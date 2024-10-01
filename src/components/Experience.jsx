@@ -30,7 +30,7 @@ export default function Experience()
         </Text>    
         <Environment preset="city" />
         <color args={['#1a1a1a']} attach = "background"/>
-        {/* <OrbitControls makeDefault /> */}
+        <OrbitControls makeDefault />
         <Model/>       
         <ContactShadows position-y={-1.5} blur={1.5}/>
     </>
