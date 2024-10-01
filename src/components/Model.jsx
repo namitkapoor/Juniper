@@ -5,7 +5,7 @@ import { useControls } from 'leva'
 import { useRef, useState } from 'react'
 
 export default function Model() {
-    const model = useLoader(GLTFLoader, './monitor.glb')
+    const model = useLoader(GLTFLoader, './joota.glb')
     const modelPosition = useControls('model', {position: [0, -0.7, 0]})
     const modelScale = useControls('model', {scale: [0.15, 0.15, 0.15]})
     const modelRotation = useControls('model', {rotation: [-0.42, 1.79, 0.28]})
