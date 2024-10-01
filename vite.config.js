@@ -1,10 +1,8 @@
 import react from '@vitejs/plugin-react'
 import { transformWithEsbuild } from 'vite'
 import restart from 'vite-plugin-restart'
-import { defineConfig } from 'vite'
 
-export default defineConfig({
-    base:'/reactPortfolio/',
+export default({
     root: 'src/',
     publicDir: '../public/',
     plugins:

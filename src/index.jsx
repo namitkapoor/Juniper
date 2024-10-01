@@ -1,8 +1,8 @@
 import './global.css'
 import ReactDOM from 'react-dom/client'
 import {BrowserRouter, Routes, Route, createBrowserRouter,RouterProvider} from "react-router-dom"
-import HelloPage from './About.jsx'
-import HomePage from './HomePage.jsx'
+import HelloPage from './Pages/About.jsx'
+import HomePage from './Pages/HomePage.jsx'
 
 const root = ReactDOM.createRoot(document.querySelector('#root'))
 

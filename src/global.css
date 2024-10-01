@@ -25,21 +25,11 @@ li { margin: 0; padding: 0; }
     top: 0%;
     left: 0%;
     font-size: 20px;
-    font-family: 'SFPro-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+    font-family: 'Satoshi', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
     font-weight: 300;
     color: black;
     z-index: 100;
     
 }
-.myName
-{
-    text-align: center;
-    position: relative;
-    top: 0%;
-    left: 0%;
-    font-size: 20px;
-    font-family: 'Satoshi', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
-    font-weight: 100;
-    color: ivory;
-}
+
 
