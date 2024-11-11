@@ -1,8 +1,8 @@
 // HelloPage.jsx
 import { Link } from 'react-router-dom';
 import AboutContent from '../components/AboutContent';
-import Navbar from '../Navbar';
-import '../about.css';
+import Navbar from '../components/Navbar';
+import '../style/about.css';
 
 export default function About() {
   return (

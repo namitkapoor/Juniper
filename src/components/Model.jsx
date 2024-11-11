@@ -5,10 +5,10 @@ import { useControls } from 'leva'
 import { useRef, useState } from 'react'
 
 export default function Model() {
-    const model = useLoader(GLTFLoader, './bottle.glb')
-    const modelPosition = useControls('model', {position: [0, -0.7, 0]})
+    const model = useLoader(GLTFLoader, './3d models/self.glb')
+    const modelPosition = useControls('model', {position: [0, -0.49, 0]})
     const modelScale = useControls('model', {scale: [0.15,0.15,0.15]})
-    const modelRotation = useControls('model', {rotation: [-0.42, 4.5, 0.28]})
+    const modelRotation = useControls('model', {rotation: [-0.42, 1.49, 0.28]})
     
     const wandaTextPosition = useControls('wandaText', {position: [0, 1.29, 0]})
     const wandaTextRotation = useControls('wandaText', {rotation: [0, 0, 0]})
@@ -59,12 +59,7 @@ export default function Model() {
                 snap={{ mass: 2, tension: 500 }}
             >
                 <Float rotationIntensity={0.4}>
-                    <spotLight
-                        intensity={200}
-                        color={'#07423c'}
-                        penumbra={0.05}
-                        decay={2.5}
-                    />
+                    <ambientLight intensity={2} />
 
                     <primitive
                         occlude

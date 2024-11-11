@@ -17,20 +17,10 @@ export default function Experience()
 
         {/* <Perf position="top-left" /> */}
         
-        {/* <Links/> */}
-        <Text
-            castShadow = {true}
-            className='wandaText'
-            scale={0.15}
-            font='./CraftworkGrotesk-Heavy.ttf'
-            position={wandaTextPosition.position}
-            rotation={wandaTextRotation.rotation}
-        >
-            Project 1
-        </Text>    
+        {/* <Links/> */}   
         <Environment preset="city" />
         <color args={['#1a1a1a']} attach = "background"/>
-        <OrbitControls makeDefault />
+        {/* <OrbitControls makeDefault /> */}
         <Model/>       
         <ContactShadows position-y={-1.5} blur={1.5}/>
     </>

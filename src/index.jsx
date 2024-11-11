@@ -1,6 +1,6 @@
-import './global.css'
+import './style/global.css'
 import ReactDOM from 'react-dom/client'
-import {BrowserRouter, Routes, Route, createBrowserRouter,RouterProvider} from "react-router-dom"
+import {BrowserRouter, Routes, Route} from "react-router-dom"
 import About from './Pages/About.jsx'
 import HomePage from './Pages/HomePage.jsx'
 
