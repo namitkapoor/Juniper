@@ -10,7 +10,7 @@
     font-family: 'Satoshi', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
     font-weight: 100;
     color: ivory;
-    z-index: 100;
+    z-index: 1;
 
 }
 .title

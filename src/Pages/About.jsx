@@ -1,5 +1,4 @@
-// HelloPage.jsx
-import { Link } from 'react-router-dom';
+// About.jsx
 import AboutContent from '../components/AboutContent';
 import Navbar from '../components/Navbar';
 import '../style/about.css';

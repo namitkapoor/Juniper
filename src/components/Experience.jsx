@@ -1,8 +1,7 @@
-import { Html, Text,Environment, OrbitControls, ContactShadows } from '@react-three/drei'
+import { Html, Text,Environment, ContactShadows } from '@react-three/drei'
 import { Suspense, useRef } from 'react'
 import Model from './Model.jsx'
 import { useControls } from 'leva'
-import Links from './Links.jsx'
 
 export default function Experience()
 {

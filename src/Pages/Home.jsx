@@ -1,13 +1,12 @@
 // HomePage.jsx
 import "../style/canvas.css";
 import{ Layout } from "antd";
-import { Link } from 'react-router-dom';
 import Experience from '../components/Experience.jsx'; // Your Three.js component
 import { Canvas } from '@react-three/fiber'
 import Content from '../components/Content.jsx'
 import Navbar from "../components/Navbar.jsx"
 
-export default function HomePage() {
+export default function Home() {
   return (
     <>
 
