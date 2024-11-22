@@ -1,6 +1,5 @@
 // HomePage.jsx
-import "../style/canvas.css";
-import{ Layout } from "antd";
+import "../style/home.css";
 import Experience from '../components/Experience.jsx'; // Your Three.js component
 import { Canvas } from '@react-three/fiber'
 import Content from '../components/Content.jsx'
@@ -9,16 +8,16 @@ import Navbar from "../components/Navbar.jsx"
 export default function Home() {
   return (
     <>
-
-        <Navbar />
-
-        {/* <div className = "transparentBackground">
-           
-        </div> */}
-        
+      <div className = "page-container">
+        <Navbar />  
+        <Content />     
         <Canvas
                 shadows
                 className= "r3f"
+                style = {{
+                    width: "100vw",
+                    height: "100vh",
+                }}
                 camera={ {
                     fov: 45,
                     near: 0.1,
@@ -28,8 +27,8 @@ export default function Home() {
             >
                 <Experience />
         </Canvas>
-        <Content />
         
+      </div>
     </>
   )
 }

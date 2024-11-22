@@ -1,13 +1,13 @@
 import "../style/navbar.css"
-import { Link } from 'react-router-dom';
+
 
 export default function Navbar() {
     return <>
-        <navigation>
-            <div class="nav-items">
-            <div class="logo-container">
+        <div className = "navigation">
+            <div className="nav-items">
+            <div className="logo-container">
                     <a class="logo-placeholder" href="/">
-                        <img src="./Owl logo white transparent.png" 
+                        <img src="./images/Owl_transparent_bg.png" 
                             height={60} 
                             width={60}
                             ></img>
@@ -19,6 +19,6 @@ export default function Navbar() {
                 <a class="nav-item" href="/">resume</a>
             </div>
             </div>
-        </navigation>
+        </div>
     </>
 }

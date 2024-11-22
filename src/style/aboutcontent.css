@@ -1,4 +1,4 @@
-.aboutcontent
+.about-content
 {
     background-color: "transparent";
     width: 100%;
@@ -10,6 +10,16 @@
     font-family: 'Satoshi', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
     font-weight: 100;
     color: ivory;
-    z-index: 100;
 
+}
+
+.ant-col {
+    padding: 16px;
+    background: #e6f7ff;
+    border: 1px solid #91d5ff;
+    text-align: center;
+}
+
+.ant-layout {
+    margin-bottom: 48px;
 }

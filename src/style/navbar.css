@@ -8,7 +8,7 @@ a {
   text-decoration: none;
   color: white;
 }
-navigation {
+.navigation {
   padding: 10px;
   position: fixed;
   top: 20px;

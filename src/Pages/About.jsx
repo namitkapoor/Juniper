@@ -6,9 +6,9 @@ import '../style/about.css';
 export default function About() {
   return (
     <>
-      <Navbar />
-      <div  className = "about">
-
+      
+      <div  className = "page-container about">
+        <Navbar />
         <AboutContent />
         {/* Link to go back to the HomePage */}
         {/* <Link to="/">
