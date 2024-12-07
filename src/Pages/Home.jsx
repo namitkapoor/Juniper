@@ -15,8 +15,8 @@ export default function Home() {
                 shadows
                 className= "r3f"
                 style = {{
-                    width: "100vw",
-                    height: "100vh",
+                    width: "auto",
+                    height: "auto",
                 }}
                 camera={ {
                     fov: 45,

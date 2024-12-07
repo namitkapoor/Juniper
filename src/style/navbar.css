@@ -10,9 +10,9 @@ a {
 }
 .navigation {
   padding: 10px;
-  position: fixed;
+  display: flex;
   top: 20px;
-  width: 100%;
+  width: auto;
   height: 50px;
   background: transparent;
   z-index: 100;

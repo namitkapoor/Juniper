@@ -3,11 +3,9 @@
     background-color: transparent;
     width: 100%;
     text-align: center;
-    position: fixed;
-    top: 15%;
-    left: 0%;
+    display: block;
     font-size: 40px;
-    font-family: 'Satoshi', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+    font-family: 'Satoshi';
     font-weight: 100;
     color: ivory;
     z-index: 100;
@@ -16,7 +14,7 @@
 .title
 {
     font-size: 40px;
-    font-family: 'Pp-eiko', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+    font-family: 'Satoshi' ;
     font-weight: 100;
 }
 .grid-container
