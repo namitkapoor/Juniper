@@ -6,7 +6,7 @@ export default function Content() {
     return (
         <div className="content">
             <Title className="title" style={{color: 'white'}} level={1}>
-                All great things are created between method and madness
+                Let <span className='eiko'>curiosity</span> be your guide
             </Title>
             
             <Button type="primary">Primary Button</Button>
