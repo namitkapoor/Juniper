@@ -36,7 +36,7 @@ export default function Home() {
             position: [0, 0, 2]
           }}
         >
-          <HeroModel />
+          <Experience />
         </Canvas>
       </section>
 
@@ -80,7 +80,7 @@ export default function Home() {
             position: [0, 0, 2]
           }}
         >
-          <Experience />
+          <HeroModel />
         </Canvas>
         <motion.div 
           className="contact-content"

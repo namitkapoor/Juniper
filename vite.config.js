@@ -2,6 +2,7 @@ import react from '@vitejs/plugin-react'
 import { transformWithEsbuild } from 'vite'
 import restart from 'vite-plugin-restart'
 import { resolve } from 'path'
+import glsl from 'vite-plugin-glsl'
 
 export default({
     root: 'src/',
@@ -26,6 +27,7 @@ export default({
                 });
             },
         },
+        glsl()
     ],
     server: {
         host: true,
@@ -37,7 +39,9 @@ export default({
         sourcemap: true,
         rollupOptions: {
             input: resolve(__dirname, 'src/index.html')
-        }
+        },
+        chunkSizeWarningLimit: 1600,
     },
-    base: './'
+    base: './',
+    assetsInclude: ['**/*.glb']
 })
