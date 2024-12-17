@@ -26,7 +26,7 @@ export default function Model() {
             fragmentShader,
             uniforms: {
                 uTime: { value: 0 },
-                uColor: { value: new THREE.Color(0.1, 0.5, 0.8) }
+                uColor: { value: new THREE.Color(0.1, 0.5, 0.9) }
             },
             transparent: true,
             side: THREE.DoubleSide,
