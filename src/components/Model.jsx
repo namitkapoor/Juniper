@@ -1,17 +1,16 @@
 import { GLTFLoader } from 'three/examples/jsm/Addons.js'
 import { useLoader, useFrame } from '@react-three/fiber'
-import { Text3D, PresentationControls, Float } from '@react-three/drei'
+import { PresentationControls, Float } from '@react-three/drei'
 import { useControls } from 'leva'
 import { useRef, useState } from 'react'
 
+
 export default function Model() {
     const model = useLoader(GLTFLoader, './3d models/self.glb')
-    const modelPosition = useControls('model', {position: [0, -0.49, 0]})
+    const modelPosition = useControls('model', {position: [0, -0.47, 0]})
     const modelScale = useControls('model', {scale: [0.15,0.15,0.15]})
     const modelRotation = useControls('model', {rotation: [-0.42, 1.49, 0.28]})
     
-    const wandaTextPosition = useControls('wandaText', {position: [0, 1.29, 0]})
-    const wandaTextRotation = useControls('wandaText', {rotation: [0, 0, 0]})
     
 
     const modelRef = useRef()

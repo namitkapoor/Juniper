@@ -10,8 +10,10 @@ export default({
         // Restart server on static/public file change
         restart({ restart: [ '../public/**', ] }),
 
-        // React support
-        react(),
+        // React support with Fast Refresh enabled
+        react({
+            fastRefresh: true
+        }),
 
         // .js file support as if it was JSX
         {
@@ -31,7 +33,15 @@ export default({
     server:
     {
         host: true, // Open to local network and display URL
-        open: !('SANDBOX_URL' in process.env || 'CODESANDBOX_HOST' in process.env) // Open if it's not a CodeSandbox
+        open: !('SANDBOX_URL' in process.env || 'CODESANDBOX_HOST' in process.env), // Open if it's not a CodeSandbox
+        hmr: {
+            overlay: true,
+            timeout: 2000
+        },
+        watch: {
+            usePolling: true,
+            interval: 100
+        }
     },
     build:
     {
@@ -40,7 +50,7 @@ export default({
         sourcemap: true, // Add sourcemap
         rollupOptions: {
             input: {
-                main: '/index.html'  // Specify your entry point
+                main: './index.html'  // Specify your entry point
             }
         }
     },
