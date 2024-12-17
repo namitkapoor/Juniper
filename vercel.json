@@ -4,5 +4,16 @@
       "source": "/(.*)",
       "destination": "/index.html"
     }
+  ],
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/node",
+      "config": { "buildCommand": "npm run build" }
+    }
+  ],
+  "routes": [
+    { "handle": "filesystem" },
+    { "src": "/.*", "dest": "/index.html" }
   ]
-} 
+}

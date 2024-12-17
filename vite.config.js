@@ -1,23 +1,22 @@
 import react from '@vitejs/plugin-react'
 import { transformWithEsbuild } from 'vite'
 import restart from 'vite-plugin-restart'
+import { resolve } from 'path'
 
 export default({
     root: 'src/',
     publicDir: '../public/',
-    plugins:
-    [
-        // Restart server on static/public file change
-        restart({ restart: [ '../public/**', ] }),
-
+    plugins: [
         // React support
         react(),
+
+        // Restart server on static/public file change
+        restart({ restart: [ '../public/**' ] }),
 
         // .js file support as if it was JSX
         {
             name: 'load+transform-js-files-as-jsx',
-            async transform(code, id)
-            {
+            async transform(code, id) {
                 if (!id.match(/src\/.*\.js$/))
                     return null
 
@@ -28,21 +27,17 @@ export default({
             },
         },
     ],
-    server:
-    {
-        host: true, // Open to local network and display URL
-        open: !('SANDBOX_URL' in process.env || 'CODESANDBOX_HOST' in process.env) // Open if it's not a CodeSandbox
+    server: {
+        host: true,
+        open: !('SANDBOX_URL' in process.env || 'CODESANDBOX_HOST' in process.env)
     },
-    build:
-    {
-        outDir: '../dist', // Output in the dist/ folder
-        emptyOutDir: true, // Empty the folder first
-        sourcemap: true, // Add sourcemap
+    build: {
+        outDir: '../dist',
+        emptyOutDir: true,
+        sourcemap: true,
         rollupOptions: {
-            input: {
-                main: '/index.html'  // Specify your entry point
-            }
+            input: resolve(__dirname, 'src/index.html')
         }
     },
-    base: '/' // Add this to handle routing properly
+    base: './'
 })
