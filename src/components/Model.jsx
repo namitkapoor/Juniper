@@ -11,7 +11,7 @@ import fragmentShader from '../shaders/holographic/fragment.glsl'
 
 export default function Model() {
     const model = useLoader(GLTFLoader, './3d models/self.glb')
-    const modelPosition = useControls('model', {position: [0, -0.40, 0]})
+    const modelPosition = useControls('model', {position: [0, -0.14, 0]})
     const modelScale = useControls('model', {scale: [0.15,0.15,0.15]})
     const modelRotation = useControls('model', {rotation: [-0.42, 1.49, 0.28]})
     
@@ -26,10 +26,10 @@ export default function Model() {
             fragmentShader,
             uniforms: {
                 uTime: { value: 0 },
-                uColor: { value: new THREE.Color(0.1, 0.5, 0.9) }
+                uColor: { value: new THREE.Color(0.1, 0.6, 0.9) }
             },
             transparent: true,
-            side: THREE.DoubleSide,
+            side: THREE.SingleSide,
             depthWrite: false,
             blending: THREE.AdditiveBlending
         })
