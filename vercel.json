@@ -11,9 +11,5 @@
       "use": "@vercel/node",
       "config": { "buildCommand": "npm run build" }
     }
-  ],
-  "routes": [
-    { "handle": "filesystem" },
-    { "src": "/.*", "dest": "/index.html" }
   ]
 }
