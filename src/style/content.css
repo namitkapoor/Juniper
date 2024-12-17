@@ -1,9 +1,10 @@
 .content
 {
     background-color: transparent;
-    width: auto;
+    width: 100%;
     text-align: center;
     display: block;
+    font-size: 40px;
     font-family: 'Satoshi';
     font-weight: 100;
     color: ivory;
@@ -15,12 +16,6 @@
     font-size: 40px;
     font-family: 'Satoshi' ;
     font-weight: 100;
-}
-.eiko
-{ 
-    font-family: 'pp-eiko';
-    font-weight: 100;
-    font-style: italic;
 }
 .grid-container
 {
