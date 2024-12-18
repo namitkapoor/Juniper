@@ -6,7 +6,7 @@
 
 /* Hero Section */
 .hero-section {
-  min-height: 100vh;
+  min-height: 80vh;
   position: relative;
   display: flex;
   align-items: center;
@@ -19,7 +19,16 @@
   z-index: 5;
   text-align: center;
 }
-
+.occupation {
+  margin-bottom: 0.25rem;
+  color: #a7d4e47e;
+  font-size: 2rem;
+}
+.display {
+  margin-top: 0.25rem;
+  color: #a7d4e4;
+  
+}
 .hero-canvas {
   position: absolute !important;
   top: 0;
@@ -27,7 +36,7 @@
   width: 100%;
   height: 100%;
   z-index: 2;
-  opacity: 0.9;
+  opacity: 0.5;
 }
 
 /* Case Studies Section */
@@ -99,7 +108,7 @@
 
 /* Typography */
 h1 {
-  font-size: 3.5rem;
+  font-size: 5.5rem;
   font-weight: 700;
   margin-bottom: 1rem;
 }
@@ -116,6 +125,11 @@ h3 {
   margin-bottom: 1rem;
 }
 
+p{
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.8);
+}
 /* Responsive Design */
 @media (max-width: 768px) {
   h1 {

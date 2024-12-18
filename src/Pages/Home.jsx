@@ -23,8 +23,9 @@ export default function Home() {
           animate={{ opacity: 1 }}
           className="hero-content"
         >
-          <h1>Namit Kapoor</h1>
-          <p>Experience Designer</p>
+          <p className = 'occupation'>Experience Designer</p>
+          <h1 className='display'>Namit Kapoor</h1>
+          
         </motion.div>
         <Canvas
           shadows

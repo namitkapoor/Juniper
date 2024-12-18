@@ -11,9 +11,9 @@ import fragmentShader from '../shaders/holographic/fragment.glsl'
 
 export default function Model() {
     const model = useLoader(GLTFLoader, './3d models/self.glb')
-    const modelPosition = useControls('model', {position: [0, -0.14, 0]})
+    const modelPosition = useControls('model', {position: [1.15, -0.51, 0]})
     const modelScale = useControls('model', {scale: [0.15,0.15,0.15]})
-    const modelRotation = useControls('model', {rotation: [-0.42, 1.49, 0.28]})
+    const modelRotation = useControls('model', {rotation: [-0.4, 0.1, 0.3]})
     
     const materialRef = useRef()
     const modelRef = useRef()
@@ -29,17 +29,18 @@ export default function Model() {
                 uColor: { value: new THREE.Color(0.1, 0.6, 0.9) }
             },
             transparent: true,
-            side: THREE.SingleSide,
+            side: THREE.DoubleSide,
             depthWrite: false,
             blending: THREE.AdditiveBlending
         })
 
         // Apply material to all meshes in the model
         model.scene.traverse((child) => {
-            if (child.isMesh) {
+            if (child.isMesh && child.material.name === 'Glasses_lenses_blue.001') {
                 child.material = material
-                materialRef.current = material
+                materialRef.current = material               
             }
+            console.log(child)
         })
     }, [model])
 
