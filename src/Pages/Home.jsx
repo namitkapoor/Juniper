@@ -11,6 +11,8 @@ import "../style/home.css";
 
 export default function Home() {
   const [activeSection, setActiveSection] = useState('hero');
+  const [activeProjectType, setActiveProjectType] = useState('ux');
+
 
   return (
     <div className="page-container">
@@ -41,19 +43,83 @@ export default function Home() {
         </Canvas>
       </section>
 
-      {/* Case Studies Section */}
-      <section className="case-studies">
-        <h2>Selected Work</h2>
-        <div className="case-studies-grid">
-          <motion.div 
-            className="case-study-card"
-            whileHover={{ scale: 1.02 }}
-            transition={{ type: "spring", stiffness: 300 }}
+       {/* Case Studies Section */}
+       <section className="case-studies">
+        <h2>Case Studies</h2>
+        <div className="toggle-container">
+          <button 
+            className={`toggle-button ${activeProjectType === 'ux' ? 'active' : ''}`}
+            onClick={() => setActiveProjectType('ux')}
           >
-            <h3>Case Study 1</h3>
-            <p>Brief description</p>
-          </motion.div>
+            UX Design
+          </button>
+          <button 
+            className={`toggle-button ${activeProjectType === 'xr' ? 'active' : ''}`}
+            onClick={() => setActiveProjectType('xr')}
+          >
+            XR Design
+          </button>
         </div>
+
+        {activeProjectType === 'ux' && (
+          <div className="case-studies-grid">
+            <motion.div 
+              className="case-study-card"
+              whileHover={{ scale: 1.02 }}
+              transition={{ type: "spring", stiffness: 300 }}
+            >
+              <h3>Manage Small Farms</h3>
+              <img className="case-study-image" src="../images/Project Cover Photos/JD thumbnail photo 2.svg" alt="Manage Small Farms" />
+              <p>Simplified an operations management app to better serve small farm owners, focusing on usability and scalability for non-technical users.</p>
+              <Button className='case-study-button'>Learn More</Button>
+            </motion.div>
+            <motion.div 
+              className="case-study-card"
+              whileHover={{ scale: 1.02 }}
+              transition={{ type: "spring", stiffness: 300 }}
+            >
+              <h3>Hire Influencer Marketing</h3>
+              <img className="case-study-image" src="../images/Project Cover Photos/Campaign Page.svg" alt="Influencer Marketing" />
+              <p>Redesigned a web app to simplify influencer hiring and campaign tracking, boosting user engagement by reducing workflow friction for small business owners.</p>
+              <Button className='case-study-button'>Learn More</Button>
+            </motion.div>
+            <motion.div 
+              className="case-study-card"
+              whileHover={{ scale: 1.02 }}
+              transition={{ type: "spring", stiffness: 300 }}
+            >
+              <h3>Personalize Skin care</h3>
+              <img className="case-study-image" src="../images/Project Cover Photos/Home Page.svg" alt="Skincare Platform" />
+              <p>Developed a chatbot-driven skincare recommendation platform, integrating computer vision to provide personalized product suggestions.</p>
+              <Button className='case-study-button'>Learn More</Button>
+            </motion.div>
+          </div>
+        )}
+
+        {activeProjectType === 'xr' && (
+          <div className="case-studies-grid">
+            <motion.div 
+              className="case-study-card"
+              whileHover={{ scale: 1.02 }}
+              transition={{ type: "spring", stiffness: 300 }}
+            >
+              <h3>Contextualize task reminders</h3>
+              <img className="case-study-image" src="../images/Project Cover Photos/Anywhere Access Luminote gif.gif" alt="AR Task Reminders" />
+              <p>Created an AR-based task management system combining spatial reminders with adaptive organizational structures to reduce cognitive load.</p>
+              <Button className='case-study-button'>Learn More</Button>
+            </motion.div>
+            <motion.div 
+              className="case-study-card"
+              whileHover={{ scale: 1.02 }}
+              transition={{ type: "spring", stiffness: 300 }}
+            >
+              <h3>Incentivize sustainable packaging</h3>
+              <img className="case-study-image" src="../images/Project Cover Photos/SUSpointpopup-cropped.gif" alt="AR Packaging" />
+              <p>Designed an AR app to promote sustainable shopping by evaluating product packaging and incentivizing eco-conscious purchases with rewards.</p>
+              <Button className='case-study-button'>Learn More</Button>
+            </motion.div>
+          </div>
+        )}
       </section>
 
       {/* Extra Work Section */}

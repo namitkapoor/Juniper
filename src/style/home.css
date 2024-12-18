@@ -2,6 +2,7 @@
   background-color: #1a1a1a;
   color: white;
   font-family: 'Satoshi', sans-serif;
+  overflow: hidden;
 }
 
 /* Hero Section */
@@ -16,7 +17,7 @@
 
 .hero-content {
   position: relative;
-  z-index: 5;
+  z-index: 11;
   text-align: center;
 }
 .occupation {
@@ -30,34 +31,138 @@
   
 }
 .hero-canvas {
-  position: absolute !important;
+  position: fixed !important;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 80%;
   height: 100%;
-  z-index: 2;
+  z-index: 1;
   opacity: 0.5;
 }
 
 /* Case Studies Section */
 .case-studies {
   padding: 4rem 2rem;
-  background: #232323;
+  background: transparent;
+  width: 100%;
+
+}
+.toggle-container {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.toggle-button {
+  padding: 0.75rem 1.5rem;
+  background: #a1a1a14d;
+  color: #f4f4f4;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 12;
+}
+
+.toggle-button.active {
+  background: #f4f4f4;
+  color: #1a1a1a;
+}
+
+.toggle-button:hover {
+  transform: translateY(-2px);
 }
 
 .case-studies-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 2rem;
   max-width: 1200px;
   margin: 0 auto;
+  width: 100%;
 }
 
 .case-study-card {
-  background: #2a2a2a;
+  background: #a1a1a14d;
   padding: 2rem;
   border-radius: 12px;
   cursor: pointer;
+  z-index: 12;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  min-height: fit-content;
+}
+
+.case-study-card h3 {
+  font-size: clamp(1.5rem, 2vw, 2rem);
+  margin-bottom: 1rem;
+}
+
+.case-study-card p {
+  font-size: clamp(0.875rem, 1.5vw, 1rem);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  flex-grow: 1;
+}
+
+.case-study-image {
+  width: 100%;
+  height: auto;
+  max-height: 300px;
+  object-fit: contain;
+  border-radius: 8px;
+  margin: 1rem 0;
+}
+
+.case-study-button {
+  padding: 0.5rem 1rem;
+  background: #1a1a1a;
+  color: #f4f4f4;
+  border-radius: 4px;
+  cursor: pointer;
+  z-index: 12;
+  width: fit-content;
+  margin-top: auto;
+}
+
+/* Responsive breakpoints */
+@media (max-width: 1200px) {
+  .case-studies-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    padding: 0 1rem;
+  }
+  
+  .case-studies {
+    padding: 3rem 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .case-studies-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .case-studies {
+    padding: 2rem 1rem;
+  }
+  
+  .case-study-card {
+    padding: 1.5rem;
+  }
+  
+  .case-study-image {
+    max-height: 250px;
+  }
 }
 
 /* Extra Work Section */
