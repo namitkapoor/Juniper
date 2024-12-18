@@ -1,0 +1,31 @@
+/* src/style/case-study.css */
+.case-study-container {
+    background-color: #1a1a1a;
+    color: white;
+    min-height: 100vh;
+  }
+  
+  .case-study-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+  
+  .case-study-hero {
+    width: 100%;
+    margin: 2rem 0;
+  }
+  
+  .case-study-hero img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+  }
+  
+  .case-study-overview {
+    margin: 4rem 0;
+  }
+  
+  .case-study-overview h2 {
+    margin-bottom: 1rem;
+  }

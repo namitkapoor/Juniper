@@ -4,7 +4,8 @@ import { motion } from 'framer-motion';
 import { Canvas } from '@react-three/fiber';
 import Experience from '../components/Experience.jsx';
 import HeroModel from '../components/HeroModel.jsx';
-import { Button, Layout, Row, Col } from 'antd'
+import { Button } from 'antd'
+import { useNavigate } from 'react-router-dom';
 import Content from '../components/Content.jsx';
 import Navbar from "../components/Navbar.jsx";
 import "../style/home.css";
@@ -12,6 +13,8 @@ import "../style/home.css";
 export default function Home() {
   const [activeSection, setActiveSection] = useState('hero');
   const [activeProjectType, setActiveProjectType] = useState('ux');
+  const navigate = useNavigate();
+
 
 
   return (
@@ -71,7 +74,7 @@ export default function Home() {
               <h3>Manage Small Farms</h3>
               <img className="case-study-image" src="../images/Project Cover Photos/JD thumbnail photo 2.svg" alt="Manage Small Farms" />
               <p>Simplified an operations management app to better serve small farm owners, focusing on usability and scalability for non-technical users.</p>
-              <Button className='case-study-button'>Learn More</Button>
+              <Button className='case-study-button'onClick={() => navigate('/case-study/manage-farms')} >Learn More</Button>
             </motion.div>
             <motion.div 
               className="case-study-card"

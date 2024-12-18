@@ -11,9 +11,9 @@ import fragmentShader from '../shaders/holographic/fragment.glsl'
 
 export default function Model() {
     const model = useLoader(GLTFLoader, './3d models/self.glb')
-    const modelPosition = useControls('model', {position: [1.15, -0.51, 0]})
+    const modelPosition = useControls('model', {position: [0.02, -0.51, 0]})
     const modelScale = useControls('model', {scale: [0.15,0.15,0.15]})
-    const modelRotation = useControls('model', {rotation: [-0.4, 0.1, 0.3]})
+    const modelRotation = useControls('model', {rotation: [-0.42, 1.47, 0.69]})
     
     const materialRef = useRef()
     const modelRef = useRef()
