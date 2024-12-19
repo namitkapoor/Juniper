@@ -1,0 +1,81 @@
+/* bento-grid.css */
+.case-study-bento-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    width: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+  }
+  
+  .bento-item {
+    background-color: rgb(63, 63, 63);
+    border-radius: 12px;
+    overflow: hidden;
+    min-height: 200px;
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+  }
+  
+  .bento-item:hover {
+    transform: translateY(-5px);
+  }
+  
+  /* Size variants */
+  .bento-item.large {
+    grid-column: span 2;
+    grid-row: span 2;
+    min-height: 400px;
+  }
+  
+  .bento-item.wide {
+    grid-column: span 2;
+  }
+  
+  .bento-item.tall {
+    grid-row: span 2;
+    min-height: 400px;
+  }
+  
+  /* Content styling */
+  .bento-images {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  
+  .bento-content {
+    padding: 1.5rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  /* Responsive breakpoints */
+  @media (max-width: 1024px) {
+    .case-study-bento-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (max-width: 640px) {
+    .case-study-bento-grid {
+      grid-template-columns: 1fr;
+    }
+  
+    .bento-item.large,
+    .bento-item.wide {
+      grid-column: span 1;
+    }
+  
+    .bento-item.large,
+    .bento-item.tall {
+      grid-row: span 1;
+      min-height: 200px;
+    }
+  }

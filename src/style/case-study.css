@@ -2,20 +2,26 @@
 .case-study-container {
     background-color: #1a1a1a;
     color: white;
-    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: Satoshi;
   }
   
   .case-study-content {
     max-width: 1200px;
-    margin: 0 auto;
-    padding: 2rem;
+    margin: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-self: center;
   }
   
   .case-study-hero {
     width: 100%;
     margin: 2rem 0;
   }
-  
   .case-study-hero img {
     width: 50%;
     height: auto;
@@ -79,7 +85,13 @@ section h2 {
     .before-after-container {
       grid-template-columns: 1fr;
     }
-  
+    .case-study-content {
+      margin: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-self: center;
+    }
     section h2 {
       font-size: 1.75rem;
     }

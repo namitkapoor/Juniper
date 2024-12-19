@@ -3,8 +3,71 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import Navbar from '../../components/Navbar.jsx';
 import '../../style/case-study.css';
+import BentoGrid from '../../components/BentoGrid.jsx';
 
 export default function ManageFarms() {
+  const introBentoItems = [
+    {
+      size: 'large',
+      content: {
+        type: 'image',
+        src: '../../images/bento-grid-images/Farms/App store review 1.jpg',
+        alt: 'Featured App Store Review'
+      }
+    },
+    {
+      size: 'wide',
+      content: {
+        type: 'stats',
+        title: 'Key Metrics',
+        items: [
+          '70 Average SUS Score',
+          '50% Increase in Daily Active Users',
+          '4.8 App Store Rating'
+        ]
+      }
+    },
+    {
+      content: {
+        type: 'text',
+        title: 'User Feedback',
+        description: 'This app has transformed how I manage my small farm. Everything I need is right at my fingertips.',
+        footer: '- John Smith, Farm Owner'
+      }
+    }
+  ];
+
+  const bentoItems = [
+    {
+      size: 'large',
+      content: {
+        type: 'image',
+        src: '../../images/bento-grid-images/Farms/App store review 1.jpg',
+        alt: 'Featured App Store Review'
+      }
+    },
+    {
+      size: 'wide',
+      content: {
+        type: 'stats',
+        title: 'Simplicity, Clarity, and Task Relevance',
+        items: [
+          'Removed irrelevant features like large-scale fleet management.',
+          'Enhanced visual clarity with intuitive icons and color-coded tasks.',
+          'Automated repetitive processes like maintenance reminders.'
+        ]
+      }
+    },
+    {
+      content: {
+        type: 'text',
+        title: 'User Feedback',
+        description: 'This app has transformed how I manage my small farm. Everything I need is right at my fingertips.',
+        footer: '- John Smith, Farm Owner'
+      }
+    }
+  ];
+
   return (
     <div className="case-study-container">
       <Navbar />
@@ -15,7 +78,10 @@ export default function ManageFarms() {
       >
         <h1 className='case-study-title'>Manage Small Farms</h1>
         <section className="case-study-hero">
-          <img className="cover-image" src="../../images/Project Cover Photos/JD thumbnail photo 2.svg" alt="Manage Small Farms" />
+          {/* <img className="cover-image" src="../../images/Project Cover Photos/JD thumbnail photo 2.svg" alt="Manage Small Farms" /> */}
+          <div className="bento-grid-container">
+            <BentoGrid items={introBentoItems} />            
+          </div>
         </section>
 
         <section className="case-study-overview">
@@ -28,19 +94,22 @@ export default function ManageFarms() {
           <div className="challenge-grid">
             <div className="challenge-item">
               <h3>Market Context</h3>
-              <p>[Market context content]</p>
+              <p>While John Deere’s Operations Center Mobile (OCM) app catered to large-scale farms, small farm owners found it overly complex and not aligned with their specific needs.</p>
             </div>
             <div className="challenge-item">
               <h3>Revenue Impact</h3>
-              <p>[Revenue impact content]</p>
+              <p>Low app adoption among small farm owners meant missed opportunities for increased brand loyalty and equipment sales.</p>
             </div>
             <div className="challenge-item">
               <h3>User Pain Points</h3>
-              <p>[User pain points content]</p>
+              <p>
+                <li>Overwhelming interface with features irrelevant to small-scale operations.</li>
+                <li>Difficulty managing tasks like equipment tracking, crop planning, and operational logs.</li>
+                <li>Lack of accessible tutorials and support for first-time users.</li></p>
             </div>
             <div className="challenge-item">
               <h3>Cost of Problems</h3>
-              <p>[Cost of problems content]</p>
+              <p>Frustrated users either abandoned the app or sought alternative tools, creating a gap in customer retention for John Deere in this growing demographic.</p>
             </div>
           </div>
         </section>
@@ -50,15 +119,22 @@ export default function ManageFarms() {
           <div className="approach-grid">
             <div className="approach-item">
               <h3>Research Insights</h3>
-              <p>[Research insights content]</p>
+              <p>
+                <li>Conducted user interviews with 15 small farm owners; 80% cited a need for simplified navigation and task-specific workflows.</li>
+                <li>Identified high-priority features like weather tracking, equipment maintenance logs, and crop scheduling as critical to users.</li>
+                <li>Usability testing revealed confusion caused by unnecessary features, leading to app abandonment.</li>
+              </p>
             </div>
             <div className="approach-item">
               <h3>Solution Framework</h3>
-              <p>[Solution framework content]</p>
+              <p>
+                <li>Streamlined the interface to highlight only essential features for small farms.</li>
+                <li>Introduced customizable dashboards for task prioritization and visibility.</li>
+                <li>Added interactive tutorials to onboard first-time users effectively.</li></p>
             </div>
             <div className="approach-item">
               <h3>Decision Criteria</h3>
-              <p>[Decision criteria content]</p>
+              <BentoGrid items={bentoItems} />
             </div>
             <div className="approach-item">
               <h3>Implementation Plan</h3>
