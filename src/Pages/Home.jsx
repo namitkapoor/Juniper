@@ -91,7 +91,7 @@ export default function Home() {
               whileHover={{ scale: 1.02 }}
               transition={{ type: "spring", stiffness: 300 }}
             >
-              <h3>Personalize Skin care</h3>
+              <h3>Personalize Skin Care</h3>
               <img className="case-study-image" src="../images/Project Cover Photos/Home Page.svg" alt="Skincare Platform" />
               <p>Developed a chatbot-driven skincare recommendation platform, integrating computer vision to provide personalized product suggestions.</p>
               <Button className='case-study-button'>Learn More</Button>
@@ -106,7 +106,7 @@ export default function Home() {
               whileHover={{ scale: 1.02 }}
               transition={{ type: "spring", stiffness: 300 }}
             >
-              <h3>Contextualize task reminders</h3>
+              <h3>Contextualize Task Reminders</h3>
               <img className="case-study-image" src="../images/Project Cover Photos/Anywhere Access Luminote gif.gif" alt="AR Task Reminders" />
               <p>Created an AR-based task management system combining spatial reminders with adaptive organizational structures to reduce cognitive load.</p>
               <Button className='case-study-button'>Learn More</Button>
@@ -116,7 +116,7 @@ export default function Home() {
               whileHover={{ scale: 1.02 }}
               transition={{ type: "spring", stiffness: 300 }}
             >
-              <h3>Incentivize sustainable packaging</h3>
+              <h3>Incentivize Sustainable Packaging</h3>
               <img className="case-study-image" src="../images/Project Cover Photos/SUSpointpopup-cropped.gif" alt="AR Packaging" />
               <p>Designed an AR app to promote sustainable shopping by evaluating product packaging and incentivizing eco-conscious purchases with rewards.</p>
               <Button className='case-study-button'>Learn More</Button>

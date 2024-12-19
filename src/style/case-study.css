@@ -17,9 +17,12 @@
   }
   
   .case-study-hero img {
-    width: 100%;
+    width: 50%;
     height: auto;
     border-radius: 12px;
+  }
+  .case-study-title {
+    font-size: 2 rem;
   }
   
   .case-study-overview {
@@ -28,4 +31,60 @@
   
   .case-study-overview h2 {
     margin-bottom: 1rem;
+  }
+
+  /* Section Headers */
+section h2 {
+    font-size: 2rem;
+    margin: 3rem 0 1.5rem;
+    color: #ffffff;
+    border-bottom: 2px solid #3a3a3a;
+    padding-bottom: 0.5rem;
+  }
+  
+  section h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #f0f0f0;
+  }
+  
+  /* Before & After Section */
+  .before-after-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 1rem;
+  }
+  
+  .before, .after {
+    text-align: center;
+  }
+  
+  .before img, .after img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-top: 0.5rem;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .challenge-grid,
+    .approach-grid,
+    .results-grid,
+    .evolution-grid {
+      grid-template-columns: 1fr;
+    }
+  
+    .before-after-container {
+      grid-template-columns: 1fr;
+    }
+  
+    section h2 {
+      font-size: 1.75rem;
+    }
+  
+    section h3 {
+      font-size: 1.25rem;
+    }
   }
