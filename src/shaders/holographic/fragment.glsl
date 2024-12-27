@@ -11,9 +11,9 @@ void main()
     if(!gl_FrontFacing)
         normal *= - 1.0;
 
-    // Stripes
-    //float stripes = mod((vPosition.y - uTime * 0.02) * 30.0, 1.0);
-    //stripes = pow(stripes, 3.0);
+    //Stripes
+    float stripes = mod((vPosition.y - uTime * 0.02) * 30.0, 1.0);
+    stripes = pow(stripes, 3.0);
 
     // Fresnel
     vec3 viewDirection = normalize(vPosition - cameraPosition);

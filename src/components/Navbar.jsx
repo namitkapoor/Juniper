@@ -14,9 +14,9 @@ export default function Navbar() {
                     </a>
             </div>
             
-            <div class="nav-links">
-                <a class="nav-item" href="/about">about</a>
-                <a class="nav-item" href="/">resume</a>
+            <div className="nav-links">
+                <a className="nav-item" href="/about">about</a>
+                <a className="nav-item" href="/">resume</a>
             </div>
             </div>
         </div>

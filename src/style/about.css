@@ -1,9 +1,13 @@
-ul { list-style-type: none; }
-li { margin: 0; padding: 0; }
+/* Global styles */
+.content-width {
+    width: 80%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+}
 
-.page-container.about
-{
-    
+/* About page container */
+.page-container.about {
     font-size: 20px;
     font-family: 'Satoshi';
     font-weight: 300;
@@ -11,77 +15,186 @@ li { margin: 0; padding: 0; }
     z-index: 10;
 }
 
-.about {
-  background-color: #1a1a1a;
-  color: white;
-  min-height: 100vh;
-  position: relative;
-  overflow-x: hidden;
+/* Grid layouts */
+.about-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
 }
 
-/* Hero Section */
-.about-hero {
-  min-height: 60vh;
-  padding: auto;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    margin-top: 1rem;
 }
 
-.about-hero-content {
-  position: relative;
-  z-index: 2;
-  text-align: center;
-  max-width: 800px;
-  padding: 0 2rem;
+/* Canvas section */
+.grid-item.canvas-section {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 20px;
+    overflow: hidden;
 }
 
-.about-hero h1 {
-  font-size: 4rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-  background: linear-gradient(45deg, #fff, #888);
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+.canvas-section canvas {
+    position: absolute !important;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover;
 }
 
-.subtitle {
-  font-size: 1.5rem;
-  opacity: 0.8;
+/* Section styling */
+.expandable-section {
+    margin-bottom: 2rem;
 }
 
-.about-hero-canvas {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-  pointer-events: none;
+.section-header {
+    width: 100%;
+    padding: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
 }
 
-/* Background Canvas */
-.background-canvas {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-  pointer-events: none;
-  opacity: 0.8;
+.section-header h2 {
+    margin: 0;
+    font-size: 2.5rem;
+    font-weight: 600;
+    background: linear-gradient(45deg, #fff, #888);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.section-header .icon {
+    font-size: 2.5rem;
+    color: #fff;
+    opacity: 0.8;
+    display: flex;
+    align-items: center;
+}
+
+.section-content {
+    padding: 2rem;
+    border-radius: 12px;
+    margin-top: 1rem;
+}
+
+/* Hero content */
+.info-canvas-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.info-canvas-content h2 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin: 0;
+    background: linear-gradient(45deg, #fff, #888);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.info-canvas-content p {
+    font-size: 1.2rem;
+    opacity: 0.8;
+    margin: 0;
+    color: #a4bfc7;
+}
+
+/* Skills cards */
+.skill-card {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 12px;
+    padding: 2rem;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.skill-content h3 {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    font-weight: 500;
+    background: linear-gradient(45deg, #fff, #888);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.skill-content ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.skill-content li {
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.8);
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .about-hero h1 {
-    font-size: 3rem;
-  }
+    .content-width {
+        width: 100%;
+        padding: 2rem 1rem;
+    }
 
-  .subtitle {
-    font-size: 1.2rem;
-  }
+    .about-grid,
+    .skills-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .section-header {
+        padding: 1.5rem 1rem;
+    }
+
+    .section-header h2 {
+        font-size: 2rem;
+    }
+
+    .section-header .icon {
+        font-size: 2rem;
+    }
+
+    .section-content {
+        padding: 1.5rem 1rem;
+        margin-top: 0.5rem;
+    }
+
+    .skill-card {
+        padding: 1.5rem 1rem;
+    }
+
+    .info-canvas-content h2 {
+        font-size: 2rem;
+    }
+
+    .info-canvas-content p {
+        font-size: 1rem;
+    }
+}
+
+/* Small screens */
+@media (max-width: 480px) {
+    .content-width {
+        padding: 1.5rem 0.75rem;
+    }
+
+    .section-header,
+    .section-content,
+    .skill-card {
+        padding: 1rem 0.75rem;
+    }
+
+    .section-header h2 {
+        font-size: 1.75rem;
+    }
 }

@@ -24,6 +24,7 @@
     "r3f-perf": "^7.2.1",
     "react": "18.3",
     "react-dom": "18.3",
+    "react-icons": "^5.4.0",
     "react-router-dom": "^6.26.2",
     "three": "^0.166.1",
     "vite-plugin": "^0.0.0",
