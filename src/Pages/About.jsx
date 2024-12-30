@@ -1,17 +1,21 @@
-import { useState } from 'react';
-import { Suspense } from 'react';
-import { Canvas } from '@react-three/fiber';
+import { lazy, Suspense, useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Canvas } from '@react-three/fiber';
 import { IoAdd } from 'react-icons/io5';
 
-import Navbar from '../components/Navbar';
-import AboutModel from '../components/AboutModel';
+// Lazy load components
+const Navbar = lazy(() => import('../components/Navbar'));
+const AboutModel = lazy(() => import('../components/AboutModel'));
+
+// Import styles
 import '../style/about.css';
+import '../style/animations.css';
 
 export default function About() {
   const [expandedSections, setExpandedSections] = useState(new Set(['about']));
 
-  const toggleSection = (section) => {
+  // Memoize toggle function
+  const toggleSection = useCallback((section) => {
     setExpandedSections(prev => {
       const newSet = new Set(prev);
       if (newSet.has(section)) {
@@ -21,12 +25,14 @@ export default function About() {
       }
       return newSet;
     });
-  };
+  }, []);
 
   const heroContent = (
     <div className="info-canvas-content">
-      <h2>Breaking and Rebuilding</h2>
-      <p>Resilience isn’t about staying intact—it’s about how you reassemble. Give me a nudge → </p>
+      <div className="section-header">
+        <h2>Breaking and Rebuilding</h2>
+      </div>
+      <p>Resilience isn't about staying intact—it's about how you reassemble. Give me a nudge → </p>
     </div>
   );
 
@@ -35,24 +41,29 @@ export default function About() {
       id: 'about',
       title: '',
       content: (
-        <div className="grid-item canvas-section">
-          <Canvas
-            camera={{
-              fov: 45,
-              near: 0.1,
-              far: 2000,
-              position: [0, 0, 5]
-            }}
-            gl={{ 
-              antialias: true,
-              alpha: true,
-              preserveDrawingBuffer: true
-            }}
-          >
-            <Suspense fallback={null}>
-              <AboutModel />
-            </Suspense>
-          </Canvas>
+        <div className="about-grid">
+          {heroContent}
+          <div className="grid-item canvas-section">
+            <Canvas
+              camera={{
+                fov: 45,
+                near: 0.1,
+                far: 2000,
+                position: [0, 0, 5]
+              }}
+              gl={{ 
+                antialias: true,
+                alpha: true,
+                preserveDrawingBuffer: true,
+                powerPreference: "high-performance"
+              }}
+              dpr={Math.min(window.devicePixelRatio, 2)}
+            >
+              <Suspense fallback={null}>
+                <AboutModel />
+              </Suspense>
+            </Canvas>
+          </div>
         </div>
       )
     },
@@ -61,7 +72,7 @@ export default function About() {
       title: 'Who Am I',
       content: (
         <div className="who-content">
-          <p>I'm a Creative Technologist and Experience Designer based in New York, passionate about bridging the gap between art and technology. With a background in both design and development, I create immersive digital experiences that push the boundaries of user interaction.</p>
+          <p>I'm an Experience Designer based in Atlanta, passionate about bridging the gap between art and technology.</p>
           <div className="skills-grid">
             <div className="skill-card">
               <div className="skill-content">
@@ -119,15 +130,22 @@ export default function About() {
 
   return (
     <div className="page-container about">
-      <Navbar />
+      <Suspense fallback={<div className="loading-skeleton">Loading...</div>}>
+        <Navbar />
+      </Suspense>
       
-      {/* Expandable Sections */}
       <div className="about-content content-width">
-        {sections.map((section) => (
+        {sections.map((section, index) => (
           <motion.div
             key={section.id}
             className="expandable-section"
-            initial={false}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              duration: 0.5,
+              delay: section.id === 'about' ? 0 : 0.2 * index,
+              ease: "easeOut"
+            }}
           >
             <div 
               className="section-header"
@@ -138,31 +156,28 @@ export default function About() {
                 <motion.span 
                   className="icon"
                   animate={{ 
-                    rotate: expandedSections.has(section.id) ? 45 : 0,
+                    rotate: expandedSections.has(section.id) ? 45 : 0 
                   }}
-                  transition={{ duration: 0.3 }}
+                  transition={{ 
+                    duration: 0.3,
+                    ease: "easeInOut"
+                  }}
                 >
                   <IoAdd />
                 </motion.span>
               )}
             </div>
-            <AnimatePresence>
+            
+            <AnimatePresence mode="wait">
               {(section.id === 'about' || expandedSections.has(section.id)) && (
-                <motion.div
+                <motion.div 
                   className="section-content"
-                  initial={{ height: 0, opacity: 0 }}
-                  animate={{ height: "auto", opacity: 1 }}
-                  exit={{ height: 0, opacity: 0 }}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
                   transition={{ duration: 0.3 }}
                 >
-                  {section.id === 'about' ? (
-                    <div className="about-grid">
-                      {heroContent}
-                      {section.content}
-                    </div>
-                  ) : (
-                    section.content
-                  )}
+                  {section.content}
                 </motion.div>
               )}
             </AnimatePresence>

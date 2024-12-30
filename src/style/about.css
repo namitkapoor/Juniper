@@ -12,7 +12,6 @@
     font-family: 'Satoshi';
     font-weight: 300;
     color: white;
-    z-index: 10;
 }
 
 /* Grid layouts */
@@ -20,6 +19,8 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
+    position: relative;
+    z-index: 1;
 }
 
 .skills-grid {
@@ -34,9 +35,9 @@
     position: relative;
     width: 100%;
     aspect-ratio: 1;
-    background: rgba(255, 255, 255, 0.03);
     border-radius: 20px;
     overflow: hidden;
+    z-index: 1;
 }
 
 .canvas-section canvas {
@@ -45,12 +46,15 @@
     left: 0;
     width: 100% !important;
     height: 100% !important;
-    object-fit: cover;
+    touch-action: none;
+    z-index: 2;
 }
 
 /* Section styling */
 .expandable-section {
     margin-bottom: 2rem;
+    will-change: transform, opacity;
+    transform-origin: top;
 }
 
 .section-header {
@@ -91,6 +95,14 @@
     flex-direction: column;
     justify-content: center;
     gap: 0.5rem;
+    position: relative;
+    z-index: 3;
+}
+
+.info-canvas-content .section-header {
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
 }
 
 .info-canvas-content h2 {
@@ -107,6 +119,7 @@
     opacity: 0.8;
     margin: 0;
     color: #a4bfc7;
+    text-align: left;
 }
 
 /* Skills cards */
@@ -142,8 +155,7 @@
 /* Responsive Design */
 @media (max-width: 768px) {
     .content-width {
-        width: 100%;
-        padding: 2rem 1rem;
+        width: 80%;
     }
 
     .about-grid,
@@ -179,6 +191,7 @@
 
     .info-canvas-content p {
         font-size: 1rem;
+        padding-left: 1rem;
     }
 }
 
@@ -196,5 +209,9 @@
 
     .section-header h2 {
         font-size: 1.75rem;
+    }
+
+    .info-canvas-content p {
+        padding-left: 0.75rem;
     }
 }

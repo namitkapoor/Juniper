@@ -7,20 +7,19 @@
     align-items: center;
     justify-content: center;
     font-family: Satoshi;
+    overflow-x: hidden;
+    width: 100%;
   }
   
   .case-study-content {
+    width: 80%;
     max-width: 1200px;
-    margin: 2rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-self: center;
+    margin: 0 auto;
+    padding: 4rem 2rem;
   }
   
   .case-study-hero {
-    width: 100%;
-    margin: 2rem 0;
+    margin-bottom: 4rem;
   }
   .case-study-hero img {
     width: 50%;
@@ -32,11 +31,15 @@
   }
   
   .case-study-overview {
-    margin: 4rem 0;
+    margin-top: -1rem;
+    padding: 0;
   }
   
-  .case-study-overview h2 {
-    margin-bottom: 1rem;
+  .case-study-overview p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.8);
+    text-align: left;
   }
 
   /* Section Headers */
@@ -86,11 +89,8 @@ section h2 {
       grid-template-columns: 1fr;
     }
     .case-study-content {
-      margin: 2rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-self: center;
+      width: 90%;
+      padding: 2rem 1rem;
     }
     section h2 {
       font-size: 1.75rem;
@@ -99,4 +99,190 @@ section h2 {
     section h3 {
       font-size: 1.25rem;
     }
+  }
+
+  .expandable-section {
+    margin-bottom: 2rem;
+    will-change: transform, opacity;
+    transform-origin: top;
+  }
+
+  .section-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .section-header h2 {
+    margin: 0;
+    font-size: 2.5rem;
+    font-weight: 600;
+    background: linear-gradient(45deg, #fff, #888);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .section-header .icon {
+    font-size: 2.5rem;
+    color: #fff;
+    opacity: 0.8;
+    display: flex;
+    align-items: center;
+  }
+
+  .section-content {
+    padding: 2rem;
+    border-radius: 12px;
+    margin-top: 1rem;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  /* Section content layouts */
+  .challenge-grid,
+  .approach-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .challenge-image img,
+  .approach-images img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    margin-top: 1rem;
+  }
+
+  /* Maintain existing before-after styles */
+  .before-after-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 1rem;
+  }
+
+  .before img, 
+  .after img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-top: 0.5rem;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .challenge-grid,
+    .approach-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .challenge-image,
+    .approach-images {
+      margin-top: 1rem;
+    }
+  }
+
+  /* Remove special styling for overview section content */
+  .expandable-section:first-of-type .section-content {
+    background: none;
+    backdrop-filter: none;
+    padding: 0;
+    margin-top: 0;
+  }
+
+  /* Subsection layouts */
+  .challenge-item,
+  .approach-item,
+  .results-item {
+    margin-bottom: 3rem;
+  }
+
+  .subsection-image {
+    margin: 2rem 0;
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .subsection-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* Grid layouts with more breathing room */
+  .challenge-grid,
+  .approach-grid,
+  .results-grid,
+  .evolution-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .comparison-images {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin: 2rem 0;
+  }
+
+  @media (max-width: 768px) {
+    .case-study-content {
+      width: 90%;
+      padding: 2rem 1rem;
+    }
+    
+    .comparison-images {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Add these styles for the section description */
+  .section-description {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.8);
+    margin-top: 0.5rem;
+    padding-bottom: 2rem;
+    text-align: left;
+    max-width: 900px;
+  }
+
+  /* Add border above the description */
+  .section-description::before {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.1);
+    margin-bottom: 1rem;
+  }
+
+  /* Toggle Button States */
+  .toggle-button {
+    padding: 0.75rem 1.5rem;
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--text-primary);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    opacity: 0.6;
+  }
+
+  .toggle-button.active {
+    background: var(--gradient-card);
+    border-color: rgba(255, 255, 255, 0.1);
+    opacity: 1;
+  }
+
+  .toggle-button:hover {
+    transform: translateY(-2px);
+    opacity: 0.8;
   }

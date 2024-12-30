@@ -6,7 +6,7 @@ export default function Navbar() {
         <div className = "navigation">
             <div className="nav-items">
             <div className="logo-container">
-                    <a class="logo-placeholder" href="/">
+                    <a className="logo-placeholder" href="/">
                         <img src="/images/Owl_transparent_bg.png" 
                             height={60} 
                             width={60}

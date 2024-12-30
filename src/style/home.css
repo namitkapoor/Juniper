@@ -1,3 +1,23 @@
+:root {
+  /* Core colors */
+  --background: #0F0F0F;
+  --text-primary: #FFFFFF;
+  --text-secondary: #E0E0E0;
+  
+  /* Gradient definitions */
+  --gradient-text: linear-gradient(45deg, #fff, #888);
+  --gradient-card: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.05),
+    rgba(255, 255, 255, 0.02)
+  );
+  
+  /* UI Elements */
+  --card-background: rgba(255, 255, 255, 0.03);
+  --tag-background: rgba(164, 191, 199, 0.08);
+  --tag-text: #a4bfc7;  /* Matches about page accent */
+}
+
 .page-container {
   background-color: #1a1a1a;
   color: white;
@@ -26,16 +46,15 @@
 }
 .display {
   margin-top: 0.25rem;
-  color: #a4bfc7;
+  color: var(--accent-primary);
   
 }
 .hero-canvas {
   position: fixed !important;
   top: 0;
   left: 0;
-  width: 80%;
+  width: 100%;
   height: 100%;
-  z-index: 1;
   opacity: 0.5;
 }
 
@@ -57,25 +76,25 @@
 
 .toggle-button {
   padding: 0.75rem 1.5rem;
-  background: #a1a1a14d;
-  color: #f4f4f4;
-  border: none;
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text-primary);
+  border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 12px;
-  cursor: pointer;
-  font-size: 1rem;
   transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  z-index: 12;
+  cursor: pointer;
+  opacity: 0.6;
+  z-index: 1;
 }
 
 .toggle-button.active {
-  background: #f4f4f4;
-  color: #1a1a1a;
+  background: var(--gradient-card);
+  border-color: rgba(255, 255, 255, 0.1);
+  opacity: 1;
 }
 
 .toggle-button:hover {
   transform: translateY(-2px);
+  opacity: 0.8;
 }
 
 .case-studies-grid {
@@ -88,23 +107,60 @@
 }
 
 .case-study-card {
-  background: #a1a1a14d;
-  padding: 2rem;
+  background: var(--gradient-card);
+  padding: 2.5rem;
   border-radius: 12px;
-  cursor: pointer;
-  z-index: 12;
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  min-height: fit-content;
+  gap: 1.5rem;
+  position: relative;
+  z-index: 4;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  cursor: pointer;
+  transition: transform 0.3s ease-out;
+}
+
+.case-study-card {
+  cursor: default;
+}
+
+.button-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: auto;
+}
+
+.case-study-button {
+  margin-top: auto;
+  padding: 0.75rem 1.5rem;
+  background: transparent;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  transition: all 0.2s ease-out;
+  cursor: pointer;
+}
+
+.case-study-button:hover {
+  background: rgba(255, 255, 255, 0.05);
+  transform: translateY(-2px);
+}
+
+.case-study-meta,
+.case-study-tags {
+  margin: 0.5rem 0;
 }
 
 .case-study-card h3 {
-  font-size: clamp(1.5rem, 2vw, 2rem);
+  background: var(--gradient-text);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 1.75rem;
   margin-bottom: 1rem;
+  opacity: 1;
 }
 
 .case-study-card p {
@@ -112,26 +168,12 @@
   line-height: 1.6;
   margin-bottom: 1.5rem;
   flex-grow: 1;
+  opacity: 1;
 }
 
 .case-study-image {
-  width: 100%;
-  height: auto;
-  max-height: 300px;
-  object-fit: contain;
   border-radius: 8px;
-  margin: 1rem 0;
-}
-
-.case-study-button {
-  padding: 0.5rem 1rem;
-  background: #1a1a1a;
-  color: #f4f4f4;
-  border-radius: 4px;
-  cursor: pointer;
-  z-index: 12;
-  width: fit-content;
-  margin-top: auto;
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 /* Responsive breakpoints */
@@ -164,11 +206,12 @@
   }
   
   .case-study-card {
-    padding: 1rem;
+    padding: 1.5rem;
   }
   
-  .case-study-image {
-    max-height: 250px;
+  .case-study-meta,
+  .case-study-tags {
+    margin: 0.25rem 0;
   }
 }
 
@@ -229,12 +272,14 @@ h2 {
   font-size: 2.5rem;
   font-weight: 600;
   margin-bottom: 2rem;
+  color: var(--text-primary);
 }
 
 h3 {
   font-size: 1.5rem;
   font-weight: 500;
   margin-bottom: 1rem;
+  color: var(--text-primary);
 }
 
 p{
@@ -280,4 +325,227 @@ li { margin: 0; padding: 0; }
     width: auto;
     z-index: 10;
     touch-action: none;
+}
+
+.case-study-tags {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.tag {
+  font-size: 0.875rem;
+  padding: 0.25rem 0.75rem;
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+  border-radius: 100px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.case-study-meta {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  color: var(--text-secondary);
+  opacity: 0.8;
+}
+
+/* Typography with gradients */
+h1.display {
+  background: var(--gradient-text);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 5.5rem;
+  font-weight: 700;
+}
+
+.case-studies h2,
+.extra-work h2 {
+  background: var(--gradient-text);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 2.5rem;
+  font-weight: 600;
+}
+
+.case-study-card h3 {
+  background: var(--gradient-text);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 1.75rem;
+  margin-bottom: 1rem;
+}
+
+/* Card styling */
+.case-study-card {
+  background: var(--gradient-card);
+  padding: 2.5rem;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  position: relative;
+  z-index: 4;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  cursor: pointer;
+  transition: transform 0.3s ease-out;
+}
+
+.case-study-card:hover {
+  transform: translateY(-4px);
+}
+
+/* Meta information */
+.case-study-meta {
+  color: var(--text-secondary);
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* Tags */
+.case-study-tags {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.tag {
+  font-size: 0.875rem;
+  padding: 0.25rem 0.75rem;
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+  border-radius: 100px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Description text */
+.case-study-card p {
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* Button styling */
+.case-study-button {
+  padding: 0.75rem 1.5rem;
+  background: transparent;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  transition: all 0.2s ease-out;
+  cursor: pointer;
+}
+
+.case-study-button:hover {
+  background: rgba(255, 255, 255, 0.05);
+  transform: translateY(-2px);
+}
+
+/* Toggle buttons */
+.toggle-button {
+  padding: 0.75rem 1.5rem;
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text-primary);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.toggle-button.active {
+  background: var(--gradient-card);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Images */
+.case-study-image {
+  width: 100%;
+  height: 400px;
+  object-fit: contain;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  opacity: 1 !important;
+}
+
+/* Ensure content stays visible */
+.case-study-card h3,
+.case-study-meta,
+.case-study-tags,
+.case-study-card p {
+  opacity: 1;
+}
+
+/* Locked Case Study Card - Updated styles */
+.case-study-card.locked {
+  opacity: 0.85;
+  filter: grayscale(20%);
+  cursor: not-allowed;
+}
+
+.case-study-card.locked::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 12px;
+  z-index: 2;
+}
+
+.lock-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 3.5rem;
+  color: rgba(255, 255, 255, 0.9);
+  z-index: 3;
+}
+
+/* Enhanced Learn More button - Updated styles */
+.case-study-button {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.5rem !important;
+  padding: 0.75rem 1.5rem !important;
+  height: auto !important;
+  background: var(--gradient-card) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 8px !important;
+  color: white !important;
+  font-weight: 500 !important;
+}
+
+.case-study-button:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.1) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+}
+
+.button-icon {
+  font-size: 1.25rem;
+  transition: transform 0.3s ease;
+}
+
+.case-study-button:hover .button-icon {
+  transform: translateX(4px);
+}
+
+/* Disabled button for locked cards */
+.case-study-card.locked .case-study-button {
+  opacity: 0.7 !important;
+  cursor: not-allowed !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+  pointer-events: none !important;
+}
+
+.case-study-card.locked .case-study-button:hover {
+  background: rgba(255, 255, 255, 0.05);
+  transform: none;
+  box-shadow: none;
 }

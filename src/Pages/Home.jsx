@@ -6,9 +6,10 @@ import Experience from '../components/Experience.jsx';
 import HeroModel from '../components/HeroModel.jsx';
 import { Button } from 'antd'
 import { useNavigate } from 'react-router-dom';
-import Content from '../components/Content.jsx';
 import Navbar from "../components/Navbar.jsx";
 import "../style/home.css";
+import { IoLockClosed, IoArrowForward } from 'react-icons/io5';
+import Experiments from '../components/Experiments';
 
 export default function Home() {
   const [activeSection, setActiveSection] = useState('hero');
@@ -68,33 +69,102 @@ export default function Home() {
           <div className="case-studies-grid">
             <motion.div 
               className="case-study-card"
-              whileHover={{ scale: 1.02 }}
-              transition={{ type: "spring", stiffness: 300 }}
+              whileHover={{ scale: 1.01 }}
+              transition={{ duration: 0.2 }}
             >
               <h3>Manage Small Farms</h3>
-              <img className="case-study-image" src="../images/Project Cover Photos/JD thumbnail photo 2.svg" alt="Manage Small Farms" />
+              
+              <div className="case-study-meta">
+                <span>60% Less Time Spent</span>
+              </div>
+
+              <div className="case-study-tags">
+                <span className="tag">Mobile Design</span>
+                <span className="tag">Research</span>
+                <span className="tag">Application</span>
+              </div>
+
+              <img 
+                className="case-study-image" 
+                src="../images/Project Cover Photos/JD thumbnail photo 2.svg" 
+                alt="Manage Small Farms" 
+              />
+              
               <p>Simplified an operations management app to better serve small farm owners, focusing on usability and scalability for non-technical users.</p>
-              <Button className='case-study-button'onClick={() => navigate('/case-study/manage-farms')} >Learn More</Button>
+              
+              <div className="button-container">
+                <Button 
+                  className='case-study-button'
+                  onClick={() => navigate('/case-study/manage-farms')}
+                >
+                  Learn More
+                </Button>
+              </div>
             </motion.div>
+
             <motion.div 
               className="case-study-card"
-              whileHover={{ scale: 1.02 }}
-              transition={{ type: "spring", stiffness: 300 }}
+              whileHover={{ scale: 1.01 }}
+              transition={{ duration: 0.2 }}
             >
               <h3>Hire Influencer Marketing</h3>
-              <img className="case-study-image" src="../images/Project Cover Photos/Campaign Page.svg" alt="Influencer Marketing" />
+              
+              <div className="case-study-meta">
+                <span>40% Increase in Engagement</span>
+              </div>
+
+              <div className="case-study-tags">
+                <span className="tag">Web Design</span>
+                <span className="tag">B2B</span>
+                <span className="tag">Dashboard</span>
+              </div>
+
+              <img 
+                className="case-study-image" 
+                src="../images/Project Cover Photos/Campaign Page.svg" 
+                alt="Influencer Marketing" 
+              />
+              
               <p>Redesigned a web app to simplify influencer hiring and campaign tracking, boosting user engagement by reducing workflow friction for small business owners.</p>
-              <Button className='case-study-button'>Learn More</Button>
+              
+              <div className="button-container">
+                <Button className='case-study-button'>Learn More</Button>
+              </div>
             </motion.div>
+
             <motion.div 
-              className="case-study-card"
-              whileHover={{ scale: 1.02 }}
-              transition={{ type: "spring", stiffness: 300 }}
+              className="case-study-card locked"
+              whileHover={{ scale: 1.01 }}
+              transition={{ duration: 0.2 }}
             >
               <h3>Personalize Skin Care</h3>
-              <img className="case-study-image" src="../images/Project Cover Photos/Home Page.svg" alt="Skincare Platform" />
+              
+              <div className="case-study-meta">
+                <span>2000+ Site Visitors</span>
+              </div>
+
+              <div className="case-study-tags">
+                <span className="tag">Web Design</span>
+                <span className="tag">E-commerce</span>
+                <span className="tag">AI/ML</span>
+              </div>
+
+              <img 
+                className="case-study-image" 
+                src="../images/Project Cover Photos/Home Page.svg" 
+                alt="Skincare Platform" 
+              />
+              
+              <IoLockClosed className="lock-icon" />
+              
               <p>Developed a chatbot-driven skincare recommendation platform, integrating computer vision to provide personalized product suggestions.</p>
-              <Button className='case-study-button'>Learn More</Button>
+              
+              <div className="button-container">
+                <Button className='case-study-button' disabled>
+                  Coming Soon
+                  <IoArrowForward className="button-icon" />
+                </Button>
+              </div>
             </motion.div>
           </div>
         )}
@@ -107,6 +177,15 @@ export default function Home() {
               transition={{ type: "spring", stiffness: 300 }}
             >
               <h3>Contextualize Task Reminders</h3>
+              <div className="case-study-meta">
+                <span>10% Increase in Task Completion</span>
+              </div>
+
+              <div className="case-study-tags">
+                <span className="tag">Web Design</span>
+                <span className="tag">E-commerce</span>
+                <span className="tag">AI/ML</span>
+              </div>
               <img className="case-study-image" src="../images/Project Cover Photos/Anywhere Access Luminote gif.gif" alt="AR Task Reminders" />
               <p>Created an AR-based task management system combining spatial reminders with adaptive organizational structures to reduce cognitive load.</p>
               <Button className='case-study-button'>Learn More</Button>
@@ -126,18 +205,7 @@ export default function Home() {
       </section>
 
       {/* Extra Work Section */}
-      <section className="extra-work">
-        <h2>Experiments</h2>
-        <div className="work-grid">
-          <motion.div 
-            className="project-card"
-            whileHover={{ scale: 1.02 }}
-          >
-            <h3>Project 1</h3>
-            <p>Brief description</p>
-          </motion.div>
-        </div>
-      </section>
+      <Experiments />
 
       {/* Contact Section */}
       <section className="contact">

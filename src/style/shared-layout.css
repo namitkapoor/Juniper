@@ -1,0 +1,33 @@
+/* Add these to your existing shared-layout.css */
+
+/* Performance Optimizations */
+.gpu-accelerated {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+  will-change: transform;
+}
+
+/* Smooth Content Loading */
+.content-container {
+  opacity: 0;
+  animation: contentFade 0.3s ease-out forwards;
+}
+
+@keyframes contentFade {
+  to {
+    opacity: 1;
+  }
+}
+
+/* Optimize Canvas Performance */
+canvas {
+  image-rendering: optimizeSpeed;
+  image-rendering: -webkit-optimize-contrast;
+}
+
+/* Reduce Layout Shifts */
+.layout-shift-fix {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 500px;
+}
