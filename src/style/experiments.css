@@ -1,56 +1,339 @@
-.work-section {
+.experiments-section {
   padding: 4rem 2rem;
   max-width: 1200px;
   margin: 0 auto;
   width: 80%;
+  background: var(--gradient-card);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
 }
 
-.work-grid {
+/* Categories */
+.categories-container {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0;
+}
+
+.categories-buttons {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 0.5rem;
+}
+
+.category-button {
+  padding: 0.75rem 1.5rem;
+  border: 1px solid var(--category-color);
+  background: rgba(255, 255, 255, 0.03);
+  color: white;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  opacity: var(--blend-opacity);
+  z-index: 100;
+  margin: 0.25rem;
+}
+
+.category-button.active {
+  background: var(--category-color);
+  opacity: 1;
+}
+
+/* Venn Diagram */
+.venn-diagram {
+  height: 300px;
+  margin: 2rem 0;
+
+}
+
+.category-circles {
+  padding-top: 24px;
+  width: 100%;
+  height: 100%;
+}
+
+.category-circle {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: var(--category-color);
+  mix-blend-mode: screen;
+  transition: all 0.3s ease;
+  opacity: 0.5;
+}
+
+.category-circle.active {
+  opacity: 0.8;
+}
+
+.category-circle.motion { transform: translate(30%, 0); }
+.category-circle.flat { transform: translate(0, 50%); }
+.category-circle.spatial { transform: translate(60%, 50%); }
+.category-circle.interactive { transform: translate(30%, 20%); }
+
+/* Projects Grid */
+.projects-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
   margin-top: 2rem;
+  width: 100%;
 }
 
-.work-card {
+.project-card {
   background: var(--gradient-card);
   padding: 2rem;
   border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.05);
   transition: all 0.3s ease;
+  grid-column: auto;
+  position: relative;
+  padding-bottom: 3rem;
 }
 
-.work-card h3 {
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
-  background: var(--gradient-text);
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+/* Add this new style for expanded state */
+.project-card.expanded {
+  grid-column: 1 / -1; /* Spans full width */
 }
 
-.work-tags {
+.project-categories {
   display: flex;
   gap: 0.5rem;
   flex-wrap: wrap;
-  margin-top: 1rem;
+  justify-content: center;
+  margin-bottom: 1rem;
+  margin-top: 0;
 }
 
-.work-tag {
+.category-tag {
   font-size: 0.875rem;
   padding: 0.25rem 0.75rem;
-  background: var(--tag-background);
-  color: var(--tag-text);
+  background: var(--category-color);
+  color: white;
   border-radius: 100px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  opacity: 0.8;
+}
+
+.project-image-container {
+  width: 100%;
+  height: 200px;
+  margin: 1.5rem 0;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.project-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  transition: transform 0.3s ease;
+}
+
+.project-card:hover .project-image {
+  transform: scale(1.05);
+}
+
+.project-card h3 {
+  margin: 0 0 1rem 0;
+}
+
+.project-card p {
+  margin: 0;
+  opacity: 0.8;
 }
 
 @media (max-width: 768px) {
-  .work-section {
+  .experiments-section {
     padding: 3rem 1rem;
     width: 90%;
   }
   
-  .work-grid {
-    grid-template-columns: 1fr;
+  .venn-diagram {
+    height: 200px;
+  }
+  
+  .category-circle {
+    width: 150px;
+    height: 150px;
+  }
+  
+  .project-image-container {
+    height: 150px;
+  }
+} 
+
+/* Update project card styles */
+.project-content {
+  width: 100%;
+  cursor: pointer;
+  position: relative;
+  padding-bottom: 2rem; /* Space for expand button */
+}
+
+.expand-button {
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--gradient-card);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.expand-button:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateX(-50%) translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.expand-icon {
+  font-size: 16px;
+  line-height: 1;
+}
+
+.expand-text {
+  font-size: 14px;
+}
+
+.project-bento-container {
+  width: 100%;
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Update BentoGrid container for better spacing */
+.case-study-bento-grid {
+  gap: 1rem;
+  padding: 0.5rem;
+}
+
+.bento-item {
+  position: relative;
+  aspect-ratio: 1;
+  border-radius: 8px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.bento-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.bento-item:hover img {
+  transform: scale(1.05);
+}
+
+.bento-item.wide {
+  grid-column: span 2;
+}
+
+.bento-item.tall {
+  grid-row: span 2;
+}
+
+/* Add these new styles */
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 1200px; /* Optional: limit maximum width */
+  margin: 0 auto; /* Center the grid */
+}
+
+.bento-item {
+  position: relative;
+  aspect-ratio: 1;
+  border-radius: 8px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.bento-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.bento-item:hover img {
+  transform: scale(1.05);
+}
+
+.bento-item.wide {
+  grid-column: span 2;
+}
+
+.bento-item.tall {
+  grid-row: span 2;
+}
+
+@media (max-width: 768px) {
+  .bento-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+} 
+
+/* Update bento item styles */
+.bento-item-content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.bento-item-description {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 1rem;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+}
+
+.bento-item:hover .bento-item-description {
+  transform: translateY(0);
+}
+
+.bento-item-description p {
+  margin: 0;
+  font-size: 14px;
+  color: white;
+  line-height: 1.4;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .bento-item-description {
+    padding: 0.75rem;
+  }
+  
+  .bento-item-description p {
+    font-size: 12px;
   }
 } 
