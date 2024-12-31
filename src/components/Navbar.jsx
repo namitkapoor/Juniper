@@ -1,6 +1,5 @@
 import "../style/navbar.css"
 
-
 export default function Navbar() {
     return <>
         <div className = "navigation">
@@ -16,7 +15,7 @@ export default function Navbar() {
             
             <div className="nav-links">
                 <a className="nav-item" href="/about">about</a>
-                <a className="nav-item" href="/">resume</a>
+                <a className="nav-item" href="/files/KapoorNamit_Resume - UXD.pdf" target="_blank">resume</a>
             </div>
             </div>
         </div>

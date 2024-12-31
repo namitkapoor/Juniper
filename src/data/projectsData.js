@@ -16,6 +16,12 @@ export const projects = [
     description: "Exploring typography in 3D space using Three.js and custom shaders.",
     categories: ['motion', 'spatial'],
     image: "./images/Experiments/Tiptoe/Tiptoe persp view.png",
+  },
+  {
+    title: "Dichotomy Within",
+    description: "A 3D diamond painting.",
+    categories: ['flat'],
+    image: "./images/Experiments/Paintings/Dichotomy Within.jpg",
   }
   // Add other projects as needed
 ];
