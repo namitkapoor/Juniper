@@ -7,47 +7,68 @@ const BentoItem = ({ className = '', delay = 0, content }) => {
   const renderContent = () => {
     if (!content) return null;
 
-    // Handle image content
-    if (content.type === 'image') {
-      return (
-        <img 
-          src={content.src} 
-          alt={content.alt || ''} 
-          className="bento-images"
-        />
-      );
-    }
+    const contentClasses = `bento-content ${className}`;
 
-    // Handle text content
-    if (content.type === 'text') {
-      return (
-        <div className="bento-content">
-          {content.title && <h3 className="text-xl font-semibold mb-3">{content.title}</h3>}
-          {content.description && <p className="text-gray-200">{content.description}</p>}
-          {content.footer && <small className="mt-2 text-gray-400">{content.footer}</small>}
-        </div>
-      );
-    }
+    switch (content.type) {
+      case 'image':
+        return (
+          <div className={contentClasses}>
+            <img 
+              src={content.src} 
+              alt={content.alt || ''} 
+              className="bento-images"
+            />
+          </div>
+        );
 
-    // Handle stats content
-    if (content.type === 'stats') {
-      return (
-        <div className="bento-content">
-          {content.title && <h3 className="text-xl font-semibold mb-3">{content.title}</h3>}
-          <ul className="space-y-2">
-            {content.items.map((item, index) => (
-              <li key={index} className="flex items-center gap-2">
-                {item}
-              </li>
-            ))}
-          </ul>
-        </div>
-      );
-    }
+      case 'text':
+      case 'timeline':
+        return (
+          <div className={contentClasses}>
+            {content.title && (
+              <h3 className="text-xl font-semibold">{content.title}</h3>
+            )}
+            <div className="flex-grow">
+              {content.description && (
+                <p className="text-gray-200">{content.description}</p>
+              )}
+              {content.milestones && (
+                <ul className="mt-4 space-y-2">
+                  {content.milestones.map((milestone, index) => (
+                    <li key={index} className="flex items-center gap-2">
+                      {milestone}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+            {content.footer && (
+              <small className="text-gray-400 mt-auto">{content.footer}</small>
+            )}
+          </div>
+        );
 
-    // Handle custom content
-    if (content.type === 'custom') {
-      return content.component;
+      case 'stats':
+        return (
+          <div className={contentClasses}>
+            {content.title && (
+              <h3 className="text-xl font-semibold mb-3">{content.title}</h3>
+            )}
+            <ul className="space-y-2 flex-grow">
+              {content.items.map((item, index) => (
+                <li key={index} className="flex items-center gap-2">
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        );
+
+      case 'custom':
+        return <div className={contentClasses}>{content.component}</div>;
+
+      default:
+        return null;
     }
   };
 
@@ -69,7 +90,7 @@ const BentoGrid = ({ items }) => {
       {items.map((item, index) => (
         <BentoItem
           key={index}
-          className={item.size || ''}
+          className={item.size || 'small'}
           delay={index * 0.1}
           content={item.content}
         />

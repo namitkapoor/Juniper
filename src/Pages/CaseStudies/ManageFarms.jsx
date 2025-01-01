@@ -26,61 +26,98 @@ export default function ManageFarms() {
       size: 'large',
       content: {
         type: 'image',
-        src: '../../images/bento-grid-images/Farms/App store review 1.jpg',
-        alt: 'Featured App Store Review'
+        src: '../../images/bento-grid-images/Farms/john-deere-app.jpg',
+        alt: 'John Deere Operations Center Mobile App Interface'
       }
     },
     {
-      size: 'wide',
+      size: 'small',
       content: {
         type: 'stats',
-        title: 'Key Metrics',
+        title: 'Impact',
         items: [
-          '70 Average SUS Score',
-          '50% Increase in Daily Active Users',
-          '4.8 App Store Rating'
+          '↑ 70% SUS Score',
+          '↑ 50% Daily Users',
+          '★ 4.8 App Rating'
         ]
       }
     },
     {
+      size: 'small',
       content: {
         type: 'text',
         title: 'User Feedback',
-        description: 'This app has transformed how I manage my small farm. Everything I need is right at my fingertips.',
-        footer: '- John Smith, Farm Owner'
-      }
-    }
-  ];
-
-  const bentoItems = [
-    {
-      size: 'large',
-      content: {
-        type: 'image',
-        src: '../../images/bento-grid-images/Farms/App store review 1.jpg',
-        alt: 'Featured App Store Review'
+        description: '"Finally, an app that understands small farm operations!"',
+        footer: '- Sarah Chen, Organic Farmer'
       }
     },
     {
-      size: 'wide',
+      size: 'tall',
       content: {
-        type: 'stats',
-        title: 'Simplicity, Clarity, and Task Relevance',
-        items: [
-          'Removed irrelevant features like large-scale fleet management.',
-          'Enhanced visual clarity with intuitive icons and color-coded tasks.',
-          'Automated repetitive processes like maintenance reminders.'
+        type: 'timeline',
+        title: 'Project Timeline',
+        milestones: [
+          'Research & Discovery',
+          'UX/UI Design',
+          'User Testing',
+          'Launch & Iterate'
         ]
       }
     },
     {
+      size: 'tall',
+      content: {
+        type: 'timeline',
+        title: 'Project Timeline',
+        milestones: [
+          'Research & Discovery',
+          'UX/UI Design',
+          'User Testing',
+          'Launch & Iterate'
+        ]
+      }
+    },
+    {
+      size: 'medium',
       content: {
         type: 'text',
-        title: 'User Feedback',
-        description: 'This app has transformed how I manage my small farm. Everything I need is right at my fingertips.',
-        footer: '- John Smith, Farm Owner'
+        title: 'Challenge',
+        description: 'Simplify complex farm management tools for small-scale operations while maintaining essential functionality.',
+        footer: '6-month project timeline'
       }
-    }
+    },
+    
+    {
+      size: 'wide',
+      content: {
+        type: 'stats',
+        title: 'Key Features',
+        items: [
+          '🌱 Smart Crop Planning',
+          '📊 Simplified Analytics',
+          '🚜 Equipment Tracking'
+        ]
+      }
+    },
+    {
+      size: 'small',
+      content: {
+        type: 'text',
+        title: 'Results',
+        description: 'Achieved 50% increase in user adoption among small farm owners, with 93% task completion rate.',
+        footer: 'Based on 6-month post-launch data'
+      }
+    },
+    {
+      size: 'small',
+      content: {
+        type: 'text',
+        title: 'Results',
+        description: 'Achieved 50% increase in user adoption among small farm owners, with 93% task completion rate.',
+        footer: 'Based on 6-month post-launch data'
+      }
+    },
+    
   ];
 
   return (
@@ -92,6 +129,9 @@ export default function ManageFarms() {
         animate={{ opacity: 1 }}
       >
         <h1 className='case-study-title'>Manage Small Farms</h1>
+        <p className="case-study-subtitle">
+          Redesigning John Deere's Operations Center Mobile for small-scale farmers
+        </p>
         
         {/* Hero Bento Grid Section */}
         <section className="case-study-hero">

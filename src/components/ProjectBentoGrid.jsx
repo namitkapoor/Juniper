@@ -21,6 +21,7 @@ const ProjectBentoGrid = ({ items }) => {
                 <img 
                   src={item.content.src} 
                   alt={item.content.alt || ''}
+                  style={{ objectFit: item.content.objectFit || 'contain' }}
                 />
                 {item.content.description && (
                   <div className="bento-item-description">

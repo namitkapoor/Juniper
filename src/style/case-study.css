@@ -90,7 +90,7 @@ section h2 {
     }
     .case-study-content {
       width: 90%;
-      padding: 2rem 1rem;
+      padding:0rem;
     }
     section h2 {
       font-size: 1.75rem;
@@ -235,7 +235,7 @@ section h2 {
   @media (max-width: 768px) {
     .case-study-content {
       width: 90%;
-      padding: 2rem 1rem;
+      padding: 2rem
     }
     
     .comparison-images {
@@ -285,4 +285,21 @@ section h2 {
   .toggle-button:hover {
     transform: translateY(-2px);
     opacity: 0.8;
+  }
+
+  .case-study-subtitle {
+    font-size: 1.25rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 2rem;
+    max-width: 600px;
+  }
+
+  .case-study-hero {
+    margin: 2rem 0;
+  }
+
+  .bento-grid-container {
+    position: relative;
+    width: 100%;
+    border-radius: 24px;
   }
