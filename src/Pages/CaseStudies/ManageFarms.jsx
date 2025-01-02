@@ -7,7 +7,7 @@ import BentoGrid from '../../components/BentoGrid.jsx';
 import { IoAdd, IoAlertCircleOutline,IoStatsChart, IoTimeOutline, IoBarChartOutline, IoPeopleOutline, IoSearchOutline, IoAccessibilityOutline, IoCheckmarkDoneOutline, IoAppsOutline, IoListOutline, IoSchoolOutline, IoAnalyticsOutline, IoDocumentTextOutline, IoGitBranchOutline, IoLayersOutline, IoSpeedometerOutline, IoCodeWorkingOutline } from 'react-icons/io5';
 
 export default function ManageFarms() {
-  const [expandedSections, setExpandedSections] = useState(new Set());
+  const [expandedSections, setExpandedSections] = useState(new Set(['approach0']));
   const [selectedPainPoint, setSelectedPainPoint] = useState(0);
   const [painPointImages, setPainPointImages] = useState([
     '../images/Case Studies/JD/original design.svg',
@@ -21,18 +21,46 @@ export default function ManageFarms() {
     '../images/Case Studies/JD/first interview w sam.jpg',
     '../images/Case Studies/JD/me at farmers market.jpg'
   ];
+  const [selectedPhase, setSelectedPhase] = useState(0);
+  const [timelineProgress, setTimelineProgress] = useState(0);
 
-  const toggleSection = useCallback((section) => {
+  const toggleSection = (section) => {
     setExpandedSections(prev => {
       const newSet = new Set(prev);
-      if (newSet.has(section)) {
-        newSet.delete(section);
+      
+      if (section === 'strategicApproach') {
+        if (newSet.has(section)) {
+          newSet.clear();
+          setTimelineProgress(0);
+        } else {
+          newSet.add(section);
+          newSet.add('approach0');
+          setTimelineProgress(25);
+        }
       } else {
-        newSet.add(section);
+        if (newSet.has(section)) {
+          newSet.delete(section);
+          const activeSections = [...newSet]
+            .filter(s => s.startsWith('approach'))
+            .map(s => parseInt(s.replace('approach', '')));
+          
+          if (activeSections.length > 0) {
+            const lastActive = Math.max(...activeSections);
+            setTimelineProgress((lastActive + 1) * 25);
+          } else {
+            newSet.delete('strategicApproach');
+            setTimelineProgress(0);
+          }
+        } else {
+          newSet.add('strategicApproach');
+          newSet.add(section);
+          const sectionNumber = parseInt(section.replace('approach', ''));
+          setTimelineProgress((sectionNumber + 1) * 25);
+        }
       }
       return newSet;
     });
-  }, []);
+  };
 
   const handlePainPointClick = (index) => {
     setSelectedPainPoint(index);
@@ -193,7 +221,9 @@ export default function ManageFarms() {
             <h2>1. Business Challenge</h2>
             <motion.span 
               className="icon"
-              animate={{ rotate: expandedSections.has('businessChallenge') ? 45 : 0 }}
+              animate={{ 
+                rotate: [...expandedSections].some(s => s.startsWith('approach')) ? 45 : 0 
+              }}
             >
               <IoAdd />
             </motion.span>
@@ -304,16 +334,43 @@ export default function ManageFarms() {
             <h2>2. Strategic Approach</h2>
             <motion.span 
               className="icon"
-              animate={{ rotate: expandedSections.has('strategicApproach') ? 45 : 0 }}
+              animate={{ 
+                rotate: [...expandedSections].some(s => s.startsWith('approach')) ? 45 : 0 
+              }}
             >
               <IoAdd />
             </motion.span>
           </div>
-          <p className="section-description">
-            A user-centered redesign focused on streamlining workflows, improving accessibility, and prioritizing ease of use.
-          </p>
           
-          <AnimatePresence mode="wait">
+          <div className="approach-timeline">
+            <div className="timeline-container">
+              <div className="timeline-phases">
+                {[
+                  { title: 'Research Insights', icon: <IoAnalyticsOutline size={20} /> },
+                  { title: 'Solution Framework', icon: <IoLayersOutline size={20} /> },
+                  { title: 'Decision Criteria', icon: <IoGitBranchOutline size={20} /> },
+                  { title: 'Implementation Plan', icon: <IoCodeWorkingOutline size={20} /> }
+                ].map((phase, index) => (
+                  <div
+                    key={index}
+                    className={`timeline-phase ${expandedSections.has(`approach${index}`) ? 'active' : ''}`}
+                    onClick={() => toggleSection(`approach${index}`)}
+                  >
+                    <div className="phase-icon">{phase.icon}</div>
+                    <div className="phase-title">{phase.title}</div>
+                  </div>
+                ))}
+                <div className="timeline-line" />
+                <motion.div 
+                  className="timeline-progress"
+                  animate={{ width: `${timelineProgress}%` }}
+                  transition={{ duration: 0.3, ease: "easeInOut" }}
+                />
+              </div>
+            </div>
+          </div>
+
+          <AnimatePresence>
             {expandedSections.has('strategicApproach') && (
               <motion.div 
                 className="section-content"
@@ -321,166 +378,201 @@ export default function ManageFarms() {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
               >
-                <div className="approach-content">
-                  <div className="approach-grid">
-                    <div className="approach-tabs">
-                      <div 
-                        className={`approach-tab ${selectedApproachTab === 0 ? 'active' : ''}`}
-                        onClick={() => setSelectedApproachTab(0)}
-                      >
-                        <div className="tab-icon">
-                          <IoAnalyticsOutline size={24} />
-                        </div>
-                        <div className="tab-content">
-                          <h3>Research Insights</h3>
-                          <p>We conducted surveys, interviews, and task analyses to uncover pain points.</p>
-                        </div>
-                      </div>
-
-                      <div 
-                        className={`approach-tab ${selectedApproachTab === 1 ? 'active' : ''}`}
-                        onClick={() => setSelectedApproachTab(1)}
-                      >
-                        <div className="tab-icon">
-                          <IoLayersOutline size={24} />
-                        </div>
-                        <div className="tab-content">
-                          <h3>Solution Framework</h3>
-                          <p>Prioritized features addressing key pain points for scalable design.</p>
-                        </div>
-                      </div>
-
-                      <div 
-                        className={`approach-tab ${selectedApproachTab === 2 ? 'active' : ''}`}
-                        onClick={() => setSelectedApproachTab(2)}
-                      >
-                        <div className="tab-icon">
-                          <IoGitBranchOutline size={24} />
-                        </div>
-                        <div className="tab-content">
-                          <h3>Decision Criteria</h3>
-                          <p>Aligning with user needs and addressing usability gaps.</p>
-                        </div>
-                      </div>
-
-                      <div 
-                        className={`approach-tab ${selectedApproachTab === 3 ? 'active' : ''}`}
-                        onClick={() => setSelectedApproachTab(3)}
-                      >
-                        <div className="tab-icon">
-                          <IoCodeWorkingOutline size={24} />
-                        </div>
-                        <div className="tab-content">
-                          <h3>Implementation Plan</h3>
-                          <p>Iterative approach ensuring continuous refinement.</p>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="approach-visuals">
-                      <AnimatePresence mode="wait">
-                        <motion.img
-                          key={selectedApproachTab}
-                          src={approachImages[selectedApproachTab]}
-                          alt="Strategic approach visualization"
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          exit={{ opacity: 0 }}
-                          transition={{ duration: 0.3 }}
-                        />
-                      </AnimatePresence>
-                    </div>
-                  </div>
-
-                  {/* Detailed content based on selected tab */}
-                  <AnimatePresence mode="wait">
-                    <motion.div
-                      key={selectedApproachTab}
-                      className="approach-details"
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -20 }}
-                      transition={{ duration: 0.3 }}
+                {/* Research Insights */}
+                <AnimatePresence>
+                  {expandedSections.has('approach0') && (
+                    <motion.div 
+                      className="approach-item"
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      exit={{ opacity: 0, height: 0 }}
                     >
-                      {selectedApproachTab === 0 && (
-                        <div className="approach-item">
+                      <div className="approach-content-grid">
+                        <div className="approach-text">
                           <div className="approach-quote">
-                            "We conducted surveys, interviews, and task analyses to uncover pain points and guide our design decisions."
+                            "I’d like a program that includes accounting,” highlighted the necessity of integrating basic financial tools.
                           </div>
-                          <ul className="approach-list">
-                            <li>Surveys revealed that 36% of farmers relied on paper tools, highlighting an opportunity for a streamlined digital solution.</li>
-                            <li>User interviews emphasized the need for offline functionality, simplified task management, and intuitive workflows.</li>
-                            <li>Affinity mapping identified three critical themes: farming experiences, technology interaction, and getting familiar with the farming industry, which shaped our user personas and priorities.</li>
-                          </ul>
-                        </div>
-                      )}
-
-                      {selectedApproachTab === 1 && (
-                        <div className="approach-item">
-                          <div className="approach-quote">
-                            "We prioritized features addressing key pain points to create a scalable, user-centered design."
-                          </div>
-                          <div className="framework-grid">
-                            <div className="framework-section">
-                              <h4>Core Features</h4>
-                              <ul>
-                                <li>A daily feed to centralize tasks and updates</li>
-                                <li>Smart crop planning for field organization</li>
-                                <li>Simplified analytics to help farmers track performance easily</li>
-                              </ul>
+                          
+                          <div className="metrics-grid">
+                            <div className="metric-item">
+                              <h4>36%</h4>
+                              <p>of farmers used paper-based systems</p>
                             </div>
-                            <div className="framework-section">
-                              <h4>Design Principles</h4>
-                              <ul>
-                                <li>Modular and mobile-first interface for ease of use</li>
-                                <li>Clear, labeled navigation tabs tailored to farmers' workflows</li>
-                                <li>Consistency in UI elements to reduce learning curves</li>
-                              </ul>
+                            <div className="metric-item">
+                              <h4>250+</h4>
+                              <p>hours of user interviews</p>
+                            </div>
+                            <div className="metric-item">
+                              <h4>3</h4>
+                              <p>key themes identified</p>
                             </div>
                           </div>
-                        </div>
-                      )}
 
-                      {selectedApproachTab === 2 && (
-                        <div className="approach-item">
-                          <div className="approach-quote">
-                            "Our decisions focused on aligning with user needs and addressing usability gaps."
-                          </div>
-                          <ul className="decision-list">
-                            <li>The need for offline access influenced the addition of core functionalities that did not require internet connectivity.</li>
-                            <li>Task analyses revealed the importance of customizable templates to streamline repetitive actions.</li>
-                            <li>Survey feedback prompted the removal of irrelevant features designed for large-scale farms, simplifying the app for small-scale operations.</li>
-                            <li>Expert evaluations guided improvements in information architecture, ensuring that labels and interactive elements were intuitive and actionable.</li>
-                          </ul>
-                        </div>
-                      )}
-
-                      {selectedApproachTab === 3 && (
-                        <div className="approach-item">
-                          <div className="approach-quote">
-                            "The iterative approach ensured continuous refinement and alignment with user feedback."
-                          </div>
-                          <div className="implementation-details">
-                            <p>Conducted four design iterations over a three-month timeline, using data from usability evaluations to refine features.</p>
-                            
-                            <h4>Prototype-First Approach</h4>
+                          <div className="research-findings">
+                            <h4>Key Findings</h4>
                             <ul>
-                              <li>Low-fidelity prototypes were tested to validate basic workflows</li>
-                              <li>High-fidelity designs incorporated feedback from heuristic evaluations and usability testing</li>
-                            </ul>
-                            
-                            <h4>Key Refinements</h4>
-                            <ul>
-                              <li>Adding a dedicated Tasks tab for seamless navigation</li>
-                              <li>Improving the organization of field sections and schedules through enhanced layouts</li>
-                              <li>Ensuring accessibility by achieving WCAG 2.0 AA compliance</li>
+                              <li>Farmers’ long work hours indicated the need for a time-efficient planner.</li>
+                              <li>Quotes like, “I’d like a program that includes accounting,” highlighted the necessity of integrating basic financial tools.</li>
+                              <li>Journey maps identified inefficiencies in current workflows, inspiring features like inventory tracking and smart crop planning.</li>
                             </ul>
                           </div>
                         </div>
-                      )}
+                        
+                        <div className="approach-visual">
+                          <img src="../images/Case Studies/JD/me at farmers market.jpg" alt="Research process visualization" />
+                          <p className="image-caption">Caption: Research synthesis and affinity mapping process</p>
+                        </div>
+                      </div>
                     </motion.div>
-                  </AnimatePresence>
-                </div>
+                  )}
+                </AnimatePresence>
+
+                {/* Solution Framework */}
+                <AnimatePresence>
+                  {expandedSections.has('approach1') && (
+                    <motion.div 
+                      className="approach-item"
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      exit={{ opacity: 0, height: 0 }}
+                    >
+                      <div className="approach-content-grid">
+                        <div className="approach-text">
+                          <div className="approach-quote">
+                            "Solution framework quote about the design direction and strategy"
+                          </div>
+                          
+                          <div className="metrics-grid">
+                            <div className="metric-item">
+                              <h4>4</h4>
+                              <p>core features identified</p>
+                            </div>
+                            <div className="metric-item">
+                              <h4>80%</h4>
+                              <p>task completion improvement</p>
+                            </div>
+                            <div className="metric-item">
+                              <h4>3x</h4>
+                              <p>faster workflow</p>
+                            </div>
+                          </div>
+
+                          <div className="solution-components">
+                            <h4>Core Components</h4>
+                            <ul>
+                              <li>Component description 1</li>
+                              <li>Component description 2</li>
+                              <li>Component description 3</li>
+                            </ul>
+                          </div>
+                        </div>
+                        
+                        <div className="approach-visual">
+                          <img src="../images/Case Studies/JD/solution-framework.jpg" alt="Solution framework diagram" />
+                          <p className="image-caption">Caption: Solution architecture and key components</p>
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+
+                {/* Decision Criteria */}
+                <AnimatePresence>
+                  {expandedSections.has('approach2') && (
+                    <motion.div 
+                      className="approach-item"
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      exit={{ opacity: 0, height: 0 }}
+                    >
+                      <div className="approach-content-grid">
+                        <div className="approach-text">
+                          <div className="approach-quote">
+                            "Decision criteria quote about the evaluation process"
+                          </div>
+                          
+                          <div className="metrics-grid">
+                            <div className="metric-item">
+                              <h4>12</h4>
+                              <p>key decisions made</p>
+                            </div>
+                            <div className="metric-item">
+                              <h4>95%</h4>
+                              <p>user approval rate</p>
+                            </div>
+                            <div className="metric-item">
+                              <h4>5</h4>
+                              <p>iterations refined</p>
+                            </div>
+                          </div>
+
+                          <div className="decision-outcomes">
+                            <h4>Key Decisions</h4>
+                            <ul>
+                              <li>Decision outcome 1</li>
+                              <li>Decision outcome 2</li>
+                              <li>Decision outcome 3</li>
+                            </ul>
+                          </div>
+                        </div>
+                        
+                        <div className="approach-visual">
+                          <img src="../images/Case Studies/JD/decision-process.jpg" alt="Decision making process" />
+                          <p className="image-caption">Caption: Decision framework and evaluation criteria</p>
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+
+                {/* Implementation Plan */}
+                <AnimatePresence>
+                  {expandedSections.has('approach3') && (
+                    <motion.div 
+                      className="approach-item"
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      exit={{ opacity: 0, height: 0 }}
+                    >
+                      <div className="approach-content-grid">
+                        <div className="approach-text">
+                          <div className="approach-quote">
+                            "Implementation quote about the execution process"
+                          </div>
+                          
+                          <div className="metrics-grid">
+                            <div className="metric-item">
+                              <h4>90</h4>
+                              <p>days to launch</p>
+                            </div>
+                            <div className="metric-item">
+                              <h4>4</h4>
+                              <p>major iterations</p>
+                            </div>
+                            <div className="metric-item">
+                              <h4>100%</h4>
+                              <p>WCAG compliance</p>
+                            </div>
+                          </div>
+
+                          <div className="implementation-steps">
+                            <h4>Key Milestones</h4>
+                            <ul>
+                              <li>Implementation milestone 1</li>
+                              <li>Implementation milestone 2</li>
+                              <li>Implementation milestone 3</li>
+                            </ul>
+                          </div>
+                        </div>
+                        
+                        <div className="approach-visual">
+                          <img src="../images/Case Studies/JD/implementation-timeline.jpg" alt="Implementation timeline" />
+                          <p className="image-caption">Caption: Implementation process and key milestones</p>
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </motion.div>
             )}
           </AnimatePresence>
@@ -499,7 +591,9 @@ export default function ManageFarms() {
             <h2>3. Measurable Results</h2>
             <motion.span 
               className="icon"
-              animate={{ rotate: expandedSections.has('results') ? 45 : 0 }}
+              animate={{ 
+                rotate: [...expandedSections].some(s => s.startsWith('approach')) ? 45 : 0 
+              }}
             >
               <IoAdd />
             </motion.span>
@@ -557,7 +651,9 @@ export default function ManageFarms() {
             <h2>4. Visual Evolution</h2>
             <motion.span 
               className="icon"
-              animate={{ rotate: expandedSections.has('evolution') ? 45 : 0 }}
+              animate={{ 
+                rotate: [...expandedSections].some(s => s.startsWith('approach')) ? 45 : 0 
+              }}
             >
               <IoAdd />
             </motion.span>
