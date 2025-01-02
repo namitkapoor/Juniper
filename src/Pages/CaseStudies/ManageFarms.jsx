@@ -4,10 +4,23 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from '../../components/Navbar.jsx';
 import '../../style/case-study.css';
 import BentoGrid from '../../components/BentoGrid.jsx';
-import { IoAdd } from 'react-icons/io5';
+import { IoAdd, IoAlertCircleOutline,IoStatsChart, IoTimeOutline, IoBarChartOutline, IoPeopleOutline, IoSearchOutline, IoAccessibilityOutline, IoCheckmarkDoneOutline, IoAppsOutline, IoListOutline, IoSchoolOutline, IoAnalyticsOutline, IoDocumentTextOutline, IoGitBranchOutline, IoLayersOutline, IoSpeedometerOutline, IoCodeWorkingOutline } from 'react-icons/io5';
 
 export default function ManageFarms() {
   const [expandedSections, setExpandedSections] = useState(new Set());
+  const [selectedPainPoint, setSelectedPainPoint] = useState(0);
+  const [painPointImages, setPainPointImages] = useState([
+    '../images/Case Studies/JD/original design.svg',
+    '../images/Case Studies/JD/App store review 1.jpg',
+    '../images/Case Studies/JD/long tutorial.jpg'
+  ]);
+  const [selectedApproachTab, setSelectedApproachTab] = useState(0);
+  const approachImages = [
+    '../images/Case Studies/JD/Team at JD Dealership.jpg',
+    '../images/Case Studies/JD/Me at dealership.jpg',
+    '../images/Case Studies/JD/first interview w sam.jpg',
+    '../images/Case Studies/JD/me at farmers market.jpg'
+  ];
 
   const toggleSection = useCallback((section) => {
     setExpandedSections(prev => {
@@ -21,24 +34,28 @@ export default function ManageFarms() {
     });
   }, []);
 
+  const handlePainPointClick = (index) => {
+    setSelectedPainPoint(index);
+  };
+
   const introBentoItems = [
     {
       size: 'large',
       content: {
         type: 'image',
-        src: '../../images/bento-grid-images/Farms/john-deere-app.jpg',
+        src: '../../images/Project Cover Photos/JD thumbnail photo 2.svg',
         alt: 'John Deere Operations Center Mobile App Interface'
-      }
+      },
+      objectFit: 'contain'
     },
     {
       size: 'small',
       content: {
         type: 'stats',
+        icon: <IoStatsChart size={24} />,
         title: 'Impact',
         items: [
-          '↑ 70% SUS Score',
-          '↑ 50% Daily Users',
-          '★ 4.8 App Rating'
+          'SUS Score: 70'
         ]
       }
     },
@@ -46,79 +63,84 @@ export default function ManageFarms() {
       size: 'small',
       content: {
         type: 'text',
+        icon: <IoPeopleOutline size={24} />,
         title: 'User Feedback',
         description: '"Finally, an app that understands small farm operations!"',
-        footer: '- Sarah Chen, Organic Farmer'
+        footer: '- Sarah Chen, Homestead Farmer'
       }
     },
     {
-      size: 'tall',
+      size: 'wide',
       content: {
         type: 'timeline',
+        icon: <IoTimeOutline size={24} />,
         title: 'Project Timeline',
         milestones: [
           'Research & Discovery',
           'UX/UI Design',
           'User Testing',
-          'Launch & Iterate'
-        ]
-      }
-    },
-    {
-      size: 'tall',
-      content: {
-        type: 'timeline',
-        title: 'Project Timeline',
-        milestones: [
-          'Research & Discovery',
-          'UX/UI Design',
-          'User Testing',
-          'Launch & Iterate'
-        ]
+          'Iterate'
+        ],
+        activeIndex: 3
       }
     },
     {
       size: 'medium',
       content: {
         type: 'text',
-        title: 'Challenge',
-        description: 'Simplify complex farm management tools for small-scale operations while maintaining essential functionality.',
-        footer: '6-month project timeline'
+        icon: <IoSearchOutline size={24} />,
+        title: 'Key Insight',
+        description: '36% of farmers rely on paper tools, highlighting the need for an intuitive digital solution.',
+        footer: 'Opportunity for adoption'
       }
     },
     
     {
       size: 'wide',
       content: {
-        type: 'stats',
-        title: 'Key Features',
+        type: 'text',
+        icon: <IoAccessibilityOutline size={24} />,
+        title: 'Accessibility Focus',
+        description: 'Achieved WCAG 2.0 AA compliance with contrast checks and color-blind-friendly visual tags.',
+        footer: 'Inclusive by Design'
+      }
+    },
+    {
+      size: 'small',
+      content: {
+        type: 'text',
+        icon: <IoCheckmarkDoneOutline size={24} />,
+        title: 'Task Success Rate',
+        description: '9/14 tasks completed successfully in usability testing.',
+        footer: 'User Evaluations'
+      }
+    },
+    {
+      size: 'wide',
+      content: {
+        type: 'text',
+        icon: <IoAlertCircleOutline size={24} />,
+        title: 'Core Pain Point',
+        description: 'Farmers lack a single tool to manage tasks, finances, and inventory efficiently.',
+        footer: 'Disconnected Systems'
+      }
+    },
+    {
+      size: 'small',
+      content: {
+        type: 'metrics',
+        icon: <IoBarChartOutline size={24} />,
+        title: 'Research Breakdown',
         items: [
-          '🌱 Smart Crop Planning',
-          '📊 Simplified Analytics',
-          '🚜 Equipment Tracking'
+          { value: '9', label: 'Surveys' },
+          { value: '4', label: 'User Interviews' },
+          { value: '127', label: 'Affinity Notes' },
+          { value: '7', label: 'Task Analyses' }
         ]
       }
-    },
-    {
-      size: 'small',
-      content: {
-        type: 'text',
-        title: 'Results',
-        description: 'Achieved 50% increase in user adoption among small farm owners, with 93% task completion rate.',
-        footer: 'Based on 6-month post-launch data'
-      }
-    },
-    {
-      size: 'small',
-      content: {
-        type: 'text',
-        title: 'Results',
-        description: 'Achieved 50% increase in user adoption among small farm owners, with 93% task completion rate.',
-        footer: 'Based on 6-month post-launch data'
-      }
-    },
-    
-  ];
+    }
+];
+
 
   return (
     <div className="case-study-container">
@@ -188,33 +210,82 @@ export default function ManageFarms() {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
               >
-                <div className="challenge-grid">
-                  <div className="challenge-content">
-                    <div className="challenge-item">
-                      <h3>Market Context</h3>
-                      <p>While John Deere's Operations Center Mobile (OCM) app catered to large-scale farms, small farm owners found it overly complex and not aligned with their specific needs.</p>
-                    </div>
-                    <div className="challenge-item">
-                      <h3>Revenue Impact</h3>
-                      <p>Low app adoption among small farm owners meant missed opportunities for increased brand loyalty and equipment sales.</p>
-                    </div>
-                    <div className="challenge-item">
+                <section className="business-challenge">
+                  <div className="market-context">
+                    <h3>Market Context</h3>
+                    <p>While John Deere's Operations Center Mobile (OCM) app catered effectively to large-scale farms, it fell short for small farm owners, who found it overly complex and misaligned with their unique needs.</p>
+                  </div>
+
+                  <div className="revenue-impact">
+                    <h3>Revenue Impact</h3>
+                    <p>With approximately 1.9 million small farms in the United States <a href="https://www.nifa.usda.gov/grants/programs/family-farms?" target="_blank" rel="noopener noreferrer">(USDA, 2022)</a>, low adoption of the app resulted in missed opportunities to strengthen brand loyalty and drive equipment sales in a significant market segment.</p>
+                  </div>
+
+                  <div className="challenge-grid">
+                    <div className="pain-points">
                       <h3>User Pain Points</h3>
-                      <ul>
-                        <li>Overwhelming interface with features irrelevant to small-scale operations</li>
-                        <li>Difficulty managing tasks like equipment tracking, crop planning, and operational logs</li>
-                        <li>Lack of accessible tutorials and support for first-time users</li>
+                      <ul className="pain-points-list">
+                        <li 
+                          className={`pain-point-item ${selectedPainPoint === 0 ? 'active' : ''}`}
+                          onClick={() => handlePainPointClick(0)}
+                        >
+                          <div className="pain-point-icon">
+                            <IoAppsOutline />
+                          </div>
+                          <div className="pain-point-content">
+                            <h4>Complex Interface</h4>
+                            <p>Overwhelming interface with features irrelevant to small-scale operations.</p>
+                          </div>
+                        </li>
+
+                        <li 
+                          className={`pain-point-item ${selectedPainPoint === 1 ? 'active' : ''}`}
+                          onClick={() => handlePainPointClick(1)}
+                        >
+                          <div className="pain-point-icon">
+                            <IoListOutline />
+                          </div>
+                          <div className="pain-point-content">
+                            <h4>Task Management</h4>
+                            <p>Difficulty managing essential tasks like equipment tracking, crop planning, and operational logs.</p>
+                          </div>
+                        </li>
+
+                        <li 
+                          className={`pain-point-item ${selectedPainPoint === 2 ? 'active' : ''}`}
+                          onClick={() => handlePainPointClick(2)}
+                        >
+                          <div className="pain-point-icon">
+                            <IoSchoolOutline />
+                          </div>
+                          <div className="pain-point-content">
+                            <h4>Learning Curve</h4>
+                            <p>Lack of accessible tutorials and support for first-time users, creating a steep learning curve.</p>
+                          </div>
+                        </li>
                       </ul>
                     </div>
-                    <div className="challenge-item">
-                      <h3>Cost of Problems</h3>
-                      <p>Frustrated users either abandoned the app or sought alternative tools, creating a gap in customer retention for John Deere in this growing demographic.</p>
+
+                    <div className="challenge-visuals">
+                      <AnimatePresence mode="wait">
+                        <motion.img
+                          key={selectedPainPoint}
+                          src={painPointImages[selectedPainPoint]}
+                          alt="Pain point visualization"
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={{ opacity: 0 }}
+                          transition={{ duration: 0.3 }}
+                        />
+                      </AnimatePresence>
                     </div>
                   </div>
-                  <div className="challenge-image">
-                    <img src="/path-to-challenge-image.jpg" alt="Business Challenge Visualization" />
+
+                  <div className="cost-problems">
+                    <h3>Cost of Problems</h3>
+                    <p>Frustrated by the lack of user-friendly tools, small farm owners either abandoned the app or turned to alternative solutions, creating a retention gap for John Deere in a rapidly growing segment.</p>
                   </div>
-                </div>
+                </section>
               </motion.div>
             )}
           </AnimatePresence>
@@ -250,28 +321,165 @@ export default function ManageFarms() {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
               >
-                <div className="approach-grid">
-                  <div className="approach-content">
-                    <div className="approach-item">
-                      <h3>Research Insights</h3>
-                      {/* Add your research insights content */}
+                <div className="approach-content">
+                  <div className="approach-grid">
+                    <div className="approach-tabs">
+                      <div 
+                        className={`approach-tab ${selectedApproachTab === 0 ? 'active' : ''}`}
+                        onClick={() => setSelectedApproachTab(0)}
+                      >
+                        <div className="tab-icon">
+                          <IoAnalyticsOutline size={24} />
+                        </div>
+                        <div className="tab-content">
+                          <h3>Research Insights</h3>
+                          <p>We conducted surveys, interviews, and task analyses to uncover pain points.</p>
+                        </div>
+                      </div>
+
+                      <div 
+                        className={`approach-tab ${selectedApproachTab === 1 ? 'active' : ''}`}
+                        onClick={() => setSelectedApproachTab(1)}
+                      >
+                        <div className="tab-icon">
+                          <IoLayersOutline size={24} />
+                        </div>
+                        <div className="tab-content">
+                          <h3>Solution Framework</h3>
+                          <p>Prioritized features addressing key pain points for scalable design.</p>
+                        </div>
+                      </div>
+
+                      <div 
+                        className={`approach-tab ${selectedApproachTab === 2 ? 'active' : ''}`}
+                        onClick={() => setSelectedApproachTab(2)}
+                      >
+                        <div className="tab-icon">
+                          <IoGitBranchOutline size={24} />
+                        </div>
+                        <div className="tab-content">
+                          <h3>Decision Criteria</h3>
+                          <p>Aligning with user needs and addressing usability gaps.</p>
+                        </div>
+                      </div>
+
+                      <div 
+                        className={`approach-tab ${selectedApproachTab === 3 ? 'active' : ''}`}
+                        onClick={() => setSelectedApproachTab(3)}
+                      >
+                        <div className="tab-icon">
+                          <IoCodeWorkingOutline size={24} />
+                        </div>
+                        <div className="tab-content">
+                          <h3>Implementation Plan</h3>
+                          <p>Iterative approach ensuring continuous refinement.</p>
+                        </div>
+                      </div>
                     </div>
-                    <div className="approach-item">
-                      <h3>Solution Framework</h3>
-                      {/* Add your solution framework content */}
-                    </div>
-                    <div className="approach-item">
-                      <h3>Decision Criteria</h3>
-                      {/* Add your decision criteria content */}
-                    </div>
-                    <div className="approach-item">
-                      <h3>Implementation Plan</h3>
-                      {/* Add your implementation plan content */}
+
+                    <div className="approach-visuals">
+                      <AnimatePresence mode="wait">
+                        <motion.img
+                          key={selectedApproachTab}
+                          src={approachImages[selectedApproachTab]}
+                          alt="Strategic approach visualization"
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={{ opacity: 0 }}
+                          transition={{ duration: 0.3 }}
+                        />
+                      </AnimatePresence>
                     </div>
                   </div>
-                  <div className="approach-image">
-                    <img src="/path-to-approach-image.jpg" alt="Strategic Approach Visualization" />
-                  </div>
+
+                  {/* Detailed content based on selected tab */}
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={selectedApproachTab}
+                      className="approach-details"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -20 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      {selectedApproachTab === 0 && (
+                        <div className="approach-item">
+                          <div className="approach-quote">
+                            "We conducted surveys, interviews, and task analyses to uncover pain points and guide our design decisions."
+                          </div>
+                          <ul className="approach-list">
+                            <li>Surveys revealed that 36% of farmers relied on paper tools, highlighting an opportunity for a streamlined digital solution.</li>
+                            <li>User interviews emphasized the need for offline functionality, simplified task management, and intuitive workflows.</li>
+                            <li>Affinity mapping identified three critical themes: farming experiences, technology interaction, and getting familiar with the farming industry, which shaped our user personas and priorities.</li>
+                          </ul>
+                        </div>
+                      )}
+
+                      {selectedApproachTab === 1 && (
+                        <div className="approach-item">
+                          <div className="approach-quote">
+                            "We prioritized features addressing key pain points to create a scalable, user-centered design."
+                          </div>
+                          <div className="framework-grid">
+                            <div className="framework-section">
+                              <h4>Core Features</h4>
+                              <ul>
+                                <li>A daily feed to centralize tasks and updates</li>
+                                <li>Smart crop planning for field organization</li>
+                                <li>Simplified analytics to help farmers track performance easily</li>
+                              </ul>
+                            </div>
+                            <div className="framework-section">
+                              <h4>Design Principles</h4>
+                              <ul>
+                                <li>Modular and mobile-first interface for ease of use</li>
+                                <li>Clear, labeled navigation tabs tailored to farmers' workflows</li>
+                                <li>Consistency in UI elements to reduce learning curves</li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+
+                      {selectedApproachTab === 2 && (
+                        <div className="approach-item">
+                          <div className="approach-quote">
+                            "Our decisions focused on aligning with user needs and addressing usability gaps."
+                          </div>
+                          <ul className="decision-list">
+                            <li>The need for offline access influenced the addition of core functionalities that did not require internet connectivity.</li>
+                            <li>Task analyses revealed the importance of customizable templates to streamline repetitive actions.</li>
+                            <li>Survey feedback prompted the removal of irrelevant features designed for large-scale farms, simplifying the app for small-scale operations.</li>
+                            <li>Expert evaluations guided improvements in information architecture, ensuring that labels and interactive elements were intuitive and actionable.</li>
+                          </ul>
+                        </div>
+                      )}
+
+                      {selectedApproachTab === 3 && (
+                        <div className="approach-item">
+                          <div className="approach-quote">
+                            "The iterative approach ensured continuous refinement and alignment with user feedback."
+                          </div>
+                          <div className="implementation-details">
+                            <p>Conducted four design iterations over a three-month timeline, using data from usability evaluations to refine features.</p>
+                            
+                            <h4>Prototype-First Approach</h4>
+                            <ul>
+                              <li>Low-fidelity prototypes were tested to validate basic workflows</li>
+                              <li>High-fidelity designs incorporated feedback from heuristic evaluations and usability testing</li>
+                            </ul>
+                            
+                            <h4>Key Refinements</h4>
+                            <ul>
+                              <li>Adding a dedicated Tasks tab for seamless navigation</li>
+                              <li>Improving the organization of field sections and schedules through enhanced layouts</li>
+                              <li>Ensuring accessibility by achieving WCAG 2.0 AA compliance</li>
+                            </ul>
+                          </div>
+                        </div>
+                      )}
+                    </motion.div>
+                  </AnimatePresence>
                 </div>
               </motion.div>
             )}

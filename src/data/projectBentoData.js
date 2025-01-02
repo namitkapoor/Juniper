@@ -7,7 +7,7 @@ export const projectBentoData = {
           src: "./images/Experiments/Ciborium/Modern day Ciborium.jpg",
           alt: "Front View",
           description: "Front elevation showing the intricate details of the columns",
-          objectFit: 'cover'
+          objectFit: 'contain'
         },
         size: 'large'
       },

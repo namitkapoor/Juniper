@@ -21,25 +21,42 @@ const BentoItem = ({ className = '', delay = 0, content }) => {
           </div>
         );
 
-      case 'text':
       case 'timeline':
         return (
           <div className={contentClasses}>
             {content.title && (
-              <h3 className="text-xl font-semibold">{content.title}</h3>
+              <h3 className="text-xl font-semibold">
+                {content.icon && content.icon}
+                {content.title}
+              </h3>
             )}
-            <div className="flex-grow">
+            <div className="flex-grow w-full">
+              <ul className="timeline-list">
+                {content.milestones.map((milestone, index) => (
+                  <li 
+                    key={index} 
+                    className={`timeline-item ${index === content.activeIndex ? 'active' : ''}`}
+                  >
+                    {milestone}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        );
+
+      case 'text':
+        return (
+          <div className={contentClasses}>
+            {content.title && (
+              <h3 className="text-xl font-semibold">
+                {content.icon && content.icon}
+                {content.title}
+              </h3>
+            )}
+            <div className="flex-grow w-full">
               {content.description && (
                 <p className="text-gray-200">{content.description}</p>
-              )}
-              {content.milestones && (
-                <ul className="mt-4 space-y-2">
-                  {content.milestones.map((milestone, index) => (
-                    <li key={index} className="flex items-center gap-2">
-                      {milestone}
-                    </li>
-                  ))}
-                </ul>
               )}
             </div>
             {content.footer && (
@@ -52,12 +69,23 @@ const BentoItem = ({ className = '', delay = 0, content }) => {
         return (
           <div className={contentClasses}>
             {content.title && (
-              <h3 className="text-xl font-semibold mb-3">{content.title}</h3>
+              <h3 className="text-xl font-semibold mb-3">
+                {content.icon && content.icon}
+                {content.title}
+              </h3>
             )}
-            <ul className="space-y-2 flex-grow">
+            <ul className="stats-list flex-grow">
               {content.items.map((item, index) => (
-                <li key={index} className="flex items-center gap-2">
-                  {item}
+                <li key={index} className="stats-item">
+                  <span className="stats-text">{item}</span>
+                  <div className="stats-bar">
+                    <motion.div 
+                      className="stats-bar-fill"
+                      initial={{ width: 0 }}
+                      animate={{ width: '80%' }}
+                      transition={{ duration: 1, delay: index * 0.2 }}
+                    />
+                  </div>
                 </li>
               ))}
             </ul>
@@ -66,6 +94,45 @@ const BentoItem = ({ className = '', delay = 0, content }) => {
 
       case 'custom':
         return <div className={contentClasses}>{content.component}</div>;
+
+      case 'metrics':
+        return (
+          <div className={contentClasses}>
+            {content.title && (
+              <h3 className="text-xl font-semibold mb-3">
+                {content.icon && content.icon}
+                {content.title}
+              </h3>
+            )}
+            <div className="metrics-grid">
+              {content.items.map((item, index) => (
+                <motion.div 
+                  key={index}
+                  className="metric-item"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: index * 0.2 }}
+                >
+                  <motion.span 
+                    className="metric-value"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ 
+                      opacity: 1, 
+                      y: 0 
+                    }}
+                    transition={{ 
+                      duration: 1,
+                      delay: index * 0.2 
+                    }}
+                  >
+                    {item.value}
+                  </motion.span>
+                  <span className="metric-label">{item.label}</span>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        );
 
       default:
         return null;
