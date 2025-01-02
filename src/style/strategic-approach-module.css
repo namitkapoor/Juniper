@@ -1,0 +1,230 @@
+.strategic-approach {
+  width: 100%;
+  margin: 2rem 0;
+}
+
+/* Timeline styling */
+.approach-timeline {
+  margin: 3rem 0;
+  padding: 1rem 0;
+}
+
+.timeline-container {
+  position: relative;
+  width: 100%;
+  padding: 0 1rem;
+}
+
+.timeline-phases {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  min-height: 100px;
+  padding-top: 20px;
+}
+
+/* Line and Progress */
+.timeline-line {
+  position: absolute;
+  top: 40px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.1);
+  z-index: 1;
+}
+
+.timeline-progress {
+  position: absolute;
+  top: 40px;
+  left: 0;
+  height: 2px;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.4));
+  z-index: 2;
+  transform-origin: left;
+}
+
+/* Phase styling */
+.timeline-phase {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  z-index: 3;
+  width: 160px;
+  transition: all 0.3s ease;
+  opacity: 0.7;
+}
+
+.phase-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, rgba(107, 104, 104, 0.871), rgba(68, 67, 67, 0.882));
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  margin-bottom: 8px;
+}
+
+.phase-title {
+  font-size: 0.9rem;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.7);
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+/* Active states */
+.timeline-phase.active {
+  opacity: 1;
+}
+
+.timeline-phase.active .phase-icon {
+  background: linear-gradient(135deg, rgb(43, 42, 42), rgba(37, 37, 37, 0.826));
+  transform: scale(1.1);
+}
+
+.timeline-phase.active .phase-title {
+  color: #ffffff;
+}
+
+/* Content sections with animations */
+.phase-content {
+  animation: slideIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: 2rem;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.phase-content h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #ffffff;
+}
+
+.phase-summary {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 2rem;
+}
+
+/* Content sections styling */
+.key-findings,
+.methodology,
+.key-features {
+  margin-bottom: 2rem;
+}
+
+.phase-content h4 {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.phase-content ul {
+  list-style: none;
+  padding: 0;
+}
+
+.phase-content li {
+  margin-bottom: 0.75rem;
+  padding-left: 1.5rem;
+  position: relative;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.phase-content li::before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* Grid layouts for specific content types */
+.criteria-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.criterion-card {
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.weight {
+  font-size: 1.5rem;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0.5rem 0;
+}
+
+/* Image gallery */
+.phase-images {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+figure {
+  margin: 0;
+}
+
+figure img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+figcaption {
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.6);
+  text-align: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .timeline-phase {
+    width: auto;
+    padding: 0.5rem;
+  }
+  
+  .phase-icon {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .phase-title {
+    font-size: 0.8rem;
+    white-space: normal;
+  }
+
+  .criteria-grid {
+    grid-template-columns: 1fr;
+  }
+} 
