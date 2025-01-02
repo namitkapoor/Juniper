@@ -1,5 +1,11 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { 
+  IoAnalyticsOutline, 
+  IoLayersOutline, 
+  IoGitBranchOutline, 
+  IoCodeWorkingOutline 
+} from 'react-icons/io5';
 import { strategicApproachData } from '../data/strategicApproachData';
 import '../style/strategic-approach-module.css';
 
@@ -95,6 +101,35 @@ const StrategicApproach = ({
   const data = strategicApproachData[projectId];
   if (!data) return null;
 
+  // Calculate timeline progress based on active phases
+  const calculateProgress = () => {
+    const totalPhases = data.phases.length;
+    let maxActivePhase = -1;
+    
+    // Find the highest (farthest) active phase
+    for (let i = 0; i < totalPhases; i++) {
+      if (expandedSections.has(`approach${i}`)) {
+        maxActivePhase = i;
+      }
+    }
+    
+    // If no active phases, return 0
+    if (maxActivePhase === -1) return 0;
+    
+    // Calculate progress based on the farthest active phase
+    return ((maxActivePhase + 1) / totalPhases) * 100;
+  };
+
+  // Handle phase click
+  const handlePhaseClick = (index) => {
+    // First ensure the main section is open
+    if (!expandedSections.has('strategicApproach')) {
+      onToggleSection('strategicApproach');
+    }
+    // Then toggle the specific phase
+    onToggleSection(`approach${index}`);
+  };
+
   return (
     <div className="strategic-approach">
       <div className="approach-timeline">
@@ -104,7 +139,7 @@ const StrategicApproach = ({
               <div
                 key={index}
                 className={`timeline-phase ${expandedSections.has(`approach${index}`) ? 'active' : ''}`}
-                onClick={() => onToggleSection(`approach${index}`)}
+                onClick={() => handlePhaseClick(index)}
               >
                 <div className="phase-icon">
                   <phase.icon size={20} />
@@ -115,8 +150,10 @@ const StrategicApproach = ({
             <div className="timeline-line" />
             <motion.div 
               className="timeline-progress"
-              animate={{ width: `${timelineProgress}%` }}
-              transition={{ duration: 0.3, ease: "easeInOut" }}
+              animate={{ 
+                width: `${calculateProgress()}%`,
+                transition: { duration: 0.3, ease: "easeInOut" }
+              }}
             />
           </div>
         </div>

@@ -29,21 +29,31 @@
 .timeline-line {
   position: absolute;
   top: 40px;
-  left: 0;
-  width: 100%;
+  left: 18px;
+  width: calc(100% - 36px);
   height: 2px;
   background: rgba(255, 255, 255, 0.1);
   z-index: 1;
+  opacity: 1;
+  transition: opacity 0.3s ease;
 }
 
 .timeline-progress {
   position: absolute;
   top: 40px;
-  left: 0;
+  left: 18px;
   height: 2px;
   background: linear-gradient(to right, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.4));
   z-index: 2;
   transform-origin: left;
+  opacity: 1;
+  transition: all 0.3s ease;
+}
+
+/* Show timeline when section is expanded */
+.strategic-approach.expanded .timeline-line,
+.strategic-approach.expanded .timeline-progress {
+  opacity: 1;
 }
 
 /* Phase styling */
@@ -61,6 +71,7 @@
 }
 
 .phase-icon {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -70,6 +81,7 @@
   border-radius: 50%;
   transition: all 0.3s ease;
   margin-bottom: 8px;
+  z-index: 4;
 }
 
 .phase-title {

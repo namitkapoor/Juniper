@@ -1,0 +1,42 @@
+.case-study-overview {
+  margin-bottom: 2rem;
+}
+
+.case-study-overview h1 {
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  background: linear-gradient(45deg, #fff, #888);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: left;
+}
+
+.case-study-overview .case-study-subtitle {
+  font-size: 1.25rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 1rem;
+  text-align: left;
+}
+
+.case-study-overview .case-study-description {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 2rem;
+  text-align: left;
+}
+
+.case-study-overview .bento-grid-container {
+  margin-top: 2rem;
+}
+
+@media (max-width: 768px) {
+  .case-study-overview h1 {
+    font-size: 2rem;
+  }
+  
+  .case-study-overview .case-study-subtitle {
+    font-size: 1.1rem;
+  }
+} 

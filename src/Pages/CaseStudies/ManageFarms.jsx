@@ -1,31 +1,22 @@
 // src/Pages/CaseStudies/ManageFarms.jsx
-import React, { useState, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import Navbar from '../../components/Navbar.jsx';
 import '../../style/case-study.css';
-import BentoGrid from '../../components/BentoGrid.jsx';
-import { IoAdd, IoAlertCircleOutline,IoStatsChart, IoTimeOutline, IoBarChartOutline, IoPeopleOutline, IoSearchOutline, IoAccessibilityOutline, IoCheckmarkDoneOutline, IoAppsOutline, IoListOutline, IoSchoolOutline, IoAnalyticsOutline, IoDocumentTextOutline, IoGitBranchOutline, IoLayersOutline, IoSpeedometerOutline, IoCodeWorkingOutline } from 'react-icons/io5';
+import { IoAdd } from 'react-icons/io5';
 import BusinessChallenge from '../../components/BusinessChallenge';
 import StrategicApproach from '../../components/StrategicApproach';
 import VisualEvolution from '../../components/VisualEvolution';
+import MeasurableResults from '../../components/MeasurableResults';
+import Overview from '../../components/Overview';
 
 export default function ManageFarms() {
-  const [expandedSections, setExpandedSections] = useState(new Set(['approach0']));
-  const [selectedPainPoint, setSelectedPainPoint] = useState(0);
-  const [painPointImages, setPainPointImages] = useState([
-    '../images/Case Studies/JD/original design.svg',
-    '../images/Case Studies/JD/App store review 1.jpg',
-    '../images/Case Studies/JD/long tutorial.jpg'
-  ]);
-  const [selectedApproachTab, setSelectedApproachTab] = useState(0);
-  const approachImages = [
-    '../images/Case Studies/JD/Team at JD Dealership.jpg',
-    '../images/Case Studies/JD/Me at dealership.jpg',
-    '../images/Case Studies/JD/first interview w sam.jpg',
-    '../images/Case Studies/JD/me at farmers market.jpg'
-  ];
-  const [selectedPhase, setSelectedPhase] = useState(0);
+  const [expandedSections, setExpandedSections] = useState(new Set());
   const [timelineProgress, setTimelineProgress] = useState(0);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const toggleSection = (section) => {
     setExpandedSections(prev => {
@@ -38,7 +29,7 @@ export default function ManageFarms() {
           setTimelineProgress(0);
         } else {
           newSet.add(section);
-          newSet.add('approach0');
+          newSet.add('approach0'); // Add Research Insights when plus icon is clicked
           setTimelineProgress(25);
         }
       } 
@@ -58,6 +49,12 @@ export default function ManageFarms() {
             setTimelineProgress(0);
           }
         } else {
+          // Clear other approach sections before adding the new one
+          [...newSet].forEach(s => {
+            if (s.startsWith('approach')) {
+              newSet.delete(s);
+            }
+          });
           newSet.add('strategicApproach');
           newSet.add(section);
           const sectionNumber = parseInt(section.replace('approach', ''));
@@ -76,151 +73,18 @@ export default function ManageFarms() {
     });
   };
 
-  const handlePainPointClick = (index) => {
-    setSelectedPainPoint(index);
-  };
-
-  const introBentoItems = [
-    {
-      size: 'large',
-      content: {
-        type: 'image',
-        src: '../../images/Project Cover Photos/JD thumbnail photo 2.svg',
-        alt: 'John Deere Operations Center Mobile App Interface'
-      },
-      objectFit: 'contain'
-    },
-    {
-      size: 'small',
-      content: {
-        type: 'stats',
-        icon: <IoStatsChart size={24} />,
-        title: 'Impact',
-        items: [
-          'SUS Score: 70'
-        ]
-      }
-    },
-    {
-      size: 'small',
-      content: {
-        type: 'text',
-        icon: <IoPeopleOutline size={24} />,
-        title: 'User Feedback',
-        description: '"Finally, an app that understands small farm operations!"',
-        footer: '- Sarah Chen, Homestead Farmer'
-      }
-    },
-    {
-      size: 'wide',
-      content: {
-        type: 'timeline',
-        icon: <IoTimeOutline size={24} />,
-        title: 'Project Timeline',
-        milestones: [
-          'Research & Discovery',
-          'UX/UI Design',
-          'User Testing',
-          'Iterate'
-        ],
-        activeIndex: 3
-      }
-    },
-    {
-      size: 'medium',
-      content: {
-        type: 'text',
-        icon: <IoSearchOutline size={24} />,
-        title: 'Key Insight',
-        description: '36% of farmers rely on paper tools, highlighting the need for an intuitive digital solution.',
-        footer: 'Opportunity for adoption'
-      }
-    },
-    
-    {
-      size: 'wide',
-      content: {
-        type: 'text',
-        icon: <IoAccessibilityOutline size={24} />,
-        title: 'Accessibility Focus',
-        description: 'Achieved WCAG 2.0 AA compliance with contrast checks and color-blind-friendly visual tags.',
-        footer: 'Inclusive by Design'
-      }
-    },
-    {
-      size: 'small',
-      content: {
-        type: 'text',
-        icon: <IoCheckmarkDoneOutline size={24} />,
-        title: 'Task Success Rate',
-        description: '9/14 tasks completed successfully in usability testing.',
-        footer: 'User Evaluations'
-      }
-    },
-    {
-      size: 'wide',
-      content: {
-        type: 'text',
-        icon: <IoAlertCircleOutline size={24} />,
-        title: 'Core Pain Point',
-        description: 'Farmers lack a single tool to manage tasks, finances, and inventory efficiently.',
-        footer: 'Disconnected Systems'
-      }
-    },
-    {
-      size: 'small',
-      content: {
-        type: 'metrics',
-        icon: <IoBarChartOutline size={24} />,
-        title: 'Research Breakdown',
-        items: [
-          { value: '9', label: 'Surveys' },
-          { value: '4', label: 'User Interviews' },
-          { value: '127', label: 'Affinity Notes' },
-          { value: '7', label: 'Task Analyses' }
-        ]
-      }
-    }
-];
-
-
   return (
     <div className="case-study-container">
       <Navbar />
       <motion.div 
-        className="case-study-content content-width"
+        className="content"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
       >
-        <h1 className='case-study-title'>Manage Small Farms</h1>
-        <p className="case-study-subtitle">
-          Redesigning John Deere's Operations Center Mobile for small-scale farmers
-        </p>
+        <h1 className="page-title">Manage Small Farms</h1>
         
-        {/* Hero Bento Grid Section */}
-        <section className="case-study-hero">
-          <div className="bento-grid-container">
-            <BentoGrid items={introBentoItems} />            
-          </div>
-        </section>
-
-        {/* Overview Section - Non-expandable */}
-        <motion.div
-          className="expandable-section"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-        >
-          <div className="section-header">
-            <h2>Overview</h2>
-          </div>
-          
-          <div className="section-content">
-            <div className="case-study-overview">
-              <p>An operations management app designed to better serve small farm owners, focusing on usability and scalability for non-technical users.</p>
-              {/* Keep your existing overview content */}
-            </div>
-          </div>
-        </motion.div>
+        {/* Overview Section */}
+        <Overview projectId="manageFarms" />
 
         {/* 1. Business Challenge Section */}
         <motion.div
@@ -289,56 +153,26 @@ export default function ManageFarms() {
         >
           <div 
             className="section-header"
-            onClick={() => toggleSection('results')}
+            onClick={() => toggleSection('measurableResults')}
           >
             <h2>3. Measurable Results</h2>
             <motion.span 
               className="icon"
               animate={{ 
-                rotate: [...expandedSections].some(s => s.startsWith('approach')) ? 45 : 0 
+                rotate: expandedSections.has('measurableResults') ? 45 : 0 
               }}
             >
               <IoAdd />
             </motion.span>
           </div>
           <p className="section-description">
-            Boosted productivity and engagement, achieving higher user satisfaction and increased adoption rates.
+            Key metrics and outcomes that demonstrate the impact of our design solutions.
           </p>
           
-          <AnimatePresence mode="wait">
-            {expandedSections.has('results') && (
-              <motion.div 
-                className="section-content"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-              >
-                <div className="results-grid">
-                  <div className="results-content">
-                    <div className="results-item">
-                      <h3>Revenue Increase</h3>
-                      {/* Add your revenue increase content */}
-                    </div>
-                    <div className="results-item">
-                      <h3>User Metrics</h3>
-                      {/* Add your user metrics content */}
-                    </div>
-                    <div className="results-item">
-                      <h3>Performance Data</h3>
-                      {/* Add your performance data content */}
-                    </div>
-                    <div className="results-item">
-                      <h3>Client Testimonials</h3>
-                      {/* Add your client testimonials content */}
-                    </div>
-                  </div>
-                  <div className="results-image">
-                    <img src="/path-to-results-image.jpg" alt="Results Visualization" />
-                  </div>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
+          <MeasurableResults 
+            isExpanded={expandedSections.has('measurableResults')} 
+            projectId="manageFarms" 
+          />
         </motion.div>
 
         {/* 4. Visual Evolution Section */}
@@ -355,7 +189,7 @@ export default function ManageFarms() {
             <motion.span 
               className="icon"
               animate={{ 
-                rotate: [...expandedSections].some(s => s.startsWith('approach')) ? 45 : 0 
+                rotate: expandedSections.has('evolution') ? 45 : 0
               }}
             >
               <IoAdd />

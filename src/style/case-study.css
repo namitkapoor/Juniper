@@ -1,430 +1,309 @@
 /* src/style/case-study.css */
 .case-study-container {
-    background-color: #1a1a1a;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-family: Satoshi;
-    overflow-x: hidden;
-    width: 100%;
-  }
-  
-  .case-study-content {
-    width: 80%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 4rem 2rem;
-  }
-  
-  .case-study-hero {
-    margin-bottom: 4rem;
-  }
-  .case-study-hero img {
-    width: 50%;
-    height: auto;
-    border-radius: 12px;
-  }
-  .case-study-title {
-    font-size: 2 rem;
-    text-align: left;
-  }
-  
-  .case-study-overview {
-    margin-top: -1rem;
-    padding: 0;
-  }
-  
-  .case-study-overview p {
-    font-size: 1.1rem;
-    line-height: 1.6;
-    color: rgba(255, 255, 255, 0.8);
-    text-align: left;
-    background: none;
-    border: none;
-    padding: 0;
-  }
+  background-color: #1a1a1a;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: Satoshi;
+  overflow-x: hidden;
+  width: 100%;
+}
 
-  /* Section Headers */
-section h2 {
-    font-size: 2rem;
-    margin: 3rem 0 1.5rem;
-    color: #ffffff;
-    border-bottom: 2px solid #3a3a3a;
-    padding-bottom: 0.5rem;
-  }
-  
-  section h3 {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-    color: #f0f0f0;
-  }
-  
-  /* Before & After Section */
-  .before-after-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
-    margin-top: 1rem;
-  }
-  
-  .before, .after {
-    text-align: center;
-  }
-  
-  .before img, .after img {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-    margin-top: 0.5rem;
-  }
-  
-  /* Responsive Design */
-  @media (max-width: 768px) {
-    .challenge-grid,
-    .approach-grid,
-    .results-grid,
-    .evolution-grid {
-      grid-template-columns: 1fr;
-    }
-  
-    .before-after-container {
-      grid-template-columns: 1fr;
-    }
-    .case-study-content {
-      width: 90%;
-      padding:0rem;
-    }
-    section h2 {
-      font-size: 1.75rem;
-    }
-  
-    section h3 {
-      font-size: 1.25rem;
-    }
-  }
+.content {
+  width: 80%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+}
 
-  .expandable-section {
-    margin-bottom: 2rem;
-    will-change: transform, opacity;
-    transform-origin: top;
-  }
+.page-title {
+  font-size: 5.5rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  background: linear-gradient(45deg, #fff, #888);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: left;
+}
 
-  .section-header {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 0.5rem;
-  }
-
-  .section-header h2 {
-    margin: 0;
+@media (max-width: 768px) {
+  .page-title {
     font-size: 2.5rem;
-    font-weight: 600;
-    background: linear-gradient(45deg, #fff, #888);
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
   }
+}
 
-  .section-header .icon {
-    font-size: 2.5rem;
-    color: #fff;
-    opacity: 0.8;
-    display: flex;
-    align-items: center;
-  }
+/* Section Headers */
+.section-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
 
-  .section-content {
-    padding: 2rem;
-    border-radius: 12px;
-    margin-top: 1rem;
-    background: rgba(255, 255, 255, 0.03);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    text-align: left;
-  }
+.section-header h2 {
+  margin: 0;
+  font-size: 2.5rem;
+  font-weight: 600;
+  background: linear-gradient(45deg, #fff, #888);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 
-  /* Section content layouts */
+.section-header .icon {
+  font-size: 2.5rem;
+  color: #fff;
+  opacity: 0.8;
+  display: flex;
+  align-items: center;
+}
+
+.section-content {
+  padding: 2rem;
+  border-radius: 12px;
+  margin-top: 1rem;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  text-align: left;
+}
+
+/* Section content layouts */
+.challenge-grid,
+.approach-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+.challenge-image img,
+.approach-images img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  margin-top: 1rem;
+}
+
+/* Maintain existing before-after styles */
+.before-after-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.before img, 
+.after img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-top: 0.5rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
   .challenge-grid,
   .approach-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-    align-items: center;
-  }
-
-  .challenge-image img,
-  .approach-images img {
-    width: 100%;
-    height: auto;
-    border-radius: 12px;
-    margin-top: 1rem;
-  }
-
-  /* Maintain existing before-after styles */
-  .before-after-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
-    margin-top: 1rem;
-  }
-
-  .before img, 
-  .after img {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-    margin-top: 0.5rem;
-  }
-
-  /* Responsive adjustments */
-  @media (max-width: 768px) {
-    .challenge-grid,
-    .approach-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .challenge-image,
-    .approach-images {
-      margin-top: 1rem;
-    }
-  }
-
-  /* Remove special styling for overview section content */
-  .expandable-section:first-of-type .section-content {
-    background: none;
-    backdrop-filter: none;
-    padding: 0;
-    margin-top: 0;
-    border: none;
-  }
-
-  /* Subsection layouts */
-  .challenge-item,
-  .approach-item,
-  .results-item {
-    margin-bottom: 3rem;
-  }
-
-  .subsection-image {
-    margin: 2rem 0;
-    width: 100%;
-    border-radius: 12px;
-    overflow: hidden;
-  }
-
-  .subsection-image img {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
-
-  /* Grid layouts with more breathing room */
-  .challenge-grid,
-  .approach-grid,
-  .results-grid,
-  .evolution-grid {
-    display: grid;
     grid-template-columns: 1fr;
-    gap: 3rem;
   }
 
+  .challenge-image,
+  .approach-images {
+    margin-top: 1rem;
+  }
+}
+
+/* Remove special styling for overview section content */
+.expandable-section:first-of-type .section-content {
+  background: none;
+  backdrop-filter: none;
+  padding: 0;
+  margin-top: 0;
+  border: none;
+}
+
+/* Subsection layouts */
+.challenge-item,
+.approach-item,
+.results-item {
+  margin-bottom: 3rem;
+}
+
+.subsection-image {
+  margin: 2rem 0;
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.subsection-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Grid layouts with more breathing room */
+.challenge-grid,
+.approach-grid,
+.results-grid,
+.evolution-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+}
+
+.comparison-images {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin: 2rem 0;
+}
+
+@media (max-width: 768px) {
+  .content {
+    width: 90%;
+    padding: 2rem;
+  }
+  
   .comparison-images {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-    margin: 2rem 0;
+    grid-template-columns: 1fr;
   }
+}
 
-  @media (max-width: 768px) {
-    .case-study-content {
-      width: 90%;
-      padding: 2rem
-    }
-    
-    .comparison-images {
-      grid-template-columns: 1fr;
-    }
-  }
+/* Add these styles for the section description */
+.section-description {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.8);
+  margin-top: 0.5rem;
+  padding-bottom: 2rem;
+  text-align: left;
+  max-width: 900px;
+}
 
-  /* Add these styles for the section description */
-  .section-description {
-    font-size: 1.1rem;
-    line-height: 1.6;
-    color: rgba(255, 255, 255, 0.8);
-    margin-top: 0.5rem;
-    padding-bottom: 2rem;
-    text-align: left;
-    max-width: 900px;
-  }
+/* Add border above the description */
+.section-description::before {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.1);
+  margin-bottom: 1rem;
+}
 
-  /* Add border above the description */
-  .section-description::before {
-    content: '';
-    display: block;
-    width: 100%;
-    height: 1px;
-    background: rgba(255, 255, 255, 0.1);
-    margin-bottom: 1rem;
-  }
+/* Toggle Button States */
+.toggle-button {
+  padding: 0.75rem 1.5rem;
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text-primary);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  opacity: 0.6;
+}
 
-  /* Toggle Button States */
-  .toggle-button {
-    padding: 0.75rem 1.5rem;
-    background: rgba(255, 255, 255, 0.03);
-    color: var(--text-primary);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 12px;
-    transition: all 0.3s ease;
-    cursor: pointer;
-    opacity: 0.6;
-  }
+.toggle-button.active {
+  background: var(--gradient-card);
+  border-color: rgba(255, 255, 255, 0.1);
+  opacity: 1;
+}
 
-  .toggle-button.active {
-    background: var(--gradient-card);
-    border-color: rgba(255, 255, 255, 0.1);
-    opacity: 1;
-  }
+.toggle-button:hover {
+  transform: translateY(-2px);
+  opacity: 0.8;
+}
 
-  .toggle-button:hover {
-    transform: translateY(-2px);
-    opacity: 0.8;
-  }
+/* Ensure all text elements within sections are left-aligned */
+.section-content h3,
+.section-content p,
+.section-content ul,
+.section-content li {
+  text-align: left;
+}
 
-  .case-study-subtitle {
-    font-size: 1.25rem;
-    color: rgba(255, 255, 255, 0.8);
-    margin-bottom: 2rem;
-    text-align: left;
-  }
+/* Keep certain elements centered if needed */
+.comparison-images,
+.before-after-container {
+  text-align: center;
+}
 
-  .case-study-hero {
-    margin: 2rem 0;
-  }
+/* Business Challenge Section Styling */
+.business-challenge {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
 
-  .bento-grid-container {
-    position: relative;
-    width: 100%;
-    border-radius: 24px;
-  }
+/* Remove boxes, keep clean typography */
+.market-context,
+.revenue-impact,
+.cost-problems {
+  padding: 1rem 0;
+}
 
-  /* Ensure all text elements within sections are left-aligned */
-  .section-content h3,
-  .section-content p,
-  .section-content ul,
-  .section-content li {
-    text-align: left;
-  }
+.market-context h3,
+.revenue-impact h3,
+.cost-problems h3 {
+  color: #f0f0f0;
+  margin-bottom: 1rem;
+}
 
-  /* Keep certain elements centered if needed */
-  .comparison-images,
-  .before-after-container {
-    text-align: center;
-  }
+.market-context p,
+.revenue-impact p,
+.cost-problems p {
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.6;
+  font-size: 1.1rem;
+}
 
-  /* Business Challenge Section Styling */
-  .business-challenge {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-  }
+/* Keep the interactive pain points section styled */
+.challenge-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+  margin: 2rem 0;
+  padding: 1rem 0;
+}
 
-  /* Remove boxes, keep clean typography */
-  .market-context,
-  .revenue-impact,
-  .cost-problems {
-    padding: 1rem 0;
-  }
+/* Pain Points Styling */
+.pain-points-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
 
-  .market-context h3,
-  .revenue-impact h3,
-  .cost-problems h3 {
-    color: #f0f0f0;
-    margin-bottom: 1rem;
-  }
+.pain-point-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.25rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
 
-  .market-context p,
-  .revenue-impact p,
-  .cost-problems p {
-    color: rgba(255, 255, 255, 0.8);
-    line-height: 1.6;
-    font-size: 1.1rem;
-  }
+.pain-point-item.active {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateX(10px);
+}
 
-  /* Keep the interactive pain points section styled */
-  .challenge-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2.5rem;
-    margin: 2rem 0;
-    padding: 1rem 0;
-  }
+.pain-point-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+}
 
-  /* Pain Points Styling */
-  .pain-points-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .pain-point-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 1rem;
-    padding: 1.25rem;
-    background: rgba(255, 255, 255, 0.03);
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    transition: all 0.3s ease;
-    cursor: pointer;
-  }
-
-  .pain-point-item.active {
-    background: rgba(255, 255, 255, 0.08);
-    border-color: rgba(255, 255, 255, 0.3);
-    transform: translateX(10px);
-  }
-
-  .pain-point-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 40px;
-    height: 40px;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
-    border-radius: 10px;
-  }
-
-  .challenge-visuals {
-    position: relative;
-    border-radius: 12px;
-    overflow: hidden;
-    aspect-ratio: 4/3;
-    background: rgba(0, 0, 0, 0.2);
-  }
-
-  .challenge-visuals img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: 15% 12%; /* Default position */
-  }
-
-
-  @media (max-width: 768px) {
-    .challenge-grid {
-      grid-template-columns: 1fr;
-    }
-    
-    .pain-point-item.active {
-      transform: translateY(-5px);
-    }
-  }
 
  
-  
+   

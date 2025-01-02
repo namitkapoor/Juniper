@@ -67,7 +67,7 @@
 .bento-images {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   aspect-ratio: 16/9;
   overflow: visible;
 }
@@ -76,6 +76,7 @@
 .bento-item.large .bento-images {
   min-height: 400px;
   height: 100%;
+  object-fit: contain;
 }
 
 .bento-item.large .bento-content {
