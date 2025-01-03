@@ -22,46 +22,55 @@ export default function ManageFarms() {
     setExpandedSections(prev => {
       const newSet = new Set(prev);
       
-      // Only handle strategic approach toggle if it's explicitly clicked
-      if (section === 'strategicApproach') {
-        if (newSet.has(section)) {
-          newSet.clear();
-          setTimelineProgress(0);
-        } else {
-          newSet.add(section);
-          newSet.add('approach0'); // Add Research Insights when plus icon is clicked
-          setTimelineProgress(25);
+      // Handle subsection toggles within Strategic Approach
+      if (section.startsWith('approach')) {
+        if (!newSet.has('strategicApproach')) {
+          newSet.add('strategicApproach');
         }
-      } 
-      // Handle subsection toggles only within Strategic Approach
-      else if (section.startsWith('approach')) {
+        
         if (newSet.has(section)) {
           newSet.delete(section);
           const activeSections = [...newSet]
             .filter(s => s.startsWith('approach'))
             .map(s => parseInt(s.replace('approach', '')));
           
-          if (activeSections.length > 0) {
-            const lastActive = Math.max(...activeSections);
-            setTimelineProgress((lastActive + 1) * 25);
-          } else {
+          if (activeSections.length === 0) {
             newSet.delete('strategicApproach');
             setTimelineProgress(0);
+          } else {
+            const lastActive = Math.max(...activeSections);
+            setTimelineProgress((lastActive + 1) * 25);
           }
         } else {
-          // Clear other approach sections before adding the new one
           [...newSet].forEach(s => {
             if (s.startsWith('approach')) {
               newSet.delete(s);
             }
           });
-          newSet.add('strategicApproach');
           newSet.add(section);
           const sectionNumber = parseInt(section.replace('approach', ''));
           setTimelineProgress((sectionNumber + 1) * 25);
         }
       }
-      // For other sections (like Business Challenge), handle normally
+      // Handle main strategic approach toggle
+      else if (section === 'strategicApproach') {
+        if (newSet.has(section)) {
+          // When closing the main section, remove all subsections
+          [...newSet].forEach(s => {
+            if (s.startsWith('approach')) {
+              newSet.delete(s);
+            }
+          });
+          newSet.delete(section);
+          setTimelineProgress(0);
+        } else {
+          // When opening the main section, always open Research Insights
+          newSet.add(section);
+          newSet.add('approach0');
+          setTimelineProgress(25);
+        }
+      }
+      // For other sections, handle normally
       else {
         if (newSet.has(section)) {
           newSet.delete(section);

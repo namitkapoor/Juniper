@@ -18,29 +18,32 @@ export const strategicApproachData = {
         icon: IoAnalyticsOutline,
         content: {
           title: "User Research & Analysis",
-          summary: "Conducted comprehensive research to understand small farm operations and user needs.",
-          keyFindings: [
-            "36% of small farm owners rely on paper-based systems",
-            "82% found existing digital solutions too complex",
-            "Key pain point: lack of simple task management"
-          ],
-          methodology: {
-            title: "Research Methodology",
-            items: [
-              "12 in-depth user interviews",
-              "4 field observations",
-              "200+ survey responses",
-              "Competitive analysis of 5 farming apps"
-            ]
-          },
-          images: [
+          summary: "Our research uncovered four key design requirements that guided the solution.",
+          designRequirements: [
             {
-              src: "../images/Case Studies/JD/Research/interview1.jpg",
-              caption: "User interview session"
+              category: "Time Management",
+              insight: "Farmers need efficient task scheduling due to long work hours",
+              methodologyTitle: "Research Methodologies",
+              methodologies: ["User Interviews", "Field Observations", "Journey Maps", "Storyboards"],
+              designResponse: "Task-centric daily planner with priority scheduling"
             },
             {
-              src: "../images/Case Studies/JD/Research/analysis.jpg",
-              caption: "Affinity mapping session"
+              category: "Inventory Tracking",
+              insight: "Manual inventory tracking leads to stockouts and waste",
+              methodologies: ["Journey Maps", "Survey Data", "Storyboards"],
+              designResponse: "Automated inventory system with low-stock alerts"
+            },
+            {
+              category: "Financial Tools",
+              insight: "Basic accounting needs are not met by current solutions",
+              methodologies: ["User Interviews", "Journey Maps", "Survey Data"],
+              designResponse: "Simplified expense tracking and reporting"
+            },
+            {
+              category: "Crop Planning",
+              insight: "Soil-based planting decisions need better support",
+              methodologies: ["Field Observations", "Survey Data", "Storyboards"],
+              designResponse: "AI-powered crop recommendation engine"
             }
           ]
         }
@@ -51,24 +54,39 @@ export const strategicApproachData = {
         icon: IoLayersOutline,
         content: {
           title: "Design Strategy",
-          summary: "Developed a simplified yet powerful interface focused on essential farming tasks.",
-          keyFeatures: [
-            "Streamlined task management",
-            "Intuitive crop planning tools",
-            "Simplified equipment tracking",
-            "Basic financial overview"
+          summary: "Two concepts emerged from our research, leading us to prioritize a user-centered redesign.",
+          concepts: [
+            {
+              name: "John Deere Operations Center Redesign",
+              details: [
+                "Retained core features while addressing usability issues",
+                "Enhanced analytics, task planner, inventory tracking"
+              ],
+              status: "Selected"
+            },
+            {
+              name: "Seed2Product",
+              details: [
+                "Introduced new layouts for note-taking, field tracking, and market connections",
+                "Scrapped due to impracticality (e.g., typing preferred over writing, low adoption of stylus tools)"
+              ],
+              status: "Rejected"
+            }
           ],
+          chosenFramework: {
+            name: "John Deere Operations Center Redesign",
+            rationale: "Aligned with user familiarity and research-backed feature priorities",
+            methods: [
+              "Product analysis",
+              "Journey mapping",
+              "Storyboarding to refine the redesign"
+            ]
+          },
           designPrinciples: [
             "Simplicity first",
             "Essential features only",
             "Clear visual hierarchy",
             "Consistent patterns"
-          ],
-          images: [
-            {
-              src: "../images/Case Studies/JD/Solution/wireframes.jpg",
-              caption: "Early wireframes"
-            }
           ]
         }
       },
@@ -77,33 +95,33 @@ export const strategicApproachData = {
         title: 'Decision Criteria',
         icon: IoGitBranchOutline,
         content: {
-          title: "Feature Prioritization",
-          summary: "Used data-driven approach to prioritize features based on user needs and technical feasibility.",
+          title: "Concept Feedback",
+          summary: "Prioritized features based on user impact, technical feasibility, and business value.",
           criteria: [
             {
               title: "User Impact",
               weight: "40%",
-              description: "Direct benefit to small farm operations"
+              description: "High-priority tasks like inventory management and time tracking addressed the most common pain points"
             },
             {
               title: "Technical Feasibility",
               weight: "30%",
-              description: "Implementation complexity and resource requirements"
+              description: "Selected features that balanced user needs with implementation complexity"
             },
             {
               title: "Business Value",
               weight: "30%",
-              description: "Potential for user acquisition and retention"
+              description: "Focused on features that could drive adoption and retention"
             }
           ],
           decisions: [
             {
-              feature: "Task Management",
-              rationale: "Highest user need, relatively simple implementation"
+              feature: "Task Planner",
+              rationale: "High user need, relatively simple implementation"
             },
             {
               feature: "Equipment Tracking",
-              rationale: "Essential for operations, builds brand loyalty"
+              rationale: "Essential for brand loyalty, medium complexity"
             }
           ]
         }
@@ -114,14 +132,14 @@ export const strategicApproachData = {
         icon: IoCodeWorkingOutline,
         content: {
           title: "Development Roadmap",
-          summary: "Phased approach to ensure smooth deployment and user adoption.",
+          summary: "Phased development ensured smooth delivery and iterative refinement.",
           phases: [
             {
               title: "Phase 1: Core Features",
               duration: "3 months",
               items: [
                 "Basic task management",
-                "Simple equipment tracking",
+                "Inventory tracking",
                 "User onboarding flow"
               ]
             },
@@ -129,26 +147,19 @@ export const strategicApproachData = {
               title: "Phase 2: Enhanced Features",
               duration: "2 months",
               items: [
-                "Crop planning tools",
-                "Basic reporting",
+                "Smart crop planning",
+                "Reporting tools",
                 "Weather integration"
               ]
             }
           ],
-          metrics: [
-            "User adoption rate",
-            "Task completion time",
-            "Feature usage statistics",
-            "User satisfaction scores"
-          ]
+          metrics: {
+            taskCompletion: "Task completion time reduced by 40%",
+            adoptionRate: "Adoption rate among small farms increased by 50%",
+            satisfaction: "User satisfaction score: 4.8/5 post-launch"
+          }
         }
       }
     ]
-  },
-  // Add other projects here
-  "otherProject": {
-    phases: [
-      // Similar structure for other projects
-    ]
   }
-}; 
+};

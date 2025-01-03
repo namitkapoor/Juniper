@@ -1,96 +1,9 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  IoAnalyticsOutline, 
-  IoLayersOutline, 
-  IoGitBranchOutline, 
-  IoCodeWorkingOutline 
-} from 'react-icons/io5';
 import { strategicApproachData } from '../data/strategicApproachData';
+import PhaseContent from './PhaseContent';
 import '../style/strategic-approach-module.css';
-
-const PhaseContent = ({ content }) => {
-  if (!content) return null;
-
-  return (
-    <div className="phase-content">
-      <h3>{content.title}</h3>
-      <p className="phase-summary">{content.summary}</p>
-
-      {content.keyFindings && (
-        <div className="key-findings">
-          <h4>Key Findings</h4>
-          <ul>
-            {content.keyFindings.map((finding, index) => (
-              <li key={index}>{finding}</li>
-            ))}
-          </ul>
-        </div>
-      )}
-
-      {content.methodology && (
-        <div className="methodology">
-          <h4>{content.methodology.title}</h4>
-          <ul>
-            {content.methodology.items.map((item, index) => (
-              <li key={index}>{item}</li>
-            ))}
-          </ul>
-        </div>
-      )}
-
-      {content.keyFeatures && (
-        <div className="key-features">
-          <h4>Key Features</h4>
-          <ul>
-            {content.keyFeatures.map((feature, index) => (
-              <li key={index}>{feature}</li>
-            ))}
-          </ul>
-        </div>
-      )}
-
-      {content.criteria && (
-        <div className="criteria-grid">
-          {content.criteria.map((criterion, index) => (
-            <div key={index} className="criterion-card">
-              <h4>{criterion.title}</h4>
-              <div className="weight">{criterion.weight}</div>
-              <p>{criterion.description}</p>
-            </div>
-          ))}
-        </div>
-      )}
-
-      {content.phases && (
-        <div className="implementation-phases">
-          {content.phases.map((phase, index) => (
-            <div key={index} className="phase-card">
-              <h4>{phase.title}</h4>
-              <div className="duration">{phase.duration}</div>
-              <ul>
-                {phase.items.map((item, idx) => (
-                  <li key={idx}>{item}</li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-      )}
-
-      {content.images && (
-        <div className="phase-images">
-          {content.images.map((image, index) => (
-            <figure key={index}>
-              <img src={image.src} alt={image.caption} />
-              <figcaption>{image.caption}</figcaption>
-            </figure>
-          ))}
-        </div>
-      )}
-    </div>
-  );
-};
+import ImageCarousel from './ImageCarousel';
 
 const StrategicApproach = ({ 
   expandedSections, 
@@ -106,27 +19,18 @@ const StrategicApproach = ({
     const totalPhases = data.phases.length;
     let maxActivePhase = -1;
     
-    // Find the highest (farthest) active phase
     for (let i = 0; i < totalPhases; i++) {
       if (expandedSections.has(`approach${i}`)) {
         maxActivePhase = i;
       }
     }
     
-    // If no active phases, return 0
-    if (maxActivePhase === -1) return 0;
-    
-    // Calculate progress based on the farthest active phase
-    return ((maxActivePhase + 1) / totalPhases) * 100;
+    return maxActivePhase === -1 ? 0 : ((maxActivePhase + 1) / totalPhases) * 100;
   };
 
   // Handle phase click
-  const handlePhaseClick = (index) => {
-    // First ensure the main section is open
-    if (!expandedSections.has('strategicApproach')) {
-      onToggleSection('strategicApproach');
-    }
-    // Then toggle the specific phase
+  const handlePhaseClick = (index, event) => {
+    event.stopPropagation();
     onToggleSection(`approach${index}`);
   };
 
@@ -139,7 +43,7 @@ const StrategicApproach = ({
               <div
                 key={index}
                 className={`timeline-phase ${expandedSections.has(`approach${index}`) ? 'active' : ''}`}
-                onClick={() => handlePhaseClick(index)}
+                onClick={(e) => handlePhaseClick(index, e)}
               >
                 <div className="phase-icon">
                   <phase.icon size={20} />
@@ -151,8 +55,7 @@ const StrategicApproach = ({
             <motion.div 
               className="timeline-progress"
               animate={{ 
-                width: `${calculateProgress()}%`,
-                transition: { duration: 0.3, ease: "easeInOut" }
+                width: `${calculateProgress()}%`
               }}
             />
           </div>
@@ -166,10 +69,18 @@ const StrategicApproach = ({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            style={{ 
+              minHeight: '600px'
+            }}
           >
             {data.phases.map((phase, index) => (
               expandedSections.has(`approach${index}`) && (
-                <PhaseContent key={phase.id} content={phase.content} />
+                <PhaseContent 
+                  key={phase.id} 
+                  content={phase.content}
+                  projectId={projectId}
+                  isResearchPhase={index === 0}
+                />
               )
             ))}
           </motion.div>

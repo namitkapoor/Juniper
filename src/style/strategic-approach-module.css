@@ -23,6 +23,7 @@
   width: 100%;
   min-height: 100px;
   padding-top: 20px;
+  z-index: 1;
 }
 
 /* Line and Progress */
@@ -36,6 +37,7 @@
   z-index: 1;
   opacity: 1;
   transition: opacity 0.3s ease;
+  pointer-events: none;
 }
 
 .timeline-progress {
@@ -48,6 +50,7 @@
   transform-origin: left;
   opacity: 1;
   transition: all 0.3s ease;
+  pointer-events: none;
 }
 
 /* Show timeline when section is expanded */
@@ -64,10 +67,11 @@
   align-items: center;
   gap: 0.5rem;
   cursor: pointer;
-  z-index: 3;
+  z-index: 5;
   width: 160px;
   transition: all 0.3s ease;
   opacity: 0.7;
+  pointer-events: all;
 }
 
 .phase-icon {
@@ -81,7 +85,7 @@
   border-radius: 50%;
   transition: all 0.3s ease;
   margin-bottom: 8px;
-  z-index: 4;
+  z-index: 6;
 }
 
 .phase-title {
@@ -90,6 +94,9 @@
   color: rgba(255, 255, 255, 0.7);
   transition: all 0.3s ease;
   white-space: nowrap;
+  position: relative;
+  z-index: 6;
+  pointer-events: all;
 }
 
 /* Active states */
@@ -107,13 +114,16 @@
 }
 
 /* Content sections with animations */
-.phase-content {
+.section-content {
   animation: slideIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  padding: 2rem;
-  background: rgba(255, 255, 255, 0.03);
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  width: 100%;
   margin-top: 2rem;
+}
+
+.phase-content {
+  padding: 2.5rem;
+  width: 100%;
+  overflow: visible;
 }
 
 @keyframes slideIn {
@@ -175,15 +185,15 @@
 /* Grid layouts for specific content types */
 .criteria-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1.5rem;
-  margin-top: 1.5rem;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  margin-top: 2rem;
 }
 
 .criterion-card {
-  padding: 1.5rem;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 8px;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -240,3 +250,94 @@ figcaption {
     grid-template-columns: 1fr;
   }
 } 
+
+/* Add these new styles */
+.design-requirements {
+  margin: 2rem 0;
+}
+
+.requirements-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.methodology-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.methodology-tag {
+  font-size: 0.85rem;
+  padding: 0.35rem 1rem;
+  border-radius: 14px;
+  color: rgba(0, 0, 0, 0.8);
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 500;
+}
+
+.methodology-tag:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.1);
+}
+
+.methodology-tag.active {
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3);
+}
+
+.carousel-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 400px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 1.1rem;
+}
+
+.methodology-section {
+  margin-top: auto;
+}
+
+.methodology-title {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-align: left;
+}
+
+.methodology-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  justify-content: flex-start;
+}
+
+/* Update card content spacing */
+.criterion-card h4 {
+  margin-bottom: 1rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.criterion-card p {
+  margin-bottom: 2rem; /* Consistent spacing before methodology section */
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Content text alignment */
+.phase-content h3,
+.phase-content h4,
+.phase-content p,
+.phase-summary,
+.design-requirements h4 {
+  text-align: left;
+}
