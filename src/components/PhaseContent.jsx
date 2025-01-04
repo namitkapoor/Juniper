@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import ImageCarousel from './ImageCarousel';
 import OptimizedImage from './OptimizedImage';
+import TaskAnalysis from './TaskAnalysis';
 
 const PhaseContent = ({ 
   content, 
@@ -122,14 +123,20 @@ const PhaseContent = ({
         </div>
       )}
 
-      {content.analyses && (
+      {content.analyses?.task && (
+        <div className="analyses-section">
+          <TaskAnalysis taskAnalysis={content.analyses.task} />
+        </div>
+      )}
+
+      {content.analyses?.product && (
         <div className="analyses-section">
           <h4 className="section-title">Product Analysis</h4>
           <div className="product-analysis">
             <p className="analysis-description">{content.analyses.product.description}</p>
             {content.analyses.product.image && (
               <figure className="analysis-image">
-                <OptimizedImage 
+                <img 
                   src={content.analyses.product.image.url} 
                   alt={content.analyses.product.image.caption}
                 />
@@ -142,33 +149,6 @@ const PhaseContent = ({
                   <h5>{finding.category}</h5>
                   <p className="issues">{finding.issues}</p>
                   <p className="impact">Impact: {finding.impact}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <h4 className="section-title">Task Analysis</h4>
-          <div className="task-analysis">
-            <p className="analysis-description">{content.analyses.task.description}</p>
-            {content.analyses.task.image && (
-              <figure className="analysis-image">
-                <img 
-                  src={content.analyses.task.image.url} 
-                  alt={content.analyses.task.image.caption}
-                />
-                <figcaption>{content.analyses.task.image.caption}</figcaption>
-              </figure>
-            )}
-            <div className="workflows-grid">
-              {content.analyses.task.workflows.map((workflow, index) => (
-                <div key={index} className="workflow-card">
-                  <h5>{workflow.name}</h5>
-                  <ol className="workflow-steps">
-                    {workflow.steps.map((step, stepIndex) => (
-                      <li key={stepIndex}>{step}</li>
-                    ))}
-                  </ol>
-                  <p className="pain-points">Pain Points: {workflow.painPoints}</p>
                 </div>
               ))}
             </div>

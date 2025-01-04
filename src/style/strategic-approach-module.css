@@ -496,210 +496,6 @@ figcaption {
 
 /* Responsive Adjustments */
 @media (max-width: 768px) {
-  .criteria-grid,
-  .feedback-images {
-    grid-template-columns: 1fr;
-  }
-
-  .criterion-card {
-    padding: 1.5rem;
-  }
-}
-
-.smart-phase-view {
-  position: relative;
-}
-
-.phase-content-wrapper {
-  margin-bottom: 2rem;
-}
-
-.phase-content-wrapper:not(:last-child) {
-  padding-bottom: 2rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-/* When showing multiple phases, add visual separation */
-.phase-content-wrapper + .phase-content-wrapper {
-  margin-top: 2rem;
-  padding-top: 2rem;
-}
-
-/* Transition states */
-.phase-content-wrapper {
-  transition: all 0.3s ease;
-}
-
-/* When in iteration view */
-.iteration-active .phase-content-wrapper {
-  background: rgba(255, 255, 255, 0.02);
-  border-radius: 12px;
-  padding: 2rem;
-  margin: 1rem 0;
-}
-
-/* Style changes when decisions phase is active */
-.decisions-active .concept-card.selected {
-  background: rgba(52, 211, 153, 0.05);
-  border-color: rgba(52, 211, 153, 0.2);
-}
-
-.decisions-active .concept-card.rejected {
-  background: rgba(239, 68, 68, 0.05);
-  border-color: rgba(239, 68, 68, 0.2);
-}
-
-/* Status badge styling */
-.concept-status {
-  display: none;
-  margin-top: 1rem;
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
-  font-size: 0.875rem;
-  font-weight: 500;
-}
-
-.decisions-active .concept-status {
-  display: inline-block;
-}
-
-.decisions-active .concept-card.selected .concept-status {
-  background: rgba(52, 211, 153, 0.1);
-  color: rgb(52, 211, 153);
-}
-
-.decisions-active .concept-card.rejected .concept-status {
-  background: rgba(239, 68, 68, 0.1);
-  color: rgb(239, 68, 68);
-}
-
-.concept-image figcaption {
-  padding: 1rem;
-  background: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(8px);
-  border-radius: 0 0 12px 12px;
-}
-
-.concept-image figcaption h6 {
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.9);
-  margin-bottom: 0.5rem;
-}
-
-.concept-image figcaption p {
-  font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.7);
-  line-height: 1.4;
-}
-
-.concept-card {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-  padding: 2rem;
-  transition: all 0.3s ease;
-}
-
-.concept-header {
-  margin-bottom: 1.5rem;
-}
-
-.concept-header h5 {
-  font-size: 1.1rem;
-  color: rgba(255, 255, 255, 0.9);
-  margin-bottom: 0.5rem;
-}
-
-.concept-description {
-  font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.7);
-  line-height: 1.5;
-}
-
-.concept-images {
-  position: relative;
-  width: 100%;
-  max-width: 360px;
-  margin: 0 auto;
-}
-
-.image-caption {
-  padding: 0.75rem;
-  background: rgba(255, 255, 255, 0.03);
-  border-radius: 8px;
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-}
-
-.caption-title {
-  font-size: 0.85rem;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.95);
-}
-
-.caption-description {
-  font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.7);
-}
-
-/* Navigation styles */
-.concept-image-arrows {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  left: 0;
-  right: 0;
-  display: flex;
-  justify-content: space-between;
-  padding: 0 1rem;
-  pointer-events: none;
-}
-
-.concept-image-arrow {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: rgba(0, 0, 0, 0.75);
-  backdrop-filter: blur(4px);
-  border: none;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  pointer-events: auto;
-  transition: all 0.3s ease;
-}
-
-.concept-image-arrow:hover {
-  background: rgba(0, 0, 0, 0.9);
-}
-
-.concept-image-nav {
-  display: flex;
-  justify-content: center;
-  gap: 0.5rem;
-  margin-top: 1rem;
-}
-
-.concept-image-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.3);
-  border: none;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.concept-image-dot.active {
-  background: rgba(255, 255, 255, 0.9);
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
   .concept-images {
     grid-template-columns: 1fr; /* Single column on mobile */
   }
@@ -812,17 +608,128 @@ figcaption {
 .analysis-image {
   margin: 1.5rem 0;
   width: 100%;
-  max-width: 800px;
 }
 
 .analysis-image img {
   width: 100%;
-  height: 300px;
-  object-fit: cover;
+  object-fit: contain;
   border-radius: 8px;
 }
 
 .analysis-image figcaption {
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.7);
+  text-align: center;
+}
+
+/* Add these new styles */
+.workflow-selector {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  overflow-x: auto;
+  padding-bottom: 1rem;
+  -webkit-overflow-scrolling: touch;
+}
+
+.workflow-tab {
+  padding: 0.75rem 1.5rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+}
+
+.workflow-tab.active {
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.95);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.workflow-content {
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Update existing styles */
+.workflow-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.workflow-images {
+  margin-top: 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+/* Task Analysis specific styles */
+.workflow-selector {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  overflow-x: auto;
+  padding-bottom: 1rem;
+  -webkit-overflow-scrolling: touch;
+}
+
+.workflow-tab {
+  padding: 0.75rem 1.5rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+}
+
+.workflow-tab.active {
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.95);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.workflow-content {
+  animation: fadeIn 0.3s ease;
+}
+
+.workflow-steps {
+  list-style-position: inside;
+  padding-left: 0;
+}
+
+.workflow-steps li {
+  margin-bottom: 0.75rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.workflow-image {
+  margin: 1.5rem 0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.workflow-image img {
+  width: 100%;
+  height: 500px;
+  object-fit: contain;
+  display: block;
+}
+
+.image-caption {
   margin-top: 0.5rem;
   font-size: 0.85rem;
   color: rgba(255, 255, 255, 0.7);

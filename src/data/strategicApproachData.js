@@ -61,7 +61,6 @@ export const strategicApproachData = {
           title: "Design Strategy",
           summary: "Two concepts emerged from our research, exploring different approaches to farm management.",
           
-          // Add analyses before concepts
           analyses: {
             product: {
               title: "Product Analysis",
@@ -90,41 +89,81 @@ export const strategicApproachData = {
             },
             task: {
               title: "Task Analysis",
-              description: "Common workflows were mapped to identify friction points",
-              image: {
-                url: "/images/Case Studies/JD/task-analysis.jpg",
-                caption: "Task Flow Mapping Session"
-              },
+              description: "Five key workflows were mapped to identify friction points",
               workflows: [
                 {
-                  name: "Daily Planning",
+                  name: "Choose a Crop to Plant",
+                  image: {
+                    url: "/images/Case Studies/JD/Task Analysis/Harvest plans task analysis.jpg",
+                    caption: "Crop Selection Workflow"
+                  },
                   steps: [
-                    "Check weather forecast",
-                    "Review field conditions",
-                    "Assign worker tasks",
-                    "Schedule equipment"
+                    "Review soil analysis data",
+                    "Check historical crop performance",
+                    "Consider market demand",
+                    "Evaluate seasonal timing",
+                    "Calculate resource requirements"
                   ],
-                  painPoints: "Multiple app switches between weather, scheduling, and equipment tracking"
+                  painPoints: "Difficulty correlating soil data with crop requirements"
                 },
                 {
-                  name: "Inventory Management",
+                  name: "Identify and Customize Flags",
+                  image: {
+                    url: "/images/Case Studies/JD/Task Analysis/Choose crop task analysis.jpg",
+                    caption: "Field Flagging System"
+                  },
                   steps: [
-                    "Check current stock",
-                    "Review usage history",
-                    "Place orders",
-                    "Update records"
+                    "Set flag parameters",
+                    "Define alert thresholds",
+                    "Assign flag categories",
+                    "Configure notification rules",
+                    "Map flag locations"
                   ],
-                  painPoints: "Manual stock counting and data entry"
+                  painPoints: "Complex flag setup process with limited customization options"
                 },
                 {
-                  name: "Field Monitoring",
+                  name: "Find Troubleshoot",
+                  image: {
+                    url: "/images/Case Studies/JD/Task Analysis/Finding troubleshoot.jpg",
+                    caption: "Issue Resolution Flow"
+                  },
                   steps: [
-                    "Review sensor data",
-                    "Check growth progress",
-                    "Plan interventions",
-                    "Document changes"
+                    "Identify problem area",
+                    "Access diagnostic tools",
+                    "Review system logs",
+                    "Apply suggested fixes",
+                    "Document resolution"
                   ],
-                  painPoints: "Scattered data sources and inconsistent documentation"
+                  painPoints: "Scattered troubleshooting resources and unclear resolution paths"
+                },
+                {
+                  name: "Create Harvest Plans",
+                  image: {
+                    url: "/images/Case Studies/JD/Task Analysis/Harvest plans task analysis.jpg",
+                    caption: "Harvest Planning Interface"
+                  },
+                  steps: [
+                    "Assess crop maturity",
+                    "Schedule equipment",
+                    "Plan storage logistics",
+                    "Coordinate labor",
+                    "Monitor weather forecasts"
+                  ],
+                  painPoints: "Limited integration between scheduling and resource management"
+                },
+                {
+                  name: "Remove Flags",
+                  image: {
+                    url: "/images/Case Studies/JD/Task Analysis/Removing flag task analysis.jpg",
+                    caption: "Equipment Management Dashboard"
+                  },
+                  steps: [
+                    "Remove flag",
+                    "Confirm removal",
+                    "Update inventory",
+                    "Optimize deployment"
+                  ],
+                  painPoints: "Difficulty tracking multiple pieces of equipment across different locations"
                 }
               ]
             }
