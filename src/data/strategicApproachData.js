@@ -16,6 +16,10 @@ export const strategicApproachData = {
         id: 'research',
         title: 'Research Insights',
         icon: IoAnalyticsOutline,
+        loopBackTo: undefined,
+        iterationHint: null,
+        iterations: [],
+        connections: ['solution', 'decisions'],
         content: {
           title: "User Research & Analysis",
           summary: "Our research uncovered four key design requirements that guided the solution.",
@@ -52,6 +56,23 @@ export const strategicApproachData = {
         id: 'solution',
         title: 'Solution Framework',
         icon: IoLayersOutline,
+        loopBackTo: 0,
+        iterationHint: "New user pain points discovered",
+        iterations: [
+          {
+            trigger: "Usability testing revealed farmers struggle with mobile view",
+            action: "Return to research phase for mobile-specific user needs",
+            outcome: "Added responsive design requirements",
+            phase: 'research'
+          },
+          {
+            trigger: "Weather integration complexity uncovered",
+            action: "Revisit research to understand critical weather data points",
+            outcome: "Simplified weather features based on key user needs",
+            phase: 'research'
+          }
+        ],
+        connections: ['research', 'implementation'],
         content: {
           title: "Design Strategy",
           summary: "Two concepts emerged from our research, leading us to prioritize a user-centered redesign.",
@@ -94,6 +115,23 @@ export const strategicApproachData = {
         id: 'decisions',
         title: 'Decision Criteria',
         icon: IoGitBranchOutline,
+        loopBackTo: 1,
+        iterationHint: "Technical constraints found",
+        iterations: [
+          {
+            trigger: "Offline mode technical limitations",
+            action: "Revisit solution framework for alternative approach",
+            outcome: "Implemented progressive data sync",
+            phase: 'solution'
+          },
+          {
+            trigger: "Performance issues with real-time updates",
+            action: "Reconsidered real-time feature scope",
+            outcome: "Adopted batch update approach",
+            phase: 'solution'
+          }
+        ],
+        connections: ['research', 'implementation'],
         content: {
           title: "Concept Feedback",
           summary: "Prioritized features based on user impact, technical feasibility, and business value.",
@@ -130,6 +168,23 @@ export const strategicApproachData = {
         id: 'implementation',
         title: 'Implementation Plan',
         icon: IoCodeWorkingOutline,
+        loopBackTo: 2,
+        iterationHint: "Feature scope adjustment needed",
+        iterations: [
+          {
+            trigger: "Development timeline constraints",
+            action: "Return to decision phase for feature prioritization",
+            outcome: "Phased release plan created",
+            phase: 'decisions'
+          },
+          {
+            trigger: "Integration complexity with legacy systems",
+            action: "Revisited technical requirements",
+            outcome: "Modified API approach",
+            phase: 'decisions'
+          }
+        ],
+        connections: ['solution', 'decisions'],
         content: {
           title: "Development Roadmap",
           summary: "Phased development ensured smooth delivery and iterative refinement.",

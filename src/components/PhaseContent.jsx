@@ -1,31 +1,35 @@
 import React, { useState } from 'react';
 import ImageCarousel from './ImageCarousel';
 
-const PhaseContent = ({ content, projectId, isResearchPhase }) => {
+const PhaseContent = ({ 
+  content, 
+  projectId, 
+  isResearchPhase, 
+  iterations, 
+  onIterationSelect 
+}) => {
   const [activeMethodology, setActiveMethodology] = useState(null);
 
   if (!content) return null;
 
   // WCAG AA compliant earth tone combinations
   const methodologyColors = {
-    "User Interviews": "#9C4221",      // Terra Cotta (contrast with white: 7.3:1)
-    "Field Observations": "#276749",   // Forest Green (contrast with white: 6.5:1)
-    "Journey Maps": "#F59E0B",         // Amber (contrast with black: 4.8:1)
-    "Survey Data": "#854D0E",          // Dark Brown (contrast with white: 7.1:1)
-    "Competitive Analysis": "#F87171", // Coral (contrast with black: 4.3:1)
-    "Storyboards": "#D97706"          // Dark Amber (contrast with black: 4.6:1)
+    "User Interviews": "#9C4221",
+    "Field Observations": "#276749",
+    "Journey Maps": "#F59E0B",
+    "Survey Data": "#854D0E",
+    "Competitive Analysis": "#F87171",
+    "Storyboards": "#D97706"
   };
 
-  // Determine text color based on background color
   const getTextColor = (method) => {
-    // Use white text for darker earth tones
     switch (method) {
       case "User Interviews":
       case "Field Observations":
       case "Survey Data":
-        return 'rgba(255, 255, 255, 0.95)'; // White text
+        return 'rgba(255, 255, 255, 0.95)';
       default:
-        return 'rgba(0, 0, 0, 0.8)'; // Dark text
+        return 'rgba(0, 0, 0, 0.8)';
     }
   };
 
@@ -42,6 +46,65 @@ const PhaseContent = ({ content, projectId, isResearchPhase }) => {
       
       <p className="phase-summary">{content.summary}</p>
 
+      {/* Display iterations if available */}
+      {iterations && iterations.length > 0 && (
+        <div className="iterations-section">
+          <h4>Iteration Examples</h4>
+          <div className="iterations-grid">
+            {iterations.map((iteration, index) => (
+              <button
+                key={index}
+                className="iteration-card"
+                onClick={() => onIterationSelect(iteration)}
+              >
+                <h5>{iteration.trigger}</h5>
+                <p>{iteration.action}</p>
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Display concepts if available */}
+      {content.concepts && (
+        <div className="concepts-section">
+          <h4>Solution Concepts</h4>
+          <div className="concepts-grid">
+            {content.concepts.map((concept, index) => (
+              <div 
+                key={index} 
+                className={`concept-card ${concept.status.toLowerCase()}`}
+              >
+                <h5>{concept.name}</h5>
+                <ul>
+                  {concept.details.map((detail, idx) => (
+                    <li key={idx}>{detail}</li>
+                  ))}
+                </ul>
+                <div className="concept-status">{concept.status}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Display chosen framework if available */}
+      {content.chosenFramework && (
+        <div className="chosen-framework">
+          <h4>Selected Framework: {content.chosenFramework.name}</h4>
+          <p>{content.chosenFramework.rationale}</p>
+          <div className="methods-list">
+            <h5>Methods Used:</h5>
+            <ul>
+              {content.chosenFramework.methods.map((method, index) => (
+                <li key={index}>{method}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      )}
+
+      {/* Display design requirements if available */}
       {content.designRequirements && (
         <div className="design-requirements">
           <h4>Design Requirements</h4>
