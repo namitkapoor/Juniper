@@ -67,7 +67,29 @@ export const strategicApproachData = {
                 "Retained core features while addressing usability issues",
                 "Enhanced analytics, task planner, inventory tracking"
               ],
-              status: "Selected"
+              status: "Selected",
+              images: [
+                {
+                  url: "/images/Case Studies/JD/Sketches/Sketch-2.1.jpg",
+                  caption: "Dashboard Overview",
+                  description: "Simplified analytics dashboard with key metrics"
+                },
+                {
+                  url: "/images/Case Studies/JD/Sketches/Sketch-2.2.jpg",
+                  caption: "Task Planning Interface",
+                  description: "Intuitive task management system"
+                },
+                {
+                  url: "/images/Case Studies/JD/Sketches/Sketch-2.3.jpg",
+                  caption: "Inventory Management",
+                  description: "Real-time inventory tracking system"
+                },
+                {
+                  url: "/images/Case Studies/JD/Sketches/Sketch-2.4.jpg",
+                  caption: "Field Analytics",
+                  description: "Advanced field performance metrics"
+                }
+              ]
             },
             {
               name: "Seed2Product",
@@ -75,10 +97,31 @@ export const strategicApproachData = {
                 "Introduced new layouts for note-taking, field tracking, and market connections",
                 "Scrapped due to impracticality (e.g., typing preferred over writing, low adoption of stylus tools)"
               ],
-              status: "Rejected"
+              status: "Rejected",
+              images: [
+                {
+                  url: "/images/Case Studies/JD/Sketches/Sketch-1.1.jpg",
+                  caption: "Field Notes Interface",
+                  description: "Digital note-taking system for field observations"
+                },
+                {
+                  url: "/images/Case Studies/JD/Sketches/Sketch-1.2.jpg",
+                  caption: "Market Connection Hub",
+                  description: "Direct farmer-to-market connection platform"
+                },
+                {
+                  url: "/images/Case Studies/JD/Sketches/Sketch-1.3.jpg",
+                  caption: "Crop Planning Tool",
+                  description: "Season planning and rotation management"
+                },
+                {
+                  url: "/images/Case Studies/JD/Sketches/Sketch-1.4.jpg",
+                  caption: "Weather Integration",
+                  description: "Local weather data and forecasting"
+                }
+              ]
             }
-          ],
-          
+          ]
         }
       },
       {

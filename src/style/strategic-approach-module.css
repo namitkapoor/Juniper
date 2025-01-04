@@ -375,10 +375,11 @@ figcaption {
 }
 
 .concept-card {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 8px;
-  padding: 1.5rem;
+  border-radius: 12px;
+  padding: 2rem;
+  transition: all 0.3s ease;
 }
 
 .concept-card.selected {
@@ -406,21 +407,26 @@ figcaption {
 }
 
 .concept-status {
-  display: inline-block;
-  padding: 0.25rem 0.75rem;
-  border-radius: 4px;
-  font-size: 0.85rem;
+  display: none;
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.875rem;
   font-weight: 500;
 }
 
-.concept-card.selected .concept-status {
-  background: rgba(76, 175, 80, 0.2);
-  color: #4CAF50;
+.decisions-active .concept-status {
+  display: inline-block;
 }
 
-.concept-card.rejected .concept-status {
-  background: rgba(255, 82, 82, 0.2);
-  color: #FF5252;
+.decisions-active .concept-card.selected .concept-status {
+  background: rgba(52, 211, 153, 0.1);
+  color: rgb(52, 211, 153);
+}
+
+.decisions-active .concept-card.rejected .concept-status {
+  background: rgba(239, 68, 68, 0.1);
+  color: rgb(239, 68, 68);
 }
 
 /* Criteria Section */
@@ -581,4 +587,156 @@ figcaption {
   .criterion-card {
     padding: 1.5rem;
   }
+}
+
+.concept-images {
+  position: relative;
+  width: 100%;
+  max-width: 360px; /* typical phone width */
+  margin: 1.5rem auto;
+}
+
+.concept-image {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.03);
+  transition: all 0.3s ease;
+  display: none; /* Hide all images by default */
+}
+
+.concept-image.active {
+  display: block; /* Show only active image */
+}
+
+.concept-image img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  border-radius: 12px;
+}
+
+.concept-image-nav {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.concept-image-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.concept-image-dot.active {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.concept-image-arrows {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1rem;
+  pointer-events: none;
+}
+
+.concept-image-arrow {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  pointer-events: auto;
+  transition: all 0.3s ease;
+}
+
+.concept-image-arrow:hover {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .concept-images {
+    grid-template-columns: 1fr; /* Single column on mobile */
+  }
+}
+
+.smart-phase-view {
+  position: relative;
+}
+
+.phase-content-wrapper {
+  margin-bottom: 2rem;
+}
+
+.phase-content-wrapper:not(:last-child) {
+  padding-bottom: 2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* When showing multiple phases, add visual separation */
+.phase-content-wrapper + .phase-content-wrapper {
+  margin-top: 2rem;
+  padding-top: 2rem;
+}
+
+/* Transition states */
+.phase-content-wrapper {
+  transition: all 0.3s ease;
+}
+
+/* When in iteration view */
+.iteration-active .phase-content-wrapper {
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 12px;
+  padding: 2rem;
+  margin: 1rem 0;
+}
+
+/* Style changes when decisions phase is active */
+.decisions-active .concept-card.selected {
+  background: rgba(52, 211, 153, 0.05);
+  border-color: rgba(52, 211, 153, 0.2);
+}
+
+.decisions-active .concept-card.rejected {
+  background: rgba(239, 68, 68, 0.05);
+  border-color: rgba(239, 68, 68, 0.2);
+}
+
+/* Status badge styling */
+.concept-status {
+  display: none;
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.decisions-active .concept-status {
+  display: inline-block;
+}
+
+.decisions-active .concept-card.selected .concept-status {
+  background: rgba(52, 211, 153, 0.1);
+  color: rgb(52, 211, 153);
+}
+
+.decisions-active .concept-card.rejected .concept-status {
+  background: rgba(239, 68, 68, 0.1);
+  color: rgb(239, 68, 68);
 }

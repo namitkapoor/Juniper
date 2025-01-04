@@ -5,6 +5,7 @@ import PhaseContent from './PhaseContent';
 import IterativeTimeline from './IterativeTimeline';
 import '../style/strategic-approach-module.css';
 import ImageCarousel from './ImageCarousel';
+import SmartPhaseView from './SmartPhaseView';
 
 const StrategicApproach = ({ 
   expandedSections, 
@@ -26,7 +27,7 @@ const StrategicApproach = ({
 
   const handlePhaseSelect = (index) => {
     onToggleSection(`approach${index}`);
-    setActiveIteration(null); // Reset active iteration when changing phases
+    setActiveIteration(null);
     
     const phase = data.phases[index];
     if (phase && phase.connections) {
@@ -64,34 +65,14 @@ const StrategicApproach = ({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            style={{ minHeight: '600px' }}
           >
-            {activeIteration && (
-              <motion.div 
-                className="iteration-details"
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-              >
-                <h4>Iteration Example</h4>
-                <p><strong>Trigger:</strong> {activeIteration.trigger}</p>
-                <p><strong>Action:</strong> {activeIteration.action}</p>
-                <p><strong>Outcome:</strong> {activeIteration.outcome}</p>
-              </motion.div>
-            )}
-            
-            {data.phases.map((phase, index) => (
-              expandedSections.has(`approach${index}`) && (
-                <PhaseContent 
-                  key={phase.id} 
-                  content={phase.content}
-                  projectId={projectId}
-                  isResearchPhase={index === 0}
-                  iterations={phase.iterations}
-                  onIterationSelect={(iteration) => handleIterationSelect(iteration, index)}
-                />
-              )
-            ))}
+            <SmartPhaseView
+              phases={data.phases}
+              expandedSections={expandedSections}
+              projectId={projectId}
+              activeIteration={activeIteration}
+              onIterationSelect={(iteration) => handleIterationSelect(iteration)}
+            />
           </motion.div>
         )}
       </AnimatePresence>
