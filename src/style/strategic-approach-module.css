@@ -118,9 +118,11 @@
 }
 
 .phase-content {
-  padding: 0rem;
-  width: 100%;
-  overflow: visible;
+  margin-top: 4rem;
+  padding: 0 2rem;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 @keyframes slideIn {
@@ -135,16 +137,18 @@
 }
 
 .phase-content h3 {
-  font-size: 1.5rem;
+  font-size: 2rem;
+  color: rgba(255, 255, 255, 0.95);
   margin-bottom: 1rem;
-  color: #ffffff;
+  letter-spacing: -0.02em;
 }
 
 .phase-summary {
   font-size: 1.1rem;
   line-height: 1.6;
   color: rgba(255, 255, 255, 0.8);
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
+  max-width: 800px;
 }
 
 /* Content sections styling */
@@ -369,9 +373,9 @@ figcaption {
 
 .concepts-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.5rem;
-  margin-top: 1rem;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  margin-top: 2rem;
 }
 
 .concept-card {
@@ -379,7 +383,6 @@ figcaption {
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 12px;
   padding: 2rem;
-  transition: all 0.3s ease;
 }
 
 .concept-header {
@@ -532,7 +535,15 @@ figcaption {
 }
 
 .analyses-section {
-  margin-bottom: 3rem;
+  margin-bottom: 4rem;
+}
+
+.analyses-section h4 {
+  font-size: 1.5rem;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.01em;
+  text-align: left;
 }
 
 .product-analysis,
@@ -627,45 +638,50 @@ figcaption {
 .workflow-selector {
   display: flex;
   gap: 1rem;
-  margin-bottom: 2rem;
+  margin: 1.5rem 0;
   overflow-x: auto;
-  padding-bottom: 1rem;
+  padding: 0.5rem;
   -webkit-overflow-scrolling: touch;
 }
 
 .workflow-tab {
-  padding: 0.75rem 1.5rem;
+  padding: 0.875rem 1.5rem;
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 8px;
   color: rgba(255, 255, 255, 0.7);
   cursor: pointer;
   white-space: nowrap;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
+  min-height: 44px;
 }
 
 .workflow-tab.active {
   background: rgba(255, 255, 255, 0.1);
   color: rgba(255, 255, 255, 0.95);
   border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.workflow-tab:hover:not(.active) {
+  background: rgba(255, 255, 255, 0.05);
+  transform: translateY(-1px);
 }
 
 .workflow-content {
-  animation: fadeIn 0.3s ease;
+  animation: slideDown 0.3s ease;
+  overflow: hidden;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-/* Update existing styles */
-.workflow-card {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-  padding: 1.5rem;
-  margin-bottom: 2rem;
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .workflow-images {
@@ -679,21 +695,22 @@ figcaption {
 .workflow-selector {
   display: flex;
   gap: 1rem;
-  margin-bottom: 2rem;
+  margin: 1.5rem 0;
   overflow-x: auto;
-  padding-bottom: 1rem;
+  padding: 0.5rem;
   -webkit-overflow-scrolling: touch;
 }
 
 .workflow-tab {
-  padding: 0.75rem 1.5rem;
+  padding: 0.875rem 1.5rem;
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 8px;
   color: rgba(255, 255, 255, 0.7);
   cursor: pointer;
   white-space: nowrap;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
+  min-height: 44px;
 }
 
 .workflow-tab.active {
@@ -717,7 +734,7 @@ figcaption {
 }
 
 .workflow-image {
-  margin: 1.5rem 0;
+  margin: 2rem 0;
   border-radius: 8px;
   overflow: hidden;
 }
@@ -725,8 +742,8 @@ figcaption {
 .workflow-image img {
   width: 100%;
   height: 500px;
-  object-fit: contain;
   display: block;
+  object-fit: contain;
 }
 
 .image-caption {
@@ -734,4 +751,58 @@ figcaption {
   font-size: 0.85rem;
   color: rgba(255, 255, 255, 0.7);
   text-align: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .phase-content {
+    padding: 0 1rem;
+  }
+
+  .concepts-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .phase-content h3 {
+    font-size: 1.75rem;
+  }
+}
+
+/* Section Headers - Consistent styling */
+.section-title,
+.analyses-section h4,
+.task-analysis h4 {
+  font-size: 1.5rem;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.01em;
+  text-align: left;
+}
+
+/* Analysis Sections - Consistent container styling */
+.product-analysis,
+.task-analysis,
+.concepts-section {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+/* Section Headers - Single unified style */
+.product-analysis h4,
+.task-analysis h4,
+.concepts-section .concept-container h4 {
+  font-size: 1.5rem;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.01em;
+  text-align: left;
+  font-weight: 500;
+}
+
+/* Section spacing */
+.analyses-section {
+  margin-bottom: 4rem;
 }

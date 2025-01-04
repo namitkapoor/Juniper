@@ -176,22 +176,37 @@ export const strategicApproachData = {
               status: "Selected",
               images: [
                 {
-                  url: "/images/Case Studies/JD/Sketches/Sketch-2.1.jpg",
+                  url: "/images/Case Studies/JD/Sketches/Sketch-2.1.svg",
                   caption: "Dashboard Overview",
                   description: "Centralized farm metrics and alerts"
                 },
                 {
-                  url: "/images/Case Studies/JD/Sketches/Sketch-2.2.jpg",
-                  caption: "Task Planning Interface",
-                  description: "Smart scheduling with weather integration"
+                  url: "/images/Case Studies/JD/Sketches/Sketch-2.2.svg",
+                  caption: "Map Setting",
+                  description: " Mark areas of interest on the map"
                 },
                 {
-                  url: "/images/Case Studies/JD/Sketches/Sketch-2.3.jpg",
-                  caption: "Inventory Management",
-                  description: "Predictive inventory tracking"
+                  url: "/images/Case Studies/JD/Sketches/Sketch-2.3.svg",
+                  caption: "Map View",
+                  description: "View your fields and areas of interest"
                 },
                 {
-                  url: "/images/Case Studies/JD/Sketches/Sketch-2.4.jpg",
+                  url: "/images/Case Studies/JD/Sketches/Sketch-2.4.svg",
+                  caption: "Field Analytics",
+                  description: "Performance tracking dashboard"
+                },
+                {
+                  url: "/images/Case Studies/JD/Sketches/Sketch-2.5.svg",
+                  caption: "Field Analytics",
+                  description: "Performance tracking dashboard"
+                },
+                {
+                  url: "/images/Case Studies/JD/Sketches/Sketch-2.6.svg",
+                  caption: "Field Analytics",
+                  description: "Performance tracking dashboard"
+                },
+                {
+                  url: "/images/Case Studies/JD/Sketches/Sketch-2.7.svg",
                   caption: "Field Analytics",
                   description: "Performance tracking dashboard"
                 }

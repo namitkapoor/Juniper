@@ -123,16 +123,10 @@ const PhaseContent = ({
         </div>
       )}
 
-      {content.analyses?.task && (
+      {content.analyses && (
         <div className="analyses-section">
-          <TaskAnalysis taskAnalysis={content.analyses.task} />
-        </div>
-      )}
-
-      {content.analyses?.product && (
-        <div className="analyses-section">
-          <h4 className="section-title">Product Analysis</h4>
           <div className="product-analysis">
+            <h4>Product Analysis</h4>
             <p className="analysis-description">{content.analyses.product.description}</p>
             {content.analyses.product.image && (
               <figure className="analysis-image">
@@ -156,68 +150,76 @@ const PhaseContent = ({
         </div>
       )}
 
+      {content.analyses?.task && (
+        <div className="analyses-section">
+          <TaskAnalysis taskAnalysis={content.analyses.task} />
+        </div>
+      )}
+
       {content.concepts && (
         <div className="concepts-section">
-          <h4 className="section-title">Solution Concepts</h4>
-          <div className="concepts-grid">
-            {content.concepts.map((concept, conceptIndex) => (
-              <div 
-                key={conceptIndex} 
-                className={`concept-card ${isDecisionsPhase ? concept.status.toLowerCase() : ''}`}
-              >
-                <div className="concept-header">
-                  <h5>{concept.name}</h5>
-                  <p className="concept-description">{concept.description}</p>
-                </div>
-                
-                {concept.images && concept.images.length > 0 && (
-                  <div className="concept-images">
-                    {concept.images.map((image, imageIndex) => (
-                      <figure 
-                        key={imageIndex} 
-                        className={`concept-image ${(activeImageIndices[conceptIndex] || 0) === imageIndex ? 'active' : ''}`}
-                      >
-                        <img src={image.url} alt={image.caption || ''} />
-                        <div className="image-caption">
-                          <span className="caption-title">{image.caption}</span>
-                          <span className="caption-description">{image.description}</span>
-                        </div>
-                      </figure>
-                    ))}
-                    <div className="concept-image-arrows">
-                      <button 
-                        className="concept-image-arrow"
-                        onClick={() => navigateImage(conceptIndex, -1)}
-                      >
-                        ←
-                      </button>
-                      <button 
-                        className="concept-image-arrow"
-                        onClick={() => navigateImage(conceptIndex, 1)}
-                      >
-                        →
-                      </button>
-                    </div>
-                    <div className="concept-image-nav">
-                      {concept.images.map((_, dotIndex) => (
-                        <button
-                          key={dotIndex}
-                          className={`concept-image-dot ${(activeImageIndices[conceptIndex] || 0) === dotIndex ? 'active' : ''}`}
-                          onClick={() => setActiveImageIndices(prev => ({
-                            ...prev,
-                            [conceptIndex]: dotIndex
-                          }))}
-                        />
-                      ))}
-                    </div>
+          <div className="concept-container">
+            <h4>Solution Concepts</h4>
+            <div className="concepts-grid">
+              {content.concepts.map((concept, conceptIndex) => (
+                <div 
+                  key={conceptIndex} 
+                  className={`concept-card ${isDecisionsPhase ? concept.status.toLowerCase() : ''}`}
+                >
+                  <div className="concept-header">
+                    <h5>{concept.name}</h5>
+                    <p className="concept-description">{concept.description}</p>
                   </div>
-                )}
-                
-                {isDecisionsPhase && (
-                  <div className="concept-status">{concept.status}</div>
-                )}
-              </div>
-            ))}
+                  
+                  {concept.images && concept.images.length > 0 && (
+                    <div className="concept-images">
+                      {concept.images.map((image, imageIndex) => (
+                        <figure 
+                          key={imageIndex} 
+                          className={`concept-image ${(activeImageIndices[conceptIndex] || 0) === imageIndex ? 'active' : ''}`}
+                        >
+                          <img src={image.url} alt={image.caption || ''} />
+                          <div className="image-caption">
+                            <span className="caption-title">{image.caption}</span>
+                            <span className="caption-description">{image.description}</span>
+                          </div>
+                        </figure>
+                      ))}
+                      <div className="concept-image-arrows">
+                        <button 
+                          className="concept-image-arrow"
+                          onClick={() => navigateImage(conceptIndex, -1)}
+                        >
+                          ←
+                        </button>
+                        <button 
+                          className="concept-image-arrow"
+                          onClick={() => navigateImage(conceptIndex, 1)}
+                        >
+                          →
+                        </button>
+                      </div>
+                      <div className="concept-image-nav">
+                        {concept.images.map((_, dotIndex) => (
+                          <button
+                            key={dotIndex}
+                            className={`concept-image-dot ${(activeImageIndices[conceptIndex] || 0) === dotIndex ? 'active' : ''}`}
+                            onClick={() => setActiveImageIndices(prev => ({
+                              ...prev,
+                              [conceptIndex]: dotIndex
+                            }))}
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                  
+                  {isDecisionsPhase && (
+                    <div className="concept-status">{concept.status}</div>
+                  )}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       )}
