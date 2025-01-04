@@ -44,9 +44,19 @@ const PhaseContent = ({
         />
       )}
       
+      {content.images && content.images.length > 0 && (
+        <div className="phase-images">
+          {content.images.map((image, index) => (
+            <figure key={index}>
+              <img src={image.url} alt={image.caption || ''} />
+              {image.caption && <figcaption>{image.caption}</figcaption>}
+            </figure>
+          ))}
+        </div>
+      )}
+
       <p className="phase-summary">{content.summary}</p>
 
-      {/* Display iterations if available */}
       {iterations && iterations.length > 0 && (
         <div className="iterations-section">
           <h4>Iteration Examples</h4>
@@ -65,7 +75,35 @@ const PhaseContent = ({
         </div>
       )}
 
-      {/* Display concepts if available */}
+      {content.criteria && (
+        <div className="criteria-section">
+          <h4>Evaluation Criteria</h4>
+          <div className="criteria-grid">
+            {content.criteria.map((criterion, index) => (
+              <div key={index} className="criterion-card">
+                <h4>{criterion.title}</h4>
+                <div className="weight">Weight: {criterion.weight}</div>
+                <p>{criterion.description}</p>
+                {criterion.feedback && (
+                  <div className="feedback-section">
+                    <h5>Feedback</h5>
+                    <div className="feedback-images">
+                      {criterion.feedback.images?.map((image, idx) => (
+                        <figure key={idx} className="feedback-image">
+                          <img src={image.url} alt={image.caption || ''} />
+                          {image.caption && <figcaption>{image.caption}</figcaption>}
+                        </figure>
+                      ))}
+                    </div>
+                    <p>{criterion.feedback.text}</p>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
       {content.concepts && (
         <div className="concepts-section">
           <h4>Solution Concepts</h4>
@@ -88,23 +126,6 @@ const PhaseContent = ({
         </div>
       )}
 
-      {/* Display chosen framework if available */}
-      {content.chosenFramework && (
-        <div className="chosen-framework">
-          <h4>Selected Framework: {content.chosenFramework.name}</h4>
-          <p>{content.chosenFramework.rationale}</p>
-          <div className="methods-list">
-            <h5>Methods Used:</h5>
-            <ul>
-              {content.chosenFramework.methods.map((method, index) => (
-                <li key={index}>{method}</li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      )}
-
-      {/* Display design requirements if available */}
       {content.designRequirements && (
         <div className="design-requirements">
           <h4>Design Requirements</h4>

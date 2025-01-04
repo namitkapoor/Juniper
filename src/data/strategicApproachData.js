@@ -56,22 +56,6 @@ export const strategicApproachData = {
         id: 'solution',
         title: 'Solution Framework',
         icon: IoLayersOutline,
-        loopBackTo: 0,
-        iterationHint: "New user pain points discovered",
-        iterations: [
-          {
-            trigger: "Usability testing revealed farmers struggle with mobile view",
-            action: "Return to research phase for mobile-specific user needs",
-            outcome: "Added responsive design requirements",
-            phase: 'research'
-          },
-          {
-            trigger: "Weather integration complexity uncovered",
-            action: "Revisit research to understand critical weather data points",
-            outcome: "Simplified weather features based on key user needs",
-            phase: 'research'
-          }
-        ],
         connections: ['research', 'implementation'],
         content: {
           title: "Design Strategy",
@@ -94,21 +78,7 @@ export const strategicApproachData = {
               status: "Rejected"
             }
           ],
-          chosenFramework: {
-            name: "John Deere Operations Center Redesign",
-            rationale: "Aligned with user familiarity and research-backed feature priorities",
-            methods: [
-              "Product analysis",
-              "Journey mapping",
-              "Storyboarding to refine the redesign"
-            ]
-          },
-          designPrinciples: [
-            "Simplicity first",
-            "Essential features only",
-            "Clear visual hierarchy",
-            "Consistent patterns"
-          ]
+          
         }
       },
       {
@@ -135,21 +105,62 @@ export const strategicApproachData = {
         content: {
           title: "Concept Feedback",
           summary: "Prioritized features based on user impact, technical feasibility, and business value.",
+          images: [
+            {
+              url: "/images/Case Studies/JD/Sketch feedback - Alex.jpg",
+              caption: "Feature Prioritization Matrix"
+            },
+            {
+              url: "/images/decisions/user-feedback.jpg",
+              caption: "User Feedback Session Results"
+            },
+            {
+              url: "/images/decisions/technical-assessment.jpg",
+              caption: "Technical Feasibility Assessment"
+            }
+          ],
           criteria: [
             {
               title: "User Impact",
               weight: "40%",
-              description: "High-priority tasks like inventory management and time tracking addressed the most common pain points"
+              description: "High-priority tasks like inventory management and time tracking addressed the most common pain points",
+              feedback: {
+                text: "User testing showed 92% positive response to the proposed features",
+                images: [
+                  {
+                    url: "/images/decisions/user-impact-metrics.jpg",
+                    caption: "User Impact Metrics"
+                  }
+                ]
+              }
             },
             {
               title: "Technical Feasibility",
               weight: "30%",
-              description: "Selected features that balanced user needs with implementation complexity"
+              description: "Selected features that balanced user needs with implementation complexity",
+              feedback: {
+                text: "Development team assessment confirmed viable implementation path",
+                images: [
+                  {
+                    url: "/images/decisions/tech-feasibility.jpg",
+                    caption: "Technical Feasibility Analysis"
+                  }
+                ]
+              }
             },
             {
               title: "Business Value",
               weight: "30%",
-              description: "Focused on features that could drive adoption and retention"
+              description: "Focused on features that could drive adoption and retention",
+              feedback: {
+                text: "ROI analysis projected 45% increase in user retention",
+                images: [
+                  {
+                    url: "/images/decisions/business-impact.jpg",
+                    caption: "Business Impact Analysis"
+                  }
+                ]
+              }
             }
           ],
           decisions: [
