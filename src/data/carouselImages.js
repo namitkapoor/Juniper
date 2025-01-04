@@ -69,9 +69,68 @@ export const carouselImages = {
       methodologies: ["Affinity Diagrams"]
     }
   ],
+  
+  businessChallengeImages: [
+    {
+      src: `${BASE_PATH}/JD/Original Design/Home.svg`,
+      caption: 'Original complex interface design',
+      alt: 'Original complex interface design',
+      methodologies: ["Interface Analysis"],
+      painPoints: ["complexInterface"]
+    },
+    {
+      src: `${BASE_PATH}/JD/Original Design/Map.svg`,
+      caption: 'Navigation complexity example',
+      alt: 'Navigation complexity example',
+      methodologies: ["Interface Analysis"],
+      painPoints: ["complexInterface"]
+    },
+    {
+      src: `${BASE_PATH}/JD/Original Design/Map-2.svg`,
+      caption: 'User feedback on task management',
+      alt: 'User feedback on task management',
+      methodologies: ["User Feedback"],
+      painPoints: ["taskManagement"]
+    },
+    {
+      src: `${BASE_PATH}/JD/Original Design/Plan.svg`,
+      caption: 'Task management interface issues',
+      alt: 'Task management interface issues',
+      methodologies: ["Interface Analysis"],
+      painPoints: ["taskManagement"]
+    },
+    {
+      src: `${BASE_PATH}/JD/long tutorial.jpg`,
+      caption: 'Complex onboarding process',
+      alt: 'Complex onboarding process',
+      methodologies: ["User Onboarding"],
+      painPoints: ["learningCurve"]
+    },
+    {
+      src: `${BASE_PATH}/JD/App store review 1.jpg`,
+      caption: 'Overwhelming tutorial steps',
+      alt: 'Overwhelming tutorial steps',
+      methodologies: ["User Onboarding"],
+      painPoints: ["learningCurve"]
+    }
+  ],
+  
   otherProject: [
     // Similar structure for other projects
   ]
+};
+
+// Helper function to get business challenge images
+export const getBusinessChallengeImages = (projectId, painPointId) => {
+  // Check if the project exists and has business challenge images
+  const projectBusinessChallenges = carouselImages.businessChallengeImages;
+  
+  if (!projectBusinessChallenges || !painPointId) {
+    return [];
+  }
+
+  // Return the images for the specific pain point
+  return projectBusinessChallenges[painPointId] || [];
 };
 
 // Helper function to get all images for a project

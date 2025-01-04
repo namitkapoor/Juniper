@@ -17,6 +17,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 3rem;
+  align-items: start;
 }
 
 .pain-points-list {
@@ -51,16 +52,14 @@
   border-radius: 50%;
 }
 
-.challenge-visuals {
-  position: relative;
-  height: 100%;
-}
-
-.challenge-visuals img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.challenge-carousel {
+  background: rgba(255, 255, 255, 0.03);
   border-radius: 12px;
+  overflow: hidden;
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 @media (max-width: 768px) {

@@ -4,20 +4,22 @@ import { IoChevronBack, IoChevronForward } from 'react-icons/io5';
 import { carouselImages } from '../data/carouselImages';
 import '../style/image-carousel.css';
 
-const ImageCarousel = ({ projectId, activeMethodology }) => {
-  const allImages = carouselImages[projectId] || [];
+const ImageCarousel = ({ projectId, activeMethodology, images: providedImages }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
 
-  // Filter images based on methodology
-  const images = activeMethodology 
-    ? allImages.filter(img => img.methodologies?.includes(activeMethodology))
-    : allImages;
+  // Use provided images if available, otherwise fetch from carouselImages
+  const images = providedImages || carouselImages[projectId] || [];
+  
+  // Filter images based on methodology if needed
+  const filteredImages = activeMethodology 
+    ? images.filter(img => img.methodologies?.includes(activeMethodology))
+    : images;
 
-  // Reset currentIndex when filtered images change
+  // Reset currentIndex when images change
   React.useEffect(() => {
     setCurrentIndex(0);
-  }, [activeMethodology]);
+  }, [activeMethodology, images]);
 
   const slideVariants = {
     enter: (direction) => ({

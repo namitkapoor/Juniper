@@ -1,10 +1,28 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { businessChallengeData } from '../data/businessChallengeData';
+import { carouselImages } from '../data/carouselImages';
+import ImageCarousel from './ImageCarousel';
 
 const BusinessChallenge = ({ isExpanded, projectId }) => {
   const [selectedPainPoint, setSelectedPainPoint] = useState(0);
   const data = businessChallengeData[projectId];
+
+  const handlePainPointChange = (index) => {
+    setSelectedPainPoint(index);
+  };
+
+  const currentPainPoint = data.painPoints[selectedPainPoint];
+  
+  // Get all business challenge images and filter by the current pain point's tag
+  const allBusinessImages = carouselImages.businessChallengeImages || [];
+  const currentImages = allBusinessImages.filter(img => 
+    img.painPoints?.includes(currentPainPoint?.id)
+  );
+
+  // Console log for debugging
+  console.log('Current Pain Point:', currentPainPoint?.id);
+  console.log('Available Images:', currentImages);
 
   return (
     <AnimatePresence>
@@ -45,7 +63,7 @@ const BusinessChallenge = ({ isExpanded, projectId }) => {
                     <li 
                       key={index}
                       className={`pain-point-item ${selectedPainPoint === index ? 'active' : ''}`}
-                      onClick={() => setSelectedPainPoint(index)}
+                      onClick={() => handlePainPointChange(index)}
                     >
                       <div className="pain-point-icon">
                         <point.icon />
@@ -59,18 +77,12 @@ const BusinessChallenge = ({ isExpanded, projectId }) => {
                 </ul>
               </div>
 
-              <div className="challenge-visuals">
-                <AnimatePresence mode="wait">
-                  <motion.img
-                    key={selectedPainPoint}
-                    src={data.painPoints[selectedPainPoint].image}
-                    alt={`${data.painPoints[selectedPainPoint].title} visualization`}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.3 }}
-                  />
-                </AnimatePresence>
+              <div className="challenge-carousel">
+                <ImageCarousel 
+                  images={currentImages}
+                  projectId={projectId}
+                  activeMethodology={null}
+                />
               </div>
             </div>
 

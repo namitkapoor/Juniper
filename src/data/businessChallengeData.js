@@ -26,19 +26,19 @@ export const businessChallengeData = {
         icon: IoAppsOutline,
         title: "Complex Interface",
         description: "Overwhelming interface with features irrelevant to small-scale operations.",
-        image: "../images/Case Studies/JD/original design.svg"
+        id: "complexInterface"
       },
       {
         icon: IoListOutline,
         title: "Task Management",
         description: "Difficulty managing essential tasks like equipment tracking, crop planning, and operational logs.",
-        image: "../images/Case Studies/JD/App store review 1.jpg"
+        id: "taskManagement"
       },
       {
         icon: IoSchoolOutline,
         title: "Learning Curve",
         description: "Lack of accessible tutorials and support for first-time users, creating a steep learning curve.",
-        image: "../images/Case Studies/JD/long tutorial.jpg"
+        id: "learningCurve"
       }
     ],
     costProblems: {
@@ -65,19 +65,37 @@ export const businessChallengeData = {
         icon: IoTimeOutline,
         title: "Time Management",
         description: "Description of time management issues...",
-        image: "../images/path/to/image1.jpg"
+        images: [
+          {
+            src: "../images/path/to/image1.jpg",
+            alt: "Time management issue visualization",
+            caption: "Time management issue visualization"
+          }
+        ]
       },
       {
         icon: IoWalletOutline,
         title: "Cost Efficiency",
         description: "Description of cost efficiency problems...",
-        image: "../images/path/to/image2.jpg"
+        images: [
+          {
+            src: "../images/path/to/image2.jpg",
+            alt: "Cost efficiency analysis",
+            caption: "Cost efficiency analysis"
+          }
+        ]
       },
       {
         icon: IoStatsChartOutline,
         title: "Performance Tracking",
         description: "Description of performance tracking issues...",
-        image: "../images/path/to/image3.jpg"
+        images: [
+          {
+            src: "../images/path/to/image3.jpg",
+            alt: "Performance tracking dashboard",
+            caption: "Performance tracking dashboard"
+          }
+        ]
       }
     ],
     costProblems: {

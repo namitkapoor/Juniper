@@ -67,7 +67,7 @@ export const strategicApproachData = {
               title: "Product Analysis",
               description: "Evaluation of existing Operations Center revealed key areas for improvement",
               image: {
-                url: "/images/Case Studies/JD/product-analysis.jpg",
+                url: "/images/Case Studies/JD/OCM Critique.avif",
                 caption: "Current Operations Center Interface Analysis"
               },
               findings: [
