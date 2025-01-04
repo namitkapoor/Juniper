@@ -382,239 +382,95 @@ figcaption {
   transition: all 0.3s ease;
 }
 
-.concept-card.selected {
-  border-color: #4CAF50;
+.concept-header {
+  margin-bottom: 1.5rem;
 }
 
-.concept-card.rejected {
-  border-color: #FF5252;
-}
-
-.concept-card h5 {
+.concept-header h5 {
+  font-size: 1.1rem;
   color: rgba(255, 255, 255, 0.9);
-  margin-bottom: 1rem;
-}
-
-.concept-card ul {
-  list-style-type: disc;
-  padding-left: 1.5rem;
-  margin-bottom: 1rem;
-}
-
-.concept-card li {
-  color: rgba(255, 255, 255, 0.7);
   margin-bottom: 0.5rem;
 }
 
-.concept-status {
-  display: none;
-  margin-top: 1rem;
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
-  font-size: 0.875rem;
-  font-weight: 500;
-}
-
-.decisions-active .concept-status {
-  display: inline-block;
-}
-
-.decisions-active .concept-card.selected .concept-status {
-  background: rgba(52, 211, 153, 0.1);
-  color: rgb(52, 211, 153);
-}
-
-.decisions-active .concept-card.rejected .concept-status {
-  background: rgba(239, 68, 68, 0.1);
-  color: rgb(239, 68, 68);
-}
-
-/* Criteria Section */
-.criteria-section {
-  margin: 2rem 0;
-}
-
-.criteria-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-  margin-top: 1.5rem;
-}
-
-.criterion-card {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-  padding: 2rem;
-  transition: all 0.3s ease;
-  display: flex;
-  flex-direction: column;
-}
-
-.criterion-card h4 {
-  color: rgba(255, 255, 255, 0.9);
-  margin-bottom: 1rem;
-  font-size: 1.1rem;
-}
-
-.criterion-card .weight {
-  font-size: 1.2rem;
-  color: rgba(255, 255, 255, 0.8);
-  margin-bottom: 1rem;
-}
-
-/* Feedback Section within Criteria */
-.feedback-section {
-  margin-top: 1.5rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.feedback-section h5 {
-  color: rgba(255, 255, 255, 0.9);
-  margin-bottom: 1rem;
-  font-size: 1rem;
-}
-
-.feedback-images {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
-  margin: 1rem 0;
-}
-
-.feedback-image {
-  position: relative;
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-.feedback-image img {
-  width: 100%;
-  height: auto;
-  display: block;
-  border-radius: 8px;
-  transition: transform 0.3s ease;
-}
-
-.feedback-image:hover img {
-  transform: scale(1.05);
-}
-
-.feedback-image figcaption {
-  margin-top: 0.5rem;
+.concept-description {
   font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.6);
-  text-align: center;
-}
-
-/* Phase Images (Additional to ImageCarousel) */
-.phase-images {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1.5rem;
-  margin: 1.5rem 0;
-}
-
-.phase-images figure {
-  position: relative;
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-.phase-images img {
-  width: 100%;
-  height: auto;
-  display: block;
-  border-radius: 8px;
-  transition: transform 0.3s ease;
-}
-
-.phase-images figure:hover img {
-  transform: scale(1.05);
-}
-
-.phase-images figcaption {
-  margin-top: 0.75rem;
-  font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.6);
-  text-align: center;
-}
-
-/* Methodology Section (existing styles) */
-.methodology-section {
-  margin-top: auto;
-  padding-top: 1.5rem;
-}
-
-.methodology-title {
-  font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.6);
-  margin-bottom: 0.75rem;
-  font-weight: 500;
-  letter-spacing: 0.02em;
-}
-
-.methodology-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-.methodology-tag {
-  font-size: 0.75rem;
-  padding: 0.25rem 0.75rem;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.methodology-tag:hover {
-  transform: translateY(-1px);
-}
-
-.methodology-tag.active {
-  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3);
-}
-
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-  .criteria-grid,
-  .feedback-images {
-    grid-template-columns: 1fr;
-  }
-
-  .criterion-card {
-    padding: 1.5rem;
-  }
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.5;
 }
 
 .concept-images {
   position: relative;
   width: 100%;
-  max-width: 360px; /* typical phone width */
-  margin: 1.5rem auto;
+  max-width: 360px;
+  margin: 0 auto;
 }
 
 .concept-image {
-  position: relative;
-  border-radius: 12px;
-  overflow: hidden;
-  background: rgba(255, 255, 255, 0.03);
-  transition: all 0.3s ease;
-  display: none; /* Hide all images by default */
+  display: none;
 }
 
 .concept-image.active {
-  display: block; /* Show only active image */
+  display: block;
 }
 
 .concept-image img {
   width: 100%;
   height: auto;
-  object-fit: contain;
-  display: block;
   border-radius: 12px;
+  margin-bottom: 1rem;
+}
+
+.image-caption {
+  padding: 0.75rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.caption-title {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.caption-description {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Navigation styles */
+.concept-image-arrows {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1rem;
+  pointer-events: none;
+}
+
+.concept-image-arrow {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(4px);
+  border: none;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  pointer-events: auto;
+  transition: all 0.3s ease;
+}
+
+.concept-image-arrow:hover {
+  background: rgba(0, 0, 0, 0.9);
 }
 
 .concept-image-nav {
@@ -629,6 +485,7 @@ figcaption {
   height: 8px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.3);
+  border: none;
   cursor: pointer;
   transition: all 0.3s ease;
 }
@@ -637,40 +494,15 @@ figcaption {
   background: rgba(255, 255, 255, 0.9);
 }
 
-.concept-image-arrows {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  right: 0;
-  transform: translateY(-50%);
-  display: flex;
-  justify-content: space-between;
-  padding: 0 1rem;
-  pointer-events: none;
-}
-
-.concept-image-arrow {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(4px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  pointer-events: auto;
-  transition: all 0.3s ease;
-}
-
-.concept-image-arrow:hover {
-  background: rgba(0, 0, 0, 0.7);
-}
-
-/* Responsive adjustments */
+/* Responsive Adjustments */
 @media (max-width: 768px) {
-  .concept-images {
-    grid-template-columns: 1fr; /* Single column on mobile */
+  .criteria-grid,
+  .feedback-images {
+    grid-template-columns: 1fr;
+  }
+
+  .criterion-card {
+    padding: 1.5rem;
   }
 }
 
@@ -739,4 +571,166 @@ figcaption {
 .decisions-active .concept-card.rejected .concept-status {
   background: rgba(239, 68, 68, 0.1);
   color: rgb(239, 68, 68);
+}
+
+.concept-image figcaption {
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  border-radius: 0 0 12px 12px;
+}
+
+.concept-image figcaption h6 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 0.5rem;
+}
+
+.concept-image figcaption p {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.4;
+}
+
+.concept-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 2rem;
+  transition: all 0.3s ease;
+}
+
+.concept-header {
+  margin-bottom: 1.5rem;
+}
+
+.concept-header h5 {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 0.5rem;
+}
+
+.concept-description {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.5;
+}
+
+.concept-images {
+  position: relative;
+  width: 100%;
+  max-width: 360px;
+  margin: 0 auto;
+}
+
+.image-caption {
+  padding: 0.75rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.caption-title {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.caption-description {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Navigation styles */
+.concept-image-arrows {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1rem;
+  pointer-events: none;
+}
+
+.concept-image-arrow {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(4px);
+  border: none;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  pointer-events: auto;
+  transition: all 0.3s ease;
+}
+
+.concept-image-arrow:hover {
+  background: rgba(0, 0, 0, 0.9);
+}
+
+.concept-image-nav {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.concept-image-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.concept-image-dot.active {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .concept-images {
+    grid-template-columns: 1fr; /* Single column on mobile */
+  }
+}
+
+/* Specific styling for feedback images */
+.feedback-image img {
+  width: 100%;
+  height: 300px; /* Set a fixed height for consistent look */
+  object-fit: cover; /* This will make the image cover the container */
+  border-radius: 8px;
+}
+
+.feedback-section {
+  margin-top: 1.5rem;
+}
+
+.feedback-images {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.feedback-image {
+  position: relative;
+}
+
+.feedback-image figcaption {
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.7);
+  text-align: center;
 }

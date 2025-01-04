@@ -59,65 +59,59 @@ export const strategicApproachData = {
         connections: ['research', 'implementation'],
         content: {
           title: "Design Strategy",
-          summary: "Two concepts emerged from our research, leading us to prioritize a user-centered redesign.",
+          summary: "Two concepts emerged from our research, exploring different approaches to farm management.",
           concepts: [
             {
               name: "John Deere Operations Center Redesign",
-              details: [
-                "Retained core features while addressing usability issues",
-                "Enhanced analytics, task planner, inventory tracking"
-              ],
+              description: "A streamlined redesign focusing on core workflows and enhanced data visualization, making farm management more intuitive and efficient.",
               status: "Selected",
               images: [
                 {
                   url: "/images/Case Studies/JD/Sketches/Sketch-2.1.jpg",
                   caption: "Dashboard Overview",
-                  description: "Simplified analytics dashboard with key metrics"
+                  description: "Centralized farm metrics and alerts"
                 },
                 {
                   url: "/images/Case Studies/JD/Sketches/Sketch-2.2.jpg",
                   caption: "Task Planning Interface",
-                  description: "Intuitive task management system"
+                  description: "Smart scheduling with weather integration"
                 },
                 {
                   url: "/images/Case Studies/JD/Sketches/Sketch-2.3.jpg",
                   caption: "Inventory Management",
-                  description: "Real-time inventory tracking system"
+                  description: "Predictive inventory tracking"
                 },
                 {
                   url: "/images/Case Studies/JD/Sketches/Sketch-2.4.jpg",
                   caption: "Field Analytics",
-                  description: "Advanced field performance metrics"
+                  description: "Performance tracking dashboard"
                 }
               ]
             },
             {
               name: "Seed2Product",
-              details: [
-                "Introduced new layouts for note-taking, field tracking, and market connections",
-                "Scrapped due to impracticality (e.g., typing preferred over writing, low adoption of stylus tools)"
-              ],
+              description: "An innovative approach reimagining farm management through natural interactions and direct market connectivity.",
               status: "Rejected",
               images: [
                 {
                   url: "/images/Case Studies/JD/Sketches/Sketch-1.1.jpg",
                   caption: "Field Notes Interface",
-                  description: "Digital note-taking system for field observations"
+                  description: "Voice and photo note-taking"
                 },
                 {
                   url: "/images/Case Studies/JD/Sketches/Sketch-1.2.jpg",
                   caption: "Market Connection Hub",
-                  description: "Direct farmer-to-market connection platform"
+                  description: "Direct buyer marketplace"
                 },
                 {
                   url: "/images/Case Studies/JD/Sketches/Sketch-1.3.jpg",
                   caption: "Crop Planning Tool",
-                  description: "Season planning and rotation management"
+                  description: "AI-powered rotation planning"
                 },
                 {
                   url: "/images/Case Studies/JD/Sketches/Sketch-1.4.jpg",
                   caption: "Weather Integration",
-                  description: "Local weather data and forecasting"
+                  description: "Smart task scheduling"
                 }
               ]
             }
@@ -154,13 +148,10 @@ export const strategicApproachData = {
               caption: "Feature Prioritization Matrix"
             },
             {
-              url: "/images/decisions/user-feedback.jpg",
+              url: "/images/Case Studies/JD/Sketch feedback - Watson.jpg",
               caption: "User Feedback Session Results"
-            },
-            {
-              url: "/images/decisions/technical-assessment.jpg",
-              caption: "Technical Feasibility Assessment"
             }
+
           ],
           criteria: [
             {

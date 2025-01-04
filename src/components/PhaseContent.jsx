@@ -129,7 +129,11 @@ const PhaseContent = ({
                 key={conceptIndex} 
                 className={`concept-card ${isDecisionsPhase ? concept.status.toLowerCase() : ''}`}
               >
-                <h5>{concept.name}</h5>
+                <div className="concept-header">
+                  <h5>{concept.name}</h5>
+                  <p className="concept-description">{concept.description}</p>
+                </div>
+                
                 {concept.images && concept.images.length > 0 && (
                   <div className="concept-images">
                     {concept.images.map((image, imageIndex) => (
@@ -138,7 +142,10 @@ const PhaseContent = ({
                         className={`concept-image ${(activeImageIndices[conceptIndex] || 0) === imageIndex ? 'active' : ''}`}
                       >
                         <img src={image.url} alt={image.caption || ''} />
-                        {image.caption && <figcaption>{image.caption}</figcaption>}
+                        <div className="image-caption">
+                          <span className="caption-title">{image.caption}</span>
+                          <span className="caption-description">{image.description}</span>
+                        </div>
                       </figure>
                     ))}
                     <div className="concept-image-arrows">
@@ -169,11 +176,7 @@ const PhaseContent = ({
                     </div>
                   </div>
                 )}
-                <ul>
-                  {concept.details.map((detail, idx) => (
-                    <li key={idx}>{detail}</li>
-                  ))}
-                </ul>
+                
                 {isDecisionsPhase && (
                   <div className="concept-status">{concept.status}</div>
                 )}
@@ -217,6 +220,19 @@ const PhaseContent = ({
                   </div>
                 </div>
               </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {content.feedbackImages && (
+        <div className="feedback-section">
+          <div className="feedback-images">
+            {content.feedbackImages.map((image, index) => (
+              <figure key={index} className="feedback-image">
+                <img src={image.url} alt={image.caption} />
+                <figcaption>{image.caption}</figcaption>
+              </figure>
             ))}
           </div>
         </div>
