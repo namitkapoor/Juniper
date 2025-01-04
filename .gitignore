@@ -1,2 +1,4 @@
 node_modules/
 dist/
+# Ignore optimized images
+public/images/optimized/

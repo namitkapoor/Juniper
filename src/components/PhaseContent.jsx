@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import ImageCarousel from './ImageCarousel';
+import OptimizedImage from './OptimizedImage';
 
 const PhaseContent = ({ 
   content, 
@@ -21,7 +22,8 @@ const PhaseContent = ({
     "Journey Maps": "#F59E0B",
     "Survey Data": "#854D0E",
     "Competitive Analysis": "#F87171",
-    "Storyboards": "#D97706"
+    "Storyboards": "#D97706",
+    "Affinity Diagrams": "#ffffff"
   };
 
   const getTextColor = (method) => {
@@ -120,9 +122,63 @@ const PhaseContent = ({
         </div>
       )}
 
+      {content.analyses && (
+        <div className="analyses-section">
+          <h4 className="section-title">Product Analysis</h4>
+          <div className="product-analysis">
+            <p className="analysis-description">{content.analyses.product.description}</p>
+            {content.analyses.product.image && (
+              <figure className="analysis-image">
+                <OptimizedImage 
+                  src={content.analyses.product.image.url} 
+                  alt={content.analyses.product.image.caption}
+                />
+                <figcaption>{content.analyses.product.image.caption}</figcaption>
+              </figure>
+            )}
+            <div className="findings-grid">
+              {content.analyses.product.findings.map((finding, index) => (
+                <div key={index} className="finding-card">
+                  <h5>{finding.category}</h5>
+                  <p className="issues">{finding.issues}</p>
+                  <p className="impact">Impact: {finding.impact}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <h4 className="section-title">Task Analysis</h4>
+          <div className="task-analysis">
+            <p className="analysis-description">{content.analyses.task.description}</p>
+            {content.analyses.task.image && (
+              <figure className="analysis-image">
+                <img 
+                  src={content.analyses.task.image.url} 
+                  alt={content.analyses.task.image.caption}
+                />
+                <figcaption>{content.analyses.task.image.caption}</figcaption>
+              </figure>
+            )}
+            <div className="workflows-grid">
+              {content.analyses.task.workflows.map((workflow, index) => (
+                <div key={index} className="workflow-card">
+                  <h5>{workflow.name}</h5>
+                  <ol className="workflow-steps">
+                    {workflow.steps.map((step, stepIndex) => (
+                      <li key={stepIndex}>{step}</li>
+                    ))}
+                  </ol>
+                  <p className="pain-points">Pain Points: {workflow.painPoints}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
       {content.concepts && (
         <div className="concepts-section">
-          <h4>Solution Concepts</h4>
+          <h4 className="section-title">Solution Concepts</h4>
           <div className="concepts-grid">
             {content.concepts.map((concept, conceptIndex) => (
               <div 

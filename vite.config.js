@@ -3,8 +3,9 @@ import { transformWithEsbuild } from 'vite'
 import restart from 'vite-plugin-restart'
 import { resolve } from 'path'
 import glsl from 'vite-plugin-glsl'
+import { defineConfig } from 'vite'
 
-export default({
+export default defineConfig({
     root: 'src/',
     publicDir: '../public/',
     plugins: [
@@ -43,5 +44,8 @@ export default({
         chunkSizeWarningLimit: 1600,
     },
     base: './',
-    assetsInclude: ['**/*.glb']
+    assetsInclude: ['**/*.glb'],
+    optimizeDeps: {
+        exclude: ['react-icons/io5']
+    }
 })

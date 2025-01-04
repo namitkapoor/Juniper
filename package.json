@@ -6,11 +6,15 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "optimize-images": "node scripts/optimizeImages.js",
+    "predeploy": "npm run optimize-images && npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "4.3",
-    "gh-pages": "^6.1.1",
+    "gh-pages": "^6.3.0",
+    "sharp": "^0.32.6",
     "vite": "^5.4.7",
     "vite-plugin-restart": "^0.4.1"
   },

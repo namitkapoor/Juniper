@@ -734,3 +734,97 @@ figcaption {
   color: rgba(255, 255, 255, 0.7);
   text-align: center;
 }
+
+.analyses-section {
+  margin-bottom: 3rem;
+}
+
+.product-analysis,
+.task-analysis {
+  margin-bottom: 2rem;
+}
+
+.analysis-description {
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 1.5rem;
+}
+
+.findings-grid,
+.workflows-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.finding-card,
+.workflow-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.finding-card h5,
+.workflow-card h5 {
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+.issues,
+.impact {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.impact {
+  margin-top: 0.75rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.workflow-steps {
+  list-style-position: inside;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+  margin: 1rem 0;
+}
+
+.workflow-steps li {
+  margin-bottom: 0.5rem;
+}
+
+.pain-points {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(239, 68, 68, 0.9);
+  font-size: 0.9rem;
+}
+
+.section-title {
+  text-align: left;
+  margin: 2rem 0 1rem;
+  color: rgba(255, 255, 255, 0.95);
+  font-size: 1.25rem;
+}
+
+.analysis-image {
+  margin: 1.5rem 0;
+  width: 100%;
+  max-width: 800px;
+}
+
+.analysis-image img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.analysis-image figcaption {
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.7);
+  text-align: center;
+}

@@ -61,6 +61,12 @@ export const carouselImages = {
       caption: 'Competitive analysis of existing farm tools',
       alt: 'Competitive analysis results',
       methodologies: ["Survey Data"]
+    },
+    {
+      src: `${BASE_PATH}/JD/Farming experience affinity map.jpg`,
+      caption: 'Affinity diagram',
+      alt: 'Affinity diagram results',
+      methodologies: ["Affinity Diagrams"]
     }
   ],
   otherProject: [

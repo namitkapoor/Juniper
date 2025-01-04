@@ -28,25 +28,25 @@ export const strategicApproachData = {
               category: "Time Management",
               insight: "Farmers need efficient task scheduling due to long work hours",
               methodologyTitle: "Research Methodologies",
-              methodologies: ["User Interviews", "Field Observations", "Journey Maps", "Storyboards"],
+              methodologies: ["User Interviews", "Field Observations", "Affinity Diagrams", "Storyboards"],
               designResponse: "Task-centric daily planner with priority scheduling"
             },
             {
               category: "Inventory Tracking",
               insight: "Manual inventory tracking leads to stockouts and waste",
-              methodologies: ["Journey Maps", "Survey Data", "Storyboards"],
+              methodologies: ["Journey Maps", "Survey Data", "Storyboards", "User Interviews"],
               designResponse: "Automated inventory system with low-stock alerts"
             },
             {
               category: "Financial Tools",
               insight: "Basic accounting needs are not met by current solutions",
-              methodologies: ["User Interviews", "Journey Maps", "Survey Data"],
+              methodologies: ["User Interviews", "Journey Maps", "Survey Data", "Affinity Diagrams"],
               designResponse: "Simplified expense tracking and reporting"
             },
             {
               category: "Crop Planning",
               insight: "Soil-based planting decisions need better support",
-              methodologies: ["Field Observations", "Survey Data", "Storyboards"],
+              methodologies: ["Field Observations", "Survey Data", "Storyboards", "Affinity Diagrams"],
               designResponse: "AI-powered crop recommendation engine"
             }
           ]
@@ -60,6 +60,76 @@ export const strategicApproachData = {
         content: {
           title: "Design Strategy",
           summary: "Two concepts emerged from our research, exploring different approaches to farm management.",
+          
+          // Add analyses before concepts
+          analyses: {
+            product: {
+              title: "Product Analysis",
+              description: "Evaluation of existing Operations Center revealed key areas for improvement",
+              image: {
+                url: "/images/Case Studies/JD/product-analysis.jpg",
+                caption: "Current Operations Center Interface Analysis"
+              },
+              findings: [
+                {
+                  category: "Navigation",
+                  issues: "Complex menu hierarchy with buried features",
+                  impact: "Users spend excessive time finding tools"
+                },
+                {
+                  category: "Data Visualization",
+                  issues: "Dense tables and basic charts",
+                  impact: "Difficulty interpreting field performance"
+                },
+                {
+                  category: "Task Management",
+                  issues: "Manual input with limited automation",
+                  impact: "Inefficient resource allocation"
+                }
+              ]
+            },
+            task: {
+              title: "Task Analysis",
+              description: "Common workflows were mapped to identify friction points",
+              image: {
+                url: "/images/Case Studies/JD/task-analysis.jpg",
+                caption: "Task Flow Mapping Session"
+              },
+              workflows: [
+                {
+                  name: "Daily Planning",
+                  steps: [
+                    "Check weather forecast",
+                    "Review field conditions",
+                    "Assign worker tasks",
+                    "Schedule equipment"
+                  ],
+                  painPoints: "Multiple app switches between weather, scheduling, and equipment tracking"
+                },
+                {
+                  name: "Inventory Management",
+                  steps: [
+                    "Check current stock",
+                    "Review usage history",
+                    "Place orders",
+                    "Update records"
+                  ],
+                  painPoints: "Manual stock counting and data entry"
+                },
+                {
+                  name: "Field Monitoring",
+                  steps: [
+                    "Review sensor data",
+                    "Check growth progress",
+                    "Plan interventions",
+                    "Document changes"
+                  ],
+                  painPoints: "Scattered data sources and inconsistent documentation"
+                }
+              ]
+            }
+          },
+          
           concepts: [
             {
               name: "John Deere Operations Center Redesign",

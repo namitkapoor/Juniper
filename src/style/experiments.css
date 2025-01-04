@@ -138,7 +138,7 @@
   transition: transform 0.3s ease;
 }
 
-.project-card:hover .project-image {
+.project-card:hover {
   transform: scale(1.05);
 }
 
