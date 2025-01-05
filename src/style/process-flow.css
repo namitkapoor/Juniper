@@ -162,20 +162,6 @@
   margin-top: 0.75rem;
 }
 
-.wireframe-grid {
-  @extend .grid-base;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-}
-
-.wireframe-card {
-  @extend .card-base;
-  
-  .screen-title {
-    margin: 1rem 0;
-    font-size: 0.875rem;
-    color: rgba(255, 255, 255, 0.9);
-  }
-}
 
 @media (max-width: 768px) {
   .process-steps {

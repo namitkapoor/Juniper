@@ -234,27 +234,83 @@ export const strategicApproachData = {
                   content: {
                     screens: [
                       {
-                        name: "Dashboard Overview",
+                        name: "Status Feed (Task Overview and Quick Actions)",
                         image: {
-                          url: "/images/Case Studies/JD/Wireframes/dashboard.svg",
-                          caption: "Main dashboard with key metrics and alerts"
+                          url: "/images/Case Studies/JD/Wireframe/Status Feed gestures.jpg",
+                          caption: "Status feed interface with task overview"
                         },
-                        validations: [
-                          "Clear hierarchy of information",
-                          "Quick access to common tasks",
-                          "Customizable views"
+                        purpose: "Provide a centralized view of daily tasks, status updates, and relevant alerts. Enable users to quickly access and edit tasks with minimal navigation.",
+                        challengesAddressed: [
+                          "Farmers struggled with finding task progress and updates quickly in the original app.",
+                          "Task analysis revealed that quick access to comments and updates was critical for efficiency."
+                        ],
+                        keyFeatures: [
+                          "Status feed highlights daily updates, task progress percentages, and comments for field tasks.",
+                          "\"Quick Add\" functionality simplifies task creation without navigating away."
+                        ],
+                        feedbackAndRefinements: [
+                          "Early feedback revealed users wanted easier access to task-specific actions, resulting in the inclusion of quick action buttons (e.g., edit, comment, mark complete).",
+                          "The slider for task progress was refined for better usability after users expressed confusion about its function during testing."
                         ]
                       },
                       {
-                        name: "Equipment Management",
+                        name: "Analyze (Insights and Reports)",
                         image: {
-                          url: "/images/Case Studies/JD/Wireframes/equipment.svg",
-                          caption: "Equipment tracking and management interface"
+                          url: "/images/Case Studies/JD/Wireframe/Analyze gestures.jpg",
+                          caption: "Analytics and reporting interface"
                         },
-                        validations: [
-                          "Real-time location tracking",
-                          "Maintenance scheduling",
-                          "Usage analytics"
+                        purpose: "Consolidate crop, seeding, and revenue insights into a single tab for data-driven decision-making. Provide actionable insights with clear visualizations (e.g., bar graphs, pie charts).",
+                        challengesAddressed: [
+                          "The original app buried essential reports in multiple sub-menus, increasing cognitive load.",
+                          "Farmers wanted easily digestible insights for field and revenue performance."
+                        ],
+                        keyFeatures: [
+                          "Tabbed navigation for \"Field Info\" and \"Revenue\" reports allows users to switch views seamlessly.",
+                          "Interactive visualizations (e.g., monthly income and profit breakdowns) improve usability."
+                        ],
+                        feedbackAndRefinements: [
+                          "Users preferred having financial and field data in separate tabs, leading to the clear separation of \"Field Info\" and \"Revenue\" views.",
+                          "Added tooltips to chart elements for better interpretability after early feedback highlighted confusion over graph details."
+                        ]
+                      },
+                      {
+                        name: "Map (Field Layout and Customization)",
+                        image: {
+                          url: "/images/Case Studies/JD/Wireframe/Map gestures.jpg",
+                          caption: "Field layout and customization interface"
+                        },
+                        purpose: "Enable users to manage field rows and sections visually, making it easier to assign tasks and track progress. Provide customization options for each row and section (e.g., shape, size, color coding).",
+                        challengesAddressed: [
+                          "The original app lacked a visual interface for field management, forcing users to rely on text-heavy workflows.",
+                          "Task analysis revealed a need for simplified field segmentation and visual customization."
+                        ],
+                        keyFeatures: [
+                          "Drag-and-drop functionality for adding and editing rows and sections.",
+                          "Customization tools for defining cell shapes, sizes, and colors to reflect real field layouts."
+                        ],
+                        feedbackAndRefinements: [
+                          "Users wanted a quicker way to toggle between rows, leading to the introduction of horizontal swipe gestures.",
+                          "Added a contextual menu for quick access to section-specific details and actions."
+                        ]
+                      },
+                      {
+                        name: "Plan (Weekly Work Plan and Prioritization)",
+                        image: {
+                          url: "/images/Case Studies/JD/Wireframe/Plan gestures.jpg",
+                          caption: "Weekly planning and task prioritization interface"
+                        },
+                        purpose: "Organize weekly work plans into a clear and editable hierarchy, with prioritization options for urgent tasks. Provide detailed task-level information, such as assigned team members and progress metrics.",
+                        challengesAddressed: [
+                          "The original app's planning tools were rigid and difficult to customize for real-time changes.",
+                          "Farmers requested better task grouping and prioritization capabilities."
+                        ],
+                        keyFeatures: [
+                          "Expandable and collapsible task sections make it easy to focus on specific rows or priorities.",
+                          "Priority tasks are visually flagged, ensuring urgent actions are not missed."
+                        ],
+                        feedbackAndRefinements: [
+                          "Collapsible sections were refined after early wireframes showed users struggling to locate subtasks.",
+                          "The ability to sort tasks by priority was added based on user requests."
                         ]
                       }
                     ]

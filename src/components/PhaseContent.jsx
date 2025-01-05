@@ -173,6 +173,67 @@ const PhaseContent = ({ content, contentType, projectId }) => {
           </div>
         );
 
+      case 'wireframes':
+        const [expandedCard, setExpandedCard] = useState(null);
+
+        return (
+          <div className="wireframes-section">
+            {section.content.screens.map((screen, index) => (
+              <div 
+                key={index} 
+                className={`wireframe-card ${expandedCard === index ? 'expanded' : ''}`}
+                onClick={() => setExpandedCard(expandedCard === index ? null : index)}
+              >
+                <div className="wireframe-header">
+                  <h4 className="wireframe-title">{screen.name}</h4>
+                  <span className="expand-icon">
+                    {expandedCard === index ? '−' : '+'}
+                  </span>
+                </div>
+                
+                <div className="wireframe-preview">
+                  <OptimizedImage 
+                    src={screen.image.url}
+                    alt={screen.name}
+                    caption={screen.image.caption}
+                  />
+                  {/* Show brief purpose as preview */}
+                  <p className="preview-text">{screen.purpose.split('.')[0]}.</p>
+                </div>
+
+                {/* Expanded content */}
+                {expandedCard === index && (
+                  <div className="wireframe-details">
+                    <div className="content-section">
+                      <h5>
+                        <span className="section-icon">✨</span>
+                        Key Features
+                      </h5>
+                      <ul>
+                        {screen.keyFeatures.map((feature, i) => (
+                          <li key={i}>{feature}</li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    <div className="content-section">
+                      <h5>
+                        <span className="section-icon">📝</span>
+                        Refinements
+                      </h5>
+                      <ul>
+                        {screen.feedbackAndRefinements.map((feedback, i) => (
+                          <li key={i}>{feedback}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        );
+
       case 'process':
         return <ProcessFlow steps={section.steps} />;
 
