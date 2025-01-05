@@ -382,6 +382,10 @@ figcaption {
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: left;
   padding: 2rem;
 }
 
@@ -805,4 +809,255 @@ figcaption {
 /* Section spacing */
 .analyses-section {
   margin-bottom: 4rem;
+}
+
+/* Common section styling */
+.phase-content {
+  margin-top: 4rem;
+  padding: 0 2rem;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Consistent section containers */
+.product-analysis,
+.task-analysis,
+.concepts-section,
+.methodology-section,
+.design-requirements,
+.feedback-section {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  transition: all 0.3s ease;
+}
+
+/* Unified header styling */
+.phase-content h3,
+.section-title,
+.analyses-section h4,
+.task-analysis h4,
+.concepts-section .concept-container h4,
+.methodology-section h4,
+.design-requirements h4 {
+  font-size: 1.5rem;
+  color: rgba(255, 255, 255, 0.95);
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.01em;
+  font-weight: 500;
+  text-align: left;
+}
+
+/* Consistent grid layouts */
+.criteria-grid,
+.concepts-grid,
+.findings-grid,
+.workflows-grid,
+.methodology-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+
+/* Card styling */
+.criterion-card,
+.concept-card,
+.finding-card,
+.workflow-card,
+.methodology-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+/* Card headers */
+.criterion-card h5,
+.concept-card h5,
+.finding-card h5,
+.workflow-card h5 {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 0.75rem;
+  font-weight: 500;
+}
+
+/* Card descriptions */
+.criterion-card p,
+.concept-description,
+.finding-card p,
+.workflow-card p {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+/* Image styling */
+.phase-images,
+.feedback-images,
+.concept-images {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+/* Image container styling */
+.feedback-image,
+figure {
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+/* Image styling */
+.feedback-image img,
+figure img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+/* Caption styling */
+figcaption {
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+  text-align: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .phase-images,
+  .feedback-images,
+  .concept-images {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Core Features styling */
+.core-features-section {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+
+.feature-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.feature-card h5 {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 0.75rem;
+  font-weight: 500;
+}
+
+.feature-priority {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.feature-impact {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Wireframes styling */
+.wireframes-section {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+.wireframes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+
+.wireframe-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.wireframe-image {
+  aspect-ratio: 16 / 9;
+  margin-bottom: 1rem;
+}
+
+.key-features-list {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.key-features-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.key-features-list li {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.95rem;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.key-features-list li::before {
+  content: "•";
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .features-grid,
+  .wireframes-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .core-features-section,
+  .wireframes-section {
+    padding: 1.5rem;
+  }
 }

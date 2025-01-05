@@ -9,7 +9,8 @@ const PhaseContent = ({
   isResearchPhase, 
   iterations, 
   onIterationSelect,
-  isDecisionsPhase
+  isDecisionsPhase,
+  isDecisionCriteria
 }) => {
   const [activeMethodology, setActiveMethodology] = useState(null);
   const [activeImageIndices, setActiveImageIndices] = useState({});
@@ -123,7 +124,7 @@ const PhaseContent = ({
         </div>
       )}
 
-      {content.analyses && (
+      {content.analyses && !isDecisionCriteria && (
         <div className="analyses-section">
           <div className="product-analysis">
             <h4>Product Analysis</h4>
@@ -150,7 +151,7 @@ const PhaseContent = ({
         </div>
       )}
 
-      {content.analyses?.task && (
+      {content.analyses?.task && !isDecisionCriteria && (
         <div className="analyses-section">
           <TaskAnalysis taskAnalysis={content.analyses.task} />
         </div>
@@ -271,6 +272,50 @@ const PhaseContent = ({
                 <img src={image.url} alt={image.caption} />
                 <figcaption>{image.caption}</figcaption>
               </figure>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Core Features Section */}
+      {content.coreFeatures && (
+        <div className="core-features-section">
+          <h4>{content.coreFeatures.title}</h4>
+          <p className="section-description">{content.coreFeatures.description}</p>
+          <div className="features-grid">
+            {content.coreFeatures.features.map((feature, index) => (
+              <div key={index} className="feature-card">
+                <h5>{feature.name}</h5>
+                <div className="feature-priority">{feature.priority} Priority</div>
+                <p>{feature.description}</p>
+                <div className="feature-impact">Impact: {feature.impact}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+      
+      {/* Wireframes Section */}
+      {content.wireframes && (
+        <div className="wireframes-section">
+          <h4>{content.wireframes.title}</h4>
+          <p className="section-description">{content.wireframes.description}</p>
+          <div className="wireframes-grid">
+            {content.wireframes.screens.map((screen, index) => (
+              <div key={index} className="wireframe-card">
+                <h5>{screen.name}</h5>
+                <div className="wireframe-image">
+                  <img src={screen.image.url} alt={screen.image.caption} />
+                  <figcaption>{screen.image.caption}</figcaption>
+                </div>
+                <div className="key-features-list">
+                  <ul>
+                    {screen.keyFeatures.map((feature, featureIndex) => (
+                      <li key={featureIndex}>{feature}</li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
             ))}
           </div>
         </div>

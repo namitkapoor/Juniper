@@ -15,7 +15,6 @@ const StrategicApproach = ({
   const data = strategicApproachData[projectId];
   const [activeConnections, setActiveConnections] = useState(new Set());
   const [activeIteration, setActiveIteration] = useState(null);
-  const [selectedPhase, setSelectedPhase] = useState(null);
   
   if (!data) return null;
 
@@ -29,7 +28,6 @@ const StrategicApproach = ({
   const handlePhaseSelect = (index) => {
     onToggleSection(`approach${index}`);
     setActiveIteration(null);
-    setSelectedPhase(data.phases[index]);
     
     const phase = data.phases[index];
     if (phase && phase.connections) {
@@ -50,17 +48,6 @@ const StrategicApproach = ({
     }
   };
 
-  // Get the previous phase's images if we're in Decision Criteria
-  const getPreviousPhaseImages = () => {
-    if (selectedPhase?.methodology === "Decision Criteria") {
-      const currentIndex = data.phases.findIndex(p => p.id === selectedPhase.id);
-      if (currentIndex > 0) {
-        return data.phases[currentIndex - 1].images || [];
-      }
-    }
-    return selectedPhase?.images || [];
-  };
-
   return (
     <div className="strategic-approach">
       <IterativeTimeline
@@ -69,7 +56,6 @@ const StrategicApproach = ({
         onPhaseSelect={handlePhaseSelect}
         activeIteration={activeIteration}
         onIterationSelect={handleIterationSelect}
-        selectedPhase={selectedPhase}
       />
 
       <AnimatePresence>
@@ -86,8 +72,6 @@ const StrategicApproach = ({
               projectId={projectId}
               activeIteration={activeIteration}
               onIterationSelect={(iteration) => handleIterationSelect(iteration)}
-              selectedPhase={selectedPhase}
-              previousPhaseImages={getPreviousPhaseImages()}
             />
           </motion.div>
         )}

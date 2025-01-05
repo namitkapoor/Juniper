@@ -21,7 +21,7 @@ export const strategicApproachData = {
         iterations: [],
         connections: ['solution', 'decisions'],
         content: {
-          title: "User Research & Analysis",
+          title: "Research Insights",
           summary: "Our research uncovered four key design requirements that guided the solution.",
           designRequirements: [
             {
@@ -58,8 +58,56 @@ export const strategicApproachData = {
         icon: IoLayersOutline,
         connections: ['research', 'implementation'],
         content: {
-          title: "Design Strategy",
-          summary: "Two concepts emerged from our research, exploring different approaches to farm management.",
+          title: "Solution Framework",
+          summary: "A streamlined redesign focusing on core workflows and enhanced data visualization.",
+          
+          coreFeatures: {
+            title: "Core Features",
+            description: "Key functionality identified through user research and business requirements",
+            features: [
+              {
+                name: "Smart Task Management",
+                description: "Automated task creation and resource allocation based on field conditions and equipment availability",
+                priority: "High",
+                impact: "40% reduction in planning time"
+              },
+              {
+                name: "Real-time Equipment Tracking",
+                description: "Live monitoring of equipment location, status, and maintenance needs",
+                priority: "High",
+                impact: "60% improvement in resource utilization"
+              },
+              {
+                name: "Data Visualization Dashboard",
+                description: "Customizable views of field performance metrics and operational KPIs",
+                priority: "Medium",
+                impact: "35% faster decision making"
+              }
+            ]
+          },
+          
+          wireframes: {
+            title: "Wireframes",
+            description: "Initial interface layouts focusing on key user workflows",
+            screens: [
+              {
+                name: "Dashboard Overview",
+                image: {
+                  url: "/images/Case Studies/JD/Wireframes/dashboard.svg",
+                  caption: "Main dashboard with key metrics and alerts"
+                },
+                keyFeatures: ["Equipment status overview", "Task priority queue", "Weather integration"]
+              },
+              {
+                name: "Equipment Management",
+                image: {
+                  url: "/images/Case Studies/JD/Wireframes/equipment.svg",
+                  caption: "Equipment tracking and management interface"
+                },
+                keyFeatures: ["Location tracking", "Maintenance schedules", "Usage analytics"]
+              }
+            ]
+          },
           
           analyses: {
             product: {
@@ -187,8 +235,8 @@ export const strategicApproachData = {
                 },
                 {
                   url: "/images/Case Studies/JD/Sketches/Sketch-2.3.svg",
-                  caption: "Map View",
-                  description: "View your fields and areas of interest"
+                  caption: "Map",
+                  description: "Predictive inventory tracking"
                 },
                 {
                   url: "/images/Case Studies/JD/Sketches/Sketch-2.4.svg",
@@ -247,21 +295,7 @@ export const strategicApproachData = {
         title: 'Decision Criteria',
         icon: IoGitBranchOutline,
         loopBackTo: 1,
-        iterationHint: "Technical constraints found",
-        iterations: [
-          {
-            trigger: "Offline mode technical limitations",
-            action: "Revisit solution framework for alternative approach",
-            outcome: "Implemented progressive data sync",
-            phase: 'solution'
-          },
-          {
-            trigger: "Performance issues with real-time updates",
-            action: "Reconsidered real-time feature scope",
-            outcome: "Adopted batch update approach",
-            phase: 'solution'
-          }
-        ],
+        iterationHint: null,
         connections: ['research', 'implementation'],
         content: {
           title: "Concept Feedback",
