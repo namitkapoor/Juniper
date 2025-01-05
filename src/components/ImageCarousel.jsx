@@ -4,9 +4,10 @@ import { IoChevronBack, IoChevronForward } from 'react-icons/io5';
 import { carouselImages } from '../data/carouselImages';
 import '../style/image-carousel.css';
 
-const ImageCarousel = ({ projectId, activeMethodology, images: providedImages }) => {
+const ImageCarousel = ({ projectId, activeMethodology, images: providedImages, variant = 'research' }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   // Use provided images if available, otherwise fetch from carouselImages
   const images = providedImages || carouselImages[projectId] || [];
@@ -53,6 +54,10 @@ const ImageCarousel = ({ projectId, activeMethodology, images: providedImages })
     });
   };
 
+  const handleImageLoad = () => {
+    setImageLoaded(true);
+  };
+
   if (!images.length) {
     return (
       <div className="carousel-empty">
@@ -65,11 +70,14 @@ const ImageCarousel = ({ projectId, activeMethodology, images: providedImages })
   }
 
   return (
-    <div className="carousel-wrapper">
-      <div className="carousel-container">
+    <div className={`carousel-container ${variant}`}>
+      <div className="carousel-wrapper">
         <AnimatePresence initial={false} custom={direction}>
-          <motion.div
+          <motion.img
             key={currentIndex}
+            src={filteredImages[currentIndex].src}
+            alt={filteredImages[currentIndex].alt}
+            className={`carousel-image ${imageLoaded ? 'loaded' : ''}`}
             custom={direction}
             variants={slideVariants}
             initial="enter"
@@ -79,28 +87,10 @@ const ImageCarousel = ({ projectId, activeMethodology, images: providedImages })
               x: { type: "spring", stiffness: 300, damping: 30 },
               opacity: { duration: 0.2 }
             }}
-            drag="x"
-            dragConstraints={{ left: 0, right: 0 }}
-            dragElastic={1}
-            onDragEnd={(e, { offset, velocity }) => {
-              const swipe = swipePower(offset.x, velocity.x);
-              if (swipe < -swipeConfidenceThreshold) {
-                paginate(1);
-              } else if (swipe > swipeConfidenceThreshold) {
-                paginate(-1);
-              }
-            }}
-            className="carousel-slide"
-          >
-            <img
-              src={images[currentIndex].src}
-              alt={images[currentIndex].alt}
-              className="carousel-image"
-            />
-            <div className="carousel-caption">
-              {images[currentIndex].caption}
-            </div>
-          </motion.div>
+            onLoad={handleImageLoad}
+            // Reset loaded state when image changes
+            onAnimationStart={() => setImageLoaded(false)}
+          />
         </AnimatePresence>
 
         <div 

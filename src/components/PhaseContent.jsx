@@ -2,13 +2,12 @@ import React, { useState } from 'react';
 import ImageCarousel from './ImageCarousel';
 import OptimizedImage from './OptimizedImage';
 import ProcessFlow from './ProcessFlow';
-import { getProjectImages } from '../data/carouselImages';
-import '../style/phase-content.css';
 import { 
-  IoNavigateOutline, 
-  IoLayersOutline,
-  // Add other icons as needed
-} from 'react-icons/io5';
+  getProjectImages, 
+  getTaskAnalysisImages, 
+  getConceptImages
+} from '../data/carouselImages';
+import '../style/phase-content.css';
 
 const PhaseContent = ({ content, contentType, projectId }) => {
   if (!content) return null;
@@ -43,8 +42,8 @@ const PhaseContent = ({ content, contentType, projectId }) => {
               <div className="research-visuals">
                 <ImageCarousel 
                   images={filteredImages}
-                  autoPlay={true}
-                  interval={5000}
+                  autoPlay={false}
+                  variant="research"
                 />
               </div>
             )}
@@ -74,37 +73,40 @@ const PhaseContent = ({ content, contentType, projectId }) => {
         );
 
       case 'analysis':
-        const getIconForCategory = (category) => {
-          switch(category.toLowerCase()) {
-            case 'navigation':
-              return <IoNavigateOutline size={20} />;
-            case 'unnecessary features':
-              return <IoLayersOutline size={20} />;
-            // Add more cases as needed
-            default:
-              return null;
-          }
-        };
+        const [selectedTask, setSelectedTask] = useState(null);
+        const taskImages = section.content?.useCarousel 
+          ? getTaskAnalysisImages(selectedTask)
+          : [];
 
         return (
           <div className="analysis-section">
-            {(section.content?.image || section.image) && (
+            {/* Cover Image */}
+            {section.content?.coverImage && (
               <div className="analysis-image">
                 <OptimizedImage 
-                  src={section.content?.image?.url || section.image?.url}
-                  alt={section.content?.image?.alt || section.image?.caption}
-                  caption={section.content?.image?.caption || section.image?.caption}
+                  src={section.content.coverImage.url}
+                  alt={section.content.coverImage.alt}
+                  caption={section.content.coverImage.caption}
                 />
               </div>
             )}
+
+            {/* Optional Carousel */}
+            {section.content?.useCarousel && taskImages.length > 0 && (
+              <div className="analysis-carousel">
+                <ImageCarousel 
+                  images={taskImages}
+                  autoPlay={false}
+                  variant="concept"
+                />
+              </div>
+            )}
+
             {(section.content?.findings || section.findings) && (
               <div className="findings-grid">
                 {(section.content?.findings || section.findings).map((finding, index) => (
                   <div key={index} className="finding-card">
-                    <h5 className="section-title">
-                      {getIconForCategory(finding.category)}
-                      {finding.category}
-                    </h5>
+                    <h5 className="section-title">{finding.category}</h5>
                     
                     <div className="content-section issue-section">
                       <h5 className="section-title">Issue Identified</h5>
@@ -132,14 +134,36 @@ const PhaseContent = ({ content, contentType, projectId }) => {
       case 'concepts':
         return (
           <div className="concepts-grid">
-            {section.items.map((concept, index) => (
+            {section.content.concepts.map((concept, index) => (
               <div key={index} className={`concept-card ${concept.status?.toLowerCase()}`}>
                 <h4>{concept.name}</h4>
                 <p>{concept.description}</p>
-                {concept.visuals && <ImageCarousel images={concept.visuals} />}
-                {concept.features && (
+                
+                {/* Cover Image */}
+                {concept.coverImage && (
+                  <div className="concept-cover-image">
+                    <OptimizedImage 
+                      src={concept.coverImage.url}
+                      alt={concept.coverImage.alt}
+                      caption={concept.coverImage.caption}
+                    />
+                  </div>
+                )}
+                
+                {/* Concept-specific carousel */}
+                {concept.useCarousel && (
+                  <div className="concept-carousel">
+                    <ImageCarousel 
+                      images={getConceptImages(concept.carouselType)}
+                      autoPlay={false}
+                      variant="concept"
+                    />
+                  </div>
+                )}
+
+                {concept.keyFeatures && (
                   <ul className="feature-list">
-                    {concept.features.map((feature, i) => (
+                    {concept.keyFeatures.map((feature, i) => (
                       <li key={i}>{feature}</li>
                     ))}
                   </ul>

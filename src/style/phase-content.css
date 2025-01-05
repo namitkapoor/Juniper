@@ -186,6 +186,17 @@
       }
     }
   }
+
+  .analysis-carousel {
+    margin: 1.5rem 0;
+    
+    .carousel-image {
+      width: 100%;
+      object-fit: contain;
+      background: var(--card-bg);
+      border-radius: 8px;
+    }
+  }
 }
 
 /* Responsive adjustments */

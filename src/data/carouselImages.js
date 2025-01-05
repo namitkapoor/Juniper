@@ -177,4 +177,72 @@ export const getTaskAnalysisImages = (taskCategory) => {
   return taskCategory 
     ? taskImages.filter(img => img.taskCategory === taskCategory)
     : taskImages;
+};
+
+// Add new concept image collections
+export const conceptImages = {
+  operationsCenterConcept: [
+    {
+      src: '/images/Case Studies/JD/Sketches/Sketch-2.1.svg',
+      caption: 'Dashboard View',
+      alt: 'Dashboard interface of Operations Center'
+    },
+    {
+      src: '/images/Case Studies/JD/Sketches/Sketch-2.2.svg',
+      caption: 'Map View',
+      alt: 'Dashboard interface of Operations Center'
+    },
+    {
+      src: '/images/Case Studies/JD/Sketches/Sketch-2.3.svg',
+      caption: 'Map View',
+      alt: 'Dashboard interface of Operations Center'
+    },
+    {
+      src: '/images/Case Studies/JD/Sketches/Sketch-2.4.svg',
+      caption: 'Plan View',
+      alt: 'Dashboard interface of Operations Center'
+    },
+    {
+      src: '/images/Case Studies/JD/Sketches/Sketch-2.5.svg',
+      caption: 'Analytics View',
+      alt: 'Dashboard interface of Operations Center'
+    },
+    {
+      src: '/images/Case Studies/JD/Sketches/Sketch-2.6.svg',
+      caption: 'Analytics View',
+      alt: 'Dashboard interface of Operations Center'
+    },
+    {
+      src: '/images/Case Studies/JD/Sketches/Sketch-2.7.svg',
+      caption: 'Analytics View',
+      alt: 'Dashboard interface of Operations Center'
+    },
+  ],
+  seed2productConcept: [
+    {
+      src: '/images/Case Studies/JD/Sketches/Sketch-1.1.jpg',
+      caption: 'Voice Interface',
+      alt: 'Voice interface demonstration'
+    },
+    {
+      src: '/images/Case Studies/JD/Sketches/Sketch-1.2.jpg',
+      caption: 'Voice Interface',
+      alt: 'Voice interface demonstration'
+    },  
+    {
+      src: '/images/Case Studies/JD/Sketches/Sketch-1.3.jpg',
+      caption: 'Voice Interface',
+      alt: 'Voice interface demonstration'
+    },
+    {
+      src: '/images/Case Studies/JD/Sketches/Sketch-1.4.jpg',
+      caption: 'Voice Interface',
+      alt: 'Voice interface demonstration'
+    }
+  ]
+};
+
+// Add new helper function
+export const getConceptImages = (conceptType) => {
+  return conceptImages[conceptType] || [];
 }; 

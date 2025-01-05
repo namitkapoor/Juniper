@@ -89,10 +89,12 @@ export const strategicApproachData = {
                   icon: IoSearchOutline,
                   description: "Key issues with existing product",
                   content: {
-                    image: {
+                    coverImage: {
                       url: "/images/Case Studies/JD/OCM Critique.avif",
-                      caption: "Product Analysis"
+                      caption: "Product Analysis Overview",
+                      alt: "Overview of product analysis"
                     },
+                    useCarousel: false,
                     findings: [
                       {
                         category: "Navigation",
@@ -116,10 +118,8 @@ export const strategicApproachData = {
                   icon: IoTimerOutline,
                   description: "What Tasks Tell Us About Time Management",
                   content: {
-                    image: {
-                      url: "/images/Case Studies/JD/Task Analysis/Choose crop task analysis.jpg",
-                      caption: "Task Flow Analysis"
-                    },
+                    useCarousel: true,
+                    carouselType: "taskAnalysis",
                     summary: "Detailed analysis of 5 key tasks revealed significant usability challenges, with an overall success rate of 50% across all tasks.",
                     metrics: {
                       overallCompletionTime: "5.1 minutes average",
@@ -207,6 +207,8 @@ export const strategicApproachData = {
                           "Smart task management",
                           "Real-time equipment tracking"
                         ],
+                        useCarousel: true,
+                        carouselType: "operationsCenterConcept"
                       },
                       {
                         name: "Seed2Product",
@@ -217,6 +219,8 @@ export const strategicApproachData = {
                           "AR field visualization",
                           "Predictive analytics"
                         ],
+                        useCarousel: true,
+                        carouselType: "seed2productConcept"
                       }
                     ]
                   }
