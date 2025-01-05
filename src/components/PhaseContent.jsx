@@ -1,325 +1,174 @@
 import React, { useState } from 'react';
 import ImageCarousel from './ImageCarousel';
 import OptimizedImage from './OptimizedImage';
-import TaskAnalysis from './TaskAnalysis';
+import ProcessFlow from './ProcessFlow';
+import { getProjectImages } from '../data/carouselImages';
+import '../style/phase-content.css';
+import { 
+  IoNavigateOutline, 
+  IoLayersOutline,
+  // Add other icons as needed
+} from 'react-icons/io5';
 
-const PhaseContent = ({ 
-  content, 
-  projectId, 
-  isResearchPhase, 
-  iterations, 
-  onIterationSelect,
-  isDecisionsPhase,
-  isDecisionCriteria
-}) => {
-  const [activeMethodology, setActiveMethodology] = useState(null);
-  const [activeImageIndices, setActiveImageIndices] = useState({});
-
+const PhaseContent = ({ content, contentType, projectId }) => {
   if (!content) return null;
 
-  // WCAG AA compliant earth tone combinations
-  const methodologyColors = {
-    "User Interviews": "#9C4221",
-    "Field Observations": "#276749",
-    "Journey Maps": "#F59E0B",
-    "Survey Data": "#854D0E",
-    "Competitive Analysis": "#F87171",
-    "Storyboards": "#D97706",
-    "Affinity Diagrams": "#ffffff"
-  };
+  const renderSection = (section) => {
+    switch (section.type) {
+      case 'requirements':
+        const researchImages = getProjectImages(projectId).filter(img => 
+          section.items.some(item => 
+            item.methodologies.some(method => img.methodologies.includes(method))
+          )
+        );
+        const [selectedTags, setSelectedTags] = useState([]);
+        
+        const filteredImages = selectedTags.length > 0 
+          ? researchImages.filter(img => 
+              img.methodologies.some(method => selectedTags.includes(method))
+            )
+          : researchImages;
 
-  const getTextColor = (method) => {
-    switch (method) {
-      case "User Interviews":
-      case "Field Observations":
-      case "Survey Data":
-        return 'rgba(255, 255, 255, 0.95)';
-      default:
-        return 'rgba(0, 0, 0, 0.8)';
-    }
-  };
+        const handleTagClick = (tag) => {
+          setSelectedTags(prev => 
+            prev.includes(tag) 
+              ? prev.filter(t => t !== tag)
+              : [...prev, tag]
+          );
+        };
 
-  // Function to handle image navigation
-  const navigateImage = (conceptIndex, direction) => {
-    setActiveImageIndices(prev => {
-      const currentIndex = prev[conceptIndex] || 0;
-      const maxIndex = content.concepts[conceptIndex].images.length - 1;
-      let newIndex = currentIndex + direction;
-      
-      if (newIndex < 0) newIndex = maxIndex;
-      if (newIndex > maxIndex) newIndex = 0;
-      
-      return { ...prev, [conceptIndex]: newIndex };
-    });
-  };
-
-  return (
-    <div className={`phase-content ${isDecisionsPhase ? 'decisions-active' : ''}`}>
-      <h3>{content.title}</h3>
-      
-      {isResearchPhase && (
-        <ImageCarousel 
-          projectId={projectId} 
-          activeMethodology={activeMethodology}
-        />
-      )}
-      
-      {content.images && content.images.length > 0 && (
-        <div className="phase-images">
-          {content.images.map((image, index) => (
-            <figure key={index}>
-              <img src={image.url} alt={image.caption || ''} />
-              {image.caption && <figcaption>{image.caption}</figcaption>}
-            </figure>
-          ))}
-        </div>
-      )}
-
-      <p className="phase-summary">{content.summary}</p>
-
-      {iterations && iterations.length > 0 && (
-        <div className="iterations-section">
-          <h4>Iteration Examples</h4>
-          <div className="iterations-grid">
-            {iterations.map((iteration, index) => (
-              <button
-                key={index}
-                className="iteration-card"
-                onClick={() => onIterationSelect(iteration)}
-              >
-                <h5>{iteration.trigger}</h5>
-                <p>{iteration.action}</p>
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {content.criteria && (
-        <div className="criteria-section">
-          <h4>Evaluation Criteria</h4>
-          <div className="criteria-grid">
-            {content.criteria.map((criterion, index) => (
-              <div key={index} className="criterion-card">
-                <h4>{criterion.title}</h4>
-                <div className="weight">Weight: {criterion.weight}</div>
-                <p>{criterion.description}</p>
-                {criterion.feedback && (
-                  <div className="feedback-section">
-                    <h5>Feedback</h5>
-                    <div className="feedback-images">
-                      {criterion.feedback.images?.map((image, idx) => (
-                        <figure key={idx} className="feedback-image">
-                          <img src={image.url} alt={image.caption || ''} />
-                          {image.caption && <figcaption>{image.caption}</figcaption>}
-                        </figure>
-                      ))}
-                    </div>
-                    <p>{criterion.feedback.text}</p>
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {content.analyses && !isDecisionCriteria && (
-        <div className="analyses-section">
-          <div className="product-analysis">
-            <h4>Product Analysis</h4>
-            <p className="analysis-description">{content.analyses.product.description}</p>
-            {content.analyses.product.image && (
-              <figure className="analysis-image">
-                <img 
-                  src={content.analyses.product.image.url} 
-                  alt={content.analyses.product.image.caption}
+        return (
+          <div className="section requirements">
+            {researchImages.length > 0 && (
+              <div className="research-visuals">
+                <ImageCarousel 
+                  images={filteredImages}
+                  autoPlay={true}
+                  interval={5000}
                 />
-                <figcaption>{content.analyses.product.image.caption}</figcaption>
-              </figure>
+              </div>
             )}
-            <div className="findings-grid">
-              {content.analyses.product.findings.map((finding, index) => (
-                <div key={index} className="finding-card">
-                  <h5>{finding.category}</h5>
-                  <p className="issues">{finding.issues}</p>
-                  <p className="impact">Impact: {finding.impact}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      )}
-
-      {content.analyses?.task && !isDecisionCriteria && (
-        <div className="analyses-section">
-          <TaskAnalysis taskAnalysis={content.analyses.task} />
-        </div>
-      )}
-
-      {content.concepts && (
-        <div className="concepts-section">
-          <div className="concept-container">
-            <h4>Solution Concepts</h4>
-            <div className="concepts-grid">
-              {content.concepts.map((concept, conceptIndex) => (
-                <div 
-                  key={conceptIndex} 
-                  className={`concept-card ${isDecisionsPhase ? concept.status.toLowerCase() : ''}`}
-                >
-                  <div className="concept-header">
-                    <h5>{concept.name}</h5>
-                    <p className="concept-description">{concept.description}</p>
-                  </div>
-                  
-                  {concept.images && concept.images.length > 0 && (
-                    <div className="concept-images">
-                      {concept.images.map((image, imageIndex) => (
-                        <figure 
-                          key={imageIndex} 
-                          className={`concept-image ${(activeImageIndices[conceptIndex] || 0) === imageIndex ? 'active' : ''}`}
-                        >
-                          <img src={image.url} alt={image.caption || ''} />
-                          <div className="image-caption">
-                            <span className="caption-title">{image.caption}</span>
-                            <span className="caption-description">{image.description}</span>
-                          </div>
-                        </figure>
-                      ))}
-                      <div className="concept-image-arrows">
-                        <button 
-                          className="concept-image-arrow"
-                          onClick={() => navigateImage(conceptIndex, -1)}
-                        >
-                          ←
-                        </button>
-                        <button 
-                          className="concept-image-arrow"
-                          onClick={() => navigateImage(conceptIndex, 1)}
-                        >
-                          →
-                        </button>
-                      </div>
-                      <div className="concept-image-nav">
-                        {concept.images.map((_, dotIndex) => (
-                          <button
-                            key={dotIndex}
-                            className={`concept-image-dot ${(activeImageIndices[conceptIndex] || 0) === dotIndex ? 'active' : ''}`}
-                            onClick={() => setActiveImageIndices(prev => ({
-                              ...prev,
-                              [conceptIndex]: dotIndex
-                            }))}
-                          />
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                  
-                  {isDecisionsPhase && (
-                    <div className="concept-status">{concept.status}</div>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      )}
-
-      {content.designRequirements && (
-        <div className="design-requirements">
-          <h4>Design Requirements</h4>
-          <div className="criteria-grid">
-            {content.designRequirements.map((req, index) => (
-              <div key={index} className="criterion-card">
-                <h4>{req.category}</h4>
-                <p>{req.insight}</p>
-                <div className="methodology-section">
-                  <div className="methodology-title">Research Methodologies</div>
+            <h5 className="requirements-title">Design Requirements</h5>
+            <div className="requirements-grid">
+              {section.items.map((item, index) => (
+                <div key={index} className="requirement-card">
+                  <h4>{item.category}</h4>
+                  <p className="insight">{item.insight}</p>
+                  <h5 className="methodology-subtitle">Research Methodologies</h5>
                   <div className="methodology-tags">
-                    {req.methodologies.map((method, idx) => (
+                    {item.methodologies.map((method, i) => (
                       <button
-                        key={idx}
-                        className={`methodology-tag ${activeMethodology === method ? 'active' : ''}`}
-                        style={{ 
-                          backgroundColor: methodologyColors[method] || 'rgba(255, 255, 255, 0.1)',
-                          opacity: activeMethodology && activeMethodology !== method ? 0.5 : 1,
-                          color: getTextColor(method),
-                          border: 'none',
-                          fontWeight: '500',
-                          letterSpacing: '0.01em',
-                          boxShadow: '0 1px 2px rgba(0, 0, 0, 0.05)'
-                        }}
-                        onClick={() => setActiveMethodology(
-                          activeMethodology === method ? null : method
-                        )}
+                        key={i}
+                        className={`methodology-tag ${selectedTags.includes(method) ? 'active' : ''}`}
+                        onClick={() => handleTagClick(method)}
                       >
                         {method}
                       </button>
                     ))}
                   </div>
+                  <p className="response">{item.response}</p>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
-      )}
+        );
 
-      {content.feedbackImages && (
-        <div className="feedback-section">
-          <div className="feedback-images">
-            {content.feedbackImages.map((image, index) => (
-              <figure key={index} className="feedback-image">
-                <img src={image.url} alt={image.caption} />
-                <figcaption>{image.caption}</figcaption>
-              </figure>
-            ))}
-          </div>
-        </div>
-      )}
+      case 'analysis':
+        const getIconForCategory = (category) => {
+          switch(category.toLowerCase()) {
+            case 'navigation':
+              return <IoNavigateOutline size={20} />;
+            case 'unnecessary features':
+              return <IoLayersOutline size={20} />;
+            // Add more cases as needed
+            default:
+              return null;
+          }
+        };
 
-      {/* Core Features Section */}
-      {content.coreFeatures && (
-        <div className="core-features-section">
-          <h4>{content.coreFeatures.title}</h4>
-          <p className="section-description">{content.coreFeatures.description}</p>
-          <div className="features-grid">
-            {content.coreFeatures.features.map((feature, index) => (
-              <div key={index} className="feature-card">
-                <h5>{feature.name}</h5>
-                <div className="feature-priority">{feature.priority} Priority</div>
-                <p>{feature.description}</p>
-                <div className="feature-impact">Impact: {feature.impact}</div>
+        return (
+          <div className="analysis-section">
+            {(section.content?.image || section.image) && (
+              <div className="analysis-image">
+                <OptimizedImage 
+                  src={section.content?.image?.url || section.image?.url}
+                  alt={section.content?.image?.alt || section.image?.caption}
+                  caption={section.content?.image?.caption || section.image?.caption}
+                />
               </div>
-            ))}
+            )}
+            {(section.content?.findings || section.findings) && (
+              <div className="findings-grid">
+                {(section.content?.findings || section.findings).map((finding, index) => (
+                  <div key={index} className="finding-card">
+                    <h5 className="section-title">
+                      {getIconForCategory(finding.category)}
+                      {finding.category}
+                    </h5>
+                    
+                    <div className="content-section issue-section">
+                      <h5 className="section-title">Issue Identified</h5>
+                      <p className="issue">{finding.issue}</p>
+                    </div>
+
+                    <div className="content-section impact-section">
+                      <h5 className="section-title">Business Impact</h5>
+                      <p className="impact">{finding.impact}</p>
+                    </div>
+
+                    {finding.additionalValidation && (
+                      <div className="content-section validation-section">
+                        <h5 className="section-title">Additional Validation</h5>
+                        <p className="additional-validation">{finding.additionalValidation}</p>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
-        </div>
-      )}
-      
-      {/* Wireframes Section */}
-      {content.wireframes && (
-        <div className="wireframes-section">
-          <h4>{content.wireframes.title}</h4>
-          <p className="section-description">{content.wireframes.description}</p>
-          <div className="wireframes-grid">
-            {content.wireframes.screens.map((screen, index) => (
-              <div key={index} className="wireframe-card">
-                <h5>{screen.name}</h5>
-                <div className="wireframe-image">
-                  <img src={screen.image.url} alt={screen.image.caption} />
-                  <figcaption>{screen.image.caption}</figcaption>
-                </div>
-                <div className="key-features-list">
-                  <ul>
-                    {screen.keyFeatures.map((feature, featureIndex) => (
-                      <li key={featureIndex}>{feature}</li>
+        );
+
+      case 'concepts':
+        return (
+          <div className="concepts-grid">
+            {section.items.map((concept, index) => (
+              <div key={index} className={`concept-card ${concept.status?.toLowerCase()}`}>
+                <h4>{concept.name}</h4>
+                <p>{concept.description}</p>
+                {concept.visuals && <ImageCarousel images={concept.visuals} />}
+                {concept.features && (
+                  <ul className="feature-list">
+                    {concept.features.map((feature, i) => (
+                      <li key={i}>{feature}</li>
                     ))}
                   </ul>
-                </div>
+                )}
               </div>
             ))}
           </div>
-        </div>
-      )}
+        );
+
+      case 'process':
+        return <ProcessFlow steps={section.steps} />;
+
+      default:
+        return null;
+    }
+  };
+
+  return (
+    <div className={`phase-content ${contentType}`}>
+      <h3>{content.title}</h3>
+      {content.summary && <p className="summary">{content.summary}</p>}
+      
+      <div className="sections">
+        {content.sections?.map((section, index) => (
+          <div key={index} className={`section ${section.type}`}>
+            {renderSection(section)}
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

@@ -1,0 +1,199 @@
+.process-flow {
+  padding: 1rem 0;
+}
+
+.process-steps {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  position: relative;
+  gap: 1.5rem;
+}
+
+.process-step {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  flex: 1;
+  min-height: 120px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  &.active {
+    background: rgba(255, 255, 255, 0.08);
+    transform: scale(1.02);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    border-color: rgba(255, 255, 255, 0.2);
+
+    h4 {
+      color: var(--accent-success);
+    }
+
+    .step-icon {
+      background: var(--accent-success);
+      border-color: var(--accent-success);
+      color: white;
+    }
+  }
+
+  h4 {
+    color: var(--text-primary);
+    font-size: 1.2rem;
+    margin: 0.75rem 0;
+    text-align: left;
+  }
+
+  p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    text-align: left;
+  }
+}
+
+/* Analysis type */
+.process-step[data-type="analysis"] {
+  .findings-grid {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .finding-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    
+    /* Section titles */
+    h5.section-title {
+      color: var(--text-primary);
+      font-size: 1.1rem;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+      opacity: 0.95;
+    }
+
+    /* Content sections */
+    .content-section {
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--card-border);
+
+      &:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+      }
+
+      &:first-child {
+        padding-top: 0;
+      }
+    }
+
+    /* Issue section */
+    .issue-section {
+      .issue {
+        color: var(--text-secondary);
+        font-size: 0.95rem;
+        line-height: 1.5;
+      }
+    }
+
+    /* Impact section */
+    .impact-section {
+      .impact {
+        color: var(--accent-error);
+        font-size: 0.95rem;
+        line-height: 1.5;
+        font-weight: 500;
+      }
+    }
+
+    /* Validation section */
+    .validation-section {
+      .additional-validation {
+        color: var(--accent-success);
+        font-size: 0.95rem;
+        line-height: 1.5;
+        font-style: italic;
+      }
+    }
+  }
+}
+
+/* Step icon */
+.step-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  transition: all 0.3s ease;
+}
+
+.step-connector {
+  flex: 0 0 40px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.1);
+  margin-top: 24px;
+}
+
+.step-details {
+  margin-top: 1rem;
+}
+
+.iteration-hint {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.05);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  margin-top: 0.75rem;
+}
+
+.wireframe-grid {
+  @extend .grid-base;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.wireframe-card {
+  @extend .card-base;
+  
+  .screen-title {
+    margin: 1rem 0;
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.9);
+  }
+}
+
+@media (max-width: 768px) {
+  .process-steps {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .process-step {
+    width: 100%;
+  }
+  
+  .step-connector {
+    display: none;
+  }
+  
+  .findings-grid,
+  .concept-grid,
+  .wireframe-grid {
+    grid-template-columns: 1fr;
+  }
+} 

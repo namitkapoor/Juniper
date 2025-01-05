@@ -4,8 +4,6 @@ import { strategicApproachData } from '../data/strategicApproachData';
 import PhaseContent from './PhaseContent';
 import IterativeTimeline from './IterativeTimeline';
 import '../style/strategic-approach-module.css';
-import ImageCarousel from './ImageCarousel';
-import SmartPhaseView from './SmartPhaseView';
 
 const StrategicApproach = ({ 
   expandedSections, 
@@ -13,7 +11,6 @@ const StrategicApproach = ({
   projectId 
 }) => {
   const data = strategicApproachData[projectId];
-  const [activeConnections, setActiveConnections] = useState(new Set());
   const [activeIteration, setActiveIteration] = useState(null);
   
   if (!data) return null;
@@ -28,18 +25,9 @@ const StrategicApproach = ({
   const handlePhaseSelect = (index) => {
     onToggleSection(`approach${index}`);
     setActiveIteration(null);
-    
-    const phase = data.phases[index];
-    if (phase && phase.connections) {
-      const newConnections = new Set();
-      phase.connections.forEach(connectedPhaseId => {
-        newConnections.add(`${phase.id}-${connectedPhaseId}`);
-      });
-      setActiveConnections(newConnections);
-    }
   };
 
-  const handleIterationSelect = (iteration, phaseIndex) => {
+  const handleIterationSelect = (iteration) => {
     setActiveIteration(iteration);
     // Find the index of the phase we're iterating back to
     const targetPhaseIndex = data.phases.findIndex(p => p.id === iteration.phase);
@@ -66,13 +54,23 @@ const StrategicApproach = ({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
-            <SmartPhaseView
-              phases={data.phases}
-              expandedSections={expandedSections}
-              projectId={projectId}
-              activeIteration={activeIteration}
-              onIterationSelect={(iteration) => handleIterationSelect(iteration)}
-            />
+            {data.phases.map((phase, index) => {
+              const shouldShow = expandedSections.has(`approach${index}`);
+              if (!shouldShow) return null;
+
+              return (
+                <PhaseContent 
+                  key={phase.id}
+                  content={phase.content}
+                  projectId={projectId}
+                  isResearchPhase={index === 0}
+                  isDecisionsPhase={expandedSections.has('approach2')}
+                  iterations={phase.iterations}
+                  onIterationSelect={handleIterationSelect}
+                  activeIteration={activeIteration}
+                />
+              );
+            })}
           </motion.div>
         )}
       </AnimatePresence>

@@ -6,7 +6,13 @@ import {
   IoPersonOutline,
   IoDocumentOutline,
   IoBarChartOutline,
-  IoCheckmarkCircleOutline
+  IoCheckmarkCircleOutline,
+  IoAccessibility,
+  IoContract,
+  IoSearchOutline,
+  IoTimerOutline,
+  IoBulbOutline,
+  IoConstructOutline
 } from 'react-icons/io5';
 
 export const strategicApproachData = {
@@ -16,38 +22,50 @@ export const strategicApproachData = {
         id: 'research',
         title: 'Research Insights',
         icon: IoAnalyticsOutline,
-        loopBackTo: undefined,
-        iterationHint: null,
-        iterations: [],
-        connections: ['solution', 'decisions'],
+        type: 'research',
         content: {
           title: "Research Insights",
           summary: "Our research uncovered four key design requirements that guided the solution.",
-          designRequirements: [
+          sections: [
             {
-              category: "Time Management",
-              insight: "Farmers need efficient task scheduling due to long work hours",
-              methodologyTitle: "Research Methodologies",
-              methodologies: ["User Interviews", "Field Observations", "Affinity Diagrams", "Storyboards"],
-              designResponse: "Task-centric daily planner with priority scheduling"
+              type: 'requirements',
+              items: [
+                {
+                  category: "Time Management",
+                  insight: "Farmers need efficient task scheduling due to long work hours",
+                  methodologies: ["User Interviews", "Field Observations", "Affinity Diagrams", "Storyboards"],
+                  response: "Task-centric daily planner with priority scheduling"
+                },
+                {
+                  category: "Inventory Tracking",
+                  insight: "Manual inventory tracking leads to stockouts and waste",
+                  methodologies: ["Journey Maps", "Survey Data", "Storyboards", "User Interviews"],
+                  response: "Automated inventory system with low-stock alerts"
+                },
+                {
+                  category: "Financial Tools",
+                  insight: "Basic accounting needs are not met by current solutions",
+                  methodologies: ["User Interviews", "Journey Maps", "Survey Data", "Affinity Diagrams"],
+                  response: "Simplified expense tracking and reporting"
+                },
+                {
+                  category: "Crop Planning",
+                  insight: "Soil-based planting decisions need better support",
+                  methodologies: ["Field Observations", "Survey Data", "Storyboards", "Affinity Diagrams"],
+                  response: "AI-powered crop recommendation engine"
+                }
+              ]
             },
             {
-              category: "Inventory Tracking",
-              insight: "Manual inventory tracking leads to stockouts and waste",
-              methodologies: ["Journey Maps", "Survey Data", "Storyboards", "User Interviews"],
-              designResponse: "Automated inventory system with low-stock alerts"
-            },
-            {
-              category: "Financial Tools",
-              insight: "Basic accounting needs are not met by current solutions",
-              methodologies: ["User Interviews", "Journey Maps", "Survey Data", "Affinity Diagrams"],
-              designResponse: "Simplified expense tracking and reporting"
-            },
-            {
-              category: "Crop Planning",
-              insight: "Soil-based planting decisions need better support",
-              methodologies: ["Field Observations", "Survey Data", "Storyboards", "Affinity Diagrams"],
-              designResponse: "AI-powered crop recommendation engine"
+              type: 'methodology',
+              items: {
+                "User Interviews": { color: "#9C4221", textColor: "light" },
+                "Field Observations": { color: "#276749", textColor: "light" },
+                "Journey Maps": { color: "#6B3FA0", textColor: "light" },
+                "Survey Data": { color: "#007BFF", textColor: "light" },
+                "Storyboards": { color: "#FFA500", textColor: "light" },
+                "Affinity Diagrams": { color: "#00FF00", textColor: "light" }
+              }
             }
           ]
         }
@@ -56,234 +74,187 @@ export const strategicApproachData = {
         id: 'solution',
         title: 'Solution Framework',
         icon: IoLayersOutline,
-        connections: ['research', 'implementation'],
+        type: 'solution',
         content: {
           title: "Solution Framework",
           summary: "A streamlined redesign focusing on core workflows and enhanced data visualization.",
-          
-          coreFeatures: {
-            title: "Core Features",
-            description: "Key functionality identified through user research and business requirements",
-            features: [
-              {
-                name: "Smart Task Management",
-                description: "Automated task creation and resource allocation based on field conditions and equipment availability",
-                priority: "High",
-                impact: "40% reduction in planning time"
-              },
-              {
-                name: "Real-time Equipment Tracking",
-                description: "Live monitoring of equipment location, status, and maintenance needs",
-                priority: "High",
-                impact: "60% improvement in resource utilization"
-              },
-              {
-                name: "Data Visualization Dashboard",
-                description: "Customizable views of field performance metrics and operational KPIs",
-                priority: "Medium",
-                impact: "35% faster decision making"
-              }
-            ]
-          },
-          
-          wireframes: {
-            title: "Wireframes",
-            description: "Initial interface layouts focusing on key user workflows",
-            screens: [
-              {
-                name: "Dashboard Overview",
-                image: {
-                  url: "/images/Case Studies/JD/Wireframes/dashboard.svg",
-                  caption: "Main dashboard with key metrics and alerts"
-                },
-                keyFeatures: ["Equipment status overview", "Task priority queue", "Weather integration"]
-              },
-              {
-                name: "Equipment Management",
-                image: {
-                  url: "/images/Case Studies/JD/Wireframes/equipment.svg",
-                  caption: "Equipment tracking and management interface"
-                },
-                keyFeatures: ["Location tracking", "Maintenance schedules", "Usage analytics"]
-              }
-            ]
-          },
-          
-          analyses: {
-            product: {
-              title: "Product Analysis",
-              description: "Evaluation of existing Operations Center revealed key areas for improvement",
-              image: {
-                url: "/images/Case Studies/JD/OCM Critique.avif",
-                caption: "Current Operations Center Interface Analysis"
-              },
-              findings: [
-                {
-                  category: "Navigation",
-                  issues: "Complex menu hierarchy with buried features",
-                  impact: "Users spend excessive time finding tools"
-                },
-                {
-                  category: "Data Visualization",
-                  issues: "Dense tables and basic charts",
-                  impact: "Difficulty interpreting field performance"
-                },
-                {
-                  category: "Task Management",
-                  issues: "Manual input with limited automation",
-                  impact: "Inefficient resource allocation"
-                }
-              ]
-            },
-            task: {
-              title: "Task Analysis",
-              description: "Five key workflows were mapped to identify friction points",
-              workflows: [
-                {
-                  name: "Choose a Crop to Plant",
-                  image: {
-                    url: "/images/Case Studies/JD/Task Analysis/Harvest plans task analysis.jpg",
-                    caption: "Crop Selection Workflow"
-                  },
-                  steps: [
-                    "Review soil analysis data",
-                    "Check historical crop performance",
-                    "Consider market demand",
-                    "Evaluate seasonal timing",
-                    "Calculate resource requirements"
-                  ],
-                  painPoints: "Difficulty correlating soil data with crop requirements"
-                },
-                {
-                  name: "Identify and Customize Flags",
-                  image: {
-                    url: "/images/Case Studies/JD/Task Analysis/Choose crop task analysis.jpg",
-                    caption: "Field Flagging System"
-                  },
-                  steps: [
-                    "Set flag parameters",
-                    "Define alert thresholds",
-                    "Assign flag categories",
-                    "Configure notification rules",
-                    "Map flag locations"
-                  ],
-                  painPoints: "Complex flag setup process with limited customization options"
-                },
-                {
-                  name: "Find Troubleshoot",
-                  image: {
-                    url: "/images/Case Studies/JD/Task Analysis/Finding troubleshoot.jpg",
-                    caption: "Issue Resolution Flow"
-                  },
-                  steps: [
-                    "Identify problem area",
-                    "Access diagnostic tools",
-                    "Review system logs",
-                    "Apply suggested fixes",
-                    "Document resolution"
-                  ],
-                  painPoints: "Scattered troubleshooting resources and unclear resolution paths"
-                },
-                {
-                  name: "Create Harvest Plans",
-                  image: {
-                    url: "/images/Case Studies/JD/Task Analysis/Harvest plans task analysis.jpg",
-                    caption: "Harvest Planning Interface"
-                  },
-                  steps: [
-                    "Assess crop maturity",
-                    "Schedule equipment",
-                    "Plan storage logistics",
-                    "Coordinate labor",
-                    "Monitor weather forecasts"
-                  ],
-                  painPoints: "Limited integration between scheduling and resource management"
-                },
-                {
-                  name: "Remove Flags",
-                  image: {
-                    url: "/images/Case Studies/JD/Task Analysis/Removing flag task analysis.jpg",
-                    caption: "Equipment Management Dashboard"
-                  },
-                  steps: [
-                    "Remove flag",
-                    "Confirm removal",
-                    "Update inventory",
-                    "Optimize deployment"
-                  ],
-                  painPoints: "Difficulty tracking multiple pieces of equipment across different locations"
-                }
-              ]
-            }
-          },
-          
-          concepts: [
+          sections: [
             {
-              name: "John Deere Operations Center Redesign",
-              description: "A streamlined redesign focusing on core workflows and enhanced data visualization, making farm management more intuitive and efficient.",
-              status: "Selected",
-              images: [
+              type: 'process',
+              steps: [
                 {
-                  url: "/images/Case Studies/JD/Sketches/Sketch-2.1.svg",
-                  caption: "Dashboard Overview",
-                  description: "Centralized farm metrics and alerts"
+                  id: 'product-analysis',
+                  type: 'analysis',
+                  title: "Product Analysis",
+                  icon: IoSearchOutline,
+                  description: "Key issues with existing product",
+                  content: {
+                    image: {
+                      url: "/images/Case Studies/JD/OCM Critique.avif",
+                      caption: "Product Analysis"
+                    },
+                    findings: [
+                      {
+                        category: "Navigation",
+                        issue: "The app's navigation pathways were overly complex, requiring multiple steps to access frequently used features.",
+                        impact: "This led to increased task completion times, causing frustration among users with time-sensitive workflows.",
+                        additionalValidation: "Task analysis validated the need for streamlining navigation by identifying common workflows."
+                      },
+                      {
+                        category: "Unnecessary Features",
+                        issue: "Several features, such as equipment tracking and advanced analytics, were irrelevant to small farm owners and cluttered the interface.",
+                        impact: "This created cognitive overload, reducing adoption rates and user satisfaction.",
+                        additionalValidation: "Farmers explicitly commented on irrelevant features during interviews."
+                      }
+                    ]
+                  }
                 },
                 {
-                  url: "/images/Case Studies/JD/Sketches/Sketch-2.2.svg",
-                  caption: "Map Setting",
-                  description: " Mark areas of interest on the map"
+                  id: 'task-analysis',
+                  type: 'analysis',
+                  title: "Task Analysis",
+                  icon: IoTimerOutline,
+                  description: "What Tasks Tell Us About Time Management",
+                  content: {
+                    image: {
+                      url: "/images/Case Studies/JD/Task Analysis/Choose crop task analysis.jpg",
+                      caption: "Task Flow Analysis"
+                    },
+                    summary: "Detailed analysis of 5 key tasks revealed significant usability challenges, with an overall success rate of 50% across all tasks.",
+                    metrics: {
+                      overallCompletionTime: "5.1 minutes average",
+                      overallSuccessRate: "50%",
+                      participantCount: "10 small farm owners"
+                    },
+                    findings: [
+                      {
+                        category: "Choose a Crop to Plant",
+                        description: "Users needed to navigate through multiple menus to identify suitable crops for planting.",
+                        metrics: {
+                          completionTime: "5 minutes average",
+                          successRate: "70%",
+                          failureNote: "3 out of 10 users struggled to locate recommendations"
+                        },
+                        issue: "The feature was buried under unrelated menus, causing delays.",
+                        impact: "Users expressed a need for crop suggestions based on soil conditions.",
+                        additionalValidation: "Integrated crop recommendations into the daily planner for easier access."
+                      },
+                      {
+                        category: "Identify and Customize Flags",
+                        description: "Users were tasked with marking areas on the field using customizable flags.",
+                        metrics: {
+                          completionTime: "4.5 minutes average",
+                          successRate: "50%",
+                          failureNote: "5 out of 10 users found it unclear how to customize flags"
+                        },
+                        issue: "The flag customization process lacked clear instructions and required users to backtrack frequently.",
+                        impact: "Terminology inconsistencies confused users about flag types.",
+                        additionalValidation: "Simplified the process with clear, step-by-step instructions and consistent labeling."
+                      },
+                      {
+                        category: "Find Troubleshoot",
+                        description: "Users were asked to locate troubleshooting tools for equipment issues.",
+                        metrics: {
+                          completionTime: "6 minutes average",
+                          successRate: "40%",
+                          failureNote: "only 4 out of 10 users completed the task without help"
+                        },
+                        issue: "The feature was hard to locate due to poor navigation pathways.",
+                        impact: "Users suggested adding an equipment-specific section in the navigation menu.",
+                        additionalValidation: "Introduced a dedicated 'Equipment' tab with clear labels and direct access to troubleshooting tools."
+                      },
+                      {
+                        category: "Create Harvest Plans",
+                        description: "Users needed to create a plan for harvesting specific fields.",
+                        metrics: {
+                          completionTime: "7 minutes average",
+                          successRate: "30%",
+                          failureNote: "most users abandoned the task midway"
+                        },
+                        issue: "Overwhelming steps and a lack of visual guidance made it difficult for users to proceed.",
+                        impact: "Users struggled to understand the flow between fields, tasks, and scheduling.",
+                        additionalValidation: "Simplified the harvest planning process with pre-filled templates and a visual scheduling tool."
+                      },
+                      {
+                        category: "Remove Flags",
+                        description: "Users needed to delete flags after completing a task in the field.",
+                        metrics: {
+                          completionTime: "3 minutes average",
+                          successRate: "60%",
+                          failureNote: "4 out of 10 users found the process counterintuitive"
+                        },
+                        issue: "The delete action was buried in secondary menus, requiring unnecessary steps.",
+                        impact: "Users expected a quick option to delete flags directly from the main map view.",
+                        additionalValidation: "Added a right-click/long-press delete option directly within the field map interface."
+                      }
+                    ]
+                  }
                 },
                 {
-                  url: "/images/Case Studies/JD/Sketches/Sketch-2.3.svg",
-                  caption: "Map",
-                  description: "Predictive inventory tracking"
+                  id: 'solution-concepts',
+                  type: 'concepts',
+                  title: "Solution Concepts",
+                  icon: IoBulbOutline,
+                  description: "Two Compelling Design Ideas",
+                  content: {
+                    concepts: [
+                      {
+                        name: "Operations Center Redesign",
+                        description: "A streamlined redesign focusing on core workflows and enhanced data visualization.",
+                        status: "Selected",
+                        keyFeatures: [
+                          "Unified dashboard",
+                          "Smart task management",
+                          "Real-time equipment tracking"
+                        ],
+                      },
+                      {
+                        name: "Seed2Product",
+                        description: "An innovative approach reimagining farm management through natural interactions.",
+                        status: "Rejected",
+                        keyFeatures: [
+                          "Voice-first interface",
+                          "AR field visualization",
+                          "Predictive analytics"
+                        ],
+                      }
+                    ]
+                  }
                 },
                 {
-                  url: "/images/Case Studies/JD/Sketches/Sketch-2.4.svg",
-                  caption: "Field Analytics",
-                  description: "Performance tracking dashboard"
-                },
-                {
-                  url: "/images/Case Studies/JD/Sketches/Sketch-2.5.svg",
-                  caption: "Field Analytics",
-                  description: "Performance tracking dashboard"
-                },
-                {
-                  url: "/images/Case Studies/JD/Sketches/Sketch-2.6.svg",
-                  caption: "Field Analytics",
-                  description: "Performance tracking dashboard"
-                },
-                {
-                  url: "/images/Case Studies/JD/Sketches/Sketch-2.7.svg",
-                  caption: "Field Analytics",
-                  description: "Performance tracking dashboard"
-                }
-              ]
-            },
-            {
-              name: "Seed2Product",
-              description: "An innovative approach reimagining farm management through natural interactions and direct market connectivity.",
-              status: "Rejected",
-              images: [
-                {
-                  url: "/images/Case Studies/JD/Sketches/Sketch-1.1.jpg",
-                  caption: "Field Notes Interface",
-                  description: "Voice and photo note-taking"
-                },
-                {
-                  url: "/images/Case Studies/JD/Sketches/Sketch-1.2.jpg",
-                  caption: "Market Connection Hub",
-                  description: "Direct buyer marketplace"
-                },
-                {
-                  url: "/images/Case Studies/JD/Sketches/Sketch-1.3.jpg",
-                  caption: "Crop Planning Tool",
-                  description: "AI-powered rotation planning"
-                },
-                {
-                  url: "/images/Case Studies/JD/Sketches/Sketch-1.4.jpg",
-                  caption: "Weather Integration",
-                  description: "Smart task scheduling"
+                  id: 'wireframes',
+                  type: 'wireframes',
+                  title: "Wireframes",
+                  icon: IoConstructOutline,
+                  description: "Early Wireframes: Validating Our Ideas",
+                  content: {
+                    screens: [
+                      {
+                        name: "Dashboard Overview",
+                        image: {
+                          url: "/images/Case Studies/JD/Wireframes/dashboard.svg",
+                          caption: "Main dashboard with key metrics and alerts"
+                        },
+                        validations: [
+                          "Clear hierarchy of information",
+                          "Quick access to common tasks",
+                          "Customizable views"
+                        ]
+                      },
+                      {
+                        name: "Equipment Management",
+                        image: {
+                          url: "/images/Case Studies/JD/Wireframes/equipment.svg",
+                          caption: "Equipment tracking and management interface"
+                        },
+                        validations: [
+                          "Real-time location tracking",
+                          "Maintenance scheduling",
+                          "Usage analytics"
+                        ]
+                      }
+                    ]
+                  }
                 }
               ]
             }

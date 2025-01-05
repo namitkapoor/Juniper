@@ -117,6 +117,39 @@ export const carouselImages = {
   
   otherProject: [
     // Similar structure for other projects
+  ],
+
+  taskAnalysis: [
+    {
+      src: `${BASE_PATH}/JD/Task Analysis/Choose crop task analysis.jpg`,
+      caption: 'Task Analysis: Choose a Crop to Plant',
+      alt: 'Task flow diagram for crop selection process',
+      taskCategory: "Choose a Crop to Plant"
+    },
+    {
+      src: `${BASE_PATH}/JD/Task Analysis/Categorize and customize flags task Analysis.jpg`,
+      caption: 'Task Analysis: Identify and Customize Flags',
+      alt: 'Task flow diagram for flag customization',
+      taskCategory: "Identify and Customize Flags"
+    },
+    {
+      src: `${BASE_PATH}/JD/Task Analysis/Finding Troubleshoot.jpg`,
+      caption: 'Task Analysis: Find Troubleshoot',
+      alt: 'Task flow diagram for troubleshooting process',
+      taskCategory: "Find Troubleshoot"
+    },
+    {
+      src: `${BASE_PATH}/JD/Task Analysis/Harvest plan task analysis.jpg`,
+      caption: 'Task Analysis: Create Harvest Plans',
+      alt: 'Task flow diagram for harvest planning',
+      taskCategory: "Create Harvest Plans"
+    },
+    {
+      src: `${BASE_PATH}/JD/Task Analysis/Remove flags task analysis.jpg`,
+      caption: 'Task Analysis: Remove Flags',
+      alt: 'Task flow diagram for flag removal process',
+      taskCategory: "Remove Flags"
+    }
   ]
 };
 
@@ -136,4 +169,12 @@ export const getBusinessChallengeImages = (projectId, painPointId) => {
 // Helper function to get all images for a project
 export const getProjectImages = (projectId) => {
   return carouselImages[projectId] || [];
+};
+
+// Add a new helper function
+export const getTaskAnalysisImages = (taskCategory) => {
+  const taskImages = carouselImages.taskAnalysis || [];
+  return taskCategory 
+    ? taskImages.filter(img => img.taskCategory === taskCategory)
+    : taskImages;
 }; 
