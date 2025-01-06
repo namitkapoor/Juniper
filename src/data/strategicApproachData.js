@@ -234,7 +234,7 @@ export const strategicApproachData = {
                   content: {
                     screens: [
                       {
-                        name: "Status Feed (Task Overview and Quick Actions)",
+                        name: "Status Feed (Overview)",
                         image: {
                           url: "/images/Case Studies/JD/Wireframe/Status Feed gestures.jpg",
                           caption: "Status feed interface with task overview"
@@ -254,27 +254,7 @@ export const strategicApproachData = {
                         ]
                       },
                       {
-                        name: "Analyze (Insights and Reports)",
-                        image: {
-                          url: "/images/Case Studies/JD/Wireframe/Analyze gestures.jpg",
-                          caption: "Analytics and reporting interface"
-                        },
-                        purpose: "Consolidate crop, seeding, and revenue insights into a single tab for data-driven decision-making. Provide actionable insights with clear visualizations (e.g., bar graphs, pie charts).",
-                        challengesAddressed: [
-                          "The original app buried essential reports in multiple sub-menus, increasing cognitive load.",
-                          "Farmers wanted easily digestible insights for field and revenue performance."
-                        ],
-                        keyFeatures: [
-                          "Tabbed navigation for \"Field Info\" and \"Revenue\" reports allows users to switch views seamlessly.",
-                          "Interactive visualizations (e.g., monthly income and profit breakdowns) improve usability."
-                        ],
-                        feedbackAndRefinements: [
-                          "Users preferred having financial and field data in separate tabs, leading to the clear separation of \"Field Info\" and \"Revenue\" views.",
-                          "Added tooltips to chart elements for better interpretability after early feedback highlighted confusion over graph details."
-                        ]
-                      },
-                      {
-                        name: "Map (Field Layout and Customization)",
+                        name: "Map (Customizable Field Layout)",
                         image: {
                           url: "/images/Case Studies/JD/Wireframe/Map gestures.jpg",
                           caption: "Field layout and customization interface"
@@ -312,7 +292,28 @@ export const strategicApproachData = {
                           "Collapsible sections were refined after early wireframes showed users struggling to locate subtasks.",
                           "The ability to sort tasks by priority was added based on user requests."
                         ]
-                      }
+                      },
+                      {
+                        name: "Analyze (Field and Revenue Reports)",
+                        image: {
+                          url: "/images/Case Studies/JD/Wireframe/Analyze gestures.jpg",
+                          caption: "Analytics and reporting interface"
+                        },
+                        purpose: "Consolidate crop, seeding, and revenue insights into a single tab for data-driven decision-making. Provide actionable insights with clear visualizations (e.g., bar graphs, pie charts).",
+                        challengesAddressed: [
+                          "The original app buried essential reports in multiple sub-menus, increasing cognitive load.",
+                          "Farmers wanted easily digestible insights for field and revenue performance."
+                        ],
+                        keyFeatures: [
+                          "Tabbed navigation for \"Field Info\" and \"Revenue\" reports allows users to switch views seamlessly.",
+                          "Interactive visualizations (e.g., monthly income and profit breakdowns) improve usability."
+                        ],
+                        feedbackAndRefinements: [
+                          "Users preferred having financial and field data in separate tabs, leading to the clear separation of \"Field Info\" and \"Revenue\" views.",
+                          "Added tooltips to chart elements for better interpretability after early feedback highlighted confusion over graph details."
+                        ]
+                      },
+                      
                     ]
                   }
                 }

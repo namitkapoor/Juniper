@@ -994,35 +994,6 @@ figcaption {
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Wireframes styling */
-.wireframes-section {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-  padding: 2rem;
-  margin-bottom: 2rem;
-}
-
-.wireframes-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-  gap: 2rem;
-  margin-top: 1.5rem;
-}
-
-.wireframe-card {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-  padding: 1.5rem;
-  transition: all 0.3s ease;
-}
-
-.wireframe-image {
-  aspect-ratio: 16 / 9;
-  margin-bottom: 1rem;
-}
-
 .key-features-list {
   margin-top: 1rem;
   padding-top: 1rem;

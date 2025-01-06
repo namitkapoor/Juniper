@@ -234,24 +234,29 @@
 @media (min-width: 1024px) {
   .wireframes-section {
     grid-template-columns: repeat(2, 1fr);
-    max-width: 1200px;
     margin: 0 auto;
   }
 }
 
 .wireframe-card {
-  padding: 0;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 1rem;
   cursor: pointer;
   transition: all 0.3s ease;
   display: flex;
   flex-direction: column;
+  transform-origin: center;
+  will-change: transform, grid-column;
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 /* Image Container Styles */
 .wireframe-preview {
   position: relative;
   width: 100%;
-  height: 300px;
+  height: 320px;
   margin: 0;
   overflow: hidden;
 }
@@ -259,6 +264,7 @@
 .wireframe-preview img {
   width: 100%;
   height: 100%;
+  aspect-ratio: 16/9;
   object-fit: cover;
   transition: transform 0.3s ease;
 }
@@ -281,6 +287,7 @@
   grid-column: 1 / -1;
   max-width: 1000px;
   margin: 0 auto;
+  animation: expandCard 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .wireframe-card.expanded .wireframe-preview {
@@ -290,6 +297,7 @@
 
 .wireframe-card.expanded .wireframe-preview img {
   object-fit: contain; /* Shows full image when expanded */
+  aspect-ratio: 3/2;
 }
 
 /* Preview Text */
@@ -327,6 +335,10 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 1.5rem;
+  animation: slideIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  animation-delay: 0.3s;
+  opacity: 0;
+  transform: translateY(30px);
 }
 
 .content-section h5 {
@@ -362,3 +374,44 @@
 .content-section.challenges { border-left: 3px solid #FF5722; }
 .content-section.features { border-left: 3px solid #2196F3; }
 .content-section.feedback { border-left: 3px solid #9C27B0; } 
+
+/* Animation Keyframes */
+@keyframes expandCard {
+  0% {
+    transform: scale(0.97);
+  }
+  60% {
+    transform: scale(1.03);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes collapseCard {
+  0% {
+    transform: scale(1.03);
+  }
+  40% {
+    transform: scale(0.97);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Optional: Add transition for collapse */
+.wireframe-card:not(.expanded) {
+  animation: collapseCard 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+} 
