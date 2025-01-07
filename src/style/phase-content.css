@@ -415,3 +415,53 @@
 .wireframe-card:not(.expanded) {
   animation: collapseCard 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
 } 
+
+/* Decision Criteria Styles */
+.feedback-grid,
+.accessibility-grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.feedback-card,
+.accessibility-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+
+.feedback-card img,
+.accessibility-card img {
+  width: 100%;
+  height: auto;
+  max-height: 300px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin: 1rem 0;
+}
+
+.feedback-card h4,
+.accessibility-card h4 {
+  color: var(--text-primary);
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.feedback-card p,
+.accessibility-card p {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.recommendations-list {
+  margin-top: 1rem;
+  padding-left: 1.5rem;
+}
+
+.recommendations-list li {
+  margin-bottom: 0.5rem;
+  color: var(--text-secondary);
+} 

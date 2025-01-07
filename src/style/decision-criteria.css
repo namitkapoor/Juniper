@@ -1,0 +1,575 @@
+.decision-concept-comparison {
+  margin: 2rem 0;
+}
+
+.decision-concept-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  margin-top: 3.5rem;
+}
+
+.decision-concept-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+  padding: 2rem;
+}
+
+.decision-concept-card.selected {
+  border-color: var(--accent-success);
+  background: linear-gradient(rgba(76, 175, 80, 0.1), transparent);
+}
+
+.decision-concept-card.not-selected {
+  border-color: var(--accent-danger, #dc3545);
+  background: linear-gradient(rgba(220, 53, 69, 0.15), rgba(220, 53, 69, 0.05));
+}
+
+.decision-concept-image {
+  margin-top: 1.5rem;
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.decision-concept-image img {
+  width: 100%;
+  height: auto;
+  max-height: 400px;
+  object-fit: contain;
+}
+
+.decision-caption {
+  padding: 1rem;
+  background: var(--card-bg);
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  margin: 0.5rem 0 1rem;
+}
+
+.status-badge.selected {
+  background: var(--accent-success);
+  color: white;
+}
+
+.status-badge.not-selected {
+  background-color: var(--accent-danger, #dc3545) !important;
+  color: white !important;
+}
+
+/* Tab Styles */
+.tabs {
+  display: flex;
+  gap: 1rem;
+  margin: 2rem 0;
+  border-bottom: 1px solid var(--card-border);
+  padding-bottom: 0.5rem;
+}
+
+.tab-button {
+  background: none;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  position: relative;
+  transition: color 0.3s ease;
+  font-size: 1.2rem;
+}
+
+.tab-button.active {
+  color: var(--text-primary);
+}
+
+.tab-button.active::after {
+  content: '';
+  position: absolute;
+  bottom: -0.5rem;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--accent-success);
+}
+
+/* Wireframe Feedback Styles */
+.wireframe-feedback {
+  margin-top: 2rem;
+}
+
+.wireframe-section {
+  background: var(--card-bg);
+  border-radius: 8px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+.wireframe-image {
+  margin-bottom: 2rem;
+}
+
+.hotspots-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.hotspot-card {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 1.5rem;
+  border-radius: 6px;
+}
+
+.hotspot-card h6 {
+  color: var(--accent-success);
+  margin-bottom: 1rem;
+}
+
+.feedback-text {
+  color: var(--text-secondary);
+  margin-bottom: 0.75rem;
+}
+
+.changes-text {
+  color: var(--text-primary);
+  font-style: italic;
+}
+
+/* Accessibility Styles */
+.accessibility-section {
+  margin-top: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.accessibility-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 columns */
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.accessibility-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+  padding: 2rem;
+}
+
+.accessibility-card h3 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin-bottom: 1.25rem;
+  color: var(--text-primary);
+  text-align: center; /* Centered title */
+}
+
+.accessibility-card .description {
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+  text-align: center; /* Centered description */
+}
+
+.accessibility-card .recommendations {
+  text-align: center; /* Centered recommendations */
+}
+
+.accessibility-card .recommendations h6 {
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+  font-size: 1.1rem;
+}
+
+.accessibility-card .recommendations ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.accessibility-card .recommendations li {
+  margin-bottom: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.recommendations {
+  margin: 1rem 0;
+}
+
+.recommendations h6 {
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+}
+
+.recommendations ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.recommendations li {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: var(--text-secondary);
+}
+
+.recommendations li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--accent-success);
+}
+
+.visual-example {
+  margin-top: 1.5rem;
+}
+
+/* ... we'll add more styles as needed */
+
+/* Tab Content Animation */
+.tab-content {
+  position: relative;
+}
+
+.decision-concept-comparison,
+.wireframe-feedback,
+.accessibility-section {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeInUp 0.3s ease forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Tab Button Hover Effect */
+.tab-button {
+  /* ... existing tab-button styles ... */
+  transition: color 0.3s ease;
+}
+
+.tab-button::after {
+  content: '';
+  position: absolute;
+  bottom: -0.5rem;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: var(--accent-success);
+  transition: all 0.3s ease;
+  opacity: 0;
+}
+
+.tab-button:hover::after {
+  width: 100%;
+  left: 0;
+  opacity: 0.5;
+}
+
+.tab-button.active::after {
+  width: 100%;
+  left: 0;
+  opacity: 1;
+}
+
+
+/* Wireframe specific styles with unique class names */
+.decision-wireframe-feedback {
+  margin-top: 2rem;
+}
+
+.decision-wireframe-section {
+  background: var(--card-bg);
+  border-radius: 8px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+.decision-wireframe-image {
+  margin-bottom: 2rem;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.decision-wireframe-image img {
+  width: 100%;
+  height: auto;
+  max-height: 600px;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.decision-hotspots-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.decision-hotspot-card {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 1.5rem;
+  border-radius: 6px;
+  border: 1px solid var(--card-border);
+}
+
+.decision-hotspot-card h6 {
+  color: var(--accent-success);
+  margin-bottom: 1rem;
+}
+
+.decision-feedback-text {
+  color: var(--text-secondary);
+  margin-bottom: 0.75rem;
+}
+
+.decision-changes-text {
+  color: var(--text-primary);
+  font-style: italic;
+}
+
+/* Wireframe Feedback Styles */
+.decision-wireframe-intro {
+  margin: 2rem 0;
+  text-align: left;
+}
+
+.decision-wireframe-intro h4 {
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+  text-align: left;
+}
+
+.decision-wireframe-intro p {
+  color: var(--text-secondary);
+  text-align: left;
+  margin-bottom: 5rem;
+}
+
+.decision-wireframe-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.decision-wireframe-item {
+  position: relative;
+}
+
+.decision-wireframe-image-container {
+  position: relative;
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.decision-wireframe-image {
+  position: relative;
+  width: 100%;
+}
+
+.decision-wireframe-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.decision-wireframe-caption {
+  padding: 0.5rem;
+  background: var(--card-bg);
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  border-top: 1px solid var(--card-border);
+}
+
+/* Hotspot Markers */
+.decision-hotspot-marker {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--accent-success);
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translate(-50%, -50%);
+  transition: all 0.2s ease;
+  z-index: 2;
+}
+
+.decision-hotspot-marker:hover {
+  transform: translate(-50%, -50%) scale(1.2);
+  box-shadow: 0 0 0 4px rgba(76, 175, 80, 0.2);
+}
+
+/* Hotspots Details Section */
+.decision-hotspots-section {
+  opacity: 0;
+  transform: translateY(20px);
+  visibility: hidden;
+  transition: all 0.4s ease-out;
+  margin-bottom: 0;
+  height: 0;
+}
+
+.decision-hotspots-section.active {
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
+  margin-bottom: 2rem;
+  height: auto;
+}
+
+.decision-hotspots-section h4 {
+  text-align: left;
+  margin-bottom: 2rem;
+}
+
+.decision-hotspots-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.decision-hotspot-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+
+.hotspot-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.hotspot-number {
+  width: 24px;
+  height: 24px;
+  background: var(--accent-success);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.decision-feedback-text {
+  color: var(--text-secondary);
+  margin-bottom: 0.75rem;
+}
+
+.decision-changes-text {
+  color: var(--text-primary);
+  font-style: italic;
+}
+
+.decision-concept-card h3 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin-bottom: 1.25rem;
+  color: var(--text-primary);
+  text-align: center !important;
+  width: 100%;
+  display: block;
+}
+
+.decision-wireframe-intro h3 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin-bottom: 1.25rem;
+  color: var(--text-primary);
+}
+
+.accessibility-card h3 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin-bottom: 1.25rem;
+  color: var(--text-primary);
+  text-align: center;
+}
+
+/* Accessibility Card Title - using more specific selectors */
+.accessibility-section .accessibility-grid .accessibility-card h3 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin-bottom: 1.25rem;
+  color: var(--text-primary);
+  text-align: center;
+  width: 100%;
+  display: block;
+  color: var(--accent-success);
+}
+
+/* Section animation */
+.decision-hotspots-section {
+  opacity: 0;
+  transform: translateY(20px);
+  visibility: hidden;
+  transition: all 0.4s ease-out;
+  margin-bottom: 0;
+  height: 0;
+}
+
+.decision-hotspots-section.active {
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
+  margin-bottom: 2rem;
+  height: auto;
+}
+
+/* Individual card animations */
+.decision-hotspot-card {
+  animation: slideInFromSide 0.4s ease-out;
+}
+
+.decision-hotspot-card:first-child {
+  animation: slideInFromLeft 0.4s ease-out;
+}
+
+@keyframes slideInFromSide {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+} 

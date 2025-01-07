@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import ImageCarousel from './ImageCarousel';
 import OptimizedImage from './OptimizedImage';
 import ProcessFlow from './ProcessFlow';
+import DecisionCriteria from './DecisionCriteria';
 import { 
   getProjectImages, 
   getTaskAnalysisImages, 
@@ -236,6 +237,9 @@ const PhaseContent = ({ content, contentType, projectId }) => {
 
       case 'process':
         return <ProcessFlow steps={section.steps} />;
+
+      case 'decisions':
+        return <DecisionCriteria content={section.content} />;
 
       default:
         return null;
