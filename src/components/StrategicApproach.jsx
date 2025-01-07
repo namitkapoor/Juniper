@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import strategicApproachData from '../data/strategicApproachData';
+import strategicApproachData from '../data/strategic/strategicApproachData';
 import PhaseContent from './PhaseContent';
 import IterativeTimeline from './IterativeTimeline';
 import '../style/strategic-approach-module.css';

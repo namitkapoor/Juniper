@@ -12,9 +12,10 @@ const ProcessFlow = ({ steps, isNested = false, projectId }) => {
 
   // Format content based on step type
   const getStepContent = (step) => {
-    // If step has direct content, use it
     if (step.content) {
       return {
+        title: step.title,
+        summary: step.description,
         sections: [
           {
             type: step.type,
@@ -33,14 +34,17 @@ const ProcessFlow = ({ steps, isNested = false, projectId }) => {
           <React.Fragment key={step.id}>
             <motion.div
               className={`process-step ${activeStep === step.id ? 'active' : ''}`}
+              data-type={step.type}
               onClick={() => handleStepClick(step.id)}
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.2 }}
             >
-              <div className="step-icon">
-                <step.icon size={24} />
+              <div className="step-header">
+                <div className="step-icon">
+                  <step.icon size={24} />
+                </div>
+                <h4>{step.title}</h4>
               </div>
-              <h4>{step.title}</h4>
               <p>{step.description}</p>
               {step.iterationHint && (
                 <div className="iteration-hint">{step.iterationHint}</div>
@@ -54,17 +58,19 @@ const ProcessFlow = ({ steps, isNested = false, projectId }) => {
       <AnimatePresence mode='wait'>
         {activeStep && (
           <motion.div
-            className="step-details"
+            className="step-content-wrapper"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 20 }}
             transition={{ duration: 0.3 }}
           >
-            <PhaseContent 
-              content={getStepContent(steps.find(step => step.id === activeStep))}
-              contentType={steps.find(step => step.id === activeStep)?.type}
-              projectId={projectId}
-            />
+            <div className="step-content">
+              <PhaseContent 
+                content={getStepContent(steps.find(step => step.id === activeStep))}
+                contentType={steps.find(step => step.id === activeStep)?.type}
+                projectId={projectId}
+              />
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

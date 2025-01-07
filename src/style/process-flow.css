@@ -62,70 +62,8 @@
 .process-step[data-type="analysis"] {
   .findings-grid {
     display: grid;
+    grid-template-columns: 1fr;
     gap: 1.5rem;
-  }
-
-  .finding-card {
-    background: var(--card-bg);
-    border: 1px solid var(--card-border);
-    border-radius: 12px;
-    padding: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    
-    /* Section titles */
-    h5.section-title {
-      color: var(--text-primary);
-      font-size: 1.1rem;
-      font-weight: 500;
-      margin-bottom: 0.5rem;
-      opacity: 0.95;
-    }
-
-    /* Content sections */
-    .content-section {
-      padding: 0.75rem 0;
-      border-bottom: 1px solid var(--card-border);
-
-      &:last-child {
-        border-bottom: none;
-        padding-bottom: 0;
-      }
-
-      &:first-child {
-        padding-top: 0;
-      }
-    }
-
-    /* Issue section */
-    .issue-section {
-      .issue {
-        color: var(--text-secondary);
-        font-size: 0.95rem;
-        line-height: 1.5;
-      }
-    }
-
-    /* Impact section */
-    .impact-section {
-      .impact {
-        color: var(--accent-error);
-        font-size: 0.95rem;
-        line-height: 1.5;
-        font-weight: 500;
-      }
-    }
-
-    /* Validation section */
-    .validation-section {
-      .additional-validation {
-        color: var(--accent-success);
-        font-size: 0.95rem;
-        line-height: 1.5;
-        font-style: italic;
-      }
-    }
   }
 }
 
