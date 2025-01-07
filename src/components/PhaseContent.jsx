@@ -9,11 +9,17 @@ import {
   getConceptImages
 } from '../data/carouselImages';
 import '../style/phase-content.css';
+import ImplementationPlan from './ImplementationPlan';
 
 const PhaseContent = ({ content, contentType, projectId }) => {
+  console.log('PhaseContent received:', { content, contentType, projectId });
+
   if (!content) return null;
 
   const renderSection = (section) => {
+    console.log('renderSection called with:', section);
+    console.log('section.type:', section.type);
+
     switch (section.type) {
       case 'requirements':
         const researchImages = getProjectImages(projectId).filter(img => 
@@ -241,6 +247,15 @@ const PhaseContent = ({ content, contentType, projectId }) => {
       case 'decisions':
         return <DecisionCriteria content={section.content} />;
 
+      case 'iterations':
+      case 'usabilityTesting':
+      case 'presentation':
+      case 'reflection':
+        return <ImplementationPlan content={{ sections: [section] }} />;
+
+      case 'implementation':
+        return <ImplementationPlan content={section.content} />;
+
       default:
         return null;
     }
@@ -252,11 +267,14 @@ const PhaseContent = ({ content, contentType, projectId }) => {
       {content.summary && <p className="summary">{content.summary}</p>}
       
       <div className="sections">
-        {content.sections?.map((section, index) => (
-          <div key={index} className={`section ${section.type}`}>
-            {renderSection(section)}
-          </div>
-        ))}
+        {content.sections?.map((section, index) => {
+          console.log('Mapping section:', section);
+          return (
+            <div key={index} className={`section ${section.type}`}>
+              {renderSection(section)}
+            </div>
+          );
+        })}
       </div>
     </div>
   );
