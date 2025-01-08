@@ -36,7 +36,7 @@ const PhaseContent = ({ content, contentType, projectId }) => {
       case 'decisions':
         return <DecisionCriteria content={section.content} />;
 
-      case 'iterations':
+      case 'prototypes':
       case 'usabilityTesting':
       case 'presentation':
       case 'reflection':

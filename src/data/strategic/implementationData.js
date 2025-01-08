@@ -1,4 +1,4 @@
-import { IoCodeWorkingOutline } from 'react-icons/io5';
+import { IoCodeWorkingOutline, IoColorPaletteOutline } from 'react-icons/io5';
 
 export const implementationPhase = {
     id: 'implementation',
@@ -25,33 +25,64 @@ export const implementationPhase = {
       summary: "A comprehensive roadmap that focused on iterative development, usability testing, and key refinements.",
       sections: [
         {
-          type: 'iterations',
-          title: "Iterations",
+          type: 'prototypes',
+          title: "Prototypes",
+          icon: IoColorPaletteOutline,
           description: "Minor design and functionality tweaks were made across all wireframe flows to address usability feedback.",
           items: [
             {
               change: "Map view field layout",
               reason: "Simplified navigation and better handling of custom field shapes and sizes based on user feedback.",
               result: "Added drag-and-drop functionality for editing rows and sections, along with a color-coding system.",
-              image: "/images/Case Studies/JD/Wireframe/Map (Add new field).jpg"
+              media: {
+                type: 'video',
+                url: "/videos/Case Studies/JD/Prototypes/Map video.mp4",
+                poster: "",
+                autoplay: false,
+                loop: true,
+                muted: true,
+                containMode: true
+              }
             },
             {
               change: "Status feed improvements",
               reason: "Addressed user requests for quicker task access.",
               result: "Integrated quick action buttons like 'edit', 'comment', and 'mark complete'.",
-              image: "/images/Case Studies/JD/Wireframe/Status Feed gestures.jpg"
+              media: {
+                type: 'video',
+                url: "/videos/Case Studies/JD/Prototypes/Home video.mp4",
+                poster: "",
+                autoplay: false,
+                loop: true,
+                muted: true,
+                containMode: true
+              }
             },
             {
               change: "Weekly work plan visualization",
               reason: "Enhanced clarity for task grouping and prioritization.",
               result: "Collapsible sections and priority task indicators were added to streamline workflow management.",
-              image: "/images/Case Studies/JD/Wireframe/Plan gestures.jpg"
+              media: {
+                type: 'video',
+                url: "/videos/Case Studies/JD/Prototypes/Plan video.mp4",
+                poster: "/images/Case Studies/JD/Wireframe/Plan gestures.jpg",
+                autoplay: false,
+                loop: true,
+                muted: true
+              }
             },
             {
               change: "Reporting and analytics",
               reason: "Made field and revenue data accessible through distinct, visually appealing tabs.",
               result: "Added interactive charts and simplified navigation for financial and crop performance data.",
-              image: "/images/Case Studies/JD/Wireframe/Analyze gestures.jpg"
+              media: {
+                type: 'video',
+                url: "/videos/Case Studies/JD/Prototypes/Analysis video.mp4",
+                poster: "/images/Case Studies/JD/Wireframe/Analyze gestures.jpg",
+                autoplay: false,
+                loop: true,
+                muted: true
+              }
             }
           ]
         },

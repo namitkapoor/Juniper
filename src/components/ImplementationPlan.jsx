@@ -21,42 +21,40 @@ const ImplementationPlan = ({ content }) => {
   if (!content || !content.sections) return null;
 
   const icons = {
-    iterations: <IoGitCompareOutline className="panel-icon" />,
+    prototypes: <IoGitCompareOutline className="panel-icon" />,
     usabilityTesting: <IoPeopleOutline className="panel-icon" />,
     presentation: <IoDocumentTextOutline className="panel-icon" />,
     reflection: <IoBookOutline className="panel-icon" />
   };
 
-  const renderIterationsPanel = (section) => (
-    <div className="panel-content iterations">
+  const renderPrototypesPanel = (section) => (
+    <div className="panel-content prototypes">
       <p className="description">{section.description}</p>
-      <div className="iterations-grid">
+      <div className="prototypes-grid">
         {section.items.map((item, index) => (
-          <div 
-            key={index}
-            className={`iteration-card ${selectedCard === index ? 'selected' : ''} ${animatingCard === index ? 'animating' : ''}`}
-            onClick={() => {
-              setSelectedCard(selectedCard === index ? null : index);
-              setAnimatingCard(index);
-              setTimeout(() => setAnimatingCard(null), 300);
-            }}
-          >
-            {item.image && (
-              <div className="iteration-image">
-                <img src={item.image} alt={item.change} />
+          <div key={index} className="prototype-card">
+            <h4>{item.change}</h4>
+            <div className="media-container">
+              {item.media.type === 'video' && (
+                <video
+                  src={item.media.url}
+                  controls
+                  preload="metadata"
+                  loop={item.media.loop}
+                  muted={item.media.muted}
+                  playsInline
+                  className="prototype-video"
+                />
+              )}
+            </div>
+            <div className="prototype-info">
+              <div className="info-row">
+                <IoInformationCircleOutline className="info-icon" />
+                <p className="reason">{item.reason}</p>
               </div>
-            )}
-            <div className="iteration-content">
-              <h5>{item.change}</h5>
-              <div className="iteration-details">
-                <div className="reason">
-                  <IoInformationCircleOutline />
-                  <span>{item.reason}</span>
-                </div>
-                <div className="result">
-                  <IoTrendingUp />
-                  <span>{item.result}</span>
-                </div>
+              <div className="info-row">
+                <IoCheckmarkCircleOutline className="info-icon" />
+                <p className="result">{item.result}</p>
               </div>
             </div>
           </div>
@@ -142,8 +140,8 @@ const ImplementationPlan = ({ content }) => {
 
   const renderPanelContent = (type, section) => {
     switch (type) {
-      case 'iterations':
-        return renderIterationsPanel(section);
+      case 'prototypes':
+        return renderPrototypesPanel(section);
       case 'usabilityTesting':
         return renderUsabilityPanel(section);
       case 'presentation':
