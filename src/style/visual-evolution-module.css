@@ -146,6 +146,7 @@
   position: relative;
   width: 100%;
   padding: 2rem 0;
+  touch-action: none;
 }
 
 .visual-slider-labels {
@@ -168,6 +169,7 @@
   overflow: hidden;
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.1);
+  touch-action: none;
 }
 
 .visual-slider-image {
@@ -188,6 +190,7 @@
   border-radius: 2px;
   margin: 2rem 0;
   cursor: pointer;
+  touch-action: none;
 }
 
 .visual-slider-progress {
@@ -200,14 +203,15 @@
 .visual-slider-handle {
   position: absolute;
   top: 50%;
-  width: 20px;
-  height: 20px;
+  width: 28px;
+  height: 28px;
   background: #ffffff;
   border-radius: 50%;
   transform: translate(-50%, -50%);
   cursor: grab;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   transition: transform 0.2s ease;
+  touch-action: none;
 }
 
 .visual-slider-handle:hover {
@@ -267,5 +271,14 @@
   
   .visual-image-slider {
     height: 300px;
+  }
+
+  .visual-slider-handle {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .visual-slider-track {
+    height: 6px;
   }
 } 
