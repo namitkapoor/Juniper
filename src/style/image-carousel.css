@@ -16,7 +16,6 @@
   justify-content: center;
   align-items: center;
   background: rgba(0, 0, 0, 0.2);
-  touch-action: pan-x;
   user-select: none;
 }
 
@@ -27,7 +26,7 @@
   object-fit: contain;
   padding: 1.5rem;
   opacity: 0;
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  transition: opacity 0.3s ease;
   pointer-events: none;
 }
 
@@ -76,6 +75,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  pointer-events: auto;
 }
 
 .carousel-arrow:hover {
@@ -118,14 +118,13 @@
 @media (max-width: 768px) {
   .carousel-image {
     height: 300px;
-    transition: transform 0.3s ease;
-    will-change: transform;
   }
 
   .carousel-arrow {
     width: 36px;
     height: 36px;
-    opacity: 1;
+    opacity: 0.8;
+    display: flex;
   }
 
   .carousel-caption {
@@ -134,11 +133,11 @@
     font-size: 0.9rem;
   }
 
-  .carousel-wrapper::before,
-  .carousel-wrapper::after {
+  .carousel-wrapper::before {
     content: '';
     position: absolute;
     top: 50%;
+    left: 16px;
     width: 32px;
     height: 32px;
     background: rgba(255, 255, 255, 0.1);
@@ -147,15 +146,22 @@
     transform: translateY(-50%);
     transition: opacity 0.3s ease;
     pointer-events: none;
-  }
-
-  .carousel-wrapper::before {
-    left: 16px;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='white' viewBox='0 0 24 24'%3E%3Cpath d='M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z'/%3E%3C/svg%3E");
   }
 
   .carousel-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 50%;
     right: 16px;
+    width: 32px;
+    height: 32px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    opacity: 0;
+    transform: translateY(-50%);
+    transition: opacity 0.3s ease;
+    pointer-events: none;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='white' viewBox='0 0 24 24'%3E%3Cpath d='M10.59 7.41L12 6l6 6-6 6-1.41-1.41L15.17 12z'/%3E%3C/svg%3E");
   }
 
@@ -164,12 +170,9 @@
     opacity: 1;
   }
 
+  /* Hide arrows on mobile since we're using swipe */
   .carousel-arrow {
     display: none;
-  }
-
-  .carousel-wrapper {
-    touch-action: manipulation;
   }
 }
 
