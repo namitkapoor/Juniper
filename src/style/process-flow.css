@@ -1,6 +1,7 @@
 .process-flow {
   width: 100%;
-  overflow-x: hidden;
+  overflow: hidden;
+  position: relative;
 }
 
 .process-steps {
@@ -11,6 +12,7 @@
   position: relative;
   gap: 1.5rem;
   width: 100%;
+  overflow: visible;
 }
 
 .process-step {
