@@ -1,10 +1,10 @@
 /* Concepts Grid */
 .concepts-grid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 2.5rem;
   width: 100%;
   margin: 2rem 0;
+  gap: 2.5rem;
+  overflow-x: hidden; /* Prevent horizontal scrollbar flash */
 }
 
 .concept-card {
@@ -15,6 +15,7 @@
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  box-sizing: border-box; /* Ensure padding is included in width */
 }
 
 .concept-cover-image {
@@ -30,41 +31,52 @@
   object-fit: cover;
 }
 
-/* Wireframes Section */
-.wireframes-section {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 2rem;
-  padding: 1rem;
-}
-
-.wireframe-card {
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
-  border-radius: 12px;
-  padding: 1.5rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.wireframe-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1rem;
-}
-
-/* ... rest of the styles from phase-content.css ... */
-
-/* Responsive */
-@media (min-width: 768px) {
+/* Mobile */
+@media (max-width: 768px) {
   .concepts-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem; /* Increased gap to prevent overlap */
+  }
+  
+  .concept-card {
+    width: 60%;
+    margin: 0 auto;
+    min-height: min-content; /* Allow content to determine height */
+    height: auto; /* Ensure proper content flow */
   }
 }
 
-@media (min-width: 1024px) {
-  .wireframes-section {
+/* Tablet to Small Desktop */
+@media (min-width: 769px) and (max-width: 1299px) {
+  .concepts-grid {
+    grid-template-columns: 1fr;
+    max-width: 100%;
+    gap: 2.5rem;
+  }
+  
+  .concept-card {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    margin: 0;
+  }
+}
+
+/* Large Desktop */
+@media (min-width: 1300px) {
+  .concepts-grid {
     grid-template-columns: repeat(2, 1fr);
+    max-width: 100%;
+    gap: 2.5rem;
+    align-items: start;
+  }
+  
+  .concept-card {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    margin: 0;
   }
 } 

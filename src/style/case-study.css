@@ -300,6 +300,50 @@
   min-width: 40px;
 }
 
+@media (max-width: 486px) {
+  .content {
+    width: 92%;
+    padding: 0.5rem;
+  }
+
+  .section-content {
+    min-height: calc(100vh - 200px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .pain-point-item {
+    padding: 1.25rem;
+    min-height: 120px;
+    margin-bottom: 1rem;
+  }
+
+  .challenge-grid,
+  .approach-grid {
+    gap: 1.5rem;
+  }
+
+  .section-image,
+  .usability-image {
+    min-height: 250px;
+    max-height: 350px;
+    margin: 1.5rem 0;
+  }
+
+  .before-after-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .before img, 
+  .after img {
+    min-height: 200px;
+    object-fit: cover;
+  }
+}
+
 
  
    

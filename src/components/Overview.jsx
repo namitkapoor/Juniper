@@ -8,7 +8,6 @@ const Overview = ({ projectId }) => {
   const data = overviewData[projectId];
   if (!data) return null;
 
-  // Process bento items to create icon elements
   const processedBentoItems = data.bentoItems.map(item => ({
     ...item,
     content: {
@@ -20,15 +19,18 @@ const Overview = ({ projectId }) => {
   return (
     <section className="case-study-overview">
       <motion.div
+        className="overview-content"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <h1>{data.title}</h1>
-        <p className="case-study-subtitle">{data.subtitle}</p>
-        <p className="case-study-description">{data.description}</p>
+        <div className="overview-header">
+          <h1>{data.title}</h1>
+          <p className="case-study-subtitle">{data.subtitle}</p>
+          <p className="case-study-description">{data.description}</p>
+        </div>
         
-        <div className="bento-grid-container">
+        <div className="bento-grid-wrapper">
           <BentoGrid items={processedBentoItems} />
         </div>
       </motion.div>

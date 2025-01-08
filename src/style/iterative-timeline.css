@@ -77,6 +77,26 @@
   transition: color 0.3s ease;
 }
 
+/* Add mobile breakpoint */
+@media (max-width: 768px) {
+  .node-title {
+    white-space: normal;
+    text-align: center;
+    max-width: 80px;
+    line-height: 1.2;
+    font-size: 0.8rem;
+  }
+
+  .timeline-nodes {
+    padding: 0 1rem; /* Reduce padding to prevent overflow */
+  }
+
+  .node-button {
+    width: 40px;  /* Slightly smaller buttons on mobile */
+    height: 40px;
+  }
+}
+
 .active .node-title {
   color: rgba(255, 255, 255, 1);
 }

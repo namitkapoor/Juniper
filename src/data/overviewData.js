@@ -24,28 +24,7 @@ export const overviewData = {
         }
       },
       {
-        size: 'small',
-        content: {
-          type: 'stats',
-          icon: IoStatsChart,
-          title: 'Impact',
-          items: [
-            'SUS Score: 70'
-          ]
-        }
-      },
-      {
-        size: 'small',
-        content: {
-          type: 'text',
-          icon: IoPeopleOutline,
-          title: 'User Feedback',
-          description: '"Finally, an app that understands small farm operations!"',
-          footer: '- Sarah Chen, Homestead Farmer'
-        }
-      },
-      {
-        size: 'wide',
+        size: 'tall',
         content: {
           type: 'timeline',
           icon: IoTimeOutline,
@@ -60,23 +39,36 @@ export const overviewData = {
         }
       },
       {
-        size: 'medium',
+        size: 'wide',
         content: {
-          type: 'text',
-          icon: IoSearchOutline,
-          title: 'Key Insight',
-          description: '36% of farmers rely on paper tools, highlighting the need for an intuitive digital solution.',
-          footer: 'Opportunity for adoption'
+          type: 'stats',
+          icon: IoStatsChart,
+          title: 'Impact',
+          items: [
+            'SUS Score: 70',
+            'User Satisfaction: 85%',
+            'Task Completion: 92%'
+          ]
         }
       },
       {
         size: 'wide',
         content: {
           type: 'text',
-          icon: IoAccessibilityOutline,
-          title: 'Accessibility Focus',
-          description: 'Achieved WCAG 2.0 AA compliance with contrast checks and color-blind-friendly visual tags.',
-          footer: 'Inclusive by Design'
+          icon: IoPeopleOutline,
+          title: 'User Feedback',
+          description: '"Finally, an app that understands small farm operations!"',
+          footer: '- Sarah Chen, Homestead Farmer'
+        }
+      },
+      {
+        size: 'tall',
+        content: {
+          type: 'text',
+          icon: IoSearchOutline,
+          title: 'Key Insight',
+          description: '36% of farmers rely on paper tools, highlighting the need for an intuitive digital solution.',
+          footer: 'Opportunity for adoption'
         }
       },
       {
@@ -87,16 +79,6 @@ export const overviewData = {
           title: 'Task Success Rate',
           description: '9/14 tasks completed successfully in usability testing.',
           footer: 'User Evaluations'
-        }
-      },
-      {
-        size: 'wide',
-        content: {
-          type: 'text',
-          icon: IoAlertCircleOutline,
-          title: 'Core Pain Point',
-          description: 'Farmers lack a single tool to manage tasks, finances, and inventory efficiently.',
-          footer: 'Disconnected Systems'
         }
       },
       {
@@ -111,6 +93,16 @@ export const overviewData = {
             { value: '127', label: 'Affinity Notes' },
             { value: '7', label: 'Task Analyses' }
           ]
+        }
+      },
+      {
+        size: 'wide',
+        content: {
+          type: 'text',
+          icon: IoAccessibilityOutline,
+          title: 'Accessibility Focus',
+          description: 'Achieved WCAG 2.0 AA compliance with contrast checks and color-blind-friendly visual tags.',
+          footer: 'Inclusive by Design'
         }
       }
     ]

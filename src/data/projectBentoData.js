@@ -27,7 +27,7 @@ export const projectBentoData = {
           src: "./images/Experiments/Ciborium/Pattern F.png",
           alt: "Front View",
           description: "Front elevation showing the intricate details of the columns",
-          objectFit: 'contain'
+          objectFit: 'cover'
         },
         size: 'large'
       },
@@ -38,9 +38,9 @@ export const projectBentoData = {
           src: "./images/Experiments/Ciborium/Pattern A.png",
           alt: "Side View",
           description: "Side perspective highlighting the spatial depth",
-          objectFit: 'contain'
+          objectFit: 'cover'
         },
-        size: 'wide'
+        size: 'large'
       },
       {
         content: {
@@ -50,7 +50,7 @@ export const projectBentoData = {
           description: "Close-up of ornamental details",
           objectFit: 'contain'
         },
-        size: 'small'
+        size: 'large'
       },
       {
         content: {
@@ -58,9 +58,9 @@ export const projectBentoData = {
           src: "./images/Experiments/Ciborium/Textured persp.png",
           alt: "Full Height View",
           description: "Complete vertical composition",
-          objectFit: 'scale-down'
+          objectFit: 'contain'
         },
-        size: 'small'
+        size: 'large'
       },
       
     ]

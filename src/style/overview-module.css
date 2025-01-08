@@ -39,4 +39,30 @@
   .case-study-overview .case-study-subtitle {
     font-size: 1.1rem;
   }
+}
+
+@media (max-width: 486px) {
+  .case-study-overview {
+    margin-bottom: 1rem;
+  }
+
+  .case-study-overview h1 {
+    font-size: 1.75rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  .case-study-overview .case-study-subtitle {
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .case-study-overview .case-study-description {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .case-study-overview .bento-grid-container {
+    margin-top: 1.5rem;
+    padding: 0;
+  }
 } 

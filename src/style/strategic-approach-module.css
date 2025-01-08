@@ -1,6 +1,6 @@
 .strategic-approach {
   width: 100%;
-  margin: 2rem 0;
+  margin: 4rem 0;
 }
 
 /* Timeline styling */
@@ -118,8 +118,8 @@
 }
 
 .phase-content {
-  margin-top: 4rem;
-  padding: 0 2rem;
+  margin-top: 3rem;
+  padding: 0;
   max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
@@ -138,6 +138,18 @@
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
+  .strategic-approach {
+    margin: 3rem 0;
+  }
+
+  .approach-timeline {
+    margin: 2rem 0;
+  }
+
+  .phase-content {
+    margin-top: 2rem;
+  }
+
   .timeline-phase {
     width: auto;
     padding: 0.5rem;

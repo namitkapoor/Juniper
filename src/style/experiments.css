@@ -220,51 +220,17 @@
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Update BentoGrid container for better spacing */
-.case-study-bento-grid {
-  gap: 1rem;
-  padding: 0.5rem;
-}
-
-.bento-item {
-  position: relative;
-  aspect-ratio: 1;
-  border-radius: 8px;
-  overflow: hidden;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.bento-item img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.3s ease;
-}
-
-.bento-item:hover img {
-  transform: scale(1.05);
-}
-
-.bento-item.wide {
-  grid-column: span 2;
-}
-
-.bento-item.tall {
-  grid-row: span 2;
-}
-
-/* Add these new styles */
-.bento-grid {
+/* Project Preview Grid (renamed from bento-grid) */
+.project-preview-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 1.5rem;
   width: 100%;
-  max-width: 1200px; /* Optional: limit maximum width */
-  margin: 0 auto; /* Center the grid */
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-.bento-item {
+.preview-item {
   position: relative;
   aspect-ratio: 1;
   border-radius: 8px;
@@ -273,39 +239,30 @@
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.bento-item img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.preview-item img {
+  object-fit: contain;
   transition: transform 0.3s ease;
 }
 
-.bento-item:hover img {
+.preview-item:hover img {
   transform: scale(1.05);
 }
 
-.bento-item.wide {
+.preview-item.wide {
   grid-column: span 2;
 }
 
-.bento-item.tall {
+.preview-item.tall {
   grid-row: span 2;
 }
 
-@media (max-width: 768px) {
-  .bento-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-} 
-
-/* Update bento item styles */
-.bento-item-content {
+.preview-content {
   position: relative;
   width: 100%;
   height: 100%;
 }
 
-.bento-item-description {
+.preview-description {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -316,11 +273,11 @@
   transition: transform 0.3s ease;
 }
 
-.bento-item:hover .bento-item-description {
+.preview-item:hover .preview-description {
   transform: translateY(0);
 }
 
-.bento-item-description p {
+.preview-description p {
   margin: 0;
   font-size: 14px;
   color: white;
@@ -329,11 +286,27 @@
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-  .bento-item-description {
+  .project-preview-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .preview-description {
     padding: 0.75rem;
   }
   
-  .bento-item-description p {
+  .preview-description p {
     font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .project-preview-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .preview-item.wide,
+  .preview-item.tall {
+    grid-column: 1 / -1;
+    grid-row: auto;
   }
 } 

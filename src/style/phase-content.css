@@ -8,24 +8,131 @@
   --accent-error: #FF6B6B;
 }
 
-/* Base phase content */
+/* Base content padding */
+.content {
+  width: 92%;
+  margin: 0 auto;
+  padding: 2rem 0;
+}
+
+/* Phase content inherits content width */
 .phase-content {
-  h3 {
-    color: var(--text-primary);
-    font-size: 1.75rem;
-    margin-bottom: 1.5rem;
-    text-align: left;
+  width: 100%;
+  padding: 0;
+}
+
+/* Remove specific padding from wireframes and other phase content types */
+.phase-content.wireframes,
+.phase-content.research,
+.phase-content.implementation,
+.phase-content.solution {
+  padding: 0;
+}
+
+.phase-content h3,
+.phase-content .summary,
+.analysis-section,
+.wireframes-section,
+.concepts-grid,
+.findings-grid,
+.feedback-grid,
+.accessibility-grid,
+.content-section {
+  width: 100%;
+  max-width: 100%;
+}
+
+@media (max-width: 768px) {
+  .content {
+    width: 92%;
+    padding: 1.5rem 0;
   }
 
-  .summary {
-    color: var(--text-secondary);
-    font-size: 1.1rem;
-    line-height: 1.6;
-    margin-bottom: 2rem;
-    text-align: left;
+  .phase-content,
+  .phase-content.wireframes,
+  .phase-content.research,
+  .phase-content.implementation,
+  .phase-content.solution {
+    padding: 0;
+  }
+
+  /* All direct children of phase-content should respect content width */
+  .phase-content > * {
+    width: 100%;
+  }
+
+  .phase-content h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .phase-content .summary {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
   }
 }
 
+@media (max-width: 486px) {
+  .content {
+    width: 94%;
+    padding: 1rem 0;
+  }
+
+  .phase-content,
+  .phase-content.wireframes,
+  .phase-content.research,
+  .phase-content.implementation,
+  .phase-content.solution {
+    padding: 0;
+  }
+
+  .phase-content h3 {
+    font-size: 1.25rem;
+    line-height: 1.4;
+  }
+
+  .phase-content .summary {
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  /* Ensure all sections respect content width */
+  .analysis-section,
+  .wireframes-section,
+  .concepts-grid,
+  .findings-grid,
+  .feedback-grid,
+  .accessibility-grid,
+  .content-section {
+    width: 100%;
+    padding: 0;
+  }
+
+  /* Remove any additional padding from cards */
+  .wireframe-card,
+  .concept-card,
+  .finding-card,
+  .feedback-card,
+  .accessibility-card {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .content-section {
+    margin-bottom: 1.5rem;
+  }
+
+  /* Maintain border styling but remove extra padding */
+  .content-section.purpose,
+  .content-section.challenges,
+  .content-section.features,
+  .content-section.feedback {
+    border-left: none;
+    border-top: 3px solid;
+    padding-top: 1rem;
+    margin-top: 1rem;
+  }
+}
 
 /* Analysis Sections */
 .analysis-section {
@@ -86,30 +193,6 @@
   }
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .phase-content {
-    h3 {
-      font-size: 1.5rem;
-    }
-
-    .summary {
-      font-size: 1rem;
-    }
-  }
-
-  .section.prototypes {
-    .prototypes-grid {
-      grid-template-columns: 1fr; /* Single column on mobile */
-    }
-  }
-
-  .prototypes-grid,
-  .findings-grid {
-    grid-template-columns: 1fr;
-  }
-} 
-
 /* Wireframes Section */
 .wireframes-section {
   display: grid;
@@ -129,7 +212,6 @@
   background: var(--card-bg);
   border: 1px solid var(--card-border);
   border-radius: 12px;
-  padding: 1rem;
   cursor: pointer;
   transition: all 0.3s ease;
   display: flex;
@@ -173,7 +255,6 @@
 .wireframe-card.expanded {
   grid-column: 1 / -1;
   max-width: 1000px;
-  margin: 0 auto;
   animation: expandCard 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
@@ -602,31 +683,47 @@
   align-items: center;
 } 
 
-.prototype-info {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  width: 100%;
+/* Override case-studies padding for phase-content */
+.case-studies .phase-content {
+  padding: 0;
 }
 
-.info-row {
-  display: flex;
-  gap: 0.75rem;
-  align-items: flex-start;
+/* Ensure all phase content types have no padding */
+.phase-content,
+.phase-content.wireframes,
+.phase-content.research,
+.phase-content.implementation,
+.phase-content.solution {
+  padding: 0;
 }
 
-.info-icon {
-  width: 20px;
-  height: 20px;
-  color: var(--text-secondary);
-  flex-shrink: 0;
-  margin-top: 0.2rem; /* Align with first line of text */
+@media (max-width: 768px) {
+  .case-studies .phase-content {
+    padding: 0;
+  }
 }
 
-.reason, .result {
-  color: var(--text-secondary);
-  font-size: 0.95rem;
-  line-height: 1.5;
-  margin: 0;
-  flex: 1;
+@media (max-width: 486px) {
+  .case-studies .phase-content {
+    padding: 0;
+  }
+} 
+
+/* Override any inherited padding from parent containers */
+.strategic-approach .timeline-container .section-content .phase-content {
+  padding: 0;
+}
+
+/* Ensure all phase content types maintain zero padding */
+.strategic-approach .timeline-container .section-content .phase-content.wireframes,
+.strategic-approach .timeline-container .section-content .phase-content.research,
+.strategic-approach .timeline-container .section-content .phase-content.implementation,
+.strategic-approach .timeline-container .section-content .phase-content.solution {
+  padding: 0;
+}
+
+@media (max-width: 768px) {
+  .strategic-approach .timeline-container .section-content .phase-content {
+    padding: 0;
+  }
 } 
