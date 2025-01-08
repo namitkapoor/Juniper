@@ -16,12 +16,16 @@
   --card-background: rgba(255, 255, 255, 0.03);
   --tag-background: rgba(164, 191, 199, 0.08);
   --tag-text: #a4bfc7;  /* Matches about page accent */
+  
+  /* Add font family variable */
+  --font-primary: 'Satoshi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 
+    'Helvetica Neue', Arial, sans-serif;
 }
 
 .page-container {
   background-color: #1a1a1a;
   color: white;
-  font-family: 'Satoshi', sans-serif;
+  font-family: var(--font-primary);
   overflow: hidden;
 }
 
