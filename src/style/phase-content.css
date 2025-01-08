@@ -26,107 +26,6 @@
   }
 }
 
-/* Research Phase */
-.section.requirements {
-  /* Research visuals section */
-  .research-visuals {
-    margin-bottom: 2.5rem;
-    
-    h4 {
-      color: var(--text-primary);
-      font-size: 1.4rem;
-      margin-bottom: 1.25rem;
-      text-align: left;
-      font-weight: 500;
-    }
-  }
-
-  .requirements-title {
-    color: var(--text-primary);
-    font-size: 1.4rem;
-    margin: 2rem 0 1.5rem;
-    text-align: left;
-    font-weight: 500;
-  }
-
-  /* Requirements grid */
-  .requirements-grid {
-    display: grid;
-    gap: 1.5rem;
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .requirement-card {
-    background: var(--card-bg);
-    border: 1px solid var(--card-border);
-    border-radius: 12px;
-    padding: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-
-
-    h4 {
-      color: var(--text-primary);
-      font-size: 1.2rem;
-      margin-bottom: 0.75rem;
-      text-align: left;
-      font-weight: 500;
-    }
-
-    .insight {
-      color: var(--text-secondary);
-      line-height: 1.5;
-      font-size: 0.95rem;
-    }
-
-    .methodology-subtitle {
-      color: var(--text-primary);
-      font-size: 0.9rem;
-      margin: 1.25rem 0 0.75rem;
-      text-align: left;
-      font-weight: 500;
-      opacity: 0.9;
-    }
-
-    .methodology-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin: 0.5rem 0;
-
-      .methodology-tag {
-        background: rgba(255, 255, 255, 0.08);
-        padding: 0.35rem 0.75rem;
-        border-radius: 4px;
-        font-size: 0.8rem;
-        color: var(--text-primary);
-        letter-spacing: 0.02em;
-        transition: all 0.2s ease;
-        border: none;
-        cursor: pointer;
-
-        &:hover {
-          background: rgba(255, 255, 255, 0.12);
-        }
-
-        &.active {
-          background: var(--accent-success);
-          color: white;
-        }
-      }
-    }
-
-    .response {
-      color: var(--accent-success);
-      font-size: 0.875rem;
-      margin-top: auto;
-      padding-top: 0.75rem;
-      border-top: 1px solid var(--card-border);
-    }
-  }
-}
 
 /* Analysis Sections */
 .analysis-section {
@@ -147,43 +46,31 @@
     }
   }
 
-  .findings-grid {
-    display: grid;
-    gap: 1.5rem;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--text-primary);
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    letter-spacing: -0.01em;
+
+    svg {
+      color: var(--accent-success);
+      opacity: 0.9;
+    }
   }
 
-  .finding-card {
-    background: var(--card-bg);
-    border: 1px solid var(--card-border);
-    border-radius: 12px;
-    padding: 1.5rem;
-
-    .section-title {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      color: var(--text-primary);
-      font-size: 1.2rem;
-      font-weight: 600;
-      margin-bottom: 1rem;
-      letter-spacing: -0.01em;
-
-      svg {
-        color: var(--accent-success);
-        opacity: 0.9;
-      }
-    }
-
-    .content-section {
-      h5.section-title {
-        font-size: 0.9rem;
-        color: var(--text-secondary);
-        font-weight: 500;
-        margin-bottom: 0.5rem;
-        letter-spacing: 0.02em;
-        text-transform: uppercase;
-      }
+  .content-section {
+    h5.section-title {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
     }
   }
 
@@ -482,14 +369,46 @@
 
 .finding-card {
   position: relative;
-  height: fit-content;
   background: var(--card-bg);
   border: 1px solid var(--card-border);
   border-radius: 12px;
-  padding: 1.5rem;
+  padding: 1.75rem;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.25rem;
+}
+
+/* Content sections with minimal styling */
+.content-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* Section titles with improved hierarchy */
+.section-title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  opacity: 0.8;
+}
+
+/* Content styling with monochromatic colors */
+.issue,
+.impact,
+.additional-validation {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 0;
+  color: var(--text-primary);
+}
+
+@media (min-width: 768px) {
+  .findings-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 /* Wireframes grid specific */
@@ -549,4 +468,103 @@
   .visual-iterations-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+} 
+
+/* Solution Concepts specific grid */
+.concepts-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  width: 100%;
+  margin: 2rem 0;
+}
+
+.concept-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 2rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.concept-cover-image {
+  width: 100%;
+  aspect-ratio: 16/9;
+  overflow: hidden;
+  border-radius: 8px;
+  flex: 1;
+}
+
+.concept-cover-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.concept-card h4 {
+  color: var(--text-primary);
+  font-size: 1.4rem;
+  font-weight: 500;
+  margin: 0;
+}
+
+.concept-card p {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.feature-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.feature-list li {
+  color: var(--text-secondary);
+  margin-bottom: 0.75rem;
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.feature-list li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--accent-success);
+}
+
+/* Force side-by-side layout at tablet sizes and above */
+@media (min-width: 768px) {
+  .concepts-grid {
+    grid-template-columns: repeat(2, 1fr);
+    align-items: stretch;
+  }
+} 
+
+/* Title with icon styling */
+.title-with-icon {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;  /* Increased from 0.5rem for more breathing room */
+  margin-bottom: 1rem;  /* Added space below the title */
+  padding: 0.5rem 0;    /* Added vertical padding */
+}
+
+.title-with-icon svg {
+  color: var(--text-secondary);
+  width: 28px;          /* Increased from 24px */
+  height: 28px;         /* Increased from 24px */
+  flex-shrink: 0;       /* Prevent icon from shrinking */
+}
+
+.title-with-icon span {
+  color: var(--text-primary);
+  font-size: 1.2rem;    /* Slightly larger text */
+  font-weight: 500;
+  letter-spacing: -0.01em;
 } 

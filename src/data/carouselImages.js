@@ -133,19 +133,19 @@ export const carouselImages = {
       taskCategory: "Identify and Customize Flags"
     },
     {
-      src: `${BASE_PATH}/JD/Task Analysis/Finding Troubleshoot.jpg`,
+      src: `${BASE_PATH}/JD/Task Analysis/Finding troubleshoot.jpg`,
       caption: 'Task Analysis: Find Troubleshoot',
       alt: 'Task flow diagram for troubleshooting process',
       taskCategory: "Find Troubleshoot"
     },
     {
-      src: `${BASE_PATH}/JD/Task Analysis/Harvest plan task analysis.jpg`,
+      src: `${BASE_PATH}/JD/Task Analysis/Harvest plans task analysis.jpg`,
       caption: 'Task Analysis: Create Harvest Plans',
       alt: 'Task flow diagram for harvest planning',
       taskCategory: "Create Harvest Plans"
     },
     {
-      src: `${BASE_PATH}/JD/Task Analysis/Remove flags task analysis.jpg`,
+      src: `${BASE_PATH}/JD/Task Analysis/Removing flag task analysis.jpg`,
       caption: 'Task Analysis: Remove Flags',
       alt: 'Task flow diagram for flag removal process',
       taskCategory: "Remove Flags"
