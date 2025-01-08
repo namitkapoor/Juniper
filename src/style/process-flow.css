@@ -24,6 +24,7 @@
   transition: all 0.3s ease;
   max-width: 100%;
   box-sizing: border-box;
+  position: relative;
 
   &:hover {
     transform: translateY(-2px);
@@ -141,6 +142,33 @@
   .step-connector {
     display: none;
   }
+
+  .process-step.active {
+    border-left: 4px solid var(--accent-success);
+    padding-left: calc(1.25rem - 4px);
+  }
+
+  .process-step.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 8px solid var(--accent-success);
+  }
+
+  .process-step.active + .step-content {
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    padding: 1.25rem;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
 }
 
 /* Smaller screens */
@@ -152,5 +180,15 @@
   .process-step {
     padding: 1rem;
     min-height: 90px;
+  }
+
+  .process-step.active::after {
+    bottom: -0.75rem;
+  }
+
+  .process-step.active + .step-content {
+    margin-top: 0.75rem;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
   }
 } 
