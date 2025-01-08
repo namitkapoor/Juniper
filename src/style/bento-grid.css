@@ -57,7 +57,7 @@
   align-items: center;
   text-align: center;
   height: 100%;
-  padding: 2.5rem 2rem;
+  padding: 0rem 2rem;
 }
 
 .bento-item.tall h3 {
@@ -319,7 +319,7 @@
 @media (max-width: 480px) {
   .bento-grid {
     gap: 0.75rem;
-    padding: 0.5rem;
+    padding: 0rem;
   }
 
   .bento-content {
