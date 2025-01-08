@@ -56,6 +56,14 @@ const BusinessChallenge = ({ isExpanded, projectId }) => {
             </div>
 
             <div className="challenge-grid">
+              <div className="challenge-carousel">
+                <ImageCarousel 
+                  images={currentImages}
+                  projectId={projectId}
+                  activeMethodology={null}
+                />
+              </div>
+
               <div className="pain-points">
                 <h3>User Pain Points</h3>
                 <ul className="pain-points-list">
@@ -75,14 +83,6 @@ const BusinessChallenge = ({ isExpanded, projectId }) => {
                     </li>
                   ))}
                 </ul>
-              </div>
-
-              <div className="challenge-carousel">
-                <ImageCarousel 
-                  images={currentImages}
-                  projectId={projectId}
-                  activeMethodology={null}
-                />
               </div>
             </div>
 

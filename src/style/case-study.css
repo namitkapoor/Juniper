@@ -67,12 +67,15 @@
 }
 
 /* Section content layouts */
-.challenge-grid,
-.approach-grid {
+.section-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 2rem;
   align-items: center;
+}
+
+.approach-grid {
+  composes: section-grid;
 }
 
 .challenge-image img,
@@ -101,7 +104,7 @@
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-  .challenge-grid,
+  .section-grid,
   .approach-grid {
     grid-template-columns: 1fr;
   }
@@ -142,7 +145,7 @@
 }
 
 /* Grid layouts with more breathing room */
-.challenge-grid,
+.section-grid,
 .approach-grid,
 .results-grid,
 .evolution-grid {
@@ -257,7 +260,7 @@
 }
 
 /* Keep the interactive pain points section styled */
-.challenge-grid {
+.section-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 2.5rem;
@@ -319,7 +322,7 @@
     margin-bottom: 1rem;
   }
 
-  .challenge-grid,
+  .section-grid,
   .approach-grid {
     gap: 1.5rem;
   }

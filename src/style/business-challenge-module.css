@@ -13,19 +13,33 @@
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.challenge-grid {
+.business-challenge .challenge-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat(3, auto);
   gap: 3rem;
   align-items: start;
 }
 
+/* Default layout - 2 columns x 3 rows */
+.market-context {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.revenue-impact {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.cost-problems {
+  grid-column: 1;
+  grid-row: 3;
+}
+
 .pain-points-list {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  list-style: none;
-  padding: 0;
+  grid-column: 2;
+  grid-row: 1 / span 3;
 }
 
 .pain-point-item {
@@ -43,6 +57,7 @@
 }
 
 .pain-point-icon {
+  flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -62,8 +77,91 @@
   justify-content: center;
 }
 
+/* Tablet breakpoint - 3 columns x 2 rows */
+@media (max-width: 1024px) {
+  .business-challenge .challenge-grid {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto auto;
+    gap: 2rem;
+  }
+
+  .market-context {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .revenue-impact {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  .cost-problems {
+    grid-column: 3;
+    grid-row: 2;
+  }
+
+  .pain-points-list {
+    grid-column: 1 / span 3;
+    grid-row: 1;
+  }
+}
+
+/* Mobile breakpoint */
 @media (max-width: 768px) {
-  .challenge-grid {
+  .business-challenge .challenge-grid {
     grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
+
+  .market-context,
+  .revenue-impact,
+  .cost-problems {
+    grid-column: 1;
+  }
+
+  .market-context {
+    grid-row: 2;
+  }
+
+  .revenue-impact {
+    grid-row: 3;
+  }
+
+  .cost-problems {
+    grid-row: 4;
+  }
+
+  .pain-points-list {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .pain-point-item {
+    flex: 0 0 85vw;
+  }
+}
+
+/* Small mobile breakpoint */
+@media (max-width: 480px) {
+  .business-challenge {
+    gap: 1.5rem;
+  }
+
+  .business-challenge .challenge-grid {
+    gap: 1rem;
+  }
+
+  .pain-point-item {
+    flex: 0 0 85vw; /* Use viewport width for better scaling */
+    padding: 1rem;
+  }
+
+  .pain-point-icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .challenge-carousel {
+    min-height: 300px;
   }
 } 
