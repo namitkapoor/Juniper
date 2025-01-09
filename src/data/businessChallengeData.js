@@ -4,7 +4,11 @@ import {
   IoSchoolOutline,
   IoTimeOutline,
   IoWalletOutline,
-  IoStatsChartOutline
+  IoStatsChartOutline,
+  IoSearchOutline,
+  IoAnalyticsOutline,
+  IoPeopleOutline,
+  IoSettingsOutline
 } from 'react-icons/io5';
 
 export const businessChallengeData = {
@@ -101,6 +105,189 @@ export const businessChallengeData = {
     costProblems: {
       title: "Cost of Problems",
       content: "Description of cost problems for another project..."
+    }
+  },
+  
+  "influencerMarketing": {
+    marketContext: {
+      title: "Market Context",
+      content: "Small businesses struggle to effectively leverage influencer marketing due to complex discovery processes and limited campaign management tools."
+    },
+    revenueImpact: {
+      title: "Revenue Impact",
+      content: "With 68% of small businesses planning to increase influencer marketing spending, inefficient processes result in missed opportunities and wasted marketing budgets.",
+      source: {
+        text: "Business Insider, 2023",
+        link: "https://www.businessinsider.com/influencer-marketing-report-2023"
+      }
+    },
+    painPoints: [
+      {
+        icon: IoSearchOutline,
+        title: "Discovery Process",
+        description: "Time-consuming and inefficient process of finding relevant influencers for specific campaigns.",
+        images: [
+          {
+            src: "../images/influencer/discovery-process.jpg",
+            alt: "Influencer discovery interface",
+            caption: "Current discovery interface"
+          }
+        ]
+      },
+      {
+        icon: IoAnalyticsOutline,
+        title: "Performance Tracking",
+        description: "Lack of comprehensive analytics for measuring campaign effectiveness and ROI.",
+        images: [
+          {
+            src: "../images/influencer/analytics-dashboard.jpg",
+            alt: "Analytics dashboard",
+            caption: "Current analytics view"
+          }
+        ]
+      },
+      {
+        icon: IoPeopleOutline,
+        title: "Communication",
+        description: "Fragmented communication channels between businesses and influencers.",
+        images: [
+          {
+            src: "../images/influencer/communication.jpg",
+            alt: "Communication interface",
+            caption: "Current messaging system"
+          }
+        ]
+      },
+      {
+        icon: IoSettingsOutline,
+        title: "Campaign Management",
+        description: "Complex workflow for setting up and managing multiple campaigns simultaneously.",
+        images: [
+          {
+            src: "../images/influencer/campaign-management.jpg",
+            alt: "Campaign management interface",
+            caption: "Current campaign manager"
+          }
+        ]
+      }
+    ],
+    costProblems: {
+      title: "Cost of Problems",
+      content: "Small businesses lose an average of 15-20 hours per month on manual influencer discovery and campaign management, resulting in reduced marketing efficiency and missed opportunities."
+    }
+  },
+  
+  "taskReminders": {
+    marketContext: {
+      title: "Market Context",
+      content: "Traditional task reminder systems operate on simple time-based triggers, failing to account for user context, priority, and optimal timing for task completion."
+    },
+    revenueImpact: {
+      title: "Market Opportunity",
+      content: "With 67% of professionals using digital task management tools, there's a significant opportunity to improve task completion rates through contextual awareness.",
+      source: {
+        text: "Productivity Report, 2023",
+        link: "https://example.com/productivity-report-2023"
+      }
+    },
+    painPoints: [
+      {
+        icon: IoTimeOutline,
+        title: "Poor Timing",
+        description: "Reminders often arrive at inconvenient moments, leading to task dismissal or postponement.",
+        images: [
+          {
+            src: "../images/TaskReminders/timing-analysis.jpg",
+            alt: "Reminder timing analysis",
+            caption: "Current reminder patterns"
+          }
+        ]
+      },
+      {
+        icon: IoAnalyticsOutline,
+        title: "Lack of Context",
+        description: "Systems don't consider location, activity, or user availability when sending notifications.",
+        images: [
+          {
+            src: "../images/TaskReminders/context-study.jpg",
+            alt: "Context analysis",
+            caption: "Context impact study"
+          }
+        ]
+      },
+      {
+        icon: IoSettingsOutline,
+        title: "Priority Confusion",
+        description: "Users struggle to identify truly important tasks among numerous notifications.",
+        images: [
+          {
+            src: "../images/TaskReminders/priority-matrix.jpg",
+            alt: "Task priority matrix",
+            caption: "Priority distribution"
+          }
+        ]
+      }
+    ],
+    costProblems: {
+      title: "Cost of Problems",
+      content: "Users miss or postpone 40% of important tasks due to poorly timed reminders, leading to decreased productivity and increased stress levels."
+    }
+  },
+  
+  "sustainablePackaging": {
+    marketContext: {
+      title: "Market Context",
+      content: "Despite growing consumer demand for sustainable packaging, retailers face significant barriers in adoption, primarily due to cost concerns and implementation complexity."
+    },
+    revenueImpact: {
+      title: "Market Opportunity",
+      content: "The sustainable packaging market is projected to reach $305.31 billion by 2027, with retailers playing a crucial role in driving adoption.",
+      source: {
+        text: "Environmental Impact Report, 2023",
+        link: "https://example.com/sustainability-report-2023"
+      }
+    },
+    painPoints: [
+      {
+        icon: IoWalletOutline,
+        title: "Cost Barriers",
+        description: "Higher costs of sustainable materials making adoption financially challenging.",
+        images: [
+          {
+            src: "../images/SustainablePackaging/cost-analysis.jpg",
+            alt: "Cost comparison analysis",
+            caption: "Traditional vs Sustainable costs"
+          }
+        ]
+      },
+      {
+        icon: IoAnalyticsOutline,
+        title: "Implementation Complexity",
+        description: "Lack of clear guidelines and processes for transitioning to sustainable options.",
+        images: [
+          {
+            src: "../images/SustainablePackaging/implementation-flow.jpg",
+            alt: "Implementation process",
+            caption: "Current transition challenges"
+          }
+        ]
+      },
+      {
+        icon: IoStatsChartOutline,
+        title: "ROI Uncertainty",
+        description: "Difficulty in measuring and demonstrating return on sustainable packaging investments.",
+        images: [
+          {
+            src: "../images/SustainablePackaging/roi-metrics.jpg",
+            alt: "ROI measurement",
+            caption: "Current metrics tracking"
+          }
+        ]
+      }
+    ],
+    costProblems: {
+      title: "Cost of Inaction",
+      content: "Retailers risk losing market share as 73% of consumers express preference for brands using sustainable packaging, while also facing potential regulatory penalties in markets with packaging waste regulations."
     }
   }
 }; 

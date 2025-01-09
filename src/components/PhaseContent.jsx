@@ -9,6 +9,9 @@ import SolutionFramework from './SolutionFramework';
 const PhaseContent = ({ content, contentType, projectId }) => {
   if (!content) return null;
 
+  // Get project-specific content if it exists
+  const projectContent = content[projectId] || content;
+
   const renderSection = (section) => {
     switch (section.type) {
       case 'requirements':
@@ -34,7 +37,10 @@ const PhaseContent = ({ content, contentType, projectId }) => {
         return <ProcessFlow steps={section.steps} />;
 
       case 'decisions':
-        return <DecisionCriteria content={section.content} />;
+        return <DecisionCriteria 
+          content={section.content} 
+          projectId={projectId}
+        />;
 
       case 'prototypes':
       case 'usabilityTesting':
@@ -52,11 +58,11 @@ const PhaseContent = ({ content, contentType, projectId }) => {
 
   return (
     <div className={`phase-content ${contentType}`}>
-      <h3>{content.title}</h3>
-      {content.summary && <p className="summary">{content.summary}</p>}
+      <h3>{projectContent.title}</h3>
+      {projectContent.summary && <p className="summary">{projectContent.summary}</p>}
       
       <div className="sections">
-        {content.sections?.map((section, index) => (
+        {projectContent.sections?.map((section, index) => (
           <div key={index} className={`section ${section.type}`}>
             {renderSection(section)}
           </div>

@@ -3,16 +3,24 @@ import {
   IoSearchOutline,
   IoTimerOutline,
   IoBulbOutline,
-  IoConstructOutline
+  IoConstructOutline,
+  IoAnalyticsOutline,
+  IoPeopleOutline,
+  IoSettingsOutline,
+  IoWalletOutline
 } from 'react-icons/io5';
 
-export const solutionPhase = 
-{
-    id: 'solution',
-    title: 'Solution Framework',
-    icon: IoLayersOutline,
-    type: 'solution',
-    content: {
+const baseSolutionPhase = {
+  id: 'solution',
+  title: 'Solution Framework',
+  icon: IoLayersOutline,
+  type: 'solution'
+};
+
+export const solutionPhase = {
+  ...baseSolutionPhase,
+  content: {
+    "manageFarms": {
       title: "Solution Framework",
       summary: "Using insights from research and task analysis, we developed wireframes and proposed two design concepts, prioritizing a redesign of OCM that integrated task efficiency and intuitive navigation.",
       sections: [
@@ -257,5 +265,306 @@ export const solutionPhase =
           ]
         }
       ]
+    },
+    "influencerMarketing": {
+      title: "Solution Framework",
+      summary: "Based on our research insights, we developed a comprehensive solution focusing on automated discovery and streamlined campaign management.",
+      sections: [
+        {
+          type: 'process',
+          steps: [
+            {
+              id: 'platform-analysis',
+              type: 'analysis',
+              title: "Platform Analysis",
+              icon: IoSearchOutline,
+              description: "Evaluation of existing influencer platforms",
+              content: {
+                coverImage: {
+                  url: "/images/Case Studies/Influencer/platform-analysis.jpg",
+                  caption: "Platform Analysis Overview",
+                  alt: "Overview of platform analysis"
+                },
+                useCarousel: false,
+                findings: [
+                  {
+                    category: "Discovery Tools",
+                    issue: "Current platforms rely heavily on manual search and filtering",
+                    impact: "Time-consuming process with limited accuracy in matches",
+                    additionalValidation: "User interviews revealed 70% of time spent on manual discovery"
+                  },
+                  {
+                    category: "Campaign Management",
+                    issue: "Fragmented tools across multiple platforms",
+                    impact: "Inefficient workflow and increased chance of errors",
+                    additionalValidation: "Task analysis showed 40% time waste in platform switching"
+                  }
+                ]
+              }
+            },
+            {
+              id: 'user-workflows',
+              type: 'analysis',
+              title: "User Workflows",
+              icon: IoTimerOutline,
+              description: "Analysis of current user processes",
+              content: {
+                useCarousel: true,
+                carouselType: "taskAnalysis",
+                summary: "Analysis of key tasks revealed significant inefficiencies in current workflows",
+                metrics: {
+                  overallCompletionTime: "4.5 hours average per campaign",
+                  overallSuccessRate: "45%",
+                  participantCount: "15 small business owners"
+                },
+                findings: [
+                  {
+                    category: "Influencer Discovery",
+                    description: "Manual search and vetting process across multiple platforms",
+                    metrics: {
+                      completionTime: "2.5 hours average",
+                      successRate: "40%",
+                      failureNote: "60% of matches were irrelevant to brand needs"
+                    }
+                  },
+                  {
+                    category: "Campaign Setup",
+                    description: "Complex process of creating and managing campaign details",
+                    metrics: {
+                      completionTime: "1.5 hours average",
+                      successRate: "55%",
+                      failureNote: "45% experienced data entry errors"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "taskReminders": {
+      title: "Solution Framework",
+      summary: "Based on research insights, we developed a context-aware reminder system that adapts to user behavior and environmental factors.",
+      sections: [
+        {
+          type: 'process',
+          steps: [
+            {
+              id: 'system-analysis',
+              type: 'analysis',
+              title: "System Analysis",
+              icon: IoSearchOutline,
+              description: "Evaluation of current reminder systems",
+              content: {
+                coverImage: {
+                  url: "/images/Case Studies/TaskReminders/system-analysis.jpg",
+                  caption: "System Analysis Overview",
+                  alt: "Overview of system analysis"
+                },
+                useCarousel: false,
+                findings: [
+                  {
+                    category: "Notification Timing",
+                    issue: "Current systems use fixed schedules without context",
+                    impact: "73% of reminders are dismissed or postponed",
+                    additionalValidation: "Time-motion studies showed poor timing correlation"
+                  },
+                  {
+                    category: "Context Awareness",
+                    issue: "No consideration of user's current state or environment",
+                    impact: "40% of notifications arrive at inappropriate moments",
+                    additionalValidation: "User activity logs confirmed timing mismatches"
+                  }
+                ]
+              }
+            },
+            {
+              id: 'user-behavior',
+              type: 'analysis',
+              title: "User Behavior Analysis",
+              icon: IoTimerOutline,
+              description: "Understanding task completion patterns",
+              content: {
+                useCarousel: true,
+                carouselType: "taskAnalysis",
+                summary: "Analysis of user behavior revealed key patterns in task completion and notification response",
+                metrics: {
+                  overallCompletionTime: "2.5 minutes average response time",
+                  overallSuccessRate: "45%",
+                  participantCount: "250 users tracked"
+                },
+                findings: [
+                  {
+                    category: "Response Patterns",
+                    description: "Analysis of notification response times and contexts",
+                    metrics: {
+                      completionTime: "45 seconds optimal window",
+                      successRate: "35%",
+                      failureNote: "65% of notifications missed optimal timing"
+                    }
+                  },
+                  {
+                    category: "Context Impact",
+                    description: "Effect of different contexts on task completion",
+                    metrics: {
+                      completionTime: "1.8 minutes with context",
+                      successRate: "82%",
+                      failureNote: "18% needed additional prompts"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              id: 'concept-development',
+              type: 'concepts',
+              title: "Concept Development",
+              icon: IoBulbOutline,
+              description: "AI-powered contextual reminder system",
+              content: {
+                concepts: [
+                  {
+                    title: "Smart Context Engine",
+                    description: "AI system that learns from user behavior and environmental factors",
+                    features: [
+                      "Location awareness",
+                      "Activity recognition",
+                      "Time pattern analysis",
+                      "Priority learning"
+                    ],
+                    image: "/images/Case Studies/TaskReminders/Concepts/smart-context.jpg"
+                  },
+                  {
+                    title: "Adaptive Interface",
+                    description: "UI that adjusts based on user context and task priority",
+                    features: [
+                      "Context-based layouts",
+                      "Priority visualization",
+                      "Gesture shortcuts",
+                      "Voice interactions"
+                    ],
+                    image: "/images/Case Studies/TaskReminders/Concepts/adaptive-ui.jpg"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "sustainablePackaging": {
+      title: "Solution Framework",
+      summary: "A comprehensive incentive program combining financial support with implementation guidance to drive sustainable packaging adoption.",
+      sections: [
+        {
+          type: 'process',
+          steps: [
+            {
+              id: 'cost-analysis',
+              type: 'analysis',
+              title: "Cost Analysis",
+              icon: IoWalletOutline,
+              description: "Deep dive into cost structures and opportunities",
+              content: {
+                coverImage: {
+                  url: "/images/Case Studies/SustainablePackaging/cost-breakdown.jpg",
+                  caption: "Cost Analysis Framework",
+                  alt: "Detailed cost breakdown visualization"
+                },
+                useCarousel: false,
+                findings: [
+                  {
+                    category: "Material Costs",
+                    issue: "30-45% premium on sustainable materials",
+                    impact: "Major barrier for mid-sized retailers",
+                    solution: "Volume-based discounts and subsidies"
+                  },
+                  {
+                    category: "Implementation Costs",
+                    issue: "High transition and training expenses",
+                    impact: "Extended ROI timeline",
+                    solution: "Phased implementation with support funding"
+                  }
+                ]
+              }
+            },
+            {
+              id: 'incentive-design',
+              type: 'design',
+              title: "Incentive Structure",
+              icon: IoConstructOutline,
+              description: "Multi-tiered incentive program design",
+              content: {
+                coverImage: {
+                  url: "/images/Case Studies/SustainablePackaging/incentive-tiers.jpg",
+                  caption: "Incentive Program Structure",
+                  alt: "Tiered incentive system diagram"
+                },
+                features: [
+                  {
+                    title: "Financial Incentives",
+                    description: "Tiered rebate system based on adoption levels",
+                    benefits: [
+                      "Volume-based discounts",
+                      "Implementation cost sharing",
+                      "Performance bonuses"
+                    ]
+                  },
+                  {
+                    title: "Support System",
+                    description: "Comprehensive implementation assistance",
+                    benefits: [
+                      "Supplier network access",
+                      "Training resources",
+                      "Transition planning"
+                    ]
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          type: 'features',
+          content: {
+            title: "Key Program Features",
+            description: "Comprehensive support system for sustainable transition",
+            items: [
+              {
+                title: "Cost Management",
+                icon: IoWalletOutline,
+                features: [
+                  "Volume-based discounts",
+                  "Implementation subsidies",
+                  "Performance incentives"
+                ],
+                image: "/images/Case Studies/SustainablePackaging/cost-management.jpg"
+              },
+              {
+                title: "Implementation Support",
+                icon: IoConstructOutline,
+                features: [
+                  "Transition planning",
+                  "Supplier connections",
+                  "Staff training"
+                ],
+                image: "/images/Case Studies/SustainablePackaging/implementation.jpg"
+              },
+              {
+                title: "Progress Tracking",
+                icon: IoAnalyticsOutline,
+                features: [
+                  "ROI monitoring",
+                  "Impact metrics",
+                  "Performance analytics"
+                ],
+                image: "/images/Case Studies/SustainablePackaging/tracking.jpg"
+              }
+            ]
+          }
+        }
+      ]
     }
-  };
+  }
+};

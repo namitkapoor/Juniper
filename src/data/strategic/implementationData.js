@@ -1,26 +1,16 @@
 import { IoCodeWorkingOutline, IoColorPaletteOutline } from 'react-icons/io5';
 
+const baseImplementationPhase = {
+  id: 'implementation',
+  title: 'Implementation Plan',
+  icon: IoCodeWorkingOutline,
+  type: 'implementation'
+};
+
 export const implementationPhase = {
-    id: 'implementation',
-    title: 'Implementation Plan',
-    icon: IoCodeWorkingOutline,
-    type: 'implementation',
-    iterations: [
-      {
-        trigger: "Development timeline constraints",
-        action: "Return to decision phase for feature prioritization",
-        outcome: "Phased release plan created",
-        phase: 'decisions'
-      },
-      {
-        trigger: "Integration complexity with legacy systems",
-        action: "Revisited technical requirements",
-        outcome: "Modified API approach",
-        phase: 'decisions'
-      }
-    ],
-    connections: ['solution', 'decisions'],
-    content: {
+  ...baseImplementationPhase,
+  content: {
+    "manageFarms": {
       title: "Implementation Plan",
       summary: "A comprehensive roadmap that focused on iterative development, usability testing, and key refinements.",
       sections: [
@@ -152,5 +142,322 @@ export const implementationPhase = {
         adoptionRate: "Adoption rate among small farms increased by 50%",
         satisfaction: "User satisfaction score: 4.8/5 post-launch"
       }
+    },
+    "influencerMarketing": {
+      title: "Implementation Plan",
+      summary: "A phased implementation approach focusing on core AI functionality and iterative improvements based on user feedback.",
+      sections: [
+        {
+          type: 'prototypes',
+          title: "Prototypes",
+          icon: IoColorPaletteOutline,
+          description: "Interactive prototypes were developed to validate key features and gather user feedback.",
+          items: [
+            {
+              change: "AI-Powered Discovery Interface",
+              reason: "Streamline the influencer search and matching process",
+              result: "Implemented smart filters and AI-based recommendations with match explanations",
+              media: {
+                type: 'video',
+                url: "/videos/Case Studies/Influencer/Prototypes/discovery-interface.mp4",
+                poster: "/images/Case Studies/Influencer/Prototypes/discovery-poster.jpg",
+                autoplay: false,
+                loop: true,
+                muted: true,
+                containMode: true
+              }
+            },
+            {
+              change: "Campaign Management Dashboard",
+              reason: "Centralize campaign tracking and performance metrics",
+              result: "Created unified dashboard with real-time analytics and automated reporting",
+              media: {
+                type: 'video',
+                url: "/videos/Case Studies/Influencer/Prototypes/campaign-dashboard.mp4",
+                poster: "/images/Case Studies/Influencer/Prototypes/dashboard-poster.jpg",
+                autoplay: false,
+                loop: true,
+                muted: true,
+                containMode: true
+              }
+            }
+          ]
+        },
+        {
+          type: 'usabilityTesting',
+          title: "Usability Testing",
+          description: "Conducted comprehensive testing with small business owners and influencers.",
+          metrics: {
+            tasksTested: 8,
+            participants: 12,
+            averageSuccessRate: "78%",
+            keyFindings: [
+              "AI-powered discovery reduced search time by 65%",
+              "Campaign setup workflow improved completion rates by 40%",
+              "Real-time analytics dashboard received positive feedback for clarity",
+              "Some users requested more detailed AI match explanations",
+              "Mobile responsiveness needs improvement for on-the-go management"
+            ]
+          }
+        },
+        {
+          type: 'presentation',
+          title: "Final Presentation",
+          description: "Presented the solution to stakeholders, highlighting key features and success metrics.",
+          items: [
+            "Demonstrated significant time savings through AI automation",
+            "Showcased improved match quality through intelligent algorithms",
+            "Presented roadmap for future AI capabilities and integrations"
+          ]
+        },
+        {
+          type: 'reflection',
+          title: "Reflection",
+          description: "Key learnings and insights from the development process.",
+          items: [
+            "AI implementation requires clear explanation of match decisions",
+            "Balance between automation and user control is crucial",
+            "Regular user feedback helps refine AI algorithms effectively"
+          ]
+        }
+      ],
+      roadmap: {
+        phases: [
+          {
+            title: "Phase 1: Core AI Features",
+            duration: "4 months",
+            items: [
+              "AI-powered discovery engine",
+              "Basic campaign management",
+              "Performance analytics"
+            ]
+          },
+          {
+            title: "Phase 2: Advanced Features",
+            duration: "3 months",
+            items: [
+              "Advanced AI matching",
+              "Automated reporting",
+              "Mobile optimization"
+            ]
+          }
+        ]
+      },
+      metrics: {
+        discoveryTime: "65% reduction in influencer discovery time",
+        matchQuality: "85% improvement in match relevance",
+        satisfaction: "User satisfaction score: 4.6/5"
+      }
+    },
+    "taskReminders": {
+      title: "Implementation Plan",
+      summary: "A phased rollout approach focusing on core AI features first, followed by interface refinements based on user feedback.",
+      sections: [
+        {
+          type: 'prototypes',
+          title: "Prototypes",
+          icon: IoColorPaletteOutline,
+          description: "Iterative development of key features based on user testing and feedback.",
+          items: [
+            {
+              change: "Context Detection System",
+              reason: "Initial implementation showed accuracy issues in certain environments",
+              result: "Refined ML model with improved sensor fusion and activity recognition",
+              media: {
+                type: 'video',
+                url: "/videos/Case Studies/TaskReminders/Prototypes/context-detection.mp4",
+                poster: "/images/Case Studies/TaskReminders/Prototypes/context-detection-poster.jpg",
+                autoplay: false,
+                loop: true,
+                muted: true,
+                containMode: true
+              }
+            },
+            {
+              change: "Priority Interface",
+              reason: "Users needed clearer visual hierarchy for task importance",
+              result: "Implemented color coding and size-based priority indicators",
+              media: {
+                type: 'video',
+                url: "/videos/Case Studies/TaskReminders/Prototypes/priority-interface.mp4",
+                poster: "/images/Case Studies/TaskReminders/Prototypes/priority-interface-poster.jpg",
+                autoplay: false,
+                loop: true,
+                muted: true,
+                containMode: true
+              }
+            }
+          ]
+        },
+        {
+          type: 'usabilityTesting',
+          title: "Usability Testing",
+          description: "Comprehensive testing across different user contexts and environments",
+          findings: [
+            {
+              metric: "Task Completion Rate",
+              before: "45%",
+              after: "92%",
+              insight: "Context-aware notifications significantly improved task completion"
+            },
+            {
+              metric: "Time to Response",
+              before: "15 minutes",
+              after: "3 minutes",
+              insight: "Better timing reduced notification dismissal rate"
+            },
+            {
+              metric: "User Satisfaction",
+              before: "3.2/5",
+              after: "4.7/5",
+              insight: "Adaptive interface received positive feedback"
+            }
+          ]
+        },
+        {
+          type: 'reflection',
+          title: "Reflection",
+          description: "Key learnings and insights from the development process.",
+          items: [
+            "Context detection requires careful balance of accuracy vs battery life",
+            "Privacy concerns need clear user communication and controls",
+            "Machine learning models improve significantly with user feedback"
+          ]
+        }
+      ],
+      roadmap: {
+        phases: [
+          {
+            title: "Phase 1: Core AI Features",
+            duration: "3 months",
+            items: [
+              "Context detection engine",
+              "Basic priority management",
+              "Initial ML models"
+            ]
+          },
+          {
+            title: "Phase 2: Interface Refinement",
+            duration: "2 months",
+            items: [
+              "Adaptive UI components",
+              "Advanced priority visualization",
+              "Accessibility improvements"
+            ]
+          }
+        ]
+      },
+      metrics: {
+        taskCompletion: "92% task completion rate",
+        contextAccuracy: "95% context detection accuracy",
+        userSatisfaction: "4.7/5 user satisfaction score"
+      }
+    },
+    "sustainablePackaging": {
+      title: "Implementation Plan",
+      summary: "A phased rollout approach ensuring smooth transition and maximum adoption.",
+      sections: [
+        {
+          type: 'prototypes',
+          title: "Prototypes",
+          icon: IoColorPaletteOutline,
+          description: "Interactive prototypes were developed to validate key features and gather retailer feedback.",
+          items: [
+            {
+              change: "Incentive Dashboard",
+              reason: "Retailers needed clear visibility into program benefits and progress",
+              result: "Created interactive tiered progress tracking with ROI visualization",
+              media: {
+                type: 'video',
+                url: "/videos/Case Studies/SustainablePackaging/Prototypes/incentive-dashboard.mp4",
+                poster: "/images/Case Studies/SustainablePackaging/Prototypes/dashboard-poster.jpg",
+                autoplay: false,
+                loop: true,
+                muted: true,
+                containMode: true
+              }
+            },
+            {
+              change: "Implementation Guide",
+              reason: "Complex transition process needed better support structure",
+              result: "Developed interactive guide with progress tracking and resource access",
+              media: {
+                type: 'video',
+                url: "/videos/Case Studies/SustainablePackaging/Prototypes/implementation-guide.mp4",
+                poster: "/images/Case Studies/SustainablePackaging/Prototypes/guide-poster.jpg",
+                autoplay: false,
+                loop: true,
+                muted: true,
+                containMode: true
+              }
+            }
+          ]
+        },
+        {
+          type: 'usabilityTesting',
+          title: "Usability Testing",
+          description: "Conducted comprehensive testing with retailers of varying sizes.",
+          metrics: {
+            tasksTested: 10,
+            participants: 8,
+            averageSuccessRate: "82%",
+            keyFindings: [
+              "Tiered system was easily understood by all participants",
+              "ROI calculator helped justify program adoption to stakeholders",
+              "Implementation guide reduced support requests by 45%",
+              "Some users requested more detailed supplier information",
+              "Mobile access needed improvement for on-site usage"
+            ]
+          }
+        },
+        {
+          type: 'presentation',
+          title: "Final Presentation",
+          description: "Presented the solution to stakeholders, highlighting adoption metrics and business impact.",
+          items: [
+            "Demonstrated significant cost savings through volume-based incentives",
+            "Showcased successful pilot program results",
+            "Presented roadmap for program expansion"
+          ]
+        },
+        {
+          type: 'reflection',
+          title: "Reflection",
+          description: "Key learnings and insights from the development process.",
+          items: [
+            "Balancing incentives with implementation support is crucial",
+            "Clear ROI demonstration drives adoption",
+            "Regular feedback helps refine support resources effectively"
+          ]
+        }
+      ],
+      roadmap: {
+        phases: [
+          {
+            title: "Phase 1: Pilot Program",
+            duration: "3 months",
+            items: [
+              "Initial retailer onboarding",
+              "Basic analytics dashboard",
+              "Core support resources"
+            ]
+          },
+          {
+            title: "Phase 2: Regional Launch",
+            duration: "6 months",
+            items: [
+              "Expanded retailer network",
+              "Enhanced analytics",
+              "Supplier integration"
+            ]
+          }
+        ]
+      },
+      metrics: {
+        adoptionRate: "82% pilot program success rate",
+        costReduction: "25% average materials cost reduction",
+        satisfaction: "4.2/5 retailer satisfaction score"
+      }
     }
-  };
+  }
+};

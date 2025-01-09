@@ -11,6 +11,30 @@ const strategicApproachData = {
       decisionsPhase,
       implementationPhase
     ]
+  },
+  "influencerMarketing": {
+    phases: [
+      researchPhase,
+      solutionPhase,
+      decisionsPhase,
+      implementationPhase
+    ]
+  },
+  "taskReminders": {
+    phases: [
+      researchPhase,
+      solutionPhase,
+      decisionsPhase,
+      implementationPhase
+    ]
+  },
+  "sustainablePackaging": {
+    phases: [
+      researchPhase,
+      solutionPhase,
+      decisionsPhase,
+      implementationPhase
+    ]
   }
 };
 

@@ -128,7 +128,12 @@ export default function Home() {
               <p>Redesigned a web app to simplify influencer hiring and campaign tracking, boosting user engagement by reducing workflow friction for small business owners.</p>
               
               <div className="button-container">
-                <Button className='case-study-button'>Learn More</Button>
+                <Button 
+                  className='case-study-button'
+                  onClick={() => navigate('/case-study/influencer-marketing')}
+                >
+                  Learn More
+                </Button>
               </div>
             </motion.div>
 
@@ -173,32 +178,72 @@ export default function Home() {
           <div className="case-studies-grid">
             <motion.div 
               className="case-study-card"
-              whileHover={{ scale: 1.02 }}
-              transition={{ type: "spring", stiffness: 300 }}
+              whileHover={{ scale: 1.01 }}
+              transition={{ duration: 0.2 }}
             >
               <h3>Contextualize Task Reminders</h3>
+              
               <div className="case-study-meta">
                 <span>10% Increase in Task Completion</span>
               </div>
 
               <div className="case-study-tags">
-                <span className="tag">Web Design</span>
-                <span className="tag">E-commerce</span>
-                <span className="tag">AI/ML</span>
+                <span className="tag">AR/VR</span>
+                <span className="tag">Mobile Design</span>
+                <span className="tag">Productivity</span>
               </div>
-              <img className="case-study-image" src="../images/Project Cover Photos/Anywhere Access Luminote gif.gif" alt="AR Task Reminders" />
+
+              <img 
+                className="case-study-image" 
+                src="../images/Project Cover Photos/Anywhere Access Luminote gif.gif" 
+                alt="AR Task Reminders" 
+              />
+              
               <p>Created an AR-based task management system combining spatial reminders with adaptive organizational structures to reduce cognitive load.</p>
-              <Button className='case-study-button'>Learn More</Button>
+              
+              <div className="button-container">
+                <Button 
+                  className='case-study-button'
+                  onClick={() => navigate('/case-study/task-reminders')}
+                >
+                  Learn More
+                </Button>
+              </div>
             </motion.div>
+
             <motion.div 
               className="case-study-card"
-              whileHover={{ scale: 1.02 }}
-              transition={{ type: "spring", stiffness: 300 }}
+              whileHover={{ scale: 1.01 }}
+              transition={{ duration: 0.2 }}
             >
               <h3>Incentivize Sustainable Packaging</h3>
-              <img className="case-study-image" src="../images/Project Cover Photos/SUSpointpopup-cropped.gif" alt="AR Packaging" />
+              
+              <div className="case-study-meta">
+                <span>30% More Eco-Friendly Choices</span>
+              </div>
+
+              <div className="case-study-tags">
+                <span className="tag">AR/VR</span>
+                <span className="tag">Sustainability</span>
+                <span className="tag">Retail</span>
+              </div>
+
+              <img 
+                className="case-study-image" 
+                src="../images/Project Cover Photos/SUSpointpopup-cropped.gif" 
+                alt="AR Packaging" 
+              />
+              
               <p>Designed an AR app to promote sustainable shopping by evaluating product packaging and incentivizing eco-conscious purchases with rewards.</p>
-              <Button className='case-study-button'>Learn More</Button>
+              
+              <div className="button-container">
+                <Button 
+                  className='case-study-button'
+                  onClick={() => navigate('/case-study/sustainable-packaging')}
+                >
+                  Learn More
+                </Button>
+              </div>
             </motion.div>
           </div>
         )}

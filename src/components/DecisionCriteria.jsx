@@ -2,11 +2,14 @@ import React, { useState } from 'react';
 import OptimizedImage from './OptimizedImage';
 import '../style/decision-criteria.css';
 
-const DecisionCriteria = ({ content }) => {
+const DecisionCriteria = ({ content, projectId }) => {
   const [activeTab, setActiveTab] = useState('concepts');
   const [activeHotspots, setActiveHotspots] = useState({});
 
   if (!content) return null;
+
+  // Get project-specific content if it exists
+  const projectContent = content[projectId] || content;
 
   const tabs = [
     { id: 'concepts', label: 'Concept Feedback' },
@@ -22,11 +25,10 @@ const DecisionCriteria = ({ content }) => {
   };
 
   const renderConceptComparison = () => {
-    console.log('Concept Feedback:', content.conceptFeedback);
     return (
       <div className="decision-concept-comparison">
         <div className="decision-concept-grid">
-          {content.conceptFeedback?.map((concept, index) => {
+          {projectContent.conceptFeedback?.map((concept, index) => {
             const status = concept.status?.toLowerCase() || '';
             
             return (
@@ -41,11 +43,11 @@ const DecisionCriteria = ({ content }) => {
                 <p className="description">{concept.description}</p>
                 {concept.image && (
                   <div className="decision-concept-image">
-                    <img
+                    <OptimizedImage
                       src={concept.image.url}
                       alt={concept.image.alt || concept.title}
+                      caption={concept.image.caption}
                     />
-                    <p className="decision-caption">{concept.image.caption}</p>
                   </div>
                 )}
                 <div className="supporting-points">
@@ -56,8 +58,6 @@ const DecisionCriteria = ({ content }) => {
                     ))}
                   </ul>
                 </div>
-
-                
               </div>
             );
           })}
@@ -69,13 +69,13 @@ const DecisionCriteria = ({ content }) => {
   const renderWireframeFeedback = () => (
     <div className="decision-wireframe-feedback">
       <div className="decision-wireframe-intro">
-        <h3>Map View Flow Iterations</h3>
-        <p>The following wireframes showcase the evolution of the Map View interface, which was my primary focus area in this project.</p>
+        <h3>Interface Iterations</h3>
+        <p>The following wireframes showcase the evolution of the interface based on user feedback.</p>
       </div>
 
       <div className={`decision-hotspots-section ${Object.values(activeHotspots).some(v => v) ? 'active' : ''}`}>
         <div className="decision-hotspots-grid">
-          {content.wireframeFeedback?.[0].images.flatMap(image =>
+          {projectContent.wireframeFeedback?.[0].images.flatMap(image =>
             image.hotspots
               .filter(hotspot => activeHotspots[`${image.id}-${hotspot.id}`])
               .map(hotspot => (
@@ -93,13 +93,13 @@ const DecisionCriteria = ({ content }) => {
       </div>
 
       <div className="decision-wireframe-grid">
-        {content.wireframeFeedback?.[0].images.map((image) => (
+        {projectContent.wireframeFeedback?.[0].images.map((image) => (
           <div key={image.id} className="decision-wireframe-item">
             <div className="decision-wireframe-image-container">
               <div className="decision-wireframe-image">
                 <OptimizedImage
                   src={image.url}
-                  alt={`Map View Version ${image.id}`}
+                  alt={`Version ${image.id}`}
                   caption={image.caption}
                 />
                 {image.hotspots.map((hotspot) => (
@@ -132,7 +132,7 @@ const DecisionCriteria = ({ content }) => {
   const renderAccessibility = () => (
     <div className="accessibility-section">
       <div className="accessibility-grid">
-        {content.accessibility?.map((item, index) => (
+        {projectContent.accessibility?.map((item, index) => (
           <div key={index} className="accessibility-card">
             <h3>{item.title}</h3>
             <p className="description">{item.description}</p>
@@ -176,8 +176,7 @@ const DecisionCriteria = ({ content }) => {
 
   return (
     <div className="decision-criteria">
-      
-      <div className="tabs">
+      <div className="decision-tabs">
         {tabs.map(tab => (
           <button
             key={tab.id}
@@ -188,10 +187,7 @@ const DecisionCriteria = ({ content }) => {
           </button>
         ))}
       </div>
-
-      <div className="tab-content">
-        {renderContent()}
-      </div>
+      {renderContent()}
     </div>
   );
 };

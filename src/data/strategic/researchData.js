@@ -1,54 +1,190 @@
-import { IoAnalyticsOutline } from 'react-icons/io5';
+import { IoAnalyticsOutline, IoPeopleOutline } from 'react-icons/io5';
 
-export const researchPhase = {
+const baseResearchPhase = {
   id: 'research',
   title: 'Research Insights',
   icon: IoAnalyticsOutline,
   type: 'research',
+};
+
+export const researchPhase = {
+  ...baseResearchPhase,
   content: {
-    title: "Research Insights",
-    summary: "Our research uncovered four key design requirements that guided the solution.",
-    sections: [
-      {
-        type: 'requirements',
-        items: [
-          {
-            category: "Time Management",
-            insight: "Farmers need efficient task scheduling due to long work hours",
-            methodologies: ["User Interviews", "Field Observations", "Affinity Diagrams", "Storyboards"],
-            response: "Task-centric daily planner with priority scheduling"
-          },
-          {
-            category: "Inventory Tracking",
-            insight: "Manual inventory tracking leads to stockouts and waste",
-            methodologies: ["Journey Maps", "Survey Data", "Storyboards", "User Interviews"],
-            response: "Automated inventory system with low-stock alerts"
-          },
-          {
-            category: "Financial Tools",
-            insight: "Basic accounting needs are not met by current solutions",
-            methodologies: ["User Interviews", "Journey Maps", "Survey Data", "Affinity Diagrams"],
-            response: "Simplified expense tracking and reporting"
-          },
-          {
-            category: "Crop Planning",
-            insight: "Soil-based planting decisions need better support",
-            methodologies: ["Field Observations", "Survey Data", "Storyboards", "Affinity Diagrams"],
-            response: "AI-powered crop recommendation engine"
+    "manageFarms": {
+      title: "Research Insights",
+      summary: "Our research uncovered four key design requirements that guided the solution.",
+      sections: [
+        {
+          type: 'requirements',
+          items: [
+            {
+              category: "Time Management",
+              insight: "Farmers need efficient task scheduling due to long work hours",
+              methodologies: ["User Interviews", "Field Observations", "Affinity Diagrams", "Storyboards"],
+              response: "Task-centric daily planner with priority scheduling"
+            },
+            {
+              category: "Inventory Tracking",
+              insight: "Manual inventory tracking leads to stockouts and waste",
+              methodologies: ["Journey Maps", "Survey Data", "Storyboards", "User Interviews"],
+              response: "Automated inventory system with low-stock alerts"
+            },
+            {
+              category: "Financial Tools",
+              insight: "Basic accounting needs are not met by current solutions",
+              methodologies: ["User Interviews", "Journey Maps", "Survey Data", "Affinity Diagrams"],
+              response: "Simplified expense tracking and reporting"
+            },
+            {
+              category: "Crop Planning",
+              insight: "Soil-based planting decisions need better support",
+              methodologies: ["Field Observations", "Survey Data", "Storyboards", "Affinity Diagrams"],
+              response: "AI-powered crop recommendation engine"
+            }
+          ]
+        },
+        {
+          type: 'methodology',
+          items: {
+            "User Interviews": { color: "#9C4221", textColor: "light" },
+            "Field Observations": { color: "#276749", textColor: "light" },
+            "Journey Maps": { color: "#6B3FA0", textColor: "light" },
+            "Survey Data": { color: "#007BFF", textColor: "light" },
+            "Storyboards": { color: "#FFA500", textColor: "light" },
+            "Affinity Diagrams": { color: "#00FF00", textColor: "light" }
           }
-        ]
-      },
-      {
-        type: 'methodology',
-        items: {
-          "User Interviews": { color: "#9C4221", textColor: "light" },
-          "Field Observations": { color: "#276749", textColor: "light" },
-          "Journey Maps": { color: "#6B3FA0", textColor: "light" },
-          "Survey Data": { color: "#007BFF", textColor: "light" },
-          "Storyboards": { color: "#FFA500", textColor: "light" },
-          "Affinity Diagrams": { color: "#00FF00", textColor: "light" }
         }
-      }
-    ]
+      ]
+    },
+    "influencerMarketing": {
+      title: "Research Insights",
+      summary: "Our research revealed key challenges in influencer discovery and campaign management that informed our solution.",
+      sections: [
+        {
+          type: 'requirements',
+          items: [
+            {
+              category: "Discovery Process",
+              insight: "Small businesses spend excessive time manually searching for relevant influencers",
+              methodologies: ["User Interviews", "Journey Maps", "Survey Data", "Affinity Diagrams"],
+              response: "AI-powered influencer matching system"
+            },
+            {
+              category: "Campaign Management",
+              insight: "Influencers often struggle with managing multiple campaigns",
+              methodologies: ["User Interviews", "Journey Maps", "Survey Data", "Affinity Diagrams"],
+              response: "AI-powered campaign management tool"
+            }
+          ]
+        },
+        {
+          type: 'methodology',
+          items: {
+            "User Interviews": { color: "#9C4221", textColor: "light" },
+            "Journey Maps": { color: "#6B3FA0", textColor: "light" },
+            "Survey Data": { color: "#007BFF", textColor: "light" },
+            "Storyboards": { color: "#FFA500", textColor: "light" },
+            "Affinity Diagrams": { color: "#00FF00", textColor: "light" },
+            "Field Observations": { color: "#276749", textColor: "light" }
+          }
+        }
+      ]
+    },
+    "taskReminders": {
+      title: "Research Insights",
+      summary: "Our research revealed key patterns in task management behavior and contextual triggers.",
+      sections: [
+        {
+          type: 'requirements',
+          items: [
+            {
+              category: "Context Awareness",
+              insight: "Users need reminders that consider their location, activity, and availability",
+              methodologies: ["User Interviews", "Contextual Inquiry", "Journey Maps", "Survey Data"],
+              response: "AI-powered context detection system"
+            },
+            {
+              category: "Priority Management",
+              insight: "Task importance varies based on time, location, and user state",
+              methodologies: ["Task Analysis", "User Interviews", "Affinity Diagrams"],
+              response: "Dynamic priority adjustment algorithm"
+            },
+            {
+              category: "Notification Timing",
+              insight: "Poor timing leads to 73% of task abandonment",
+              methodologies: ["Usage Analytics", "Survey Data", "User Interviews"],
+              response: "Smart notification scheduling system"
+            },
+            {
+              category: "User Preferences",
+              insight: "Different users have varying notification preferences",
+              methodologies: ["Preference Analysis", "User Interviews", "Survey Data"],
+              response: "Personalized notification settings with learning capability"
+            }
+          ]
+        },
+        {
+          type: 'methodology',
+          items: {
+            "User Interviews": { color: "#9C4221", textColor: "light" },
+            "Contextual Inquiry": { color: "#276749", textColor: "light" },
+            "Journey Maps": { color: "#6B3FA0", textColor: "light" },
+            "Survey Data": { color: "#007BFF", textColor: "light" },
+            "Task Analysis": { color: "#FFA500", textColor: "light" },
+            "Affinity Diagrams": { color: "#00FF00", textColor: "light" },
+            "Usage Analytics": { color: "#FF4500", textColor: "light" },
+            "Preference Analysis": { color: "#8B008B", textColor: "light" }
+          }
+        }
+      ]
+    },
+    "sustainablePackaging": {
+      title: "Research Insights",
+      summary: "Our research uncovered key barriers and opportunities in sustainable packaging adoption across different retail segments.",
+      sections: [
+        {
+          type: 'requirements',
+          items: [
+            {
+              category: "Cost Management",
+              insight: "30-45% cost premium for sustainable materials creates adoption barrier",
+              methodologies: ["Market Analysis", "Cost Analysis", "Retailer Interviews", "Survey Data"],
+              response: "Tiered incentive system with volume-based discounts"
+            },
+            {
+              category: "Implementation Process",
+              insight: "Complex transition process averaging 8-12 months",
+              methodologies: ["Process Analysis", "Retailer Interviews", "Journey Maps", "Timeline Studies"],
+              response: "Hybrid support system with guided implementation"
+            },
+            {
+              category: "ROI Tracking",
+              insight: "Difficulty measuring and demonstrating return on investment",
+              methodologies: ["Financial Analysis", "Retailer Interviews", "Performance Metrics", "Benchmark Studies"],
+              response: "Integrated analytics platform with customizable metrics"
+            },
+            {
+              category: "Supply Chain",
+              insight: "Limited access to reliable sustainable packaging suppliers",
+              methodologies: ["Supplier Analysis", "Market Research", "Distribution Studies", "Network Maps"],
+              response: "Curated supplier network with quality assurance"
+            }
+          ]
+        },
+        {
+          type: 'methodology',
+          items: {
+            "Market Analysis": { color: "#9C4221", textColor: "light" },
+            "Retailer Interviews": { color: "#276749", textColor: "light" },
+            "Journey Maps": { color: "#6B3FA0", textColor: "light" },
+            "Survey Data": { color: "#007BFF", textColor: "light" },
+            "Process Analysis": { color: "#FFA500", textColor: "light" },
+            "Performance Metrics": { color: "#00FF00", textColor: "light" },
+            "Supplier Analysis": { color: "#FF4500", textColor: "light" },
+            "Cost Analysis": { color: "#8B008B", textColor: "light" }
+          }
+        }
+      ]
+    }
   }
 }; 
