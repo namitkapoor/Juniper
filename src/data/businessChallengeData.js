@@ -115,10 +115,10 @@ export const businessChallengeData = {
     },
     revenueImpact: {
       title: "Revenue Impact",
-      content: "With 68% of small businesses planning to increase influencer marketing spending, inefficient processes result in missed opportunities and wasted marketing budgets.",
+      content: "Influencer marketing has experienced significant growth, with the industry's value increasing from $9.7 billion in 2020 to $13.8 billion in 2021, marking a 42% year-over-year rise. ",
       source: {
-        text: "Business Insider, 2023",
-        link: "https://www.businessinsider.com/influencer-marketing-report-2023"
+        text: "Collabstr, 2022 Influencer Marketing Report",
+        link: "https://collabstr.com/2022-influencer-marketing-report?"
       }
     },
     painPoints: [

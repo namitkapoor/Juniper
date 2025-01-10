@@ -31,6 +31,7 @@ const PhaseContent = ({ content, contentType, projectId }) => {
         return <SolutionFramework 
           content={section.content} 
           type={section.type}
+          projectId={projectId}
         />;
 
       case 'process':

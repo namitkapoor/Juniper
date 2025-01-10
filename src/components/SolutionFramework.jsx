@@ -15,7 +15,7 @@ import {
 } from 'react-icons/io5';
 import '../style/solution-framework.css';
 
-const SolutionFramework = ({ content, type }) => {
+const SolutionFramework = ({ content, type, projectId }) => {
   const [expandedCard, setExpandedCard] = useState(null);
 
   const getTaskIcon = (category) => {
@@ -34,14 +34,8 @@ const SolutionFramework = ({ content, type }) => {
 
   if (type === 'analysis') {
     const taskImages = content?.useCarousel 
-      ? getTaskAnalysisImages()
+      ? getTaskAnalysisImages(projectId)
       : [];
-
-    console.log('Task Analysis Debug:', { 
-      hasCarousel: content?.useCarousel,
-      imagesFound: taskImages.length,
-      taskImages 
-    });
 
     return (
       <div className="analysis-section">
@@ -56,7 +50,7 @@ const SolutionFramework = ({ content, type }) => {
           </div>
         )}
 
-        {/* Task Analysis Carousel - simplified */}
+        {/* Task Analysis Carousel */}
         {taskImages.length > 0 && (
           <div className="analysis-carousel">
             <h4>Task Analysis</h4>
@@ -128,7 +122,7 @@ const SolutionFramework = ({ content, type }) => {
             {concept.useCarousel && (
               <div className="concept-carousel">
                 <ImageCarousel 
-                  images={getConceptImages(concept.carouselType)}
+                  images={getConceptImages(projectId)}
                   autoPlay={false}
                   variant="concept"
                 />

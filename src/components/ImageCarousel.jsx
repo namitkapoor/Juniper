@@ -1,26 +1,22 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { IoChevronBack, IoChevronForward } from 'react-icons/io5';
-import { carouselImages } from '../data/carouselImages';
 import '../style/image-carousel.css';
 
-const ImageCarousel = ({ projectId, activeMethodology, images: providedImages, variant = 'research' }) => {
+const ImageCarousel = ({ images: providedImages, variant = 'research', activeMethodology }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
   const [imageLoaded, setImageLoaded] = useState(false);
 
-  // Use provided images if available, otherwise fetch from carouselImages
-  const images = providedImages || carouselImages[projectId] || [];
-  
   // Filter images based on methodology if needed
   const filteredImages = activeMethodology 
-    ? images.filter(img => img.methodologies?.includes(activeMethodology))
-    : images;
+    ? providedImages.filter(img => img.methodologies?.includes(activeMethodology))
+    : providedImages;
 
   // Reset currentIndex when images change
   React.useEffect(() => {
     setCurrentIndex(0);
-  }, [activeMethodology, images]);
+  }, [activeMethodology, providedImages]);
 
   const slideVariants = {
     enter: (direction) => ({
@@ -48,8 +44,8 @@ const ImageCarousel = ({ projectId, activeMethodology, images: providedImages, v
     setDirection(newDirection);
     setCurrentIndex((prevIndex) => {
       let newIndex = prevIndex + newDirection;
-      if (newIndex < 0) newIndex = images.length - 1;
-      if (newIndex >= images.length) newIndex = 0;
+      if (newIndex < 0) newIndex = filteredImages.length - 1;
+      if (newIndex >= filteredImages.length) newIndex = 0;
       return newIndex;
     });
   };
@@ -58,7 +54,7 @@ const ImageCarousel = ({ projectId, activeMethodology, images: providedImages, v
     setImageLoaded(true);
   };
 
-  if (!images.length) {
+  if (!filteredImages?.length) {
     return (
       <div className="carousel-empty">
         {activeMethodology 
@@ -88,7 +84,6 @@ const ImageCarousel = ({ projectId, activeMethodology, images: providedImages, v
               opacity: { duration: 0.2 }
             }}
             onLoad={handleImageLoad}
-            // Reset loaded state when image changes
             onAnimationStart={() => setImageLoaded(false)}
           />
         </AnimatePresence>
@@ -108,7 +103,7 @@ const ImageCarousel = ({ projectId, activeMethodology, images: providedImages, v
       </div>
 
       <div className="carousel-controls">
-        {images.map((_, index) => (
+        {filteredImages.map((_, index) => (
           <div
             key={index}
             className={`carousel-dot ${index === currentIndex ? 'active' : ''}`}
