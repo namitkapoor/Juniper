@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { businessChallengeData } from '../data/businessChallengeData';
-import { getBusinessChallengeImages } from '../data/carouselImages';
+import { carouselImages } from '../data/carouselImages';
 import ImageCarousel from './ImageCarousel';
 
 const BusinessChallenge = ({ isExpanded, projectId }) => {
@@ -14,11 +14,15 @@ const BusinessChallenge = ({ isExpanded, projectId }) => {
 
   const currentPainPoint = data.painPoints[selectedPainPoint];
   
-  // Get business challenge images for the current project and filter by pain point
-  const allBusinessImages = getBusinessChallengeImages(projectId);
+  // Get all business challenge images and filter by the current pain point's tag
+  const allBusinessImages = carouselImages.businessChallengeImages || [];
   const currentImages = allBusinessImages.filter(img => 
     img.painPoints?.includes(currentPainPoint?.id)
   );
+
+  // Console log for debugging
+  console.log('Current Pain Point:', currentPainPoint?.id);
+  console.log('Available Images:', currentImages);
 
   return (
     <AnimatePresence>
