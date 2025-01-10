@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Navbar from '../../components/Navbar.jsx';
 import '../../style/case-study.css';
@@ -12,6 +12,11 @@ import Overview from '../../components/Overview';
 export default function SustainablePackaging() {
   const [expandedSections, setExpandedSections] = useState(new Set());
   const [timelineProgress, setTimelineProgress] = useState(0);
+
+  // Add scroll to top effect
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const toggleSection = (section) => {
     setExpandedSections(prev => {

@@ -13,6 +13,10 @@ export default function InfluencerMarketing() {
   const [expandedSections, setExpandedSections] = useState(new Set());
   const [timelineProgress, setTimelineProgress] = useState(0);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const toggleSection = (section) => {
     setExpandedSections(prev => {
       const newSet = new Set(prev);
