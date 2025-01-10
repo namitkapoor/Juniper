@@ -5,11 +5,14 @@ import '../style/phase-content.css';
 import ImplementationPlan from './ImplementationPlan';
 import ResearchInsights from './ResearchInsights';
 import SolutionFramework from './SolutionFramework';
+import ImageCarousel from './ImageCarousel';
+import { getTaskAnalysisImages, getConceptImages } from '../data/carouselImages';
 
 const PhaseContent = ({ content, contentType, projectId }) => {
+  console.log('PhaseContent Props:', { content, contentType, projectId });
+
   if (!content) return null;
 
-  // Get project-specific content if it exists
   const projectContent = content[projectId] || content;
 
   const renderSection = (section) => {
@@ -26,15 +29,64 @@ const PhaseContent = ({ content, contentType, projectId }) => {
         );
 
       case 'analysis':
+        console.log('Analysis section:', {
+          projectId,
+          hasFindings: Boolean(section.content?.findings),
+          firstCategory: section.content?.findings?.[0]?.category
+        });
+        
+        if (section.content?.findings?.[0]?.category) {
+          const taskImages = getTaskAnalysisImages(projectId, section.content.findings[0].category);
+          console.log('Task Analysis Images:', taskImages);
+          
+          return (
+            <div className="analysis-section">
+              <ImageCarousel 
+                images={taskImages}
+                autoPlay={false}
+                variant="analysis"
+              />
+              <SolutionFramework 
+                content={section.content} 
+                type={section.type}
+                projectId={projectId}
+              />
+            </div>
+          );
+        }
+        
+        return <SolutionFramework 
+          content={section.content} 
+          type={section.type}
+          projectId={projectId}
+        />;
+
       case 'concepts':
+        console.log('Concepts section:', {
+          projectId,
+          hasConcepts: Boolean(section.content?.concepts),
+          concepts: section.content?.concepts
+        });
+        
+        return <SolutionFramework 
+          content={section.content} 
+          type={section.type}
+          projectId={projectId}
+        />;
+
       case 'wireframes':
         return <SolutionFramework 
           content={section.content} 
           type={section.type}
+          projectId={projectId}
         />;
 
       case 'process':
-        return <ProcessFlow steps={section.steps} />;
+        return <ProcessFlow 
+          steps={section.steps} 
+          projectId={projectId}
+          isNested={true}
+        />;
 
       case 'decisions':
         return <DecisionCriteria 

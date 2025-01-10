@@ -13,6 +13,8 @@ import {
 
 const ProcessFlow = ({ steps, isNested = false, projectId }) => {
   const [activeStep, setActiveStep] = useState(null);
+  
+  console.log('ProcessFlow Props:', { steps, isNested, projectId }); // Debug log
 
   const handleStepClick = (stepId) => {
     setActiveStep(activeStep === stepId ? null : stepId);

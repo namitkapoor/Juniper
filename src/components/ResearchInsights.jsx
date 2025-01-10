@@ -17,7 +17,7 @@ const ResearchInsights = ({ items, projectId }) => {
   const [selectedTags, setSelectedTags] = useState([]);
 
   // Move image filtering logic here
-  const researchImages = getProjectImages(projectId).filter(img => 
+  const researchImages = getProjectImages(projectId, 'research').filter(img => 
     items.some(item => 
       item.methodologies.some(method => img.methodologies.includes(method))
     )

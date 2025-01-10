@@ -1,10 +1,5 @@
 import React, { useState } from 'react';
-import ImageCarousel from './ImageCarousel';
 import OptimizedImage from './OptimizedImage';
-import { 
-  getConceptImages, 
-  getTaskAnalysisImages 
-} from '../data/carouselImages';
 import { 
   IoNavigateOutline,
   IoTrashOutline,
@@ -14,8 +9,11 @@ import {
   IoCalendarOutline
 } from 'react-icons/io5';
 import '../style/solution-framework.css';
+import ImageCarousel from './ImageCarousel';
+import { getConceptImages } from '../data/carouselImages';
 
 const SolutionFramework = ({ content, type, projectId }) => {
+  console.log('SolutionFramework Props:', { content, type, projectId });
   const [expandedCard, setExpandedCard] = useState(null);
 
   const getTaskIcon = (category) => {
@@ -28,15 +26,10 @@ const SolutionFramework = ({ content, type, projectId }) => {
       'Create Harvest Plans': IoCalendarOutline,
       'Remove Flags': IoTrashOutline
     };
-    
     return iconMap[category];
   };
 
   if (type === 'analysis') {
-    const taskImages = content?.useCarousel 
-      ? getTaskAnalysisImages(projectId)
-      : [];
-
     return (
       <div className="analysis-section">
         {/* Cover Image */}
@@ -46,18 +39,6 @@ const SolutionFramework = ({ content, type, projectId }) => {
               src={content.coverImage.url}
               alt={content.coverImage.alt}
               caption={content.coverImage.caption}
-            />
-          </div>
-        )}
-
-        {/* Task Analysis Carousel */}
-        {taskImages.length > 0 && (
-          <div className="analysis-carousel">
-            <h4>Task Analysis</h4>
-            <ImageCarousel 
-              images={taskImages}
-              autoPlay={false}
-              variant="analysis"
             />
           </div>
         )}
@@ -104,40 +85,31 @@ const SolutionFramework = ({ content, type, projectId }) => {
   if (type === 'concepts') {
     return (
       <div className="concepts-grid">
-        {content.concepts.map((concept, index) => (
-          <div key={index} className={`concept-card ${concept.status?.toLowerCase()}`}>
-            <h4>{concept.name}</h4>
-            <p>{concept.description}</p>
-            
-            {concept.coverImage && (
-              <div className="concept-cover-image">
-                <OptimizedImage 
-                  src={concept.coverImage.url}
-                  alt={concept.coverImage.alt}
-                  caption={concept.coverImage.caption}
-                />
-              </div>
-            )}
-            
-            {concept.useCarousel && (
-              <div className="concept-carousel">
-                <ImageCarousel 
-                  images={getConceptImages(projectId)}
-                  autoPlay={false}
-                  variant="concept"
-                />
-              </div>
-            )}
+        {content?.concepts?.map((concept, index) => {
+          const carouselType = concept.carouselType || 
+            (concept.name?.toLowerCase().includes('operations center') ? 'operationsCenterConcept' : 'seed2productConcept');
+          
+          return (
+            <div key={index} className={`concept-card ${concept.status?.toLowerCase()}`}>
+              <h4>{concept.name}</h4>
+              <p>{concept.description}</p>
+              
+              <ImageCarousel 
+                images={getConceptImages(projectId, carouselType)}
+                autoPlay={false}
+                variant="concept"
+              />
 
-            {concept.keyFeatures && (
-              <ul className="feature-list">
-                {concept.keyFeatures.map((feature, i) => (
-                  <li key={i}>{feature}</li>
-                ))}
-              </ul>
-            )}
-          </div>
-        ))}
+              {concept.keyFeatures && (
+                <ul className="feature-list">
+                  {concept.keyFeatures.map((feature, i) => (
+                    <li key={i}>{feature}</li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          );
+        })}
       </div>
     );
   }
@@ -145,7 +117,7 @@ const SolutionFramework = ({ content, type, projectId }) => {
   if (type === 'wireframes') {
     return (
       <div className="wireframes-section">
-        {content.screens.map((screen, index) => (
+        {content?.screens?.map((screen, index) => (
           <div 
             key={index} 
             className={`wireframe-card ${expandedCard === index ? 'expanded' : ''}`}
