@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { IoChevronBack, IoChevronForward } from 'react-icons/io5';
 import '../style/image-carousel.css';
 
-const ImageCarousel = ({ images: providedImages, variant = 'research', activeMethodology }) => {
+const ImageCarousel = ({ images: providedImages, variant = 'research', activeMethodology, projectId }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
   const [imageLoaded, setImageLoaded] = useState(false);
@@ -66,7 +66,10 @@ const ImageCarousel = ({ images: providedImages, variant = 'research', activeMet
   }
 
   return (
-    <div className={`carousel-container ${variant}`}>
+    <div 
+      className={`carousel-container ${variant}`} 
+      data-project={projectId}
+    >
       <div className="carousel-wrapper">
         <AnimatePresence initial={false} custom={direction}>
           <motion.img
@@ -88,32 +91,38 @@ const ImageCarousel = ({ images: providedImages, variant = 'research', activeMet
           />
         </AnimatePresence>
 
-        <div 
-          className="carousel-arrow prev" 
-          onClick={() => paginate(-1)}
-        >
-          <IoChevronBack color="white" size={24} />
-        </div>
-        <div 
-          className="carousel-arrow next" 
-          onClick={() => paginate(1)}
-        >
-          <IoChevronForward color="white" size={24} />
-        </div>
+        {filteredImages.length > 1 && (
+          <>
+            <div 
+              className="carousel-arrow prev" 
+              onClick={() => paginate(-1)}
+            >
+              <IoChevronBack color="white" size={24} />
+            </div>
+            <div 
+              className="carousel-arrow next" 
+              onClick={() => paginate(1)}
+            >
+              <IoChevronForward color="white" size={24} />
+            </div>
+          </>
+        )}
       </div>
 
-      <div className="carousel-controls">
-        {filteredImages.map((_, index) => (
-          <div
-            key={index}
-            className={`carousel-dot ${index === currentIndex ? 'active' : ''}`}
-            onClick={() => {
-              setDirection(index > currentIndex ? 1 : -1);
-              setCurrentIndex(index);
-            }}
-          />
-        ))}
-      </div>
+      {filteredImages.length > 1 && (
+        <div className="carousel-controls">
+          {filteredImages.map((_, index) => (
+            <div
+              key={index}
+              className={`carousel-dot ${index === currentIndex ? 'active' : ''}`}
+              onClick={() => {
+                setDirection(index > currentIndex ? 1 : -1);
+                setCurrentIndex(index);
+              }}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 };

@@ -1,4 +1,15 @@
-import { IoAnalyticsOutline, IoPeopleOutline } from 'react-icons/io5';
+import { 
+  IoAnalyticsOutline, 
+  IoSpeedometerOutline,  // Simplified Workflow
+  IoStatsChartOutline,   // Data-Driven Insights
+  IoSearchOutline,       // Optimized Discovery
+  IoPeopleOutline,       // Community-Centric
+  IoExpandOutline,        // Scalability
+  IoTimeOutline,        // Time Management
+  IoArchiveOutline,     // Inventory Tracking
+  IoWalletOutline,      // Financial Tools
+  IoLeafOutline         // Crop Planning
+} from 'react-icons/io5';
 
 const baseResearchPhase = {
   id: 'research',
@@ -19,24 +30,28 @@ export const researchPhase = {
           items: [
             {
               category: "Time Management",
+              icon: IoTimeOutline,
               insight: "Farmers need efficient task scheduling due to long work hours",
               methodologies: ["User Interviews", "Field Observations", "Affinity Diagrams", "Storyboards"],
               response: "Task-centric daily planner with priority scheduling"
             },
             {
               category: "Inventory Tracking",
+              icon: IoArchiveOutline,
               insight: "Manual inventory tracking leads to stockouts and waste",
               methodologies: ["Journey Maps", "Survey Data", "Storyboards", "User Interviews"],
               response: "Automated inventory system with low-stock alerts"
             },
             {
               category: "Financial Tools",
+              icon: IoWalletOutline,
               insight: "Basic accounting needs are not met by current solutions",
               methodologies: ["User Interviews", "Journey Maps", "Survey Data", "Affinity Diagrams"],
               response: "Simplified expense tracking and reporting"
             },
             {
               category: "Crop Planning",
+              icon: IoLeafOutline,
               insight: "Soil-based planting decisions need better support",
               methodologies: ["Field Observations", "Survey Data", "Storyboards", "Affinity Diagrams"],
               response: "AI-powered crop recommendation engine"
@@ -58,34 +73,55 @@ export const researchPhase = {
     },
     "influencerMarketing": {
       title: "Research Insights",
-      summary: "Our research revealed key challenges in influencer discovery and campaign management that informed our solution.",
+      summary: "Our research revealed key requirements for simplifying influencer marketing for small businesses while ensuring scalability.",
       sections: [
         {
           type: 'requirements',
           items: [
             {
-              category: "Discovery Process",
-              insight: "Small businesses spend excessive time manually searching for relevant influencers",
-              methodologies: ["User Interviews", "Journey Maps", "Survey Data", "Affinity Diagrams"],
+              category: "Simplified Workflow",
+              icon: IoSpeedometerOutline,
+              insight: "Streamline campaign creation, influencer discovery, and contract management into an intuitive and unified experience",
+              methodologies: ["Journey Maps", "Competitive Analysis"],
+              response: "Unified dashboard with integrated campaign management"
+            },
+            {
+              category: "Data-Driven Insights",
+              icon: IoStatsChartOutline,
+              insight: "Provide actionable analytics for campaign performance and influencer tracking",
+              methodologies: ["Empathy Maps", "Competitive Analysis", "Personas"],
+              response: "Simplified analytics with actionable recommendations"
+            },
+            {
+              category: "Optimized Discovery",
+              icon: IoSearchOutline,
+              insight: "Build an efficient marketplace for finding and filtering influencers",
+              methodologies: ["Journey Maps", "Empathy Maps", "Personas"],
               response: "AI-powered influencer matching system"
             },
             {
-              category: "Campaign Management",
-              insight: "Influencers often struggle with managing multiple campaigns",
-              methodologies: ["User Interviews", "Journey Maps", "Survey Data", "Affinity Diagrams"],
-              response: "AI-powered campaign management tool"
+              category: "Community-Centric",
+              icon: IoPeopleOutline,
+              insight: "Highlight local influencers and campaigns to foster community connections",
+              methodologies: ["Empathy Maps", "Personas", "Journey Maps"],
+              response: "Location-based discovery and community features"
+            },
+            {
+              category: "Scalability",
+              icon: IoExpandOutline,
+              insight: "Ensure tools scale with business growth while maintaining simplicity",
+              methodologies: ["Personas", "Competitive Analysis"],
+              response: "Modular design with expandable features"
             }
           ]
         },
         {
           type: 'methodology',
           items: {
-            "User Interviews": { color: "#9C4221", textColor: "light" },
             "Journey Maps": { color: "#6B3FA0", textColor: "light" },
-            "Survey Data": { color: "#007BFF", textColor: "light" },
-            "Storyboards": { color: "#FFA500", textColor: "light" },
-            "Affinity Diagrams": { color: "#00FF00", textColor: "light" },
-            "Field Observations": { color: "#276749", textColor: "light" }
+            "Competitive Analysis": { color: "#276749", textColor: "light" },
+            "Empathy Maps": { color: "#9C4221", textColor: "light" },
+            "Personas": { color: "#007BFF", textColor: "light" }
           }
         }
       ]

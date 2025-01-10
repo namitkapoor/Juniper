@@ -8,7 +8,8 @@ import {
   IoSearchOutline,
   IoAnalyticsOutline,
   IoPeopleOutline,
-  IoSettingsOutline
+  IoSettingsOutline,
+  IoNavigateOutline
 } from 'react-icons/io5';
 
 export const businessChallengeData = {
@@ -123,56 +124,26 @@ export const businessChallengeData = {
     },
     painPoints: [
       {
+        id: "campaignWorkflow",
+        icon: IoNavigateOutline,
+        title: "Campaign Workflow",
+        description: "Managing campaign creation and tracking across stages was overly complex and fragmented."
+      },
+      {
+        id: "contractManagement",
+        icon: IoStatsChartOutline,
+        title: "Contract Management",
+        description: "Contracts were challenging to create, modify, and track, leading to inefficiencies in the agreement process with influencers."
+      },
+      {
+        id: "influencerStatus",
         icon: IoSearchOutline,
-        title: "Discovery Process",
-        description: "Time-consuming and inefficient process of finding relevant influencers for specific campaigns.",
-        images: [
-          {
-            src: "../images/influencer/discovery-process.jpg",
-            alt: "Influencer discovery interface",
-            caption: "Current discovery interface"
-          }
-        ]
-      },
-      {
-        icon: IoAnalyticsOutline,
-        title: "Performance Tracking",
-        description: "Lack of comprehensive analytics for measuring campaign effectiveness and ROI.",
-        images: [
-          {
-            src: "../images/influencer/analytics-dashboard.jpg",
-            alt: "Analytics dashboard",
-            caption: "Current analytics view"
-          }
-        ]
-      },
-      {
-        icon: IoPeopleOutline,
-        title: "Communication",
-        description: "Fragmented communication channels between businesses and influencers.",
-        images: [
-          {
-            src: "../images/influencer/communication.jpg",
-            alt: "Communication interface",
-            caption: "Current messaging system"
-          }
-        ]
-      },
-      {
-        icon: IoSettingsOutline,
-        title: "Campaign Management",
-        description: "Complex workflow for setting up and managing multiple campaigns simultaneously.",
-        images: [
-          {
-            src: "../images/influencer/campaign-management.jpg",
-            alt: "Campaign management interface",
-            caption: "Current campaign manager"
-          }
-        ]
+        title: "Influencer Status Management",
+        description: "Brands struggle with a complicated campaign creation and management process."
       }
     ],
     costProblems: {
-      title: "Cost of Problems",
+      title: "Cost of Current Problems",
       content: "Small businesses lose an average of 15-20 hours per month on manual influencer discovery and campaign management, resulting in reduced marketing efficiency and missed opportunities."
     }
   },

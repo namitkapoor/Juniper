@@ -16,7 +16,6 @@ import '../style/research-insights.css';
 const ResearchInsights = ({ items, projectId }) => {
   const [selectedTags, setSelectedTags] = useState([]);
 
-  // Move image filtering logic here
   const researchImages = getProjectImages(projectId, 'research').filter(img => 
     items.some(item => 
       item.methodologies.some(method => img.methodologies.includes(method))
@@ -37,22 +36,6 @@ const ResearchInsights = ({ items, projectId }) => {
     );
   };
 
-  const getInsightIcon = (category) => {
-    const iconMap = {
-      'User Research': IoPersonOutline,
-      'Market Analysis': IoBarChartOutline,
-      'Competitive Analysis': IoSearchOutline,
-      'User Testing': IoPeopleOutline,
-      'Documentation': IoDocumentTextOutline,
-      'Heuristic Evaluation': IoEyeOutline,
-      'Data Analysis': IoAnalyticsOutline,
-      'Performance Metrics': IoStatsChartOutline
-    };
-    
-    const IconComponent = iconMap[category];
-    return IconComponent ? <IconComponent size={28} /> : null;
-  };
-
   return (
     <>
       {researchImages.length > 0 && (
@@ -61,14 +44,16 @@ const ResearchInsights = ({ items, projectId }) => {
             images={filteredImages}
             autoPlay={false}
             variant="research"
+            projectId={projectId}
           />
         </div>
       )}
+      <h5 className="requirements-title">Design Requirements</h5>
       <div className="requirements-grid">
         {items.map((item, index) => (
           <div key={index} className="requirement-card">
             <div className="title-with-icon">
-              {getInsightIcon(item.category)}
+              {item.icon && <item.icon size={24} />}
               <span>{item.category}</span>
             </div>
             <p className="insight">{item.insight}</p>

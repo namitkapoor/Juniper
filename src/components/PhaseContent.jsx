@@ -20,7 +20,6 @@ const PhaseContent = ({ content, contentType, projectId }) => {
       case 'requirements':
         return (
           <div className="section requirements">
-            <h5 className="requirements-title">Design Requirements</h5>
             <ResearchInsights 
               items={section.items}
               projectId={projectId}

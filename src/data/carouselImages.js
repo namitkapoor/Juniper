@@ -209,11 +209,122 @@ export const carouselImages = {
     }
   },
   influencerMarketing: {
-    research: [],
-    businessChallenge: [],
-    taskAnalysis: [],
+    research: [
+      {
+        src: `${BASE_PATH}/MI/Research/Business Owner Persona.svg`,
+        caption: 'Interview with a lifestyle influencer',
+        alt: 'Semi-structured interview with influencer',
+        methodologies: ["Personas"]
+      },
+      {
+        src: `${BASE_PATH}/MI/Research/Influencer Persona.svg`,
+        caption: 'Interview with brand marketing team',
+        alt: 'Semi-structured interview with brand',
+        methodologies: ["Personas"]
+      },
+      {
+        src: `${BASE_PATH}/MI/Research/Business Journey map.svg`,
+        caption: 'User journey mapping session',
+        alt: 'Journey mapping workshop results',
+        methodologies: ["Journey Maps"]
+      },
+      {
+        src: `${BASE_PATH}/MI/Research/Nextdoor - Neighborhood CA.jpg`,
+        caption: 'Competitive analysis findings',
+        alt: 'Competitive analysis documentation',
+        methodologies: ["Competitive Analysis"]
+      },
+      {
+        src: `${BASE_PATH}/MI/Research/Businesses Empathy map.svg`,
+        caption: 'Research synthesis affinity mapping',
+        alt: 'Affinity mapping session results',
+        methodologies: ["Empathy Maps"]
+      },
+      {
+        src: `${BASE_PATH}/MI/Research/Influencers Empathy map.svg`,
+        caption: 'Research synthesis affinity mapping',
+        alt: 'Affinity mapping session results',
+        methodologies: ["Empathy Maps"]
+      }
+    ],
+    businessChallenge: [
+      {
+        src: `${BASE_PATH}/MI/Original Design/old design campaign.svg`,
+        caption: 'Current campaign workflow interface',
+        alt: 'Original interface showing complex campaign workflow',
+        methodologies: ["Interface Analysis"],
+        painPoints: ["campaignWorkflow"]
+      },
+      {
+        src: `${BASE_PATH}/MI/Original Design/old contracts.svg`,
+        caption: 'Contract management interface',
+        alt: 'Complex contract management system',
+        methodologies: ["Interface Analysis"],
+        painPoints: ["contractManagement"]
+      },
+      {
+        src: `${BASE_PATH}/MI/Original Design/old influencer management.svg`,
+        caption: 'Influencer status dashboard',
+        alt: 'Current influencer status management',
+        methodologies: ["Interface Analysis"],
+        painPoints: ["influencerStatus"]
+      }
+    ],
+    taskAnalysis: [
+      {
+        src: `${BASE_PATH}/MI/Task Analysis/Create Campaign.jpg`,
+        caption: 'Task Analysis: Campaign Creation',
+        alt: 'Task flow diagram for campaign creation',
+        taskCategory: "Create Campaign"
+      },
+      {
+        src: `${BASE_PATH}/MI/Task Analysis/Find Influencer.jpg`,
+        caption: 'Task Analysis: Influencer Discovery',
+        alt: 'Task flow for finding relevant influencers',
+        taskCategory: "Find Influencer"
+      },
+      {
+        src: `${BASE_PATH}/MI/Task Analysis/Track Performance.jpg`,
+        caption: 'Task Analysis: Performance Tracking',
+        alt: 'Task flow for analytics monitoring',
+        taskCategory: "Track Performance"
+      }
+    ],
     concepts: {
-      // concept variations
+      dashboardConcept: [
+        {
+          src: `${BASE_PATH}/MI/Sketches/Sketch-1.1.svg`,
+          caption: 'Dashboard Overview',
+          alt: 'Main dashboard interface concept'
+        },
+        {
+          src: `${BASE_PATH}/MI/Sketches/Sketch-1.2.svg`,
+          caption: 'Campaign Creation',
+          alt: 'Streamlined campaign creation flow'
+        },
+        {
+          src: `${BASE_PATH}/MI/Sketches/Sketch-1.3.svg`,
+          caption: 'Analytics View',
+          alt: 'Enhanced analytics visualization'
+        }
+      ],
+      mobileAppConcept: [
+        {
+          src: `${BASE_PATH}/MI/Sketches/Sketch-2.1.jpg`,
+          caption: 'Mobile Dashboard',
+          alt: 'Mobile app dashboard concept'
+        },
+        {
+          src: `${BASE_PATH}/MI/Sketches/Sketch-2.2.jpg`,
+          caption: 'Quick Actions',
+          alt: 'Mobile quick actions interface'
+        },
+        {
+          src: `${BASE_PATH}/MI/Sketches/Sketch-2.3.jpg`,
+          caption: 'Mobile Analytics',
+          alt: 'Mobile analytics view'
+        }
+      ]
     }
   }
 };
