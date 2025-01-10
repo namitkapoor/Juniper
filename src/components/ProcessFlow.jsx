@@ -2,57 +2,24 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import PhaseContent from './PhaseContent';
 import '../style/process-flow.css';
-import { 
-  IoLeafOutline,
-  IoFlagOutline,
-  IoConstructOutline,
-  IoCalendarOutline,
-  IoNavigateOutline,
-  IoTrashOutline
-} from 'react-icons/io5';
 
 const ProcessFlow = ({ steps, isNested = false, projectId }) => {
   const [activeStep, setActiveStep] = useState(null);
-  
-  console.log('ProcessFlow Props:', { steps, isNested, projectId }); // Debug log
 
   const handleStepClick = (stepId) => {
     setActiveStep(activeStep === stepId ? null : stepId);
   };
 
-  // Map task titles to icons
-  const getTaskIcon = (taskTitle) => {
-    const iconMap = {
-      'Choose a Crop to Plant': IoLeafOutline,
-      'Identify and Customize Flags': IoFlagOutline,
-      'Find Troubleshoot': IoConstructOutline,
-      'Create Harvest Plans': IoCalendarOutline,
-      'Navigation': IoNavigateOutline,
-      'Unnecessary Features': IoTrashOutline
-    };
-    
-    return iconMap[taskTitle] || null;
-  };
-
-  // Format content and inject icons
+  // Format content (removed icon injection)
   const getStepContent = (step) => {
     if (step.content) {
-      // Inject icons into findings if they exist
-      const contentWithIcons = {
-        ...step.content,
-        findings: step.content.findings?.map(finding => ({
-          ...finding,
-          icon: getTaskIcon(finding.category)
-        }))
-      };
-
       return {
         title: step.title,
         summary: step.description,
         sections: [
           {
             type: step.type,
-            content: contentWithIcons
+            content: step.content
           }
         ]
       };

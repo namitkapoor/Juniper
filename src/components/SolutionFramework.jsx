@@ -1,13 +1,5 @@
 import React, { useState } from 'react';
 import OptimizedImage from './OptimizedImage';
-import { 
-  IoNavigateOutline,
-  IoTrashOutline,
-  IoConstructOutline,
-  IoFlagOutline,
-  IoLeafOutline,
-  IoCalendarOutline
-} from 'react-icons/io5';
 import '../style/solution-framework.css';
 import ImageCarousel from './ImageCarousel';
 import { getConceptImages } from '../data/carouselImages';
@@ -15,19 +7,6 @@ import { getConceptImages } from '../data/carouselImages';
 const SolutionFramework = ({ content, type, projectId }) => {
   console.log('SolutionFramework Props:', { content, type, projectId });
   const [expandedCard, setExpandedCard] = useState(null);
-
-  const getTaskIcon = (category) => {
-    const iconMap = {
-      'Navigation': IoNavigateOutline,
-      'Unnecessary Features': IoTrashOutline,
-      'Choose a Crop to Plant': IoLeafOutline,
-      'Identify and Customize Flags': IoFlagOutline,
-      'Find Troubleshoot': IoConstructOutline,
-      'Create Harvest Plans': IoCalendarOutline,
-      'Remove Flags': IoTrashOutline
-    };
-    return iconMap[category];
-  };
 
   if (type === 'analysis') {
     return (
@@ -47,11 +26,10 @@ const SolutionFramework = ({ content, type, projectId }) => {
         {content?.findings && (
           <div className="findings-grid">
             {content.findings.map((finding, index) => {
-              const IconComponent = getTaskIcon(finding.category);
               return (
                 <div key={index} className="finding-card">
                   <h5 className="title-with-icon">
-                    {IconComponent && <IconComponent size={24} />}
+                    {finding.icon && <finding.icon size={24} />}
                     <span>{finding.category}</span>
                   </h5>
                   

@@ -79,4 +79,16 @@
     box-sizing: border-box;
     margin: 0;
   }
+}
+
+.analysis-section .analysis-image {
+  max-width: 800px;  /* Reduced from original size */
+  margin: 0 auto 2rem;  /* Centers the image and adds bottom margin */
+}
+
+.analysis-section .analysis-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;  /* Optional: keeps the rounded corners */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);  /* Optional: maintains subtle shadow */
 } 

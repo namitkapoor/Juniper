@@ -7,7 +7,16 @@ import {
   IoAnalyticsOutline,
   IoPeopleOutline,
   IoSettingsOutline,
-  IoWalletOutline
+  IoWalletOutline,
+  IoNavigateOutline,
+  IoAppsOutline,
+  IoPersonOutline,
+  IoDocumentTextOutline,
+  IoStatsChartOutline,
+  IoLeafOutline,
+  IoFlagOutline,
+  IoCalendarOutline,
+  IoTrashOutline
 } from 'react-icons/io5';
 
 const baseSolutionPhase = {
@@ -43,12 +52,14 @@ export const solutionPhase = {
                 findings: [
                   {
                     category: "Navigation",
+                    icon: IoNavigateOutline,
                     issue: "The app's navigation pathways were overly complex, requiring multiple steps to access frequently used features.",
                     impact: "This led to increased task completion times, causing frustration among users with time-sensitive workflows.",
                     additionalValidation: "Task analysis validated the need for streamlining navigation by identifying common workflows."
                   },
                   {
                     category: "Unnecessary Features",
+                    icon: IoAppsOutline,
                     issue: "Several features, such as equipment tracking and advanced analytics, were irrelevant to small farm owners and cluttered the interface.",
                     impact: "This created cognitive overload, reducing adoption rates and user satisfaction.",
                     additionalValidation: "Farmers explicitly commented on irrelevant features during interviews."
@@ -74,6 +85,7 @@ export const solutionPhase = {
                 findings: [
                   {
                     category: "Choose a Crop to Plant",
+                    icon: IoLeafOutline,
                     description: "Users needed to navigate through multiple menus to identify suitable crops for planting.",
                     metrics: {
                       completionTime: "5 minutes average",
@@ -86,6 +98,7 @@ export const solutionPhase = {
                   },
                   {
                     category: "Identify and Customize Flags",
+                    icon: IoFlagOutline,
                     description: "Users were tasked with marking areas on the field using customizable flags.",
                     metrics: {
                       completionTime: "4.5 minutes average",
@@ -98,6 +111,7 @@ export const solutionPhase = {
                   },
                   {
                     category: "Find Troubleshoot",
+                    icon: IoConstructOutline,
                     description: "Users were asked to locate troubleshooting tools for equipment issues.",
                     metrics: {
                       completionTime: "6 minutes average",
@@ -110,6 +124,7 @@ export const solutionPhase = {
                   },
                   {
                     category: "Create Harvest Plans",
+                    icon: IoCalendarOutline,
                     description: "Users needed to create a plan for harvesting specific fields.",
                     metrics: {
                       completionTime: "7 minutes average",
@@ -122,6 +137,7 @@ export const solutionPhase = {
                   },
                   {
                     category: "Remove Flags",
+                    icon: IoTrashOutline,
                     description: "Users needed to delete flags after completing a task in the field.",
                     metrics: {
                       completionTime: "3 minutes average",
@@ -268,36 +284,45 @@ export const solutionPhase = {
     },
     "influencerMarketing": {
       title: "Solution Framework",
-      summary: "Based on our research insights, we developed a comprehensive solution focusing on automated discovery and streamlined campaign management.",
+      summary: "Through product analysis and task observation, we identified key issues in campaign management and developed solutions focused on streamlining workflows and improving visibility.",
       sections: [
         {
           type: 'process',
           steps: [
             {
-              id: 'platform-analysis',
+              id: 'product-analysis',
               type: 'analysis',
-              title: "Platform Analysis",
+              title: "Product Analysis",
               icon: IoSearchOutline,
-              description: "Evaluation of existing influencer platforms",
+              description: "Key issues with existing product",
               content: {
                 coverImage: {
-                  url: "/images/Case Studies/Influencer/platform-analysis.jpg",
-                  caption: "Platform Analysis Overview",
-                  alt: "Overview of platform analysis"
+                  url: "/images/Case Studies/MI/Original Design/old design campaign.svg",
+                  caption: "Product Analysis Overview",
+                  alt: "Overview of product analysis"
                 },
                 useCarousel: false,
                 findings: [
                   {
-                    category: "Discovery Tools",
-                    issue: "Current platforms rely heavily on manual search and filtering",
-                    impact: "Time-consuming process with limited accuracy in matches",
-                    additionalValidation: "User interviews revealed 70% of time spent on manual discovery"
+                    category: "Influencer Status in Campaigns",
+                    icon: IoPersonOutline,
+                    issue: "Lack of visibility into the status of influencers within a campaign (e.g., pending, active, completed).",
+                    impact: "Delayed follow-ups and unclear campaign tracking, leading to reduced efficiency.",
+                    additionalValidation: "User interviews revealed frustration over unclear statuses, with 50% of participants expressing the need for real-time updates."
                   },
                   {
-                    category: "Campaign Management",
-                    issue: "Fragmented tools across multiple platforms",
-                    impact: "Inefficient workflow and increased chance of errors",
-                    additionalValidation: "Task analysis showed 40% time waste in platform switching"
+                    category: "Contract Management",
+                    icon: IoDocumentTextOutline,
+                    issue: "Managing contracts across platforms was disjointed, with no unified view of contract stages or deadlines.",
+                    impact: "Increased risk of missing critical deadlines and inefficient workflow for small businesses.",
+                    additionalValidation: "Task analysis highlighted 30% of time wasted in reconciling contract details manually."
+                  },
+                  {
+                    category: "Campaign Tracking",
+                    icon: IoStatsChartOutline,
+                    issue: "Fragmented tools made it difficult to get a holistic view of campaign performance (e.g., influencer contributions, campaign ROI).",
+                    impact: "Reduced confidence in decision-making and slower iteration cycles for campaigns.",
+                    additionalValidation: "Usability testing revealed low engagement with campaign tracking features, with 40% of users abandoning mid-task."
                   }
                 ]
               }
@@ -320,6 +345,7 @@ export const solutionPhase = {
                 findings: [
                   {
                     category: "Influencer Discovery",
+                    icon: IoSearchOutline,
                     description: "Manual search and vetting process across multiple platforms",
                     metrics: {
                       completionTime: "2.5 hours average",
@@ -329,6 +355,7 @@ export const solutionPhase = {
                   },
                   {
                     category: "Campaign Setup",
+                    icon: IoSettingsOutline,
                     description: "Complex process of creating and managing campaign details",
                     metrics: {
                       completionTime: "1.5 hours average",
