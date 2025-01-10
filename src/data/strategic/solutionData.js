@@ -365,6 +365,115 @@ export const solutionPhase = {
                   }
                 ]
               }
+            },
+            {
+              id: 'design-iterations',
+              type: 'concepts',
+              title: "Design Iterations",
+              icon: IoBulbOutline,
+              description: "Exploring different design approaches",
+              content: {
+                concepts: [
+                  {
+                    name: "Campaign-Centric Dashboard",
+                    description: "A streamlined dashboard focused on campaign management and performance tracking.",
+                    status: "Selected",
+                    keyFeatures: [
+                      "Real-time campaign metrics",
+                      "Influencer status tracking",
+                      "Automated contract management"
+                    ],
+                    useCarousel: true,
+                    carouselType: "campaignDashboardConcept"
+                  },
+                  {
+                    name: "Influencer-First Interface",
+                    description: "An alternative approach prioritizing influencer discovery and relationship management.",
+                    status: "Rejected",
+                    keyFeatures: [
+                      "Advanced influencer search",
+                      "Relationship scoring",
+                      "Communication hub"
+                    ],
+                    useCarousel: true,
+                    carouselType: "influencerFirstConcept"
+                  }
+                ]
+              }
+            },
+            {
+              id: 'wireframe-concepts',
+              type: 'wireframes',
+              title: "Wireframes",
+              icon: IoConstructOutline,
+              description: "Detailed interface wireframes based on selected concept",
+              content: {
+                screens: [
+                  {
+                    name: "Discovery (AI-Powered Search and Matching)",
+                    image: {
+                      url: "/images/Case Studies/MI/Wireframe/Discovery interface.jpg",
+                      caption: "AI-powered influencer discovery interface"
+                    },
+                    purpose: "Streamline influencer discovery with AI-powered matching and smart filters. Provide detailed insights into match quality and potential campaign fit.",
+                    challengesAddressed: [
+                      "Manual search process was time-consuming and inefficient",
+                      "Match quality was difficult to assess without detailed metrics"
+                    ],
+                    keyFeatures: [
+                      "Smart filters that adapt based on campaign goals",
+                      "AI-powered match scoring with detailed explanations",
+                      "Quick-view profiles with key metrics and past performance"
+                    ],
+                    feedbackAndRefinements: [
+                      "Added detailed match explanations after users requested more transparency in AI decisions",
+                      "Simplified filter interface based on user testing feedback"
+                    ]
+                  },
+                  {
+                    name: "Campaign Dashboard (Performance Tracking)",
+                    image: {
+                      url: "/images/Case Studies/MI/Wireframe/Campaign dashboard.jpg",
+                      caption: "Centralized campaign management dashboard"
+                    },
+                    purpose: "Provide a unified view of campaign status, influencer performance, and key metrics. Enable quick actions for common campaign management tasks.",
+                    challengesAddressed: [
+                      "Scattered campaign data made tracking difficult",
+                      "Lack of real-time performance insights"
+                    ],
+                    keyFeatures: [
+                      "Real-time performance metrics and ROI tracking",
+                      "Status updates for all campaign participants",
+                      "Automated alerts for key milestones and issues"
+                    ],
+                    feedbackAndRefinements: [
+                      "Added customizable dashboard layouts based on user preferences",
+                      "Integrated quick-action buttons for common tasks after usability testing"
+                    ]
+                  },
+                  {
+                    name: "Contract Management",
+                    image: {
+                      url: "/images/Case Studies/MI/Wireframe/Contract management.jpg",
+                      caption: "Streamlined contract management interface"
+                    },
+                    purpose: "Simplify contract creation, tracking, and management. Automate routine contract tasks and provide clear status visibility.",
+                    challengesAddressed: [
+                      "Contract management was manual and error-prone",
+                      "Status tracking was inconsistent across platforms"
+                    ],
+                    keyFeatures: [
+                      "Template-based contract generation",
+                      "Digital signature integration",
+                      "Automated reminders and status tracking"
+                    ],
+                    feedbackAndRefinements: [
+                      "Simplified contract templates based on user feedback",
+                      "Added bulk contract management features for larger campaigns"
+                    ]
+                  }
+                ]
+              }
             }
           ]
         }
