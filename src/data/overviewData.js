@@ -1,5 +1,4 @@
 import { 
-  IoAlertCircleOutline,
   IoStatsChart, 
   IoTimeOutline, 
   IoBarChartOutline, 
@@ -7,7 +6,13 @@ import {
   IoSearchOutline, 
   IoAccessibilityOutline, 
   IoCheckmarkDoneOutline, 
-  IoSparklesOutline
+  IoSparklesOutline,
+  IoStopwatch,
+  IoBriefcase,
+  IoInformationCircleOutline,
+  IoConstructOutline,
+  IoRocketOutline,
+  
 } from 'react-icons/io5';
 
 export const overviewData = {
@@ -15,6 +20,21 @@ export const overviewData = {
     title: "Overview",
     subtitle: "An operations management app designed to better serve small farm owners, focusing on usability and scalability for non-technical users.",
     bentoItems: [
+      {
+        size: 'tall',
+        content: {
+          type: 'timeline',
+          icon: IoTimeOutline,
+          title: 'Project Timeline',
+          milestones: [
+            'Farmer Insights',
+            'Design Concepts',
+            'Field Testing',
+            'Iterative Refinement'
+          ],
+          activeIndex: 3
+        }
+      },
       {
         size: 'large',
         content: {
@@ -25,79 +45,43 @@ export const overviewData = {
         }
       },
       {
-        size: 'tall',
-        content: {
-          type: 'timeline',
-          icon: IoTimeOutline,
-          title: 'Project Timeline',
-          milestones: [
-            'Research & Discovery',
-            'UX/UI Design',
-            'User Testing',
-            'Iterate'
-          ],
-          activeIndex: 3
-        }
-      },
-      {
-        size: 'wide',
-        content: {
-          type: 'stats',
-          icon: IoStatsChart,
-          title: 'Impact',
-          items: [
-            'SUS Score: 70',
-            'User Satisfaction: 85%',
-            'Task Completion: 92%'
-          ]
-        }
-      },
-      {
-        size: 'wide',
+        size: 'medium',
         content: {
           type: 'text',
           icon: IoPeopleOutline,
           title: 'User Feedback',
-          description: '"Finally, an app that understands small farm operations!"',
+          description: '"It’s like you’ve been to my farm —  The layout is exactly how it looks!"',
           footer: '- Sarah Chen, Homestead Farmer'
         }
       },
+      
       {
-        size: 'tall',
+        size: 'wide',
         content: {
-          type: 'text',
-          icon: IoSearchOutline,
-          title: 'Key Insight',
-          description: '36% of farmers rely on paper tools, highlighting the need for an intuitive digital solution.',
-          footer: 'Opportunity for adoption'
+          type: 'metrics',
+          icon: IoStatsChart,
+          title: 'Impact',
+          items: [
+            { value: '70', label: 'SUS Score' },
+            { value: '85%', label: 'User Satisfaction' },
+            { value: '64%', label: 'Task Completion' },
+            { value: '12', label: 'User Interviews' }
+          ]
         }
       },
+      
       {
-        size: 'small',
+        size: 'medium',
         content: {
           type: 'text',
           icon: IoCheckmarkDoneOutline,
-          title: 'Task Success Rate',
-          description: '9/14 tasks completed successfully in usability testing.',
+          title: 'My Contribution',
+          description: 'Led the design of a map-to-grid interface tailored for small farms, making it easier for farmers to visualize and manage their land.',
           footer: 'User Evaluations'
         }
       },
       {
         size: 'small',
-        content: {
-          type: 'metrics',
-          icon: IoBarChartOutline,
-          title: 'Research Breakdown',
-          items: [
-            { value: '9', label: 'Surveys' },
-            { value: '4', label: 'User Interviews' },
-            { value: '127', label: 'Affinity Notes' },
-            { value: '7', label: 'Task Analyses' }
-          ]
-        }
-      },
-      {
-        size: 'wide',
         content: {
           type: 'text',
           icon: IoAccessibilityOutline,
@@ -105,7 +89,45 @@ export const overviewData = {
           description: 'Achieved WCAG 2.0 AA compliance with contrast checks and color-blind-friendly visual tags.',
           footer: 'Inclusive by Design'
         }
-      }
+      },
+      {
+        size: 'wide',
+        content: {
+          type: 'text',
+          icon: IoSearchOutline,
+          title: 'Product Summary',
+          description: 'Small farmers often rely on paper tools, making farm management inefficient. Our grid-based map view creates a digital twin of their farm, helping sync fieldwork with indoor tools for better organization.',
+          footer: 'Opportunity for adoption'
+        }
+      },
+          
+      {
+        size: 'large',
+        content: {
+          type: 'stats',
+          icon: IoInformationCircleOutline,
+          title: 'Project Info',
+          items: [
+            'Role: UX/UI Designer',
+            'Team: 4 members',
+            'Duration: 3 months'
+          ]
+        }
+      },
+      
+           
+      {
+        size: 'small',
+        content: {
+          type: 'text',
+          icon: IoConstructOutline,
+          title: 'Tools Used',
+          description: 'Figma, Miro, Google Workspace',
+          footer: 'User Evaluations'
+        }
+      },
+      
+      
     ]
   },
   "influencerMarketing": {
@@ -113,15 +135,6 @@ export const overviewData = {
     subtitle: "Redesigning a web app to simplify influencer hiring and campaign tracking",
     description: "A B2B platform that streamlines influencer marketing for small business owners, focusing on workflow efficiency and engagement metrics.",
     bentoItems: [
-      {
-        size: 'large',
-        content: {
-          type: 'image',
-          src: '../../images/Case Studies/MI/Summary image.jpg',
-          alt: 'John Deere Operations Center Mobile App Interface',
-          objectFit: 'cover'
-        }
-      },
       {
         size: 'tall',
         content: {
@@ -138,20 +151,63 @@ export const overviewData = {
         }
       },
       {
+        size: 'large',
+        content: {
+          type: 'image',
+          src: '../../images/Case Studies/MI/Summary image.jpg',
+          alt: 'My Influencer Marketing Platform',
+          objectFit: 'cover'
+        }
+      },
+      {
+        size: 'medium',
+        content: {
+          type: 'text',
+          icon: IoConstructOutline,
+          title: 'Tools Used',
+          description: 'Figma, Miro, Google Workspace',
+          footer: 'User Evaluations'
+        }
+      }, 
+      {
         size: 'wide',
         content: {
-          type: 'stats',
+          type: 'metrics',
           icon: IoStatsChart,
           title: 'Impact',
           items: [
-            "SUS Score: 68",
-            "28% Reduction in Clicks",
-            "1m 47s Faster Task Completion"
+            { value: '68', label: 'SUS Score' },
+            { value: '3+', label: 'A/B Tests' },
+            { value: '107s', label: 'Faster Task Completion' },
+            { value: '4', label: 'User Interviews' }
           ]
         }
       },
       {
-        size: 'wide',
+        size: 'medium',
+        content: {
+          type: 'text',
+          icon: IoSearchOutline,
+          title: 'Product Summary',
+          description: 'Small farmers often rely on paper tools, making farm management inefficient. Our grid-based map view creates a digital twin of their farm, helping sync fieldwork with indoor tools for better organization.',
+          footer: 'Opportunity for adoption'
+        }
+      },
+      {
+        size: 'small',
+        content: {
+          type: 'stats',
+          icon: IoInformationCircleOutline,
+          title: 'Project Info',
+          items: [
+            "Role: UX/UI Designer",
+            "Team: 6 members",
+            "Duration: 3 months"
+          ]
+        }
+      },
+      {
+        size: 'small',
         content: {
           type: 'text',
           icon: IoPeopleOutline,
@@ -160,8 +216,21 @@ export const overviewData = {
           footer: '- Emily Davis, Small Business Ownerr'
         }
       },
+      
+      
       {
-        size: 'tall',
+        size: 'wide',
+        content: {
+          type: 'text',
+          icon: IoCheckmarkDoneOutline,
+          title: 'My Contribution',
+          description: 'I redesigned the influencer marketing platform, transforming it from a placeholder UI into a polished, user-friendly product. By conducting competitive research and optimizing task flows, I delivered a realistic yet impactful facelift that adhered to branding constraints and tight timelines.',
+          footer: 'User Evaluations'
+        }
+      },
+      
+      {
+        size: 'wide',
         content: {
           type: 'text',
           icon: IoSearchOutline,
@@ -172,29 +241,6 @@ export const overviewData = {
       },
       {
         size: 'small',
-        content: {
-          type: 'text',
-          icon: IoCheckmarkDoneOutline,
-          title: 'Task Success Rate',
-          description: '7/10 tasks completed successfully in usability testing.',
-          footer: 'User Evaluations'
-        }
-      },
-      {
-        size: 'small',
-        content: {
-          type: 'metrics',
-          icon: IoBarChartOutline,
-          title: 'Research Breakdown',
-          items: [
-            { "value": "8", "label": "A/B Tests Conducted" },
-            { "value": "5", "label": "Task Analyses" },
-            { "value": "3", "label": "Design Iterations" }
-          ]
-        }
-      },
-      {
-        size: 'wide',
         content: {
           type: 'text',
           icon: IoAccessibilityOutline,
@@ -210,6 +256,22 @@ export const overviewData = {
     subtitle: "A context-aware task reminder system that helps users prioritize and complete tasks more effectively.",
     bentoItems: [
       {
+        size: 'tall', 
+        content: {
+          type: 'timeline',
+          icon: IoTimeOutline,
+          title: 'Research Timeline',
+          milestones: [
+            "Location Triggers",
+            "Cognition & Space",
+            "AR & Organization",
+            "Prototype & Test"
+          ],
+          activeIndex: 3
+        }
+      },
+      
+      {
         size: 'large',
         content: {
           type: 'image',
@@ -218,23 +280,9 @@ export const overviewData = {
           objectFit: 'cover'
         }
       },
+      
       {
-        size: 'tall',
-        content: {
-          type: 'timeline',
-          icon: IoTimeOutline,
-          title: 'Research Timeline',
-          milestones: [
-            "Exploring location-based reminders.",
-            "Understanding cognitive structures and physical spaces.",
-            "Synergizing AR and organizational methods.",
-            "Prototype & Test"
-          ],
-          activeIndex: 3
-        }
-      },
-      {
-        size: 'wide',
+        size: 'medium',
         content: {
           type: 'stats',
           icon: IoSparklesOutline,
@@ -245,6 +293,39 @@ export const overviewData = {
             "Contextual Adaptability", 
             "Anywhere Access"
           ]
+        }
+      },
+      {
+        size: 'medium',
+        content: {
+          type: 'text',
+          icon: IoRocketOutline,
+          title: 'Innovation Focus',
+          description: '"Explored novel ways to integrate spatial interfaces, leveraging physical spaces to reduce cognitive load and enhance task management through context-aware AR solutions."',
+          footer: 'Revolutionizing Interaction Design'
+        }
+      },
+      {
+        size: 'wide',
+        content: {
+          type: 'stats',
+          icon: IoConstructOutline,
+          title: 'Project Info',
+          items: [
+            "Role: UX Developer", 
+            "Team: Solo Project", 
+            "Duration: 9 months"
+          ]
+        }
+      },
+      {
+        size: 'small',
+        content: {
+          type: 'text',
+          icon: IoPeopleOutline,
+          title: 'Product Need',
+          description: 'Packaging sustainability is critical to reducing environmental impact.',
+          footer: 'Opportunity for Change'
         }
       },
       {
@@ -268,10 +349,10 @@ export const overviewData = {
         }
       },
       {
-        size: 'small',
+        size: 'wide',
         content: {
           type: 'metrics',
-          icon: IoBarChartOutline,
+          icon: IoStatsChart,
           title: 'Research Data',
           items: [
             { "value": "30+", "label": "Literature Sources" },
@@ -288,15 +369,6 @@ export const overviewData = {
     subtitle: "A gamified AR solution to promote adoption of sustainable packaging by rewarding eco-conscious choices.",
     bentoItems: [
       {
-        size: 'large',
-        content: {
-          type: 'image',
-          src: '../../images/Case Studies/SP/Cover image.jpg',
-          alt: 'Sustainable Packaging Platform Interface',
-          objectFit: 'cover'
-        }
-      },
-      {
         size: 'tall',
         content: {
           type: 'timeline',
@@ -312,20 +384,16 @@ export const overviewData = {
         }
       },
       {
-        size: 'wide',
+        size: 'large',
         content: {
-          type: 'stats',
-          icon: IoStatsChart,
-          title: 'Key Metrics',
-          items: [
-            "Plastic Waste: 268M Tonnes Annually",
-            "Economic Value Lost: $165B",
-            "Landfill Waste: 45% from Packaging"
-          ]
+          type: 'image',
+          src: '../../images/Case Studies/SP/Cover image.jpg',
+          alt: 'Sustainable Packaging Platform Interface',
+          objectFit: 'cover'
         }
       },
       {
-        size: 'wide',
+        size: 'small',
         content: {
           type: 'text',
           icon: IoPeopleOutline,
@@ -337,6 +405,43 @@ export const overviewData = {
       {
         size: 'wide',
         content: {
+          type: 'metrics',
+          icon: IoStatsChart,
+          title: 'Potential Impact',
+          items: [
+            { value: '268M', label: 'Plastic Waste' },
+            { value: '$165B', label: 'Economic Value Lost' },
+            { value: '45%', label: 'Landfill Waste' }
+          ]
+        }
+      },
+      {
+        size: 'wide',
+        content: {
+          type: 'text',
+          icon: IoRocketOutline,
+          title: 'Innovation Focus',
+          description: '"Explored novel ways to integrate spatial interfaces, leveraging physical spaces to reduce cognitive load and enhance task management through context-aware AR solutions."',
+          footer: 'Revolutionizing Interaction Design'
+        }
+      },
+      {
+        size: 'medium',
+        content: {
+          type: 'stats',
+          icon: IoInformationCircleOutline,
+          title: 'Project Info',
+          items: [
+            'Role: UX/UI Designer',
+            'Team: 4 members',
+            'Duration: 3 months'
+          ]
+        }
+      },
+
+      {
+        size: 'wide',
+        content: {
           type: 'text',
           icon: IoSearchOutline,
           title: 'Research Insight',
@@ -345,17 +450,13 @@ export const overviewData = {
         }
       },
       {
-        size: 'small',
+        size: 'wide',
         content: {
-          type: 'metrics',
-          icon: IoBarChartOutline,
-          title: 'Research Data',
-          items: [
-            { value: '15', label: 'Retailers' },
-            { value: '300', label: 'Survey Responses' },
-            { value: '4', label: 'Focus Groups' },
-            { value: '3', label: 'Program Iterations' }
-          ]
+          type: 'text',
+          icon: IoCheckmarkDoneOutline,
+          title: 'My Contribution',
+          description: 'I designed a gamified AR solution that rewards users for choosing sustainable packaging, leveraging physical spaces to reduce cognitive load and enhance task management through context-aware AR solutions.',
+          footer: 'Revolutionizing Interaction Design'
         }
       }
     ]
