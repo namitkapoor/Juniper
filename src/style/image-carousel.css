@@ -114,7 +114,7 @@
 }
 
 /* Responsive Design */
-@media (max-width: 768px) {
+@media (max-width: 480px) {
   .carousel-image {
     height: 300px;
   }
@@ -171,7 +171,14 @@
 
   /* Hide arrows on mobile since we're using swipe */
   .carousel-arrow {
-    display: none;
+    display: flex;
+  }
+}
+
+/* Add this to ensure arrows are visible on tablets and larger */
+@media (min-width: 481px) {
+  .carousel-arrow {
+    display: flex;
   }
 }
 

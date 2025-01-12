@@ -76,21 +76,21 @@ export const carouselImages = {
         caption: 'Original complex interface design',
         alt: 'Original complex interface design',
         methodologies: ["Interface Analysis"],
-        painPoints: ["complexInterface"]
+        painPoints: ["marketPenetration"]
       },
       {
         src: `${BASE_PATH}/JD/Original Design/Map.svg`,
         caption: 'Navigation complexity example',
         alt: 'Navigation complexity example',
         methodologies: ["Interface Analysis"],
-        painPoints: ["complexInterface"]
+        painPoints: ["productFit"]
       },
       {
         src: `${BASE_PATH}/JD/Original Design/Map-2.svg`,
         caption: 'User feedback on task management',
         alt: 'User feedback on task management',
         methodologies: ["User Feedback"],
-        painPoints: ["taskManagement"]
+        painPoints: ["retention"]
       },
       {
         src: `${BASE_PATH}/JD/Original Design/Plan.svg`,
@@ -249,80 +249,328 @@ export const carouselImages = {
     ],
     businessChallenge: [
       {
-        src: `${BASE_PATH}/MI/Original Design/old design campaign.svg`,
+        src: `${BASE_PATH}/MI/Original Design/original design drop shadow.png`,
         caption: 'Current campaign workflow interface',
         alt: 'Original interface showing complex campaign workflow',
         methodologies: ["Interface Analysis"],
-        painPoints: ["campaignWorkflow"]
+        painPoints: ["operationalEfficiency"]
       },
       {
         src: `${BASE_PATH}/MI/Original Design/old contracts.svg`,
         caption: 'Contract management interface',
         alt: 'Complex contract management system',
         methodologies: ["Interface Analysis"],
-        painPoints: ["contractManagement"]
+        painPoints: ["riskManagement"]
       },
       {
         src: `${BASE_PATH}/MI/Original Design/old influencer management.svg`,
         caption: 'Influencer status dashboard',
         alt: 'Current influencer status management',
         methodologies: ["Interface Analysis"],
-        painPoints: ["influencerStatus"]
+        painPoints: ["revenueOptimization"]
       }
     ],
     taskAnalysis: [
       {
-        src: `${BASE_PATH}/MI/Task Analysis/Create Campaign.jpg`,
+        src: `${BASE_PATH}/MI/Task Flow/Old Task Flow-min.jpg`,
         caption: 'Task Analysis: Campaign Creation',
         alt: 'Task flow diagram for campaign creation',
         taskCategory: "Create Campaign"
       },
       {
-        src: `${BASE_PATH}/MI/Task Analysis/Find Influencer.jpg`,
+        src: `${BASE_PATH}/MI/Task Flow/New Task Flow-min.jpg`,
         caption: 'Task Analysis: Influencer Discovery',
         alt: 'Task flow for finding relevant influencers',
         taskCategory: "Find Influencer"
-      },
-      {
-        src: `${BASE_PATH}/MI/Task Analysis/Track Performance.jpg`,
-        caption: 'Task Analysis: Performance Tracking',
-        alt: 'Task flow for analytics monitoring',
-        taskCategory: "Track Performance"
       }
     ],
     concepts: {
-      dashboardConcept: [
+      campaignDashboardConcept: [
         {
-          src: `${BASE_PATH}/MI/Sketches/Sketch-1.1.svg`,
-          caption: 'Dashboard Overview',
-          alt: 'Main dashboard interface concept'
+          src: `${BASE_PATH}/MI/Design Iterations/mockup1.png`,
+          caption: 'Campaign Performance Overview',
+          alt: 'Main campaign dashboard showing key metrics'
         },
         {
-          src: `${BASE_PATH}/MI/Sketches/Sketch-1.2.svg`,
-          caption: 'Campaign Creation',
-          alt: 'Streamlined campaign creation flow'
+          src: `${BASE_PATH}/MI/Design Iterations/mockup2.png`,
+          caption: 'Real-Time Analytics',
+          alt: 'Real-time performance tracking interface'
         },
         {
-          src: `${BASE_PATH}/MI/Sketches/Sketch-1.3.svg`,
-          caption: 'Analytics View',
-          alt: 'Enhanced analytics visualization'
+          src: `${BASE_PATH}/MI/Sketches/Dashboard-3.svg`,
+          caption: 'Status Updates',
+          alt: 'Campaign status and alerts view'
         }
       ],
-      mobileAppConcept: [
+      statusTrackingConcept: [
         {
-          src: `${BASE_PATH}/MI/Sketches/Sketch-2.1.jpg`,
-          caption: 'Mobile Dashboard',
-          alt: 'Mobile app dashboard concept'
+          src: `${BASE_PATH}/MI/Wireframe/Status tracking.jpg`,
+          caption: 'Status Tracking Overview',
+          alt: 'Status tracking system interface'
         },
         {
-          src: `${BASE_PATH}/MI/Sketches/Sketch-2.2.jpg`,
-          caption: 'Quick Actions',
-          alt: 'Mobile quick actions interface'
+          src: `${BASE_PATH}/MI/Sketches/Status-2.svg`,
+          caption: 'Notification Center',
+          alt: 'Status notification system'
         },
         {
-          src: `${BASE_PATH}/MI/Sketches/Sketch-2.3.jpg`,
-          caption: 'Mobile Analytics',
-          alt: 'Mobile analytics view'
+          src: `${BASE_PATH}/MI/Sketches/Status-3.svg`,
+          caption: 'Progress View',
+          alt: 'Campaign progress tracking'
+        }
+      ],
+      contractTemplateConcept: [
+        {
+          src: `${BASE_PATH}/MI/Wireframe/Contract management.jpg`,
+          caption: 'Contract Template System',
+          alt: 'Contract management and automation interface'
+        },
+        {
+          src: `${BASE_PATH}/MI/Sketches/Contract-2.svg`,
+          caption: 'Digital Signatures',
+          alt: 'Digital signature integration'
+        },
+        {
+          src: `${BASE_PATH}/MI/Sketches/Contract-3.svg`,
+          caption: 'Status Tracking',
+          alt: 'Contract status tracking interface'
+        }
+      ]
+    }
+  },
+  taskReminders: {
+    research: [
+      {
+          src: `${BASE_PATH}/TR/Research/User study3.jpg`,
+          caption: 'User interview findings',
+          alt: 'Interview notes and synthesis',
+          methodologies: ["User Interviews"]
+        },
+      
+      {
+        src: `${BASE_PATH}/TR/Research/Interview2-Abhishek-unedited.png`,
+        caption: 'Competitive analysis matrix',
+        alt: 'Comparison of task management apps',
+        methodologies: ["User Interviews"]
+      },
+      {
+        src: `${BASE_PATH}/TR/Research/Interview2-Kim-unedited.png`,
+        caption: 'Competitive analysis matrix',
+        alt: 'Comparison of task management apps',
+        methodologies: ["User Interviews"]
+      },
+      {
+        src: `${BASE_PATH}/TR/Research/notes app Vision Pro.png`,
+        caption: 'Competitive analysis matrix',
+        alt: 'Comparison of task management apps',
+        methodologies: ["Competitive Analysis"]
+      },
+      {
+        src: `${BASE_PATH}/TR/Research/Noda mind map.jpg`,
+        caption: 'Competitive analysis matrix',
+        alt: 'Comparison of task management apps',
+        methodologies: ["Competitive Analysis"]
+      },
+      {
+        src: `${BASE_PATH}/TR/Research/Obsidian.png`,
+        caption: 'Competitive analysis matrix',
+        alt: 'Comparison of task management apps',
+        methodologies: ["Competitive Analysis"]
+      },
+      
+      {
+        src: `${BASE_PATH}/TR/Research/zoomed in affinity map.png`,
+        caption: 'Task management journey map',
+        alt: 'User journey through task completion',
+        methodologies: ["Affinity Diagrams"]
+      },
+      {
+        src: `${BASE_PATH}/TR/Research/mood and energy levels.png`,
+        caption: 'User empathy mapping',
+        alt: 'Empathy map synthesis',
+        methodologies: ["Survey Data"]
+      },
+      {
+        src: `${BASE_PATH}/TR/Research/alarms and checklist supremacy.png`,
+        caption: 'User empathy mapping',
+        alt: 'Empathy map synthesis',
+        methodologies: ["Survey Data"]
+      },
+      {
+        src: `${BASE_PATH}/TR/Research/sights and sounds over everything else.png`,
+        caption: 'User empathy mapping',
+        alt: 'Empathy map synthesis',
+        methodologies: ["Survey Data"]
+      },
+      {
+        src: `${BASE_PATH}/TR/Research/lit review.png`,
+        caption: 'User empathy mapping',
+        alt: 'Empathy map synthesis',
+        methodologies: ["Literature Review"]
+      }
+    ],
+    businessChallenge: [
+      {
+        src: `${BASE_PATH}/TR/Research/too many tools bad.png`,
+        caption: 'Complex task organization',
+        alt: 'Cluttered task interface',
+        methodologies: ["Interface Analysis"],
+        painPoints: ["userEngagement"]
+      },
+      {
+        src: `${BASE_PATH}/TR/Lit review/meta intro.webp`,
+        caption: 'Overwhelming notifications',
+        alt: 'Multiple notification screens',
+        methodologies: ["Interface Analysis"],
+        painPoints: ["techIntegration"]
+      },
+      {
+        src: `${BASE_PATH}/TR/Lit review/creating a to-do list.jpg`,
+        caption: 'Calendar integration issues',
+        alt: 'Calendar sync problems',
+        methodologies: ["Interface Analysis"],
+        painPoints: ["adoptionBarriers"]
+      }
+    ],
+    taskAnalysis: [
+      {
+        src: `${BASE_PATH}/TR/Task Analysis/Create Task.jpg`,
+        caption: 'Task Analysis: Create New Task',
+        alt: 'Task flow for creating tasks',
+        taskCategory: "Create Task"
+      },
+      {
+        src: `${BASE_PATH}/TR/Task Analysis/Set Reminder.jpg`,
+        caption: 'Task Analysis: Set Reminders',
+        alt: 'Task flow for reminder setup',
+        taskCategory: "Set Reminder"
+      },
+      {
+        src: `${BASE_PATH}/TR/Task Analysis/Share Task.jpg`,
+        caption: 'Task Analysis: Share Tasks',
+        alt: 'Task flow for task sharing',
+        taskCategory: "Share Task"
+      }
+    ],
+    concepts: {
+      mainAppConcept: [
+        {
+          src: `${BASE_PATH}/TR/Sketches/Sketch-1.1.svg`,
+          caption: 'Task List View',
+          alt: 'Main task interface concept'
+        },
+        {
+          src: `${BASE_PATH}/TR/Sketches/Sketch-1.2.svg`,
+          caption: 'Calendar Integration',
+          alt: 'Calendar sync interface'
+        },
+        {
+          src: `${BASE_PATH}/TR/Sketches/Sketch-1.3.svg`,
+          caption: 'Smart Notifications',
+          alt: 'Notification system design'
+        }
+      ],
+      arConcept: [
+        {
+          src: `${BASE_PATH}/TR/Sketches/AR-1.jpg`,
+          caption: 'Spatial Task View',
+          alt: 'AR task visualization'
+        },
+        {
+          src: `${BASE_PATH}/TR/Sketches/AR-2.jpg`,
+          caption: 'Location Reminders',
+          alt: 'Location-based AR reminders'
+        }
+      ]
+    }
+  },
+  sustainablePackaging: {
+    research: [
+      {
+        src: `${BASE_PATH}/SP/grocery items packaging.jpg`,
+        caption: 'Market research findings',
+        alt: 'Market analysis data',
+        methodologies: ["Market Research"]
+      },
+      {
+        src: `${BASE_PATH}/SP/Research/Retailer Interviews.svg`,
+        caption: 'Retailer interview synthesis',
+        alt: 'Interview findings summary',
+        methodologies: ["User Interviews"]
+      },
+      {
+        src: `${BASE_PATH}/SP/Research/Sustainability Journey.svg`,
+        caption: 'Sustainability adoption journey',
+        alt: 'Journey map for sustainability',
+        methodologies: ["Journey Maps"]
+      }
+    ],
+    businessChallenge: [
+      {
+        src: `${BASE_PATH}/SP/grocery items packaging.jpg`,
+        caption: 'Cost barrier analysis',
+        alt: 'Cost comparison charts',
+        methodologies: ["Cost Analysis"],
+        painPoints: ["costManagement"]
+      },
+      {
+        src: `${BASE_PATH}/SP/Original Design/implementation.jpg`,
+        caption: 'Implementation challenges',
+        alt: 'Implementation process diagram',
+        methodologies: ["Process Analysis"],
+        painPoints: ["implementationStrategy"]
+      },
+      {
+        src: `${BASE_PATH}/SP/Original Design/metrics.jpg`,
+        caption: 'Performance metrics dashboard',
+        alt: 'Metrics tracking interface',
+        methodologies: ["Analytics"],
+        painPoints: ["performanceMetrics"]
+      }
+    ],
+    taskAnalysis: [
+      {
+        src: `${BASE_PATH}/SP/Task Analysis/Package Selection.jpg`,
+        caption: 'Task Analysis: Package Selection',
+        alt: 'Task flow for package selection',
+        taskCategory: "Select Package"
+      },
+      {
+        src: `${BASE_PATH}/SP/Task Analysis/Cost Comparison.jpg`,
+        caption: 'Task Analysis: Cost Comparison',
+        alt: 'Task flow for cost analysis',
+        taskCategory: "Compare Costs"
+      },
+      {
+        src: `${BASE_PATH}/SP/Task Analysis/Impact Assessment.jpg`,
+        caption: 'Task Analysis: Impact Assessment',
+        alt: 'Task flow for impact calculation',
+        taskCategory: "Assess Impact"
+      }
+    ],
+    concepts: {
+      gamificationConcept: [
+        {
+          src: `${BASE_PATH}/SP/Sketches/Game-1.svg`,
+          caption: 'Reward System',
+          alt: 'Gamification rewards interface'
+        },
+        {
+          src: `${BASE_PATH}/SP/Sketches/Game-2.svg`,
+          caption: 'Progress Tracking',
+          alt: 'Sustainability progress dashboard'
+        }
+      ],
+      arConcept: [
+        {
+          src: `${BASE_PATH}/SP/Sketches/AR-1.jpg`,
+          caption: 'AR Package Preview',
+          alt: 'AR packaging visualization'
+        },
+        {
+          src: `${BASE_PATH}/SP/Sketches/AR-2.jpg`,
+          caption: 'Impact Visualization',
+          alt: 'AR environmental impact display'
         }
       ]
     }

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import OptimizedImage from './OptimizedImage';
 import '../style/solution-framework.css';
 import ImageCarousel from './ImageCarousel';
-import { getConceptImages } from '../data/carouselImages';
+import { getConceptImages, getProjectImages } from '../data/carouselImages';
 
 const SolutionFramework = ({ content, type, projectId }) => {
   console.log('SolutionFramework Props:', { content, type, projectId });
@@ -11,7 +11,6 @@ const SolutionFramework = ({ content, type, projectId }) => {
   if (type === 'analysis') {
     return (
       <div className="analysis-section">
-        {/* Cover Image */}
         {content?.coverImage && (
           <div className="analysis-image">
             <OptimizedImage 
@@ -22,14 +21,14 @@ const SolutionFramework = ({ content, type, projectId }) => {
           </div>
         )}
 
-        {/* Findings Grid */}
         {content?.findings && (
           <div className="findings-grid">
             {content.findings.map((finding, index) => {
+              const IconComponent = finding.icon;
               return (
                 <div key={index} className="finding-card">
                   <h5 className="title-with-icon">
-                    {finding.icon && <finding.icon size={24} />}
+                    {IconComponent && <IconComponent size={24} />}
                     <span>{finding.category}</span>
                   </h5>
                   
@@ -60,23 +59,61 @@ const SolutionFramework = ({ content, type, projectId }) => {
     );
   }
 
+  if (type === 'taskAnalysis') {
+    const taskImages = getProjectImages(projectId, 'taskAnalysis');
+    console.log('Task Analysis Section:', { 
+      projectId, 
+      taskImages,
+      imagesLength: taskImages?.length,
+      firstImage: taskImages[0],
+      hasMultipleImages: taskImages.length > 1
+    });
+    
+    return (
+      <div className="task-analysis-section">
+        {taskImages.length > 0 ? (
+          <ImageCarousel 
+            images={taskImages}
+            autoPlay={false}
+            variant="task"
+            showNavigation={taskImages.length > 1}
+          />
+        ) : (
+          <div className="no-images-message">
+            No task analysis images available for {projectId}
+          </div>
+        )}
+      </div>
+    );
+  }
+
   if (type === 'concepts') {
+    console.log('Concepts Props:', { content, projectId });
     return (
       <div className="concepts-grid">
         {content?.concepts?.map((concept, index) => {
-          const carouselType = concept.carouselType || 
-            (concept.name?.toLowerCase().includes('operations center') ? 'operationsCenterConcept' : 'seed2productConcept');
+          const conceptImages = getConceptImages(projectId, concept.carouselType);
+          
+          console.log('Concept Images:', {
+            projectId,
+            conceptName: concept.name,
+            carouselType: concept.carouselType,
+            imagesFound: conceptImages?.length
+          });
           
           return (
             <div key={index} className={`concept-card ${concept.status?.toLowerCase()}`}>
               <h4>{concept.name}</h4>
               <p>{concept.description}</p>
               
-              <ImageCarousel 
-                images={getConceptImages(projectId, carouselType)}
-                autoPlay={false}
-                variant="concept"
-              />
+              {concept.useCarousel && conceptImages?.length > 0 && (
+                <ImageCarousel 
+                  images={conceptImages}
+                  autoPlay={false}
+                  variant="concept"
+                  showNavigation={conceptImages.length > 1}
+                />
+              )}
 
               {concept.keyFeatures && (
                 <ul className="feature-list">

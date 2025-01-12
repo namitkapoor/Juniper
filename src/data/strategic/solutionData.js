@@ -4,10 +4,7 @@ import {
   IoTimerOutline,
   IoBulbOutline,
   IoConstructOutline,
-  IoAnalyticsOutline,
-  IoPeopleOutline,
   IoSettingsOutline,
-  IoWalletOutline,
   IoNavigateOutline,
   IoAppsOutline,
   IoPersonOutline,
@@ -16,7 +13,14 @@ import {
   IoLeafOutline,
   IoFlagOutline,
   IoCalendarOutline,
-  IoTrashOutline
+  IoTrashOutline,
+  IoGameControllerOutline,
+  IoPhonePortraitOutline,
+  IoCodeSlashOutline,
+  IoNotificationsOutline,
+  IoLocationOutline,
+  IoCreateOutline,
+  
 } from 'react-icons/io5';
 
 const baseSolutionPhase = {
@@ -351,17 +355,49 @@ export const solutionPhase = {
                       completionTime: "2.5 hours average",
                       successRate: "40%",
                       failureNote: "60% of matches were irrelevant to brand needs"
-                    }
+                    },
+                    issue: "Manual discovery process lacks efficiency and accuracy",
+                    impact: "Significant time waste on unsuitable matches",
+                    additionalValidation: "User interviews confirmed high frustration with search process"
+                  },
+                  {
+                    category: "Campaign Creation",
+                    icon: IoCreateOutline,
+                    description: "Process of setting up new campaign parameters and requirements",
+                    metrics: {
+                      completionTime: "1.2 hours average",
+                      successRate: "60%",
+                      failureNote: "40% needed to revise campaign parameters multiple times"
+                    },
+                    issue: "Complex setup process with redundant data entry",
+                    impact: "Extended campaign launch timelines",
+                    additionalValidation: "Task analysis revealed duplicate data entry across platforms"
+                  },                  
+                  {
+                    category: "Contract Processing",
+                    icon: IoDocumentTextOutline,
+                    description: "Managing influencer agreements and terms",
+                    metrics: {
+                      completionTime: "45 minutes per contract",
+                      successRate: "50%",
+                      failureNote: "50% of contracts required multiple revision cycles"
+                    },
+                    issue: "Manual contract creation and tracking process",
+                    impact: "Delayed campaign starts due to contract bottlenecks",
+                    additionalValidation: "Interview feedback highlighted contract management as major pain point"
                   },
                   {
                     category: "Campaign Setup",
-                    icon: IoSettingsOutline,
+                    icon: IoAppsOutline,
                     description: "Complex process of creating and managing campaign details",
                     metrics: {
                       completionTime: "1.5 hours average",
                       successRate: "55%",
                       failureNote: "45% experienced data entry errors"
-                    }
+                    },
+                    issue: "Fragmented campaign setup workflow",
+                    impact: "High error rates in campaign configurations",
+                    additionalValidation: "Task analysis showed redundant steps in setup process"
                   }
                 ]
               }
@@ -369,34 +405,46 @@ export const solutionPhase = {
             {
               id: 'design-iterations',
               type: 'concepts',
-              title: "Design Iterations",
+              title: "Solution Focus Areas",
               icon: IoBulbOutline,
               description: "Exploring different design approaches",
               content: {
                 concepts: [
                   {
-                    name: "Campaign-Centric Dashboard",
-                    description: "A streamlined dashboard focused on campaign management and performance tracking.",
+                    name: "Unified Campaign Management",
+                    description: "A centralized dashboard system that consolidates campaign tracking, influencer management, and contract handling.",
                     status: "Selected",
                     keyFeatures: [
-                      "Real-time campaign metrics",
-                      "Influencer status tracking",
-                      "Automated contract management"
+                      "Real-time campaign metrics visualization",
+                      "Unified status tracking interface",
+                      "Automated contract workflow system"
                     ],
                     useCarousel: true,
                     carouselType: "campaignDashboardConcept"
                   },
                   {
-                    name: "Influencer-First Interface",
-                    description: "An alternative approach prioritizing influencer discovery and relationship management.",
-                    status: "Rejected",
+                    name: "Status Tracking System",
+                    description: "Real-time tracking and notification system for campaign and influencer status updates.",
+                    status: "Selected",
                     keyFeatures: [
-                      "Advanced influencer search",
-                      "Relationship scoring",
-                      "Communication hub"
+                      "Automated status notifications",
+                      "Progress tracking visualization",
+                      "Milestone alert system"
                     ],
                     useCarousel: true,
-                    carouselType: "influencerFirstConcept"
+                    carouselType: "statusTrackingConcept"
+                  },
+                  {
+                    name: "Contract Template System",
+                    description: "Streamlined contract creation and management system with automated workflows.",
+                    status: "Selected",
+                    keyFeatures: [
+                      "Template-based contract generation",
+                      "Automated approval workflows",
+                      "Integrated tracking and reminders"
+                    ],
+                    useCarousel: true,
+                    carouselType: "contractTemplateConcept"
                   }
                 ]
               }
@@ -404,9 +452,201 @@ export const solutionPhase = {
             {
               id: 'wireframe-concepts',
               type: 'wireframes',
-              title: "Wireframes",
+              title: "Design Development",
               icon: IoConstructOutline,
-              description: "Detailed interface wireframes based on selected concept",
+              description: "Interface components implementing our core solutions",
+              content: {
+                screens: [
+                  {
+                    name: "Campaign Overview Dashboard",
+                    image: {
+                      url: "/images/Case Studies/MI/Wireframes/campaign overview.jpg",
+                      caption: "Unified campaign management interface"
+                    },
+                    purpose: "Create a centralized command center that unifies campaign management, influencer tracking, and performance metrics.",
+                    challengesAddressed: [
+                      "Fragmented campaign management across multiple platforms",
+                      "Lack of unified performance tracking"
+                    ],
+                    keyFeatures: [
+                      "Real-time campaign status visualization",
+                      "Integrated influencer performance metrics",
+                      "At-a-glance campaign progress indicators"
+                    ],
+                    feedbackAndRefinements: [
+                      "Added visual status indicators based on user feedback about tracking clarity",
+                      "Implemented one-click access to common actions for efficiency"
+                    ]
+                  },
+                  {
+                    name: "Status Tracking System",
+                    image: {
+                      url: "/images/Case Studies/MI/Wireframes/system icons.svg",
+                      caption: "Real-time status tracking interface"
+                    },
+                    purpose: "Provide immediate visibility into campaign and influencer statuses with automated updates.",
+                    challengesAddressed: [
+                      "Manual status tracking leading to delays",
+                      "Inconsistent status updates across team members"
+                    ],
+                    keyFeatures: [
+                      "Automated status change notifications",
+                      "Visual progress tracking",
+                      "Integrated timeline view"
+                    ],
+                    feedbackAndRefinements: [
+                      "Enhanced status categorization based on user workflow patterns",
+                      "Added bulk status update capabilities for efficiency"
+                    ]
+                  },
+                  {
+                    name: "Contract Management Interface",
+                    image: {
+                      url: "/images/Case Studies/MI/Wireframes/contracts full page.jpg",
+                      caption: "Streamlined contract management system"
+                    },
+                    purpose: "Streamline the entire contract lifecycle from creation to signing and tracking.",
+                    challengesAddressed: [
+                      "Time-consuming manual contract creation",
+                      "Difficulty tracking contract statuses across campaigns"
+                    ],
+                    keyFeatures: [
+                      "Template-based contract generation",
+                      "Automated approval workflows",
+                      "Contract status tracking integration"
+                    ],
+                    feedbackAndRefinements: [
+                      "Simplified template customization based on user testing",
+                      "Added batch contract processing for multiple influencers"
+                    ]
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "taskReminders": {
+      title: "Solution Framework",
+      summary: "Based on research insights, we developed a context-aware reminder system that adapts to user behavior and environmental factors.",
+      sections: [
+        {
+          type: 'process',
+          steps: [
+            {
+              id: 'system-analysis',
+              type: 'analysis',
+              title: "System Analysis",
+              icon: IoSearchOutline,
+              description: "Simple comparison with traditional reminders",
+              content: {
+                coverImage: {
+                  url: "/images/Case Studies/TaskReminders/system-analysis.jpg",
+                  caption: "System Analysis Overview",
+                  alt: "Overview of system analysis"
+                },
+                useCarousel: false,
+                findings: [
+                  {
+                    category: "Notification Timing",
+                    issue: "Current systems use fixed schedules without context",
+                    impact: "73% of reminders are dismissed or postponed",
+                    additionalValidation: "Time-motion studies showed poor timing correlation"
+                  },
+                  {
+                    category: "Context Awareness",
+                    issue: "No consideration of user's current state or environment",
+                    impact: "40% of notifications arrive at inappropriate moments",
+                    additionalValidation: "User activity logs confirmed timing mismatches"
+                  }
+                ]
+              }
+            },
+            {
+              id: 'user-behavior',
+              type: 'analysis',
+              title: "User Behavior Analysis",
+              icon: IoTimerOutline,
+              description: "Spatial vs. traditional reminder patterns",
+              content: {
+                useCarousel: true,
+                carouselType: "taskAnalysis",
+                summary: "Analysis of user behavior revealed key patterns in task completion and notification response",
+                metrics: {
+                  overallCompletionTime: "2.5 minutes average response time",
+                  overallSuccessRate: "45%",
+                  participantCount: "250 users tracked"
+                },
+                findings: [
+                  {
+                    category: "Response Patterns",
+                    icon: IoNotificationsOutline,
+                    description: "Analysis of notification response times and contexts",
+                    metrics: {
+                      completionTime: "45 seconds optimal window",
+                      successRate: "35%",
+                      failureNote: "65% of notifications missed optimal timing"
+                    },
+                    issue: "Fixed notification timing ignores user context",
+                    impact: "High dismissal rate due to poor timing",
+                    additionalValidation: "Time-motion studies confirmed contextual mismatch"
+                  },
+                  {
+                    category: "Context Impact",
+                    icon: IoLocationOutline,
+                    description: "Effect of different contexts on task completion",
+                    metrics: {
+                      completionTime: "1.8 minutes with context",
+                      successRate: "82%",
+                      failureNote: "18% needed additional prompts"
+                    },
+                    issue: "Lack of environmental awareness in notifications",
+                    impact: "Reduced task completion rates in certain contexts",
+                    additionalValidation: "Location tracking showed strong correlation with completion rates"
+                  }
+                ]
+              }
+            },
+            {
+              id: 'concept-development',
+              type: 'concepts',
+              title: "Concept Development",
+              icon: IoBulbOutline,
+              description: "Spatial note system and AR interface designs",
+              content: {
+                concepts: [
+                  {
+                    title: "Smart Context Engine",
+                    description: "AI system that learns from user behavior and environmental factors",
+                    features: [
+                      "Location awareness",
+                      "Activity recognition",
+                      "Time pattern analysis",
+                      "Priority learning"
+                    ],
+                    image: "/images/Case Studies/TaskReminders/Concepts/smart-context.jpg"
+                  },
+                  {
+                    title: "Adaptive Interface",
+                    description: "UI that adjusts based on user context and task priority",
+                    features: [
+                      "Context-based layouts",
+                      "Priority visualization",
+                      "Gesture shortcuts",
+                      "Voice interactions"
+                    ],
+                    image: "/images/Case Studies/TaskReminders/Concepts/adaptive-ui.jpg"
+                  }
+                ]
+              }
+            },
+            {
+              id: 'design-iterations',
+              type: 'wireframes',
+              title: "Design Iterations",
+              icon: IoConstructOutline,
+              description: "Key interaction mockups and iterations",
               content: {
                 screens: [
                   {
@@ -479,129 +719,19 @@ export const solutionPhase = {
         }
       ]
     },
-    "taskReminders": {
-      title: "Solution Framework",
-      summary: "Based on research insights, we developed a context-aware reminder system that adapts to user behavior and environmental factors.",
-      sections: [
-        {
-          type: 'process',
-          steps: [
-            {
-              id: 'system-analysis',
-              type: 'analysis',
-              title: "System Analysis",
-              icon: IoSearchOutline,
-              description: "Evaluation of current reminder systems",
-              content: {
-                coverImage: {
-                  url: "/images/Case Studies/TaskReminders/system-analysis.jpg",
-                  caption: "System Analysis Overview",
-                  alt: "Overview of system analysis"
-                },
-                useCarousel: false,
-                findings: [
-                  {
-                    category: "Notification Timing",
-                    issue: "Current systems use fixed schedules without context",
-                    impact: "73% of reminders are dismissed or postponed",
-                    additionalValidation: "Time-motion studies showed poor timing correlation"
-                  },
-                  {
-                    category: "Context Awareness",
-                    issue: "No consideration of user's current state or environment",
-                    impact: "40% of notifications arrive at inappropriate moments",
-                    additionalValidation: "User activity logs confirmed timing mismatches"
-                  }
-                ]
-              }
-            },
-            {
-              id: 'user-behavior',
-              type: 'analysis',
-              title: "User Behavior Analysis",
-              icon: IoTimerOutline,
-              description: "Understanding task completion patterns",
-              content: {
-                useCarousel: true,
-                carouselType: "taskAnalysis",
-                summary: "Analysis of user behavior revealed key patterns in task completion and notification response",
-                metrics: {
-                  overallCompletionTime: "2.5 minutes average response time",
-                  overallSuccessRate: "45%",
-                  participantCount: "250 users tracked"
-                },
-                findings: [
-                  {
-                    category: "Response Patterns",
-                    description: "Analysis of notification response times and contexts",
-                    metrics: {
-                      completionTime: "45 seconds optimal window",
-                      successRate: "35%",
-                      failureNote: "65% of notifications missed optimal timing"
-                    }
-                  },
-                  {
-                    category: "Context Impact",
-                    description: "Effect of different contexts on task completion",
-                    metrics: {
-                      completionTime: "1.8 minutes with context",
-                      successRate: "82%",
-                      failureNote: "18% needed additional prompts"
-                    }
-                  }
-                ]
-              }
-            },
-            {
-              id: 'concept-development',
-              type: 'concepts',
-              title: "Concept Development",
-              icon: IoBulbOutline,
-              description: "AI-powered contextual reminder system",
-              content: {
-                concepts: [
-                  {
-                    title: "Smart Context Engine",
-                    description: "AI system that learns from user behavior and environmental factors",
-                    features: [
-                      "Location awareness",
-                      "Activity recognition",
-                      "Time pattern analysis",
-                      "Priority learning"
-                    ],
-                    image: "/images/Case Studies/TaskReminders/Concepts/smart-context.jpg"
-                  },
-                  {
-                    title: "Adaptive Interface",
-                    description: "UI that adjusts based on user context and task priority",
-                    features: [
-                      "Context-based layouts",
-                      "Priority visualization",
-                      "Gesture shortcuts",
-                      "Voice interactions"
-                    ],
-                    image: "/images/Case Studies/TaskReminders/Concepts/adaptive-ui.jpg"
-                  }
-                ]
-              }
-            }
-          ]
-        }
-      ]
-    },
     "sustainablePackaging": {
       title: "Solution Framework",
-      summary: "A comprehensive incentive program combining financial support with implementation guidance to drive sustainable packaging adoption.",
+      summary: "Our solution leverages AR and gamification to make sustainable packaging choices more engaging and accessible.",
       sections: [
         {
           type: 'process',
           steps: [
             {
-              id: 'cost-analysis',
+              id: 'concept-research',
               type: 'analysis',
-              title: "Cost Analysis",
-              icon: IoWalletOutline,
-              description: "Deep dive into cost structures and opportunities",
+              title: "Concept Research",
+              icon: IoSearchOutline,
+              description: "AR packaging inspiration and concept sketches",
               content: {
                 coverImage: {
                   url: "/images/Case Studies/SustainablePackaging/cost-breakdown.jpg",
@@ -626,79 +756,154 @@ export const solutionPhase = {
               }
             },
             {
-              id: 'incentive-design',
-              type: 'design',
-              title: "Incentive Structure",
-              icon: IoConstructOutline,
-              description: "Multi-tiered incentive program design",
+              id: 'gamification-framework',
+              type: 'analysis',
+              title: "Gamification Framework",
+              icon: IoTimerOutline,
+              description: "Analysis of engagement patterns",
               content: {
-                coverImage: {
-                  url: "/images/Case Studies/SustainablePackaging/incentive-tiers.jpg",
-                  caption: "Incentive Program Structure",
-                  alt: "Tiered incentive system diagram"
+                useCarousel: true,
+                carouselType: "taskAnalysis",
+                summary: "Analysis of user engagement revealed opportunities for gamification",
+                metrics: {
+                  overallCompletionTime: "3.2 minutes per decision",
+                  overallSuccessRate: "52%",
+                  participantCount: "180 retail buyers"
                 },
-                features: [
+                findings: [
                   {
-                    title: "Financial Incentives",
-                    description: "Tiered rebate system based on adoption levels",
-                    benefits: [
-                      "Volume-based discounts",
-                      "Implementation cost sharing",
-                      "Performance bonuses"
+                    category: "Reward Mechanics",
+                    icon: IoGameControllerOutline,
+                    description: "Analysis of user motivation through rewards",
+                    metrics: {
+                      completionTime: "2.5 minutes average",
+                      successRate: "48%",
+                      failureNote: "52% found current incentives unclear"
+                    },
+                    issue: "Lack of clear incentive structure",
+                    impact: "Low engagement with sustainable options",
+                    additionalValidation: "User feedback indicated desire for tangible rewards"
+                  },
+                  {
+                    category: "Progress Tracking",
+                    icon: IoStatsChartOutline,
+                    description: "Evaluation of achievement system effectiveness",
+                    metrics: {
+                      completionTime: "1.8 minutes average",
+                      successRate: "65%",
+                      failureNote: "35% couldn't track their progress"
+                    },
+                    issue: "Poor visibility of sustainability progress",
+                    impact: "Reduced long-term engagement",
+                    additionalValidation: "Analytics showed drop in repeated sustainable choices"
+                  }
+                ]
+              }
+            },
+            {
+              id: 'ar-interaction',
+              type: 'wireframes',
+              title: "AR Interaction Design",
+              icon: IoPhonePortraitOutline,
+              description: "Interface components and wireframes",
+              content: {
+                screens: [
+                  {
+                    name: "Discovery (AI-Powered Search and Matching)",
+                    image: {
+                      url: "/images/Case Studies/MI/Wireframe/Discovery interface.jpg",
+                      caption: "AI-powered influencer discovery interface"
+                    },
+                    purpose: "Streamline influencer discovery with AI-powered matching and smart filters. Provide detailed insights into match quality and potential campaign fit.",
+                    challengesAddressed: [
+                      "Manual search process was time-consuming and inefficient",
+                      "Match quality was difficult to assess without detailed metrics"
+                    ],
+                    keyFeatures: [
+                      "Smart filters that adapt based on campaign goals",
+                      "AI-powered match scoring with detailed explanations",
+                      "Quick-view profiles with key metrics and past performance"
+                    ],
+                    feedbackAndRefinements: [
+                      "Added detailed match explanations after users requested more transparency in AI decisions",
+                      "Simplified filter interface based on user testing feedback"
                     ]
                   },
                   {
-                    title: "Support System",
-                    description: "Comprehensive implementation assistance",
-                    benefits: [
-                      "Supplier network access",
-                      "Training resources",
-                      "Transition planning"
+                    name: "Campaign Dashboard (Performance Tracking)",
+                    image: {
+                      url: "/images/Case Studies/MI/Wireframe/Campaign dashboard.jpg",
+                      caption: "Centralized campaign management dashboard"
+                    },
+                    purpose: "Provide a unified view of campaign status, influencer performance, and key metrics. Enable quick actions for common campaign management tasks.",
+                    challengesAddressed: [
+                      "Scattered campaign data made tracking difficult",
+                      "Lack of real-time performance insights"
+                    ],
+                    keyFeatures: [
+                      "Real-time performance metrics and ROI tracking",
+                      "Status updates for all campaign participants",
+                      "Automated alerts for key milestones and issues"
+                    ],
+                    feedbackAndRefinements: [
+                      "Added customizable dashboard layouts based on user preferences",
+                      "Integrated quick-action buttons for common tasks after usability testing"
                     ]
+                  },
+                  {
+                    name: "Contract Management",
+                    image: {
+                      url: "/images/Case Studies/MI/Wireframe/Contract management.jpg",
+                      caption: "Streamlined contract management interface"
+                    },
+                    purpose: "Simplify contract creation, tracking, and management. Automate routine contract tasks and provide clear status visibility.",
+                    challengesAddressed: [
+                      "Contract management was manual and error-prone",
+                      "Status tracking was inconsistent across platforms"
+                    ],
+                    keyFeatures: [
+                      "Template-based contract generation",
+                      "Digital signature integration",
+                      "Automated reminders and status tracking"
+                    ],
+                    feedbackAndRefinements: [
+                      "Simplified contract templates based on user feedback",
+                      "Added bulk contract management features for larger campaigns"
+                    ]
+                  }
+                ]
+              }
+            },
+            {
+              id: 'technical-implementation',
+              type: 'implementation',
+              title: "Technical Implementation",
+              icon: IoCodeSlashOutline,
+              description: "AR demonstration and implementation flow",
+              content: {
+                coverImage: {
+                  url: "/images/Case Studies/SustainablePackaging/cost-breakdown.jpg",
+                  caption: "Cost Analysis Framework",
+                  alt: "Detailed cost breakdown visualization"
+                },
+                useCarousel: false,
+                findings: [
+                  {
+                    category: "Material Costs",
+                    issue: "30-45% premium on sustainable materials",
+                    impact: "Major barrier for mid-sized retailers",
+                    solution: "Volume-based discounts and subsidies"
+                  },
+                  {
+                    category: "Implementation Costs",
+                    issue: "High transition and training expenses",
+                    impact: "Extended ROI timeline",
+                    solution: "Phased implementation with support funding"
                   }
                 ]
               }
             }
           ]
-        },
-        {
-          type: 'features',
-          content: {
-            title: "Key Program Features",
-            description: "Comprehensive support system for sustainable transition",
-            items: [
-              {
-                title: "Cost Management",
-                icon: IoWalletOutline,
-                features: [
-                  "Volume-based discounts",
-                  "Implementation subsidies",
-                  "Performance incentives"
-                ],
-                image: "/images/Case Studies/SustainablePackaging/cost-management.jpg"
-              },
-              {
-                title: "Implementation Support",
-                icon: IoConstructOutline,
-                features: [
-                  "Transition planning",
-                  "Supplier connections",
-                  "Staff training"
-                ],
-                image: "/images/Case Studies/SustainablePackaging/implementation.jpg"
-              },
-              {
-                title: "Progress Tracking",
-                icon: IoAnalyticsOutline,
-                features: [
-                  "ROI monitoring",
-                  "Impact metrics",
-                  "Performance analytics"
-                ],
-                image: "/images/Case Studies/SustainablePackaging/tracking.jpg"
-              }
-            ]
-          }
         }
       ]
     }

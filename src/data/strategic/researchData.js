@@ -8,7 +8,12 @@ import {
   IoTimeOutline,        // Time Management
   IoArchiveOutline,     // Inventory Tracking
   IoWalletOutline,      // Financial Tools
-  IoLeafOutline         // Crop Planning
+  IoLeafOutline,         // Crop Planning
+  IoLocationOutline,     // Context Awareness
+  IoListOutline,         // Priority Management
+  IoNotificationsOutline, // Notification Timing
+  IoSettingsOutline,     // Customization & Accessibility
+  IoLinkOutline          // Physical-Digital Integration
 } from 'react-icons/io5';
 
 const baseResearchPhase = {
@@ -135,27 +140,38 @@ export const researchPhase = {
           items: [
             {
               category: "Context Awareness",
+              icon: IoLocationOutline,
               insight: "Users need reminders that consider their location, activity, and availability",
-              methodologies: ["User Interviews", "Contextual Inquiry", "Journey Maps", "Survey Data"],
-              response: "AI-powered context detection system"
+              methodologies: ["User Interviews", "Affinity Diagrams"],
+              response: "Spatial-aware reminder persistence system"
             },
             {
               category: "Priority Management",
+              icon: IoListOutline,
               insight: "Task importance varies based on time, location, and user state",
-              methodologies: ["Task Analysis", "User Interviews", "Affinity Diagrams"],
-              response: "Dynamic priority adjustment algorithm"
+              methodologies: ["Competitive Analysis", "User Interviews", "Affinity Diagrams"],
+              response: "Integrated calendar and spatial note management"
             },
             {
               category: "Notification Timing",
+              icon: IoNotificationsOutline,
               insight: "Poor timing leads to 73% of task abandonment",
-              methodologies: ["Usage Analytics", "Survey Data", "User Interviews"],
+              methodologies: ["Survey Data", "Literature Review"],
               response: "Smart notification scheduling system"
             },
             {
-              category: "User Preferences",
-              insight: "Different users have varying notification preferences",
-              methodologies: ["Preference Analysis", "User Interviews", "Survey Data"],
+              category: "Customization & Accessibility",
+              icon: IoSettingsOutline,
+              insight: "Different users have varying notification and organization preferences",
+              methodologies: ["Competitive Analysis", "User Interviews", "Survey Data"],
               response: "Personalized notification settings with learning capability"
+            },
+            {
+              category: "Physical-Digital Integration",
+              icon: IoLinkOutline,
+              insight: "Physical context influences how users organize and access information",
+              methodologies: ["Competitive Analysis", "User Interviews"],
+              response: "Proximity-based reminder system"
             }
           ]
         },
@@ -163,13 +179,10 @@ export const researchPhase = {
           type: 'methodology',
           items: {
             "User Interviews": { color: "#9C4221", textColor: "light" },
-            "Contextual Inquiry": { color: "#276749", textColor: "light" },
-            "Journey Maps": { color: "#6B3FA0", textColor: "light" },
-            "Survey Data": { color: "#007BFF", textColor: "light" },
-            "Task Analysis": { color: "#FFA500", textColor: "light" },
+            "Survey Data": { color: "#007BFF", textColor: "light" },           
             "Affinity Diagrams": { color: "#00FF00", textColor: "light" },
-            "Usage Analytics": { color: "#FF4500", textColor: "light" },
-            "Preference Analysis": { color: "#8B008B", textColor: "light" }
+            "Literature Review": { color: "#FF4500", textColor: "light" },
+            "Competitive Analysis": { color: "#8B008B", textColor: "light" }
           }
         }
       ]
