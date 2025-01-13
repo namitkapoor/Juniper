@@ -149,20 +149,40 @@ export const carouselImages = {
     concepts: {
       operationsCenterConcept: [
         {
-          src: '/images/Case Studies/JD/Wireframe/Status Feed gestures.jpg',
+          src: '/images/Case Studies/JD/Sketches/Sketch-2.1.svg',
           caption: 'Status Feed Overview',
           alt: 'Status feed interface with task overview'
         },
         {
-          src: '/images/Case Studies/JD/Wireframe/Plan gestures.jpg',
+          src: '/images/Case Studies/JD/Sketches/Sketch-2.2.svg',
           caption: 'Weekly Planning View',
           alt: 'Weekly planning and task prioritization interface'
         },
         {
-          src: '/images/Case Studies/JD/Wireframe/Analyze gestures.jpg',
+          src: '/images/Case Studies/JD/Sketches/Sketch-2.3.svg',
           caption: 'Analytics Dashboard',
           alt: 'Analytics and reporting interface'
-        }
+        },
+        {
+          src: '/images/Case Studies/JD/Sketches/Sketch-2.4.svg',
+          caption: 'Analytics Dashboard',
+          alt: 'Analytics and reporting interface'
+        },
+        {
+          src: '/images/Case Studies/JD/Sketches/Sketch-2.5.svg',
+          caption: 'Analytics Dashboard',
+          alt: 'Analytics and reporting interface'
+        },
+        {
+          src: '/images/Case Studies/JD/Sketches/Sketch-2.6.svg',
+          caption: 'Analytics Dashboard',
+          alt: 'Analytics and reporting interface'
+        },
+        {
+          src: '/images/Case Studies/JD/Sketches/Sketch-2.7.svg',
+          caption: 'Analytics Dashboard',
+          alt: 'Analytics and reporting interface'
+        },
       ],
       seed2productConcept: [
         {
@@ -499,7 +519,7 @@ export const carouselImages = {
       }
     ],
     concepts: {
-      gamificationConcept: [
+      scannerConcept: [
         {
           src: `${BASE_PATH}/SP/Sketches/Game-1.svg`,
           caption: 'Reward System',
@@ -511,7 +531,7 @@ export const carouselImages = {
           alt: 'Sustainability progress dashboard'
         }
       ],
-      arConcept: [
+      scoringConcept: [
         {
           src: `${BASE_PATH}/SP/Sketches/AR-1.jpg`,
           caption: 'AR Package Preview',
