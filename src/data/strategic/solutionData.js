@@ -78,8 +78,12 @@ export const solutionPhase = {
               icon: IoTimerOutline,
               description: "What Tasks Tell Us About Time Management",
               content: {
-                useCarousel: true,
-                carouselType: "taskAnalysis",
+                coverImage: {
+                  url: "/images/Case Studies/JD/Task Analysis/Combined.jpg",
+                  caption: "Task Analysis Overview",
+                  alt: "Overview of product analysis"
+                },
+                useCarousel: false,
                 summary: "Detailed analysis of 5 key tasks revealed significant usability challenges, with an overall success rate of 50% across all tasks.",
                 metrics: {
                   overallCompletionTime: "5.1 minutes average",
@@ -301,7 +305,7 @@ export const solutionPhase = {
               description: "Key issues with existing product",
               content: {
                 coverImage: {
-                  url: "/images/Case Studies/MI/Original Design/old design campaign.svg",
+                  url: "/images/Case Studies/MI/Original Design/original design high res.jpg",
                   caption: "Product Analysis Overview",
                   alt: "Overview of product analysis"
                 },
@@ -411,37 +415,37 @@ export const solutionPhase = {
               content: {
                 concepts: [
                   {
-                    name: "Unified Campaign Management",
-                    description: "A centralized dashboard system that consolidates campaign tracking, influencer management, and contract handling.",
+                    name: "Campaign Hub",
+                    description: "All-in-one dashboard for managing influencer campaigns.",
                     status: "Selected",
                     keyFeatures: [
-                      "Real-time campaign metrics visualization",
-                      "Unified status tracking interface",
-                      "Automated contract workflow system"
+                      "Live campaign tracking",
+                      "Status monitoring",
+                      "Contract management"
                     ],
                     useCarousel: true,
                     carouselType: "campaignDashboardConcept"
                   },
                   {
-                    name: "Status Tracking System",
-                    description: "Real-time tracking and notification system for campaign and influencer status updates.",
+                    name: "Progress Tracker",
+                    description: "Real-time system for monitoring campaign progress.",
                     status: "Selected",
                     keyFeatures: [
-                      "Automated status notifications",
-                      "Progress tracking visualization",
-                      "Milestone alert system"
+                      "Auto notifications",
+                      "Visual progress bars",
+                      "Key milestone alerts"
                     ],
                     useCarousel: true,
                     carouselType: "statusTrackingConcept"
                   },
                   {
-                    name: "Contract Template System",
-                    description: "Streamlined contract creation and management system with automated workflows.",
+                    name: "Contract System",
+                    description: "Simplified contract creation and handling process.",
                     status: "Selected",
                     keyFeatures: [
-                      "Template-based contract generation",
-                      "Automated approval workflows",
-                      "Integrated tracking and reminders"
+                      "Quick contract creation",
+                      "Automated workflows",
+                      "Built-in reminders"
                     ],
                     useCarousel: true,
                     carouselType: "contractTemplateConcept"
@@ -541,6 +545,11 @@ export const solutionPhase = {
               icon: IoSearchOutline,
               description: "Spatial interaction patterns with traditional and AR reminders",
               content: {
+                coverImage: {
+                  url: "/images/Case Studies/TR/Solution Framework/Combined icons.svg",
+                  caption: "Task Analysis Overview",
+                  alt: "Overview of task analysis"
+                },
                 useCarousel: false,
                 findings: [
                   {
@@ -767,6 +776,11 @@ export const solutionPhase = {
               icon: IoSearchOutline,
               description: "Exploring AR and gamification in retail environments",
               content: {
+                coverImage: {
+                  url: "/images/Case Studies/SP/Research/Genuine researrch inspo.png",
+                  caption: "Task Analysis Overview",
+                  alt: "Overview of task analysis"
+                },
                 useCarousel: false,
                 findings: [
                   {

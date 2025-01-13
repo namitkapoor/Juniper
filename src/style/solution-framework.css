@@ -82,8 +82,10 @@
 }
 
 .analysis-section .analysis-image {
-  max-width: 800px;  /* Reduced from original size */
-  margin: 0 auto 2rem;  /* Centers the image and adds bottom margin */
+  width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+  overflow: hidden;
 }
 
 .analysis-section .analysis-image img {

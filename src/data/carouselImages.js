@@ -267,51 +267,21 @@ export const carouselImages = {
     concepts: {
       campaignDashboardConcept: [
         {
-          src: `${BASE_PATH}/MI/Design Iterations/mockup1.png`,
+          src: `${BASE_PATH}/MI/Solution Focus/campaign hub wireframe.jpg`,
           caption: 'Campaign Performance Overview',
           alt: 'Main campaign dashboard showing key metrics'
-        },
-        {
-          src: `${BASE_PATH}/MI/Design Iterations/mockup2.png`,
-          caption: 'Real-Time Analytics',
-          alt: 'Real-time performance tracking interface'
-        },
-        {
-          src: `${BASE_PATH}/MI/Sketches/Dashboard-3.svg`,
-          caption: 'Status Updates',
-          alt: 'Campaign status and alerts view'
         }
       ],
       statusTrackingConcept: [
         {
-          src: `${BASE_PATH}/MI/Wireframe/Status tracking.jpg`,
+          src: `${BASE_PATH}/MI/Solution Focus/Progress Tracker image.jpg`,
           caption: 'Status Tracking Overview',
           alt: 'Status tracking system interface'
-        },
-        {
-          src: `${BASE_PATH}/MI/Sketches/Status-2.svg`,
-          caption: 'Notification Center',
-          alt: 'Status notification system'
-        },
-        {
-          src: `${BASE_PATH}/MI/Sketches/Status-3.svg`,
-          caption: 'Progress View',
-          alt: 'Campaign progress tracking'
         }
       ],
       contractTemplateConcept: [
         {
-          src: `${BASE_PATH}/MI/Wireframe/Contract management.jpg`,
-          caption: 'Contract Template System',
-          alt: 'Contract management and automation interface'
-        },
-        {
-          src: `${BASE_PATH}/MI/Sketches/Contract-2.svg`,
-          caption: 'Digital Signatures',
-          alt: 'Digital signature integration'
-        },
-        {
-          src: `${BASE_PATH}/MI/Sketches/Contract-3.svg`,
+          src: `${BASE_PATH}/MI/Wireframes/contracts template 3.jpg`,
           caption: 'Status Tracking',
           alt: 'Contract status tracking interface'
         }
