@@ -214,13 +214,13 @@ export const carouselImages = {
         src: `${BASE_PATH}/MI/Research/Business Owner Persona.svg`,
         caption: 'Interview with a lifestyle influencer',
         alt: 'Semi-structured interview with influencer',
-        methodologies: ["Personas"]
+        methodologies: ["User Personas"]
       },
       {
         src: `${BASE_PATH}/MI/Research/Influencer Persona.svg`,
         caption: 'Interview with brand marketing team',
         alt: 'Semi-structured interview with brand',
-        methodologies: ["Personas"]
+        methodologies: ["User Personas"]
       },
       {
         src: `${BASE_PATH}/MI/Research/Business Journey map.svg`,
@@ -330,6 +330,23 @@ export const carouselImages = {
         methodologies: ["User Interviews"]
       },
       {
+        src: `${BASE_PATH}/TR/Research/Tina Persona5.png`,
+        caption: 'Competitive analysis matrix',
+        alt: 'Comparison of task management apps',
+        methodologies: ["User Personas"]
+      },
+      {
+        src: `${BASE_PATH}/TR/Research/Val Persona5.png`,
+        caption: 'Competitive analysis matrix',
+        alt: 'Comparison of task management apps',
+        methodologies: ["User Personas"]
+      },{
+        src: `${BASE_PATH}/TR/Research/Leo Persona5.png`,
+        caption: 'Competitive analysis matrix',
+        alt: 'Comparison of task management apps',
+        methodologies: ["User Personas"]
+      },
+      {
         src: `${BASE_PATH}/TR/Research/notes app Vision Pro.png`,
         caption: 'Competitive analysis matrix',
         alt: 'Comparison of task management apps',
@@ -423,44 +440,62 @@ export const carouselImages = {
       }
     ],
     concepts: {
-      mainAppConcept: [
+      spatialNoteConcept: [
         {
-          src: `${BASE_PATH}/TR/Sketches/Sketch-1.1.svg`,
+          src: `${BASE_PATH}/TR/Design Concepts/Spatial note.png`,
           caption: 'Task List View',
           alt: 'Main task interface concept'
-        },
-        {
-          src: `${BASE_PATH}/TR/Sketches/Sketch-1.2.svg`,
-          caption: 'Calendar Integration',
-          alt: 'Calendar sync interface'
-        },
-        {
-          src: `${BASE_PATH}/TR/Sketches/Sketch-1.3.svg`,
-          caption: 'Smart Notifications',
-          alt: 'Notification system design'
         }
       ],
-      arConcept: [
+      spatialCalendarConcept: [
         {
-          src: `${BASE_PATH}/TR/Sketches/AR-1.jpg`,
+          src: `${BASE_PATH}/TR/Design Concepts/calendar wireframe.jpg`,
+          caption: 'Calendar View',
+          alt: 'Calendar interface concept'
+        }
+      ],
+      spatialSoundConcept: [
+        {
+          src: `${BASE_PATH}/TR/Design Concepts/spatial audio 2.png`,
+          caption: 'Sound View',
+          alt: 'Sound interface concept'
+        }
+      ],
+      physicalSpaceConcept: [
+        {
+          src: `${BASE_PATH}/TR/Design Concepts/Room lightup 1.png`,
           caption: 'Spatial Task View',
           alt: 'AR task visualization'
-        },
-        {
-          src: `${BASE_PATH}/TR/Sketches/AR-2.jpg`,
-          caption: 'Location Reminders',
-          alt: 'Location-based AR reminders'
         }
       ]
     }
   },
   sustainablePackaging: {
     research: [
+      
       {
-        src: `${BASE_PATH}/SP/grocery items packaging.jpg`,
+        src: `${BASE_PATH}/SP/Research/zero waste grocery stores1.jpg`,
         caption: 'Market research findings',
         alt: 'Market analysis data',
-        methodologies: ["Market Research"]
+        methodologies: ["Literature Review"]
+      },
+      {
+        src: `${BASE_PATH}/SP/Research/grocery items packaging.jpg`,
+        caption: 'Market research findings',
+        alt: 'Market analysis data',
+        methodologies: ["Literature Review"]
+      },
+      {
+        src: `${BASE_PATH}/SP/Research/storyboard1.jpg`,
+        caption: 'Sustainability adoption journey',
+        alt: 'Journey map for sustainability',
+        methodologies: ["Storyboards"]
+      },
+      {
+        src: `${BASE_PATH}/SP/Research/storyboard2.jpg`,
+        caption: 'Sustainability adoption journey',
+        alt: 'Journey map for sustainability',
+        methodologies: ["Storyboards"]
       },
       {
         src: `${BASE_PATH}/SP/Research/Retailer Interviews.svg`,
@@ -468,34 +503,35 @@ export const carouselImages = {
         alt: 'Interview findings summary',
         methodologies: ["User Interviews"]
       },
-      {
-        src: `${BASE_PATH}/SP/Research/Sustainability Journey.svg`,
-        caption: 'Sustainability adoption journey',
-        alt: 'Journey map for sustainability',
-        methodologies: ["Journey Maps"]
-      }
     ],
     businessChallenge: [
       {
-        src: `${BASE_PATH}/SP/grocery items packaging.jpg`,
+        src: `${BASE_PATH}/SP/Pain Points/young adult buying groceries.jpg`,
         caption: 'Cost barrier analysis',
         alt: 'Cost comparison charts',
         methodologies: ["Cost Analysis"],
-        painPoints: ["costManagement"]
+        painPoints: ["informationAccess"]
       },
       {
-        src: `${BASE_PATH}/SP/Original Design/implementation.jpg`,
+        src: `${BASE_PATH}/SP/Pain Points/earth recycle.png`,
         caption: 'Implementation challenges',
         alt: 'Implementation process diagram',
         methodologies: ["Process Analysis"],
-        painPoints: ["implementationStrategy"]
+        painPoints: ["knowledgeGap"]
       },
       {
-        src: `${BASE_PATH}/SP/Original Design/metrics.jpg`,
+        src: `${BASE_PATH}/SP/Pain Points/Sample AR Interface 1.gif`,
         caption: 'Performance metrics dashboard',
         alt: 'Metrics tracking interface',
         methodologies: ["Analytics"],
-        painPoints: ["performanceMetrics"]
+        painPoints: ["engagement"]
+      },
+      {
+        src: `${BASE_PATH}/SP/Pain Points/packaging info.jpg`,
+        caption: 'Performance metrics dashboard',
+        alt: 'Packaging info',
+        methodologies: ["Analytics"],
+        painPoints: ["decisionMaking"]
       }
     ],
     taskAnalysis: [

@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Canvas } from '@react-three/fiber';
 import Experience from '../components/Experience.jsx';
-import HeroModel from '../components/HeroModel.jsx';
+import Contact from '../components/Contact.jsx';
 import { Button } from 'antd'
 import { useNavigate } from 'react-router-dom';
 import Navbar from "../components/Navbar.jsx";
@@ -253,28 +253,7 @@ export default function Home() {
       <Experiments />
 
       {/* Contact Section */}
-      <section className="contact">
-        <Canvas
-          className="contact-canvas"
-          camera={{
-            fov: 45,
-            near: 0.1,
-            far: 2000,
-            position: [0, 0, 2]
-          }}
-        >
-          <HeroModel />
-        </Canvas>
-        <motion.div 
-          className="contact-content"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-        >
-          <h2>Let's Connect</h2>
-          <p>Get in touch for opportunities or collaborations</p>
-          <Button>Connect</Button>
-        </motion.div>
-      </section>
+      <Contact />
     </div>
   );
 }

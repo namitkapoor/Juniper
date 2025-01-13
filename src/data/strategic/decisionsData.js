@@ -2,7 +2,7 @@ import { IoCheckmarkCircleOutline } from 'react-icons/io5';
 
 const baseDecisionsPhase = {
   id: 'decisions',
-  title: 'Design Decisions',
+  title: 'Decision Criteria',
   icon: IoCheckmarkCircleOutline,
   type: 'decisions'
 };

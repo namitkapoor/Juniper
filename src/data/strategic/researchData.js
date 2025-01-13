@@ -13,7 +13,10 @@ import {
   IoListOutline,         // Priority Management
   IoNotificationsOutline, // Notification Timing
   IoSettingsOutline,     // Customization & Accessibility
-  IoLinkOutline          // Physical-Digital Integration
+  IoLinkOutline,          // Physical-Digital Integration
+  IoGiftOutline,          // User Engagement
+  IoSchoolOutline,        // Educational Component
+  IoStarOutline           // Incentive Design
 } from 'react-icons/io5';
 
 const baseResearchPhase = {
@@ -126,7 +129,7 @@ export const researchPhase = {
             "Journey Maps": { color: "#6B3FA0", textColor: "light" },
             "Competitive Analysis": { color: "#276749", textColor: "light" },
             "Empathy Maps": { color: "#9C4221", textColor: "light" },
-            "Personas": { color: "#007BFF", textColor: "light" }
+            "User Personas": { color: "#007BFF", textColor: "light" }
           }
         }
       ]
@@ -142,7 +145,7 @@ export const researchPhase = {
               category: "Context Awareness",
               icon: IoLocationOutline,
               insight: "Users need reminders that consider their location, activity, and availability",
-              methodologies: ["User Interviews", "Affinity Diagrams"],
+              methodologies: ["User Interviews", "Affinity Diagrams", "User Personas"],
               response: "Spatial-aware reminder persistence system"
             },
             {
@@ -156,7 +159,7 @@ export const researchPhase = {
               category: "Notification Timing",
               icon: IoNotificationsOutline,
               insight: "Poor timing leads to 73% of task abandonment",
-              methodologies: ["Survey Data", "Literature Review"],
+              methodologies: ["Survey Data", "User Personas", "Literature Review"],
               response: "Smart notification scheduling system"
             },
             {
@@ -179,6 +182,7 @@ export const researchPhase = {
           type: 'methodology',
           items: {
             "User Interviews": { color: "#9C4221", textColor: "light" },
+            "User Personas": { color: "#007BFF", textColor: "light" },
             "Survey Data": { color: "#007BFF", textColor: "light" },           
             "Affinity Diagrams": { color: "#00FF00", textColor: "light" },
             "Literature Review": { color: "#FF4500", textColor: "light" },
@@ -195,42 +199,41 @@ export const researchPhase = {
           type: 'requirements',
           items: [
             {
-              category: "Cost Management",
-              insight: "30-45% cost premium for sustainable materials creates adoption barrier",
-              methodologies: ["Market Analysis", "Cost Analysis", "Retailer Interviews", "Survey Data"],
-              response: "Tiered incentive system with volume-based discounts"
+              category: "Material Sustainability",
+              icon: IoLeafOutline,
+              insight: "Need for clear system to evaluate packaging sustainability",
+              methodologies: ["Literature Review", "User Interviews"],
+              response: "Points-based scoring system (10-80) based on material sustainability"
             },
             {
-              category: "Implementation Process",
-              insight: "Complex transition process averaging 8-12 months",
-              methodologies: ["Process Analysis", "Retailer Interviews", "Journey Maps", "Timeline Studies"],
-              response: "Hybrid support system with guided implementation"
+              category: "User Engagement",
+              icon: IoGiftOutline,
+              insight: "Users need motivation to choose sustainable packaging",
+              methodologies: ["Storyboards", "User Interviews"],
+              response: "Combined AR scanning and reward system for product information"
             },
             {
-              category: "ROI Tracking",
-              insight: "Difficulty measuring and demonstrating return on investment",
-              methodologies: ["Financial Analysis", "Retailer Interviews", "Performance Metrics", "Benchmark Studies"],
-              response: "Integrated analytics platform with customizable metrics"
+              category: "Educational Component",
+              icon: IoSchoolOutline,
+              insight: "Limited understanding of product materials and recycling methods",
+              methodologies: ["Literature Review", "Storyboards"],
+              response: "AR-based material composition visualization and recycling guides"
             },
             {
-              category: "Supply Chain",
-              insight: "Limited access to reliable sustainable packaging suppliers",
-              methodologies: ["Supplier Analysis", "Market Research", "Distribution Studies", "Network Maps"],
-              response: "Curated supplier network with quality assurance"
+              category: "Incentive Design",
+              icon: IoStarOutline,
+              insight: "Need to balance immediate rewards with long-term sustainability",
+              methodologies: ["User Interviews", "Literature Review"],
+              response: "Tiered discount system linked to sustainability scores"
             }
           ]
         },
         {
           type: 'methodology',
           items: {
-            "Market Analysis": { color: "#9C4221", textColor: "light" },
-            "Retailer Interviews": { color: "#276749", textColor: "light" },
-            "Journey Maps": { color: "#6B3FA0", textColor: "light" },
-            "Survey Data": { color: "#007BFF", textColor: "light" },
-            "Process Analysis": { color: "#FFA500", textColor: "light" },
-            "Performance Metrics": { color: "#00FF00", textColor: "light" },
-            "Supplier Analysis": { color: "#FF4500", textColor: "light" },
-            "Cost Analysis": { color: "#8B008B", textColor: "light" }
+            "Literature Review": { color: "#9C4221", textColor: "light" },
+            "User Interviews": { color: "#276749", textColor: "light" },
+            "Storyboards": { color: "#6B3FA0", textColor: "light" },
           }
         }
       ]

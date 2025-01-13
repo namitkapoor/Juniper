@@ -9,7 +9,8 @@ import {
   IoAnalyticsOutline,
   IoPeopleOutline,
   IoSettingsOutline,
-  IoNavigateOutline
+  IoNavigateOutline,
+  IoThumbsDownOutline
 } from 'react-icons/io5';
 
 export const businessChallengeData = {
@@ -145,23 +146,30 @@ export const businessChallengeData = {
     },
     painPoints: [
       {
-        icon: IoWalletOutline,
-        title: "Cost Management",
-        description: "Higher costs of sustainable materials making adoption financially challenging.",
-        id: "costManagement"
+        icon: IoNavigateOutline,
+        title: "Complex Decision Making",
+        description: "Multiple packaging options and unclear sustainability metrics make sustainable choices difficult.",
+        id: "decisionMaking"
       },
       {
-        icon: IoAnalyticsOutline,
-        title: "Implementation Strategy",
-        description: "Lack of clear frameworks for transitioning to sustainable options.",
-        id: "implementation"
+        icon: IoSearchOutline,
+        title: "Information Access",
+        description: "Consumers struggle to identify and understand recyclable product information at point of purchase.",
+        id: "informationAccess"
       },
       {
-        icon: IoStatsChartOutline,
-        title: "Performance Metrics",
-        description: "Difficulty in measuring and demonstrating sustainability ROI.",
-        id: "metrics"
+        icon: IoSchoolOutline,
+        title: "Knowledge Gap",
+        description: "61% of consumers lack understanding of basic recycling concepts and proper disposal methods.",
+        id: "knowledgeGap"
+      },
+      {
+        icon: IoThumbsDownOutline,
+        title: "Low Engagement",
+        description: "Traditional information delivery methods fail to drive meaningful behavior change in sustainable practices.",
+        id: "engagement"
       }
+      
     ],
     costProblems: {
       title: "Cost of Inaction",

@@ -342,7 +342,12 @@ export const solutionPhase = {
               icon: IoTimerOutline,
               description: "Analysis of current user processes",
               content: {
-                useCarousel: true,
+                coverImage: {
+                  url: "/images/Case Studies/MI/Task Flow/Old Task Flow-min.jpg",
+                  caption: "User Workflow Overview",
+                  alt: "Overview of user workflows"
+                },
+                useCarousel: false,
                 carouselType: "taskAnalysis",
                 summary: "Analysis of key tasks revealed significant inefficiencies in current workflows",
                 metrics: {
@@ -579,7 +584,7 @@ export const solutionPhase = {
             {
               id: 'user-behavior',
               type: 'analysis',
-              title: "User Behavior Analysis",
+              title: "User Behavior",
               icon: IoTimerOutline,
               description: "Understanding how young adults manage tasks and information",
               content: {
@@ -637,49 +642,58 @@ export const solutionPhase = {
             {
               id: 'concept-development',
               type: 'concepts',
-              title: "Concept Development",
+              title: "Design Concepts",
               icon: IoBulbOutline,
-              description: "Bridging physical and digital task management",
+              description: "Exploring spatial approaches to task management",
               content: {
                 concepts: [
                   {
-                    name: "Spatial Note System",
-                    description: "A system allowing notes to persist in both physical spaces and digital calendars",
+                    name: "Spatial Notes",
+                    description: "Digital notes that persist in specific physical locations",
                     status: "Selected",
                     keyFeatures: [
-                      "Physical space anchoring",
-                      "Digital calendar integration",
-                      "Cross-platform persistence",
-                      "Environmental context preservation"
+                      "Location-based note anchoring",
+                      "Contextual reminders",
+                      "Digital-physical mapping"
                     ],
                     useCarousel: true,
                     carouselType: "spatialNoteConcept"
                   },
                   {
-                    name: "Priority Visualization",
-                    description: "Visual system for managing reminder importance and urgency",
+                    name: "Spatial Calendar",
+                    description: "Calendar events tied to physical spaces",
                     status: "Selected",
                     keyFeatures: [
-                      "Proximity-based priority",
-                      "Visual urgency indicators",
-                      "Context-aware visibility",
-                      "Intuitive organization"
+                      "Space-time visualization",
+                      "Location-based scheduling",
+                      "Environmental context"
                     ],
                     useCarousel: true,
-                    carouselType: "priorityVisConcept"
+                    carouselType: "spatialCalendarConcept"
                   },
                   {
-                    name: "Context-Aware Notifications",
-                    description: "Notification system that adapts to user's environment and activity",
+                    name: "Spatial Sound",
+                    description: "Audio cues that adapt to physical spaces",
                     status: "Selected",
                     keyFeatures: [
-                      "Environment-based triggers",
-                      "Location awareness",
-                      "Activity recognition",
-                      "Adaptive reminder timing"
+                      "Directional audio",
+                      "Context-aware volume",
+                      "Sound localization"
                     ],
                     useCarousel: true,
-                    carouselType: "contextNotificationConcept"
+                    carouselType: "spatialSoundConcept"
+                  },
+                  {
+                    name: "Physical Space Reminders",
+                    description: "Using physical spaces as direct reminder triggers",
+                    status: "Rejected",
+                    keyFeatures: [
+                      "Environmental triggers",
+                      "Space-based notifications",
+                      "Physical interventions"
+                    ],
+                    useCarousel: true,
+                    carouselType: "physicalSpaceConcept"
                   }
                 ]
               }
@@ -687,72 +701,73 @@ export const solutionPhase = {
             {
               id: 'design-iterations',
               type: 'wireframes',
-              title: "Design Iterations",
+              title: "Design Development",
               icon: IoConstructOutline,
-              description: "Key interaction mockups and iterations",
+              description: "Technical implementation and interface evolution",
               content: {
+                
                 screens: [
                   {
-                    name: "Discovery (AI-Powered Search and Matching)",
+                    name: "Spatial Calendar Interface",
                     image: {
-                      url: "/images/Case Studies/MI/Wireframe/Discovery interface.jpg",
-                      caption: "AI-powered influencer discovery interface"
+                      url: "/images/Case Studies/TR/Development/LumiNote create new.gif",
+                      caption: "Mixed reality calendar with spatial note creation"
                     },
-                    purpose: "Streamline influencer discovery with AI-powered matching and smart filters. Provide detailed insights into match quality and potential campaign fit.",
+                    purpose: "Create an intuitive calendar interface that enables users to place notes in physical space by selecting time slots.",
                     challengesAddressed: [
-                      "Manual search process was time-consuming and inefficient",
-                      "Match quality was difficult to assess without detailed metrics"
+                      "Traditional calendar apps lack spatial context",
+                      "Need for natural interaction with digital content in physical space"
                     ],
                     keyFeatures: [
-                      "Smart filters that adapt based on campaign goals",
-                      "AI-powered match scoring with detailed explanations",
-                      "Quick-view profiles with key metrics and past performance"
+                      "Time slot-based note creation",
+                      "MRTK2 spatial anchor integration",
+                      "Intuitive gesture controls for note placement"
                     ],
                     feedbackAndRefinements: [
-                      "Added detailed match explanations after users requested more transparency in AI decisions",
-                      "Simplified filter interface based on user testing feedback"
+                      "Added micro-animations for better interaction feedback",
+                      "Improved pointing and clicking accuracy based on user testing"
                     ]
                   },
                   {
-                    name: "Campaign Dashboard (Performance Tracking)",
+                    name: "Physical Space Integration",
                     image: {
-                      url: "/images/Case Studies/MI/Wireframe/Campaign dashboard.jpg",
-                      caption: "Centralized campaign management dashboard"
+                      url: "/images/Case Studies/TR/Development/Recognizes your physical space.gif",
+                      caption: "Physics-based interactions with real-world objects"
                     },
-                    purpose: "Provide a unified view of campaign status, influencer performance, and key metrics. Enable quick actions for common campaign management tasks.",
+                    purpose: "Create realistic and responsive interactions between digital notes and physical environment.",
                     challengesAddressed: [
-                      "Scattered campaign data made tracking difficult",
-                      "Lack of real-time performance insights"
+                      "Need for natural physics behavior in mixed reality",
+                      "Challenge of maintaining spatial awareness"
                     ],
                     keyFeatures: [
-                      "Real-time performance metrics and ROI tracking",
-                      "Status updates for all campaign participants",
-                      "Automated alerts for key milestones and issues"
+                      "Invisible room mesh for physics collisions",
+                      "Realistic bounce-off interactions",
+                      "Spatial persistence of notes"
                     ],
                     feedbackAndRefinements: [
-                      "Added customizable dashboard layouts based on user preferences",
-                      "Integrated quick-action buttons for common tasks after usability testing"
+                      "Refined collision detection for more natural feel",
+                      "Optimized room mesh generation for better performance"
                     ]
                   },
                   {
-                    name: "Contract Management",
+                    name: "Technical Infrastructure",
                     image: {
-                      url: "/images/Case Studies/MI/Wireframe/Contract management.jpg",
-                      caption: "Streamlined contract management interface"
+                      url: "/images/Case Studies/TR/Wireframe/Technical.jpg",
+                      caption: "Platform integration and development challenges"
                     },
-                    purpose: "Simplify contract creation, tracking, and management. Automate routine contract tasks and provide clear status visibility.",
+                    purpose: "Build robust technical foundation despite evolving XR platforms and tools.",
                     challengesAddressed: [
-                      "Contract management was manual and error-prone",
-                      "Status tracking was inconsistent across platforms"
+                      "Platform updates breaking existing functionality",
+                      "Integration challenges with Meta's Presence Platform"
                     ],
                     keyFeatures: [
-                      "Template-based contract generation",
-                      "Digital signature integration",
-                      "Automated reminders and status tracking"
+                      "MRTK2 toolkit integration",
+                      "Spatial anchor management",
+                      "Cross-platform compatibility considerations"
                     ],
                     feedbackAndRefinements: [
-                      "Simplified contract templates based on user feedback",
-                      "Added bulk contract management features for larger campaigns"
+                      "Rebuilt project to accommodate Meta platform updates",
+                      "Optimized for Quest 3 specific features"
                     ]
                   }
                 ]
@@ -904,29 +919,74 @@ export const solutionPhase = {
             },
             {
               id: 'technical-implementation',
-              type: 'implementation',
+              type: 'wireframes',
               title: "Technical Implementation",
               icon: IoCodeSlashOutline,
               description: "AR demonstration and implementation flow",
               content: {
-                coverImage: {
-                  url: "/images/Case Studies/SustainablePackaging/cost-breakdown.jpg",
-                  caption: "Cost Analysis Framework",
-                  alt: "Detailed cost breakdown visualization"
-                },
-                useCarousel: false,
-                findings: [
+                screens: [
                   {
-                    category: "Material Costs",
-                    issue: "30-45% premium on sustainable materials",
-                    impact: "Major barrier for mid-sized retailers",
-                    solution: "Volume-based discounts and subsidies"
+                    name: "Spatial Calendar Interface",
+                    image: {
+                      url: "/images/Case Studies/TR/Wireframe/Calendar.jpg",
+                      caption: "Mixed reality calendar with spatial note creation"
+                    },
+                    purpose: "Create an intuitive calendar interface that enables users to place notes in physical space by selecting time slots.",
+                    challengesAddressed: [
+                      "Traditional calendar apps lack spatial context",
+                      "Need for natural interaction with digital content in physical space"
+                    ],
+                    keyFeatures: [
+                      "Time slot-based note creation",
+                      "MRTK2 spatial anchor integration",
+                      "Intuitive gesture controls for note placement"
+                    ],
+                    feedbackAndRefinements: [
+                      "Added micro-animations for better interaction feedback",
+                      "Improved pointing and clicking accuracy based on user testing"
+                    ]
                   },
                   {
-                    category: "Implementation Costs",
-                    issue: "High transition and training expenses",
-                    impact: "Extended ROI timeline",
-                    solution: "Phased implementation with support funding"
+                    name: "Physical Space Integration",
+                    image: {
+                      url: "/images/Case Studies/TR/Wireframe/Spatial.jpg",
+                      caption: "Physics-based interactions with real-world objects"
+                    },
+                    purpose: "Create realistic and responsive interactions between digital notes and physical environment.",
+                    challengesAddressed: [
+                      "Need for natural physics behavior in mixed reality",
+                      "Challenge of maintaining spatial awareness"
+                    ],
+                    keyFeatures: [
+                      "Invisible room mesh for physics collisions",
+                      "Realistic bounce-off interactions",
+                      "Spatial persistence of notes"
+                    ],
+                    feedbackAndRefinements: [
+                      "Refined collision detection for more natural feel",
+                      "Optimized room mesh generation for better performance"
+                    ]
+                  },
+                  {
+                    name: "Technical Infrastructure",
+                    image: {
+                      url: "/images/Case Studies/TR/Wireframe/Technical.jpg",
+                      caption: "Platform integration and development challenges"
+                    },
+                    purpose: "Build robust technical foundation despite evolving XR platforms and tools.",
+                    challengesAddressed: [
+                      "Platform updates breaking existing functionality",
+                      "Integration challenges with Meta's Presence Platform"
+                    ],
+                    keyFeatures: [
+                      "MRTK2 toolkit integration",
+                      "Spatial anchor management",
+                      "Cross-platform compatibility considerations"
+                    ],
+                    feedbackAndRefinements: [
+                      "Rebuilt project to accommodate Meta platform updates",
+                      "Optimized for Quest 3 specific features"
+                    ]
                   }
                 ]
               }
@@ -935,5 +995,5 @@ export const solutionPhase = {
         }
       ]
     }
-  }
+  }    
 };

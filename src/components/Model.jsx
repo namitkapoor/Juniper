@@ -11,9 +11,16 @@ import fragmentShader from '../shaders/holographic/fragment.glsl'
 
 export default function Model() {
     const model = useLoader(GLTFLoader, './3d models/self.glb')
-    const modelPosition = useControls('model', {position: [0.02, -0.51, 0]})
-    const modelScale = useControls('model', {scale: [0.15,0.15,0.15]})
-    const modelRotation = useControls('model', {rotation: [-0.42, 1.47, 0.69]})
+    
+    // Commented out useControls for debugging
+    // const modelPosition = useControls('model', {position: [0.02, -0.51, 0]})
+    // const modelScale = useControls('model', {scale: [0.15,0.15,0.15]})
+    // const modelRotation = useControls('model', {rotation: [-0.42, 1.47, 0.69]})
+
+    // Directly set values
+    const modelPosition = { position: [0.02, -0.51, 0] };
+    const modelScale = { scale: [0.15, 0.15, 0.15] };
+    const modelRotation = { rotation: [-0.42, 1.47, 0.69] };
     
     const materialRef = useRef()
     const modelRef = useRef()
@@ -72,9 +79,9 @@ export default function Model() {
                 <Float rotationIntensity={0.4}>
                     <primitive 
                         object={model.scene}
-                        position={modelPosition.position}
-                        scale={modelScale.scale}
-                        rotation={modelRotation.rotation}
+                        position={[0.02, -0.51, 0]}
+                        scale={[0.15, 0.15, 0.15]}
+                        rotation={[-0.42, 1.47, 0.69]}
                         ref={modelRef}
                         onPointerOver={modelBehavior}
                         onPointerOut={modelReset}
