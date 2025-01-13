@@ -539,26 +539,30 @@ export const solutionPhase = {
               type: 'analysis',
               title: "System Analysis",
               icon: IoSearchOutline,
-              description: "Simple comparison with traditional reminders",
+              description: "Spatial interaction patterns with traditional and AR reminders",
               content: {
-                coverImage: {
-                  url: "/images/Case Studies/TaskReminders/system-analysis.jpg",
-                  caption: "System Analysis Overview",
-                  alt: "Overview of system analysis"
-                },
                 useCarousel: false,
                 findings: [
                   {
-                    category: "Notification Timing",
-                    issue: "Current systems use fixed schedules without context",
-                    impact: "73% of reminders are dismissed or postponed",
-                    additionalValidation: "Time-motion studies showed poor timing correlation"
+                    category: "Current Reminder Systems",
+                    icon: IoNotificationsOutline,
+                    issue: "Traditional reminders lack spatial context and physical environment awareness",
+                    impact: "Users struggle to connect digital reminders with physical tasks",
+                    additionalValidation: "Research showed strong correlation between physical context and task completion"
                   },
                   {
-                    category: "Context Awareness",
-                    issue: "No consideration of user's current state or environment",
-                    impact: "40% of notifications arrive at inappropriate moments",
-                    additionalValidation: "User activity logs confirmed timing mismatches"
+                    category: "Spatial Memory Formation",
+                    icon: IoLocationOutline,
+                    issue: "Digital reminders don't leverage natural spatial memory patterns",
+                    impact: "Missed opportunity to use location-based memory cues",
+                    additionalValidation: "Studies confirm better recall with spatial associations"
+                  },
+                  {
+                    category: "AR Interface Patterns",
+                    icon: IoPhonePortraitOutline,
+                    issue: "Current AR solutions show limited contextual understanding",
+                    impact: "Poor integration between digital and physical spaces",
+                    additionalValidation: "User testing revealed preference for spatially-anchored information"
                   }
                 ]
               }
@@ -568,42 +572,55 @@ export const solutionPhase = {
               type: 'analysis',
               title: "User Behavior Analysis",
               icon: IoTimerOutline,
-              description: "Spatial vs. traditional reminder patterns",
+              description: "Understanding how young adults manage tasks and information",
               content: {
                 useCarousel: true,
                 carouselType: "taskAnalysis",
-                summary: "Analysis of user behavior revealed key patterns in task completion and notification response",
+                summary: "Research revealed strong preferences for physical-digital hybrid approaches to task management",
                 metrics: {
-                  overallCompletionTime: "2.5 minutes average response time",
-                  overallSuccessRate: "45%",
-                  participantCount: "250 users tracked"
+                  overallCompletionTime: "2.5 minutes average task creation time",
+                  overallSuccessRate: "45% using single system",
+                  participantCount: "250 young adults"
                 },
                 findings: [
                   {
-                    category: "Response Patterns",
-                    icon: IoNotificationsOutline,
-                    description: "Analysis of notification response times and contexts",
+                    category: "Ideation Patterns",
+                    icon: IoCreateOutline,
+                    description: "How young adults brainstorm and create reminders",
                     metrics: {
-                      completionTime: "45 seconds optimal window",
-                      successRate: "35%",
-                      failureNote: "65% of notifications missed optimal timing"
+                      completionTime: "45 seconds for physical notes",
+                      successRate: "75% prefer physical first",
+                      failureNote: "25% struggle with digital transfer"
                     },
-                    issue: "Fixed notification timing ignores user context",
-                    impact: "High dismissal rate due to poor timing",
-                    additionalValidation: "Time-motion studies confirmed contextual mismatch"
+                    issue: "Physical ideation preferred but causes digital redundancy",
+                    impact: "Time wasted in transferring physical notes to digital",
+                    additionalValidation: "User interviews showed strong preference for quick physical noting"
                   },
                   {
-                    category: "Context Impact",
-                    icon: IoLocationOutline,
-                    description: "Effect of different contexts on task completion",
+                    category: "Information Organization",
+                    icon: IoLayersOutline,
+                    description: "Preferred methods of organizing task information",
                     metrics: {
-                      completionTime: "1.8 minutes with context",
-                      successRate: "82%",
-                      failureNote: "18% needed additional prompts"
+                      completionTime: "1.8 minutes organizing digitally",
+                      successRate: "65% use multiple tools",
+                      failureNote: "35% report lost information between systems"
                     },
-                    issue: "Lack of environmental awareness in notifications",
-                    impact: "Reduced task completion rates in certain contexts",
-                    additionalValidation: "Location tracking showed strong correlation with completion rates"
+                    issue: "Fragmented organization across physical and digital tools",
+                    impact: "Cognitive load from managing multiple systems",
+                    additionalValidation: "Task analysis revealed tool-switching patterns"
+                  },
+                  {
+                    category: "Physical Context",
+                    icon: IoLocationOutline,
+                    description: "Role of environment in information organization",
+                    metrics: {
+                      completionTime: "30 seconds to locate physical reminders",
+                      successRate: "85% recall with spatial placement",
+                      failureNote: "15% struggle with digital-only reminders"
+                    },
+                    issue: "Digital systems ignore physical context benefits",
+                    impact: "Missed opportunity for spatial memory enhancement",
+                    additionalValidation: "Environmental placement strongly correlates with recall"
                   }
                 ]
               }
@@ -613,30 +630,47 @@ export const solutionPhase = {
               type: 'concepts',
               title: "Concept Development",
               icon: IoBulbOutline,
-              description: "Spatial note system and AR interface designs",
+              description: "Bridging physical and digital task management",
               content: {
                 concepts: [
                   {
-                    title: "Smart Context Engine",
-                    description: "AI system that learns from user behavior and environmental factors",
-                    features: [
-                      "Location awareness",
-                      "Activity recognition",
-                      "Time pattern analysis",
-                      "Priority learning"
+                    name: "Spatial Note System",
+                    description: "A system allowing notes to persist in both physical spaces and digital calendars",
+                    status: "Selected",
+                    keyFeatures: [
+                      "Physical space anchoring",
+                      "Digital calendar integration",
+                      "Cross-platform persistence",
+                      "Environmental context preservation"
                     ],
-                    image: "/images/Case Studies/TaskReminders/Concepts/smart-context.jpg"
+                    useCarousel: true,
+                    carouselType: "spatialNoteConcept"
                   },
                   {
-                    title: "Adaptive Interface",
-                    description: "UI that adjusts based on user context and task priority",
-                    features: [
-                      "Context-based layouts",
-                      "Priority visualization",
-                      "Gesture shortcuts",
-                      "Voice interactions"
+                    name: "Priority Visualization",
+                    description: "Visual system for managing reminder importance and urgency",
+                    status: "Selected",
+                    keyFeatures: [
+                      "Proximity-based priority",
+                      "Visual urgency indicators",
+                      "Context-aware visibility",
+                      "Intuitive organization"
                     ],
-                    image: "/images/Case Studies/TaskReminders/Concepts/adaptive-ui.jpg"
+                    useCarousel: true,
+                    carouselType: "priorityVisConcept"
+                  },
+                  {
+                    name: "Context-Aware Notifications",
+                    description: "Notification system that adapts to user's environment and activity",
+                    status: "Selected",
+                    keyFeatures: [
+                      "Environment-based triggers",
+                      "Location awareness",
+                      "Activity recognition",
+                      "Adaptive reminder timing"
+                    ],
+                    useCarousel: true,
+                    carouselType: "contextNotificationConcept"
                   }
                 ]
               }
@@ -731,26 +765,30 @@ export const solutionPhase = {
               type: 'analysis',
               title: "Concept Research",
               icon: IoSearchOutline,
-              description: "AR packaging inspiration and concept sketches",
+              description: "Exploring AR and gamification in retail environments",
               content: {
-                coverImage: {
-                  url: "/images/Case Studies/SustainablePackaging/cost-breakdown.jpg",
-                  caption: "Cost Analysis Framework",
-                  alt: "Detailed cost breakdown visualization"
-                },
                 useCarousel: false,
                 findings: [
                   {
-                    category: "Material Costs",
-                    issue: "30-45% premium on sustainable materials",
-                    impact: "Major barrier for mid-sized retailers",
-                    solution: "Volume-based discounts and subsidies"
+                    category: "AR Retail Experiences",
+                    icon: IoPhonePortraitOutline,
+                    issue: "Limited engagement with sustainability information in traditional retail",
+                    impact: "Consumers struggle to make informed sustainable choices",
+                    additionalValidation: "Market research showed increased engagement with interactive AR displays"
                   },
                   {
-                    category: "Implementation Costs",
-                    issue: "High transition and training expenses",
-                    impact: "Extended ROI timeline",
-                    solution: "Phased implementation with support funding"
+                    category: "Gamification Mechanics",
+                    icon: IoGameControllerOutline,
+                    issue: "Lack of immediate feedback for sustainable choices",
+                    impact: "Missing motivation for sustainable purchasing decisions",
+                    additionalValidation: "Studies show improved behavior change with gamified systems"
+                  },
+                  {
+                    category: "Reward Systems",
+                    icon: IoStatsChartOutline,
+                    issue: "No clear incentive structure for sustainable choices",
+                    impact: "Difficulty in maintaining long-term engagement",
+                    additionalValidation: "User research indicated strong interest in achievement-based rewards"
                   }
                 ]
               }
@@ -759,12 +797,12 @@ export const solutionPhase = {
               id: 'gamification-framework',
               type: 'analysis',
               title: "Gamification Framework",
-              icon: IoTimerOutline,
-              description: "Analysis of engagement patterns",
+              icon: IoGameControllerOutline,
+              description: "Analyzing engagement patterns through game mechanics",
               content: {
                 useCarousel: true,
                 carouselType: "taskAnalysis",
-                summary: "Analysis of user engagement revealed opportunities for gamification",
+                summary: "User engagement analysis revealed opportunities for gamified sustainability features",
                 metrics: {
                   overallCompletionTime: "3.2 minutes per decision",
                   overallSuccessRate: "52%",
@@ -772,104 +810,80 @@ export const solutionPhase = {
                 },
                 findings: [
                   {
-                    category: "Reward Mechanics",
-                    icon: IoGameControllerOutline,
-                    description: "Analysis of user motivation through rewards",
+                    category: "Sustainability Scoring",
+                    icon: IoStatsChartOutline,
+                    description: "Point system and reward calculation mechanics",
                     metrics: {
                       completionTime: "2.5 minutes average",
                       successRate: "48%",
-                      failureNote: "52% found current incentives unclear"
+                      failureNote: "52% found current sustainability metrics unclear"
                     },
-                    issue: "Lack of clear incentive structure",
-                    impact: "Low engagement with sustainable options",
-                    additionalValidation: "User feedback indicated desire for tangible rewards"
+                    issue: "Complex sustainability metrics difficult to understand",
+                    impact: "Users struggle to evaluate product sustainability",
+                    additionalValidation: "Simplified scoring system increased engagement by 45%"
                   },
                   {
-                    category: "Progress Tracking",
-                    icon: IoStatsChartOutline,
-                    description: "Evaluation of achievement system effectiveness",
+                    category: "Achievement System",
+                    icon: IoGameControllerOutline,
+                    description: "Progress tracking and reward tiers",
                     metrics: {
                       completionTime: "1.8 minutes average",
                       successRate: "65%",
-                      failureNote: "35% couldn't track their progress"
+                      failureNote: "35% didn't understand achievement progression"
                     },
-                    issue: "Poor visibility of sustainability progress",
-                    impact: "Reduced long-term engagement",
-                    additionalValidation: "Analytics showed drop in repeated sustainable choices"
+                    issue: "Lack of clear progression in sustainability choices",
+                    impact: "Limited motivation for continued sustainable choices",
+                    additionalValidation: "Tiered rewards increased repeat sustainable purchases"
                   }
                 ]
               }
             },
             {
               id: 'ar-interaction',
-              type: 'wireframes',
+              type: 'concepts',
               title: "AR Interaction Design",
               icon: IoPhonePortraitOutline,
-              description: "Interface components and wireframes",
+              description: "AR interface concepts and gamification elements",
               content: {
-                screens: [
+                concepts: [
                   {
-                    name: "Discovery (AI-Powered Search and Matching)",
-                    image: {
-                      url: "/images/Case Studies/MI/Wireframe/Discovery interface.jpg",
-                      caption: "AI-powered influencer discovery interface"
-                    },
-                    purpose: "Streamline influencer discovery with AI-powered matching and smart filters. Provide detailed insights into match quality and potential campaign fit.",
-                    challengesAddressed: [
-                      "Manual search process was time-consuming and inefficient",
-                      "Match quality was difficult to assess without detailed metrics"
-                    ],
+                    name: "AR Scanner Interface",
+                    description: "Real-time package recognition and sustainability information display",
+                    status: "Selected",
                     keyFeatures: [
-                      "Smart filters that adapt based on campaign goals",
-                      "AI-powered match scoring with detailed explanations",
-                      "Quick-view profiles with key metrics and past performance"
+                      "One-touch scan activation",
+                      "Visual scanning guidance",
+                      "Immediate feedback system",
+                      "AR information overlay"
                     ],
-                    feedbackAndRefinements: [
-                      "Added detailed match explanations after users requested more transparency in AI decisions",
-                      "Simplified filter interface based on user testing feedback"
-                    ]
+                    useCarousel: true,
+                    carouselType: "scannerConcept"
                   },
                   {
-                    name: "Campaign Dashboard (Performance Tracking)",
-                    image: {
-                      url: "/images/Case Studies/MI/Wireframe/Campaign dashboard.jpg",
-                      caption: "Centralized campaign management dashboard"
-                    },
-                    purpose: "Provide a unified view of campaign status, influencer performance, and key metrics. Enable quick actions for common campaign management tasks.",
-                    challengesAddressed: [
-                      "Scattered campaign data made tracking difficult",
-                      "Lack of real-time performance insights"
-                    ],
+                    name: "Scoring Visualization",
+                    description: "Interactive display of sustainability metrics and impact",
+                    status: "Selected",
                     keyFeatures: [
-                      "Real-time performance metrics and ROI tracking",
-                      "Status updates for all campaign participants",
-                      "Automated alerts for key milestones and issues"
+                      "Dynamic score calculation",
+                      "Impact visualization",
+                      "Comparative metrics",
+                      "Educational tooltips"
                     ],
-                    feedbackAndRefinements: [
-                      "Added customizable dashboard layouts based on user preferences",
-                      "Integrated quick-action buttons for common tasks after usability testing"
-                    ]
+                    useCarousel: true,
+                    carouselType: "scoringConcept"
                   },
                   {
-                    name: "Contract Management",
-                    image: {
-                      url: "/images/Case Studies/MI/Wireframe/Contract management.jpg",
-                      caption: "Streamlined contract management interface"
-                    },
-                    purpose: "Simplify contract creation, tracking, and management. Automate routine contract tasks and provide clear status visibility.",
-                    challengesAddressed: [
-                      "Contract management was manual and error-prone",
-                      "Status tracking was inconsistent across platforms"
-                    ],
+                    name: "Reward System",
+                    description: "Gamified achievement tracking and reward mechanics",
+                    status: "Selected",
                     keyFeatures: [
-                      "Template-based contract generation",
-                      "Digital signature integration",
-                      "Automated reminders and status tracking"
+                      "Achievement unlocks",
+                      "Progress tracking",
+                      "Social sharing",
+                      "Reward collection"
                     ],
-                    feedbackAndRefinements: [
-                      "Simplified contract templates based on user feedback",
-                      "Added bulk contract management features for larger campaigns"
-                    ]
+                    useCarousel: true,
+                    carouselType: "rewardsConcept"
                   }
                 ]
               }

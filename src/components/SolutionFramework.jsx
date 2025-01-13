@@ -8,6 +8,21 @@ const SolutionFramework = ({ content, type, projectId }) => {
   console.log('SolutionFramework Props:', { content, type, projectId });
   const [expandedCard, setExpandedCard] = useState(null);
 
+  const renderCarousel = (images, variant) => (
+    images.length > 0 ? (
+      <ImageCarousel 
+        images={images}
+        autoPlay={false}
+        variant={variant}
+        showNavigation={images.length > 1}
+      />
+    ) : (
+      <div className="no-images-message">
+        No images available for {projectId}
+      </div>
+    )
+  );
+
   if (type === 'analysis') {
     return (
       <div className="analysis-section">
@@ -59,30 +74,19 @@ const SolutionFramework = ({ content, type, projectId }) => {
     );
   }
 
-  if (type === 'taskAnalysis') {
-    const taskImages = getProjectImages(projectId, 'taskAnalysis');
-    console.log('Task Analysis Section:', { 
+  if (type === 'taskAnalysis' || type === 'userWorkflow' || type === 'userBehaviorAnalysis' || type === 'gamificationFramework') {
+    const images = getProjectImages(projectId, type);
+    console.log(`${type} Section:`, { 
       projectId, 
-      taskImages,
-      imagesLength: taskImages?.length,
-      firstImage: taskImages[0],
-      hasMultipleImages: taskImages.length > 1
+      images,
+      imagesLength: images?.length,
+      firstImage: images[0],
+      hasMultipleImages: images.length > 1
     });
     
     return (
-      <div className="task-analysis-section">
-        {taskImages.length > 0 ? (
-          <ImageCarousel 
-            images={taskImages}
-            autoPlay={false}
-            variant="task"
-            showNavigation={taskImages.length > 1}
-          />
-        ) : (
-          <div className="no-images-message">
-            No task analysis images available for {projectId}
-          </div>
-        )}
+      <div className={`${type}-section`}>
+        {renderCarousel(images, type)}
       </div>
     );
   }
@@ -92,7 +96,9 @@ const SolutionFramework = ({ content, type, projectId }) => {
     return (
       <div className="concepts-grid">
         {content?.concepts?.map((concept, index) => {
-          const conceptImages = getConceptImages(projectId, concept.carouselType);
+          const conceptImages = concept.useCarousel ? 
+            getConceptImages(projectId, concept.carouselType) : 
+            [];
           
           console.log('Concept Images:', {
             projectId,
@@ -106,7 +112,7 @@ const SolutionFramework = ({ content, type, projectId }) => {
               <h4>{concept.name}</h4>
               <p>{concept.description}</p>
               
-              {concept.useCarousel && conceptImages?.length > 0 && (
+              {conceptImages.length > 0 && (
                 <ImageCarousel 
                   images={conceptImages}
                   autoPlay={false}

@@ -149,40 +149,20 @@ export const carouselImages = {
     concepts: {
       operationsCenterConcept: [
         {
-          src: '/images/Case Studies/JD/Sketches/Sketch-2.1.svg',
-          caption: 'Dashboard View',
-          alt: 'Dashboard interface of Operations Center'
+          src: '/images/Case Studies/JD/Wireframe/Status Feed gestures.jpg',
+          caption: 'Status Feed Overview',
+          alt: 'Status feed interface with task overview'
         },
         {
-          src: '/images/Case Studies/JD/Sketches/Sketch-2.2.svg',
-          caption: 'Map View',
-          alt: 'Dashboard interface of Operations Center'
+          src: '/images/Case Studies/JD/Wireframe/Plan gestures.jpg',
+          caption: 'Weekly Planning View',
+          alt: 'Weekly planning and task prioritization interface'
         },
         {
-          src: '/images/Case Studies/JD/Sketches/Sketch-2.3.svg',
-          caption: 'Map View',
-          alt: 'Dashboard interface of Operations Center'
-        },
-        {
-          src: '/images/Case Studies/JD/Sketches/Sketch-2.4.svg',
-          caption: 'Plan View',
-          alt: 'Dashboard interface of Operations Center'
-        },
-        {
-          src: '/images/Case Studies/JD/Sketches/Sketch-2.5.svg',
-          caption: 'Analytics View',
-          alt: 'Dashboard interface of Operations Center'
-        },
-        {
-          src: '/images/Case Studies/JD/Sketches/Sketch-2.6.svg',
-          caption: 'Analytics View',
-          alt: 'Dashboard interface of Operations Center'
-        },
-        {
-          src: '/images/Case Studies/JD/Sketches/Sketch-2.7.svg',
-          caption: 'Analytics View',
-          alt: 'Dashboard interface of Operations Center'
-        },
+          src: '/images/Case Studies/JD/Wireframe/Analyze gestures.jpg',
+          caption: 'Analytics Dashboard',
+          alt: 'Analytics and reporting interface'
+        }
       ],
       seed2productConcept: [
         {

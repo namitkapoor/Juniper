@@ -10,7 +10,6 @@ const ProcessFlow = ({ steps, isNested = false, projectId }) => {
     setActiveStep(activeStep === stepId ? null : stepId);
   };
 
-  // Format content (removed icon injection)
   const getStepContent = (step) => {
     if (step.content) {
       return {

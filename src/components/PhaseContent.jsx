@@ -34,26 +34,6 @@ const PhaseContent = ({ content, contentType, projectId }) => {
           firstCategory: section.content?.findings?.[0]?.category
         });
         
-        if (section.content?.findings?.[0]?.category) {
-          const taskImages = getTaskAnalysisImages(projectId, section.content.findings[0].category);
-          console.log('Task Analysis Images:', taskImages);
-          
-          return (
-            <div className="analysis-section">
-              <ImageCarousel 
-                images={taskImages}
-                autoPlay={false}
-                variant="analysis"
-              />
-              <SolutionFramework 
-                content={section.content} 
-                type={section.type}
-                projectId={projectId}
-              />
-            </div>
-          );
-        }
-        
         return <SolutionFramework 
           content={section.content} 
           type={section.type}
