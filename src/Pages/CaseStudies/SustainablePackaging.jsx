@@ -8,6 +8,7 @@ import StrategicApproach from '../../components/StrategicApproach';
 import VisualEvolution from '../../components/VisualEvolution';
 import MeasurableResults from '../../components/MeasurableResults';
 import Overview from '../../components/Overview';
+import OtherProjects from '../../components/OtherProjects';
 
 export default function SustainablePackaging() {
   const [expandedSections, setExpandedSections] = useState(new Set());
@@ -210,6 +211,15 @@ export default function SustainablePackaging() {
             isExpanded={expandedSections.has('visualEvolution')}
             projectId="sustainablePackaging"
           />
+        </motion.div>
+
+        {/* Add Other Projects section at the bottom */}
+        <motion.div
+          className="expandable-section"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+        >
+          <OtherProjects currentProjectId="sustainable-packaging" />
         </motion.div>
       </motion.div>
     </div>

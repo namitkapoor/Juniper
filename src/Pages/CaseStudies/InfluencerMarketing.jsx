@@ -8,6 +8,7 @@ import StrategicApproach from '../../components/StrategicApproach';
 import VisualEvolution from '../../components/VisualEvolution';
 import MeasurableResults from '../../components/MeasurableResults';
 import Overview from '../../components/Overview';
+import OtherProjects from '../../components/OtherProjects';
 
 export default function InfluencerMarketing() {
   const [expandedSections, setExpandedSections] = useState(new Set());
@@ -209,6 +210,15 @@ export default function InfluencerMarketing() {
             isExpanded={expandedSections.has('visualEvolution')} 
             projectId="influencerMarketing" 
           />
+        </motion.div>
+
+        {/* Add Other Projects section at the bottom */}
+        <motion.div
+          className="expandable-section"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+        >
+          <OtherProjects currentProjectId="influencer-marketing" />
         </motion.div>
       </motion.div>
     </div>
