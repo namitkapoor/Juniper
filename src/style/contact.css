@@ -1,8 +1,8 @@
 /* src/style/contact.css */
 .contact-section {
   padding: 6rem 2rem;
-  background-color: rgba(255, 255, 255, 0);
-  color: rgba(255, 255, 255, 0.9);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
 }
 
 .contact-wrapper {
@@ -26,14 +26,15 @@
 
 .contact-header h2 {
   font-size: 3rem;
-  font-weight: 600;
+  font-weight: 900;
   margin-bottom: 1rem;
-  color: rgba(255, 255, 255, 0.95);
+  color: var(--text-primary);
+  font-family: 'PP Eiko', sans-serif;
 }
 
 .contact-subtitle {
   font-size: 1.2rem;
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--text-secondary);
   font-weight: 400;
 }
 
@@ -45,7 +46,7 @@
 }
 
 .social-link {
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--icon-color);
   transition: all 0.3s ease;
   padding: 0.5rem;
 }
@@ -76,6 +77,12 @@
   animation: pulse 2s infinite;
 }
 
+.availability-status p {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
 @keyframes pulse {
   0% {
     transform: scale(0.95);
@@ -93,15 +100,6 @@
   }
 }
 
-.location-info {
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 1rem;
-  line-height: 1.6;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
 /* Case Study Links */
 .case-study-links {
   padding-top: 2rem;
@@ -110,8 +108,10 @@
 .case-study-links h3 {
   font-size: 1.5rem;
   margin-bottom: 2rem;
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--text-primary);
   text-align: left;
+  font-family: 'PP Eiko', sans-serif;
+  font-weight: 500;
 }
 
 .case-study-list {
@@ -126,8 +126,8 @@
   align-items: center;
   padding: 1rem 0;
   text-decoration: none;
-  color: rgba(255, 255, 255, 0.9);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border-color);
   transition: all 0.3s ease;
 }
 
@@ -144,8 +144,8 @@
 }
 
 .case-study-link:hover {
-  color: rgba(255, 255, 255, 1);
-  border-bottom-color: rgba(255, 255, 255, 0.3);
+  color: var(--text-primary);
+  border-bottom-color: var(--text-secondary);
 }
 
 .case-study-link:hover .arrow-icon {
@@ -163,15 +163,13 @@
 }
 
 .scroll-top {
-  position: absolute;
-  right: 0;
-  top: -20px;
-  background: rgba(255, 255, 255, 0.1);
-  border: none;
-  width: 40px;
-  height: 40px;
+  position: static;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--text-primary);
   cursor: pointer;
   transition: all 0.3s ease;
   display: flex;
@@ -180,19 +178,19 @@
 }
 
 .scroll-top:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: var(--hover-bg);
   transform: translateY(-2px);
 }
 
 .copyright {
   font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--footer-text);
   margin-bottom: 0.5rem;
 }
 
 .footer-note {
   font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--footer-text);
 }
 
 /* Responsive Design */
@@ -219,15 +217,128 @@
   }
 }
 
-.contact-left {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
+:root[data-theme="dark"] {
+  --bg-primary: #1a1a1a;
+  --text-primary: rgba(255, 255, 255, 0.9);
+  --text-secondary: rgba(255, 255, 255, 0.7);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --card-bg: rgba(255, 255, 255, 0.03);
+  --hover-bg: rgba(255, 255, 255, 0.1);
+  --icon-color: rgba(255, 255, 255, 0.8);
+  --footer-text: rgba(255, 255, 255, 0.6);
 }
 
-.contact-info-group {
+:root[data-theme="light"] {
+  --bg-primary: #ffffff;
+  --text-primary: rgba(0, 0, 0, 0.9);
+  --text-secondary: rgba(0, 0, 0, 0.7);
+  --border-color: rgba(0, 0, 0, 0.1);
+  --card-bg: rgba(0, 0, 0, 0.03);
+  --hover-bg: rgba(0, 0, 0, 0.1);
+  --icon-color: rgba(0, 0, 0, 0.8);
+  --footer-text: rgba(0, 0, 0, 0.6);
+}
+
+.theme-toggle {
+  position: static;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  width: 74px;
+  height: 32px;
+  border-radius: 16px;
+  cursor: pointer;
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 8px;
+  transition: all 0.3s ease;
+  overflow: visible;
+}
+
+.theme-toggle::before {
+  content: '';
+  position: absolute;
+  left: 4px;
+  width: 24px;
+  height: 24px;
+  background-color: var(--text-primary);
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+  z-index: 1;
+}
+
+:root[data-theme="light"] .theme-toggle::before {
+  transform: translateX(42px);
+}
+
+.theme-toggle svg {
+  width: 16px;
+  height: 16px;
+  color: var(--text-primary);
+  z-index: 2;
+  position: relative;
+}
+
+.theme-toggle .sun-icon,
+.theme-toggle .moon-icon {
+  opacity: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.theme-toggle .sun-icon {
+  opacity: 0;
+}
+
+.theme-toggle .moon-icon {
+  color: black;
+  opacity: 1;
+}
+
+:root[data-theme="light"] .theme-toggle .sun-icon {
+  opacity: 1;
+}
+
+:root[data-theme="light"] .theme-toggle .moon-icon {
+  opacity: 0;
+}
+
+.theme-toggle:hover {
+  background: var(--hover-bg);
+  transform: translateY(-2px);
+}
+
+/* Update the controls container */
+.controls-container {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  display: flex;
   gap: 1rem;
-  margin-top: 1rem;
+  align-items: center;
+  z-index: 100;
+}
+
+.theme-toggle.coming-soon {
+  opacity: 0.5;
+  cursor: not-allowed;
+  position: relative;
+}
+
+.coming-soon-text {
+  position: absolute;
+  top: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.75rem;
+  white-space: nowrap;
+  color: var(--text-secondary);
+  pointer-events: none;
+}
+
+.theme-toggle.coming-soon:hover {
+  transform: none;
+  background: var(--card-bg);
 }

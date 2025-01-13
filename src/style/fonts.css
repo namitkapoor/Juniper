@@ -16,7 +16,7 @@
          url('/fonts/Satoshi/Satoshi-Medium.woff') format('woff'),
          url('/fonts/Satoshi/Satoshi-Medium.ttf') format('truetype');
     font-weight: 500;
-    font-style: normal;
+    font-style: medium;
     font-display: swap;
   }
   
@@ -26,6 +26,30 @@
          url('/fonts/Satoshi/Satoshi-Bold.woff') format('woff'),
          url('/fonts/Satoshi/Satoshi-Bold.ttf') format('truetype');
     font-weight: 700;
+    font-style: bold;
+    font-display: swap;
+  }
+  
+  @font-face {
+    font-family: 'PP Eiko';
+    src: url('/fonts/PP-Eiko/PPEiko-Heavy.otf') format('opentype');
+    font-weight: 900;
     font-style: normal;
     font-display: swap;
   }
+
+  @font-face {
+     font-family: 'PP Eiko';
+     src: url('/fonts/PP-Eiko/PPEiko-Medium.otf') format('opentype');
+     font-weight: 500;
+     font-style: normal;
+     font-display: swap;
+   }
+
+   @font-face {
+     font-family: 'PP Eiko';
+     src: url('/fonts/PP-Eiko/PPEiko-Light.otf') format('opentype');
+     font-weight: 300;
+     font-style: normal;
+     font-display: swap;
+   }

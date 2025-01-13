@@ -1,7 +1,7 @@
-:root {
-  /* Core colors */
-  --background: #0F0F0F;
-  --text-primary: #FFFFFF;
+:root[data-theme="dark"] {
+  /* Core colors - keeping your original dark theme */
+  --background: #1a1a1a;
+  --text-primary: #e8e8e8;
   --text-secondary: #E0E0E0;
   
   /* Gradient definitions */
@@ -15,16 +15,32 @@
   /* UI Elements */
   --card-background: rgba(255, 255, 255, 0.03);
   --tag-background: rgba(164, 191, 199, 0.08);
-  --tag-text: #a4bfc7;  /* Matches about page accent */
+  --tag-text: #a4bfc7;
+}
+
+:root[data-theme="light"] {
+  /* Core colors - subtle light theme */
+  --background: #ffffff;
+  --text-primary: #1a1a1a;
+  --text-secondary: #4a4a4a;
   
-  /* Add font family variable */
-  --font-primary: 'Satoshi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 
-    'Helvetica Neue', Arial, sans-serif;
+  /* Gradient definitions */
+  --gradient-text: linear-gradient(45deg, #1a1a1a, #4a4a4a);
+  --gradient-card: linear-gradient(
+    145deg,
+    rgba(0, 0, 0, 0.02),
+    rgba(0, 0, 0, 0.01)
+  );
+  
+  /* UI Elements */
+  --card-background: rgba(0, 0, 0, 0.02);
+  --tag-background: rgba(164, 191, 199, 0.1);
+  --tag-text: #718791;
 }
 
 .page-container {
-  background-color: #1a1a1a;
-  color: white;
+  background-color: var(--background);
+  color: var(--text-primary);
   font-family: var(--font-primary);
   overflow: hidden;
 }
@@ -123,6 +139,7 @@
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   transition: transform 0.3s ease-out;
+  cursor: auto;
 }
 
 .button-container {
@@ -133,19 +150,24 @@
 }
 
 .case-study-button {
-  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
   padding: 0.75rem 1.5rem;
-  background: transparent;
-  color: #fff;
+  height: auto;
+  background: var(--gradient-card);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 4px;
+  border-radius: 8px;
+  color: white;
+  font-weight: 500;
   transition: all 0.2s ease-out;
-  cursor: pointer;
 }
 
 .case-study-button:hover {
-  background: rgba(255, 255, 255, 0.05);
   transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
 .case-study-meta,
@@ -388,10 +410,6 @@ h1.display {
   -webkit-backdrop-filter: blur(10px);
   cursor: pointer;
   transition: transform 0.3s ease-out;
-}
-
-.case-study-card:hover {
-  transform: translateY(-4px);
 }
 
 /* Meta information */

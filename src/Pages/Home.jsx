@@ -71,6 +71,7 @@ export default function Home() {
               className="case-study-card"
               whileHover={{ scale: 1.01 }}
               transition={{ duration: 0.2 }}
+              onClick={() => navigate('/case-study/manage-farms')}
             >
               <h3>Manage Small Farms</h3>
               
@@ -95,9 +96,13 @@ export default function Home() {
               <div className="button-container">
                 <Button 
                   className='case-study-button'
-                  onClick={() => navigate('/case-study/manage-farms')}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    navigate('/case-study/manage-farms');
+                  }}
                 >
                   Learn More
+                  <IoArrowForward className="button-icon" />
                 </Button>
               </div>
             </motion.div>
@@ -106,6 +111,7 @@ export default function Home() {
               className="case-study-card"
               whileHover={{ scale: 1.01 }}
               transition={{ duration: 0.2 }}
+              onClick={() => navigate('/case-study/influencer-marketing')}
             >
               <h3>Hire Influencer Marketing</h3>
               
@@ -130,9 +136,13 @@ export default function Home() {
               <div className="button-container">
                 <Button 
                   className='case-study-button'
-                  onClick={() => navigate('/case-study/influencer-marketing')}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    navigate('/case-study/influencer-marketing');
+                  }}
                 >
                   Learn More
+                  <IoArrowForward className="button-icon" />
                 </Button>
               </div>
             </motion.div>
@@ -180,6 +190,7 @@ export default function Home() {
               className="case-study-card"
               whileHover={{ scale: 1.01 }}
               transition={{ duration: 0.2 }}
+              onClick={() => navigate('/case-study/task-reminders')}
             >
               <h3>Contextualize Task Reminders</h3>
               
@@ -204,9 +215,13 @@ export default function Home() {
               <div className="button-container">
                 <Button 
                   className='case-study-button'
-                  onClick={() => navigate('/case-study/task-reminders')}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    navigate('/case-study/task-reminders');
+                  }}
                 >
                   Learn More
+                  <IoArrowForward className="button-icon" />
                 </Button>
               </div>
             </motion.div>
@@ -215,6 +230,7 @@ export default function Home() {
               className="case-study-card"
               whileHover={{ scale: 1.01 }}
               transition={{ duration: 0.2 }}
+              onClick={() => navigate('/case-study/sustainable-packaging')}
             >
               <h3>Incentivize Sustainable Packaging</h3>
               
@@ -239,9 +255,13 @@ export default function Home() {
               <div className="button-container">
                 <Button 
                   className='case-study-button'
-                  onClick={() => navigate('/case-study/sustainable-packaging')}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    navigate('/case-study/sustainable-packaging');
+                  }}
                 >
                   Learn More
+                  <IoArrowForward className="button-icon" />
                 </Button>
               </div>
             </motion.div>

@@ -1,9 +1,10 @@
 import { GLTFLoader } from 'three/examples/jsm/Addons.js'
 import { useLoader, useFrame } from '@react-three/fiber'
-import { PresentationControls, Float } from '@react-three/drei'
+import { PresentationControls, Float, Text, Center } from '@react-three/drei'
 import { useControls } from 'leva'
 import { useRef, useState, useEffect } from 'react'
 import * as THREE from 'three'
+import '../style/fonts.css'
 
 // Import shaders
 import vertexShader from '../shaders/holographic/vertex.glsl'
@@ -47,7 +48,6 @@ export default function Model() {
                 child.material = material
                 materialRef.current = material               
             }
-            console.log(child)
         })
     }, [model])
 
@@ -68,6 +68,24 @@ export default function Model() {
 
     return (
         <>
+            {/* <Text
+                position={[0, 0.35, -2]}
+                fontSize={0.75}
+                anchorX="center"
+                anchorY="middle"
+            >
+                Namit Kapoor
+                <meshStandardMaterial
+                    attach="material"
+                    color="#4a9eff"
+                    emissive="#ffffff"
+                    emissiveIntensity={200}
+                    transparent
+                    opacity={1.0}
+                    metalness={0.8}
+                    roughness={0.2}
+                />
+            </Text> */}
             <PresentationControls
                 global
                 rotation={[0.13, 0.1, 0]}
@@ -77,6 +95,7 @@ export default function Model() {
                 snap={{ mass: 4, tension: 400 }}
             >
                 <Float rotationIntensity={0.4}>
+                    
                     <primitive 
                         object={model.scene}
                         position={[0.02, -0.51, 0]}

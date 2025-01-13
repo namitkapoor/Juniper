@@ -1,0 +1,130 @@
+.other-projects {
+  padding: 2rem 0;
+}
+
+.carousel-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin: 1rem 0;
+  position: relative;
+  background-color: transparent;    
+}
+
+.carousel-button {
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  font-size: 1.25rem;
+  cursor: pointer;
+  padding: 0.75rem;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.carousel-button:hover {
+  background: var(--hover-bg);
+  transform: scale(1.1);
+}
+
+.carousel-content {
+  width: 100%;
+  max-width: 800px;
+  position: relative;
+}
+
+.case-study-card {
+  background: var(--card-background);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+  transition: transform 0.2s ease-out;
+}
+
+.case-study-card:hover {
+  transform: translateY(-2px);
+}
+
+.card-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-header h3 {
+  font-size: 1.25rem;
+  margin: 0;
+}
+
+.metric {
+  font-size: 1rem;
+  color: var(--text-secondary);
+}
+
+.case-study-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tag {
+  font-size: 0.9rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  background: var(--tag-bg);
+  color: var(--text-secondary);
+}
+
+.case-study-image {
+  width: 75%;
+  object-fit: contain;
+  border-radius: 0.5rem;
+}
+
+.carousel-indicators {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 100%;
+  background: var(--text-secondary);
+  opacity: 0.5;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.indicator.active {
+  opacity: 1;
+  transform: scale(1.2);
+  background: var(--text-primary);
+}
+
+@media (max-width: 768px) {
+  .carousel-content {
+    max-width: 80vw;
+  }
+}
+
+.carousel-content .button-container {
+  margin-top: auto;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.carousel-content .case-study-button {
+  width: auto;
+  min-width: 120px;
+  margin-left: 0;
+} 

@@ -9,6 +9,7 @@ import StrategicApproach from '../../components/StrategicApproach';
 import VisualEvolution from '../../components/VisualEvolution';
 import MeasurableResults from '../../components/MeasurableResults';
 import Overview from '../../components/Overview';
+import OtherProjects from '../../components/OtherProjects';
 
 export default function ManageFarms() {
   const [expandedSections, setExpandedSections] = useState(new Set());
@@ -212,6 +213,15 @@ export default function ManageFarms() {
             isExpanded={expandedSections.has('evolution')} 
             projectId="manageFarms" 
           />
+        </motion.div>
+
+        {/* Add Other Projects section at the bottom */}
+        <motion.div
+          className="expandable-section"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+        >
+          <OtherProjects currentProjectId="manage-farms" />
         </motion.div>
       </motion.div>
     </div>

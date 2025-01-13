@@ -1,9 +1,12 @@
 // src/components/Contact.jsx
 import React from 'react';
 import '../style/contact.css';
-import { IoLogoLinkedin, IoLogoGithub, IoMailOutline, IoArrowForward, IoArrowUp } from 'react-icons/io5';
+import { IoLogoLinkedin, IoLogoGithub, IoMailOutline, IoArrowForward, IoArrowUp, IoSunnyOutline, IoMoonOutline } from 'react-icons/io5';
+import { useTheme } from './ThemeContext.jsx';
 
 export default function Contact() {
+  const { theme, toggleTheme } = useTheme();
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -69,16 +72,33 @@ export default function Contact() {
                 <a href="/case-study/sustainable-packaging" className="case-study-link">
                   <span className="case-title">Incentivize Sustainable Packaging</span>
                   <IoArrowForward className="arrow-icon" />
-                </a>
+                </a>                
               </div>
             </div>
           </div>
         </div>
 
-        <div className="footer">
-          <button className="scroll-top" onClick={scrollToTop} aria-label="Scroll to top">
+        <div className="controls-container">
+          <button 
+            className="theme-toggle coming-soon"
+            disabled
+            aria-label="Theme toggle coming soon"
+          >
+            <span className="coming-soon-text">Coming Soon</span>
+            <IoMoonOutline className="moon-icon" />
+            <IoSunnyOutline className="sun-icon" />
+          </button>
+          <button 
+            className="scroll-top" 
+            onClick={scrollToTop} 
+            aria-label="Scroll to top"
+          >
             <IoArrowUp />
           </button>
+        </div>
+
+        <div className="footer">
+          
           <p className="copyright">© 2024 Namit Kapoor. All Rights Reserved.</p>
           <p className="footer-note">Made with ❤️ and creativity.</p>
         </div>
