@@ -32,7 +32,7 @@ export default function Home() {
   const handleLoadingComplete = () => {
     setIsLoading(false);
     // Comment out session storage for development
-    // sessionStorage.setItem('hasLoaded', 'true');
+    sessionStorage.setItem('hasLoaded', 'true');
   };
 
   return (
