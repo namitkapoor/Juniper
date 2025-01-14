@@ -62,9 +62,9 @@ export default function OtherProjects({ currentProjectId }) {
   return (
     <section className="other-projects">
         <h2>Other Projects</h2>
-      <div className="carousel-container">
+      <div className="project-carousel-container">
         <button 
-          className="carousel-button prev"
+          className="project-carousel-button prev"
           onClick={prevProject}
           aria-label="Previous project"
         >
@@ -72,7 +72,7 @@ export default function OtherProjects({ currentProjectId }) {
         </button>
 
         <motion.div 
-          className="carousel-content"
+          className="project-carousel-content"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           key={currentIndex}
@@ -81,7 +81,7 @@ export default function OtherProjects({ currentProjectId }) {
         </motion.div>
 
         <button 
-          className="carousel-button next"
+          className="project-carousel-button next"
           onClick={nextProject}
           aria-label="Next project"
         >

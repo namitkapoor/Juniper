@@ -2,7 +2,7 @@
   padding: 2rem 0;
 }
 
-.carousel-container {
+.project-carousel-container {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -12,7 +12,7 @@
   background-color: transparent;    
 }
 
-.carousel-button {
+.project-carousel-button {
   background: none;
   border: none;
   color: var(--text-primary);
@@ -23,12 +23,12 @@
   transition: all 0.3s ease;
 }
 
-.carousel-button:hover {
+.project-carousel-button:hover {
   background: var(--hover-bg);
   transform: scale(1.1);
 }
 
-.carousel-content {
+.project-carousel-content {
   width: 100%;
   max-width: 800px;
   position: relative;
