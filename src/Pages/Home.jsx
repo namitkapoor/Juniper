@@ -66,6 +66,12 @@ export default function Home() {
               position: [0, 0, 2]
             }}
           >
+            <ambientLight intensity={0.2} />
+            <directionalLight 
+              position={[5, 5, 5]} 
+              intensity={0.5} 
+              castShadow 
+            />
             <Experience />
           </Canvas>
         </section>
@@ -76,8 +82,14 @@ export default function Home() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 2 }}
+          onClick={() => {
+            document.querySelector('.case-studies').scrollIntoView({ 
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }}
         >
-          <span className="scroll-text">Peek at my work</span>
+          <span className="scroll-text">View Projects</span>
           <IoChevronDown 
             className="scroll-arrow"
             size={24}

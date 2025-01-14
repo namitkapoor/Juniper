@@ -343,7 +343,7 @@ export const solutionPhase = {
               description: "Analysis of current user processes",
               content: {
                 coverImage: {
-                  url: "/images/Case Studies/MI/Task Flow/Old Task Flow-min.jpg",
+                  url: "/images/Case Studies/MI/Task Flow/Old Task Flow-min-1.jpg",
                   caption: "User Workflow Overview",
                   alt: "Overview of user workflows"
                 },

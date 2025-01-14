@@ -4,6 +4,7 @@
   --text-primary: rgba(255, 255, 255, 0.75);
   --text-secondary: rgba(255, 255, 255, 0.6);
   --text-tertiary: rgba(255, 255, 255, 0.45);
+
 }
 
 :root[data-theme="dark"] {
@@ -74,7 +75,6 @@
   margin-bottom: 0.25rem;
   color: var(--text-tertiary);
   font-size: 2rem;
-  font-family: var(--font-primary);
 }
 
 .display {
@@ -88,7 +88,6 @@
 }
 
 .tagline {
-  font-family: var(--font-primary);
   font-size: 1.5rem;
   color: var(--text-tertiary);
   line-height: 1.6;
@@ -674,32 +673,27 @@ h1.display {
 }
 
 .scroll-indicator {
-  position: static;
-  bottom: 3rem;
-  left: 50%;
-  transform: translateX(-50%);
+  cursor: pointer;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.5rem;
-  opacity: 0.6;
+  gap: 8px;
   transition: opacity 0.3s ease;
-  z-index: 11;
 }
 
 .scroll-indicator:hover {
-  opacity: 1;
+  opacity: 0.8;
 }
 
 .scroll-text {
-  font-family: var(--font-display);
   font-size: 1rem;
   color: var(--text-secondary);
-  font-style: italic;
+  font-weight: 500;
+  letter-spacing: 0.02em;
 }
 
 .scroll-arrow {
-  animation: bounce 4s infinite;
+  animation: bounce 2s infinite;
 }
 
 @keyframes bounce {
@@ -791,4 +785,29 @@ h1.display {
   .availability-status p {
     font-size: 0.9rem;
   }
+}
+
+/* Update hero section typography */
+.occupation {
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: var(--text-secondary);
+  letter-spacing: 0.02em;
+}
+
+.display {
+  font-family: var(--font-display);
+  font-size: 4.5rem;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+/* Make scroll indicator more subtle */
+.scroll-text {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: var(--text-secondary);
 }

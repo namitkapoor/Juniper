@@ -1,197 +1,128 @@
 /* Create a new file: src/style/fonts.css */
 
 @font-face {
-    font-family: 'Satoshi';
-    src: url('/fonts/Satoshi/Satoshi-Regular.woff2') format('woff2'),
-         url('/fonts/Satoshi/Satoshi-Regular.woff') format('woff'),
-         url('/fonts/Satoshi/Satoshi-Regular.ttf') format('truetype');
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-  }
-  
-  @font-face {
-    font-family: 'Satoshi';
-    src: url('/fonts/Satoshi/Satoshi-Medium.woff2') format('woff2'),
-         url('/fonts/Satoshi/Satoshi-Medium.woff') format('woff'),
-         url('/fonts/Satoshi/Satoshi-Medium.ttf') format('truetype');
-    font-weight: 500;
-    font-style: normal;
-    font-display: swap;
-  }
-  
-  @font-face {
-    font-family: 'Satoshi';
-    src: url('/fonts/Satoshi/Satoshi-Bold.woff2') format('woff2'),
-         url('/fonts/Satoshi/Satoshi-Bold.woff') format('woff'),
-         url('/fonts/Satoshi/Satoshi-Bold.ttf') format('truetype');
-    font-weight: 700;
-    font-style: normal;
-    font-display: swap;
-  }
-  
-  @font-face {
-    font-family: 'PP Eiko Light';
-    src: url('/fonts/PP-Eiko/PPEiko-Light.otf') format('opentype');
-    font-weight: 300;
-    font-style: normal;
-    font-display: swap;
-  }
-
-  @font-face {
-     font-family: 'PP Eiko';
-     src: url('/fonts/PP-Eiko/PPEiko-Medium.otf') format('opentype');
-     font-weight: 500;
-     font-style: normal;
-     font-display: swap;
-   }
-
-   @font-face {
-     font-family: 'PP Eiko';
-     src: url('/fonts/PP-Eiko/PPEiko-Heavy.otf') format('opentype');
-     font-weight: 900;
-     font-style: normal;
-     font-display: swap;
-   }
-
-   @font-face {
-     font-family: 'PP Eiko';
-     src: url('/fonts/PP-Eiko/PPEiko-Light.otf') format('opentype');
-     font-weight: 300;
-     font-style: normal;
-     font-display: swap;
-   }
-
-   @font-face {
-     font-family: 'PP Eiko';
-     src: url('/fonts/PP-Eiko/PPEiko-LightItalic.otf') format('opentype');
-     font-weight: 300;
-     font-style: italic;
-     font-display: swap;
-   }
-
-/* CSS Variables for Typography */
-:root {
-  --font-primary: 'Satoshi', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-display: 'PP Eiko', Georgia, serif;
-  --font-display-light: 'PP Eiko Light', Georgia, serif;
+  font-family: 'Craftwork Grotesk';
+  src: url('/fonts/CraftworkGrotesk/CraftworkGrotesk-Regular.ttf') format('truetype');
+  font-style: normal;
+  font-display: swap;
 }
 
-/* Base Typography */
-body {
-  font-family: var(--font-primary);
+@font-face {
+  font-family: 'Craftwork Grotesk';
+  src: url('/fonts/CraftworkGrotesk/CraftworkGrotesk-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Craftwork Grotesk';
+  src: url('/fonts/CraftworkGrotesk/CraftworkGrotesk-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'PP Eiko';
+  src: url('/fonts/PP-Eiko/PPEiko-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'PP Eiko';
+  src: url('/fonts/PP-Eiko/PPEiko-Thin.otf') format('opentype');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/Satoshi/Satoshi-Light.woff2') format('woff2');
   font-weight: 300;
-  line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-style: normal;
+  font-display: swap;
 }
 
-/* Heading Hierarchy */
-h1, .display {
+/* Typography System */
+:root {
+  /* Craftwork Grotesk for most UI elements */
+  --font-primary: 'Craftwork Grotesk', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  /* PP Eiko only for hero name display */
+  --font-display: 'PP Eiko', system-ui, sans-serif;
+  --font-headings: 'Satoshi', system-ui, sans-serif;
+  
+  /* Font Weights */
+  --weight-light: 100;
+  --weight-regular: 400;   /* Craftwork Grotesk Regular */
+  --weight-medium: 500;    /* Craftwork Grotesk Medium */
+  --weight-semibold: 600;  /* Craftwork Grotesk SemiBold */
+}
+
+/* Clear Font Usage Guide */
+
+/* 1. Hero Section */
+.occupation {
+  /* Uses Craftwork Grotesk Regular */
   font-family: var(--font-display);
-  font-weight: 900;
-  line-height: 1.1;
-  margin: 0 0 1rem;
-  padding: 0.5rem 0;
+  font-weight: var(--weight-semibold);
+  font-size: 1.1rem;
 }
 
-h1 {
-  font-size: 3.5rem;
+.display {
+  /* Only place using PP Eiko */
+  font-family: var(--font-display);
+  font-weight: var(--weight-light);
+  font-size: clamp(3.5rem, 8vw, 7rem);
+  letter-spacing: 0.02em;
+
 }
 
-h1.display {
-  font-size: 7rem;
+/* 2. Main Navigation */
+.nav-links {
+  /* Uses Craftwork Grotesk Regular */
+  font-family: var(--font-primary);
+  font-weight: var(--weight-regular);
+}
+
+/* 3. Section Headers */
+h1, h2, h3 {
+  /* All headings use Craftwork Grotesk */
+  font-family: var(--font-headings);
   letter-spacing: -0.02em;
 }
 
-h2 {
-  font-family: var(--font-display);
-  font-weight: 500; /* Medium weight for h2 */
-  font-size: 2.5rem;
-  line-height: 1.2;
-  margin: 0 0 1rem;
-  padding: 0.25rem 0; /* Add padding to prevent cutoff */
-}
-
-/* Lighter weight for h3 and below */
-h3, h4, h5, h6 {
-  font-family: var(--font-display-light);
-  line-height: 1.2;
-  margin: 0 0 1rem;
-  padding: 0.25rem 0; /* Add padding to prevent cutoff */
-}
-
-h3 {
-  font-size: 2rem;
-  font-weight: 300;
-}
-
-h4 {
-  font-size: 1.75rem;
-  font-weight: 300;
-}
-
-/* Card and Section Typography */
+/* 4. Case Study Cards */
 .case-study-card h3 {
-  font-family: var(--font-display);
-  font-weight: 500; /* Keep card titles slightly bolder */
-  padding: 0.25rem 0; /* Prevent cutoff */
-  margin-bottom: 0.5rem;
-  line-height: 1.3; /* Slightly increased line height */
+  /* Uses Craftwork Grotesk Medium */
+  font-family: var(--font-headings);
+  font-weight: var(--weight-medium);
 }
 
-.section-header h2 {
-  font-family: var(--font-display);
-  font-weight: 500;
-  padding: 0.25rem 0; /* Prevent cutoff */
+.case-study-meta,
+.case-study-card p {
+  /* Uses Craftwork Grotesk Regular */
+  font-family: var(--font-headings);
+  font-weight: var(--weight-regular);
 }
 
-/* Navigation */
-.nav-link {
+/* 5. Buttons and Interactive Elements */
+.button,
+.toggle-button {
+  /* Uses Craftwork Grotesk Medium */
+  font-family: var(--font-headings);
+  font-weight: var(--weight-medium);
+}
+
+/* 6. Body Text */
+p, 
+.body-text {
+  /* Uses Craftwork Grotesk Regular */
   font-family: var(--font-primary);
-  font-weight: 400;
+  font-weight: var(--weight-regular);
 }
 
-/* Fix for gradient text */
-[class*="gradient-text"],
-[style*="background-clip: text"] {
-  padding: 0.25rem 0; /* Prevent cutoff for gradient text */
-  line-height: 1.3; /* Slightly increased line height */
-}
-
-/* Responsive Typography */
-@media (max-width: 768px) {
-  h1 {
-    font-size: 2.75rem;
-  }
-
-  h1.display {
-    font-size: 4.5rem;
-  }
-
-  h2 {
-    font-size: 2rem;
-  }
-
-  h3 {
-    font-size: 1.75rem;
-  }
-}
-
-@media (max-width: 480px) {
-  h1 {
-    font-size: 2.25rem;
-  }
-
-  h1.display {
-    font-size: 3.5rem;
-  }
-
-  h2 {
-    font-size: 1.75rem;
-  }
-
-  h3 {
-    font-size: 1.5rem;
-  }
-}
+/* Keep existing responsive styles */
