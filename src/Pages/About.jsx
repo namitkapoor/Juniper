@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Canvas } from '@react-three/fiber';
 import { IoAdd } from 'react-icons/io5';
 import { aboutSections } from '../data/aboutContent';
+import Contact from '../components/Contact';
 
 // Lazy load components
 const Navbar = lazy(() => import('../components/Navbar'));
@@ -161,6 +162,19 @@ export default function About() {
             </AnimatePresence>
           </motion.div>
         ))}
+
+        <motion.div
+          className="expandable-section"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{
+            duration: 0.5,
+            delay: 0.2 * (aboutSections.length + 1),
+            ease: "easeOut"
+          }}
+        >
+          <Contact />
+        </motion.div>
       </div>
     </div>
   );

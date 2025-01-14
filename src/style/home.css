@@ -1,3 +1,11 @@
+:root {
+  /* Softer whites for text */
+  --text-bright: rgba(255, 255, 255, 0.87);
+  --text-primary: rgba(255, 255, 255, 0.75);
+  --text-secondary: rgba(255, 255, 255, 0.6);
+  --text-tertiary: rgba(255, 255, 255, 0.45);
+}
+
 :root[data-theme="dark"] {
   /* Core colors - keeping your original dark theme */
   --background: #1a1a1a;
@@ -58,17 +66,85 @@
   position: relative;
   z-index: 11;
   text-align: center;
+  max-width: 800px;
+  padding: 0 2rem;
 }
+
 .occupation {
   margin-bottom: 0.25rem;
-  color: #eeeeee7e;
+  color: var(--text-tertiary);
   font-size: 2rem;
+  font-family: var(--font-primary);
 }
+
 .display {
   margin-top: 0.25rem;
-  color: var(--accent-primary);
-  
+  margin-bottom: 1rem;
+  color: var(--text-bright);
+  background: var(--gradient-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
+
+.tagline {
+  font-family: var(--font-primary);
+  font-size: 1.5rem;
+  color: var(--text-tertiary);
+  line-height: 1.6;
+  margin-top: 1.5rem;
+  font-weight: 300;
+}
+
+.interactive-word {
+  position: relative;
+  color: var(--text-bright);
+  font-family: var(--font-display);
+  font-style: italic;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.interactive-word:hover {
+  color: #fff;
+}
+
+.tooltip {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(8px);
+  background: rgba(0, 0, 0, 0.85);
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  font-family: var(--font-primary);
+  font-style: normal;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  color: var(--text-primary);
+}
+
+.tooltip.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(4px);
+}
+
+/* Optional: Add a small arrow to the tooltip */
+.tooltip::before {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-bottom: 4px solid rgba(0, 0, 0, 0.8);
+}
+
 .hero-canvas {
   position: fixed !important;
   top: 0;
@@ -140,6 +216,7 @@
   -webkit-backdrop-filter: blur(10px);
   transition: transform 0.3s ease-out;
   cursor: auto;
+  color: var(--text-secondary);
 }
 
 .button-container {
@@ -150,24 +227,19 @@
 }
 
 .case-study-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
+  margin-top: auto;
   padding: 0.75rem 1.5rem;
-  height: auto;
-  background: var(--gradient-card);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 8px;
-  color: white;
-  font-weight: 500;
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
   transition: all 0.2s ease-out;
+  cursor: pointer;
 }
 
 .case-study-button:hover {
+  background: rgba(255, 255, 255, 0.05);
   transform: translateY(-2px);
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.3);
 }
 
 .case-study-meta,
@@ -182,6 +254,7 @@
   font-size: 1.75rem;
   margin-bottom: 1rem;
   opacity: 1;
+  color: var(--text-bright);
 }
 
 .case-study-card p {
@@ -289,7 +362,7 @@ h2 {
   font-size: 2.5rem;
   font-weight: 600;
   margin-bottom: 2rem;
-  color: var(--text-primary);
+  color: var(--text-bright);
 }
 
 h3 {
@@ -365,7 +438,7 @@ li { margin: 0; padding: 0; }
   display: flex;
   justify-content: center;
   gap: 1rem;
-  color: var(--text-secondary);
+  color: var(--text-tertiary);
   opacity: 0.8;
 }
 
@@ -414,7 +487,7 @@ h1.display {
 
 /* Meta information */
 .case-study-meta {
-  color: var(--text-secondary);
+  color: var(--text-tertiary);
   display: flex;
   gap: 0.5rem;
 }
@@ -445,8 +518,8 @@ h1.display {
 .case-study-button {
   padding: 0.75rem 1.5rem;
   background: transparent;
-  color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--text-secondary);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 4px;
   transition: all 0.2s ease-out;
   cursor: pointer;
@@ -526,7 +599,7 @@ h1.display {
   padding: 0.75rem 1.5rem !important;
   height: auto !important;
   background: var(--gradient-card) !important;
-  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
   border-radius: 8px !important;
   color: white !important;
   font-weight: 500 !important;
@@ -559,4 +632,111 @@ h1.display {
   background: rgba(255, 255, 255, 0.05);
   transform: none;
   box-shadow: none;
+}
+
+@media (max-width: 768px) {
+  .tagline {
+    font-size: 1.25rem;
+  }
+}
+
+.particle-wrapper {
+  display: inline-flex;
+  position: relative;
+  align-items: center;
+  min-height: 1.6em;
+}
+
+.word-container {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+}
+
+.animated-word {
+  font-family: var(--font-display);
+  font-style: italic;
+  color: rgba(255, 255, 255, 1);
+  font-weight: 500;
+  display: inline-block;
+  perspective: 1000px;
+}
+
+.char {
+  display: inline-block;
+  transform-origin: 50% 50%;
+}
+
+/* Optional: Add a subtle glow effect */
+.animated-word {
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+.scroll-indicator {
+  position: static;
+  bottom: 3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+  z-index: 11;
+}
+
+.scroll-indicator:hover {
+  opacity: 1;
+}
+
+.scroll-text {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+.scroll-arrow {
+  animation: bounce 4s infinite;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+.loader-screen {
+  background: var(--background);
+}
+
+.loader-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  text-align: center;
+}
+
+.glasses-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.loader-text {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  color: var(--text-secondary);
+  font-style: italic;
+  text-align: center;
 }
