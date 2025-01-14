@@ -740,3 +740,55 @@ h1.display {
   font-style: italic;
   text-align: center;
 }
+
+.availability-status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 24px;  /* Space after tagline */
+  opacity: 0.9;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #4CAF50;  /* Green dot */
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+.availability-status p {
+  font-size: 1rem;
+  color: var(--text-bright);
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Add responsive styles inside your existing media query (around line 638) */
+@media (max-width: 768px) {
+  .tagline {
+    font-size: 1.25rem;
+  }
+  
+  .availability-status {
+    margin-top: 20px;
+  }
+  
+  .availability-status p {
+    font-size: 0.9rem;
+  }
+}

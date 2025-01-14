@@ -45,12 +45,6 @@ export default function Contact() {
                 <IoMailOutline className="social-icon" />
               </a>
             </div>
-
-            <div className="availability-status">
-              <span className="status-dot"></span>
-              <p>Available for hybrid roles</p>
-              
-            </div>
           </div>
 
           <div className="contact-right">
