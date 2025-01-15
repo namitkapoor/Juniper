@@ -249,8 +249,8 @@ export default function Home() {
                 </div>
 
                 <div className="case-study-tags">
-                  <span className="tag">AR/VR</span>
-                  <span className="tag">Mobile Design</span>
+                  <span className="tag">AR</span>
+                  <span className="tag">Spatial Interface Design</span>
                   <span className="tag">Productivity</span>
                 </div>
 
@@ -289,9 +289,9 @@ export default function Home() {
                 </div>
 
                 <div className="case-study-tags">
-                  <span className="tag">AR/VR</span>
+                  <span className="tag">AR</span>
+                  <span className="tag">Mobile Design</span>
                   <span className="tag">Sustainability</span>
-                  <span className="tag">Retail</span>
                 </div>
 
                 <img 

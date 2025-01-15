@@ -171,71 +171,41 @@ export const decisionsPhase = {
     },
     "influencerMarketing": {
       title: "Decision Criteria",
-      summary: "Key design decisions focused on automating discovery and streamlining campaign management, based on user research and technical feasibility analysis",
+      summary: "Key design decisions focused on optimizing campaign efficiency and scalability, supported by user research and technical feasibility analysis",
       sections: [
         {
           type: 'decisions',
           content: {
-            conceptFeedback: [
-              {
-                title: "AI-First Platform",
-                description: "Selected as primary direction due to its potential for automation and scalability.",
-                status: "Selected",
-                supportingPoints: [
-                  "85% of users expressed strong interest in AI-powered matching",
-                  "Reduces manual discovery time by estimated 70%",
-                  "Scalable architecture supports future feature expansion"
-                ],
-                image: {
-                  url: "/images/Case Studies/Influencer/Concepts/ai-platform.jpg",
-                  caption: "AI-First Platform concept visualization"
-                }
-              },
-              {
-                title: "Community-Driven Marketplace",
-                description: "While fostering community engagement, this approach didn't address core efficiency needs.",
-                status: "Not Selected",
-                supportingPoints: [
-                  "Required significant user participation to build value",
-                  "Longer time to market and value realization",
-                  "Less differentiation from existing solutions"
-                ],
-                image: {
-                  url: "/images/Case Studies/Influencer/Concepts/community-marketplace.jpg",
-                  caption: "Community Marketplace concept visualization"
-                }
-              }
-            ],
             wireframeFeedback: [
               {
-                title: "Discovery Interface",
-                description: "Evolution of the AI-powered discovery interface",
+                title: "Interface Testing Results",
+                description: "Quantitative and qualitative feedback from user testing",
                 images: [
                   {
                     id: 1,
-                    url: "/images/Case Studies/Influencer/Wireframes/discovery-v1.jpg",
-                    caption: "Initial Discovery Interface",
+                    url: "/images/Case Studies/MI/Changes/Tab Restructure.jpg",
+                    caption: "Navigation Efficiency Improvements",
                     hotspots: [
                       {
                         id: "1-1",
                         position: { x: 25, y: 35 },
-                        challenge: "Filter Complexity",
-                        feedback: "Too many filter options created decision paralysis",
-                        changes: "Simplified to core filters with AI handling advanced matching"
+                        challenge: "Time and Click Efficiency",
+                        feedback: "Users spent excessive time switching between tabs",
+                        changes: "Consolidated view reduced average clicks by 28%"
                       }
                     ]
                   },
                   {
                     id: 2,
-                    url: "/images/Case Studies/Influencer/Wireframes/discovery-v2.jpg",
-                    caption: "Refined Discovery Interface",
+                    url: "/images/Case Studies/MI/Changes/Influencers to Tracking.jpg",
+                    caption: "Navigation Efficiency Improvements",
                     hotspots: [
                       {
-                        id: "2-1",
-                        position: { x: 30, y: 40 },
-                        challenge: "Results Presentation",
-                        feedback: "Match quality indicators needed more context",
-                        changes: "Added detailed match reasoning and success metrics"
+                        id: "2-2",
+                        position: { x: 25, y: 35 },
+                        challenge: "Time and Click Efficiency",
+                        feedback: "Users spent excessive time switching between tabs",
+                        changes: "Consolidated view reduced average clicks by 28%"
                       }
                     ]
                   }
@@ -244,29 +214,31 @@ export const decisionsPhase = {
             ],
             accessibility: [
               {
-                title: "Keyboard Navigation",
-                description: "Enhanced keyboard navigation for power users",
+                title: "Screen Reader Compatibility",
+                description: "Enhanced navigation and status tracking for screen readers",
                 recommendations: [
-                  "Implemented keyboard shortcuts for common actions",
-                  "Added focus indicators for all interactive elements",
-                  "Created skip links for main content areas"
+                  "Added clear ARIA labels for status changes",
+                  "Implemented keyboard shortcuts for quick navigation",
+                  "Created logical tab order for timeline navigation",
+                  "Added status announcement for timeline changes"
                 ],
                 visual: {
                   url: "/images/Case Studies/Influencer/Accessibility/keyboard-nav.jpg",
-                  caption: "Keyboard navigation implementation"
+                  caption: "Screen reader navigation implementation"
                 }
               },
               {
-                title: "Data Visualization",
-                description: "Made campaign analytics accessible to all users",
+                title: "Status Visualization",
+                description: "Made tracking system accessible to all users",
                 recommendations: [
-                  "Added text alternatives for all charts",
-                  "Implemented high-contrast mode for graphs",
-                  "Created screen reader friendly data tables"
+                  "Used both color and icons to indicate status",
+                  "Implemented high-contrast status indicators",
+                  "Added text descriptions for all status changes",
+                  "Created keyboard-navigable timeline interface"
                 ],
                 visual: {
                   url: "/images/Case Studies/Influencer/Accessibility/data-viz.jpg",
-                  caption: "Accessible data visualization examples"
+                  caption: "Accessible status visualization"
                 }
               }
             ]

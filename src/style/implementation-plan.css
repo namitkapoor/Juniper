@@ -265,9 +265,27 @@
 
 .iteration-image {
   width: 100%;
-  height: 200px;
+  height: auto;
+  min-height: 200px;
   overflow: hidden;
+}
+
+/* Specific styles for images only */
+.iteration-image:has(img):not(:has(video)) {
   padding: 1rem;
+}
+
+/* Video-specific container styles */
+.iteration-image:has(video) {
+  padding: 0;
+  background: transparent;
+}
+
+/* Override any phone mask styles */
+.implementation-plan .iteration-image:has(video) {
+  padding: 0;
+  background: none;
+  border: none;
 }
 
 .iteration-image img {

@@ -1,4 +1,5 @@
 import { IoCodeWorkingOutline, IoColorPaletteOutline } from 'react-icons/io5';
+import MediaRenderer from '../../components/MediaRenderer';
 
 const baseImplementationPhase = {
   id: 'implementation',
@@ -31,7 +32,8 @@ export const implementationPhase = {
                 autoplay: false,
                 loop: true,
                 muted: true,
-                containMode: true
+                containMode: true,
+                phoneFrame: true
               }
             },
             {
@@ -45,7 +47,8 @@ export const implementationPhase = {
                 autoplay: false,
                 loop: true,
                 muted: true,
-                containMode: true
+                containMode: true,
+                phoneFrame: true
               }
             },
             {
@@ -58,7 +61,8 @@ export const implementationPhase = {
                 poster: "/images/Case Studies/JD/Wireframe/Plan gestures.jpg",
                 autoplay: false,
                 loop: true,
-                muted: true
+                muted: true,
+                phoneFrame: true
               }
             },
             {
@@ -71,7 +75,8 @@ export const implementationPhase = {
                 poster: "/images/Case Studies/JD/Wireframe/Analyze gestures.jpg",
                 autoplay: false,
                 loop: true,
-                muted: true
+                muted: true,
+                phoneFrame: true
               }
             }
           ]
@@ -145,40 +150,60 @@ export const implementationPhase = {
     },
     "influencerMarketing": {
       title: "Implementation Plan",
-      summary: "A phased implementation approach focusing on core AI functionality and iterative improvements based on user feedback.",
+      summary: "A streamlined implementation approach focusing on core campaign management functionality and intuitive user flows.",
       sections: [
         {
           type: 'prototypes',
           title: "Prototypes",
           icon: IoColorPaletteOutline,
-          description: "Interactive prototypes were developed to validate key features and gather user feedback.",
+          description: "Interactive prototypes were developed to validate key user flows and gather feedback.",
           items: [
             {
-              change: "AI-Powered Discovery Interface",
-              reason: "Streamline the influencer search and matching process",
-              result: "Implemented smart filters and AI-based recommendations with match explanations",
+              change: "Campaign Creation Flow",
+              reason: "Streamline the process of setting up new influencer campaigns",
+              result: "Implemented step-by-step campaign creation with clear fields for campaign details, product information, and usage guidelines",
               media: {
                 type: 'video',
-                url: "/videos/Case Studies/Influencer/Prototypes/discovery-interface.mp4",
-                poster: "/images/Case Studies/Influencer/Prototypes/discovery-poster.jpg",
-                autoplay: false,
-                loop: true,
-                muted: true,
-                containMode: true
+                url: "/videos/Case Studies/MI/New campaign high res.mp4",
+                poster: "/videos/Case Studies/MI/New campaign high res.mp4",
+                caption: "Campaign creation interface showing basic details form",
+                isLaptop: true
               }
             },
             {
-              change: "Campaign Management Dashboard",
-              reason: "Centralize campaign tracking and performance metrics",
-              result: "Created unified dashboard with real-time analytics and automated reporting",
+              change: "Contracts Management",
+              reason: "Enable efficient browsing and filtering of potential influencers",
+              result: "Created a grid view with key influencer metrics, filtering options, and clear pricing information",
               media: {
                 type: 'video',
-                url: "/videos/Case Studies/Influencer/Prototypes/campaign-dashboard.mp4",
-                poster: "/images/Case Studies/Influencer/Prototypes/dashboard-poster.jpg",
-                autoplay: false,
-                loop: true,
-                muted: true,
-                containMode: true
+                url: "/videos/Case Studies/MI/Contracts high res.mp4",
+                poster: "/videos/Case Studies/MI/Contracts high res.mp4",
+                caption: "Influencer exploration interface with filtering capabilities",
+                isLaptop: true
+              }
+            },
+            {
+              change: "Influencer Discovery Interface",
+              reason: "Enable efficient browsing and filtering of potential influencers",
+              result: "Created a grid view with key influencer metrics, filtering options, and clear pricing information",
+              media: {
+                type: 'video',
+                url: "/videos/Case Studies/MI/Explore high res.mp4",
+                poster: "/videos/Case Studies/MI/Explore high res.mp4",
+                caption: "Influencer exploration interface with filtering capabilities",
+                isLaptop: true
+              }
+            },
+            {
+              change: "Campaign Tracking Dashboard",
+              reason: "Provide clear visibility into campaign progress",
+              result: "Developed a timeline-based tracking system showing key milestones from proposal to post completion",
+              media: {
+                type: 'video',
+                url: "/videos/Case Studies/MI/Campaign Tracking high res.mp4",
+                poster: "/videos/Case Studies/MI/Campaign Tracking high res.mp4",
+                caption: "Campaign tracking interface with timeline visualization",
+                isLaptop: true
               }
             }
           ]
@@ -192,62 +217,15 @@ export const implementationPhase = {
             participants: 12,
             averageSuccessRate: "78%",
             keyFindings: [
-              "AI-powered discovery reduced search time by 65%",
-              "Campaign setup workflow improved completion rates by 40%",
-              "Real-time analytics dashboard received positive feedback for clarity",
-              "Some users requested more detailed AI match explanations",
+              "Campaign creation wizard reduced setup confusion",
+              "Timeline visualization improved campaign status understanding",
+              "Consolidated view increased efficiency in managing multiple influencers",
+              "Some users requested additional filtering options in discovery",
               "Mobile responsiveness needs improvement for on-the-go management"
             ]
           }
-        },
-        {
-          type: 'presentation',
-          title: "Final Presentation",
-          description: "Presented the solution to stakeholders, highlighting key features and success metrics.",
-          items: [
-            "Demonstrated significant time savings through AI automation",
-            "Showcased improved match quality through intelligent algorithms",
-            "Presented roadmap for future AI capabilities and integrations"
-          ]
-        },
-        {
-          type: 'reflection',
-          title: "Reflection",
-          description: "Key learnings and insights from the development process.",
-          items: [
-            "AI implementation requires clear explanation of match decisions",
-            "Balance between automation and user control is crucial",
-            "Regular user feedback helps refine AI algorithms effectively"
-          ]
         }
-      ],
-      roadmap: {
-        phases: [
-          {
-            title: "Phase 1: Core AI Features",
-            duration: "4 months",
-            items: [
-              "AI-powered discovery engine",
-              "Basic campaign management",
-              "Performance analytics"
-            ]
-          },
-          {
-            title: "Phase 2: Advanced Features",
-            duration: "3 months",
-            items: [
-              "Advanced AI matching",
-              "Automated reporting",
-              "Mobile optimization"
-            ]
-          }
-        ]
-      },
-      metrics: {
-        discoveryTime: "65% reduction in influencer discovery time",
-        matchQuality: "85% improvement in match relevance",
-        satisfaction: "User satisfaction score: 4.6/5"
-      }
+      ]
     },
     "taskReminders": {
       title: "Implementation Plan",
@@ -354,45 +332,71 @@ export const implementationPhase = {
       }
     },
     "sustainablePackaging": {
-      title: "Implementation Plan",
-      summary: "A phased rollout approach ensuring smooth transition and maximum adoption.",
-      sections: [
+  title: "Implementation Plan",
+  summary: "A user-centric approach focusing on seamless product identification and rewards redemption.",
+  sections: [
+    {
+      type: 'prototypes',
+      title: "Prototypes",
+      icon: IoColorPaletteOutline,
+      description: "Interactive prototypes demonstrating the product identification and rewards flow.",
+      items: [
         {
-          type: 'prototypes',
-          title: "Prototypes",
-          icon: IoColorPaletteOutline,
-          description: "Interactive prototypes were developed to validate key features and gather retailer feedback.",
-          items: [
-            {
-              change: "Incentive Dashboard",
-              reason: "Retailers needed clear visibility into program benefits and progress",
-              result: "Created interactive tiered progress tracking with ROI visualization",
-              media: {
-                type: 'video',
-                url: "/videos/Case Studies/SustainablePackaging/Prototypes/incentive-dashboard.mp4",
-                poster: "/images/Case Studies/SustainablePackaging/Prototypes/dashboard-poster.jpg",
-                autoplay: false,
-                loop: true,
-                muted: true,
-                containMode: true
-              }
-            },
-            {
-              change: "Implementation Guide",
-              reason: "Complex transition process needed better support structure",
-              result: "Developed interactive guide with progress tracking and resource access",
-              media: {
-                type: 'video',
-                url: "/videos/Case Studies/SustainablePackaging/Prototypes/implementation-guide.mp4",
-                poster: "/images/Case Studies/SustainablePackaging/Prototypes/guide-poster.jpg",
-                autoplay: false,
-                loop: true,
-                muted: true,
-                containMode: true
-              }
-            }
-          ]
+          change: "Smart Product Recognition",
+          reason: "Enable quick and intuitive packaging identification",
+          result: "Created camera-based scanning interface with instant product recognition",
+          media: {
+            type: 'video',
+            url: "/videos/Case Studies/SP/Product Identification.mp4",
+            poster: "/videos/Case Studies/SP/Product Identification.mp4",
+            alt: "Product recognition demo",
+            containMode: true
+          }
         },
+        {
+          change: "Interactive Product Visualization",
+          reason: "Help users understand product packaging composition",
+          result: "Developed AR animation showing packaging materials and sustainability details",
+          media: {
+            type: 'video',
+            url: "/videos/Case Studies/SP/AR Product.mp4",
+            poster: "/videos/Case Studies/SP/AR Product.mp4",
+            autoplay: false,
+            loop: true,
+            muted: true,
+            containMode: true
+          }
+        },
+        {
+          change: "Sustainability Score Display",
+          reason: "Communicate product sustainability value clearly",
+          result: "Implemented SUS points system with visual indicators and reward potential",
+          media: {
+            type: 'video',
+            url: "/videos/Case Studies/SP/SUS Points.mp4",
+            poster: "/videos/Case Studies/SP/SUS Points.mp4",
+            autoplay: false,
+            loop: true,
+            muted: true,
+            containMode: true
+          }
+        },
+        {
+          change: "Rewards Management Interface",
+          reason: "Provide clear overview of accumulated rewards",
+          result: "Created consolidated cart view showing total sustainability impact and available discounts",
+          media: {
+            type: 'video',
+            url: "/videos/Case Studies/SP/Cart view.mp4",
+            poster: "/videos/Case Studies/SP/Cart view.mp4",
+            autoplay: false,
+            loop: true,
+            muted: true,
+            containMode: true
+          }
+        }
+      ]
+    },
         {
           type: 'usabilityTesting',
           title: "Usability Testing",

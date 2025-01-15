@@ -22,7 +22,7 @@ export const caseStudies = {
       id: 'task-reminders',
       title: 'Contextualize Task Reminders',
       metric: '10% Increase in Task Completion',
-      tags: ['AR/VR', 'Mobile Design', 'Productivity'],
+      tags: ['AR', 'Spatial Interface Design', 'Productivity'],
       image: '../images/Project Cover Photos/Anywhere Access Luminote gif.gif',
       description: 'Created an AR-based task management system combining spatial reminders with adaptive organizational structures to reduce cognitive load.'
     },
@@ -30,7 +30,7 @@ export const caseStudies = {
       id: 'sustainable-packaging',
       title: 'Incentivize Sustainable Packaging',
       metric: '30% More Eco-Friendly Choices',
-      tags: ['AR/VR', 'Sustainability', 'Retail'],
+      tags: ['AR', 'Mobile Design', 'Sustainability'],
       image: '../images/Project Cover Photos/SUSpointpopup-cropped.gif',
       description: 'Designed an AR app to promote sustainable shopping by evaluating product packaging and incentivizing eco-conscious purchases with rewards.'
     }

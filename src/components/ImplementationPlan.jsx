@@ -34,7 +34,7 @@ const ImplementationPlan = ({ content }) => {
         {section.items.map((item, index) => (
           <div key={index} className="prototype-card">
             <h4>{item.change}</h4>
-            <div className="media-container">
+            <div className={`media-container ${item.media.isLaptop ? 'laptop' : ''}`}>
               {item.media.type === 'video' && (
                 <video
                   src={item.media.url}

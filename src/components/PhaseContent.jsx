@@ -9,7 +9,7 @@ import ImageCarousel from './ImageCarousel';
 import { getTaskAnalysisImages, getConceptImages } from '../data/carouselImages';
 
 const PhaseContent = ({ content, contentType, projectId }) => {
-  console.log('PhaseContent Props:', { content, contentType, projectId });
+  
 
   if (!content) return null;
 

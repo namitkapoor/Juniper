@@ -637,4 +637,22 @@
   .decision-wireframe-intro p {
     margin-bottom: 2rem; /* Reduce spacing */
   }
+}
+
+/* Project-specific styles */
+.decision-wireframe-grid.influencerMarketing {
+  grid-template-columns: 1fr; /* Single column for bigger images */
+  max-width: 800px; /* Or your preferred max width */
+  margin: 0 auto;
+}
+
+.decision-wireframe-item.influencerMarketing .decision-wireframe-image {
+  width: 100%;
+  max-width: none; /* Remove any max-width constraints */
+}
+
+.decision-wireframe-item.influencerMarketing .decision-wireframe-image img {
+  width: 100%;
+  max-height: 800px; /* Adjust this value as needed */
+  object-fit: contain;
 } 

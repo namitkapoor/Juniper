@@ -3,7 +3,7 @@ import OptimizedImage from './OptimizedImage';
 import '../style/decision-criteria.css';
 
 const DecisionCriteria = ({ content, projectId }) => {
-  const [activeTab, setActiveTab] = useState('concepts');
+  const [activeTab, setActiveTab] = useState(null);
   const [activeHotspots, setActiveHotspots] = useState({});
 
   if (!content) return null;
@@ -11,11 +11,19 @@ const DecisionCriteria = ({ content, projectId }) => {
   // Get project-specific content if it exists
   const projectContent = content[projectId] || content;
 
-  const tabs = [
-    { id: 'concepts', label: 'Concept Feedback' },
-    { id: 'wireframes', label: 'Wireframe Feedback' },
-    { id: 'accessibility', label: 'Accessibility' }
-  ];
+  // Only create tabs for sections that have content
+  const availableTabs = [
+    { id: 'concepts', label: 'Concept Feedback', hasContent: !!projectContent.conceptFeedback?.length },
+    { id: 'wireframes', label: 'Wireframe Feedback', hasContent: !!projectContent.wireframeFeedback?.length },
+    { id: 'accessibility', label: 'Accessibility', hasContent: !!projectContent.accessibility?.length }
+  ].filter(tab => tab.hasContent);
+
+  // Set initial active tab to first available tab if not set
+  React.useEffect(() => {
+    if (!activeTab && availableTabs.length > 0) {
+      setActiveTab(availableTabs[0].id);
+    }
+  }, []);
 
   const toggleHotspot = (imageId, hotspotId) => {
     setActiveHotspots(prev => ({
@@ -67,7 +75,7 @@ const DecisionCriteria = ({ content, projectId }) => {
   };
 
   const renderWireframeFeedback = () => (
-    <div className="decision-wireframe-feedback">
+    <div className={`decision-wireframe-feedback ${projectId}`}>
       <div className="decision-wireframe-intro">
         <h3>Interface Iterations</h3>
         <p>The following wireframes showcase the evolution of the interface based on user feedback.</p>
@@ -92,9 +100,9 @@ const DecisionCriteria = ({ content, projectId }) => {
         </div>
       </div>
 
-      <div className="decision-wireframe-grid">
+      <div className={`decision-wireframe-grid ${projectId}`}>
         {projectContent.wireframeFeedback?.[0].images.map((image) => (
-          <div key={image.id} className="decision-wireframe-item">
+          <div key={image.id} className={`decision-wireframe-item ${projectId}`}>
             <div className="decision-wireframe-image-container">
               <div className="decision-wireframe-image">
                 <OptimizedImage
@@ -176,17 +184,19 @@ const DecisionCriteria = ({ content, projectId }) => {
 
   return (
     <div className="decision-criteria">
-      <div className="decision-tabs">
-        {tabs.map(tab => (
-          <button
-            key={tab.id}
-            className={`tab-button ${activeTab === tab.id ? 'active' : ''}`}
-            onClick={() => setActiveTab(tab.id)}
-          >
-            {tab.label}
-          </button>
-        ))}
-      </div>
+      {availableTabs.length > 0 && (
+        <div className="decision-tabs">
+          {availableTabs.map(tab => (
+            <button
+              key={tab.id}
+              className={`tab-button ${activeTab === tab.id ? 'active' : ''}`}
+              onClick={() => setActiveTab(tab.id)}
+            >
+              {tab.label}
+            </button>
+          ))}
+        </div>
+      )}
       {renderContent()}
     </div>
   );

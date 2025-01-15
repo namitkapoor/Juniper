@@ -1,0 +1,45 @@
+/* Base video styles */
+.media-content.video-media {
+  width: 100%;
+  height: auto;
+  max-height: 600px;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+/* Container styles */
+.media-wrapper {
+  width: 100%;
+  height: auto;
+  padding: 0;
+  background: none;
+  border: none;
+}
+
+/* Specific overrides for implementation plan videos */
+.implementation-plan .iteration-card .video-media,
+.implementation-plan .iteration-image .video-media {
+  padding: 0;
+  background: none;
+  border: none;
+  box-shadow: none;
+  width: 100%;
+  height: auto;
+  max-height: 600px;
+  object-fit: contain;
+}
+
+/* Container overrides */
+.implementation-plan .iteration-image:has(.video-media),
+.implementation-plan .iteration-card:has(.video-media) {
+  padding: 0;
+  background: none;
+  border: none;
+}
+
+/* Contain mode specific styles */
+.media-content.video-media.contain-mode {
+  object-fit: contain;
+  max-height: 600px;
+  width: 100%;
+} 

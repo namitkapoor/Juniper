@@ -514,9 +514,28 @@
 /* Requirements grid specific */
 .prototypes-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(400px, 100%), 1fr));
   width: 100%;
+}
+
+/* Ensure phone frames stay centered and don't stretch */
+.prototypes-grid .prototype-card:has(.media-container:not(.laptop)) {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Allow laptop containers to fill available space */
+.prototypes-grid .prototype-card:has(.media-container.laptop) {
+  grid-column: 1 / -1;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .prototypes-grid {
+    grid-template-columns: 1fr;  /* Stack on mobile */
+  }
 }
 
 /* Visual iterations grid specific */
@@ -664,6 +683,12 @@
   background: transparent;
   aspect-ratio: 9/19.5;
 }
+.media-container.laptop {
+  position: relative;
+  border-radius: 0px;
+  width: 60%;
+  aspect-ratio: 16/9;
+}
 
 .prototype-video {
   width: 100%;
@@ -727,5 +752,55 @@
 @media (max-width: 768px) {
   .strategic-approach .timeline-container .section-content .phase-content {
     padding: 0;
+  }
+} 
+
+/* Prototype info styling */
+.prototype-info {
+  width: 100%;
+  text-align: center;
+  padding: 1rem;
+}
+
+.info-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.info-row:last-child {
+  margin-bottom: 0;
+}
+
+.info-row .info-icon {
+  color: var(--text-secondary);
+}
+
+.prototype-info .reason,
+.prototype-info .result {
+  text-align: center;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+  max-width: 90%;
+  margin: 0 auto;
+}
+
+.prototype-card h4 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+/* Ensure prototype info stays centered on all screen sizes */
+@media (max-width: 768px) {
+  .prototype-info {
+    padding: 0.75rem;
+  }
+  
+  .prototype-info .reason,
+  .prototype-info .result {
+    max-width: 100%;
   }
 } 
