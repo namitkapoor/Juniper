@@ -364,59 +364,85 @@ export const decisionsPhase = {
           content: {
             conceptFeedback: [
               {
-                title: "Tiered Incentive Program",
-                description: "Selected as primary approach due to scalability and proven effectiveness in pilot testing.",
+                title: "Camera-First Scanning Approach",
+                description: "Selected as primary approach for its simplicity and immediate engagement.",
                 status: "Selected",
                 supportingPoints: [
-                  "82% of pilot retailers achieved Tier 2 status within 6 months",
-                  "Flexible progression path matches varying retailer capabilities",
-                  "Clear ROI demonstration at each tier"
+                  "Immediate camera access reduces friction to start scanning",
+                  "Visual feedback provides clear scanning guidance",
+                  "Single-step process encourages frequent use",
+                  "Direct integration with existing shopping behavior"
                 ],
                 image: {
-                  url: "/images/Case Studies/SustainablePackaging/Sketches/tiered-system.svg",
-                  caption: "Tiered incentive system visualization"
+                  url: "/images/Case Studies/SustainablePackaging/Sketches/camera-first.svg",
+                  caption: "Camera-first interface design"
                 }
               },
               {
-                title: "Fixed Rebate System",
-                description: "While simpler to implement, this approach lacked the motivational aspects needed for long-term adoption.",
+                title: "Manual Input System",
+                description: "Rejected due to increased user friction and potential for errors.",
                 status: "Not Selected",
                 supportingPoints: [
-                  "One-size-fits-all approach didn't address varying retailer needs",
-                  "Limited motivation for continued improvement",
-                  "Harder to justify ROI for larger investments"
+                  "Required multiple steps to input package information",
+                  "Higher cognitive load for users during shopping",
+                  "Increased chance of incorrect data entry",
+                  "Broke the natural shopping flow"
                 ],
                 image: {
-                  url: "/images/Case Studies/SustainablePackaging/Sketches/fixed-rebate.jpg",
-                  caption: "Fixed rebate system concept"
+                  url: "/images/Case Studies/SustainablePackaging/Sketches/manual-input.jpg",
+                  caption: "Manual input system concept"
                 }
+              }
+            ],
+            wireframeFeedback: [
+              {
+                title: "Points Display Evolution",
+                description: "Development of the sustainability score visualization",
+                images: [
+                  {
+                    id: 1,
+                    url: "/images/Case Studies/SustainablePackaging/Wireframes/points-v1.jpg",
+                    caption: "Initial Points Display",
+                    hotspots: [
+                      {
+                        id: "1-1",
+                        position: { x: 25, y: 35 },
+                        challenge: "Score Clarity",
+                        feedback: "Users needed clearer connection between sustainability and rewards",
+                        changes: "Added direct point-to-discount conversion display"
+                      }
+                    ]
+                  }
+                ]
               }
             ],
             accessibility: [
               {
-                title: "Analytics Dashboard",
-                description: "Enhanced accessibility for performance tracking",
+                title: "Scanning Accessibility",
+                description: "Enhanced package scanning for all users",
                 recommendations: [
-                  "Screen reader optimization for data visualization",
-                  "Keyboard navigation for all dashboard functions",
-                  "High-contrast mode for better readability"
+                  "Clear audio feedback during scanning process",
+                  "High-contrast visual indicators",
+                  "Haptic feedback for successful scans",
+                  "Voice-guided scanning instructions"
                 ],
                 visual: {
-                  url: "/images/Case Studies/SustainablePackaging/Accessibility/dashboard-access.jpg",
-                  caption: "Accessible dashboard design"
+                  url: "/images/Case Studies/SustainablePackaging/Accessibility/scanner-access.jpg",
+                  caption: "Accessible scanning interface"
                 }
               },
               {
-                title: "Implementation Guide",
-                description: "Made support resources accessible to all users",
+                title: "Points Understanding",
+                description: "Made sustainability scoring clear and comprehensible",
                 recommendations: [
-                  "Multi-format training materials (text, video, audio)",
-                  "Clear navigation structure for documentation",
-                  "Mobile-responsive design for on-site access"
+                  "Multiple formats for score explanation",
+                  "Clear visual hierarchy for information",
+                  "Simple language for sustainability metrics",
+                  "Alternative text for all score visualizations"
                 ],
                 visual: {
-                  url: "/images/Case Studies/SustainablePackaging/Accessibility/guide-access.jpg",
-                  caption: "Accessible implementation guide"
+                  url: "/images/Case Studies/SustainablePackaging/Accessibility/points-access.jpg",
+                  caption: "Accessible points display"
                 }
               }
             ]

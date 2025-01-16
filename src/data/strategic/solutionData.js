@@ -829,7 +829,12 @@ export const solutionPhase = {
               icon: IoGameControllerOutline,
               description: "Analyzing engagement patterns through game mechanics",
               content: {
-                useCarousel: true,
+                coverImage: {
+                  url: "/images/Case Studies/SP/Wireframes/Wireframe flow.png",
+                  caption: "Task Analysis Overview",
+                  alt: "Overview of task analysis"
+                },
+                useCarousel: false,
                 carouselType: "taskAnalysis",
                 summary: "User engagement analysis revealed opportunities for gamified sustainability features",
                 metrics: {
@@ -868,51 +873,51 @@ export const solutionPhase = {
               }
             },
             {
-              id: 'ar-interaction',
+              id: 'app-flow-development',
               type: 'concepts',
-              title: "AR Interaction Design",
+              title: "App Flow Development",
               icon: IoPhonePortraitOutline,
-              description: "AR interface concepts and gamification elements",
+              description: "Evolution of the core user journey through sketches and wireframes",
               content: {
                 concepts: [
                   {
-                    name: "AR Scanner Interface",
-                    description: "Real-time package recognition and sustainability information display",
+                    name: "Product Discovery Flow",
+                    description: "Initial interaction from launching app to product identification",
                     status: "Selected",
                     keyFeatures: [
-                      "One-touch scan activation",
-                      "Visual scanning guidance",
-                      "Immediate feedback system",
-                      "AR information overlay"
+                      "Simple camera access from home screen",
+                      "Clear scanning instructions",
+                      "Package recognition feedback",
+                      "Easy retry mechanism"
                     ],
                     useCarousel: true,
-                    carouselType: "scannerConcept"
+                    carouselType: "discoveryFlow"
                   },
                   {
-                    name: "Scoring Visualization",
-                    description: "Interactive display of sustainability metrics and impact",
+                    name: "Sustainability Information Display",
+                    description: "Progressive reveal of package sustainability details and points",
                     status: "Selected",
                     keyFeatures: [
-                      "Dynamic score calculation",
-                      "Impact visualization",
-                      "Comparative metrics",
-                      "Educational tooltips"
+                      "SUS score prominence",
+                      "Material breakdown visualization",
+                      "Points earning explanation",
+                      "Clear call to action for rewards"
                     ],
                     useCarousel: true,
-                    carouselType: "scoringConcept"
+                    carouselType: "infoDisplay"
                   },
                   {
-                    name: "Reward System",
-                    description: "Gamified achievement tracking and reward mechanics",
+                    name: "Rewards and Checkout Process",
+                    description: "Journey from points accumulation to discount redemption",
                     status: "Selected",
                     keyFeatures: [
-                      "Achievement unlocks",
-                      "Progress tracking",
-                      "Social sharing",
-                      "Reward collection"
+                      "Cart-based points summary",
+                      "Simple QR code access",
+                      "Clear discount visualization",
+                      "Seamless redemption flow"
                     ],
                     useCarousel: true,
-                    carouselType: "rewardsConcept"
+                    carouselType: "rewardsFlow"
                   }
                 ]
               }
@@ -926,51 +931,81 @@ export const solutionPhase = {
               content: {
                 screens: [
                   {
-                    name: "Spatial Calendar Interface",
+                    name: "AR Package Scanner",
                     image: {
-                      url: "/images/Case Studies/TR/Wireframe/Calendar.jpg",
-                      caption: "Mixed reality calendar with spatial note creation"
+                      url: "/images/Case Studies/SP/Interaction Design/wirerframe2_vector.svg",
+                      caption: "AR-enabled package recognition system"
                     },
-                    purpose: "Create an intuitive calendar interface that enables users to place notes in physical space by selecting time slots.",
+                    purpose: "Enable quick and accurate identification of product packaging through camera-based AR scanning.",
                     challengesAddressed: [
-                      "Traditional calendar apps lack spatial context",
-                      "Need for natural interaction with digital content in physical space"
+                      "Need for real-time package recognition",
+                      "Accurate sustainability scoring calculation",
+                      "User feedback during scanning process"
                     ],
                     keyFeatures: [
-                      "Time slot-based note creation",
-                      "MRTK2 spatial anchor integration",
-                      "Intuitive gesture controls for note placement"
+                      "Real-time AR object recognition",
+                      "Visual scanning indicators",
+                      "Package material identification",
+                      "Instant sustainability scoring"
                     ],
                     feedbackAndRefinements: [
-                      "Added micro-animations for better interaction feedback",
-                      "Improved pointing and clicking accuracy based on user testing"
+                      "Added visual guides for optimal scanning distance",
+                      "Implemented progress indicator during recognition",
+                      "Enhanced feedback for successful scans"
                     ]
                   },
                   {
-                    name: "Physical Space Integration",
+                    name: "SUS Points System",
                     image: {
-                      url: "/images/Case Studies/TR/Wireframe/Spatial.jpg",
-                      caption: "Physics-based interactions with real-world objects"
+                      url: "/images/Case Studies/SP/Interaction Design/Scoring visualization.png",
+                      caption: "Sustainability scoring and points visualization"
                     },
-                    purpose: "Create realistic and responsive interactions between digital notes and physical environment.",
+                    purpose: "Provide clear visualization of sustainability scores and potential rewards.",
                     challengesAddressed: [
-                      "Need for natural physics behavior in mixed reality",
-                      "Challenge of maintaining spatial awareness"
+                      "Complex sustainability metrics simplification",
+                      "Clear communication of point values",
+                      "Engaging reward visualization"
                     ],
                     keyFeatures: [
-                      "Invisible room mesh for physics collisions",
-                      "Realistic bounce-off interactions",
-                      "Spatial persistence of notes"
+                      "Dynamic point calculation",
+                      "AR point visualization overlay",
+                      "Interactive reward preview",
+                      "Points-to-discount conversion"
                     ],
                     feedbackAndRefinements: [
-                      "Refined collision detection for more natural feel",
-                      "Optimized room mesh generation for better performance"
+                      "Simplified point display for quick understanding",
+                      "Added animation for point accumulation",
+                      "Improved reward visibility"
+                    ]
+                  },
+                  {
+                    name: "Checkout Integration",
+                    image: {
+                      url: "/images/Case Studies/SP/Interaction Design/wirerframe3_vector.svg",
+                      caption: "QR code-based reward redemption"
+                    },
+                    purpose: "Enable seamless redemption of sustainability rewards at checkout.",
+                    challengesAddressed: [
+                      "Point redemption verification",
+                      "Integration with existing POS systems",
+                      "Quick checkout process"
+                    ],
+                    keyFeatures: [
+                      "Dynamic QR code generation",
+                      "Real-time point balance display",
+                      "One-tap code enlargement",
+                      "Automatic reward application"
+                    ],
+                    feedbackAndRefinements: [
+                      "Optimized QR code visibility",
+                      "Streamlined redemption process",
+                      "Added confirmation feedback"
                     ]
                   },
                   {
                     name: "Technical Infrastructure",
                     image: {
-                      url: "/images/Case Studies/TR/Wireframe/Technical.jpg",
+                      url: "/images/Case Studies/SP/Interaction Design/technical implementation.png",
                       caption: "Platform integration and development challenges"
                     },
                     purpose: "Build robust technical foundation despite evolving XR platforms and tools.",

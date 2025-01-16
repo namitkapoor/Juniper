@@ -4,8 +4,8 @@ export const visualEvolutionData = {
       {
         stage: "Initial Design",
         description: "Original complex interface with overwhelming features",
-        image: "../images/Case Studies/JD/original design.svg",
-        keyIssues: [
+        image: "../images/Case Studies/JD/OCM Original app.svg",
+        improvements: [
           "Cluttered interface",
           "Complex navigation",
           "Information overload"
@@ -65,9 +65,19 @@ export const visualEvolutionData = {
         ]
       },
       {
-        stage: "Final Design",
+        stage: "Fourth Design",
         description: "AI-powered platform with automated matching",
         image: "../images/Case Studies/MI/Design Iterations/mockup4.png",
+        improvements: [
+          "Intelligent matching algorithm",
+          "Streamlined campaign management",
+          "Clear success metrics visualization"
+        ]
+      },
+      {
+        stage: "Final Design",
+        description: "AI-powered platform with automated matching",
+        image: "../images/Case Studies/MI/Prototypes/Actual Design- Explore.png",
         improvements: [
           "Intelligent matching algorithm",
           "Streamlined campaign management",
@@ -95,23 +105,45 @@ export const visualEvolutionData = {
       {
         stage: "Initial Design",
         description: "Traditional time-based reminder system",
-        image: "/images/Case Studies/TaskReminders/Evolution/initial-design.svg",
-        keyIssues: [
-          "Fixed notification timing",
-          "No context awareness",
-          "High dismissal rate",
-          "Limited user control"
+        image: "/images/Case Studies/TR/Visual Evolution/AR Note first design w shadow.png",
+        improvements: [
+          "Basic rectangular note interface",
+          "Scattered menu placement",
+          "Standard notification styling",
+          "Basic reminder functionality"
+        ]
+      },
+      {
+        stage: "Second Design",
+        description: "Context-aware AI-powered system",
+        image: "/images/Case Studies/TR/Visual Evolution/AR Note Design 2 figma.png",
+        improvements: [
+          "Introduced sticky note appearance",
+          "Improved visual recognition",
+          "Softer corners and edges",
+          "More intuitive note metaphor"
+        ]
+      },
+      {
+        stage: "Third Design",
+        description: "Context-aware AI-powered system",
+        image: "/images/Case Studies/TR/Visual Evolution/Just Note w shadow.png",
+        improvements: [
+          "Streamlined menu organization",
+          "Left-right button anchoring",
+          "Cleaner interface layout",
+          "Enhanced visual hierarchy"
         ]
       },
       {
         stage: "Final Design",
         description: "Context-aware AI-powered system",
-        image: "/images/Case Studies/TaskReminders/Evolution/final-design.svg",
+        image: "/images/Case Studies/TR/Design Concepts/Note and calendar.png",
         improvements: [
-          "Smart context detection",
-          "Adaptive interface",
-          "Intelligent timing",
-          "Personalized controls"
+          "Calendar integration",
+          "Paired spatial-temporal functionality",
+          "Refined interaction model",
+          "Complete note-calendar ecosystem"
         ]
       }
     ],
@@ -135,7 +167,7 @@ export const visualEvolutionData = {
       {
         stage: "Initial Design",
         description: "Basic rebate program with limited support",
-        image: "/images/Case Studies/SustainablePackaging/Evolution/initial-design.svg",
+        image: "/images/Case Studies/SP/Sketches/sketch1.png",
         keyIssues: [
           "One-size-fits-all approach",
           "Limited implementation support",
@@ -146,7 +178,7 @@ export const visualEvolutionData = {
       {
         stage: "Final Design",
         description: "Comprehensive incentive and support platform",
-        image: "/images/Case Studies/SustainablePackaging/Evolution/final-design.svg",
+        image: "/images/Case Studies/SP/Sketches/sketch2.png",
         improvements: [
           "Tiered incentive structure",
           "Guided implementation process",

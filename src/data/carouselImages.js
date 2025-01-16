@@ -555,28 +555,75 @@ export const carouselImages = {
       }
     ],
     concepts: {
-      scannerConcept: [
+      discoveryFlow: [
         {
-          src: `${BASE_PATH}/SP/Sketches/Game-1.svg`,
+          src: `${BASE_PATH}/SP/Sketches/Product discovery.png`,
           caption: 'Reward System',
           alt: 'Gamification rewards interface'
         },
         {
-          src: `${BASE_PATH}/SP/Sketches/Game-2.svg`,
+          src: `${BASE_PATH}/SP/Sketches/main sketch.png`,
           caption: 'Progress Tracking',
           alt: 'Sustainability progress dashboard'
-        }
-      ],
-      scoringConcept: [
+        },
         {
-          src: `${BASE_PATH}/SP/Sketches/AR-1.jpg`,
+          src: `${BASE_PATH}/SP/Sketches/sketch1.png`,
           caption: 'AR Package Preview',
           alt: 'AR packaging visualization'
         },
         {
-          src: `${BASE_PATH}/SP/Sketches/AR-2.jpg`,
+          src: `${BASE_PATH}/SP/Sketches/sketch2.png`,
+          caption: 'AR Package Preview',
+          alt: 'AR packaging visualization'
+        },
+        {
+          src: `${BASE_PATH}/SP/Sketches/sketch3.png`,
+          caption: 'AR Package Preview',
+          alt: 'AR packaging visualization'
+        }
+      ],
+      infoDisplay: [
+        {
+          src: `${BASE_PATH}/SP/Wireframes/1.svg`,
+          caption: 'AR Package Preview',
+          alt: 'AR packaging visualization'
+        },
+        {
+          src: `${BASE_PATH}/SP/Wireframes/2.svg`,
           caption: 'Impact Visualization',
           alt: 'AR environmental impact display'
+        },
+        {
+          src: `${BASE_PATH}/SP/Wireframes/3.svg`,
+          caption: 'Reward System',
+          alt: 'Gamification rewards interface'
+        }
+      ],
+      rewardsFlow: [
+        {
+          src: `${BASE_PATH}/SP/Wireframes/4.svg`,
+          caption: 'Reward System',
+          alt: 'Gamification rewards interface'
+        },
+        {
+          src: `${BASE_PATH}/SP/Wireframes/5.svg`,
+          caption: 'Reward System',
+          alt: 'Gamification rewards interface'
+        },
+        {
+          src: `${BASE_PATH}/SP/Wireframes/6.svg`,
+          caption: 'Reward System',
+          alt: 'Gamification rewards interface'
+        },
+        {
+          src: `${BASE_PATH}/SP/Wireframes/7.svg`,
+          caption: 'Reward System',
+          alt: 'Gamification rewards interface'
+        },
+        {
+          src: `${BASE_PATH}/SP/Wireframes/8.svg`,
+          caption: 'Reward System',
+          alt: 'Gamification rewards interface'
         }
       ]
     }

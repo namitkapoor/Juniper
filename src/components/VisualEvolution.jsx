@@ -9,24 +9,38 @@ const EvolutionSlider = ({ iterations }) => {
   
   // Calculate which images should be visible based on slider value
   const getVisibleImages = (value) => {
-    const numIterations = iterations.length - 1; // -1 because we count from 0
-    const position = value * numIterations;
-    const currentIndex = Math.floor(position);
-    const nextIndex = Math.min(currentIndex + 1, iterations.length - 1);
-    const progress = position - currentIndex; // Value between 0 and 1
+    const numIterations = iterations.length;
+    // Calculate which segment we're in (0 to numIterations-1)
+    const segmentSize = 1 / (numIterations - 1);
+    const currentIndex = Math.min(
+      Math.floor(value / segmentSize),
+      numIterations - 1
+    );
+    const nextIndex = Math.min(currentIndex + 1, numIterations - 1);
+    
+    // Calculate progress within current segment
+    const segmentProgress = (value - (currentIndex * segmentSize)) / segmentSize;
     
     return {
       currentIndex,
       nextIndex,
-      progress
+      progress: segmentProgress
     };
   };
 
   const handleSliderChange = (e) => {
     const rect = sliderRef.current.getBoundingClientRect();
     const x = e.clientX - rect.left;
-    const percentage = Math.max(0, Math.min(1, x / rect.width));
-    setSliderValue(percentage);
+    let rawPercentage = Math.max(0, Math.min(1, x / rect.width));
+    
+    // Calculate number of segments
+    const numSegments = iterations.length - 1;
+    const segmentSize = 1 / numSegments;
+    
+    // Find nearest segment
+    const nearestSegment = Math.round(rawPercentage / segmentSize) * segmentSize;
+    
+    setSliderValue(Math.min(1, nearestSegment));
   };
 
   const handleMouseDown = (e) => {
@@ -85,11 +99,11 @@ const EvolutionSlider = ({ iterations }) => {
 
       <div className="visual-details-grid">
         <div className="visual-detail-card">
-          <h3>Design Evolution</h3>
+          <h3>{iterations[currentIndex].stage}</h3>
           <ul className="visual-detail-list">
-            {iterations[currentIndex].improvements.map((improvement, index) => (
+            {iterations[currentIndex].improvements?.map((improvement, index) => (
               <li key={index}>{improvement}</li>
-            ))}
+            )) || []}
           </ul>
         </div>
       </div>
