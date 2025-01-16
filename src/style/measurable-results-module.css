@@ -26,10 +26,6 @@
   transition: opacity 0.2s ease;
 }
 
-.measurable-metric-image:hover {
-  opacity: 0.9;
-}
-
 .lightbox-overlay {
   position: fixed;
   top: 0;
@@ -138,6 +134,7 @@
 .measurable-metric-change {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 0.75rem;
   margin-top: 0.75rem;
 }
@@ -202,10 +199,6 @@
   transition: all 0.3s ease;
 }
 
-.measurable-testimonial-card:hover {
-  transform: translateY(-4px);
-  background: rgba(255, 255, 255, 0.05);
-}
 
 .measurable-testimonial-content blockquote {
   font-size: 1.2rem;
@@ -230,6 +223,7 @@
 .measurable-testimonial-author {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 1rem;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   padding-top: 1.5rem;

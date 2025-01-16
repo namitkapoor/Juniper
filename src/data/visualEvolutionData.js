@@ -14,7 +14,7 @@ export const visualEvolutionData = {
       {
         stage: "Final Design",
         description: "Streamlined interface focused on essential tasks",
-        image: "../images/Case Studies/JD/final design.svg",
+        image: "../images/Case Studies/JD/Final prototype combined.png",
         improvements: [
           "Simplified navigation",
           "Clear visual hierarchy",
@@ -37,7 +37,7 @@ export const visualEvolutionData = {
       {
         stage: "Initial Design",
         description: "Traditional search-based interface with manual matching",
-        image: "../images/Case Studies/Influencer/Evolution/initial-design.svg",
+        image: "../images/Case Studies/MI/Design Iterations/mockup1.png",
         keyIssues: [
           "Time-consuming manual search process",
           "Limited match quality indicators",
@@ -45,9 +45,29 @@ export const visualEvolutionData = {
         ]
       },
       {
+        stage: "Second Design",
+        description: "AI-powered platform with automated matching",
+        image: "../images/Case Studies/MI/Design Iterations/mockup2.png",
+        improvements: [
+          "Intelligent matching algorithm",
+          "Streamlined campaign management",
+          "Clear success metrics visualization"
+        ]
+      },
+      {
+        stage: "Third Design",
+        description: "AI-powered platform with automated matching",
+        image: "../images/Case Studies/MI/Design Iterations/mockup3.png",
+        improvements: [
+          "Intelligent matching algorithm",
+          "Streamlined campaign management",
+          "Clear success metrics visualization"
+        ]
+      },
+      {
         stage: "Final Design",
         description: "AI-powered platform with automated matching",
-        image: "../images/Case Studies/Influencer/Evolution/final-design.svg",
+        image: "../images/Case Studies/MI/Design Iterations/mockup4.png",
         improvements: [
           "Intelligent matching algorithm",
           "Streamlined campaign management",

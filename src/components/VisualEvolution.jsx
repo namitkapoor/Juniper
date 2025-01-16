@@ -6,8 +6,21 @@ import '../style/visual-evolution-module.css';
 const EvolutionSlider = ({ iterations }) => {
   const [sliderValue, setSliderValue] = useState(0);
   const sliderRef = useRef(null);
-  const initialDesign = iterations[0];
-  const finalDesign = iterations[iterations.length - 1];
+  
+  // Calculate which images should be visible based on slider value
+  const getVisibleImages = (value) => {
+    const numIterations = iterations.length - 1; // -1 because we count from 0
+    const position = value * numIterations;
+    const currentIndex = Math.floor(position);
+    const nextIndex = Math.min(currentIndex + 1, iterations.length - 1);
+    const progress = position - currentIndex; // Value between 0 and 1
+    
+    return {
+      currentIndex,
+      nextIndex,
+      progress
+    };
+  };
 
   const handleSliderChange = (e) => {
     const rect = sliderRef.current.getBoundingClientRect();
@@ -27,6 +40,8 @@ const EvolutionSlider = ({ iterations }) => {
     document.addEventListener('mouseup', handleMouseUp);
   };
 
+  const { currentIndex, nextIndex, progress } = getVisibleImages(sliderValue);
+
   return (
     <div className="visual-evolution-container">
       <div className="visual-slider-container">
@@ -36,18 +51,19 @@ const EvolutionSlider = ({ iterations }) => {
         </div>
         
         <div className="visual-image-slider">
-          <img 
-            src={initialDesign.image} 
-            alt="Initial design"
-            className="visual-slider-image"
-            style={{ opacity: 1 - sliderValue }}
-          />
-          <img 
-            src={finalDesign.image} 
-            alt="Final design"
-            className="visual-slider-image"
-            style={{ opacity: sliderValue }}
-          />
+          {iterations.map((iteration, index) => (
+            <img 
+              key={index}
+              src={iteration.image} 
+              alt={`Design iteration ${index + 1}`}
+              className="visual-slider-image"
+              style={{
+                opacity: index === currentIndex ? 1 - progress : 
+                         index === nextIndex ? progress : 0,
+                display: (index === currentIndex || index === nextIndex) ? 'block' : 'none'
+              }}
+            />
+          ))}
         </div>
 
         <div 
@@ -69,17 +85,9 @@ const EvolutionSlider = ({ iterations }) => {
 
       <div className="visual-details-grid">
         <div className="visual-detail-card">
-          <h3>Key Issues</h3>
+          <h3>Design Evolution</h3>
           <ul className="visual-detail-list">
-            {initialDesign.keyIssues.map((issue, index) => (
-              <li key={index}>{issue}</li>
-            ))}
-          </ul>
-        </div>
-        <div className="visual-detail-card">
-          <h3>Improvements</h3>
-          <ul className="visual-detail-list">
-            {finalDesign.improvements.map((improvement, index) => (
+            {iterations[currentIndex].improvements.map((improvement, index) => (
               <li key={index}>{improvement}</li>
             ))}
           </ul>

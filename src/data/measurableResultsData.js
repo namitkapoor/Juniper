@@ -4,7 +4,12 @@ import {
   IoHappyOutline,
   IoTimeOutline,
   IoRocketOutline,
-  IoPeopleOutline
+  IoPeopleOutline,
+  IoOptionsOutline,
+  IoVolumeHighOutline,
+  IoColorPaletteOutline,
+  IoSpeedometerOutline,
+  IoTrophyOutline
 } from 'react-icons/io5';
 
 export const measurableResultsData = {
@@ -22,7 +27,7 @@ export const measurableResultsData = {
           "Improved user satisfaction across all farm sizes.",
           "Addressed pain points, reducing the learning curve for new users."
         ],
-        image: "../images/Case Studies/JD/Average SUS Scores.png"
+        // image: "../images/Case Studies/JD/Average SUS Scores.png"
       },
       {
         title: "Task Completion",
@@ -35,8 +40,7 @@ export const measurableResultsData = {
           "Simulated a sample of end users' experience with task-based user evaluation.",
           "Improved task completion rates across key functionalities.",
           "Streamlined workflows resulted in faster task execution and reduced error rates."
-        ],
-        image: "../images/Case Studies/JD/Evals/Map tab task.webp"
+        ]
       },
       {
         title: "Heuristic Evaluation",
@@ -51,7 +55,7 @@ export const measurableResultsData = {
           "Two mid-priority issues addressed, improving consistency and navigation flows.",
           "Expert insights guided the redesign to align with heuristic best practices."
         ],
-        image: "../images/Case Studies/JD/Evals/Heuristic evals.webp"
+        // image: "../images/Case Studies/JD/Evals/Heuristic evals.webp"
       }
     ],
     testimonials: [
@@ -66,116 +70,112 @@ export const measurableResultsData = {
   "influencerMarketing": {
     metrics: [
       {
-        title: "Discovery Time",
-        icon: IoTimeOutline,
+        title: "Navigation Efficiency",
+        icon: IoSpeedometerOutline,
         stats: {
-          value: "65%",
-          unit: "Reduction",
-          previousValue: "2.5 hours",
-          change: "Down to 52 minutes"
+          value: "28%",
+          unit: "Click Reduction",         
+          change: "107s time saved"
         },
         details: [
-          "AI-powered matching reduced manual search time significantly",
-          "Automated vetting process improved match quality",
-          "Smart filters eliminated irrelevant results"
+          "Consolidated view reduced navigation complexity",
+          "Single-tab design eliminated context switching",
+          "Streamlined status tracking improved visibility"
         ],
-        image: "/images/Case Studies/Influencer/Results/discovery-time.jpg"
+        // image: "/images/Case Studies/Influencer/Results/discovery-time.jpg"
       },
       {
-        title: "Campaign Success",
+        title: "Task analysis",
         icon: IoRocketOutline,
         stats: {
-          value: "85%",
-          unit: "Match Quality",
-          previousValue: "40%",
-          change: "+45%"
+          value: "95%",
+          unit: "Task Success",
+          change: "Key tasks tested"
         },
         details: [
-          "Higher relevance in influencer-brand matches",
-          "Reduced campaign setup errors by 80%",
-          "Improved ROI tracking accuracy"
+          "Campaign creation workflow",
+          "Influencer status tracking",
+          "Progress monitoring"
         ],
-        image: "/images/Case Studies/Influencer/Results/campaign-success.jpg"
+        // image: "/images/Case Studies/Influencer/Results/campaign-success.jpg"
       },
       {
-        title: "User Adoption",
-        icon: IoPeopleOutline,
+        title: "System Usability",
+        icon: IoTrophyOutline,
         stats: {
-          value: "4.6",
-          unit: "User Satisfaction",
-          change: "92% would recommend"
+          value: "68",
+          unit: "SUS Score",
+          change: "Based on user testing"
         },
         details: [
-          "Positive feedback on AI-powered features",
-          "High satisfaction with automated workflows",
-          "Strong user retention after 3 months"
+          "Interface learnability",
+          "Task completion confidence",
+          "Overall system satisfaction"
         ],
-        image: "/images/Case Studies/Influencer/Results/user-adoption.jpg"
+        // image: "/images/Case Studies/Influencer/Results/user-adoption.jpg"
       }
     ],
     testimonials: [
       {
-        quote: "The AI matching saved us countless hours of manual searching. It's like having a digital marketing assistant that actually understands our brand.",
+        quote: "Being able to see all my influencer campaigns in one place has made tracking so much easier. The timeline view gives me instant visibility into where each collaboration stands.",
         author: "Michael Rodriguez",
         role: "Marketing Director, StyleCraft",
         image: "/images/Case Studies/Influencer/Testimonials/michael.jpg"
       },
       {
-        quote: "Finally, a platform that makes influencer marketing accessible for small businesses. The automated campaign tracking is a game-changer.",
+        quote: "The streamlined interface has cut down the time I spend managing campaigns significantly. I especially love how I can quickly see which influencers need follow-up without switching between different tabs.",
         author: "Lisa Chen",
-        role: "Owner, Sustainable Beauty Co",
-        image: "/images/Case Studies/Influencer/Testimonials/lisa.jpg"
+        role: "Owner, Sustainable Beauty Co"
+        // image: "/images/Case Studies/Influencer/Testimonials/lisa.jpg"
       }
     ]
   },
   "taskReminders": {
     metrics: [
       {
-        title: "Task Completion",
-        icon: IoTimeOutline,
+        title: "Attribute Evaluation",
+        icon: IoOptionsOutline,
         stats: {
-          value: "92%",
-          unit: "Completion Rate",
-          previousValue: "45%",
-          change: "+47%"
+          value: "6",
+          unit: "Participants",
+          change: "3 Attributes Tested"
         },
         details: [
-          "Context-aware notifications improved task completion significantly",
-          "Reduced notification dismissal rate by 65%",
-          "Average response time decreased from 15 to 3 minutes"
+          "Sound variations (pitch and loudness)",
+          "Color changes (saturation and hue)",
+          "Animation speed adjustments"
         ],
-        image: "/images/Case Studies/TaskReminders/Results/completion-rate.jpg"
+        // image: "/images/Case Studies/TaskReminders/Results/attributes.jpg"
       },
       {
-        title: "User Satisfaction",
-        icon: IoHappyOutline,
+        title: "Sound Effectiveness",
+        icon: IoVolumeHighOutline,
         stats: {
-          value: "4.7",
-          unit: "out of 5",
-          previousValue: "3.2",
-          change: "+1.5"
+          value: "Increasing",
+          unit: "Volume",
+          change: "Preferred by users"
         },
         details: [
-          "95% of users reported better timing of notifications",
-          "Adaptive interface received positive feedback",
-          "Context detection accuracy rated at 95%"
+          "Sound intensification with proximity matched spatial expectations",
+          "Progressive volume increase improved urgency perception",
+          "Natural mapping to real-world sound behavior"
         ],
-        image: "/images/Case Studies/TaskReminders/Results/satisfaction.jpg"
+        // image: "/images/Case Studies/TaskReminders/Results/satisfaction.jpg"
       },
       {
-        title: "System Performance",
-        icon: IoStatsChartOutline,
+        title: "Visual Indicators",
+        icon: IoColorPaletteOutline,
         stats: {
-          value: "95%",
-          unit: "Context Accuracy",
-          change: "Battery impact <5%"
+          value: "Desaturation",
+          unit: "Effect",
+          change: "Clear priority signaling"
         },
         details: [
-          "High accuracy in context detection",
-          "Minimal battery consumption",
-          "Fast adaptation to user patterns"
+          "Color desaturation effectively communicated distance-based priority",
+          "Hue shifts provided additional priority context",
+          "Animation speed reinforced urgency levels"
         ],
-        image: "/images/Case Studies/TaskReminders/Results/performance.jpg"
+        // image: "/images/Case Studies/TaskReminders/Results/performance.jpg"
       }
     ],
     testimonials: [
@@ -186,7 +186,7 @@ export const measurableResultsData = {
         image: "/images/Case Studies/TaskReminders/Testimonials/david.jpg"
       },
       {
-        quote: "Finally, a reminder system that doesn't interrupt me at the wrong times. The AI really understands my work patterns.",
+        quote: "Finally, a reminder system that grabs my attention without taking me out of my space. Although wearing a headset is a bother for now, can't wait for smart glasses to adopt this!",
         author: "Emily Chen",
         role: "UX Designer",
         image: "/images/Case Studies/TaskReminders/Testimonials/emily.jpg"

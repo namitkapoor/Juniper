@@ -502,15 +502,6 @@
   width: 100%;
 }
 
-/* Feedback/Accessibility grid specific */
-.feedback-grid,
-.accessibility-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 2rem;
-  width: 100%;
-}
-
 /* Requirements grid specific */
 .prototypes-grid {
   display: grid;
@@ -611,6 +602,7 @@
   font-size: 1.4rem;
   font-weight: 500;
   margin: 0;
+  text-align: left;
 }
 
 .concept-card p {
@@ -618,6 +610,7 @@
   font-size: 1rem;
   line-height: 1.6;
   margin: 0;
+  text-align: ce;
 }
 
 .feature-list {

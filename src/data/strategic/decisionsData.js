@@ -255,64 +255,66 @@ export const decisionsPhase = {
           content: {
             conceptFeedback: [
               {
-                title: "Smart Context Engine",
-                description: "Selected as primary approach due to its balance of automation and user control.",
+                title: "AR Spatial Note System",
+                description: "Selected as primary approach, combining spatial note interface with calendar integration for comprehensive task management.",
                 status: "Selected",
                 supportingPoints: [
-                  "85% of users preferred contextual awareness over fixed schedules",
-                  "Machine learning approach allows for continuous improvement",
-                  "Privacy-first design maintains user trust"
+                  "Spatial notes provide intuitive task visualization",
+                  "Calendar integration adds temporal context to spatial placement",
+                  "Multi-sensory feedback (visual, audio) enhances reminder effectiveness",
+                  "Technical feasibility validated through Unity prototypes"
                 ],
                 image: {
-                  url: "/images/Case Studies/TaskReminders/Concepts/smart-context-final.jpg",
-                  caption: "Smart Context Engine architecture"
+                  url: "/images/Case Studies/TR/Design Concepts/Note and calendar.png",
+                  caption: "AR Spatial Note System with calendar integration"
                 }
               },
               {
-                title: "Pure AI Assistant",
-                description: "Rejected due to concerns about user autonomy and privacy.",
+                title: "Physical Space as a Reminder",
+                description: "Rejected due to implementation challenges.",
                 status: "Not Selected",
                 supportingPoints: [
-                  "Users expressed concerns about full automation",
-                  "Higher privacy risks with continuous monitoring",
-                  "Potential for notification fatigue"
+                  "Limited effectiveness as standalone reminder mechanism",
+                  "Users needed more explicit notification methods",
+                  "Lack of temporal context made task management difficult",
+                  "Technical constraints in reliable space recognition"
                 ],
                 image: {
-                  url: "/images/Case Studies/TaskReminders/Concepts/ai-assistant.jpg",
-                  caption: "AI Assistant concept"
+                  url: "/images/Case Studies/TR/Design Concepts/Room lightup 1.png",
+                  caption: "Physical Space as a Reminder concept"
                 }
               }
             ],
             wireframeFeedback: [
               {
-                title: "Task Creation Flow",
-                description: "Evolution of the task creation interface based on user testing",
+                title: "Spatial Interface Evolution",
+                description: "Five rounds of iterative testing in AR environment",
                 images: [
                   {
                     id: 1,
-                    url: "/images/Case Studies/TaskReminders/Wireframes/task-creation-v1.jpg",
-                    caption: "Initial Task Creation Interface",
+                    url: "/images/Case Studies/TaskReminders/Wireframes/spatial-note-v1.jpg",
+                    caption: "Basic AR Note Interface",
                     hotspots: [
                       {
                         id: "1-1",
                         position: { x: 30, y: 40 },
-                        challenge: "Context Selection",
-                        feedback: "Too many options overwhelmed users",
-                        changes: "Simplified to most common contexts with AI suggestions"
+                        challenge: "Spatial Interaction",
+                        feedback: "Users needed intuitive color interaction methods",
+                        changes: "Implemented direct manipulation for note properties"
                       }
                     ]
                   },
                   {
                     id: 2,
-                    url: "/images/Case Studies/TaskReminders/Wireframes/task-creation-v2.jpg",
-                    caption: "Refined Task Creation Interface",
+                    url: "/images/Case Studies/TaskReminders/Wireframes/spatial-note-v2.jpg",
+                    caption: "Enhanced Visual Feedback",
                     hotspots: [
                       {
                         id: "2-1",
                         position: { x: 35, y: 45 },
-                        challenge: "Priority Settings",
-                        feedback: "Users wanted more intuitive priority controls",
-                        changes: "Added visual priority indicators and smart defaults"
+                        challenge: "Visual Communication",
+                        feedback: "Need for clearer category and state indicators",
+                        changes: "Added micro-animations and visual categorization"
                       }
                     ]
                   }
@@ -321,29 +323,31 @@ export const decisionsPhase = {
             ],
             accessibility: [
               {
-                title: "Notification Controls",
-                description: "Enhanced accessibility for notification management",
+                title: "Multi-sensory Feedback",
+                description: "Enhanced reminder effectiveness through multiple feedback channels",
                 recommendations: [
-                  "Added voice control for managing notifications",
-                  "Implemented high-contrast mode for notifications",
-                  "Created haptic feedback patterns for different priority levels"
+                  "Implemented spatial sound with distance-based volume",
+                  "Created color desaturation for distance indication",
+                  "Added animation speed variations for urgency levels",
+                  "Designed consistent visual language for note states"
                 ],
                 visual: {
-                  url: "/images/Case Studies/TaskReminders/Accessibility/notification-controls.jpg",
-                  caption: "Accessible notification controls"
+                  url: "/images/Case Studies/TaskReminders/Accessibility/multi-sensory.jpg",
+                  caption: "Multi-sensory feedback implementation"
                 }
               },
               {
-                title: "Context Settings",
-                description: "Made context configuration accessible to all users",
+                title: "Spatial Interaction",
+                description: "Designed for intuitive spatial interaction patterns",
                 recommendations: [
-                  "Added screen reader support for context selection",
-                  "Implemented keyboard shortcuts for quick context switching",
-                  "Created clear visual indicators for active contexts"
+                  "Maintained consistent interaction distances",
+                  "Created clear visual boundaries for interactive elements",
+                  "Implemented natural mapping for spatial controls",
+                  "Used familiar gesture patterns from mobile interfaces"
                 ],
                 visual: {
-                  url: "/images/Case Studies/TaskReminders/Accessibility/context-settings.jpg",
-                  caption: "Accessible context configuration"
+                  url: "/images/Case Studies/TaskReminders/Accessibility/spatial-interaction.jpg",
+                  caption: "Spatial interaction patterns"
                 }
               }
             ]
