@@ -215,7 +215,16 @@ export const implementationPhase = {
           metrics: {
             tasksTested: 8,
             participants: 12,
-            averageSuccessRate: "95%",
+            customMetrics: [
+              {
+                label: "Success Rate",
+                value: "95%"
+              },
+              {
+                label: "Time on Task",
+                value: "2.5 min avg"
+              }
+            ],
             keyFindings: [
               "Campaign creation wizard reduced setup confusion",
               "Timeline visualization improved campaign status understanding",
@@ -243,12 +252,12 @@ export const implementationPhase = {
               result: "Refined ML model with improved sensor fusion and activity recognition",
               media: {
                 type: 'video',
-                url: "/videos/Case Studies/TaskReminders/Prototypes/context-detection.mp4",
-                poster: "/images/Case Studies/TaskReminders/Prototypes/context-detection-poster.jpg",
+                url: "/videos/Case Studies/TR/luminote calendar functionality.mp4",
+                poster: "/images/Case Studies/TR/luminote calendar functionality.mp4",
                 autoplay: false,
                 loop: true,
                 muted: true,
-                containMode: true
+                isLaptop: true
               }
             },
             {
@@ -257,12 +266,12 @@ export const implementationPhase = {
               result: "Implemented color coding and size-based priority indicators",
               media: {
                 type: 'video',
-                url: "/videos/Case Studies/TaskReminders/Prototypes/priority-interface.mp4",
-                poster: "/images/Case Studies/TaskReminders/Prototypes/priority-interface-poster.jpg",
+                url: "/videos/Case Studies/TR/luminote menu items sequence.mp4",
+                poster: "/videos/Case Studies/TR/luminote menu items sequence.mp4",
                 autoplay: false,
                 loop: true,
                 muted: true,
-                containMode: true
+                isLaptop: true
               }
             }
           ]
@@ -270,19 +279,48 @@ export const implementationPhase = {
         {
           type: 'usabilityTesting',
           title: "Attribute Evaluation",
-          description: "Comprehensive testing across different user contexts and environments",
+          description: "Evaluation of spatial attributes (sound, color, animation) for task reminders across varying distances",
           metrics: {
-            tasksTested: 8,
-            participants: 12,
-            averageSuccessRate: "92%",
+            tasksTested: 10,
+            participants: 6,
+            customMetrics: [
+              {
+                label: "Sound Variations",
+                value: "Pitch & Loudness"
+              },
+              {
+                label: "Color Variations",
+                value: "Hue & Saturation"
+              },
+              {
+                label: "Animation Tests",
+                value: "Speed & Motion"
+              }
+            ],
+            attributeDetails: {
+              sound: {
+                variations: ["pitch", "loudness"],
+                testCases: 4,
+                keyFindings: "Volume increase with proximity mimics real-world behavior and aligns with users' cognitive framework"
+              },
+              color: {
+                variations: ["hue", "saturation"],
+                testCases: 4,
+                keyFindings: "Distance-based hue changes effectively indicate note importance - grayed out distant notes align with users' preference for keeping important notes closer"
+              },
+              animation: {
+                variations: ["speed"],
+                testCases: 2,
+                keyFindings: "While speed variation showed no significant impact, the presence of motion in spatial notes was highly preferred"
+              }
+            },
             keyFindings: [
-              "Context-aware notifications significantly improved task completion",
-              "Better timing reduced notification dismissal rate",
-              "Adaptive interface received positive feedback",
-              "Privacy controls were well-received by users",
-              "Machine learning model accuracy exceeded expectations"
+              "Color grading effectively communicates note importance through distance",
+              "Spatial audio with distance-based volume follows natural cognitive expectations",
+              "Motion presence in spatial notes enhances user experience",
+              "Distance-based attribute changes provide intuitive importance hierarchy"
             ]
-          } 
+          }
         },
         {
           type: 'reflection',
@@ -396,7 +434,28 @@ export const implementationPhase = {
           metrics: {
             tasksTested: 10,
             participants: 8,
-            averageSuccessRate: "82%",
+            customMetrics: [
+              {
+                label: "Success Rate",
+                value: "82%"
+              },
+              {
+                label: "ROI Calculator",
+                value: "Helped justify program adoption"
+              },
+              {
+                label: "Support Requests",
+                value: "Reduced by 45%"
+              },
+              {
+                label: "Detailed Supplier Info",
+                value: "Some users requested"
+              },
+              {
+                label: "Mobile Access",
+                value: "Needed improvement for on-site usage"
+              }
+            ],
             keyFindings: [
               "Tiered system was easily understood by all participants",
               "ROI calculator helped justify program adoption to stakeholders",

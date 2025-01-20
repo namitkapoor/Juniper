@@ -23,21 +23,6 @@
   font-display: swap;
 }
 
-@font-face {
-  font-family: 'PP Eiko';
-  src: url('/fonts/PP-Eiko/PPEiko-Medium.otf') format('opentype');
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'PP Eiko';
-  src: url('/fonts/PP-Eiko/PPEiko-Thin.otf') format('opentype');
-  font-weight: 100;
-  font-style: normal;
-  font-display: swap;
-}
 
 @font-face {
   font-family: 'Satoshi';
@@ -57,17 +42,32 @@
 
 /* Typography System */
 :root {
-  /* Craftwork Grotesk for most UI elements */
   --font-primary: 'Craftwork Grotesk', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-  /* PP Eiko only for hero name display */
   --font-display: 'O-Goudy', system-ui, sans-serif;
   --font-headings: 'Satoshi', system-ui, sans-serif;
   
   /* Font Weights */
   --weight-light: 100;
-  --weight-regular: 400;   /* Craftwork Grotesk Regular */
-  --weight-medium: 500;    /* Craftwork Grotesk Medium */
-  --weight-semibold: 600;  /* Craftwork Grotesk SemiBold */
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+
+  /* Base Typography Styles */
+  --display-size: clamp(3.5rem, 8vw, 7rem);
+  --display-letter-spacing: -0.02em;
+  --display-weight: var(--weight-regular);
+}
+
+/* Core Typography Classes */
+.display {
+  font-family: var(--font-display);
+  font-weight: var(--display-weight);
+  font-size: var(--display-size);
+  letter-spacing: var(--display-letter-spacing);
+  background: var(--gradient-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 /* Clear Font Usage Guide */
@@ -78,15 +78,6 @@
   font-family: var(--font-display);
   font-weight: var(--weight-semibold);
   font-size: 1.1rem;
-}
-
-.display {
-  /* Only place using PP Eiko */
-  font-family: var(--font-display);
-  font-weight: var(--weight-regular);
-  font-size: clamp(3.5rem, 8vw, 7rem);
-  letter-spacing: 0.02em;
-
 }
 
 /* 2. Main Navigation */

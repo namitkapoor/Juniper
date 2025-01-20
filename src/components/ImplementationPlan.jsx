@@ -8,7 +8,10 @@ import {
   IoInformationCircleOutline,
   IoArrowForward,
   IoTrendingUp,
-  IoTime
+  IoTime,
+  IoVolumeHighOutline,
+  IoColorPaletteOutline,
+  IoSpeedometerOutline
 } from 'react-icons/io5';
 import '../style/implementation-plan.css';
 
@@ -25,6 +28,20 @@ const ImplementationPlan = ({ content }) => {
     usabilityTesting: <IoPeopleOutline className="panel-icon" />,
     presentation: <IoDocumentTextOutline className="panel-icon" />,
     reflection: <IoBookOutline className="panel-icon" />
+  };
+
+  const getMetricIcon = (label) => {
+    const lowerLabel = label.toLowerCase();
+    if (lowerLabel.includes('sound') || lowerLabel.includes('volume')) {
+      return <IoVolumeHighOutline />;
+    }
+    if (lowerLabel.includes('color')) {
+      return <IoColorPaletteOutline />;
+    }
+    if (lowerLabel.includes('animation') || lowerLabel.includes('speed')) {
+      return <IoSpeedometerOutline />;
+    }
+    return <IoTrendingUp />;
   };
 
   const renderPrototypesPanel = (section) => (
@@ -68,33 +85,71 @@ const ImplementationPlan = ({ content }) => {
       <p className="description">{section.description}</p>
       <div className="metrics-dashboard">
         <div className="metrics-grid">
-          {Object.entries(section.metrics).map(([key, value], index) => {
-            if (key !== 'keyFindings') {
-              return (
-                <div 
-                  key={key}
-                  className={`metric-card ${activeMetric === index ? 'active' : ''}`}
-                  onMouseEnter={() => setActiveMetric(index)}
-                  onMouseLeave={() => setActiveMetric(null)}
-                >
-                  <div className="metric-icon">
-                    {key === 'tasksTested' && <IoTime />}
-                    {key === 'participants' && <IoPeopleOutline />}
-                    {key === 'averageSuccessRate' && <IoTrendingUp />}
-                  </div>
-                  <div className="metric-details">
-                    <h6>{key.replace(/([A-Z])/g, ' $1').toLowerCase()}</h6>
-                    <span className="metric-value">{value}</span>
-                  </div>
-                </div>
-              );
-            }
-            return null;
-          })}
+          <div 
+            className={`metric-card ${activeMetric === 'tasks' ? 'active' : ''}`}
+            onMouseEnter={() => setActiveMetric('tasks')}
+            onMouseLeave={() => setActiveMetric(null)}
+          >
+            <div className="metric-icon">
+              <IoTime />
+            </div>
+            <div className="metric-details">
+              <h6>tasks tested</h6>
+              <span className="metric-value">{section.metrics.tasksTested}</span>
+            </div>
+          </div>
+          <div 
+            className={`metric-card ${activeMetric === 'participants' ? 'active' : ''}`}
+            onMouseEnter={() => setActiveMetric('participants')}
+            onMouseLeave={() => setActiveMetric(null)}
+          >
+            <div className="metric-icon">
+              <IoPeopleOutline />
+            </div>
+            <div className="metric-details">
+              <h6>participants</h6>
+              <span className="metric-value">{section.metrics.participants}</span>
+            </div>
+          </div>
+          {section.metrics.averageSuccessRate && (
+            <div 
+              className={`metric-card ${activeMetric === 'success' ? 'active' : ''}`}
+              onMouseEnter={() => setActiveMetric('success')}
+              onMouseLeave={() => setActiveMetric(null)}
+            >
+              <div className="metric-icon">
+                <IoTrendingUp />
+              </div>
+              <div className="metric-details">
+                <h6>average success rate</h6>
+                <span className="metric-value">{section.metrics.averageSuccessRate}</span>
+              </div>
+            </div>
+          )}
         </div>
-        {section.image && (
+        {section.metrics.customMetrics && (
+          <div className="metrics-grid custom-metrics-row">
+            {section.metrics.customMetrics.map((metric, index) => (
+              <div 
+                key={`custom-metric-${index}`}
+                className={`metric-card ${activeMetric === `custom-${index}` ? 'active' : ''}`}
+                onMouseEnter={() => setActiveMetric(`custom-${index}`)}
+                onMouseLeave={() => setActiveMetric(null)}
+              >
+                <div className="metric-icon">
+                  {getMetricIcon(metric.label)}
+                </div>
+                <div className="metric-details">
+                  <h6>{metric.label.toLowerCase()}</h6>
+                  <span className="metric-value">{metric.value}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+        {section.metrics.image && (
           <div className="usability-image">
-            <img src={section.image} alt="Usability Testing Results" />
+            <img src={section.metrics.image} alt="Usability Testing Results" />
           </div>
         )}
         <div className="key-findings">
@@ -102,7 +157,7 @@ const ImplementationPlan = ({ content }) => {
           <div className="findings-grid">
             {section.metrics.keyFindings.map((finding, index) => (
               <div 
-                key={index}
+                key={`finding-${index}`}
                 className={`finding-card ${selectedCard === `finding-${index}` ? 'selected' : ''}`}
                 onClick={() => setSelectedCard(selectedCard === `finding-${index}` ? null : `finding-${index}`)}
               >

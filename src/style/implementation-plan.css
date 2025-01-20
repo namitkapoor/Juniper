@@ -590,3 +590,14 @@
     padding-right: 0.5rem;
   }
 } 
+
+.custom-metrics-row {
+  margin-top: 1rem;
+  border-top: 1px solid var(--card-border);
+  padding-top: 1rem;
+}
+
+.custom-metrics-row .metric-card {
+  flex: 1;
+  min-width: 0; /* Allows cards to shrink below their content size */
+} 

@@ -588,8 +588,12 @@ export const solutionPhase = {
               icon: IoTimerOutline,
               description: "Understanding how young adults manage tasks and information",
               content: {
-                useCarousel: true,
-                carouselType: "taskAnalysis",
+                coverImage: {
+                  url: "/images/Case Studies/TR/Solution Framework/key locations.png",
+                  caption: "Remember vs Remind",
+                  alt: "Overview of task analysis"
+                },
+                useCarousel: false,
                 summary: "Research revealed strong preferences for physical-digital hybrid approaches to task management",
                 metrics: {
                   overallCompletionTime: "2.5 minutes average task creation time",
