@@ -3,9 +3,11 @@ import React from 'react';
 import '../style/contact.css';
 import { IoLogoLinkedin, IoLogoGithub, IoMailOutline, IoArrowForward, IoArrowUp, IoSunnyOutline, IoMoonOutline } from 'react-icons/io5';
 import { useTheme } from './ThemeContext.jsx';
+import { useNavigate } from 'react-router-dom';
 
 export default function Contact() {
   const { theme, toggleTheme } = useTheme();
+  const navigate = useNavigate();
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -51,22 +53,38 @@ export default function Contact() {
             <div className="case-study-links">
               <h3>Featured Work</h3>
               <div className="case-study-list">
-                <a href="/case-study/manage-farms" className="case-study-link">
+                <div 
+                  className="case-study-link"
+                  onClick={() => navigate('/case-study/manage-farms')}
+                  style={{ cursor: 'pointer' }}
+                >
                   <span className="case-title">Manage Small Farms</span>
                   <IoArrowForward className="arrow-icon" />
-                </a>
-                <a href="/case-study/influencer-marketing" className="case-study-link">
+                </div>
+                <div 
+                  className="case-study-link"
+                  onClick={() => navigate('/case-study/influencer-marketing')}
+                  style={{ cursor: 'pointer' }}
+                >
                   <span className="case-title">Hire Influencer Marketing</span>
                   <IoArrowForward className="arrow-icon" />
-                </a>
-                <a href="/case-study/task-reminders" className="case-study-link">
+                </div>
+                <div 
+                  className="case-study-link"
+                  onClick={() => navigate('/case-study/task-reminders')}
+                  style={{ cursor: 'pointer' }}
+                >
                   <span className="case-title">Contextualize Task Reminders</span>
                   <IoArrowForward className="arrow-icon" />
-                </a>
-                <a href="/case-study/sustainable-packaging" className="case-study-link">
+                </div>
+                <div 
+                  className="case-study-link"
+                  onClick={() => navigate('/case-study/sustainable-packaging')}
+                  style={{ cursor: 'pointer' }}
+                >
                   <span className="case-title">Incentivize Sustainable Packaging</span>
                   <IoArrowForward className="arrow-icon" />
-                </a>                
+                </div>
               </div>
             </div>
           </div>
@@ -92,7 +110,6 @@ export default function Contact() {
         </div>
 
         <div className="footer">
-          
           <p className="copyright">© 2024 Namit Kapoor. All Rights Reserved.</p>
           <p className="footer-note">Made with ❤️ and creativity.</p>
         </div>

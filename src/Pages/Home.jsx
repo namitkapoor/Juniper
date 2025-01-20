@@ -126,7 +126,7 @@ export default function Home() {
                 <h3>Manage Small Farms</h3>
                 
                 <div className="case-study-meta">
-                  <span>60% Less Time Spent</span>
+                  <span>70 SUS Score</span>
                 </div>
 
                 <div className="case-study-tags">
@@ -166,7 +166,7 @@ export default function Home() {
                 <h3>Hire Influencer Marketing</h3>
                 
                 <div className="case-study-meta">
-                  <span>40% Increase in Engagement</span>
+                  <span>28% Less Clicks</span>
                 </div>
 
                 <div className="case-study-tags">
@@ -205,7 +205,7 @@ export default function Home() {
                 <h3>Personalize Skin Care</h3>
                 
                 <div className="case-study-meta">
-                  <span>2000+ Site Visitors</span>
+                  <span>1200+ Site Visitors</span>
                 </div>
 
                 <div className="case-study-tags">
@@ -245,7 +245,7 @@ export default function Home() {
                 <h3>Contextualize Task Reminders</h3>
                 
                 <div className="case-study-meta">
-                  <span>10% Increase in Task Completion</span>
+                  <span>30+ User Studies</span>
                 </div>
 
                 <div className="case-study-tags">

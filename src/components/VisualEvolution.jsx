@@ -60,14 +60,14 @@ const EvolutionSlider = ({ iterations }) => {
     <div className="visual-evolution-container">
       <div className="visual-slider-container">
         <div className="visual-slider-labels">
-          <span className="visual-slider-label">Initial Design</span>
-          <span className="visual-slider-label">Final Design</span>
+          <span className="visual-slider-label" key="initial">Initial Design</span>
+          <span className="visual-slider-label" key="final">Final Design</span>
         </div>
         
         <div className="visual-image-slider">
           {iterations.map((iteration, index) => (
             <img 
-              key={index}
+              key={`image-${index}`}
               src={iteration.image} 
               alt={`Design iteration ${index + 1}`}
               className="visual-slider-image"
@@ -101,8 +101,8 @@ const EvolutionSlider = ({ iterations }) => {
         <div className="visual-detail-card">
           <h3>{iterations[currentIndex].stage}</h3>
           <ul className="visual-detail-list">
-            {iterations[currentIndex].improvements?.map((improvement, index) => (
-              <li key={index}>{improvement}</li>
+            {(iterations[currentIndex].improvements || iterations[currentIndex].keyIssues)?.map((item, index) => (
+              <li key={`improvement-${index}`}>{item}</li>
             )) || []}
           </ul>
         </div>

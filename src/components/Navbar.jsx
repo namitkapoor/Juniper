@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import "../style/navbar.css"
 
 export default function Navbar() {
@@ -53,7 +54,7 @@ export default function Navbar() {
         <div className="navigation">
             <div className="nav-items">
                 <div className="logo-container">
-                    <a className="logo-placeholder" href="/">
+                    <Link className="logo-placeholder" to="/">
                         <div className="logo-with-text">
                             <svg
                                 width="60"
@@ -126,12 +127,12 @@ export default function Navbar() {
                             </svg>
                             <span className="logo-text">namit</span>
                         </div>
-                    </a>
+                    </Link>
                 </div>
                 
                 <div className="nav-links">
-                    <a className="nav-item" href="/about">about</a>
-                    <a className="nav-item" href="/files/KapoorNamit_Resume.pdf" target="_blank">resume</a>
+                    <Link className="nav-item" to="/about">about</Link>
+                    <a className="nav-item" href="/files/KapoorNamit_Resume.pdf" target="_blank" rel="noopener noreferrer">resume</a>
                 </div>
             </div>
         </div>

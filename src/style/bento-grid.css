@@ -133,6 +133,7 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   gap: 0.5rem;
 }
 
@@ -145,6 +146,7 @@
   align-items: center;
   gap: 0.75rem;
   margin-bottom: 0.5rem;
+  text-align: left;
 }
 
 .bento-item h3 svg {
@@ -157,6 +159,7 @@
   font-size: 0.875rem;
   color: rgba(255, 255, 255, 0.8);
   line-height: 1.4;
+  text-align: left;
 }
 
 .bento-item .footer {
@@ -232,6 +235,7 @@
   font-weight: 600;
   color: white;
   margin-bottom: 0.25rem;
+  text-align: center;
 }
 
 .metrics-item .label {
@@ -239,6 +243,7 @@
   color: rgba(255, 255, 255, 0.6);
   text-transform: uppercase;
   letter-spacing: 0.05em;
+  text-align: center;
 }
 
 /* Responsive adjustments */
@@ -360,4 +365,5 @@
   font-size: 1.5rem;
   margin-bottom: 2rem;
   justify-content: center;
+  text-align: center;
 }
