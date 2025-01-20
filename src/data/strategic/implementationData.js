@@ -103,20 +103,40 @@ export const implementationPhase = {
           type: 'presentation',
           title: "Final Presentation",
           description: "Showcased the finalized prototype to John Deere's team, highlighting its alignment with user needs and business goals.",
+          coverImage: "/images/Case Studies/JD/Final Presentation.jpg",
           items: [
-            "Presented key findings and wireframe iterations with supporting metrics.",
-            "Highlighted adoption potential with a focus on task efficiency and usability enhancements.",
-            "Received approval and positive feedback from stakeholders, validating the design direction."
+            {
+              text: "Presented key findings and wireframe iterations with supporting metrics.",
+              icon: "metrics"
+            },
+            {
+              text: "Highlighted adoption potential with a focus on task efficiency and usability enhancements.",
+              icon: "efficiency"
+            },
+            {
+              text: "Received approval and positive feedback from stakeholders, validating the design direction.",
+              icon: "approval"
+            }
           ]
         },
         {
           type: 'reflection',
           title: "Reflection",
           description: "Critical takeaways from the project and lessons for future iterations.",
+          coverImage: "/images/Case Studies/JD/Reflection.jpg",
           items: [
-            "Balancing user feedback with technical feasibility was key to delivering a viable product.",
-            "Iterative usability testing provided actionable insights, significantly improving user experience.",
-            "The collaborative approach across design, research, and development teams ensured a user-centered solution."
+            {
+              text: "Balancing user feedback with technical feasibility was key to delivering a viable product.",
+              icon: "balance"
+            },
+            {
+              text: "Iterative usability testing provided actionable insights, significantly improving user experience.",
+              icon: "testing"
+            },
+            {
+              text: "The collaborative approach across design, research, and development teams ensured a user-centered solution.",
+              icon: "collaboration"
+            }
           ]
         }
       ],
@@ -469,6 +489,7 @@ export const implementationPhase = {
           type: 'presentation',
           title: "Final Presentation",
           description: "Presented the solution to stakeholders, highlighting adoption metrics and business impact.",
+          coverImage: "/images/Case Studies/SP/Final Presentation.jpg",
           items: [
             "Demonstrated significant cost savings through volume-based incentives",
             "Showcased successful pilot program results",

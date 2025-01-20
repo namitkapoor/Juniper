@@ -120,10 +120,10 @@ export const decisionsPhase = {
                   "Implemented keyboard navigation for all features",
                   "Created logical tab order for field navigation"
                 ],
-                visual: {
-                  url: "/images/accessibility/screen-reader-flow.jpg",
-                  caption: "Screen reader navigation flow"
-                }
+                // visual: {
+                //   url: "/images/accessibility/screen-reader-flow.jpg",
+                //   caption: "Screen reader navigation flow"
+                // }
               },
               {
                 title: "Color Contrast",
@@ -133,10 +133,10 @@ export const decisionsPhase = {
                   "Used 3:1 minimum for large text and visual elements",
                   "Implemented high-contrast mode option"
                 ],
-                visual: {
-                  url: "/images/accessibility/contrast-examples.jpg",
-                  caption: "Color contrast implementation examples"
-                }
+                // visual: {
+                //   url: "/images/accessibility/contrast-examples.jpg",
+                //   caption: "Color contrast implementation examples"
+                // }
               },
               {
                 title: "Color-Blind Accessibility",
@@ -146,10 +146,10 @@ export const decisionsPhase = {
                   "Tested with various color vision deficiency simulations",
                   "Implemented customizable color schemes"
                 ],
-                visual: {
-                  url: "/images/accessibility/colorblind-modes.jpg",
-                  caption: "Color-blind friendly visualizations"
-                }
+                // visual: {
+                //   url: "/images/accessibility/colorblind-modes.jpg",
+                //   caption: "Color-blind friendly visualizations"
+                // }
               },
               {
                 title: "Icon Usability",
@@ -159,10 +159,10 @@ export const decisionsPhase = {
                   "Standardized icon usage across the application",
                   "Created consistent touch target sizes"
                 ],
-                visual: {
-                  url: "/images/accessibility/icon-guidelines.jpg",
-                  caption: "Icon usability guidelines"
-                }
+                // visual: {
+                //   url: "/images/accessibility/icon-guidelines.jpg",
+                //   caption: "Icon usability guidelines"
+                // }
               }
             ]
           }
@@ -222,10 +222,10 @@ export const decisionsPhase = {
                   "Created logical tab order for timeline navigation",
                   "Added status announcement for timeline changes"
                 ],
-                visual: {
-                  url: "/images/Case Studies/Influencer/Accessibility/keyboard-nav.jpg",
-                  caption: "Screen reader navigation implementation"
-                }
+                // visual: {
+                //   url: "/images/Case Studies/Influencer/Accessibility/keyboard-nav.jpg",
+                //   caption: "Screen reader navigation implementation"
+                // }
               },
               {
                 title: "Status Visualization",
@@ -236,10 +236,10 @@ export const decisionsPhase = {
                   "Added text descriptions for all status changes",
                   "Created keyboard-navigable timeline interface"
                 ],
-                visual: {
-                  url: "/images/Case Studies/Influencer/Accessibility/data-viz.jpg",
-                  caption: "Accessible status visualization"
-                }
+                // visual: {
+                //   url: "/images/Case Studies/Influencer/Accessibility/data-viz.jpg",
+                //   caption: "Accessible status visualization"
+                // }
               }
             ]
           }
@@ -331,10 +331,10 @@ export const decisionsPhase = {
                   "Added animation speed variations for urgency levels",
                   "Designed consistent visual language for note states"
                 ],
-                visual: {
-                  url: "/images/Case Studies/TaskReminders/Accessibility/multi-sensory.jpg",
-                  caption: "Multi-sensory feedback implementation"
-                }
+                // visual: {
+                //   url: "/images/Case Studies/TaskReminders/Accessibility/multi-sensory.jpg",
+                //   caption: "Multi-sensory feedback implementation"
+                // }
               },
               {
                 title: "Spatial Interaction",
@@ -345,10 +345,10 @@ export const decisionsPhase = {
                   "Implemented natural mapping for spatial controls",
                   "Used familiar gesture patterns from mobile interfaces"
                 ],
-                visual: {
-                  url: "/images/Case Studies/TaskReminders/Accessibility/spatial-interaction.jpg",
-                  caption: "Spatial interaction patterns"
-                }
+                // visual: {
+                //   url: "/images/Case Studies/TaskReminders/Accessibility/spatial-interaction.jpg",
+                //   caption: "Spatial interaction patterns"
+                // }
               }
             ]
           }
@@ -394,23 +394,65 @@ export const decisionsPhase = {
                 }
               }
             ],
-            wireframeFeedback: [
-              {
-                title: "Points Display Evolution",
-                description: "Development of the sustainability score visualization",
-                images: [
-                  {
-                    id: 1,
-                    url: "/images/Case Studies/SustainablePackaging/Wireframes/points-v1.jpg",
-                    caption: "Initial Points Display",
-                    hotspots: [
-                      {
-                        id: "1-1",
-                        position: { x: 25, y: 35 },
-                        challenge: "Score Clarity",
-                        feedback: "Users needed clearer connection between sustainability and rewards",
-                        changes: "Added direct point-to-discount conversion display"
-                      }
+            "wireframeFeedback": [
+  {
+    "title": "Scan Flow Evolution",
+    "description": "Development of the product detection and interaction sequence",
+    "images": [
+      {
+        "id": 1,
+        "url": "/images/Case Studies/SP/Wireframes/Scan flow 2.1.png",
+        "caption": "Initial Detection Animation",
+        "hotspots": [
+          {
+            "id": "1-1",
+            "position": { x: 25, y: 35 },
+            "challenge": "Animation Refinement",
+            "feedback": "Initial product detection animation lacked polish and clear feedback",
+            "changes": "Tightened animation timing and improved visual responsiveness"
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "url": "/images/Case Studies/SP/Wireframes/Scan flow 2.2.png",
+        "caption": "Interactive Elements",
+        "hotspots": [
+          {
+            "id": "2-2",
+            "position": { x: 25, y: 35 },
+            "challenge": "User Engagement",
+            "feedback": "Need for clear interaction affordances",
+            "changes": "Added 'tap to view' prompt to encourage active participation"
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "url": "/images/Case Studies/SP/Wireframes/Scan flow 2.3.png",
+        "caption": "Transition State",
+        "hotspots": [
+          {
+            "id": "3-3",
+            "position": { x: 25, y: 35 },
+            "challenge": "Visual Continuity",
+            "feedback": "Abrupt transition between detection and details view",
+            "changes": "Implemented smooth transitionary state to connect scanning and information display"
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "url": "/images/Case Studies/SP/Wireframes/Scan flow 2.4.png",
+        "caption": "Final Product View",
+        "hotspots": [
+          {
+            "id": "4-4",
+            "position": { x: 25, y: 35 },
+            "challenge": "Visual Clarity",
+            "feedback": "Text legibility and product representation needed improvement",
+            "changes": "Enhanced text contrast and added product shaders for better visual quality"
+          }
                     ]
                   }
                 ]
@@ -426,10 +468,10 @@ export const decisionsPhase = {
                   "Haptic feedback for successful scans",
                   "Voice-guided scanning instructions"
                 ],
-                visual: {
-                  url: "/images/Case Studies/SustainablePackaging/Accessibility/scanner-access.jpg",
-                  caption: "Accessible scanning interface"
-                }
+                // visual: {
+                //   url: "/images/Case Studies/SustainablePackaging/Accessibility/scanner-access.jpg",
+                //   caption: "Accessible scanning interface"
+                // }
               },
               {
                 title: "Points Understanding",
@@ -440,10 +482,10 @@ export const decisionsPhase = {
                   "Simple language for sustainability metrics",
                   "Alternative text for all score visualizations"
                 ],
-                visual: {
-                  url: "/images/Case Studies/SustainablePackaging/Accessibility/points-access.jpg",
-                  caption: "Accessible points display"
-                }
+                // visual: {
+                //   url: "/images/Case Studies/SustainablePackaging/Accessibility/points-access.jpg",
+                //   caption: "Accessible points display"
+                // }
               }
             ]
           }

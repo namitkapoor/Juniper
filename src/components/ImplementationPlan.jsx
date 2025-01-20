@@ -11,7 +11,11 @@ import {
   IoTime,
   IoVolumeHighOutline,
   IoColorPaletteOutline,
-  IoSpeedometerOutline
+  IoSpeedometerOutline,
+  IoStatsChartOutline,
+  IoTrendingUpOutline,
+  IoScaleOutline,
+  IoFlaskOutline
 } from 'react-icons/io5';
 import '../style/implementation-plan.css';
 
@@ -42,6 +46,18 @@ const ImplementationPlan = ({ content }) => {
       return <IoSpeedometerOutline />;
     }
     return <IoTrendingUp />;
+  };
+
+  const getItemIcon = (iconType) => {
+    switch (iconType) {
+      case 'metrics': return <IoStatsChartOutline />;
+      case 'efficiency': return <IoTrendingUpOutline />;
+      case 'approval': return <IoCheckmarkCircleOutline />;
+      case 'balance': return <IoScaleOutline />;
+      case 'testing': return <IoFlaskOutline />;
+      case 'collaboration': return <IoPeopleOutline />;
+      default: return <IoCheckmarkCircleOutline />;
+    }
   };
 
   const renderPrototypesPanel = (section) => (
@@ -172,24 +188,30 @@ const ImplementationPlan = ({ content }) => {
   );
 
   const renderListPanel = (section) => (
-    <div className="panel-content list">
-      {section.image && (
-        <div className="section-image">
-          <img src={section.image} alt={section.title} />
+    <div className={`panel-content ${section.type}`}>
+      {section.coverImage && (
+        <div className="section-cover">
+          <img src={section.coverImage} alt={section.title} />
         </div>
       )}
       <p className="description">{section.description}</p>
-      <ul className="items-list">
+      <div className="items-grid">
         {section.items.map((item, index) => (
-          <li 
-            key={index}
-            className={`list-item ${selectedCard === `list-${index}` ? 'selected' : ''}`}
-            onClick={() => setSelectedCard(`list-${index}`)}
+          <div 
+            key={`item-${index}`}
+            className="item-card"
           >
-            {item}
-          </li>
+            <div className="item-header">
+              <div className="item-icon">
+                {getItemIcon(item.icon)}
+              </div>
+            </div>
+            <p className="item-text">
+              {typeof item === 'string' ? item : item.text}
+            </p>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 
