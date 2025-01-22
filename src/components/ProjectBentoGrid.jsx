@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import { Row, Col } from 'antd';
 import { motion } from 'framer-motion';
 import '../style/bento-grid-base.css';
@@ -18,6 +18,77 @@ const ProjectBentoGrid = ({ items }) => {
     return spans[size] || spans.small;
   };
 
+  const BentoItem = ({ item }) => {
+    const [isPlaying, setIsPlaying] = useState(false);
+    const videoRef = useRef(null);
+    const { content, size } = item;
+    
+    const handleVideoClick = (e) => {
+      e.stopPropagation(); // Prevent event bubbling
+      if (videoRef.current) {
+        if (isPlaying) {
+          videoRef.current.pause();
+        } else {
+          videoRef.current.play();
+        }
+        setIsPlaying(!isPlaying);
+      }
+    };
+
+    const renderContent = () => {
+      switch (content.type) {
+        case 'image':
+          return (
+            <img 
+              src={content.src} 
+              alt={content.alt}
+              style={{ objectFit: content.objectFit || 'cover' }}
+            />
+          );
+        case 'video':
+          return (
+            <div 
+              className="video-container"
+              data-playing={isPlaying}
+            >
+              <video 
+                ref={videoRef}
+                loop 
+                muted 
+                playsInline
+                style={{ objectFit: content.objectFit || 'cover' }}
+                onPlay={() => setIsPlaying(true)}
+                onPause={() => setIsPlaying(false)}
+              >
+                <source src={content.src} type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+              <button 
+                className="video-control-button"
+                onClick={handleVideoClick}
+                aria-label={isPlaying ? 'Pause' : 'Play'}
+              >
+                {isPlaying ? '⏸' : '▶'}
+              </button>
+            </div>
+          );
+        default:
+          return null;
+      }
+    };
+
+    return (
+      <div className={`preview-item ${size}`}>
+        <div className="preview-content">
+          {renderContent()}
+          <div className="preview-description">
+            <p>{content.description}</p>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <Row gutter={[16, 16]} className="bento-container">
       {items.map((item, index) => {
@@ -35,28 +106,7 @@ const ProjectBentoGrid = ({ items }) => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
             >
-              {item.content.type === 'image' && (
-                <div className="bento-item-content project-bento-content">
-                  <img
-                    src={item.content.src}
-                    alt={item.content.alt || ''}
-                    style={{
-                      objectFit: item.content.objectFit || 'contain',
-                      width: '100%',
-                      height: '100%'
-                    }}
-                  />
-                  {item.content.description && (
-                    <motion.div 
-                      className="bento-item-description"
-                      initial={{ opacity: 0 }}
-                      whileHover={{ opacity: 1 }}
-                    >
-                      <p>{item.content.description}</p>
-                    </motion.div>
-                  )}
-                </div>
-              )}
+              <BentoItem item={item} />
             </motion.div>
           </Col>
         );

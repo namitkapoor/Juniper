@@ -1,10 +1,5 @@
 export const projects = [
-  {
-    title: "VR Head Gestures",
-    description: "A VR experience using head gestures to interact with the UI elements",
-    categories: ['motion', 'spatial', 'interactive'],
-    image: "./images/Experiments/Head Gestures/UI Design 1.png",
-  },
+  
   {
     title: "Treatment Lotion",
     description: "La Mer's AR product campaign for the launch of their new treatment lotion",
@@ -28,6 +23,12 @@ export const projects = [
     description: "Coach's 2021 Holiday Box made AR ready using Blender and three.js",
     categories: ['motion', 'spatial'],
     image: "./images/Experiments/Coach/Green box.png",
+  },
+  {
+    title: "Mother's Day Gifts",
+    description: "Swarovski Mother's day campaign models animated using Blender",
+    categories: ['motion', 'spatial'],
+    image: "./images/Experiments/Swarovski/Just box.png",
   },
   {
     title: "Go Portal",
@@ -66,12 +67,7 @@ export const projects = [
     categories: ['flat'],
     image: "./images/Experiments/Paintings/Guiding Light.jpg",
   },
-  {
-    title: "Mother's Day Gifts",
-    description: "Swarovski Mother's day campaign models animated using Blender",
-    categories: ['motion', 'spatial'],
-    image: "./images/Experiments/Swarovski/Just box.png",
-  },
+  
   
   {
     title: "Wanda",

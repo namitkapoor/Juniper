@@ -182,7 +182,7 @@
 .expand-button {
   position: absolute;
   bottom: -20px;
-  left: 50%;
+  left: calc(50% - 15px);
   transform: translateX(-50%);
   width: 40px;
   height: 40px;
@@ -196,6 +196,7 @@
   justify-content: center;
   transition: all 0.3s ease;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  z-index: 10;
 }
 
 .expand-button:hover {
@@ -220,39 +221,46 @@
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Project Preview Grid (renamed from bento-grid) */
+/* Project Preview Grid */
 .project-preview-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1.5rem;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1.25rem;
   width: 100%;
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
+  padding: 0.5rem;
 }
 
 .preview-item {
   position: relative;
-  aspect-ratio: 1;
-  border-radius: 8px;
+  border-radius: 16px;
   overflow: hidden;
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(8px);
+  height: 100%;
 }
 
-.preview-item img {
-  object-fit: contain;
-  transition: transform 0.3s ease;
+/* Size variants matching bento-grid style */
+.preview-item.large {
+  grid-column: span 12;
+  aspect-ratio: 21/9;
 }
 
-.preview-item:hover img {
-  transform: scale(1.05);
+.preview-item.medium {
+  grid-column: span 6;
+  aspect-ratio: 4/3;
 }
 
 .preview-item.wide {
-  grid-column: span 2;
+  grid-column: span 8;
+  aspect-ratio: 16/9;
 }
 
 .preview-item.tall {
+  grid-column: span 6;
   grid-row: span 2;
 }
 
@@ -260,8 +268,26 @@
   position: relative;
   width: 100%;
   height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
 }
 
+/* Image and Video Styling */
+.preview-content img,
+.preview-content video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.preview-item:hover img {
+  transform: scale(1.05);
+}
+
+/* Description overlay */
 .preview-description {
   position: absolute;
   bottom: 0;
@@ -271,6 +297,7 @@
   padding: 1rem;
   transform: translateY(100%);
   transition: transform 0.3s ease;
+  backdrop-filter: blur(4px);
 }
 
 .preview-item:hover .preview-description {
@@ -279,15 +306,89 @@
 
 .preview-description p {
   margin: 0;
-  font-size: 14px;
+  font-size: 0.9rem;
   color: white;
   line-height: 1.4;
 }
 
+/* Video Container Styling */
+.video-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.video-container video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.video-control-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.6);
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  cursor: pointer;
+  opacity: 1;
+  transition: all 0.3s ease;
+  color: white;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  z-index: 2;
+  backdrop-filter: blur(4px);
+}
+
+.video-container[data-playing="true"] .video-control-button {
+  opacity: 0;
+}
+
+.video-container[data-playing="true"]:hover .video-control-button {
+  opacity: 1;
+}
+
+.video-control-button:hover {
+  background: rgba(0, 0, 0, 0.8);
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
 /* Responsive adjustments */
+@media (max-width: 1024px) {
+  .project-preview-grid {
+    grid-template-columns: repeat(8, 1fr);
+    gap: 1rem;
+  }
+
+  .preview-item.large {
+    grid-column: span 8;
+  }
+
+  .preview-item.medium,
+  .preview-item.wide {
+    grid-column: span 4;
+  }
+}
+
 @media (max-width: 768px) {
   .project-preview-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.75rem;
+  }
+
+  .preview-item.large,
+  .preview-item.medium,
+  .preview-item.wide,
+  .preview-item.tall {
+    grid-column: span 4;
   }
 
   .preview-description {
@@ -295,18 +396,21 @@
   }
   
   .preview-description p {
-    font-size: 12px;
+    font-size: 0.8rem;
   }
 }
 
 @media (max-width: 480px) {
   .project-preview-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+    padding: 0;
   }
-  
+
+  .preview-item.large,
+  .preview-item.medium,
   .preview-item.wide,
   .preview-item.tall {
-    grid-column: 1 / -1;
-    grid-row: auto;
+    grid-column: span 2;
   }
 } 

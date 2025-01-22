@@ -1,4 +1,56 @@
 export const projectBentoData = {
+  "Sanctuary": {
+    bentoItems: [
+      {
+        content: {
+          type: 'image',
+          src: "./images/Experiments/Paintings/Sanctuary.jpg",
+          alt: "Sanctuary",
+          description: "Sanctuary",
+          objectFit: 'cover'
+        },
+        size: 'large'
+      }
+    ]
+  },
+  "VR Head Gestures": {
+    bentoItems: [
+      {
+        content: {
+          type: 'video',
+          src: "./videos/Experiments/Head Gestures/Head Gesture - VR Interaction.mp4",
+          alt: "VR Interaction",
+          description: "VR Interaction",
+          objectFit: 'cover'
+        },
+        size: 'medium'
+      }
+    ]
+  },
+  "Owlette": {
+    bentoItems: [
+      {
+        content: {
+          type: 'video',
+          src: "./videos/Experiments/Owlette/Owlette animatic 1.mp4",
+          alt: "Animatic 1",
+          description: "Animatic 1",
+          objectFit: 'cover'
+        },
+        size: 'medium'
+      },
+      {
+        content: {
+          type: 'video',
+          src: "./videos/Experiments/Owlette/Owlette animatic 2.mp4",
+          alt: "Animatic 2",
+          description: "Animatic 2",
+          objectFit: 'cover'
+        },
+        size: 'medium'
+      }
+    ]
+  },
   "Central Ciborium": {
     bentoItems: [
       {
@@ -50,7 +102,7 @@ export const projectBentoData = {
           description: "Side perspective highlighting the spatial depth",
           objectFit: 'cover'
         },
-        size: 'wide'
+        size: 'medium'
       },
       
       {
@@ -135,13 +187,23 @@ export const projectBentoData = {
       },
     ]
   },
-  "Swarovski": {
+  "Mother's Day Gifts": {
     bentoItems: [
       {
         content: {
-          type: 'image',
-          src: "./images/Experiments/Swarovski/Swarovski-white-logo.png",
-          alt: "All Hats",
+          type: 'video',
+          src: "./videos/Experiments/Swarovski/Aquamarine jewellery.mp4",
+          alt: "Jewellery showcase",
+          description: "Complete vertical composition",
+          objectFit: 'cover'
+        },
+        size: 'medium'
+      },
+      {
+        content: {
+          type: 'video',
+          src: "./videos/Experiments/Swarovski/Black cube swarovski rotation  w jewellery.mp4",
+          alt: "Jewellery showcase",
           description: "Complete vertical composition",
           objectFit: 'cover'
         },
