@@ -40,7 +40,7 @@ export default function Contact() {
               >
                 <IoLogoGithub className="social-icon" />
               </a>
-              <a href="mailto:namitkapoor26@gmail.com"
+              <a href="mailto:namitkpr@gmail.com"
                 className="social-link"
                 aria-label="Email"
               >
