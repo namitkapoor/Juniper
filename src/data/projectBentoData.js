@@ -9,7 +9,7 @@ export const projectBentoData = {
           description: "Front elevation showing the intricate details of the columns",
           objectFit: 'contain'
         },
-        size: 'large'
+        size: 'medium'
       },
       {
         content: {
@@ -19,7 +19,7 @@ export const projectBentoData = {
           description: "Complete vertical composition",
           objectFit: 'cover'
         },
-        size: 'large'
+        size: 'medium'
       },
       {
         content: {
@@ -45,35 +45,173 @@ export const projectBentoData = {
       {
         content: {
           type: 'image',
-          src: "./images/Experiments/Ciborium/Solid w wireframe persp.png",
-          alt: "Detail View",
-          description: "Close-up of ornamental details",
-          objectFit: 'contain'
+          src: "./images/Experiments/Ciborium/Pattern D & E.png",
+          alt: "Side View",
+          description: "Side perspective highlighting the spatial depth",
+          objectFit: 'cover'
         },
-        size: 'large'
+        size: 'wide'
       },
+      
       {
         content: {
           type: 'image',
           src: "./images/Experiments/Ciborium/Textured persp.png",
           alt: "Full Height View",
           description: "Complete vertical composition",
-          objectFit: 'contain'
+          objectFit: 'cover'
         },
-        size: 'large'
+        size: 'medium'
       },
+      
       
     ]
   },
   "Disney Hats": {
     bentoItems: [
-      // ... Disney Hats bento items
+      {
+        content: {
+          type: 'image',
+          src: "./images/Experiments/Disney Hats/All hats.jpg",
+          alt: "All Hats",
+          description: "Complete vertical composition",
+          objectFit: 'cover'
+        },
+        size: 'medium'
+      },
+      {
+        content: {
+          type: 'image',
+          src: "./images/Experiments/Disney Hats/Low poly mesh left persp.png",
+          alt: "All Hats",
+          description: "Complete vertical composition",
+          objectFit: 'cover'
+        },
+        size: 'medium'
+      },
+      {
+        content: {
+          type: 'image',
+          src: "./images/Experiments/Disney Hats/All textures.png",
+          alt: "All Hats",
+          description: "Complete vertical composition",
+          objectFit: 'cover'
+        },
+        size: 'large'
+      },
+      {
+        content: {
+          type: 'image',
+          src: "./images/Experiments/Disney Hats/UV w Textures.png",
+          alt: "All Hats",
+          description: "Complete vertical composition",
+          objectFit: 'contain'
+        },
+        size: 'large'
+      },
     ]
   },
   "Tiptoe": {
     bentoItems: [
-      // ... Tiptoe bento items
+      {
+        content: {
+          type: 'image',
+          src: "./images/Experiments/Tiptoe/Weight paint.jpg",
+          alt: "All Hats",
+          description: "Complete vertical composition",
+          objectFit: 'cover'
+        },
+        size: 'medium'
+      },
+      {
+        content: {
+          type: 'image',
+          src: "./images/Experiments/Tiptoe/Tiptoe UV w texture.jpg",
+          alt: "All Hats",
+          description: "Complete vertical composition",
+          objectFit: 'contain'
+        },
+        size: 'medium'
+      },
     ]
   },
+  "Swarovski": {
+    bentoItems: [
+      {
+        content: {
+          type: 'image',
+          src: "./images/Experiments/Swarovski/Swarovski-white-logo.png",
+          alt: "All Hats",
+          description: "Complete vertical composition",
+          objectFit: 'cover'
+        },
+        size: 'medium'
+      },
+    ]
+  },
+  "Treatment Lotion": {
+    bentoItems: [
+      {
+        content: {
+          type: 'image',
+          src: "./images/Experiments/La Mer/La Mer new flow screenshot .png",
+          alt: "Product Campaign",
+          description: "Complete vertical composition",
+          objectFit: 'cover'
+        },
+        size: 'wide'
+      },
+      {
+        content: {
+          type: 'image',
+          src: "./images/Experiments/La Mer/Product Campaign.png",
+          alt: "Product Campaign",
+          description: "Complete vertical composition",
+          objectFit: 'cover'
+        },
+        size: 'medium'
+      },
+      {
+        content: {
+          type: 'image',
+          src: "./images/Experiments/La Mer/Live product screenshot.jpg",
+          alt: "Live Product",
+          description: "Complete vertical composition",
+          objectFit: 'cover'
+        },
+        size: 'medium'
+      },
+      {
+        content: {
+          type: 'image',
+          src: "./images/Experiments/La Mer/glass ripple effect low-poly screenshot.jpg",
+          alt: "Low Poly",
+          description: "Complete vertical composition",
+          objectFit: 'cover'
+        },
+        size: 'wide'
+      },
+      {
+        content: {
+          type: 'image',
+          src: "./images/Experiments/La Mer/bottle wireframe.png",
+          alt: "Low Poly",
+          description: "Complete vertical composition",
+          objectFit: 'contain'
+        },
+        size: 'wide'
+      },
+      {
+        content: {
+          type: 'image',
+          src: "./images/Experiments/La Mer/Bottle combined texture bake 1.png",
+          alt: "Low Poly",
+          description: "Complete vertical composition",
+          objectFit: 'cover'
+        },
+        size: 'wide'
+      },
+    ]
+  }
   // ... other projects' bento items
 }; 

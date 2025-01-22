@@ -7,14 +7,11 @@
   aspect-ratio: 4/3;
 }
 
-.project-bento-content {
-  padding: 1rem;
-}
+
 
 .project-bento-content img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
   transition: transform 0.3s ease;
 }
 
