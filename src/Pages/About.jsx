@@ -2,6 +2,7 @@ import { lazy, Suspense, useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Canvas } from '@react-three/fiber';
 import { IoAdd } from 'react-icons/io5';
+import * as IoIcons from 'react-icons/io5';
 import { aboutSections } from '../data/aboutContent';
 import Contact from '../components/Contact';
 
@@ -68,19 +69,51 @@ export default function About() {
         return (
           <div className="who-content">
             <p>{section.content.description}</p>
-            <div className="skills-grid">
-              {Object.entries(section.content.skills).map(([key, skill]) => (
-                <div key={key} className="skill-card">
-                  <div className="skill-content">
-                    <h3>{skill.title}</h3>
-                    <ul>
-                      {skill.items.map((item, index) => (
-                        <li key={index}>{item}</li>
+            <div className="skills-section">
+              <h3>Skills</h3>
+              <div className="skills-grid">
+                {Object.entries(section.content.skills).map(([key, skillCategory], index) => (
+                  <div key={index} className="skill-card">
+                    <h4>{skillCategory.title}</h4>
+                    <div className="skill-icons">
+                      {skillCategory.software.map((skill, idx) => (
+                        <div key={idx}>
+                          <img src={skill.icon} alt={skill.name} title={skill.name} className="skill-icon" />
+                          <span>{skill.name}</span>
+                        </div>
                       ))}
-                    </ul>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
+            </div>
+          </div>
+        );
+
+      case 'journey':
+        return (
+          <div className={`timeline-section ${expandedSections.has('journey') ? 'timeline-visible' : ''}`}>
+            <div className="custom-timeline">
+              <div className="central-line"></div>
+              {section.content.timeline.map((event, index) => {
+                const IconComponent = IoIcons[event.icon];
+                return (
+                  <div 
+                    key={index} 
+                    className={`custom-timeline-item ${index % 2 === 0 ? 'even' : 'odd'}`}
+                  >
+                    <div className="custom-timeline-content">
+                      <div className="timeline-icon">
+                        {IconComponent ? <IconComponent /> : null}
+                      </div>
+                      <div className="timeline-text">
+                        <span className="timeline-year">{event.year}</span>
+                        <p>{event.text}</p>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
         );
@@ -96,14 +129,14 @@ export default function About() {
 
       case 'drive':
         return (
-          <div className="personal-section">
-            <p>{section.content.intro}</p>
-            <p>My drive comes from:</p>
-            <ul>
-              {section.content.drivingFactors.map((factor, index) => (
-                <li key={index}>{factor}</li>
-              ))}
-            </ul>
+          <div className="interests-section">
+            {section.content.interests.map((interest, index) => (
+              <div key={index} className="interest-card">
+                <img src={interest.image} alt={interest.title} className="interest-image" />
+                <h4>{interest.title}</h4>
+                <p>{interest.description}</p>
+              </div>
+            ))}
           </div>
         );
 

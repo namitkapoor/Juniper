@@ -224,6 +224,7 @@ export default function LoaderScreen({ onLoadingComplete }) {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5, duration: 1.2 }}  // Slower text fade-in
             style={{
+              fontFamily: 'var(--font-body)',
               fontSize: '1.1rem',  // Slightly larger
               letterSpacing: '0.5px',  // Better readability
               fontWeight: 500,  // Medium weight

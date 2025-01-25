@@ -8,6 +8,7 @@ import TaskReminders from './CaseStudies/TaskReminders.jsx'
 import SustainablePackaging from './CaseStudies/SustainablePackaging.jsx'
 import '../style/app.css'
 import { ThemeProvider } from '../components/ThemeContext'
+import { Analytics } from '@vercel/analytics/react'
 
 const root = ReactDOM.createRoot(document.querySelector('#root'))
 

@@ -792,6 +792,7 @@ h1.display {
   font-weight: 500;
   letter-spacing: -0.02em;
   color: var(--text-primary);
+  margin-top: 0;
 }
 
 /* Make scroll indicator more subtle */

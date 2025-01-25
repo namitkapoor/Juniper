@@ -1,6 +1,6 @@
 /* Global styles */
 .content-width {
-    width: 80%;
+    width: 100%;
     max-width: 1200px;
     margin: 0 auto;
     padding: 4rem 2rem;
@@ -59,7 +59,7 @@
 
 .section-header {
     width: 100%;
-    padding: 2rem;
+    padding: 2rem 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -122,33 +122,173 @@
     text-align: left;
 }
 
-/* Skills cards */
+/* Skills Section */
+.skills-section {
+    margin-top: 2rem;
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+}
+
 .skill-card {
     background: rgba(255, 255, 255, 0.03);
     border-radius: 12px;
     padding: 2rem;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
+    text-align: center;
 }
 
-.skill-content h3 {
+.skill-card h4 {
+    margin-bottom: 3rem;
+    font-size: 1.8rem;
+    font-weight: 500;
+    color: #fff;
+}
+
+.skill-icons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 3.5rem;
+}
+
+.skill-icon {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    transition: transform 0.3s;
+}
+
+.skill-icon:hover {
+    transform: scale(1.1);
+}
+
+.skill-icon + span {
+    display: block;
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin-top: 0.5rem;
+}
+
+/* My Journey Section */
+.journey-content {
+    margin-top: 2rem;
+}
+
+.timeline-section {
+    margin: 4rem auto;
+}
+
+.custom-timeline {
+    position: relative;
+    max-width: 1000px;
+    margin: 2rem auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 0;
+}
+
+.custom-timeline-item {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.custom-timeline-item::before {
+    content: '';
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background: #fff;
+    border-radius: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+}
+
+.custom-timeline-content {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 1rem;
+    width: 45%;
+    z-index: 2;
+    position: relative;
+}
+
+.custom-timeline-item.odd .custom-timeline-content {
+    margin-left: 55%;
+    text-align: left;
+}
+
+.custom-timeline-item.even .custom-timeline-content {
+    margin-right: 55%;
+    text-align: left;
+}
+
+/* Central Line */
+.central-line {
+    position: absolute;
+    width: 2px;
+    background: #fff;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 0;
+    height: 0;
+    transition: height 1.5s ease;
+}
+
+.timeline-visible .central-line {
+    height: 100%;
+}
+
+/* Interests Section */
+.interests-section {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.interest-card {
+    background: rgba(255, 255, 255, 0.03);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+    transition: transform 0.3s;
+}
+
+.interest-card:hover {
+    transform: scale(1.05);
+}
+
+.interest-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
     margin-bottom: 1rem;
+}
+
+.interest-title {
     font-size: 1.5rem;
     font-weight: 500;
-    background: linear-gradient(45deg, #fff, #888);
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-.skill-content ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.skill-content li {
+    color: #fff;
     margin-bottom: 0.5rem;
-    font-size: 1.1rem;
+}
+
+.interest-description {
+    font-size: 1rem;
     color: rgba(255, 255, 255, 0.8);
 }
 
@@ -192,6 +332,14 @@
     .info-canvas-content p {
         font-size: 1rem;
         padding-left: 1rem;
+    }
+
+    .skills-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .interests-section {
+        grid-template-columns: 1fr;
     }
 }
 
