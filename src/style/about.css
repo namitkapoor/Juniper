@@ -269,9 +269,6 @@
     transition: transform 0.3s;
 }
 
-.interest-card:hover {
-    transform: scale(1.05);
-}
 
 .interest-image {
     width: 100%;

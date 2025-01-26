@@ -152,23 +152,23 @@ export const aboutSections = [
       interests: [
         {
           title: "Open World RPGs",
-          description: "Witcher 3, Cyberpunk, Ghost of Tsushima, God of War, etc.",
-          image: "/images/interests/rpgs.jpg"
+          description: "Witcher 3, Cyberpunk, Ghost of Tsushima, God of War, and more...",
+          image: "/images/interests/the-witcher-3-geralt-thumbs-up 1.svg"
         },
         {
           title: "Impossible shapes and optical illusions",
-          description: "Stuff that makes your mind do a double take.",
-          image: "/images/Experiments/Paintings/Dichotomy Within.jpg"
+          description: "Which surface is on top?",
+          image: "/images/interests/Dichotomy Within 1.svg"
         },
         {
           title: "Metaphysics and Philosophy",
           description: "My mind likes to ponder.",
-          image: "/images/interests/physics_and_philosophy.jpg"
+          image: "/images/interests/physics_and_philosophy.svg"
         },
         {
           title: "My synesthesia",
-          description: "I see visuals for sounds, numbers have personalities for me, and I express it via audio reactive art in TouchDesigner.",
-          image: "/images/interests/synesthesia.jpg"
+          description: "I am learning to express it using TouchDesigner. More to come :)",
+          image: "/images/interests/Numbers and personalities.svg"
         }
       ]
     }
