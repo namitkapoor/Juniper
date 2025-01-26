@@ -142,7 +142,7 @@ export default function TaskReminders() {
             </motion.span>
           </div>
           <p className="section-description">
-            A systematic approach to developing an AI-powered contextual reminder system.
+            A systematic approach to developing a contextual reminder system using Quest 3.
           </p>
           
           <StrategicApproach 

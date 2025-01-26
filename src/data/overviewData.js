@@ -324,7 +324,7 @@ export const overviewData = {
           type: 'text',
           icon: IoPeopleOutline,
           title: 'Product Need',
-          description: 'Packaging sustainability is critical to reducing environmental impact.',
+          description: 'Most young adults end up creating redundant reminders in their phone, notebook, sticky notes, etc. because they need both physical and digital reminders.',
           footer: 'Opportunity for Change'
         }
       },
@@ -398,7 +398,7 @@ export const overviewData = {
           type: 'text',
           icon: IoPeopleOutline,
           title: 'Product Need',
-          description: 'Packaging sustainability is critical to reducing environmental impact.',
+          description: 'Sustainable packaging is critical to reducing humanity\'s environmental impact.',
           footer: 'Opportunity for Change'
         }
       },
@@ -422,7 +422,7 @@ export const overviewData = {
           icon: IoRocketOutline,
           title: 'Innovation Focus',
           description: '"Explored novel ways to integrate spatial interfaces, leveraging physical spaces to reduce cognitive load and enhance task management through context-aware AR solutions."',
-          footer: 'Revolutionizing Interaction Design'
+          footer: 'Gamifying Sustainability'
         }
       },
       {

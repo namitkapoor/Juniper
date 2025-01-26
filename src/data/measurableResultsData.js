@@ -196,51 +196,46 @@ export const measurableResultsData = {
   "sustainablePackaging": {
     metrics: [
       {
-        title: "Adoption Rate",
+        title: "Technical Detection",
         icon: IoRocketOutline,
         stats: {
-          value: "82%",
-          unit: "Pilot Success",
-          previousValue: "30%",
-          change: "+52%"
+          value: "6",
+          unit: "Material Types",
+          change: "detected via AR"
         },
         details: [
-          "82% of pilot retailers achieved program goals",
-          "50% reduction in implementation timeline",
-          "25% average cost savings through volume discounts"
-        ],
-        image: "/images/Case Studies/SustainablePackaging/Results/adoption-rate.jpg"
+          "AR detection for Glass, Aluminum, Paperboard, and 3 types of Plastic",
+          "Average scan time under 1 second",
+          "Works in standard store lighting"
+        ]
       },
       {
-        title: "Cost Reduction",
+        title: "Eco Score Impact",
         icon: IoTrendingUpOutline,
         stats: {
-          value: "25%",
-          unit: "Average Savings",
-          previousValue: "0%",
-          change: "+25%"
+          value: "500-1000",
+          unit: "Points Range",
+          change: "$1-4 savings potential per purchase"
         },
         details: [
-          "Volume-based discounts effectively reduced material costs",
-          "Streamlined supplier network improved pricing",
-          "Bulk ordering opportunities maximized savings"
-        ],
-        image: "/images/Case Studies/SustainablePackaging/Results/cost-savings.jpg"
+          "80 points for most sustainable (Glass)",
+          "10 points for least sustainable (Styrofoam)",
+          "Tiered rewards starting at 500 points"
+        ]
       },
       {
-        title: "Retailer Satisfaction",
-        icon: IoHappyOutline,
+        title: "User Study",
+        icon: IoPeopleOutline,
         stats: {
-          value: "4.2",
-          unit: "out of 5",
-          change: "85% would recommend"
+          value: "87%",
+          unit: "Understanding Rate",
+          change: "of scoring system"
         },
         details: [
-          "Strong satisfaction with support resources",
-          "Positive feedback on implementation process",
-          "High likelihood of program continuation"
-        ],
-        image: "/images/Case Studies/SustainablePackaging/Results/satisfaction.jpg"
+          "Study with university participants",
+          "Clear understanding of point-to-dollar conversion",
+          "Positive response to incremental rewards"
+        ]
       }
     ],
     testimonials: [
