@@ -756,7 +756,7 @@ export const solutionPhase = {
                   {
                     name: "Technical Infrastructure",
                     image: {
-                      url: "/images/Case Studies/TR/Wireframe/Technical.jpg",
+                      url: "/images/Case Studies/TR/Development/Meta and MRTK.svg",
                       caption: "Platform integration and development challenges"
                     },
                     purpose: "Build robust technical foundation despite evolving XR platforms and tools.",

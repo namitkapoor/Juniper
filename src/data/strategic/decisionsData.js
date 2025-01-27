@@ -288,35 +288,87 @@ export const decisionsPhase = {
             wireframeFeedback: [
               {
                 title: "Spatial Interface Evolution",
-                description: "Five rounds of iterative testing in AR environment",
+                description: "Evolution of AR note-taking interface through iterative testing",
                 images: [
                   {
                     id: 1,
-                    url: "/images/Case Studies/TaskReminders/Wireframes/spatial-note-v1.jpg",
-                    caption: "Basic AR Note Interface",
+                    url: "/images/Case Studies/TR/Wireframe/Rectangle 1.jpg", // Yellow note card with color selection
+                    caption: "First Note Design",
                     hotspots: [
                       {
                         id: "1-1",
                         position: { x: 30, y: 40 },
-                        challenge: "Spatial Interaction",
-                        feedback: "Users needed intuitive color interaction methods",
-                        changes: "Implemented direct manipulation for note properties"
+                        challenge: "Color Selection",
+                        feedback: "Traditional mobile color picker didn't translate well to AR",
+                        changes: "Implemented spatial color selection with direct manipulation"
                       }
                     ]
                   },
                   {
                     id: 2,
-                    url: "/images/Case Studies/TaskReminders/Wireframes/spatial-note-v2.jpg",
-                    caption: "Enhanced Visual Feedback",
+                    url: "/images/Case Studies/TR/Wireframe/Rectangle 2.jpg", // Calendar view with blue interface
+                    caption: "Calendar Integration Prototype",
                     hotspots: [
                       {
-                        id: "2-1",
+                        id: "2-2",
                         position: { x: 35, y: 45 },
-                        challenge: "Visual Communication",
-                        feedback: "Need for clearer category and state indicators",
-                        changes: "Added micro-animations and visual categorization"
+                        challenge: "Spatial Organization",
+                        feedback: "Users needed better way to organize notes in 3D space",
+                        changes: "Introduced calendar as primary spatial anchor for notes"
                       }
                     ]
+                  },
+                  {
+                    id: 3,
+                    url: "/images/Case Studies/TR/Wireframe/Rectangle 3.jpg", // AR view with keyboard and calendar
+                    caption: "Input Method Integration",
+                    hotspots: [
+                      {
+                        id: "3-3",
+                        position: { x: 40, y: 50 },
+                        challenge: "Text Input",
+                        feedback: "Need for seamless text input in AR space",
+                        changes: "Added floating keyboard with contextual positioning"
+                      }
+                    ]
+                  },
+                  {
+                    id: 4,
+                    url: "/images/Case Studies/TR/Wireframe/Rectangle 4.jpg", // Final AR implementation
+                    caption: "Final Implementation",
+                    hotspots: [
+                      {
+                        id: "4-4",
+                        position: { x: 45, y: 55 },
+                        challenge: "Spatial Layout",
+                        feedback: "Need for clear visual hierarchy in 3D space",
+                        changes: "Calendar view as main anchor, with notes and input methods positioned contextually"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                title: "Key Design Decisions",
+                description: "Major interface changes based on user testing",
+                designDecisions: [
+                  {
+                    title: "Note Visualization",
+                    beforeImage: "image-3.jpg", // Teal note version
+                    afterImage: "image-9.jpg", // Final implementation
+                    description: "Evolved from skeuomorphic sticky note design to spatially-aware cards with contextual controls"
+                  },
+                  {
+                    title: "Calendar Integration",
+                    beforeImage: "image-4.jpg", // Early calendar view
+                    afterImage: "image-8.jpg", // Final calendar implementation
+                    description: "Transformed from traditional grid layout to spatially-anchored organization system"
+                  },
+                  {
+                    title: "Color Selection",
+                    beforeImage: "image-1.jpg", // Original color picker
+                    afterImage: "image-2.jpg", // Green note version
+                    description: "Moved from traditional color picker to direct spatial color manipulation"
                   }
                 ]
               }
