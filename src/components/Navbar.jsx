@@ -1,11 +1,12 @@
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import "../style/navbar.css"
 
 export default function Navbar() {
     const [isBlinking, setIsBlinking] = useState(false);
     const [isMoving, setIsMoving] = useState(false);
+    const location = useLocation();
 
     // Eye movement animation
     const eyeMotion = {
@@ -131,7 +132,7 @@ export default function Navbar() {
                 </div>
                 
                 <div className="nav-links">
-                    <Link className="nav-item" to="/about">about</Link>
+                    <Link className={`nav-item ${location.pathname === '/about' ? 'active' : ''}`} to="/about">about</Link>
                     <a className="nav-item" href="/files/KapoorNamit_Resume.pdf" target="_blank" rel="noopener noreferrer">resume</a>
                 </div>
             </div>

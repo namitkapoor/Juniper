@@ -66,3 +66,9 @@ a {
     padding: 0 1rem;
   }
 }
+
+.nav-item.active {
+    color: #a4bfc7; /* Highlight color, e.g., gold */
+    font-weight: bold;
+    border-bottom: 2px solid #a4bfc7; /* Optional underline */
+}
