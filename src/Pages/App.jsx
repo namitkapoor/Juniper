@@ -27,6 +27,7 @@ const App = () => {
           </Routes>
         </PageTransition>
       </BrowserRouter>
+      <Analytics />
     </ThemeProvider>
   );
 };
