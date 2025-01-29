@@ -1,3 +1,4 @@
+import React, { useEffect } from 'react'
 import ReactDOM from 'react-dom/client'
 import {BrowserRouter, Routes, Route} from "react-router-dom"
 import About from './About.jsx'
@@ -9,10 +10,16 @@ import SustainablePackaging from './CaseStudies/SustainablePackaging.jsx'
 import '../style/app.css'
 import { ThemeProvider } from '../components/ThemeContext'
 import { Analytics } from '@vercel/analytics/react'
+import { track } from '@vercel/analytics'
 import PageTransition from '../components/PageTransition'
+
 const root = ReactDOM.createRoot(document.querySelector('#root'))
 
 const App = () => {
+  useEffect(() => {
+    track('page_view', { page: 'home' });
+  }, []);
+
   return (
     <ThemeProvider>
       <BrowserRouter>
