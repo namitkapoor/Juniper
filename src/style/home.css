@@ -695,6 +695,7 @@ li { margin: 0; padding: 0; }
   gap: 8px;
   transition: opacity 0.3s ease;
   z-index: 11;
+  position: relative;
 }
 
 .scroll-indicator:hover {

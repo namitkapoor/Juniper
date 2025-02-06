@@ -82,6 +82,7 @@ export default function Home() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 2 }}
+          style={{ cursor: 'pointer' }}
           onClick={() => {
             document.querySelector('.case-studies').scrollIntoView({ 
               behavior: 'smooth',
