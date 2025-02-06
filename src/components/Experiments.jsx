@@ -37,8 +37,9 @@ export default function Experiments() {
 
   return (
     <section className="experiments-section">
-      <h2>Experiments</h2>
+      <h2 className='experiments-title'>Experiments</h2>
       
+
       <div className="categories-container">
         <div className="categories-buttons">
           {Object.entries(categories).map(([key, { name, color }]) => (

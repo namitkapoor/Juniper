@@ -99,10 +99,11 @@ export default function Home() {
 
          {/* Case Studies Section */}
          <section className="case-studies">
-          <h2>Case Studies</h2>
+          <h2 className='case-studies-title'>Case Studies</h2>
           <div className="toggle-container">
             <button 
               className={`toggle-button ${activeProjectType === 'ux' ? 'active' : ''}`}
+
               onClick={() => setActiveProjectType('ux')}
             >
               UX Design

@@ -19,10 +19,11 @@ export default function Contact() {
         <div className="contact-content">
           <div className="contact-left">
             <div className="contact-header">
-              <h2>Contact</h2>
-              <p className="contact-subtitle">Let's create something amazing together</p>
+              <h2>Next Steps</h2>
+              <p className="contact-subtitle">Tell me about your team and vision.</p>
             </div>
             
+
             <div className="social-links">
               <a href="https://www.linkedin.com/in/namitkapoor/" 
                 target="_blank" 
@@ -110,8 +111,8 @@ export default function Contact() {
         </div>
 
         <div className="footer">
-          <p className="copyright">© 2024 Namit Kapoor. All Rights Reserved.</p>
-          <p className="footer-note">Made with ❤️ and creativity.</p>
+          <p className="copyright">© 2025 Namit Kapoor. All Rights Reserved.</p>
+          <p className="footer-note">Tuned to experiential wavelengths 💫</p>
         </div>
       </div>
     </section>

@@ -49,8 +49,8 @@ export default function Experience() {
                 offset={[0.003, 0.003]}
             />
             <Vignette 
-                darkness={0.9}
-                offset={0.2}
+                darkness={1.1}
+                offset={0.15}
             />
         </EffectComposer>
     </>
