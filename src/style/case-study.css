@@ -74,10 +74,6 @@
   align-items: center;
 }
 
-.approach-grid {
-  composes: section-grid;
-}
-
 .challenge-image img,
 .approach-images img {
   width: 100%;
