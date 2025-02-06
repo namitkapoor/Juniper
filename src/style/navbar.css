@@ -68,7 +68,9 @@ a {
 }
 
 .nav-item.active {
-    color: #a4bfc7; /* Highlight color, e.g., gold */
+    background: linear-gradient(45deg, #fff, #888);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
     font-weight: bold;
-    border-bottom: 2px solid #a4bfc7; /* Optional underline */
+    border-bottom: 2px solid #908ab7; /* Optional underline */
 }

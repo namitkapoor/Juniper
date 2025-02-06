@@ -14,27 +14,32 @@ export default function AnimatedTagline() {
   return (
     <div className="tagline-container">
       <p className="tagline">
-        Crafting experiences where{' '}
+        Harmonizing {' '}
         <span 
           className="interactive-word"
           onMouseEnter={() => showDefinition('tech')}
           onMouseLeave={hideDefinition}
+
+
         >
-          technology
+          pixels
           <span className={`tooltip ${activeTooltip === 'tech' ? 'visible' : ''}`}>
             AI, XR, Mobile, Web
           </span>
         </span>
-        {' '}amplifies{' '}
+        {' '}with{' '}
         <span 
           className="interactive-word"
           onMouseEnter={() => showDefinition('human')}
+
+
           onMouseLeave={hideDefinition}
         >
-          human potential
+          lived experiences
           <span className={`tooltip ${activeTooltip === 'human' ? 'visible' : ''}`}>
             Accessibility, Usability, Delight
           </span>
+
         </span>
       </p>
       <div className="availability-status">

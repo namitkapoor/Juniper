@@ -225,12 +225,15 @@ export default function LoaderScreen({ onLoadingComplete }) {
             transition={{ delay: 0.5, duration: 1.2 }}  // Slower text fade-in
             style={{
               fontFamily: 'var(--font-body)',
-              fontSize: '1.1rem',  // Slightly larger
-              letterSpacing: '0.5px',  // Better readability
-              fontWeight: 500,  // Medium weight
-              color: 'rgba(255, 255, 255, 0.9)',  // Brighter text
+              textTransform: 'uppercase',
+              fontSize: '0.8rem',  // Slightly smaller
+              letterSpacing: '4.5px',  // Better readability
+              fontWeight: 100,  // Medium weight
+
+
+              color: 'rgba(191, 191, 191, 0.9)',  // Brighter text
               textShadow: '0 0 10px rgba(0, 0, 0, 0.3)',  // Subtle glow
-              marginTop: '2rem'  // More space between glasses and text
+              marginTop: '0.5rem'  // More space between glasses and text
             }}
           >
             Putting on my problem solving glasses

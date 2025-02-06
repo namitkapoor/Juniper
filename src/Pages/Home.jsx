@@ -52,7 +52,7 @@ export default function Home() {
             }}
           >
             <p className = 'occupation'>Experience Designer</p>
-            <h1 className='display'>Namit Kapoor</h1>
+            <h1 className='hero-display'>Namit Kapoor</h1>
             <AnimatedTagline />
           </motion.div>
 

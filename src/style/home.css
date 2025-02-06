@@ -50,7 +50,7 @@
 .page-container {
   background-color: var(--background);
   color: var(--text-primary);
-  font-family: var(--font-primary);
+  font-family: var(--font-body);
   overflow: hidden;
 }
 
@@ -67,22 +67,41 @@
   position: relative;
   z-index: 11;
   text-align: center;
-  max-width: 800px;
+  max-width: 1200px;
   padding: 0 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero-display {
+  font-family: var(--font-display);
+  font-size: 4.5rem;
+  font-weight: 100;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  margin: 0 0 1.5rem 0;
+  line-height: 1.1;
 }
 
 .occupation {
-  margin-bottom: 0.25rem;
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  font-weight: 400;
   color: var(--text-tertiary);
-  font-size: 2rem;
+  letter-spacing: 0.02em;
+  margin-bottom: 0.5rem;
+  opacity: 0.7;
 }
 
 .tagline {
-  font-size: 1.5rem;
+  font-size: 1.75rem;
   color: var(--text-tertiary);
   line-height: 1.6;
-  margin-top: 1.5rem;
   font-weight: 300;
+  max-width: 800px;
+  margin: 0 auto 2.5rem auto;
+  opacity: 0.9;
 }
 
 .interactive-word {
@@ -107,7 +126,7 @@
   padding: 0.5rem 1rem;
   border-radius: 4px;
   font-size: 0.875rem;
-  font-family: var(--font-primary);
+  font-family: var(--font-body);
   font-style: normal;
   white-space: nowrap;
   opacity: 0;
@@ -140,7 +159,8 @@
   left: 0;
   width: 100%;
   height: 100%;
-  opacity: 0.5;
+  opacity: 0.4;
+  filter: blur(1px);
 }
 
 /* Case Studies Section */
@@ -431,14 +451,7 @@ li { margin: 0; padding: 0; }
   opacity: 0.8;
 }
 
-/* Typography with gradients */
-h1.display {
-  background: var(--gradient-text);
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-size: 5.5rem;
-  font-weight: 700;
-}
+
 
 .case-studies h2,
 .extra-work h2 {
@@ -626,6 +639,11 @@ h1.display {
 @media (max-width: 768px) {
   .tagline {
     font-size: 1.25rem;
+    margin-bottom: 2rem;
+  }
+  
+  .occupation {
+    font-size: 1rem;
   }
 }
 
@@ -669,6 +687,7 @@ h1.display {
   align-items: center;
   gap: 8px;
   transition: opacity 0.3s ease;
+  z-index: 11;
 }
 
 .scroll-indicator:hover {
@@ -718,10 +737,9 @@ h1.display {
 }
 
 .loader-text {
-  font-family: var(--font-display);
+  font-family: var(--font-body);
   font-size: 1rem;
   color: var(--text-secondary);
-  font-style: italic;
   text-align: center;
 }
 
@@ -730,8 +748,13 @@ h1.display {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  margin-top: 24px;  /* Space after tagline */
-  opacity: 0.9;
+  margin-top: 0;
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+.availability-status:hover {
+  opacity: 1;
 }
 
 .status-dot {
@@ -764,8 +787,18 @@ h1.display {
 
 /* Add responsive styles inside your existing media query (around line 638) */
 @media (max-width: 768px) {
+  .hero-display {
+    font-size: 3.5rem;
+    margin: 0 0 1rem 0;
+  }
+  
   .tagline {
     font-size: 1.25rem;
+    margin-bottom: 2rem;
+  }
+  
+  .occupation {
+    font-size: 1rem;
   }
   
   .availability-status {
@@ -778,21 +811,12 @@ h1.display {
 }
 
 /* Update hero section typography */
-.occupation {
-  font-family: var(--font-body);
-  font-size: 1.1rem;
-  font-weight: 400;
-  color: var(--text-secondary);
-  letter-spacing: 0.02em;
-}
-
 .display {
   font-family: var(--font-display);
   font-size: 4.5rem;
-  font-weight: 500;
+  font-weight: 100;
   letter-spacing: -0.02em;
   color: var(--text-primary);
-  margin-top: 0;
 }
 
 /* Make scroll indicator more subtle */

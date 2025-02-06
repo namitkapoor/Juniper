@@ -1,29 +1,45 @@
 /* Create a new file: src/style/fonts.css */
 
 @font-face {
-  font-family: 'Craftwork Grotesk';
-  src: url('/fonts/CraftworkGrotesk/CraftworkGrotesk-Regular.ttf') format('truetype');
+  font-family: 'PP-Eiko';
+  src: url('/fonts/PP-Eiko/PPEiko-Thin.otf') format('otf');
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
+
 }
 
 @font-face {
-  font-family: 'Craftwork Grotesk';
-  src: url('/fonts/CraftworkGrotesk/CraftworkGrotesk-Medium.ttf') format('truetype');
+  font-family: 'PP-Eiko';
+  src: url('/fonts/PP-Eiko/PPEiko-LightItalic.otf') format('otf');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+
+}
+
+@font-face {
+  font-family: 'PP-Eiko';
+  src: url('/fonts/PP-Eiko/PPEiko-Regular.otf') format('otf');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'PP-Eiko';
+  src: url('/fonts/PP-Eiko/PPEiko-Medium.otf') format('otf');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
-
 @font-face {
-  font-family: 'Craftwork Grotesk';
-  src: url('/fonts/CraftworkGrotesk/CraftworkGrotesk-SemiBold.ttf') format('truetype');
-  font-weight: 600;
-  font-style: normal;
+  font-family: 'PP-Eiko';
+  src: url('/fonts/PP-Eiko/PPEiko-BlackItalic.otf') format('otf');
+  font-weight: 900;
+  font-style: italic;
   font-display: swap;
+
 }
-
-
 @font-face {
   font-family: 'Satoshi';
   src: url('/fonts/Satoshi/Satoshi-Light.woff2') format('woff2');
@@ -33,57 +49,59 @@
 }
 
 @font-face {
-  font-family: 'O-Goudy';
-  src: url('/fonts/Ofl-goudy/OFLGoudyStMTT.ttf') format('truetype');
+  font-family: 'Satoshi';
+  src: url('/fonts/Satoshi/Satoshi-Regular.woff2') format('woff2');
   font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/Satoshi/Satoshi-Medium.woff2') format('woff2');
+  font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 
 /* Typography System */
 :root {
-  --font-primary: 'Craftwork Grotesk', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-  --font-display: 'O-Goudy', system-ui, sans-serif;
-  --font-headings: 'Satoshi', system-ui, sans-serif;
-  
+  /* Font families - with better fallbacks */
+  --font-display: 'PP-Eiko', serif;
+  --font-body: 'Satoshi', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
   /* Font Weights */
-  --weight-light: 100;
+  --weight-thin: 100;
+  --weight-light: 300;
   --weight-regular: 400;
   --weight-medium: 500;
-  --weight-semibold: 600;
+  --weight-bold: 700;
+  --weight-heavy: 900;
 
   /* Base Typography Styles */
-  --display-size: clamp(3.5rem, 8vw, 7rem);
-  --display-letter-spacing: -0.02em;
-  --display-weight: var(--weight-regular);
+  --display-size: clamp(4.5rem, 10vw, 7rem);
+  --display-letter-spacing: -0.01em;
 }
 
-/* Core Typography Classes */
-.display {
-  font-family: var(--font-display);
-  font-weight: var(--display-weight);
-  font-size: var(--display-size);
-  letter-spacing: var(--display-letter-spacing);
-  background: var(--gradient-text);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+/* Base Typography */
+body {
+  font-family: var(--font-body);
+  font-weight: var(--weight-regular);
+}
+
+/* Animation */
+@keyframes shine {
+  to {
+    background-position: 200% center;
+  }
 }
 
 /* Clear Font Usage Guide */
 
-/* 1. Hero Section */
-.occupation {
-  /* Uses Craftwork Grotesk Regular */
-  font-family: var(--font-display);
-  font-weight: var(--weight-semibold);
-  font-size: 1.1rem;
-}
-
 /* 2. Main Navigation */
 .nav-links {
   /* Uses Craftwork Grotesk Regular */
-  font-family: var(--font-primary);
+  font-family: var(--font-body);
   font-weight: var(--weight-regular);
 }
 
@@ -120,8 +138,9 @@ h1, h2, h3 {
 p, 
 .body-text {
   /* Uses Craftwork Grotesk Regular */
-  font-family: var(--font-primary);
+  font-family: var(--font-body);
   font-weight: var(--weight-regular);
 }
+
 
 /* Keep existing responsive styles */
