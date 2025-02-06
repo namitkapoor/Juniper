@@ -32,7 +32,7 @@ export default function Contact() {
               >
                 <IoLogoLinkedin className="social-icon" />
               </a>
-              <a href="https://github.com/yourusername" 
+              <a href="https://github.com/namitkapoor" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="social-link"
