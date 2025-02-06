@@ -25,10 +25,11 @@ const Overview = ({ projectId }) => {
         transition={{ duration: 0.5 }}
       >
         <div className="overview-header">
-          <h1>{data.title}</h1>
+          <h1 className='overview-title'>{data.title}</h1>
           <p className="case-study-subtitle">{data.subtitle}</p>
           <p className="case-study-description">{data.description}</p>
         </div>
+
         
         <div className="bento-grid-wrapper">
           <BentoGrid items={processedBentoItems} />
