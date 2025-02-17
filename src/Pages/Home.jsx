@@ -1,6 +1,6 @@
 // HomePage.jsx
 import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Canvas } from '@react-three/fiber';
 import Experience from '../components/Experience.jsx';
 import Contact from '../components/Contact.jsx';
@@ -12,12 +12,106 @@ import { IoLockClosed, IoArrowForward, IoChevronDown } from 'react-icons/io5';
 import Experiments from '../components/Experiments';
 import AnimatedTagline from '../components/AnimatedTagline';
 import LoaderScreen from '../components/LoaderScreen';
+import { 
+  IoColorPalette, // Design
+  IoSparkles, // UX
+  IoSearch, // Research
+  IoCode, // Development
+  IoExtensionPuzzle, // AI (using puzzle piece instead)
+  IoGlasses, // XR/Mixed Reality
+  IoBriefcase, // B2B
+  IoPeople // B2C
+} from 'react-icons/io5';
+
+const caseStudyCategories = {
+  ux: { 
+    name: 'UX Design', 
+    color: 'linear-gradient(135deg,rgb(230, 162, 236),rgb(34, 25, 219))',
+    icon: IoExtensionPuzzle
+  },
+  research: { 
+    name: 'UX Research', 
+    color: 'linear-gradient(135deg,rgb(198, 194, 166), rgb(17, 60, 6))',
+    icon: IoSearch 
+  },
+  development: { 
+    name: 'Development', 
+    color: 'linear-gradient(135deg,rgb(142, 145, 161),rgb(7, 41, 237))',
+    icon: IoCode 
+  },
+  ai: { 
+    name: 'AI', 
+    color: 'linear-gradient(135deg,rgb(222, 101, 46), #673AB7)',
+    icon: IoSparkles 
+  },
+  xr: { 
+    name: 'XR', 
+    color: 'linear-gradient(135deg,rgb(105, 200, 210),rgb(26, 66, 74))',
+    icon: IoGlasses 
+  },
+  b2b: { 
+    name: 'B2B', 
+    color: 'linear-gradient(135deg,rgb(179, 134, 65), #FF9800)',
+    icon: IoBriefcase
+  },
+  b2c: { 
+    name: 'B2C', 
+    color: 'linear-gradient(135deg, #FF8A65,rgb(148, 55, 27))',
+    icon: IoPeople 
+  }
+};
+
+const caseStudies = [
+  {
+    title: 'Manage Small Farms',
+    metrics: '70 SUS Score',
+    categories: ['ux', 'research', 'b2c'],
+    image: '../images/Project Cover Photos/JD thumbnail photo 2.svg',
+    description: 'Simplified an operations management app to better serve small farm owners, focusing on usability and scalability for non-technical users.',
+    path: '/case-study/manage-farms'
+  },
+  {
+    title: 'Hire Influencer Marketing',
+    metrics: '28% Less Clicks',
+    categories: ['ux', 'b2b'],
+    image: '../images/Project Cover Photos/Campaign Page.svg',
+    description: 'Redesigned a web app to simplify influencer hiring and campaign tracking, boosting user engagement by reducing workflow friction for small business owners.',
+    path: '/case-study/influencer-marketing'
+  },
+  
+  {
+    title: 'Contextualize Task Reminders',
+    metrics: '30+ User Studies',
+    categories: ['xr', 'research', 'ux', 'development'],
+    image: '../images/Project Cover Photos/Anywhere Access Luminote gif.gif',
+    description: 'Created an AR-based task management system combining spatial reminders with adaptive organizational structures to reduce cognitive load.',
+    path: '/case-study/task-reminders'
+  },
+  {
+    title: 'Incentivize Sustainable Packaging', 
+    metrics: '30% More Eco-Friendly Choices',
+    categories: ['xr', 'ux', 'development', 'b2c'],
+    image: '../images/Project Cover Photos/SUSpointpopup-cropped.gif',
+    description: 'Designed an AR app to promote sustainable shopping by evaluating product packaging and incentivizing eco-conscious purchases with rewards.',
+    path: '/case-study/sustainable-packaging'
+  },
+  {
+    title: 'Personalize Skin Care',
+    metrics: '1200+ Site Visitors',
+    categories: ['ux', 'development','ai', 'b2b'],
+    image: '../images/Project Cover Photos/Home Page.svg',
+    description: 'Developed a chatbot-driven skincare recommendation platform, integrating computer vision to provide personalized product suggestions.',
+    path: '/case-study/personalize-skin-care',
+    comingSoon: true
+  },
+];
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const [activeSection, setActiveSection] = useState('hero');
   const [activeProjectType, setActiveProjectType] = useState('ux');
   const navigate = useNavigate();
+  const [activeCategories, setActiveCategories] = useState(new Set());
 
   // Comment out the first-load check for development
 
@@ -33,6 +127,28 @@ export default function Home() {
     setIsLoading(false);
     // Comment out session storage for development
     sessionStorage.setItem('hasLoaded', 'true');
+  };
+
+  const toggleCategory = (category) => {
+    setActiveCategories(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(category)) {
+        newSet.delete(category);
+      } else {
+        newSet.add(category);
+      }
+      return newSet;
+    });
+  };
+
+  const sortCaseStudies = (studies) => {
+    if (activeCategories.size === 0) return studies;
+    
+    return [...studies].sort((a, b) => {
+      const aMatches = a.categories.filter(cat => activeCategories.has(cat)).length;
+      const bMatches = b.categories.filter(cat => activeCategories.has(cat)).length;
+      return bMatches - aMatches;
+    });
   };
 
   return (
@@ -100,225 +216,98 @@ export default function Home() {
 
          {/* Case Studies Section */}
          <section className="case-studies">
-          <h2 className='case-studies-title'>Case Studies</h2>
-          <div className="toggle-container">
-            <button 
-              className={`toggle-button ${activeProjectType === 'ux' ? 'active' : ''}`}
-
-              onClick={() => setActiveProjectType('ux')}
-            >
-              UX Design
-            </button>
-            <button 
-              className={`toggle-button ${activeProjectType === 'xr' ? 'active' : ''}`}
-              onClick={() => setActiveProjectType('xr')}
-            >
-              XR Design
-            </button>
+          <div className="case-studies-header">
+            <h2 className='case-studies-title'>Case Studies</h2>
+            <p className="filter-subtitle">I solve problems across these areas. Where can I add value to yours?</p>
+          </div>
+          
+          <div className="categories-container">
+            <div className="categories-buttons">
+              {Object.entries(caseStudyCategories).map(([key, { name, color, icon: Icon }]) => (
+                <motion.button
+                  key={key}
+                  className={`category-button ${activeCategories.has(key) ? 'active' : ''}`}
+                  onClick={() => toggleCategory(key)}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  style={{
+                    '--category-color': color,
+                    '--blend-opacity': activeCategories.has(key) ? '1' : '0.3'
+                  }}
+                >
+                  <Icon className="category-icon" />
+                  <span>{name}</span>
+                </motion.button>
+              ))}
+            </div>
           </div>
 
-          {activeProjectType === 'ux' && (
-            <div className="case-studies-grid">
-              <motion.div 
-                className="case-study-card"
-                whileHover={{ scale: 1.01 }}
-                transition={{ duration: 0.2 }}
-                onClick={() => navigate('/case-study/manage-farms')}
-              >
-                <h3>Manage Small Farms</h3>
-                
-                <div className="case-study-meta">
-                  <span>70 SUS Score</span>
-                </div>
+          <motion.div className="case-studies-grid" layout>
+            <AnimatePresence>
+              {sortCaseStudies(caseStudies).map((study) => (
+                <motion.div
+                  key={study.title}
+                  className={`case-study-card ${study.comingSoon ? 'coming-soon' : ''}`}
+                  layout
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ 
+                    opacity: study.categories.some(cat => activeCategories.has(cat)) || activeCategories.size === 0 ? 1 : 0.3,
+                    scale: study.categories.some(cat => activeCategories.has(cat)) || activeCategories.size === 0 ? 1 : 0.95
+                  }}
+                  exit={{ opacity: 0, scale: 0.8 }}
+                  transition={{ duration: 0.3 }}
+                  onClick={() => !study.comingSoon && navigate(study.path)}
+                >
+                  <h3>{study.title}</h3>
+                  
+                  {study.comingSoon ? (
+                    <div className="coming-soon-badge">
+                      <IoLockClosed className="lock-icon" />
+                      Coming Soon
+                    </div>
+                  ) : (
+                    <div className="case-study-meta">
+                      <span>{study.metrics}</span>
+                    </div>
+                  )}
 
-                <div className="case-study-tags">
-                  <span className="tag">Mobile Design</span>
-                  <span className="tag">Research</span>
-                  <span className="tag">Application</span>
-                </div>
+                  <div className="case-study-tags">
+                    {study.categories.map(cat => (
+                      <span 
+                        key={cat} 
+                        className="tag"
+                        style={{ '--category-color': caseStudyCategories[cat].color }}
+                      >
+                        {caseStudyCategories[cat].name}
+                      </span>
+                    ))}
+                  </div>
 
-                <img 
-                  className="case-study-image" 
-                  src="../images/Project Cover Photos/JD thumbnail photo 2.svg" 
-                  alt="Manage Small Farms" 
-                />
-                
-                <p>Simplified an operations management app to better serve small farm owners, focusing on usability and scalability for non-technical users.</p>
-                
-                <div className="button-container">
-                  <Button 
-                    className='case-study-button'
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      navigate('/case-study/manage-farms');
-                    }}
-                  >
-                    Learn More
-                    <IoArrowForward className="button-icon" />
-                  </Button>
-                </div>
-              </motion.div>
-
-              <motion.div 
-                className="case-study-card"
-                whileHover={{ scale: 1.01 }}
-                transition={{ duration: 0.2 }}
-                onClick={() => navigate('/case-study/influencer-marketing')}
-              >
-                <h3>Hire Influencer Marketing</h3>
-                
-                <div className="case-study-meta">
-                  <span>28% Less Clicks</span>
-                </div>
-
-                <div className="case-study-tags">
-                  <span className="tag">Web Design</span>
-                  <span className="tag">B2B</span>
-                  <span className="tag">Dashboard</span>
-                </div>
-
-                <img 
-                  className="case-study-image" 
-                  src="../images/Project Cover Photos/Campaign Page.svg" 
-                  alt="Influencer Marketing" 
-                />
-                
-                <p>Redesigned a web app to simplify influencer hiring and campaign tracking, boosting user engagement by reducing workflow friction for small business owners.</p>
-                
-                <div className="button-container">
-                  <Button 
-                    className='case-study-button'
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      navigate('/case-study/influencer-marketing');
-                    }}
-                  >
-                    Learn More
-                    <IoArrowForward className="button-icon" />
-                  </Button>
-                </div>
-              </motion.div>
-
-              <motion.div 
-                className="case-study-card locked"
-                whileHover={{ scale: 1.01 }}
-                transition={{ duration: 0.2 }}
-              >
-                <h3>Personalize Skin Care</h3>
-                
-                <div className="case-study-meta">
-                  <span>1200+ Site Visitors</span>
-                </div>
-
-                <div className="case-study-tags">
-                  <span className="tag">Web Design</span>
-                  <span className="tag">E-commerce</span>
-                  <span className="tag">AI/ML</span>
-                </div>
-
-                <img 
-                  className="case-study-image" 
-                  src="../images/Project Cover Photos/Home Page.svg" 
-                  alt="Skincare Platform" 
-                />
-                
-                <IoLockClosed className="lock-icon" />
-                
-                <p>Developed a chatbot-driven skincare recommendation platform, integrating computer vision to provide personalized product suggestions.</p>
-                
-                <div className="button-container">
-                  <Button className='case-study-button' disabled>
-                    Coming Soon
-                    <IoArrowForward className="button-icon" />
-                  </Button>
-                </div>
-              </motion.div>
-            </div>
-          )}
-
-          {activeProjectType === 'xr' && (
-            <div className="case-studies-grid">
-              <motion.div 
-                className="case-study-card"
-                whileHover={{ scale: 1.01 }}
-                transition={{ duration: 0.2 }}
-                onClick={() => navigate('/case-study/task-reminders')}
-              >
-                <h3>Contextualize Task Reminders</h3>
-                
-                <div className="case-study-meta">
-                  <span>30+ User Studies</span>
-                </div>
-
-                <div className="case-study-tags">
-                  <span className="tag">AR</span>
-                  <span className="tag">Spatial Interface Design</span>
-                  <span className="tag">Productivity</span>
-                </div>
-
-                <img 
-                  className="case-study-image" 
-                  src="../images/Project Cover Photos/Anywhere Access Luminote gif.gif" 
-                  alt="AR Task Reminders" 
-                />
-                
-                <p>Created an AR-based task management system combining spatial reminders with adaptive organizational structures to reduce cognitive load.</p>
-                
-                <div className="button-container">
-                  <Button 
-                    className='case-study-button'
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      navigate('/case-study/task-reminders');
-                    }}
-                  >
-                    Learn More
-                    <IoArrowForward className="button-icon" />
-                  </Button>
-                </div>
-              </motion.div>
-
-              <motion.div 
-                className="case-study-card"
-                whileHover={{ scale: 1.01 }}
-                transition={{ duration: 0.2 }}
-                onClick={() => navigate('/case-study/sustainable-packaging')}
-              >
-                <h3>Incentivize Sustainable Packaging</h3>
-                
-                <div className="case-study-meta">
-                  <span>30% More Eco-Friendly Choices</span>
-                </div>
-
-                <div className="case-study-tags">
-                  <span className="tag">AR</span>
-                  <span className="tag">Mobile Design</span>
-                  <span className="tag">Sustainability</span>
-                </div>
-
-                <img 
-                  className="case-study-image" 
-                  src="../images/Project Cover Photos/SUSpointpopup-cropped.gif" 
-                  alt="AR Packaging" 
-                />
-                
-                <p>Designed an AR app to promote sustainable shopping by evaluating product packaging and incentivizing eco-conscious purchases with rewards.</p>
-                
-                <div className="button-container">
-                  <Button 
-                    className='case-study-button'
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      navigate('/case-study/sustainable-packaging');
-                    }}
-                  >
-                    Learn More
-                    <IoArrowForward className="button-icon" />
-                  </Button>
-                </div>
-              </motion.div>
-            </div>
-          )}
+                  <img 
+                    className="case-study-image" 
+                    src={study.image}
+                    alt={study.title} 
+                  />
+                  
+                  <p>{study.description}</p>
+                  
+                  <div className="button-container">
+                    <Button 
+                      className={`case-study-button ${study.comingSoon ? 'disabled' : ''}`}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        !study.comingSoon && navigate(study.path);
+                      }}
+                      disabled={study.comingSoon}
+                    >
+                      {study.comingSoon ? 'Coming Soon' : 'Learn More'}
+                      {!study.comingSoon && <IoArrowForward className="button-icon" />}
+                    </Button>
+                  </div>
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </motion.div>
         </section>
 
         {/* Extra Work Section */}

@@ -834,3 +834,109 @@ li { margin: 0; padding: 0; }
   font-weight: 400;
   color: var(--text-secondary);
 }
+
+.categories-container {
+  margin: 1.5rem auto 3rem;
+}
+
+.categories-buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.category-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.85rem;
+  font-weight: 400;
+  position: relative;
+  overflow: hidden;
+}
+
+.category-icon {
+  font-size: 1rem;
+  opacity: 0.8;
+}
+
+.category-button.active {
+  background: var(--category-color);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: white;
+  box-shadow: 0 4px 15px -3px rgba(0, 0, 0, 0.3);
+}
+
+.category-button:hover {
+  transform: translateY(-2px);
+  background: var(--category-color);
+  opacity: 0.8;
+}
+
+/* For the tags inside case study cards */
+.tag {
+  background: var(--category-color);
+  opacity: 0.8;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Ensure smooth transition for all properties */
+.category-button {
+  transition: all 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .categories-container {
+    margin: 1rem 0 2rem;
+  }
+  
+  .category-button {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+  }
+  
+  .category-icon {
+    font-size: 0.9rem;
+  }
+}
+
+.case-study-card.coming-soon {
+  opacity: 0.35 !important;
+  cursor: default;
+  pointer-events: none;
+  filter: grayscale(0.8);
+  position: relative;
+}
+
+.coming-soon-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-tertiary);
+  font-size: 0.9rem;
+  margin: 0.5rem 0;
+}
+
+.lock-icon {
+  font-size: 1rem;
+}
+
+.case-study-button.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.case-study-card.coming-soon:hover {
+  transform: none;
+  box-shadow: none;
+}
