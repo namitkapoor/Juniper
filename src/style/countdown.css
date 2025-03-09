@@ -1,0 +1,507 @@
+/* Countdown Timer Styles */
+.countdown-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2rem;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+}
+
+.countdown-header {
+  margin-bottom: 0.5rem;
+}
+
+.countdown-label-main {
+  color: #FF5252;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+.countdown-timer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  margin: 0.5rem 0;
+}
+
+.countdown-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 60px;
+}
+
+.countdown-value {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--text-bright);
+  line-height: 1;
+}
+
+.countdown-unit-label {
+  color: var(--text-tertiary);
+  font-size: 0.75rem;
+  margin-top: 0.25rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.countdown-separator {
+  font-size: 2rem;
+  color: var(--text-secondary);
+  margin-top: -0.5rem;
+  opacity: 0.5;
+}
+
+.countdown-footer {
+  margin-top: 0.5rem;
+}
+
+.countdown-note {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  opacity: 0.9;
+}
+
+@media (max-width: 768px) {
+  .countdown-container {
+    padding: 0.75rem;
+    width: 90%;
+  }
+  
+  .countdown-label-main {
+    font-size: 0.9rem;
+  }
+  
+  .countdown-value {
+    font-size: 1.5rem;
+  }
+  
+  .countdown-unit {
+    min-width: 40px;
+  }
+  
+  .countdown-separator {
+    font-size: 1.5rem;
+  }
+  
+  .countdown-note {
+    font-size: 0.75rem;
+    text-align: center;
+  }
+}
+
+/* Circular Countdown Timer Styles */
+.circular-countdown-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(8px);
+  max-width: 500px;
+}
+
+/* Status badge - Follows Law of Common Region */
+.status-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  width: 100%;
+}
+
+.status-indicator {
+  width: 8px;
+  height: 8px;
+  background: var(--text-bright);
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+}
+
+.status-indicator.pulse {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 6px rgba(255, 255, 255, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+  }
+}
+
+.status-text {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-bright);
+  letter-spacing: 0.02em;
+}
+
+/* Main content area - Follows Law of Proximity */
+.countdown-content {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 1.75rem;
+}
+
+.circular-display {
+  position: relative;
+  flex-shrink: 0;
+  width: 120px;
+  height: 120px;
+}
+
+.circular-display svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* Time display - Follows Visual Hierarchy */
+.time-display {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.days-number {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--text-bright);
+  line-height: 1;
+}
+
+.days-label {
+  color: var(--text-tertiary);
+  font-size: 0.7rem;
+  margin-top: 0.2rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.8;
+}
+
+/* Timeline info - Follows Law of Common Region */
+.timeline-info {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.info-primary {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.timeline-date {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--text-bright);
+  letter-spacing: -0.01em;
+}
+
+.timeline-label {
+  font-size: 0.85rem;
+  color: var(--text-tertiary);
+  opacity: 0.9;
+}
+
+/* Detailed time display */
+.detailed-time {
+  display: flex;
+  align-items: center;
+  margin-top: 0.5rem;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 8px;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.time-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 40px;
+}
+
+.time-value {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-bright);
+  line-height: 1;
+}
+
+.time-label {
+  color: var(--text-tertiary);
+  font-size: 0.6rem;
+  margin-top: 0.2rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.time-separator {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  font-weight: 300;
+  margin: 0 0.2rem;
+  line-height: 1;
+  padding-bottom: 1rem;
+}
+
+.info-secondary {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-top: 0.25rem;
+}
+
+/* Tags - Follows Aesthetic-Usability Effect */
+.tag {
+  padding: 0.35rem 0.75rem;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 4px;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.urgency-tag {
+  background: rgba(255, 204, 0, 0.1);
+  color: rgba(255, 174, 43, 0.9);
+  border-color: rgba(255, 204, 0, 0.3);
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .circular-countdown-container {
+    padding: 1.25rem;
+  }
+  
+  .countdown-content {
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: center;
+  }
+  
+  .timeline-info {
+    align-items: center;
+    text-align: center;
+  }
+  
+  .info-secondary {
+    justify-content: center;
+  }
+  
+  .detailed-time {
+    justify-content: center;
+  }
+}
+
+/* Simplified Countdown Timer Styles with better font rendering */
+.simplified-countdown-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  max-width: 600px;
+  position: relative;
+}
+
+/* Add a pseudo-element for the pulse effect */
+.simplified-countdown-container::after {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 60, 60, 0);
+  pointer-events: none;
+  animation: red-pulse 5s infinite ease-in-out;
+  z-index: -1;
+}
+
+/* Pulse animation that happens every 7 seconds */
+@keyframes red-pulse {
+  0%, 85% {
+    border-color: rgba(255, 60, 60, 0);
+    box-shadow: 0 0 0 rgba(255, 60, 60, 0);
+  }
+  90% {
+    border-color: rgba(255, 60, 60, 0.7);
+    box-shadow: 0 0 20px rgba(255, 60, 60, 0.3);
+  }
+  95% {
+    border-color: rgba(255, 60, 60, 0.4);
+    box-shadow: 0 0 10px rgba(255, 60, 60, 0.1);
+  }
+  100% {
+    border-color: rgba(255, 60, 60, 0);
+    box-shadow: 0 0 0 rgba(255, 60, 60, 0);
+  }
+}
+
+/* Add a subtle pulse to the time values as well */
+.time-value {
+  /* Existing properties */
+  font-family: var(--font-display, Georgia, serif);
+  font-size: 3rem;
+  font-weight: 400;
+  line-height: 1;
+  color: var(--text-bright, rgba(255, 255, 255, 0.95));
+  position: relative;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+  
+  /* Add the color pulse */
+  animation: text-pulse 5s infinite ease-in-out;
+}
+
+@keyframes text-pulse {
+  0%, 85% {
+    color: var(--text-bright, rgba(255, 255, 255, 0.95));
+    text-shadow: none;
+  }
+  90% {
+    color: rgba(255, 220, 220, 1);
+    text-shadow: 0 0 8px rgba(255, 60, 60, 0.3);
+  }
+  95% {
+    color: rgba(255, 200, 200, 0.95);
+    text-shadow: 0 0 4px rgba(255, 60, 60, 0.1);
+  }
+  100% {
+    color: var(--text-bright, rgba(255, 255, 255, 0.95));
+    text-shadow: none;
+  }
+}
+
+/* Countdown units - unified layout */
+.countdown-units {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 0.5rem 0;
+  position: relative;
+}
+
+.time-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 60px;
+  padding: 0 0.5rem;
+  position: relative;
+}
+
+.time-label {
+  font-family: var(--font-body, sans-serif);
+  color: var(--text-tertiary, rgba(255, 255, 255, 0.7)); 
+  font-size: 0.7rem;
+  margin-top: 0.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  opacity: 0.7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.time-separator {
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 2.5rem;
+  font-weight: 300; /* Changed from 200 to 300 for better rendering */
+  margin: 0 -0.2rem;
+  line-height: 1;
+  padding-bottom: 1.3rem;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Message design */
+.countdown-message {
+  font-family: var(--font-body, sans-serif);
+  font-size: 0.9rem;
+  color: var(--text-secondary, rgba(255, 255, 255, 0.8));
+  text-align: center;
+  opacity: 0.9;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .simplified-countdown-container {
+    width: 90%;
+  }
+  
+  .time-unit {
+    min-width: 50px;
+  }
+  
+  .time-value {
+    font-size: 2.5rem;
+  }
+  
+  .time-separator {
+    font-size: 2rem;
+    padding-bottom: 1.2rem;
+  }
+  
+  .time-label {
+    font-size: 0.65rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .time-value {
+    font-size: 1.8rem;
+    font-weight: 400;
+  }
+  
+  .time-separator {
+    font-size: 1.6rem;
+    padding-bottom: 0.9rem;
+  }
+  
+  .time-unit {
+    min-width: 40px;
+  }
+}

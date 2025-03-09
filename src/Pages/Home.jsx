@@ -22,6 +22,7 @@ import {
   IoBriefcase, // B2B
   IoPeople // B2C
 } from 'react-icons/io5';
+import CountdownTimer from '../components/CountdownTimer';
 
 const caseStudyCategories = {
   ux: { 
@@ -164,12 +165,14 @@ export default function Home() {
             animate={{ opacity: 1 }}
             className="hero-content"
             style={{ 
-              marginTop: '-25vh'
+              marginTop: '-15vh'
             }}
           >
-            <p className = 'occupation'>Experience Designer</p>
+            <p className='occupation'>Experience Designer</p>
             <h1 className='hero-display'>Namit Kapoor</h1>
-            <AnimatedTagline />
+            
+            {/* Countdown Timer is now more prominent */}
+            <CountdownTimer targetDate="July 2, 2025" />
           </motion.div>
 
           <Canvas

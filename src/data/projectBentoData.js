@@ -18,7 +18,7 @@ export const projectBentoData = {
       {
         content: {
           type: 'video',
-          src: "./videos/Experiments/Head Gestures/Head Gesture - VR Interaction.mp4",
+          src: "./videos/Experiments/Head Gestures/Accessible VR Head gesture.mp4",
           alt: "VR Interaction",
           description: "VR Interaction",
           objectFit: 'cover'
@@ -48,7 +48,45 @@ export const projectBentoData = {
           objectFit: 'cover'
         },
         size: 'medium'
+      },
+      {
+        content: {
+          type: 'video',
+          src: "./videos/Experiments/Owlette/Owlette - Rebirth of a Spirit Guide.mp4",
+          alt: "Owl blinking",
+          description: "Owl blinking",
+          objectFit: 'cover'
+        },
+        size: 'medium'
       }
+    ]
+  },
+  "Dichotomy Within": {
+    bentoItems: [
+      {
+        content: {
+          type: 'video',
+          src: "./videos/Experiments/Dichotomy within/Dichotomy within.mp4",
+          alt: "Dichotomy Within",
+          description: "Dichotomy Within",
+          objectFit: 'cover'
+        },
+        size: 'medium'
+      }     
+    ]
+  },
+  "Wanda": {
+    bentoItems: [
+      {
+        content: {
+          type: 'video',
+          src: "./videos/Experiments/Wanda/Wanda ISTS videos.mp4",
+          alt: "Wanda",
+          description: "Wanda",
+          objectFit: 'cover'
+        },
+        size: 'medium'
+      }     
     ]
   },
   "Central Ciborium": {
@@ -167,6 +205,16 @@ export const projectBentoData = {
     bentoItems: [
       {
         content: {
+          type: 'video',
+          src: "./videos/Experiments/Tiptoe/Macy's Tiptoe - The Holiday Reindeer portfolio reel.mp4",
+          alt: "All Hats",
+          description: "Complete vertical composition",
+          objectFit: 'cover'
+        },
+        size: 'medium'
+      },
+      {
+        content: {
           type: 'image',
           src: "./images/Experiments/Tiptoe/Weight paint.jpg",
           alt: "All Hats",
@@ -185,6 +233,7 @@ export const projectBentoData = {
         },
         size: 'medium'
       },
+      
     ]
   },
   "Mother's Day Gifts": {

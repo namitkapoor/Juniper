@@ -11,8 +11,9 @@ import Overview from '../../components/Overview';
 import OtherProjects from '../../components/OtherProjects';
 
 export default function InfluencerMarketing() {
-  const [expandedSections, setExpandedSections] = useState(new Set());
-  const [timelineProgress, setTimelineProgress] = useState(0);
+  const [expandedSections, setExpandedSections] = useState(
+    new Set(['strategicApproach', 'approach0', 'measurableResults'])
+  );  const [timelineProgress, setTimelineProgress] = useState(0);
 
   useEffect(() => {
     window.scrollTo(0, 0);

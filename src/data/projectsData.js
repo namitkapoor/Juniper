@@ -7,6 +7,12 @@ export const projects = [
     image: "./images/Experiments/La Mer/just bottle.png",
   },
   {
+    title: "VR Head Gestures",
+    description: "new interaction modality for notifications in VR",
+    categories: ['motion', 'spatial', 'interactive'],
+    image: "./images/Experiments/Head Gestures/UI Design 1.png",
+  },
+  {
     title: "Tiptoe",
     description: "Macy's 2021 Holiday Campaign Mascot made AR ready using Blender and three.js",
     categories: ['motion', 'spatial'],

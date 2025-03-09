@@ -11,8 +11,10 @@ import Overview from '../../components/Overview';
 import OtherProjects from '../../components/OtherProjects';
 
 export default function SustainablePackaging() {
-  const [expandedSections, setExpandedSections] = useState(new Set());
-  const [timelineProgress, setTimelineProgress] = useState(0);
+  const [expandedSections, setExpandedSections] = useState(
+    new Set(['strategicApproach', 'approach0', 'measurableResults'])
+  );
+  const [timelineProgress, setTimelineProgress] = useState(25);
 
   // Add scroll to top effect
   useEffect(() => {
