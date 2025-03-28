@@ -5,6 +5,7 @@ import { projects, categories } from '../data/projectsData';
 import { projectBentoData } from '../data/projectBentoData';
 import '../style/voidExperiments.css';
 import { FaVolumeMute, FaVolumeUp, FaPlay, FaPause } from 'react-icons/fa';
+import ModelViewer from './ModelViewer';
 
 export default function VoidExperiments() {
     const [activeCategories, setActiveCategories] = useState(new Set());
@@ -264,10 +265,10 @@ export default function VoidExperiments() {
                             </div>
                             <h3>{project.title}</h3>
                             <div className="void-project-image-container">
-                                <img 
-                                    src={project.image} 
-                                    alt={project.title}
-                                    className="void-project-image"
+                                <ModelViewer 
+                                    modelPath={project.model}
+                                    imagePath={project.image}
+                                    title={project.title}
                                 />
                             </div>
                             <p>{project.description}</p>
