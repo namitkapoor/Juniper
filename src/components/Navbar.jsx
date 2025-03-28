@@ -51,7 +51,7 @@ export default function Navbar() {
         };
     }, []);
 
-    return <>
+    return (
         <div className="navigation">
             <div className="nav-items">
                 <div className="logo-container">
@@ -132,10 +132,11 @@ export default function Navbar() {
                 </div>
                 
                 <div className="nav-links">
+                    <Link className={`nav-item ${location.pathname === '/void' ? 'active' : ''}`} to="/void">void</Link>
                     <Link className={`nav-item ${location.pathname === '/about' ? 'active' : ''}`} to="/about">about</Link>
                     <a className="nav-item" href="/files/KapoorNamit_Resume.pdf" target="_blank" rel="noopener noreferrer">resume</a>
                 </div>
             </div>
         </div>
-    </>
+    );
 }
