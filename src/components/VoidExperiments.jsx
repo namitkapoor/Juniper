@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import ProjectBentoGrid from './ProjectBentoGrid';
 import { projects, categories } from '../data/projectsData';
 import { projectBentoData } from '../data/projectBentoData';
-import '../style/experiments.css';
+import '../style/voidExperiments.css';
 import { FaVolumeMute, FaVolumeUp, FaPlay, FaPause } from 'react-icons/fa';
 
 export default function VoidExperiments() {
@@ -165,14 +165,14 @@ export default function VoidExperiments() {
     };
 
     return (
-        <section className="experiments-section">
-            <h2 className='experiments-title'>Innovation Portfolio</h2>
+        <section className="void-experiments-section">
+            <h2 className='void-experiments-title'>Innovation Portfolio</h2>
             
             {/* Featured Video Showcase */}
-            <div className="featured-video-container">
+            <div className="void-featured-video-container">
                 <video 
                     ref={videoRef}
-                    className="featured-video"
+                    className="void-featured-video"
                     src="./videos/Experiments/Portfolio Reel/Portfolio Reel - 3D.mp4" 
                     autoPlay 
                     loop 
@@ -184,17 +184,16 @@ export default function VoidExperiments() {
                     Your browser does not support the video tag.
                 </video>
                 
-                {/* Separate play/pause button with its own click handler */}
                 <button 
-                    className="video-play-button"
+                    className="void-video-play-button"
                     onClick={togglePlayPause}
                 >
                     {isPlaying ? <FaPause /> : <FaPlay />}
                 </button>
                 
-                <div className="video-controls" onClick={e => e.stopPropagation()}>
+                <div className="void-video-controls" onClick={e => e.stopPropagation()}>
                     <button 
-                        className="video-mute-toggle" 
+                        className="void-video-mute-toggle" 
                         onClick={toggleMute}
                         onMouseEnter={() => setShowVolumeSlider(true)}
                     >
@@ -202,7 +201,7 @@ export default function VoidExperiments() {
                     </button>
                     
                     <div 
-                        className={`volume-slider-container ${showVolumeSlider ? 'visible' : ''}`}
+                        className={`void-volume-slider-container ${showVolumeSlider ? 'visible' : ''}`}
                         onMouseLeave={() => setShowVolumeSlider(false)}
                     >
                         <input
@@ -212,18 +211,18 @@ export default function VoidExperiments() {
                             step="0.01"
                             value={volume}
                             onChange={handleVolumeChange}
-                            className="volume-slider"
+                            className="void-volume-slider"
                         />
                     </div>
                 </div>
             </div>
 
-            <div className="categories-container">
-                <div className="categories-buttons">
+            <div className="void-categories-container">
+                <div className="void-categories-buttons">
                     {Object.entries(categories).map(([key, { name, color }]) => (
                         <motion.button
                             key={key}
-                            className={`category-button ${activeCategories.has(key) ? 'active' : ''}`}
+                            className={`void-category-button ${activeCategories.has(key) ? 'active' : ''}`}
                             onClick={() => toggleCategory(key)}
                             whileHover={{ scale: 1.05 }}
                             style={{
@@ -237,12 +236,12 @@ export default function VoidExperiments() {
                 </div>
             </div>
 
-            <motion.div className="projects-grid" layout>
+            <motion.div className="void-projects-grid" layout>
                 <AnimatePresence>
                     {sortProjects(projects).map((project) => (
                         <motion.div
                             key={project.title}
-                            className={`project-card ${expandedProject === project.title ? 'expanded' : ''}`}
+                            className={`void-project-card ${expandedProject === project.title ? 'expanded' : ''}`}
                             layout
                             initial={{ opacity: 0, scale: 0.8 }}
                             animate={{ 
@@ -252,11 +251,11 @@ export default function VoidExperiments() {
                             exit={{ opacity: 0, scale: 0.8 }}
                             transition={{ duration: 0.3 }}
                         >
-                            <div className="project-categories">
+                            <div className="void-project-categories">
                                 {project.categories.map(cat => (
                                     <span 
                                         key={cat} 
-                                        className="category-tag"
+                                        className="void-category-tag"
                                         style={{ '--category-color': categories[cat].color }}
                                     >
                                         {categories[cat].name}
@@ -264,30 +263,30 @@ export default function VoidExperiments() {
                                 ))}
                             </div>
                             <h3>{project.title}</h3>
-                            <div className="project-image-container">
+                            <div className="void-project-image-container">
                                 <img 
                                     src={project.image} 
                                     alt={project.title}
-                                    className="project-image"
+                                    className="void-project-image"
                                 />
                             </div>
                             <p>{project.description}</p>
                             
                             {projectBentoData[project.title] && (
                                 <motion.button
-                                    className="expand-button"
+                                    className="void-expand-button"
                                     onClick={() => handleProjectExpand(project.title)}
                                     animate={{ rotate: expandedProject === project.title ? 180 : 0 }}
                                     transition={{ duration: 0.3 }}
                                 >
-                                    <span className="expand-icon">▼</span>
+                                    <span className="void-expand-icon">▼</span>
                                 </motion.button>
                             )}
 
                             <AnimatePresence>
                                 {expandedProject === project.title && projectBentoData[project.title] && (
                                     <motion.div
-                                        className="project-bento-container"
+                                        className="void-project-bento-container"
                                         initial={{ height: 0, opacity: 0 }}
                                         animate={{ height: 'auto', opacity: 1 }}
                                         exit={{ height: 0, opacity: 0 }}
