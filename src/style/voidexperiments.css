@@ -34,7 +34,6 @@
 .void-categories-container {
   position: sticky;
   top: 80px; /* Adjust based on your navbar height */
-  background: rgba(0, 0, 0, 0.4);
   backdrop-filter: blur(10px);
   padding: 1rem 0;
   z-index: 10;
@@ -117,6 +116,7 @@
 
 .void-project-categories {
   display: flex;
+  justify-content: center;
   gap: 0.5rem;
   flex-wrap: wrap;
   margin-bottom: 1rem;
@@ -150,8 +150,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(0, 0, 0, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .void-project-image {

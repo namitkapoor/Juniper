@@ -10,11 +10,14 @@
 }
 
 .void-page {
-  overflow: hidden;
-  background: #000;
+  background-color: var(--background);
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
 }
 
-/* Starfield effect */
+/* Starfield effect - more subtle */
 .void-page::before {
   content: '';
   position: fixed;
@@ -41,6 +44,9 @@
 
 /* Content wrapper */
 .void-content {
+  flex: 1;
+  position: relative;
+  z-index: 2;
   padding: 2rem;
   max-width: 1400px;
   margin: 0 auto;
@@ -67,6 +73,7 @@
 
 /* Ensure proper spacing between sections */
 .void-experiments-section {
+    margin-top: 3rem;
     margin-bottom: 4rem;
 }
 
@@ -97,12 +104,66 @@
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-    .void-page {
-        padding-top: 1rem;
-    }
-    .void-page .experiments-section {
-        padding-top: 100px;
-        padding-left: 20px;
-        padding-right: 20px;
-    }
+  .void-content {
+    padding: 1.5rem 1rem;
+    padding-top: calc(60px + 1.5rem);
+  }
+  
+  .page-spinner {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .page-loader-content h2 {
+    font-size: 1.5rem;
+  }
+  
+  .void-experiments-section {
+    margin-top: 2rem;
+    margin-bottom: 3rem;
+  }
+}
+
+/* Make sure the page loader covers everything and has a pure black background */
+.page-loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--background);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.page-loader-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.page-spinner {
+  width: 60px;
+  height: 60px;
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  border-top-color: var(--text-bright);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.page-loader-content h2 {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: var(--weight-thin);
+  color: var(--text-bright);
+  letter-spacing: var(--display-letter-spacing);
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 } 

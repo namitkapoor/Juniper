@@ -9,7 +9,6 @@ import { useNavigate } from 'react-router-dom';
 import Navbar from "../components/Navbar.jsx";
 import "../style/home.css";
 import { IoLockClosed, IoArrowForward, IoChevronDown } from 'react-icons/io5';
-import Experiments from '../components/Experiments';
 import AnimatedTagline from '../components/AnimatedTagline';
 import LoaderScreen from '../components/LoaderScreen';
 import { 
@@ -324,8 +323,8 @@ export default function Home() {
           </motion.div>
         </section>
 
-        {/* Extra Work Section */}
-        <Experiments />
+        {/* Extra Work Section - commented out since we have a separate page */}
+        {/* <Experiments /> */}
 
         {/* Contact Section */}
         <Contact />

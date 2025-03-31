@@ -45,7 +45,7 @@ export default function VoidExperiments() {
     return (
         <section className="void-experiments-section">
             <div className="void-experiments-header">
-                <h2 className="void-experiments-title">Experiments & Projects</h2>
+                <h2 className="void-experiments-title">Past Work</h2>
                 <p className="void-experiments-subtitle">
                     A collection of creative explorations in interactive design, 3D, and motion
                 </p>

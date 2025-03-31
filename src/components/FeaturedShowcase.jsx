@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaVolumeMute, FaVolumeUp, FaPlay, FaPause, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import IframeLoader from './IframeLoader';
 import '../style/featuredShowcase.css';
 
 export default function FeaturedShowcase() {
@@ -9,27 +10,49 @@ export default function FeaturedShowcase() {
     const [isPlaying, setIsPlaying] = useState(true);
     const [volume, setVolume] = useState(1);
     const [showVolumeSlider, setShowVolumeSlider] = useState(false);
+    const [iframeLoaded, setIframeLoaded] = useState(false);
     const videoRef = useRef(null);
+    const iframeRef = useRef(null);
+    
+    const handleIframeLoad = () => {
+        // Set a short delay to make sure the iframe content is fully rendered
+        setTimeout(() => {
+            setIframeLoaded(true);
+        }, 1500);
+    };
+    
+    // Reset iframe loaded state when switching showcases
+    useEffect(() => {
+        if (currentIndex === 0) {
+            setIframeLoaded(false);
+        }
+    }, [currentIndex]);
     
     const showcases = [
         {
             type: 'audio-reactive',
             title: 'Sound Waves in Space',
-            description: "An interactive audio-reactive visualization exploring sound in the void.",
+            description: "An interactive audio-reactive visualization that transforms sound into stunning visual patterns.",
             component: (
-                <iframe
-                    src="https://waddle-tunes.vercel.app/"
-                    title="Interactive Sound Visualization"
-                    className="showcase-frame"
-                    allow="autoplay; microphone"
-                    loading="lazy"
-                />
+                <div className="iframe-container">
+                    <IframeLoader loaded={iframeLoaded} />
+                    <iframe
+                        ref={iframeRef}
+                        src="https://waddle-tunes.vercel.app/"
+                        title="Interactive Sound Visualization"
+                        className="showcase-frame"
+                        allow="autoplay; microphone; camera; fullscreen"
+                        loading="lazy"
+                        sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox allow-downloads"
+                        onLoad={handleIframeLoad}
+                    />
+                </div>
             )
         },
         {
             type: 'video',
             title: 'Recent Work',
-            description: "A glimpse into my experiments with motion and interaction.",
+            description: "A glimpse into my experiments with 3D, motion, and interaction design.",
             component: (
                 <div className="video-container">
                     <video 
@@ -56,7 +79,7 @@ export default function FeaturedShowcase() {
                             }
                         }}
                     >
-                        {isPlaying ? <FaPause /> : <FaPlay />}
+                        {isPlaying ? <FaPause size={20} /> : <FaPlay size={20} />}
                     </button>
                     <div className="video-controls">
                         <button 
@@ -68,8 +91,19 @@ export default function FeaturedShowcase() {
                                 }
                             }}
                             onMouseEnter={() => setShowVolumeSlider(true)}
+                            style={{ 
+                                background: 'transparent', 
+                                border: 'none', 
+                                color: 'white',
+                                cursor: 'pointer',
+                                padding: '0.5rem',
+                                borderRadius: '4px',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center'
+                            }}
                         >
-                            {isMuted ? <FaVolumeMute /> : <FaVolumeUp />}
+                            {isMuted ? <FaVolumeMute size={18} /> : <FaVolumeUp size={18} />}
                         </button>
                         <div 
                             className={`volume-slider-container ${showVolumeSlider ? 'visible' : ''}`}
@@ -151,10 +185,10 @@ export default function FeaturedShowcase() {
                     </motion.div>
                 </AnimatePresence>
 
-                <button className="showcase-nav prev" onClick={prevShowcase}>
+                <button className="showcase-nav prev" onClick={prevShowcase} aria-label="Previous showcase">
                     <FaChevronLeft />
                 </button>
-                <button className="showcase-nav next" onClick={nextShowcase}>
+                <button className="showcase-nav next" onClick={nextShowcase} aria-label="Next showcase">
                     <FaChevronRight />
                 </button>
 
@@ -164,6 +198,7 @@ export default function FeaturedShowcase() {
                             key={index}
                             className={`indicator ${index === currentIndex ? 'active' : ''}`}
                             onClick={() => setCurrentIndex(index)}
+                            aria-label={`Go to showcase ${index + 1}`}
                         />
                     ))}
                 </div>
