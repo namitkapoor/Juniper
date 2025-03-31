@@ -1,0 +1,219 @@
+.featured-showcase {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    position: relative;
+}
+
+.showcase-container {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    border-radius: 12px;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.showcase-content {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.showcase-title {
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    font-weight: var(--font-weight-light);
+    color: white;
+    z-index: 10;
+    margin: 0;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.showcase-frame,
+.showcase-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border: none;
+}
+
+/* Video controls */
+.video-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.video-play-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    opacity: 0;
+}
+
+.video-container:hover .video-play-button {
+    opacity: 1;
+}
+
+.video-controls {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    display: flex;
+    align-items: center;
+    z-index: 10;
+}
+
+.video-mute-toggle {
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.volume-slider-container {
+    position: absolute;
+    right: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 20px;
+    height: 40px;
+    width: 0;
+    overflow: hidden;
+    transition: width 0.3s ease;
+    margin-right: 0.5rem;
+    display: flex;
+    align-items: center;
+}
+
+.volume-slider-container.visible {
+    width: 100px;
+    padding: 0 1rem;
+}
+
+.volume-slider {
+    width: 100%;
+    -webkit-appearance: none;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+    height: 4px;
+}
+
+.volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: white;
+    cursor: pointer;
+}
+
+/* Navigation buttons */
+.showcase-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 10;
+    opacity: 0;
+}
+
+.showcase-container:hover .showcase-nav {
+    opacity: 1;
+}
+
+.showcase-nav.prev {
+    left: 1rem;
+}
+
+.showcase-nav.next {
+    right: 1rem;
+}
+
+.showcase-nav:hover {
+    background: rgba(0, 0, 0, 0.8);
+    transform: translateY(-50%) scale(1.1);
+}
+
+/* Indicators */
+.showcase-indicators {
+    position: absolute;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 0.5rem;
+    z-index: 10;
+}
+
+.indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+}
+
+.indicator.active {
+    background: white;
+    transform: scale(1.2);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .featured-showcase {
+        padding: 1rem;
+    }
+
+    .showcase-title {
+        font-size: 1.75rem;
+        top: 1rem;
+        left: 1rem;
+    }
+
+    .showcase-nav {
+        width: 32px;
+        height: 32px;
+    }
+
+    .video-play-button {
+        width: 48px;
+        height: 48px;
+    }
+} 

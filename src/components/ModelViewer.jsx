@@ -1,56 +1,26 @@
 import React, { Suspense, useState, useEffect, useRef } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, useGLTF, Center, PerspectiveCamera, Environment } from '@react-three/drei';
-import { useControls } from 'leva';
+// import { useControls } from 'leva';
 
 function Model({ url, title }) {
     console.log('Attempting to load model from URL:', url);
     const modelRef = useRef();
     const timeRef = useRef(0);
     
-    // Create Leva controls for this specific model
-    const controls = useControls(title, {
-        scale: { value: title === "Holiday Box" ? 0.3 : title === "Treatment Lotion" ? 1.9 : 2, min: 0.1, max: 20, step: 0.1 },
-        wiggleEnabled: { value: true, label: "Gentle Wiggle" },
-        wiggleAmount: { value: 0.10, min: 0, max: 0.5, step: 0.01, label: "Wiggle Amount" },
-        wiggleSpeed: { value: 1.0, min: 0.1, max: 2, step: 0.1, label: "Wiggle Speed" },
-        rotationX: { 
-            value: title === "Holiday Box" ? 0.49 : title === "Treatment Lotion" ? -1.60 : 0, 
-            min: -Math.PI, 
-            max: Math.PI, 
-            step: 0.01 
-        },
-        rotationY: { 
-            value: title === "Holiday Box" ? -0.34 : title === "Treatment Lotion" ? -1.60 : 0, 
-            min: -Math.PI, 
-            max: Math.PI, 
-            step: 0.01 
-        },
-        rotationZ: { 
-            value: title === "Holiday Box" ? -0.34 : title === "Treatment Lotion" ? -0.80 : 0, 
-            min: -Math.PI, 
-            max: Math.PI, 
-            step: 0.01 
-        },
-        positionX: { 
-            value: title === "Holiday Box" ? -1.9 : title === "Treatment Lotion" ? 3.1 : 0, 
-            min: -20, 
-            max: 20, 
-            step: 0.1 
-        },
-        positionY: { 
-            value: title === "Holiday Box" ? 17.8 : title === "Treatment Lotion" ? 5.0 : 0, 
-            min: -20, 
-            max: 20, 
-            step: 0.1 
-        },
-        positionZ: { 
-            value: title === "Holiday Box" ? 1.5 : title === "Treatment Lotion" ? 5.0 : 0, 
-            min: -20, 
-            max: 20, 
-            step: 0.1 
-        }
-    });
+    // Default values instead of Leva controls
+    const defaultControls = {
+        scale: title === "Holiday Box" ? 0.3 : title === "Treatment Lotion" ? 1.9 : 2,
+        wiggleEnabled: true,
+        wiggleAmount: 0.10,
+        wiggleSpeed: 1.0,
+        rotationX: title === "Holiday Box" ? 0.49 : title === "Treatment Lotion" ? -1.60 : 0,
+        rotationY: title === "Holiday Box" ? -0.34 : title === "Treatment Lotion" ? -1.60 : 0,
+        rotationZ: title === "Holiday Box" ? -0.34 : title === "Treatment Lotion" ? -0.80 : 0,
+        positionX: title === "Holiday Box" ? -1.9 : title === "Treatment Lotion" ? 3.1 : 0,
+        positionY: title === "Holiday Box" ? 17.8 : title === "Treatment Lotion" ? 5.0 : 0,
+        positionZ: title === "Holiday Box" ? 1.5 : title === "Treatment Lotion" ? 5.0 : 0
+    };
     
     // Remove any leading dot from the path
     const cleanUrl = url.startsWith('.') ? url.substring(1) : url;
@@ -61,18 +31,11 @@ function Model({ url, title }) {
         
         // Gentle wiggle animation
         useFrame((state, delta) => {
-            if (modelRef.current && controls.wiggleEnabled) {
-                // Increment time
-                timeRef.current += delta * controls.wiggleSpeed;
-                
-                // Create a smooth sine wave motion
-                const wiggle = Math.sin(timeRef.current) * controls.wiggleAmount;
-                
-                // Apply the wiggle to the model's rotation
-                modelRef.current.rotation.y = controls.rotationY + wiggle;
-                
-                // Add a subtle tilt for more organic motion
-                modelRef.current.rotation.x = controls.rotationX + (Math.sin(timeRef.current * 0.5) * controls.wiggleAmount * 0.3);
+            if (modelRef.current && defaultControls.wiggleEnabled) {
+                timeRef.current += delta * defaultControls.wiggleSpeed;
+                const wiggle = Math.sin(timeRef.current) * defaultControls.wiggleAmount;
+                modelRef.current.rotation.y = defaultControls.rotationY + wiggle;
+                modelRef.current.rotation.x = defaultControls.rotationX + (Math.sin(timeRef.current * 0.5) * defaultControls.wiggleAmount * 0.3);
             }
         });
 
@@ -81,9 +44,9 @@ function Model({ url, title }) {
                 <primitive 
                     ref={modelRef}
                     object={scene} 
-                    scale={controls.scale}
-                    position={[controls.positionX, controls.positionY, controls.positionZ]}
-                    rotation={[controls.rotationX, controls.rotationY, controls.rotationZ]}
+                    scale={defaultControls.scale}
+                    position={[defaultControls.positionX, defaultControls.positionY, defaultControls.positionZ]}
+                    rotation={[defaultControls.rotationX, defaultControls.rotationY, defaultControls.rotationZ]}
                 />
             </Center>
         );
@@ -96,65 +59,38 @@ function Model({ url, title }) {
 export default function ModelViewer({ modelPath, imagePath, title }) {
     const [modelError, setModelError] = useState(false);
     
-    // Camera controls
-    const { cameraPosition, fov } = useControls('Camera', {
-        cameraPosition: {
-            value: { x: 0.0, y: 11.6, z: 7.2 },
-            step: 0.1
-        },
-        fov: { value: 45, min: 20, max: 120, step: 1 }
-    });
+    // Default camera values instead of Leva controls
+    const defaultCamera = {
+        position: { x: 0.0, y: 11.6, z: 7.2 },
+        fov: 45
+    };
 
-    // Environment and lighting controls
-    const { envPreset, envIntensity } = useControls('Environment', {
-        envPreset: {
-            value: 'apartment',
-            options: ['sunset', 'dawn', 'night', 'warehouse', 'forest', 'apartment', 'studio', 'city', 'park', 'lobby']
-        },
-        envIntensity: { value: 1.0, min: 0, max: 5, step: 0.1 }
-    });
+    // Default environment values
+    const defaultEnv = {
+        preset: 'apartment',
+        intensity: 1.0
+    };
 
-    // Main lighting controls
-    const lighting = useControls('Lighting', {
-        // Ambient Light
-        ambientIntensity: { value: 0.0, min: 0, max: 10, step: 0.1 },
-        
-        // Key Light (Warm)
-        keyLightIntensity: { value: 1.8, min: 0, max: 10, step: 0.1 },
+    // Default lighting values
+    const defaultLighting = {
+        ambientIntensity: 0.0,
+        keyLightIntensity: 1.8,
         keyLightColor: '#ffa32a',
-        keyLightPosition: { 
-            value: { x: 5.0, y: 5.0, z: 5.0 },
-            step: 0.1
-        },
-        
-        // Fill Light (Cool)
-        fillLightIntensity: { value: 1.9, min: 0, max: 10, step: 0.1 },
+        keyLightPosition: { x: 5.0, y: 5.0, z: 5.0 },
+        fillLightIntensity: 1.9,
         fillLightColor: '#e0f2fe',
-        fillLightPosition: {
-            value: { x: -23.5, y: -19.5, z: -8.1 },
-            step: 0.1
-        },
-        
-        // Top Light
-        topLightIntensity: { value: 4.0, min: 0, max: 10, step: 0.1 },
+        fillLightPosition: { x: -23.5, y: -19.5, z: -8.1 },
+        topLightIntensity: 4.0,
         topLightColor: '#ffffff',
-        topLightAngle: { value: 0.6, min: 0, max: Math.PI/2, step: 0.1 },
-        topLightPenumbra: { value: 1.0, min: 0, max: 1, step: 0.1 },
-        
-        // Ground Bounce
-        groundIntensity: { value: 1.5, min: 0, max: 10, step: 0.1 },
+        topLightAngle: 0.6,
+        topLightPenumbra: 1.0,
+        groundIntensity: 1.5,
         groundColor: '#d1d5db',
-        
-        // Rim Light
-        rimLightIntensity: { value: 2.0, min: 0, max: 10, step: 0.1 },
+        rimLightIntensity: 2.0,
         rimLightColor: '#818cf8',
-        rimLightPosition: {
-            value: { x: -10.0, y: 0.0, z: -10.0 },
-            step: 0.1
-        }
-    });
+        rimLightPosition: { x: -10.0, y: 0.0, z: -10.0 }
+    };
 
-    // If no model path is provided or there was an error loading the model, show the image
     if (!modelPath || modelError) {
         console.log('Falling back to image:', imagePath);
         return (
@@ -177,54 +113,48 @@ export default function ModelViewer({ modelPath, imagePath, title }) {
             >
                 <PerspectiveCamera 
                     makeDefault 
-                    position={[cameraPosition.x, cameraPosition.y, cameraPosition.z]} 
-                    fov={fov}
+                    position={[defaultCamera.position.x, defaultCamera.position.y, defaultCamera.position.z]} 
+                    fov={defaultCamera.fov}
                 />
                 
                 <Environment 
-                    preset={envPreset}
+                    preset={defaultEnv.preset}
                     background={false}
-                    intensity={envIntensity}
+                    intensity={defaultEnv.intensity}
                 />
 
-                {/* Enhanced lighting setup with Leva controls */}
-                <ambientLight intensity={lighting.ambientIntensity} />
+                <ambientLight intensity={defaultLighting.ambientIntensity} />
                 
-                {/* Key light - warm */}
                 <directionalLight 
-                    position={[lighting.keyLightPosition.x, lighting.keyLightPosition.y, lighting.keyLightPosition.z]} 
-                    intensity={lighting.keyLightIntensity}
-                    color={lighting.keyLightColor}
+                    position={[defaultLighting.keyLightPosition.x, defaultLighting.keyLightPosition.y, defaultLighting.keyLightPosition.z]} 
+                    intensity={defaultLighting.keyLightIntensity}
+                    color={defaultLighting.keyLightColor}
                 />
                 
-                {/* Fill light - cool */}
                 <directionalLight 
-                    position={[lighting.fillLightPosition.x, lighting.fillLightPosition.y, lighting.fillLightPosition.z]} 
-                    intensity={lighting.fillLightIntensity}
-                    color={lighting.fillLightColor}
+                    position={[defaultLighting.fillLightPosition.x, defaultLighting.fillLightPosition.y, defaultLighting.fillLightPosition.z]} 
+                    intensity={defaultLighting.fillLightIntensity}
+                    color={defaultLighting.fillLightColor}
                 />
                 
-                {/* Top light */}
                 <spotLight
                     position={[0, 10, 0]}
-                    angle={lighting.topLightAngle}
-                    penumbra={lighting.topLightPenumbra}
-                    intensity={lighting.topLightIntensity}
-                    color={lighting.topLightColor}
+                    angle={defaultLighting.topLightAngle}
+                    penumbra={defaultLighting.topLightPenumbra}
+                    intensity={defaultLighting.topLightIntensity}
+                    color={defaultLighting.topLightColor}
                 />
                 
-                {/* Ground bounce light */}
                 <hemisphereLight
                     skyColor="#ffffff"
-                    groundColor={lighting.groundColor}
-                    intensity={lighting.groundIntensity}
+                    groundColor={defaultLighting.groundColor}
+                    intensity={defaultLighting.groundIntensity}
                 />
                 
-                {/* Rim light */}
                 <pointLight
-                    position={[lighting.rimLightPosition.x, lighting.rimLightPosition.y, lighting.rimLightPosition.z]}
-                    intensity={lighting.rimLightIntensity}
-                    color={lighting.rimLightColor}
+                    position={[defaultLighting.rimLightPosition.x, defaultLighting.rimLightPosition.y, defaultLighting.rimLightPosition.z]}
+                    intensity={defaultLighting.rimLightIntensity}
+                    color={defaultLighting.rimLightColor}
                 />
 
                 <Suspense fallback={null}>

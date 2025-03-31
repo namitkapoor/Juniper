@@ -1,10 +1,21 @@
 .void-page {
     background-color: var(--background);
-    color: var(--text);
     min-height: 100vh;
-    width: 100%;
+    color: var(--text-primary);
     position: relative;
+    padding-top: 2rem;
     overflow-x: hidden;
+}
+
+/* Ensure proper spacing between sections */
+.void-experiments-section {
+    margin-bottom: 4rem;
+}
+
+/* Contact section specific styles for Void page */
+.void-page .contact-section {
+    margin-top: 2rem;
+    background: transparent;
 }
 
 .void-page .navigation {
@@ -28,6 +39,9 @@
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
+    .void-page {
+        padding-top: 1rem;
+    }
     .void-page .experiments-section {
         padding-top: 100px;
         padding-left: 20px;
