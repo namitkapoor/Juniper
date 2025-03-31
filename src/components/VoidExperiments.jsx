@@ -44,7 +44,12 @@ export default function VoidExperiments() {
 
     return (
         <section className="void-experiments-section">
-            <h2 className='void-experiments-title'>Recent Work</h2>
+            <div className="void-experiments-header">
+                <h2 className="void-experiments-title">Experiments & Projects</h2>
+                <p className="void-experiments-subtitle">
+                    A collection of creative explorations in interactive design, 3D, and motion
+                </p>
+            </div>
             
             <div className="void-categories-container">
                 <div className="void-categories-buttons">
@@ -80,26 +85,28 @@ export default function VoidExperiments() {
                             exit={{ opacity: 0, scale: 0.8 }}
                             transition={{ duration: 0.3 }}
                         >
-                            <div className="void-project-categories">
-                                {project.categories.map(cat => (
-                                    <span 
-                                        key={cat} 
-                                        className="void-category-tag"
-                                        style={{ '--category-color': categories[cat].color }}
-                                    >
-                                        {categories[cat].name}
-                                    </span>
-                                ))}
+                            <div className="void-project-content">
+                                <div className="void-project-categories">
+                                    {project.categories.map(cat => (
+                                        <span 
+                                            key={cat} 
+                                            className="void-category-tag"
+                                            style={{ '--category-color': categories[cat].color }}
+                                        >
+                                            {categories[cat].name}
+                                        </span>
+                                    ))}
+                                </div>
+                                <h3 className="void-project-title">{project.title}</h3>
+                                <div className="void-project-image-container">
+                                    <ModelViewer 
+                                        modelPath={project.model}
+                                        imagePath={project.image}
+                                        title={project.title}
+                                    />
+                                </div>
+                                <p className="void-project-description">{project.description}</p>
                             </div>
-                            <h3>{project.title}</h3>
-                            <div className="void-project-image-container">
-                                <ModelViewer 
-                                    modelPath={project.model}
-                                    imagePath={project.image}
-                                    title={project.title}
-                                />
-                            </div>
-                            <p>{project.description}</p>
                             
                             {projectBentoData[project.title] && (
                                 <motion.button

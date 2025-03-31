@@ -10,10 +10,8 @@
 }
 
 .void-page {
-  background-color: var(--void-bg);
-  min-height: 100vh;
-  position: relative;
   overflow: hidden;
+  background: #000;
 }
 
 /* Starfield effect */
@@ -43,9 +41,11 @@
 
 /* Content wrapper */
 .void-content {
-  position: relative;
-  z-index: 1;
   padding: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  /* Add space for navbar */
+  padding-top: calc(60px + 2rem);
 }
 
 /* Void text effect */

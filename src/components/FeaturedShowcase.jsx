@@ -14,7 +14,8 @@ export default function FeaturedShowcase() {
     const showcases = [
         {
             type: 'audio-reactive',
-            title: 'Interactive Sound Visualization',
+            title: 'Sound Waves in Space',
+            description: "An interactive audio-reactive visualization exploring sound in the void.",
             component: (
                 <iframe
                     src="https://waddle-tunes.vercel.app/"
@@ -28,6 +29,7 @@ export default function FeaturedShowcase() {
         {
             type: 'video',
             title: 'Recent Work',
+            description: "A glimpse into my experiments with motion and interaction.",
             component: (
                 <div className="video-container">
                     <video 
@@ -124,17 +126,27 @@ export default function FeaturedShowcase() {
 
     return (
         <section className="featured-showcase">
+            <div className="featured-header">
+                <h2 className="featured-title">Featured Work</h2>
+                <p className="featured-subtitle">
+                    Dive into my latest explorations in interactive design and creative technology
+                </p>
+            </div>
+
             <div className="showcase-container">
                 <AnimatePresence mode="wait">
                     <motion.div
                         key={currentIndex}
-                        initial={{ opacity: 0, x: 300 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        exit={{ opacity: 0, x: -300 }}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -20 }}
                         transition={{ duration: 0.5 }}
                         className="showcase-content"
                     >
-                        <h2 className="showcase-title">{showcases[currentIndex].title}</h2>
+                        <div className="showcase-info">
+                            <h3 className="showcase-title">{showcases[currentIndex].title}</h3>
+                            <p className="showcase-description">{showcases[currentIndex].description}</p>
+                        </div>
                         {showcases[currentIndex].component}
                     </motion.div>
                 </AnimatePresence>
