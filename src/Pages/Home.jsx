@@ -102,8 +102,9 @@ const caseStudies = [
     categories: ['ux', 'development','ai', 'b2b'],
     image: '../images/Project Cover Photos/Home Page.svg',
     description: 'Developed a chatbot-driven skincare recommendation platform, integrating computer vision to provide personalized product suggestions.',
-    path: '/case-study/personalize-skin-care',
-    comingSoon: true
+    path: 'https://sentry-skin-website.vercel.app/',
+    comingSoon: false,
+    isExternal: true
   },
 ];
 
@@ -259,7 +260,13 @@ export default function Home() {
                   }}
                   exit={{ opacity: 0, scale: 0.8 }}
                   transition={{ duration: 0.3 }}
-                  onClick={() => !study.comingSoon && navigate(study.path)}
+                  onClick={() => {
+                    if (study.isExternal) {
+                      window.open(study.path, '_blank');
+                    } else if (!study.comingSoon) {
+                      navigate(study.path);
+                    }
+                  }}
                 >
                   <h3>{study.title}</h3>
                   
@@ -299,12 +306,16 @@ export default function Home() {
                       className={`case-study-button ${study.comingSoon ? 'disabled' : ''}`}
                       onClick={(e) => {
                         e.stopPropagation();
-                        !study.comingSoon && navigate(study.path);
+                        if (study.isExternal) {
+                          window.open(study.path, '_blank');
+                        } else if (!study.comingSoon) {
+                          navigate(study.path);
+                        }
                       }}
                       disabled={study.comingSoon}
                     >
-                      {study.comingSoon ? 'Coming Soon' : 'Learn More'}
-                      {!study.comingSoon && <IoArrowForward className="button-icon" />}
+                      {study.comingSoon ? 'Coming Soon' : study.isExternal ? 'Visit Website' : 'Learn More'}
+                      {!study.comingSoon && !study.isExternal && <IoArrowForward className="button-icon" />}
                     </Button>
                   </div>
                 </motion.div>

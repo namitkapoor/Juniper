@@ -29,7 +29,8 @@ export const projects = [
     title: "Holiday Box",
     description: "Coach's 2021 Holiday Box made AR ready using Blender and three.js",
     categories: ['motion', 'spatial'],
-    image: "./images/Experiments/Coach/Green box.png"
+    image: "./images/Experiments/Coach/Green box.png",
+    model: "/3d models/coach box.glb"
   },
   {
     title: "Mother's Day Gifts",

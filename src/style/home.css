@@ -910,7 +910,7 @@ li { margin: 0; padding: 0; }
 }
 
 .case-study-card.coming-soon {
-  opacity: 0.35 !important;
+  opacity: 0.35;
   cursor: default;
   pointer-events: none;
   filter: grayscale(0.8);
@@ -939,4 +939,53 @@ li { margin: 0; padding: 0; }
 .case-study-card.coming-soon:hover {
   transform: none;
   box-shadow: none;
+}
+
+/* Case Study Card - External Link Styling */
+.case-study-card[onclick] {
+  cursor: pointer;
+}
+
+.case-study-button {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.5rem !important;
+  padding: 0.75rem 1.5rem !important;
+  height: auto !important;
+  background: var(--gradient-card) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 8px !important;
+  color: white !important;
+  font-weight: 500 !important;
+  transition: all 0.3s ease !important;
+}
+
+.case-study-button:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.1) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* External link specific styling */
+.case-study-card .case-study-button:has(.button-icon) {
+  position: relative;
+}
+
+/* Remove the arrow icon and its hover effect */
+.case-study-card .case-study-button:has(.button-icon)::after {
+  content: none;
+}
+
+.case-study-card .case-study-button:has(.button-icon):hover::after {
+  opacity: 1;
+  transform: none;
+}
+
+/* Hover effect for the entire card when it's an external link */
+.case-study-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
 }
