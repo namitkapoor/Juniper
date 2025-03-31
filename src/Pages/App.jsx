@@ -5,7 +5,7 @@ import '../style/fonts.css'
 import '../style/app.css'
 import About from './About.jsx'
 import Home from './Home.jsx'
-import Void from './Void.jsx'
+import Explore from './Explore.jsx'
 import ManageFarms from './CaseStudies/ManageFarms.jsx'
 import InfluencerMarketing from './CaseStudies/InfluencerMarketing.jsx'
 import TaskReminders from './CaseStudies/TaskReminders.jsx'
@@ -29,7 +29,7 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
-            <Route path="/void" element={<Void />} />
+            <Route path="/explore" element={<Explore />} />
             <Route path="/case-study/manage-farms" element={<ManageFarms />} />
             <Route path="/case-study/influencer-marketing" element={<InfluencerMarketing />} />
             <Route path="/case-study/task-reminders" element={<TaskReminders />} />

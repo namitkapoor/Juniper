@@ -115,7 +115,7 @@ export default function ModelViewer({ modelPath, imagePath, title }) {
             <img 
                 src={imagePath} 
                 alt={title}
-                className="void-project-image"
+                className="explore-project-image"
             />
         );
     }
