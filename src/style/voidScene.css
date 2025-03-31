@@ -1,0 +1,40 @@
+.void-page {
+    background: #000;
+    min-height: 100vh;
+    position: relative;
+}
+
+/* Ensure other components render on top of the scene */
+.navbar,
+.contact-section {
+    position: relative;
+    z-index: 1;
+}
+
+.category-filters {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    display: flex;
+    gap: 10px;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 15px;
+    backdrop-filter: blur(5px);
+}
+
+.filter-btn {
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 14px;
+    background: transparent;
+}
+
+.filter-btn:hover {
+    background: var(--category-color) !important;
+    color: white !important;
+} 

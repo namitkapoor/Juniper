@@ -4,6 +4,7 @@
   max-width: 1200px;
   margin: 0 auto;
   width: 80%;
+  position: relative;
 }
 
 .void-experiments-title {
@@ -47,43 +48,65 @@
 
 .void-projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 2rem;
   margin-top: 2rem;
-  width: 100%;
+  position: relative;
 }
 
 .void-project-card {
-  background: var(--gradient-card);
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
   padding: 2rem;
   border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.05);
   transition: all 0.3s ease;
-  grid-column: auto;
   position: relative;
-  padding-bottom: 3rem;
+}
+
+.void-project-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, var(--void-glow), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+}
+
+.void-project-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  border-color: var(--void-text-dim);
+}
+
+.void-project-card:hover::before {
+  opacity: 0.2;
 }
 
 .void-project-card.expanded {
   grid-column: 1 / -1;
+  max-width: 100%;
 }
 
 .void-project-categories {
   display: flex;
   gap: 0.5rem;
   flex-wrap: wrap;
-  justify-content: center;
   margin-bottom: 1rem;
-  margin-top: 0;
 }
 
 .void-category-tag {
   font-size: 0.875rem;
   padding: 0.25rem 0.75rem;
+  border-radius: 100px;
   background: var(--category-color);
   color: white;
-  border-radius: 100px;
   opacity: 0.8;
+}
+
+.void-category-tag:hover {
+  opacity: 1;
+  box-shadow: 0 0 10px var(--void-glow);
 }
 
 .void-project-image-container {
@@ -103,10 +126,6 @@
   object-fit: contain;
   object-position: center;
   transition: transform 0.3s ease;
-}
-
-.void-project-card:hover {
-  transform: scale(1.05);
 }
 
 .void-project-card h3 {
@@ -287,8 +306,12 @@
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .void-experiments-section {
-    padding: 3rem 1rem;
     width: 90%;
+    padding: 3rem 1rem;
+  }
+  
+  .void-projects-grid {
+    grid-template-columns: 1fr;
   }
   
   .void-project-image-container {

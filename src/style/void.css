@@ -1,10 +1,68 @@
+:root {
+  --void-bg: #030303;
+  --void-accent: rgba(255, 255, 255, 0.03);
+  --void-glow: rgba(255, 255, 255, 0.1);
+  --void-text: rgba(255, 255, 255, 0.87);
+  --void-text-dim: rgba(255, 255, 255, 0.6);
+  --void-orbit-1: 20s;
+  --void-orbit-2: 30s;
+  --void-orbit-3: 40s;
+}
+
 .void-page {
-    background-color: var(--background);
-    min-height: 100vh;
-    color: var(--text-primary);
-    position: relative;
-    padding-top: 2rem;
-    overflow-x: hidden;
+  background-color: var(--void-bg);
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Starfield effect */
+.void-page::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(1px 1px at 20px 30px, var(--void-accent), rgba(0,0,0,0)),
+    radial-gradient(1px 1px at 40px 70px, var(--void-accent), rgba(0,0,0,0)),
+    radial-gradient(1px 1px at 50px 160px, var(--void-accent), rgba(0,0,0,0)),
+    radial-gradient(1px 1px at 90px 40px, var(--void-accent), rgba(0,0,0,0)),
+    radial-gradient(1px 1px at 130px 80px, var(--void-accent), rgba(0,0,0,0));
+  background-repeat: repeat;
+  animation: stars 8s linear infinite;
+  opacity: 0.5;
+  z-index: 0;
+}
+
+@keyframes stars {
+  from { transform: translateY(0); }
+  to { transform: translateY(-100px); }
+}
+
+/* Content wrapper */
+.void-content {
+  position: relative;
+  z-index: 1;
+  padding: 2rem;
+}
+
+/* Void text effect */
+.void-title {
+  font-family: var(--font-display);
+  font-size: 3.5rem;
+  color: var(--void-text);
+  text-align: center;
+  margin: 2rem 0;
+  position: relative;
+  text-shadow: 0 0 20px var(--void-glow);
+  animation: void-pulse 4s ease-in-out infinite;
+}
+
+@keyframes void-pulse {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 1; }
 }
 
 /* Ensure proper spacing between sections */
