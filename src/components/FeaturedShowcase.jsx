@@ -79,7 +79,7 @@ export default function FeaturedShowcase() {
                             }
                         }}
                     >
-                        {isPlaying ? <FaPause size={20} /> : <FaPlay size={20} />}
+                        {isPlaying ? <FaPause /> : <FaPlay />}
                     </button>
                     <div className="video-controls">
                         <button 
@@ -91,19 +91,8 @@ export default function FeaturedShowcase() {
                                 }
                             }}
                             onMouseEnter={() => setShowVolumeSlider(true)}
-                            style={{ 
-                                background: 'transparent', 
-                                border: 'none', 
-                                color: 'white',
-                                cursor: 'pointer',
-                                padding: '0.5rem',
-                                borderRadius: '4px',
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center'
-                            }}
                         >
-                            {isMuted ? <FaVolumeMute size={18} /> : <FaVolumeUp size={18} />}
+                            {isMuted ? <FaVolumeMute /> : <FaVolumeUp />}
                         </button>
                         <div 
                             className={`volume-slider-container ${showVolumeSlider ? 'visible' : ''}`}
@@ -185,10 +174,10 @@ export default function FeaturedShowcase() {
                     </motion.div>
                 </AnimatePresence>
 
-                <button className="showcase-nav prev" onClick={prevShowcase} aria-label="Previous showcase">
+                <button className="showcase-nav prev" onClick={prevShowcase}>
                     <FaChevronLeft />
                 </button>
-                <button className="showcase-nav next" onClick={nextShowcase} aria-label="Next showcase">
+                <button className="showcase-nav next" onClick={nextShowcase}>
                     <FaChevronRight />
                 </button>
 
@@ -198,7 +187,6 @@ export default function FeaturedShowcase() {
                             key={index}
                             className={`indicator ${index === currentIndex ? 'active' : ''}`}
                             onClick={() => setCurrentIndex(index)}
-                            aria-label={`Go to showcase ${index + 1}`}
                         />
                     ))}
                 </div>

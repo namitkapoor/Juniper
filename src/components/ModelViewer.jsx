@@ -1,15 +1,14 @@
 import React, { Suspense, useState, useEffect, useRef } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, useGLTF, Center, PerspectiveCamera, Environment } from '@react-three/drei';
-// import { useControls } from 'leva';
 
 function Model({ url, title }) {
     console.log('Attempting to load model from URL:', url);
     const modelRef = useRef();
     const timeRef = useRef(0);
     
-    // Default values instead of Leva controls
-    const defaultControls = {
+    // Replace Leva controls with fixed values
+    const modelSettings = {
         scale: title === "Holiday Box" ? 0.3 : title === "Treatment Lotion" ? 1.9 : 2,
         wiggleEnabled: true,
         wiggleAmount: 0.10,
@@ -31,11 +30,18 @@ function Model({ url, title }) {
         
         // Gentle wiggle animation
         useFrame((state, delta) => {
-            if (modelRef.current && defaultControls.wiggleEnabled) {
-                timeRef.current += delta * defaultControls.wiggleSpeed;
-                const wiggle = Math.sin(timeRef.current) * defaultControls.wiggleAmount;
-                modelRef.current.rotation.y = defaultControls.rotationY + wiggle;
-                modelRef.current.rotation.x = defaultControls.rotationX + (Math.sin(timeRef.current * 0.5) * defaultControls.wiggleAmount * 0.3);
+            if (modelRef.current && modelSettings.wiggleEnabled) {
+                // Increment time
+                timeRef.current += delta * modelSettings.wiggleSpeed;
+                
+                // Create a smooth sine wave motion
+                const wiggle = Math.sin(timeRef.current) * modelSettings.wiggleAmount;
+                
+                // Apply the wiggle to the model's rotation
+                modelRef.current.rotation.y = modelSettings.rotationY + wiggle;
+                
+                // Add a subtle tilt for more organic motion
+                modelRef.current.rotation.x = modelSettings.rotationX + (Math.sin(timeRef.current * 0.5) * modelSettings.wiggleAmount * 0.3);
             }
         });
 
@@ -44,9 +50,9 @@ function Model({ url, title }) {
                 <primitive 
                     ref={modelRef}
                     object={scene} 
-                    scale={defaultControls.scale}
-                    position={[defaultControls.positionX, defaultControls.positionY, defaultControls.positionZ]}
-                    rotation={[defaultControls.rotationX, defaultControls.rotationY, defaultControls.rotationZ]}
+                    scale={modelSettings.scale}
+                    position={[modelSettings.positionX, modelSettings.positionY, modelSettings.positionZ]}
+                    rotation={[modelSettings.rotationX, modelSettings.rotationY, modelSettings.rotationZ]}
                 />
             </Center>
         );
@@ -59,38 +65,50 @@ function Model({ url, title }) {
 export default function ModelViewer({ modelPath, imagePath, title }) {
     const [modelError, setModelError] = useState(false);
     
-    // Default camera values instead of Leva controls
-    const defaultCamera = {
+    // Replace camera controls with fixed values
+    const cameraSettings = {
         position: { x: 0.0, y: 11.6, z: 7.2 },
         fov: 45
     };
 
-    // Default environment values
-    const defaultEnv = {
+    // Replace environment controls with fixed values
+    const environmentSettings = {
         preset: 'apartment',
         intensity: 1.0
     };
 
-    // Default lighting values
-    const defaultLighting = {
+    // Replace lighting controls with fixed values
+    const lightingSettings = {
+        // Ambient Light
         ambientIntensity: 0.0,
+        
+        // Key Light (Warm)
         keyLightIntensity: 1.8,
         keyLightColor: '#ffa32a',
         keyLightPosition: { x: 5.0, y: 5.0, z: 5.0 },
+        
+        // Fill Light (Cool)
         fillLightIntensity: 1.9,
         fillLightColor: '#e0f2fe',
         fillLightPosition: { x: -23.5, y: -19.5, z: -8.1 },
+        
+        // Top Light
         topLightIntensity: 4.0,
         topLightColor: '#ffffff',
         topLightAngle: 0.6,
         topLightPenumbra: 1.0,
+        
+        // Ground Bounce
         groundIntensity: 1.5,
         groundColor: '#d1d5db',
+        
+        // Rim Light
         rimLightIntensity: 2.0,
         rimLightColor: '#818cf8',
         rimLightPosition: { x: -10.0, y: 0.0, z: -10.0 }
     };
 
+    // If no model path is provided or there was an error loading the model, show the image
     if (!modelPath || modelError) {
         console.log('Falling back to image:', imagePath);
         return (
@@ -113,48 +131,54 @@ export default function ModelViewer({ modelPath, imagePath, title }) {
             >
                 <PerspectiveCamera 
                     makeDefault 
-                    position={[defaultCamera.position.x, defaultCamera.position.y, defaultCamera.position.z]} 
-                    fov={defaultCamera.fov}
+                    position={[cameraSettings.position.x, cameraSettings.position.y, cameraSettings.position.z]} 
+                    fov={cameraSettings.fov}
                 />
                 
                 <Environment 
-                    preset={defaultEnv.preset}
+                    preset={environmentSettings.preset}
                     background={false}
-                    intensity={defaultEnv.intensity}
+                    intensity={environmentSettings.intensity}
                 />
 
-                <ambientLight intensity={defaultLighting.ambientIntensity} />
+                {/* Enhanced lighting setup with fixed values */}
+                <ambientLight intensity={lightingSettings.ambientIntensity} />
                 
+                {/* Key light - warm */}
                 <directionalLight 
-                    position={[defaultLighting.keyLightPosition.x, defaultLighting.keyLightPosition.y, defaultLighting.keyLightPosition.z]} 
-                    intensity={defaultLighting.keyLightIntensity}
-                    color={defaultLighting.keyLightColor}
+                    position={[lightingSettings.keyLightPosition.x, lightingSettings.keyLightPosition.y, lightingSettings.keyLightPosition.z]} 
+                    intensity={lightingSettings.keyLightIntensity}
+                    color={lightingSettings.keyLightColor}
                 />
                 
+                {/* Fill light - cool */}
                 <directionalLight 
-                    position={[defaultLighting.fillLightPosition.x, defaultLighting.fillLightPosition.y, defaultLighting.fillLightPosition.z]} 
-                    intensity={defaultLighting.fillLightIntensity}
-                    color={defaultLighting.fillLightColor}
+                    position={[lightingSettings.fillLightPosition.x, lightingSettings.fillLightPosition.y, lightingSettings.fillLightPosition.z]} 
+                    intensity={lightingSettings.fillLightIntensity}
+                    color={lightingSettings.fillLightColor}
                 />
                 
+                {/* Top light */}
                 <spotLight
                     position={[0, 10, 0]}
-                    angle={defaultLighting.topLightAngle}
-                    penumbra={defaultLighting.topLightPenumbra}
-                    intensity={defaultLighting.topLightIntensity}
-                    color={defaultLighting.topLightColor}
+                    angle={lightingSettings.topLightAngle}
+                    penumbra={lightingSettings.topLightPenumbra}
+                    intensity={lightingSettings.topLightIntensity}
+                    color={lightingSettings.topLightColor}
                 />
                 
+                {/* Ground bounce light */}
                 <hemisphereLight
                     skyColor="#ffffff"
-                    groundColor={defaultLighting.groundColor}
-                    intensity={defaultLighting.groundIntensity}
+                    groundColor={lightingSettings.groundColor}
+                    intensity={lightingSettings.groundIntensity}
                 />
                 
+                {/* Rim light */}
                 <pointLight
-                    position={[defaultLighting.rimLightPosition.x, defaultLighting.rimLightPosition.y, defaultLighting.rimLightPosition.z]}
-                    intensity={defaultLighting.rimLightIntensity}
-                    color={defaultLighting.rimLightColor}
+                    position={[lightingSettings.rimLightPosition.x, lightingSettings.rimLightPosition.y, lightingSettings.rimLightPosition.z]}
+                    intensity={lightingSettings.rimLightIntensity}
+                    color={lightingSettings.rimLightColor}
                 />
 
                 <Suspense fallback={null}>
