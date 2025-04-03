@@ -3,6 +3,7 @@ import { Row, Col } from 'antd';
 import { motion } from 'framer-motion';
 import '../style/bento-grid-base.css';
 import '../style/project-bento.css';
+import ModelViewer from './ModelViewer';
 
 const ProjectBentoGrid = ({ items }) => {
   if (!items || items.length === 0) return null;
@@ -72,6 +73,17 @@ const ProjectBentoGrid = ({ items }) => {
               >
                 {isPlaying ? '⏸' : '▶'}
               </button>
+            </div>
+          );
+        case 'model':
+          return (
+            <div className="bento-grid-content">
+              <ModelViewer 
+                modelPath={content.src}
+                imagePath={content.src} // Fallback image path
+                title={content.alt}
+                modelSettings={content.modelSettings}
+              />
             </div>
           );
         default:

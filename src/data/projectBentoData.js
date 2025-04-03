@@ -96,7 +96,7 @@ export const projectBentoData = {
           type: 'image',
           src: "./images/Experiments/Ciborium/Modern day Ciborium.jpg",
           alt: "Front View",
-          description: "Front elevation showing the intricate details of the columns",
+          description: "Real-life Ciborium in the Vatican",
           objectFit: 'contain'
         },
         size: 'medium'
@@ -106,7 +106,7 @@ export const projectBentoData = {
           type: 'image',
           src: "./images/Experiments/Ciborium/Rough render of ciborium.jpg",
           alt: "Full Height View",
-          description: "Complete vertical composition",
+          description: "Rough render of the VR Scene",
           objectFit: 'contain'
         },
         size: 'medium'
@@ -116,7 +116,7 @@ export const projectBentoData = {
           type: 'image',
           src: "./images/Experiments/Ciborium/Pattern F.png",
           alt: "Front View",
-          description: "Front elevation showing the intricate details of the columns",
+          description: "Screenshot of Geometric Pattern made in Maya",
           objectFit: 'contain'
         },
         size: 'large'
@@ -127,7 +127,7 @@ export const projectBentoData = {
           type: 'image',
           src: "./images/Experiments/Ciborium/Pattern A.png",
           alt: "Side View",
-          description: "Side perspective highlighting the spatial depth",
+          description: "Screenshot of Geometric Pattern made in Maya",
           objectFit: 'contain'
         },
         size: 'large'
@@ -137,7 +137,7 @@ export const projectBentoData = {
           type: 'image',
           src: "./images/Experiments/Ciborium/Pattern D & E.png",
           alt: "Side View",
-          description: "Side perspective highlighting the spatial depth",
+          description: "Screenshot of Geometric Patterns made in Maya",
           objectFit: 'contain'
         },
         size: 'medium'
@@ -148,7 +148,7 @@ export const projectBentoData = {
           type: 'image',
           src: "./images/Experiments/Ciborium/Textured persp.png",
           alt: "Full Height View",
-          description: "Complete vertical composition",
+          description: "Final Textured Render",
           objectFit: 'contain'
         },
         size: 'medium'
@@ -201,6 +201,26 @@ export const projectBentoData = {
       },
     ]
   },
+  "Holiday Box": {
+    bentoItems: [
+      {
+        content: {
+          type: 'model',
+          src: "./3d models/coach box.glb",
+          alt: "Holiday Box",
+          description: "3D Model of Holiday Box",
+          objectFit: 'contain',
+          modelSettings: {
+            scale: 0.05,
+            rotation: [0, 0, 0],
+            position: [0, 0, 0] 
+          }
+        },
+        size: 'wide'
+      },
+    ]
+  },
+  
   "Tiptoe": {
     bentoItems: [
       {
@@ -264,6 +284,21 @@ export const projectBentoData = {
     bentoItems: [
       {
         content: {
+          type: 'model',
+          src: "./3d models/bottle.glb",
+          alt: "Treatment Lotion Bottle",
+          description: "3D Model of Treatment Lotion Bottle",
+          objectFit: 'contain',
+          modelSettings: {
+            scale: 1.9,
+            rotation: [-1.60, -1.60, -0.80],
+            position: [3.1, 5.0, 5.0]
+          }
+        },
+        size: 'wide'
+      },
+      {
+        content: {
           type: 'image',
           src: "./images/Experiments/La Mer/La Mer new flow screenshot .png",
           alt: "Product Campaign",
@@ -278,7 +313,7 @@ export const projectBentoData = {
           src: "./images/Experiments/La Mer/Product Campaign.png",
           alt: "Product Campaign",
           description: "Complete vertical composition",
-          objectFit: 'cover'
+          objectFit: 'contain'
         },
         size: 'medium'
       },

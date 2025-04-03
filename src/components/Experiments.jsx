@@ -293,7 +293,10 @@ export default function Experiments() {
                     exit={{ height: 0, opacity: 0 }}
                     transition={{ duration: 0.5 }}
                   >
-                    <ProjectBentoGrid items={projectBentoData[project.title].bentoItems} />
+                    <ProjectBentoGrid 
+                      items={projectBentoData[project.title].bentoItems} 
+                      projectTitle={project.title}
+                    />
                   </motion.div>
                 )}
               </AnimatePresence>

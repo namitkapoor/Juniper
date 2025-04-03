@@ -4,8 +4,7 @@ export const projects = [
     title: "Treatment Lotion",
     description: "La Mer's AR product campaign for the launch of their new treatment lotion",
     categories: ['motion', 'spatial', 'interactive'],
-    image: "./images/Experiments/La Mer/just bottle.png",
-    model: "/3d models/bottle.glb"
+    image: "./images/Experiments/La Mer/just bottle.png"
   },
   {
     title: "VR Head Gestures",
@@ -29,8 +28,7 @@ export const projects = [
     title: "Holiday Box",
     description: "Coach's 2021 Holiday Box made AR ready using Blender and three.js",
     categories: ['motion', 'spatial'],
-    image: "./images/Experiments/Coach/Green box.png",
-    model: "/3d models/coach box.glb"
+    image: "./images/Experiments/Coach/Green box.png"
   },
   {
     title: "Mother's Day Gifts",
