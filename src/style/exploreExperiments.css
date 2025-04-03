@@ -192,7 +192,7 @@
 .explore-featured-video {
   width: 100%;
   display: block;
-  object-fit: cover;
+  object-fit: contain;
   aspect-ratio: 16/9;
   background-color: rgba(0, 0, 0, 0.2);
 }
@@ -336,6 +336,20 @@
 .explore-project-bento-container {
   width: 100%;
   overflow: hidden;
+}
+
+/* Bento Grid Item Styles for Experiments */
+.explore-experiments-section .bento-grid-item {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+
+.explore-experiments-section .bento-grid-media {
+  border-radius: 8px;
 }
 
 @media (max-width: 768px) {

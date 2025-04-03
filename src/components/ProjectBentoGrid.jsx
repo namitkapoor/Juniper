@@ -42,13 +42,14 @@ const ProjectBentoGrid = ({ items }) => {
             <img 
               src={content.src} 
               alt={content.alt}
-              style={{ objectFit: content.objectFit || 'cover' }}
+              className="bento-grid-media"
+              style={{ objectFit: content.objectFit || 'contain' }}
             />
           );
         case 'video':
           return (
             <div 
-              className="video-container"
+              className="bento-grid-content"
               data-playing={isPlaying}
             >
               <video 
@@ -56,7 +57,8 @@ const ProjectBentoGrid = ({ items }) => {
                 loop 
                 muted 
                 playsInline
-                style={{ objectFit: content.objectFit || 'cover' }}
+                className="bento-grid-media"
+                style={{ objectFit: content.objectFit || 'contain' }}
                 onPlay={() => setIsPlaying(true)}
                 onPause={() => setIsPlaying(false)}
               >
@@ -78,10 +80,10 @@ const ProjectBentoGrid = ({ items }) => {
     };
 
     return (
-      <div className={`preview-item ${size}`}>
-        <div className="preview-content">
+      <div className={`bento-grid-item ${size}`}>
+        <div className="bento-grid-content">
           {renderContent()}
-          <div className="preview-description">
+          <div className="bento-grid-description">
             <p>{content.description}</p>
           </div>
         </div>
@@ -101,7 +103,7 @@ const ProjectBentoGrid = ({ items }) => {
             className={`bento-col ${item.size || ''}`}
           >
             <motion.div
-              className={`bento-item project-bento-item ${item.size || ''}`}
+              className={`bento-grid-item ${item.size || ''}`}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}

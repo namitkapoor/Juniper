@@ -166,4 +166,35 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+/* Bento Grid Item Styles */
+.bento-grid-item {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.bento-grid-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bento-grid-media {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.bento-grid-item:hover .bento-grid-media {
+  transform: scale(1.02);
 } 
