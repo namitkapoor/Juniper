@@ -170,9 +170,7 @@ export default function Home() {
           >
             <p className='occupation'>Experience Designer</p>
             <h1 className='hero-display'>Namit Kapoor</h1>
-            
-            {/* Countdown Timer is now more prominent */}
-            <CountdownTimer targetDate="July 2, 2025" />
+            <AnimatedTagline />
           </motion.div>
 
           <Canvas

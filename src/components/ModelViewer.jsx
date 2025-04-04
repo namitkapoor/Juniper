@@ -3,7 +3,6 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, useGLTF, Center, PerspectiveCamera, Environment } from '@react-three/drei';
 
 function Model({ url, title }) {
-    console.log('Attempting to load model from URL:', url);
     const modelRef = useRef();
     const timeRef = useRef(0);
     
@@ -57,7 +56,6 @@ function Model({ url, title }) {
             </Center>
         );
     } catch (error) {
-        console.error('Error loading model:', error);
         throw error;
     }
 }
@@ -110,7 +108,6 @@ export default function ModelViewer({ modelPath, imagePath, title }) {
 
     // If no model path is provided or there was an error loading the model, show the image
     if (!modelPath || modelError) {
-        console.log('Falling back to image:', imagePath);
         return (
             <img 
                 src={imagePath} 
@@ -124,8 +121,7 @@ export default function ModelViewer({ modelPath, imagePath, title }) {
         <div style={{ width: '100%', height: '300px', position: 'relative' }}>
             <Canvas
                 style={{ background: 'transparent' }}
-                onError={(error) => {
-                    console.error('Canvas error occurred:', error);
+                onError={() => {
                     setModelError(true);
                 }}
             >
@@ -185,8 +181,7 @@ export default function ModelViewer({ modelPath, imagePath, title }) {
                     <Model 
                         url={modelPath}
                         title={title}
-                        onError={(error) => {
-                            console.error('Model loading error:', error);
+                        onError={() => {
                             setModelError(true);
                         }}
                     />
