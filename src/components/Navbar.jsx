@@ -6,6 +6,7 @@ import "../style/navbar.css"
 export default function Navbar() {
     const [isBlinking, setIsBlinking] = useState(false);
     const [isMoving, setIsMoving] = useState(false);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
     const location = useLocation();
 
     // Eye movement animation
@@ -50,6 +51,10 @@ export default function Navbar() {
             clearTimeout(moveTimeout);
         };
     }, []);
+
+    const toggleMenu = () => {
+        setIsMenuOpen(!isMenuOpen);
+    };
 
     return (
         <div className="navigation">
@@ -136,7 +141,63 @@ export default function Navbar() {
                     <Link className={`nav-item ${location.pathname === '/about' ? 'active' : ''}`} to="/about">about</Link>
                     <a className="nav-item" href="/files/KapoorNamit_Resume.pdf" target="_blank" rel="noopener noreferrer">resume</a>
                 </div>
+
+                {/* Hamburger Menu Button */}
+                <button className="hamburger-menu" onClick={toggleMenu} aria-label="Toggle navigation menu">
+                    <motion.div 
+                        className="hamburger-line"
+                        animate={isMenuOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }}
+                        transition={{ duration: 0.3 }}
+                    />
+                    <motion.div 
+                        className="hamburger-line"
+                        animate={isMenuOpen ? { opacity: 0 } : { opacity: 1 }}
+                        transition={{ duration: 0.3 }}
+                    />
+                    <motion.div 
+                        className="hamburger-line"
+                        animate={isMenuOpen ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }}
+                        transition={{ duration: 0.3 }}
+                    />
+                </button>
             </div>
+
+            {/* Mobile Navigation Menu */}
+            {isMenuOpen && (
+                <motion.div 
+                    className="mobile-nav-menu"
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                >
+                <div className="mobile-nav-links">
+                    <Link 
+                        className={`mobile-nav-item ${location.pathname === '/explore' ? 'active' : ''}`} 
+                        to="/explore"
+                        onClick={() => setIsMenuOpen(false)}
+                    >
+                        explore
+                    </Link>
+                    <Link 
+                        className={`mobile-nav-item ${location.pathname === '/about' ? 'active' : ''}`} 
+                        to="/about"
+                        onClick={() => setIsMenuOpen(false)}
+                    >
+                        about
+                    </Link>
+                    <a 
+                        className="mobile-nav-item" 
+                        href="/files/KapoorNamit_Resume.pdf" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        onClick={() => setIsMenuOpen(false)}
+                    >
+                        resume
+                    </a>
+                </div>
+                </motion.div>
+            )}
         </div>
     );
 }

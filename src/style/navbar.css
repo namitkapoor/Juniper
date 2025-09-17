@@ -37,9 +37,9 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
   height: 50px;
   background: transparent;
+  position: relative;
 }
 
 .nav-items {
@@ -73,6 +73,118 @@ a {
   .nav-items {
     width: 80%;
     padding: 0 1rem;
+  }
+}
+
+/* Hamburger Menu Styles */
+.hamburger-menu {
+  display: none;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 30px;
+  height: 30px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 1000;
+}
+
+.hamburger-line {
+  width: 100%;
+  height: 3px;
+  background-color: white;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+  transform-origin: center;
+}
+
+/* Mobile Navigation Menu */
+.mobile-nav-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  z-index: 999;
+  width: 100%;
+}
+
+.mobile-nav-links {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  gap: 20px;
+}
+
+.mobile-nav-item {
+  font-family: 'Satoshi';
+  font-size: 18px;
+  color: white;
+  text-decoration: none;
+  padding: 15px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  opacity: 0.9;
+}
+
+.mobile-nav-item:hover {
+  opacity: 1;
+  transform: translateX(10px);
+}
+
+.mobile-nav-item.active {
+  background: linear-gradient(45deg, #fff, #888);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: bold;
+  border-bottom: 2px solid #908ab7;
+}
+
+/* Mobile Responsive Styles - Below 480px */
+@media (max-width: 480px) {
+  .navigation {
+    padding: 15px 20px;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .nav-items {
+    width: 100%;
+    padding: 0;
+    position: relative;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .hamburger-menu {
+    display: flex;
+  }
+
+  .logo-text {
+    font-size: 18px;
+  }
+
+  .logo-with-text svg {
+    width: 50px;
+    height: 25px;
+  }
+
+  .mobile-nav-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    z-index: 999;
   }
 }
 

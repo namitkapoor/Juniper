@@ -47,11 +47,7 @@
   flex: 1;
   position: relative;
   z-index: 2;
-  padding: 2rem;
   max-width: 1400px;
-  margin: 0 auto;
-  /* Add space for navbar */
-  padding-top: calc(60px + 2rem);
 }
 
 /* Explore text effect */
@@ -92,11 +88,8 @@
 }
 
 .explore-page .experiments-section {
-    padding-top: 120px; /* Account for fixed navbar */
     min-height: calc(100vh - 120px);
-    width: 100%;
     max-width: 1200px;
-    margin: 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -105,8 +98,7 @@
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .explore-content {
-    padding: 1.5rem 1rem;
-    padding-top: calc(60px + 1.5rem);
+    max-width: 100%;
   }
   
   .page-spinner {

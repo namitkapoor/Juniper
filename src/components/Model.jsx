@@ -98,9 +98,9 @@ export default function Model() {
                     
                     <primitive 
                         object={model.scene}
-                        position={[0.02, -0.51, 0]}
-                        scale={[0.15, 0.15, 0.15]}
-                        rotation={[-0.42, 1.47, 0.69]}
+                        position={[0.02, -0.2, 0]}
+                        scale={[0.25,0.5,0.5]}
+                        rotation={[-0.42, 1.47, 0.99]}
                         ref={modelRef}
                         onPointerOver={modelBehavior}
                         onPointerOut={modelReset}

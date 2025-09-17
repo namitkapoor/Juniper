@@ -165,7 +165,7 @@ export default function Home() {
             animate={{ opacity: 1 }}
             className="hero-content"
             style={{ 
-              marginTop: '-15vh'
+              marginTop: '45vh'
             }}
           >
             <p className='occupation'>Experience Designer</p>
