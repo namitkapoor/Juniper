@@ -37,7 +37,7 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 50px;
+  width: 100%;
   background: transparent;
   position: relative;
 }
@@ -148,12 +148,10 @@ a {
 @media (max-width: 480px) {
   .navigation {
     padding: 15px 20px;
-    flex-direction: column;
     align-items: stretch;
   }
 
   .nav-items {
-    width: 100%;
     padding: 0;
     position: relative;
   }
