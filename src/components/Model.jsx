@@ -1,31 +1,67 @@
 import { GLTFLoader } from 'three/examples/jsm/Addons.js'
 import { useLoader, useFrame } from '@react-three/fiber'
-import { PresentationControls, Float, Text, Center } from '@react-three/drei'
-import { useControls } from 'leva'
+import { Float } from '@react-three/drei'
 import { useRef, useState, useEffect } from 'react'
 import * as THREE from 'three'
-import '../style/fonts.css'
 
 // Import shaders
 import vertexShader from '../shaders/holographic/vertex.glsl'
 import fragmentShader from '../shaders/holographic/fragment.glsl'
 
 export default function Model() {
-    const model = useLoader(GLTFLoader, './3d models/self.glb')
+    // Load glasses model only
+    const glassesModel = useLoader(GLTFLoader, './3d models/just-glasses.glb')
     
-    // Commented out useControls for debugging
-    // const modelPosition = useControls('model', {position: [0.02, -0.51, 0]})
-    // const modelScale = useControls('model', {scale: [0.15,0.15,0.15]})
-    // const modelRotation = useControls('model', {rotation: [-0.42, 1.47, 0.69]})
-
-    // Directly set values
-    const modelPosition = { position: [0.02, -0.51, 0] };
-    const modelScale = { scale: [0.15, 0.15, 0.15] };
-    const modelRotation = { rotation: [-0.42, 1.47, 0.69] };
+    // Scroll state
+    const [scrollProgress, setScrollProgress] = useState(0)
     
+    // Initial glasses position (hero state) - your original parameters
+    const initialGlassesPosition = [-0.2, 0.1, 0]
+    const initialGlassesScale = [0.15, 0.15, 0.1]
+    const initialGlassesRotation = [0.6, -0.4, -0.2]
+    
+    // Scrolled glasses position (out of the way)
+    const scrolledGlassesPosition = [2.6, -3.8, 4.3]
+    const scrolledGlassesScale = [1, 1, 1]
+    const scrolledGlassesRotation = [0.6, -3.6, -0.2]
+    
+    
+    // Refs
+    const glassesRef = useRef()
     const materialRef = useRef()
-    const modelRef = useRef()
-    const [isHovered, setIsHovered] = useState(false)
+    
+    // Scroll listener for glasses animation
+    useEffect(() => {
+        const handleScroll = () => {
+            const scrollY = window.scrollY
+            const windowHeight = window.innerHeight
+            const documentHeight = document.documentElement.scrollHeight
+            
+            // More robust scroll calculation
+            const maxScroll = Math.max(documentHeight - windowHeight, 1)
+            const progress = Math.min(scrollY / maxScroll, 1)
+            
+            console.log('Scroll event triggered:', {
+                scrollY,
+                windowHeight,
+                documentHeight,
+                maxScroll,
+                progress
+            })
+            
+            setScrollProgress(progress)
+        }
+        
+        // Add scroll listener with better options
+        window.addEventListener('scroll', handleScroll, { passive: true })
+        
+        // Initial call to set correct initial state
+        handleScroll()
+        
+        return () => {
+            window.removeEventListener('scroll', handleScroll)
+        }
+    }, [])
 
     // Create shader material
     useEffect(() => {
@@ -34,7 +70,7 @@ export default function Model() {
             fragmentShader,
             uniforms: {
                 uTime: { value: 0 },
-                uColor: { value: new THREE.Color(0.1, 0.6, 0.9) }
+                uColor: { value: new THREE.Color('#4a9eff') }
             },
             transparent: true,
             side: THREE.DoubleSide,
@@ -42,71 +78,70 @@ export default function Model() {
             blending: THREE.AdditiveBlending
         })
 
-        // Apply material to all meshes in the model
-        model.scene.traverse((child) => {
-            if (child.isMesh && child.material.name === 'Glasses_lenses_blue.001') {
+        // Apply material to glasses
+        glassesModel.scene.traverse((child) => {
+            if (child.isMesh) {
                 child.material = material
-                materialRef.current = material               
+                materialRef.current = material
             }
         })
-    }, [model])
+    }, [glassesModel])
 
-    // Update shader uniforms
+    // Update shader uniforms and handle scroll animation
     useFrame((state, delta) => {
         if (materialRef.current) {
             materialRef.current.uniforms.uTime.value += delta
         }
+        
+        // Handle scroll-based glasses animation
+        if (glassesRef.current) {
+            const progress = scrollProgress
+            
+            // Debug logging every 60 frames (about once per second)
+            if (state.clock.elapsedTime % 1 < delta) {
+                console.log('useFrame - scrollProgress state:', scrollProgress, 'Using:', progress)
+            }
+            
+            // Interpolate between initial and scrolled positions
+            const currentPosition = [
+                initialGlassesPosition[0] + (scrolledGlassesPosition[0] - initialGlassesPosition[0]) * progress,
+                initialGlassesPosition[1] + (scrolledGlassesPosition[1] - initialGlassesPosition[1]) * progress,
+                initialGlassesPosition[2] + (scrolledGlassesPosition[2] - initialGlassesPosition[2]) * progress
+            ]
+            
+            const currentScale = [
+                initialGlassesScale[0] + (scrolledGlassesScale[0] - initialGlassesScale[0]) * progress,
+                initialGlassesScale[1] + (scrolledGlassesScale[1] - initialGlassesScale[1]) * progress,
+                initialGlassesScale[2] + (scrolledGlassesScale[2] - initialGlassesScale[2]) * progress
+            ]
+            
+            const currentRotation = [
+                initialGlassesRotation[0] + (scrolledGlassesRotation[0] - initialGlassesRotation[0]) * progress,
+                initialGlassesRotation[1] + (scrolledGlassesRotation[1] - initialGlassesRotation[1]) * progress,
+                initialGlassesRotation[2] + (scrolledGlassesRotation[2] - initialGlassesRotation[2]) * progress
+            ]
+            
+            // Apply interpolated values directly to glasses primitive
+            glassesRef.current.position.set(...currentPosition)
+            glassesRef.current.scale.set(...currentScale)
+            glassesRef.current.rotation.set(...currentRotation)
+        }
     })
 
-    const modelBehavior = () => {
-        setIsHovered(true)
-    }
-
-    const modelReset = () => {
-        setIsHovered(false)
+    const handleModelClick = (event) => {
+        console.log('Glasses clicked!', event) // Fixed groupRef error
     }
 
     return (
         <>
-            {/* <Text
-                position={[0, 0.35, -2]}
-                fontSize={0.75}
-                anchorX="center"
-                anchorY="middle"
-            >
-                Namit Kapoor
-                <meshStandardMaterial
-                    attach="material"
-                    color="#4a9eff"
-                    emissive="#ffffff"
-                    emissiveIntensity={200}
-                    transparent
-                    opacity={1.0}
-                    metalness={0.8}
-                    roughness={0.2}
+            <Float rotationIntensity={0.1}>
+                {/* Glasses Model with scroll animation */}
+                <primitive 
+                    ref={glassesRef}
+                    object={glassesModel.scene}
+                    onClick={handleModelClick}
                 />
-            </Text> */}
-            <PresentationControls
-                global
-                rotation={[0.13, 0.1, 0]}
-                polar={[-0.4, 0.2]}
-                azimuth={[-1, 0.75]}
-                config={{ mass: 2, tension: 400 }}
-                snap={{ mass: 4, tension: 400 }}
-            >
-                <Float rotationIntensity={0.4}>
-                    
-                    <primitive 
-                        object={model.scene}
-                        position={[0.02, -0.2, 0]}
-                        scale={[0.25,0.5,0.5]}
-                        rotation={[-0.42, 1.47, 0.99]}
-                        ref={modelRef}
-                        onPointerOver={modelBehavior}
-                        onPointerOut={modelReset}
-                    />
-                </Float>
-            </PresentationControls>
+            </Float>
         </>
     )
 }

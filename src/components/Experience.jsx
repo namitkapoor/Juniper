@@ -26,31 +26,31 @@ export default function Experience() {
             power={15}
         />
 
-        {/* Float settings adjusted for subtler movement */}
+        {/* Model with glasses */}
         <Float
-            speed={1.5}
-            rotationIntensity={0.3}
-            floatIntensity={0.4}
+            speed={1.0}
+            rotationIntensity={0.2}
+            floatIntensity={0.3}
         >
-            <Model/>    
+            <Model />
         </Float>   
 
 
         <EffectComposer>
             <Bloom 
-                intensity={1.0}
-                luminanceThreshold={0.2}
+                intensity={0.5}
+                luminanceThreshold={0.3}
                 luminanceSmoothing={0.9}
                 height={300}
                 mipmapBlur={true}
-                radius={0.7}
+                radius={0.5}
             />
             <ChromaticAberration 
-                offset={[0.003, 0.003]}
+                offset={[0.001, 0.001]}
             />
             <Vignette 
-                darkness={1.1}
-                offset={0.15}
+                darkness={0.8}
+                offset={0.1}
             />
         </EffectComposer>
     </>

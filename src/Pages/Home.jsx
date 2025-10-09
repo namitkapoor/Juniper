@@ -160,20 +160,43 @@ export default function Home() {
         
         {/* Hero Section */}
         <section className="hero-section">
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+          <div 
             className="hero-content"
             style={{ 
               marginTop: '45vh'
             }}
           >
-            <p className='occupation'>Experience Designer</p>
-            <h1 className='hero-display'>Namit Kapoor</h1>
-            <AnimatedTagline />
-          </motion.div>
+            {/* Occupation - loads first */}
+            <motion.p 
+              className='occupation'
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 0.7, y: 0 }}
+              transition={{ delay: 2.0, duration: 1.2, ease: "easeOut" }}
+            >
+              Experience Designer
+            </motion.p>
+            
+            {/* Name - loads second */}
+            <motion.h1 
+              className='hero-display'
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 2.8, duration: 1.5, ease: "easeOut" }}
+            >
+              Namit Kapoor
+            </motion.h1>
+            
+            {/* Tagline - loads third */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 4.5, duration: 1.2, ease: "easeOut" }}
+            >
+              <AnimatedTagline />
+            </motion.div>
+          </div>
 
-          <Canvas
+            <Canvas
             shadows
             className="hero-canvas"
             camera={{
