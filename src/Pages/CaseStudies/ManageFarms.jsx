@@ -5,6 +5,7 @@ import Navbar from '../../components/Navbar.jsx';
 import '../../style/case-study.css';
 import { IoAdd } from 'react-icons/io5';
 import BusinessChallenge from '../../components/BusinessChallenge';
+import DesignChanges from '../../components/DesignChanges';
 import StrategicApproach from '../../components/StrategicApproach';
 import VisualEvolution from '../../components/VisualEvolution';
 import MeasurableResults from '../../components/MeasurableResults';
@@ -14,7 +15,8 @@ import OtherProjects from '../../components/OtherProjects';
 export default function ManageFarms() {
   const [expandedSections, setExpandedSections] = useState(
     new Set(['strategicApproach', 'approach0', 'measurableResults'])
-  );  const [timelineProgress, setTimelineProgress] = useState(0);
+  );
+  const [timelineProgress, setTimelineProgress] = useState(0);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -127,7 +129,37 @@ export default function ManageFarms() {
           />
         </motion.div>
 
-        {/* 2. Strategic Approach Section */}
+        {/* 2. Design Changes Section */}
+        <motion.div
+          className="expandable-section"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+        >
+          <div 
+            className="section-header"
+            onClick={() => toggleSection('designChanges')}
+          >
+            <h2>2. Design Changes</h2>
+            <motion.span 
+              className="icon"
+              animate={{ 
+                rotate: expandedSections.has('designChanges') ? 45 : 0 
+              }}
+            >
+              <IoAdd />
+            </motion.span>
+          </div>
+          <p className="section-description">
+            Key design decisions that transformed complexity into clarity—from task planning to crop management.
+          </p>
+          
+          <DesignChanges 
+            isExpanded={expandedSections.has('designChanges')} 
+            projectId="manageFarms" 
+          />
+        </motion.div>
+
+        {/* 3. Strategic Approach Section */}
         <motion.div
           className="expandable-section"
           initial={{ opacity: 0, y: 20 }}
@@ -137,7 +169,7 @@ export default function ManageFarms() {
             className="section-header"
             onClick={() => toggleSection('strategicApproach')}
           >
-            <h2>2. Strategic Approach</h2>
+            <h2>3. Strategic Approach</h2>
             <motion.span 
               className="icon"
               animate={{ 
@@ -156,7 +188,7 @@ export default function ManageFarms() {
           />
         </motion.div>
 
-        {/* 3. Measurable Results Section */}
+        {/* 4. Measurable Results Section */}
         <motion.div
           className="expandable-section"
           initial={{ opacity: 0, y: 20 }}
@@ -166,7 +198,7 @@ export default function ManageFarms() {
             className="section-header"
             onClick={() => toggleSection('measurableResults')}
           >
-            <h2>3. Measurable Results</h2>
+            <h2>4. Measurable Results</h2>
             <motion.span 
               className="icon"
               animate={{ 
@@ -186,7 +218,7 @@ export default function ManageFarms() {
           />
         </motion.div>
 
-        {/* 4. Visual Evolution Section */}
+        {/* 5. Visual Evolution Section */}
         <motion.div
           className="expandable-section"
           initial={{ opacity: 0, y: 20 }}
@@ -196,7 +228,7 @@ export default function ManageFarms() {
             className="section-header"
             onClick={() => toggleSection('evolution')}
           >
-            <h2>4. Visual Evolution</h2>
+            <h2>5. Visual Evolution</h2>
             <motion.span 
               className="icon"
               animate={{ 

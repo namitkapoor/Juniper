@@ -86,7 +86,7 @@ export const carouselImages = {
         painPoints: ["productFit"]
       },
       {
-        src: `${BASE_PATH}/JD/Original Design/Map-2.svg`,
+        src: `${BASE_PATH}/JD/Original Design/Map2.svg`,
         caption: 'User feedback on task management',
         alt: 'User feedback on task management',
         methodologies: ["User Feedback"],

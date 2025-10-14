@@ -30,7 +30,8 @@ const EvolutionSlider = ({ iterations }) => {
 
   const handleSliderChange = (e) => {
     const rect = sliderRef.current.getBoundingClientRect();
-    const x = e.clientX - rect.left;
+    const clientX = e.clientX || (e.touches && e.touches[0]?.clientX);
+    const x = clientX - rect.left;
     let rawPercentage = Math.max(0, Math.min(1, x / rect.width));
     
     // Calculate number of segments
@@ -44,6 +45,7 @@ const EvolutionSlider = ({ iterations }) => {
   };
 
   const handleMouseDown = (e) => {
+    e.preventDefault();
     handleSliderChange(e);
     const handleMouseMove = (e) => handleSliderChange(e);
     const handleMouseUp = () => {
@@ -52,6 +54,17 @@ const EvolutionSlider = ({ iterations }) => {
     };
     document.addEventListener('mousemove', handleMouseMove);
     document.addEventListener('mouseup', handleMouseUp);
+  };
+
+  const handleTouchStart = (e) => {
+    handleSliderChange(e);
+    const handleTouchMove = (e) => handleSliderChange(e);
+    const handleTouchEnd = () => {
+      document.removeEventListener('touchmove', handleTouchMove);
+      document.removeEventListener('touchend', handleTouchEnd);
+    };
+    document.addEventListener('touchmove', handleTouchMove);
+    document.addEventListener('touchend', handleTouchEnd);
   };
 
   const { currentIndex, nextIndex, progress } = getVisibleImages(sliderValue);
@@ -84,6 +97,7 @@ const EvolutionSlider = ({ iterations }) => {
           className="visual-slider-track"
           ref={sliderRef}
           onClick={handleSliderChange}
+          onTouchStart={handleTouchStart}
         >
           <div 
             className="visual-slider-progress"
@@ -93,6 +107,7 @@ const EvolutionSlider = ({ iterations }) => {
             className="visual-slider-handle"
             style={{ left: `${sliderValue * 100}%` }}
             onMouseDown={handleMouseDown}
+            onTouchStart={handleTouchStart}
           />
         </div>
       </div>

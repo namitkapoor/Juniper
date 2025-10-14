@@ -12,9 +12,19 @@ export const visualEvolutionData = {
         ]
       },
       {
-        stage: "Final Design",
+        stage: "Second Design",
         description: "Streamlined interface focused on essential tasks",
         image: "../images/Case Studies/JD/Final prototype combined.png",
+        improvements: [
+          "Simplified navigation",
+          "Clear visual hierarchy",
+          "Focus on core features"
+        ]
+      },
+      {
+        stage: "Final Design",
+        description: "Streamlined interface focused on essential tasks",
+        image: "../images/Case Studies/JD/Redesign combined.png",
         improvements: [
           "Simplified navigation",
           "Clear visual hierarchy",
