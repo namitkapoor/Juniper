@@ -30,7 +30,7 @@ export default function Experience() {
         <Float
             speed={1.0}
             rotationIntensity={0.2}
-            floatIntensity={0.3}
+            floatIntensity={0.12}
         >
             <Model />
         </Float>   

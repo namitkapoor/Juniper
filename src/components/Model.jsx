@@ -16,7 +16,7 @@ export default function Model() {
     const [scrollProgress, setScrollProgress] = useState(0)
     
     // Initial glasses position (hero state) - your original parameters
-    const initialGlassesPosition = [-0.2, 0.1, 0]
+    const initialGlassesPosition = [-0.3, 0.2, 0]
     const initialGlassesScale = [0.15, 0.15, 0.1]
     const initialGlassesRotation = [0.6, -0.4, -0.2]
     
