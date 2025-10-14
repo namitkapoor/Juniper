@@ -359,6 +359,11 @@
   object-fit: contain;
   object-position: center;
   display: block;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translateZ(0);
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
 }
 
 .visual-glow {
@@ -500,10 +505,12 @@
 @media (max-width: 768px) {
   .case-studies-carousel {
     gap: 2rem;
+    perspective: none;
   }
 
   .case-study-showcase {
     min-height: unset;
+    transform-style: flat;
   }
 
   .showcase-content {
@@ -533,11 +540,17 @@
   .showcase-visual {
     min-height: unset;
     max-height: 350px;
+    transform-style: flat;
   }
 
   .visual-container {
     max-height: 350px;
     height: auto;
+    transform: none;
+  }
+
+  .case-study-showcase:hover .visual-container {
+    transform: none;
   }
 
   .showcase-image {
@@ -546,6 +559,7 @@
     max-height: 350px;
     object-fit: contain;
     object-position: center;
+    image-rendering: auto;
   }
 
   .case-study-button {
