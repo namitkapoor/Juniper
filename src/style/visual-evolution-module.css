@@ -174,13 +174,10 @@
 }
 
 .visual-slider-image {
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
-  height: 100%;
+  height: 90%;
   object-fit: contain;
-  padding: 1rem;
+  padding: 1rem 0;
 }
 
 .visual-slider-track {

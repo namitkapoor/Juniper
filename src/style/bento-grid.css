@@ -291,6 +291,11 @@
 
 @media (max-width: 768px) {
   .bento-grid {
+    display: none;
+  }
+  
+  /* Uncomment below if you want to show bento grid on mobile/tablet
+  .bento-grid {
     grid-template-columns: repeat(6, 1fr);
     gap: 1rem;
   }
@@ -303,7 +308,6 @@
     grid-column: span 3;
   }
 
-  /* Adjust content padding */
   .bento-content {
     padding: 1.5rem;
     display: flex;
@@ -311,7 +315,6 @@
     align-items: center;
   }
 
-  /* Adjust typography */
   .bento-item h3 {
     font-size: 1.25rem;
   }
@@ -321,7 +324,6 @@
     line-height: 1.5;
   }
 
-  /* Adjust metrics display */
   .bento-metrics {
     grid-template-columns: 1fr;
     gap: 0.75rem;
@@ -334,9 +336,15 @@
   .timeline-list {
     max-width: 90%;
   }
+  */
 }
 
 @media (max-width: 480px) {
+  .bento-grid {
+    display: none;
+  }
+  
+  /* Uncomment below if you want to show bento grid on small mobile
   .bento-grid {
     gap: 0.75rem;
     padding: 0rem;
@@ -349,7 +357,6 @@
     padding: 1.25rem;
   }
 
-  /* Adjust aspect ratios for mobile */
   .bento-item.large {
     aspect-ratio: 4/3;
   }
@@ -357,6 +364,7 @@
   .bento-item.tall {
     aspect-ratio: 1/1;
   }
+  */
 }
 
 /* Keep timeline items centered */
