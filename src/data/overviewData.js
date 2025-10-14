@@ -48,13 +48,36 @@ export const overviewData = {
       {
         size: 'small',
         content: {
-          type: 'text',
-          icon: IoPeopleOutline,
-          title: 'User Feedback',
-          description: '"It’s like you’ve been to my farm —  The layout is exactly how it looks!"',
-          footer: '- Sarah Chen, Homestead Farmer'
+          type: 'stats',
+          icon: IoInformationCircleOutline,
+          title: 'Project Info',
+          items: [
+            'Role: UX/UI Designer',
+            'Team: 4 members',
+            'Duration: 3 months'
+          ]
         }
       },
+      // {
+      //   size: 'small',
+      //   content: {
+      //     type: 'text',
+      //     icon: IoAccessibilityOutline,
+      //     title: 'Accessibility Focus',
+      //     description: 'Achieved WCAG 2.0 AA compliance with contrast checks and color-blind-friendly visual tags.',
+      //     footer: 'Inclusive by Design'
+      //   }
+      // },
+      // {
+      //   size: 'small',
+      //   content: {
+      //     type: 'text',
+      //     icon: IoPeopleOutline,
+      //     title: 'User Feedback',
+      //     description: '"It’s like you’ve been to my farm —  The layout is exactly how it looks!"',
+      //     footer: '- Sarah Chen, Homestead Farmer'
+      //   }
+      // },
       
       {
         size: 'small',
@@ -67,20 +90,7 @@ export const overviewData = {
         }
       },
       {
-        size: 'medium',
-        content: {
-          type: 'stats',
-          icon: IoInformationCircleOutline,
-          title: 'Project Info',
-          items: [
-            'Role: UX/UI Designer',
-            'Team: 4 members',
-            'Duration: 3 months'
-          ]
-        }
-      },
-      {
-        size: 'medium',
+        size: 'small',
         content: {
           type: 'text',
           icon: IoSearchOutline,
@@ -97,18 +107,7 @@ export const overviewData = {
           alt: 'John Deere Operations Center Mobile App Interface',
           objectFit: 'cover'
         }
-      },
-      
-      {
-        size: 'wide',
-        content: {
-          type: 'text',
-          icon: IoAccessibilityOutline,
-          title: 'Accessibility Focus',
-          description: 'Achieved WCAG 2.0 AA compliance with contrast checks and color-blind-friendly visual tags.',
-          footer: 'Inclusive by Design'
-        }
-      },
+      }, 
       {
         size: 'wide',
         content: {
@@ -170,15 +169,25 @@ export const overviewData = {
         }
       },
       {
-        size: 'medium',
+        size: 'small',
         content: {
           type: 'text',
           icon: IoConstructOutline,
           title: 'Tools Used',
-          description: 'Figma, Miro, Google Workspace',
+          description: 'Figma, React, Miro, Google Workspace',
           footer: 'User Evaluations'
         }
       }, 
+      {
+        size: 'small',
+        content: {
+          type: 'text',
+          icon: IoAccessibilityOutline,
+          title: 'Accessibility Focus',
+          description: 'Achieved WCAG 2.0 AA compliance with contrast checks and color-blind-friendly visual tags.',
+          footer: 'Inclusive by Design'
+        }
+      },
       {
         size: 'wide',
         content: {
@@ -216,49 +225,38 @@ export const overviewData = {
           ]
         }
       },
-      {
-        size: 'small',
-        content: {
-          type: 'text',
-          icon: IoPeopleOutline,
-          title: 'User Feedback',
-          description: '"The platform has made it so easy to find the right influencers for my business."',
-          footer: '- Emily Davis, Small Business Ownerr'
-        }
-      },
+      // {
+      //   size: 'medium',
+      //   content: {
+      //     type: 'text',
+      //     icon: IoPeopleOutline,
+      //     title: 'User Feedback',
+      //     description: '"The platform has made it so easy to find the right influencers for my business."',
+      //     footer: '- Emily Davis, Small Business Ownerr'
+      //   }
+      // },     
+      // {
+      //   size: 'wide',
+      //   content: {
+      //     type: 'text',
+      //     icon: IoCheckmarkDoneOutline,
+      //     title: 'My Contribution',
+      //     description: 'I redesigned the influencer marketing platform, transforming it from a placeholder UI into a polished, user-friendly product. By conducting competitive research and optimizing task flows, I delivered a realistic yet impactful facelift that adhered to branding constraints and tight timelines.',
+      //     footer: 'User Evaluations'
+      //   }
+      // },
       
+      // {
+      //   size: 'wide',
+      //   content: {
+      //     type: 'text',
+      //     icon: IoSearchOutline,
+      //     title: 'Key Insight',
+      //     description: 'Small businesses struggle with finding and managing influencers due to lack of resources.',
+      //     footer: 'Opportunity for adoption'
+      //   }
+      // },
       
-      {
-        size: 'wide',
-        content: {
-          type: 'text',
-          icon: IoCheckmarkDoneOutline,
-          title: 'My Contribution',
-          description: 'I redesigned the influencer marketing platform, transforming it from a placeholder UI into a polished, user-friendly product. By conducting competitive research and optimizing task flows, I delivered a realistic yet impactful facelift that adhered to branding constraints and tight timelines.',
-          footer: 'User Evaluations'
-        }
-      },
-      
-      {
-        size: 'wide',
-        content: {
-          type: 'text',
-          icon: IoSearchOutline,
-          title: 'Key Insight',
-          description: 'Small businesses struggle with finding and managing influencers due to lack of resources.',
-          footer: 'Opportunity for adoption'
-        }
-      },
-      {
-        size: 'small',
-        content: {
-          type: 'text',
-          icon: IoAccessibilityOutline,
-          title: 'Accessibility Focus',
-          description: 'Achieved WCAG 2.0 AA compliance with contrast checks and color-blind-friendly visual tags.',
-          footer: 'Inclusive by Design'
-        }
-      }
     ]
   },
   "taskReminders": {
@@ -290,33 +288,8 @@ export const overviewData = {
           objectFit: 'cover'
         }
       },
-      
       {
-        size: 'medium',
-        content: {
-          type: 'stats',
-          icon: IoSparklesOutline,
-          title: 'Benefits of Spatial Interfaces',
-          items: [
-            "Priority Indicators", 
-            "Notifications", 
-            "Contextual Adaptability", 
-            "Anywhere Access"
-          ]
-        }
-      },
-      {
-        size: 'medium',
-        content: {
-          type: 'text',
-          icon: IoRocketOutline,
-          title: 'Innovation Focus',
-          description: '"Explored novel ways to integrate spatial interfaces, leveraging physical spaces to reduce cognitive load and enhance task management through context-aware AR solutions."',
-          footer: 'Revolutionizing Interaction Design'
-        }
-      },
-      {
-        size: 'wide',
+        size: 'small',
         content: {
           type: 'stats',
           icon: IoConstructOutline,
@@ -329,33 +302,13 @@ export const overviewData = {
         }
       },
       {
-        size: 'small',
+        size: 'tall',
         content: {
           type: 'text',
           icon: IoPeopleOutline,
           title: 'Product Need',
           description: 'Most young adults end up creating redundant reminders in their phone, notebook, sticky notes, etc. because they need both physical and digital reminders.',
           footer: 'Opportunity for Change'
-        }
-      },
-      {
-        size: 'wide',
-        content: {
-          type: 'text',
-          icon: IoPeopleOutline,
-          title: 'Research Focus',
-          description: "Exploring spatial interfaces for task management and their benefits for young adults.",
-          footer: 'Thesis Exploration'
-        }
-      },
-      {
-        size: 'wide',
-        content: {
-          type: 'text',
-          icon: IoSearchOutline,
-          title: 'Research Insight',
-          description: '"How we remember is different from how we like to be reminded. Physical spaces provide context that aids in recalling information."',
-          footer: 'Opportunity for Context'
         }
       },
       {
@@ -371,7 +324,53 @@ export const overviewData = {
             { "value": "6", "label": "Evaluation Participants" }
           ]
         }
-      }
+      },
+      {
+        size: 'medium',
+        content: {
+          type: 'stats',
+          icon: IoSparklesOutline,
+          title: 'Benefits of Spatial Interfaces',
+          items: [
+            "Priority Indicators", 
+            "Notifications", 
+            "Contextual Adaptability", 
+            "Anywhere Access"
+          ]
+        }
+      },
+      // {
+      //   size: 'medium',
+      //   content: {
+      //     type: 'text',
+      //     icon: IoRocketOutline,
+      //     title: 'Innovation Focus',
+      //     description: '"Explored novel ways to integrate spatial interfaces, leveraging physical spaces to reduce cognitive load and enhance task management through context-aware AR solutions."',
+      //     footer: 'Revolutionizing Interaction Design'
+      //   }
+      // },   
+      
+      // {
+      //   size: 'wide',
+      //   content: {
+      //     type: 'text',
+      //     icon: IoPeopleOutline,
+      //     title: 'Research Focus',
+      //     description: "Exploring spatial interfaces for task management and their benefits for young adults.",
+      //     footer: 'Thesis Exploration'
+      //   }
+      // },
+      // {
+      //   size: 'small',
+      //   content: {
+      //     type: 'text',
+      //     icon: IoSearchOutline,
+      //     title: 'Research Insight',
+      //     description: '"How we remember is different from how we like to be reminded. Physical spaces provide context that aids in recalling information."',
+      //     footer: 'Opportunity for Context'
+      //   }
+      // },
+      
     ]
   },
   "sustainablePackaging": {
@@ -405,11 +404,34 @@ export const overviewData = {
       {
         size: 'small',
         content: {
+          type: 'stats',
+          icon: IoInformationCircleOutline,
+          title: 'Project Info',
+          items: [
+            'Role: UX/UI Designer',
+            'Team: 4 members',
+            'Duration: 3 months'
+          ]
+        }
+      },
+      // {
+      //   size: 'small',
+      //   content: {
+      //     type: 'text',
+      //     icon: IoPeopleOutline,
+      //     title: 'Product Need',
+      //     description: 'Sustainable packaging is critical to reducing humanity\'s environmental impact.',
+      //     footer: 'Opportunity for Change'
+      //   }
+      // },
+      {
+        size: 'small',
+        content: {
           type: 'text',
-          icon: IoPeopleOutline,
-          title: 'Product Need',
-          description: 'Sustainable packaging is critical to reducing humanity\'s environmental impact.',
-          footer: 'Opportunity for Change'
+          icon: IoSearchOutline,
+          title: 'Research Insight',
+          description: '82% of retailers cite cost as the primary barrier to sustainable packaging adoption.',
+          footer: 'Market Opportunity'
         }
       },
       {
@@ -435,40 +457,19 @@ export const overviewData = {
           footer: 'Gamifying Sustainability'
         }
       },
-      {
-        size: 'medium',
-        content: {
-          type: 'stats',
-          icon: IoInformationCircleOutline,
-          title: 'Project Info',
-          items: [
-            'Role: UX/UI Designer',
-            'Team: 4 members',
-            'Duration: 3 months'
-          ]
-        }
-      },
+      
 
-      {
-        size: 'wide',
-        content: {
-          type: 'text',
-          icon: IoSearchOutline,
-          title: 'Research Insight',
-          description: '82% of retailers cite cost as the primary barrier to sustainable packaging adoption.',
-          footer: 'Market Opportunity'
-        }
-      },
-      {
-        size: 'wide',
-        content: {
-          type: 'text',
-          icon: IoCheckmarkDoneOutline,
-          title: 'My Contribution',
-          description: 'I designed a gamified AR solution that rewards users for choosing sustainable packaging, leveraging physical spaces to reduce cognitive load and enhance task management through context-aware AR solutions.',
-          footer: 'Revolutionizing Interaction Design'
-        }
-      }
+      
+      // {
+      //   size: 'wide',
+      //   content: {
+      //     type: 'text',
+      //     icon: IoCheckmarkDoneOutline,
+      //     title: 'My Contribution',
+      //     description: 'I designed a gamified AR solution that rewards users for choosing sustainable packaging, leveraging physical spaces to reduce cognitive load and enhance task management through context-aware AR solutions.',
+      //     footer: 'Revolutionizing Interaction Design'
+      //   }
+      // }
     ]
   }
 }; 
