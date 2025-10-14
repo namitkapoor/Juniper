@@ -66,7 +66,7 @@ const caseStudies = [
     title: 'Manage Small Farms',
     metrics: '70 SUS Score',
     categories: ['ux', 'research', 'b2c'],
-    image: '../images/Project Cover Photos/JD thumbnail photo 2.svg',
+    image: '../images/Project Cover Photos/JD Redesign thumbnail vector.svg',
     description: 'Simplified an operations management app to better serve small farm owners, focusing on usability and scalability for non-technical users.',
     path: '/case-study/manage-farms'
   },
@@ -99,11 +99,29 @@ const caseStudies = [
     title: 'Personalize Skin Care',
     metrics: '1200+ Site Visitors',
     categories: ['ux', 'development','ai', 'b2b'],
-    image: '../images/Project Cover Photos/Home Page.svg',
+    image: '../images/Project Cover Photos/Sentry Skin thumbnail.svg',
     description: 'Developed a chatbot-driven skincare recommendation platform, integrating computer vision to provide personalized product suggestions.',
     path: 'https://sentry-skin-website.vercel.app/',
     comingSoon: false,
     isExternal: true
+  },
+  {
+    title: 'Recommend Beauty Products',
+    metrics: '23% More Purchases',
+    categories: ['ux', 'ai', 'b2c'],
+    image: '../images/Project Cover Photos/Nuele thumbnail.svg',
+    description: 'Redesigned a web app to simplify influencer hiring and campaign tracking, boosting user engagement by reducing workflow friction for small business owners.',
+    path: '/case-study/product-recommendations',
+    comingSoon: true
+  },
+  {
+    title: 'Improve Beauty School Enrollment',
+    metrics: '23% More Enrollments',
+    categories: ['ux', 'ai', 'b2b'],
+    image: '../images/Project Cover Photos/CV thumbnail.svg',
+    description: 'Redesigned a web app to simplify influencer hiring and campaign tracking, boosting user engagement by reducing workflow friction for small business owners.',
+    path: '/case-study/beauty-school',
+    comingSoon: true
   },
 ];
 
@@ -266,20 +284,39 @@ export default function Home() {
             </div>
           </div>
 
-          <motion.div className="case-studies-grid" layout>
+          <div className="case-studies-carousel">
             <AnimatePresence>
-              {sortCaseStudies(caseStudies).map((study) => (
+              {sortCaseStudies(caseStudies).map((study, index) => (
                 <motion.div
                   key={study.title}
-                  className={`case-study-card ${study.comingSoon ? 'coming-soon' : ''}`}
-                  layout
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ 
-                    opacity: study.categories.some(cat => activeCategories.has(cat)) || activeCategories.size === 0 ? 1 : 0.3,
-                    scale: study.categories.some(cat => activeCategories.has(cat)) || activeCategories.size === 0 ? 1 : 0.95
+                  className={`case-study-showcase ${study.comingSoon ? 'coming-soon' : ''}`}
+                  initial={{ 
+                    opacity: 0,
+                    rotateX: 45,
+                    rotateY: -15,
+                    scale: 0.85,
+                    z: -200
                   }}
-                  exit={{ opacity: 0, scale: 0.8 }}
-                  transition={{ duration: 0.3 }}
+                  whileInView={{ 
+                    opacity: study.categories.some(cat => activeCategories.has(cat)) || activeCategories.size === 0 ? 1 : 0.3,
+                    rotateX: 0,
+                    rotateY: 0,
+                    scale: study.categories.some(cat => activeCategories.has(cat)) || activeCategories.size === 0 ? 1 : 0.95,
+                    z: 0
+                  }}
+                  exit={{ 
+                    opacity: 0,
+                    rotateX: -45,
+                    rotateY: 15,
+                    scale: 0.85,
+                    z: -200
+                  }}
+                  viewport={{ once: false, margin: "-100px" }}
+                  transition={{ 
+                    duration: 0.8,
+                    delay: 0.1 * index,
+                    ease: [0.25, 0.46, 0.45, 0.94]
+                  }}
                   onClick={() => {
                     if (study.isExternal) {
                       window.open(study.path, '_blank');
@@ -287,61 +324,85 @@ export default function Home() {
                       navigate(study.path);
                     }
                   }}
+                  style={{
+                    transformStyle: 'preserve-3d',
+                    perspective: 1000
+                  }}
                 >
-                  <h3>{study.title}</h3>
-                  
-                  {study.comingSoon ? (
-                    <div className="coming-soon-badge">
-                      <IoLockClosed className="lock-icon" />
-                      Coming Soon
-                    </div>
-                  ) : (
-                    <div className="case-study-meta">
-                      <span>{study.metrics}</span>
-                    </div>
-                  )}
-
-                  <div className="case-study-tags">
-                    {study.categories.map(cat => (
-                      <span 
-                        key={cat} 
-                        className="tag"
-                        style={{ '--category-color': caseStudyCategories[cat].color }}
-                      >
-                        {caseStudyCategories[cat].name}
-                      </span>
-                    ))}
-                  </div>
-
-                  <img 
-                    className="case-study-image" 
-                    src={study.image}
-                    alt={study.title} 
-                  />
-                  
-                  <p>{study.description}</p>
-                  
-                  <div className="button-container">
-                    <Button 
-                      className={`case-study-button ${study.comingSoon ? 'disabled' : ''}`}
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        if (study.isExternal) {
-                          window.open(study.path, '_blank');
-                        } else if (!study.comingSoon) {
-                          navigate(study.path);
-                        }
-                      }}
-                      disabled={study.comingSoon}
+                  <div className={`showcase-content ${index % 2 === 1 ? 'reverse' : ''}`}>
+                    <motion.div 
+                      className="showcase-info"
+                      initial={{ x: index % 2 === 0 ? -50 : 50, opacity: 0 }}
+                      whileInView={{ x: 0, opacity: 1 }}
+                      transition={{ delay: 0.2 + (0.1 * index), duration: 0.6 }}
                     >
-                      {study.comingSoon ? 'Coming Soon' : study.isExternal ? 'Visit Website' : 'Learn More'}
-                      {!study.comingSoon && !study.isExternal && <IoArrowForward className="button-icon" />}
-                    </Button>
+                      <div className="case-study-tags">
+                        {study.categories.map(cat => (
+                          <span 
+                            key={cat} 
+                            className="tag"
+                            style={{ '--category-color': caseStudyCategories[cat].color }}
+                          >
+                            {caseStudyCategories[cat].name}
+                          </span>
+                        ))}
+                      </div>
+
+                      <div className="info-header">
+                          <div className="case-study-meta">
+                            <span className="metric-highlight">{study.metrics}</span>
+                          </div>
+                      </div>
+                      
+                      <h3>{study.title}</h3>
+                      <p className="showcase-description">{study.description}</p>
+                      
+                      <div className="button-container">
+                        <Button 
+                          className={`case-study-button ${study.comingSoon ? 'disabled' : ''}`}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            if (study.isExternal) {
+                              window.open(study.path, '_blank');
+                            } else if (!study.comingSoon) {
+                              navigate(study.path);
+                            }
+                          }}
+                          disabled={study.comingSoon}
+                        >
+                          {study.comingSoon ? 'Coming Soon' : study.isExternal ? 'Visit Website' : 'Learn More'}
+                          {!study.comingSoon && !study.isExternal && <IoArrowForward className="button-icon" />}
+                        </Button>
+                      </div>
+                    </motion.div>
+
+                    <motion.div 
+                      className="showcase-visual"
+                      initial={{ x: 50, opacity: 0, rotateY: -25 }}
+                      whileInView={{ x: 0, opacity: 1, rotateY: 0 }}
+                      transition={{ 
+                        delay: 0.3 + (0.1 * index), 
+                        duration: 0.8,
+                        ease: [0.25, 0.46, 0.45, 0.94]
+                      }}
+                      style={{
+                        transformStyle: 'preserve-3d'
+                      }}
+                    >
+                      <div className="visual-container">
+                        <img 
+                          className="showcase-image" 
+                          src={study.image}
+                          alt={study.title} 
+                        />
+                        <div className="visual-glow"></div>
+                      </div>
+                    </motion.div>
                   </div>
                 </motion.div>
               ))}
             </AnimatePresence>
-          </motion.div>
+          </div>
         </section>
 
         {/* Extra Work Section - commented out since we have a separate page */}

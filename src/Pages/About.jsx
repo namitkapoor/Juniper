@@ -206,7 +206,7 @@ export default function About() {
             ease: "easeOut"
           }}
         >
-          <Contact />
+          <Contact/>
         </motion.div>
       </div>
     </div>

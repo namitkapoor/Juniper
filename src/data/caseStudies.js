@@ -5,7 +5,7 @@ export const caseStudies = {
       title: 'Manage Small Farms',
       metric: '70 SUS Score',
       tags: ['Mobile Design', 'Research', 'Application'],
-      image: '../images/Project Cover Photos/JD thumbnail photo 2.svg',
+      image: '../images/Project Cover Photos/JD Redesign thumbnail vector.svg',
       description: 'Simplified an operations management app to better serve small farm owners, focusing on usability and scalability for non-technical users.'
     },
     {
@@ -14,6 +14,22 @@ export const caseStudies = {
       metric: '28% Less Clicks',
       tags: ['Web Design', 'B2B', 'Dashboard'],
       image: '../images/Project Cover Photos/Campaign Page.svg',
+      description: 'Redesigned a web app to simplify influencer hiring and campaign tracking, boosting user engagement by reducing workflow friction for small business owners.'
+    },
+    {
+      id: 'beauty-school',
+      title: 'Improve Beauty School Enrollment',
+      metric: '23% More Enrollments',
+      tags: ['Web App Design', 'AI', 'Enrollment Chatbot'],
+      image: '../images/Project Cover Photos/CV thumbnail.svg',
+      description: 'Redesigned a web app to simplify influencer hiring and campaign tracking, boosting user engagement by reducing workflow friction for small business owners.'
+    },
+    {
+      id: 'product-recommendations',
+      title: 'Match Haircare Products',
+      metric: '23% More Purchases',
+      tags: ['Web App Design', 'AI', 'Dashboard'],
+      image: '../images/Project Cover Photos/Nuele thumbnail.svg',
       description: 'Redesigned a web app to simplify influencer hiring and campaign tracking, boosting user engagement by reducing workflow friction for small business owners.'
     }
   ],

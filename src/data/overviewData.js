@@ -35,6 +35,7 @@ export const overviewData = {
           activeIndex: 3
         }
       },
+      
       {
         size: 'large',
         content: {
@@ -45,7 +46,7 @@ export const overviewData = {
         }
       },
       {
-        size: 'medium',
+        size: 'small',
         content: {
           type: 'text',
           icon: IoPeopleOutline,
@@ -55,6 +56,59 @@ export const overviewData = {
         }
       },
       
+      {
+        size: 'small',
+        content: {
+          type: 'text',
+          icon: IoConstructOutline,
+          title: 'Tools Used',
+          description: 'Figma, Miro, Google Workspace',
+          footer: 'User Evaluations'
+        }
+      },
+      {
+        size: 'medium',
+        content: {
+          type: 'stats',
+          icon: IoInformationCircleOutline,
+          title: 'Project Info',
+          items: [
+            'Role: UX/UI Designer',
+            'Team: 4 members',
+            'Duration: 3 months'
+          ]
+        }
+      },
+      {
+        size: 'medium',
+        content: {
+          type: 'text',
+          icon: IoSearchOutline,
+          title: 'Product Summary',
+          description: 'Small farmers often rely on paper tools, making farm management inefficient. Our grid-based map view creates a digital twin of their farm, helping sync fieldwork with indoor tools for better organization.',
+          footer: 'Opportunity for adoption'
+        }
+      },
+      {
+        size:'medium',
+        content: {
+          type: 'image',
+          src: '../../images/Case Studies/JD/Me at dealership.jpg',
+          alt: 'John Deere Operations Center Mobile App Interface',
+          objectFit: 'cover'
+        }
+      },
+      
+      {
+        size: 'wide',
+        content: {
+          type: 'text',
+          icon: IoAccessibilityOutline,
+          title: 'Accessibility Focus',
+          description: 'Achieved WCAG 2.0 AA compliance with contrast checks and color-blind-friendly visual tags.',
+          footer: 'Inclusive by Design'
+        }
+      },
       {
         size: 'wide',
         content: {
@@ -70,62 +124,18 @@ export const overviewData = {
         }
       },
       
-      {
-        size: 'medium',
-        content: {
-          type: 'text',
-          icon: IoCheckmarkDoneOutline,
-          title: 'My Contribution',
-          description: 'Led the design of a map-to-grid interface tailored for small farms, making it easier for farmers to visualize and manage their land.',
-          footer: 'User Evaluations'
-        }
-      },
-      {
-        size: 'small',
-        content: {
-          type: 'text',
-          icon: IoAccessibilityOutline,
-          title: 'Accessibility Focus',
-          description: 'Achieved WCAG 2.0 AA compliance with contrast checks and color-blind-friendly visual tags.',
-          footer: 'Inclusive by Design'
-        }
-      },
-      {
-        size: 'wide',
-        content: {
-          type: 'text',
-          icon: IoSearchOutline,
-          title: 'Product Summary',
-          description: 'Small farmers often rely on paper tools, making farm management inefficient. Our grid-based map view creates a digital twin of their farm, helping sync fieldwork with indoor tools for better organization.',
-          footer: 'Opportunity for adoption'
-        }
-      },
-          
-      {
-        size: 'large',
-        content: {
-          type: 'stats',
-          icon: IoInformationCircleOutline,
-          title: 'Project Info',
-          items: [
-            'Role: UX/UI Designer',
-            'Team: 4 members',
-            'Duration: 3 months'
-          ]
-        }
-      },
       
-           
-      {
-        size: 'small',
-        content: {
-          type: 'text',
-          icon: IoConstructOutline,
-          title: 'Tools Used',
-          description: 'Figma, Miro, Google Workspace',
-          footer: 'User Evaluations'
-        }
-      },
+      // {
+      //   size: 'medium',
+      //   content: {
+      //     type: 'text',
+      //     icon: IoCheckmarkDoneOutline,
+      //     title: 'My Contribution',
+      //     description: 'Led the design of a map-to-grid interface tailored for small farms, making it easier for farmers to visualize and manage their land.',
+      //     footer: 'User Evaluations'
+      //   }
+      // },
+     
       
       
     ]

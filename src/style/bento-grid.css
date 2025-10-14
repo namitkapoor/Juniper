@@ -1,7 +1,7 @@
 /* bento-grid.css */
 .bento-grid {
   display: grid;
-  grid-template-columns: repeat(24, 1fr);
+  grid-template-columns: repeat(12, 1fr);
   gap: 0.5rem;
   width: 100%;
   margin: 0 auto;
@@ -21,14 +21,10 @@
   transition: none;
 }
 
-.bento-item:hover {
-  transform: none;
-  background: rgba(255, 255, 255, 0.05);
-}
-
 /* Size variants */
 .bento-item.large {
-  grid-column: span 12;
+  grid-column: span 8;
+  grid-row: span 2;
   aspect-ratio: 21/9;
 }
 
@@ -39,24 +35,29 @@
 }
 
 .bento-item.tall {
-  grid-column: span 6;
+  grid-column: span 2;
   grid-row: span 2;
   min-height: 200px;
 }
 
 .bento-item.wide {
-  grid-column: span 8;
-  min-height: 120px;
-}
-
-.bento-item.medium {
   grid-column: span 6;
   min-height: 120px;
 }
 
-.bento-item.small {
+.bento-item.medium {
   grid-column: span 4;
   min-height: 120px;
+}
+
+.bento-item.small {
+  grid-column: span 2;
+  min-height: 120px;
+}
+.bento-item.square {
+  grid-column: span 4;
+  grid-row: span 2;
+  aspect-ratio: 1/1;
 }
 
 /* Special styling for timeline and key insight */
@@ -90,8 +91,6 @@
 
 /* Timeline specific styling */
 .timeline-list {
-  width: 100%;
-  max-width: 90%;
   margin: 2.5rem auto;
 }
 
@@ -198,6 +197,7 @@
 .bento-stats {
   display: flex;
   flex-direction: row;
+
   flex-wrap: wrap;
   gap: 1rem;
   margin-top: 1rem;
@@ -217,7 +217,7 @@
 /* Metrics styling */
 .bento-metrics {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 1rem;
   margin-top: 1rem;
 }
@@ -254,7 +254,7 @@
   }
 
   .bento-item.large {
-    grid-column: span 12;
+    grid-column: span 8;
     aspect-ratio: 16/9;
   }
 
@@ -271,7 +271,7 @@
   }
 
   .bento-item.tall {
-    grid-column: span 6;
+    grid-column: span 4;
     aspect-ratio: 3/4;
   }
 
@@ -300,12 +300,15 @@
   .bento-item.medium,
   .bento-item.small,
   .bento-item.tall {
-    grid-column: span 6;
+    grid-column: span 3;
   }
 
   /* Adjust content padding */
   .bento-content {
     padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   /* Adjust typography */
@@ -340,6 +343,9 @@
   }
 
   .bento-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     padding: 1.25rem;
   }
 
