@@ -1,0 +1,133 @@
+/* Custom Button Component Styles */
+.custom-button {
+  padding: 1rem 2rem;
+  background: var(--background, #000000);
+  color: var(--text-primary, #ffffff);
+  border: 2px solid var(--text-primary, #ffffff);
+  border-radius: 0;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow: none;
+  text-shadow: none;
+  outline: none;
+  font-family: inherit;
+  line-height: 1.5;
+}
+
+.custom-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.1);
+  transition: left 0.3s ease;
+}
+
+.custom-button:hover:not(:disabled) {
+  background: var(--text-primary, #ffffff);
+  color: var(--background, #000000);
+  border-color: var(--text-primary, #ffffff);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.3),
+              0 0 40px rgba(255, 255, 255, 0.1);
+  text-shadow: none;
+  outline: none;
+}
+
+.custom-button:hover:not(:disabled)::before {
+  left: 100%;
+}
+
+.custom-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.custom-button:focus {
+  outline: none;
+}
+
+/* Light mode hover adjustments */
+:root[data-theme="light"] .custom-button:hover:not(:disabled) {
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2),
+              0 0 40px rgba(0, 0, 0, 0.1);
+}
+
+/* Case study button specific styles - inherits from custom-button */
+.case-study-button {
+  /* Inherits all styles from .custom-button */
+}
+
+/* Button icon styles */
+.button-icon {
+  width: 1.25rem;
+  height: auto;
+  transition: transform 0.3s ease, filter 0.3s ease;
+  display: inline-block;
+  vertical-align: middle;
+  filter: brightness(0) saturate(100%) invert(1);
+  opacity: 1;
+}
+
+:root[data-theme="dark"] .button-icon {
+  filter: brightness(0) saturate(100%) invert(1);
+}
+
+:root[data-theme="light"] .button-icon {
+  filter: brightness(0) saturate(100%) invert(0);
+}
+
+.case-study-button:hover:not(:disabled) .button-icon {
+  transform: translateX(4px);
+}
+
+:root[data-theme="dark"] .case-study-button:hover:not(:disabled) .button-icon {
+  filter: brightness(0) saturate(100%) invert(0);
+}
+
+:root[data-theme="light"] .case-study-button:hover:not(:disabled) .button-icon {
+  /* When hovered in light mode, button bg is text-primary (#2e2d2d), text is background (#d6cccc) */
+  /* Arrow should match the text color (#d6cccc - light beige) */
+  /* Convert to white, then adjust to match #d6cccc (214/255 ≈ 0.84 brightness) */
+  filter: brightness(0) saturate(100%) invert(1) brightness(0.84);
+}
+
+/* Coming soon button styles */
+.case-study-showcase.coming-soon .case-study-button {
+  background: rgba(0, 0, 0, 0.7);
+  border-color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 1);
+  position: relative;
+  font-weight: 600;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+.case-study-showcase.coming-soon .case-study-button::before {
+  content: '🔒';
+  margin-right: 0.5rem;
+  font-size: 1rem;
+  display: inline-block;
+}
+
+.case-study-button.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.case-study-showcase.coming-soon .case-study-button.disabled {
+  opacity: 1;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+

@@ -1,25 +1,24 @@
 /* src/style/contact.css */
 .contact-section {
   position: relative;
-  width: 100%;
   padding: 6rem 2rem;
   background-color: var(--background, #000000);
   color: var(--text-primary, #ffffff);
 }
 
 .contact-wrapper {
-  max-width: 1200px;
-  margin: 0 auto;
+
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
 }
 
 .contact-content {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 4rem;
   margin-bottom: 4rem;
-  align-items: start;
+  align-items: space-between;
+  justify-content: space-between;
 }
 
 .contact-header {
@@ -83,7 +82,7 @@
 .status-dot {
   width: 10px;
   height: 10px;
-  background-color: #4CAF50;
+  background-color: var(--accent-success, #4CAF50);
   border-radius: 50%;
   animation: pulse 2s infinite;
 }

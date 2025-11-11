@@ -1,10 +1,11 @@
-import { lazy, Suspense, useState, useCallback } from 'react';
+import { lazy, Suspense, useState, useCallback, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Canvas } from '@react-three/fiber';
 import { IoAdd } from 'react-icons/io5';
 import * as IoIcons from 'react-icons/io5';
 import { aboutSections } from '../data/aboutContent';
 import Contact from '../components/Contact';
+import { useTheme } from '../components/ThemeContext';
 
 // Lazy load components
 const Navbar = lazy(() => import('../components/Navbar'));
@@ -13,6 +14,41 @@ const AboutModel = lazy(() => import('../components/AboutModel'));
 // Import styles
 import '../style/about.css';
 import '../style/animations.css';
+
+// Memoized Canvas component to prevent remounting
+const AboutCanvas = () => {
+  const { theme } = useTheme();
+  
+  // Get background color based on theme
+  // Use black background for both themes so white particles are visible
+  const backgroundColor = theme === 'light' 
+    ? '#2e2d2d' // Black background for light mode
+    : '#1d1d1d'; // Dark mode background from CSS
+  
+  return (
+    <Canvas
+      key="about-canvas"
+      camera={{
+        fov: 45,
+        near: 0.1,
+        far: 2000,
+        position: [0, 0, 5]
+      }}
+      gl={{ 
+        antialias: true,
+        alpha: false, // Set to false so background shows
+        preserveDrawingBuffer: true,
+        powerPreference: "high-performance"
+      }}
+      dpr={Math.min(window.devicePixelRatio, 2)}
+    >
+      <color attach="background" args={[backgroundColor]} />
+      <Suspense fallback={null}>
+        <AboutModel />
+      </Suspense>
+    </Canvas>
+  );
+};
 
 export default function About() {
   const [expandedSections, setExpandedSections] = useState(new Set(['about']));
@@ -30,40 +66,30 @@ export default function About() {
     });
   }, []);
 
+  // Memoize the about section content to prevent Canvas remounting
+  const aboutContent = useMemo(() => {
+    const section = aboutSections.find(s => s.id === 'about');
+    if (!section) return null;
+    
+    return (
+      <div className="about-grid">
+        <div className="info-canvas-content">
+          <div className="section-header">
+            <h2>{section.heroContent.heading}</h2>
+          </div>
+          <p>{section.heroContent.description}</p>
+        </div>
+        <div className="grid-item canvas-section">
+          <AboutCanvas />
+        </div>
+      </div>
+    );
+  }, []);
+
   const renderContent = (section) => {
     switch (section.id) {
       case 'about':
-        return (
-          <div className="about-grid">
-            <div className="info-canvas-content">
-              <div className="section-header">
-                <h2>{section.heroContent.heading}</h2>
-              </div>
-              <p>{section.heroContent.description}</p>
-            </div>
-            <div className="grid-item canvas-section">
-              <Canvas
-                camera={{
-                  fov: 45,
-                  near: 0.1,
-                  far: 2000,
-                  position: [0, 0, 5]
-                }}
-                gl={{ 
-                  antialias: true,
-                  alpha: true,
-                  preserveDrawingBuffer: true,
-                  powerPreference: "high-performance"
-                }}
-                dpr={Math.min(window.devicePixelRatio, 2)}
-              >
-                <Suspense fallback={null}>
-                  <AboutModel />
-                </Suspense>
-              </Canvas>
-            </div>
-          </div>
-        );
+        return aboutContent;
       
       case 'who':
         return (

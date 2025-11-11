@@ -41,6 +41,10 @@
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
+:root[data-theme="light"] .explore-categories-container {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
 .explore-categories-buttons {
   display: flex;
   gap: 1rem;
@@ -61,6 +65,10 @@
   cursor: pointer;
   transition: all 0.3s ease;
   opacity: var(--blend-opacity);
+}
+
+:root[data-theme="light"] .explore-category-button {
+  background: rgba(0, 0, 0, 0.03);
 }
 
 .explore-category-button.active {
@@ -133,6 +141,10 @@
   color: var(--text-bright);
   opacity: 0.9;
   transition: all 0.3s ease;
+}
+
+:root[data-theme="light"] .explore-category-tag {
+  background: rgba(0, 0, 0, 0.1);
 }
 
 .explore-category-tag:hover {

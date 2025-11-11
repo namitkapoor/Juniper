@@ -40,6 +40,10 @@
   pointer-events: none;
 }
 
+:root[data-theme="light"] .timeline-line {
+  background: rgba(0, 0, 0, 0.1);
+}
+
 .timeline-progress {
   position: absolute;
   height: 2px;
@@ -48,6 +52,10 @@
   transform-origin: left;
   opacity: 1;
   transition: all 0.3s ease;
+}
+
+:root[data-theme="light"] .timeline-progress {
+  background: linear-gradient(to right, rgba(46, 45, 45, 0.8), rgba(46, 45, 45, 0.4));
 }
 
 /* Show timeline when section is expanded */
@@ -96,6 +104,10 @@
   pointer-events: all;
 }
 
+:root[data-theme="light"] .phase-title {
+  color: var(--text-secondary, rgba(58, 58, 58, 0.7));
+}
+
 /* Active states */
 .timeline-phase.active {
   opacity: 1;
@@ -110,6 +122,10 @@
   color: var(--text-primary, #ffffff);
 }
 
+:root[data-theme="light"] .timeline-phase.active .phase-title {
+  color: var(--text-primary, #2e2d2d);
+}
+
 /* Content sections with animations */
 .section-content {
   animation: slideIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
@@ -120,7 +136,6 @@
 .phase-content {
   margin-top: 4rem;
   padding: 0;
-  max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
 }

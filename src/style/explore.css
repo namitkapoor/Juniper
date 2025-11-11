@@ -2,11 +2,18 @@
   --explore-bg: #030303;
   --explore-accent: rgba(255, 255, 255, 0.03);
   --explore-glow: rgba(255, 255, 255, 0.1);
-  --explore-text: rgba(255, 255, 255, 0.87);
-  --explore-text-dim: rgba(255, 255, 255, 0.6);
+  --explore-text: var(--text-bright, rgba(229, 229, 229, 0.87));
+  --explore-text-dim: var(--text-secondary, rgba(229, 229, 229, 0.6));
   --explore-orbit-1: 20s;
   --explore-orbit-2: 30s;
   --explore-orbit-3: 40s;
+}
+
+:root[data-theme="light"] {
+  --explore-accent: rgba(0, 0, 0, 0.03);
+  --explore-glow: rgba(0, 0, 0, 0.1);
+  --explore-text: var(--text-bright, rgba(46, 45, 45, 0.87));
+  --explore-text-dim: var(--text-secondary, rgba(58, 58, 58, 0.6));
 }
 
 .explore-page {

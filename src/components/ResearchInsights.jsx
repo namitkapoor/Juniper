@@ -38,6 +38,39 @@ const ResearchInsights = ({ items, projectId }) => {
 
   return (
     <>
+      <div className="requirements-section-compact">
+        <h5 className="requirements-title">Design Requirements</h5>
+        <div className="requirements-grid">
+          {items.map((item, index) => (
+            <div key={index} className="requirement-card">
+              <div className="title-with-icon">
+                {item.icon && <item.icon size={20} />}
+                <span>{item.category}</span>
+              </div>
+              <p className="insight">{item.insight}</p>
+              {item.methodologies?.length > 0 && (
+                <>
+                  <h5 className="methodology-subtitle">Research Methodologies</h5>
+                  <div className="methodology-tags">
+                    {item.methodologies.map((method, i) => (
+                      <button
+                        key={i}
+                        className={`methodology-tag ${selectedTags.includes(method) ? 'active' : ''}`}
+                        onClick={() => handleTagClick(method)}
+                      >
+                        {method}
+                      </button>
+                    ))}
+                  </div>
+                </>
+              )}
+              {item.response && (
+                <p className="response">{item.response}</p>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
       {researchImages.length > 0 && (
         <div className="research-visuals">
           <ImageCarousel 
@@ -48,37 +81,6 @@ const ResearchInsights = ({ items, projectId }) => {
           />
         </div>
       )}
-      <h5 className="requirements-title">Design Requirements</h5>
-      <div className="requirements-grid">
-        {items.map((item, index) => (
-          <div key={index} className="requirement-card">
-            <div className="title-with-icon">
-              {item.icon && <item.icon size={24} />}
-              <span>{item.category}</span>
-            </div>
-            <p className="insight">{item.insight}</p>
-            {item.methodologies?.length > 0 && (
-              <>
-                <h5 className="methodology-subtitle">Research Methodologies</h5>
-                <div className="methodology-tags">
-                  {item.methodologies.map((method, i) => (
-                    <button
-                      key={i}
-                      className={`methodology-tag ${selectedTags.includes(method) ? 'active' : ''}`}
-                      onClick={() => handleTagClick(method)}
-                    >
-                      {method}
-                    </button>
-                  ))}
-                </div>
-              </>
-            )}
-            {item.response && (
-              <p className="response">{item.response}</p>
-            )}
-          </div>
-        ))}
-      </div>
     </>
   );
 };

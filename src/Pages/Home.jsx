@@ -1,12 +1,13 @@
 // HomePage.jsx
 import React, { useState, useEffect, useRef, useMemo } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import Lottie from 'lottie-react';
 import Contact from '../components/Contact.jsx';
-import { Button } from 'antd'
+import Button from '../components/Button'
 import { useNavigate } from 'react-router-dom';
 import Navbar from "../components/Navbar.jsx";
 import "../style/home.css";
+import "../style/button.css";
 import { IoChevronDown } from 'react-icons/io5';
 import LoaderScreen from '../components/LoaderScreen';
 import { 
@@ -243,6 +244,7 @@ export default function Home() {
   const [activeCategories, setActiveCategories] = useState(new Set());
   const caseStudiesRef = useRef(null);
   const [heroLottieAnimation, setHeroLottieAnimation] = useState(null);
+  const [isCarouselPaused, setIsCarouselPaused] = useState(false);
 
   // Comment out the first-load check for development
 
@@ -279,6 +281,7 @@ export default function Home() {
       return newSet;
     });
   };
+
 
   // Memoize sorted case studies to avoid recalculating on every render
   const sortedCaseStudies = useMemo(() => {
@@ -348,29 +351,42 @@ export default function Home() {
 
          {/* Case Studies Section - Original Grid */}
          <section className="case-studies">
-          <div className="case-studies-header">
-            <h2 className='case-studies-title'>Case Studies</h2>
-            <p className="filter-subtitle">I solve problems across these areas. Where can I add value to yours?</p>
-          </div>
-          
-          <div className="categories-container">
-            <div className="categories-buttons">
-              {Object.entries(caseStudyCategories).map(([key, { name, color, icon: Icon }]) => (
-                <motion.button
-                  key={key}
-                  className={`category-button ${activeCategories.has(key) ? 'active' : ''}`}
-                  onClick={() => toggleCategory(key)}
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  style={{
-                    '--category-color': color,
-                    '--blend-opacity': activeCategories.has(key) ? '1' : '0.3'
-                  }}
-                >
-                  <Icon className="category-icon" />
-                  <span>{name}</span>
-                </motion.button>
-              ))}
+          <div className="categories-carousel-container">
+            <div 
+              className="categories-carousel-wrapper"
+              onMouseEnter={() => setIsCarouselPaused(true)}
+              onMouseLeave={() => setIsCarouselPaused(false)}
+              style={{ '--category-count': Object.keys(caseStudyCategories).length }}
+            >
+              <motion.div 
+                className={`categories-carousel-track ${isCarouselPaused ? 'paused' : ''}`}
+              >
+                {/* Duplicate items for seamless infinite loop */}
+                {[...Array(3)].map((_, loopIndex) => (
+                  Object.entries(caseStudyCategories).map(([key, { name, color, icon: Icon }]) => (
+                    <motion.button
+                      key={`${key}-${loopIndex}`}
+                      className={`category-carousel-button ${activeCategories.has(key) ? 'active' : ''}`}
+                      onClick={() => toggleCategory(key)}
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      style={{
+                        '--category-color': color,
+                        '--blend-opacity': activeCategories.has(key) ? '1' : '0.3'
+                      }}
+                    >
+                      <div className="category-carousel-content">
+                        <Icon className="category-icon" />
+                        <span className="category-name">{name}</span>
+                      </div>
+                      <div 
+                        className="category-gradient-overlay"
+                        style={{ background: `linear-gradient(135deg, ${color}, transparent)` }}
+                      />
+                    </motion.button>
+                  ))
+                ))}
+              </motion.div>
             </div>
           </div>
 

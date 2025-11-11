@@ -1,10 +1,11 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { Button } from 'antd';
+import Button from './Button';
 import { useNavigate } from 'react-router-dom';
 import { caseStudies } from '../data/caseStudies';
 import { IoChevronBack, IoChevronForward } from 'react-icons/io5';
 import { useState, useMemo, useEffect } from 'react';
 import '../style/other-projects.css';
+import '../style/button.css';
 
 export default function OtherProjects({ currentProjectId }) {
   const navigate = useNavigate();

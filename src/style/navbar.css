@@ -40,7 +40,6 @@ a {
   background: transparent;
   position: relative;
   border: 2px solid var(--text-primary, #ffffff);
-  border-bottom: none;
 }
 
 .nav-items {
@@ -144,6 +143,12 @@ a {
   border-bottom: 2px solid #908ab7;
 }
 
+:root[data-theme="light"] .mobile-nav-item.active {
+  background: linear-gradient(45deg, #2e2d2d, #888);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 /* Mobile Responsive Styles - Below 480px */
 @media (max-width: 480px) {
   .navigation {
@@ -192,6 +197,12 @@ a {
     -webkit-text-fill-color: transparent;
     font-weight: bold;
     border-bottom: 2px solid #908ab7; /* Optional underline */
+}
+
+:root[data-theme="light"] .nav-item.active {
+    background: linear-gradient(45deg, #2e2d2d, #888);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 /* Theme Toggle in Navbar */

@@ -1,19 +1,19 @@
 .decision-concept-comparison {
-  margin: 2rem 0;
+  margin: 1rem 0;
 }
 
 .decision-concept-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 2rem;
-  margin-top: 3.5rem;
+  gap: 1rem;
+  margin-top: 1.5rem;
 }
 
 .decision-concept-card {
   background: var(--card-bg);
   border: 1px solid var(--card-border);
-  border-radius: 8px;
-  padding: 2rem;
+  border-radius: 0;
+  padding: 1rem;
 }
 
 .decision-concept-card.selected {
@@ -27,9 +27,9 @@
 }
 
 .decision-concept-image {
-  margin-top: 1.5rem;
+  margin-top: 1rem;
   width: 100%;
-  border-radius: 8px;
+  border-radius: 0;
   overflow: hidden;
 }
 
@@ -42,10 +42,10 @@
 }
 
 .decision-caption {
-  padding: 1rem;
+  padding: 0.75rem;
   background: var(--card-bg);
   color: var(--text-secondary);
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   text-align: center;
 }
 
@@ -71,8 +71,8 @@
 /* Tab Styles */
 .tabs {
   display: flex;
-  gap: 1rem;
-  margin: 2rem 0;
+  gap: 0.75rem;
+  margin: 1rem 0;
   border-bottom: 1px solid var(--card-border);
   padding-bottom: 0.5rem;
 }
@@ -80,12 +80,12 @@
 .tab-button {
   background: none;
   border: none;
-  padding: 0.75rem 1.5rem;
+  padding: 0.5rem 1rem;
   color: var(--text-secondary);
   cursor: pointer;
   position: relative;
   transition: color 0.3s ease;
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 
 .tab-button.active {
@@ -103,14 +103,14 @@
 
 /* Wireframe Feedback Styles */
 .wireframe-feedback {
-  margin-top: 2rem;
+  margin-top: 1rem;
 }
 
 .wireframe-section {
   background: var(--card-bg);
-  border-radius: 8px;
-  padding: 2rem;
-  margin-bottom: 2rem;
+  border-radius: 0;
+  padding: 1rem;
+  margin-bottom: 1rem;
 }
 
 .wireframe-image {
@@ -127,13 +127,13 @@
 .hotspots-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1.5rem;
+  gap: 1rem;
 }
 
 .hotspot-card {
   background: rgba(255, 255, 255, 0.05);
-  padding: 1.5rem;
-  border-radius: 6px;
+  padding: 1rem;
+  border-radius: 0;
 }
 
 .hotspot-card h6 {
@@ -161,23 +161,23 @@
 .accessibility-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr); /* 2x2 layout */
-  gap: 2rem;
+  gap: 1rem;
   max-width: 1200px;
-  margin: 2rem auto;
+  margin: 1rem auto;
 }
 
 .accessibility-card {
   text-align: center;
-  padding: 2rem;
+  padding: 1rem;
   background: var(--card-bg);
   border: 1px solid var(--card-border);
-  border-radius: 12px;
+  border-radius: 0;
 }
 
 .accessibility-card h3 {
   color: var(--accent-success);
-  margin-bottom: 1rem;
-  font-size: 1.75rem;
+  margin-bottom: 0.75rem;
+  font-size: 1.25rem;
 }
 
 .accessibility-card .description {
@@ -220,13 +220,13 @@
 }
 
 .visual-example {
-  margin-top: 2rem;
+  margin-top: 1rem;
   width: 100%;
 }
 
 .visual-example img {
   width: 100%;
-  border-radius: 8px;
+  border-radius: 0;
 }
 
 /* ... we'll add more styles as needed */
@@ -293,14 +293,14 @@
 
 .decision-wireframe-section {
   background: var(--card-bg);
-  border-radius: 8px;
-  padding: 2rem;
-  margin-bottom: 2rem;
+  border-radius: 0;
+  padding: 1rem;
+  margin-bottom: 1rem;
 }
 
 .decision-wireframe-image {
-  margin-bottom: 2rem;
-  border-radius: 8px;
+  margin-bottom: 1rem;
+  border-radius: 0;
   overflow: hidden;
 }
 
@@ -309,21 +309,21 @@
   height: auto;
   max-height: 600px;
   object-fit: contain;
-  border-radius: 8px;
+  border-radius: 0;
 }
 
 .decision-hotspots-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1.5rem;
+  gap: 1rem;
 }
 
 .decision-hotspot-card {
   background: var(--card-bg);
   border: 1px solid var(--card-border);
-  border-radius: 8px;
-  padding: 1.5rem;
-  margin-bottom: 1rem;
+  border-radius: 0;
+  padding: 1rem;
+  margin-bottom: 0.75rem;
 }
 
 .decision-hotspot-card h6 {
@@ -343,7 +343,7 @@
 
 /* Wireframe Feedback Styles */
 .decision-wireframe-intro {
-  margin: 2rem 0;
+  margin: 1rem 0;
   text-align: left;
 }
 
@@ -356,14 +356,14 @@
 .decision-wireframe-intro p {
   color: var(--text-secondary);
   text-align: left;
-  margin-bottom: 5rem;
+  margin-bottom: 1.5rem;
 }
 
 .decision-wireframe-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 1.5rem;
-  margin-bottom: 3rem;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .decision-wireframe-item {
@@ -373,7 +373,7 @@
 .decision-wireframe-image-container {
   position: relative;
   border: 1px solid var(--card-border);
-  border-radius: 8px;
+  border-radius: 0;
   overflow: hidden;
 }
 
@@ -447,13 +447,13 @@
 .decision-hotspots-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1.5rem;
+  gap: 1rem;
 }
 
 .decision-hotspot-card {
   background: var(--card-bg);
   border: 1px solid var(--card-border);
-  border-radius: 8px;
+  border-radius: 0;
   padding: 1.5rem;
 }
 
@@ -492,9 +492,9 @@
 }
 
 .decision-concept-card h3 {
-  font-size: 1.75rem;
+  font-size: 1.25rem;
   font-weight: 600;
-  margin-bottom: 1.25rem;
+  margin-bottom: 0.75rem;
   color: var(--text-primary);
   text-align: center !important;
   width: 100%;
@@ -502,25 +502,25 @@
 }
 
 .decision-wireframe-intro h3 {
-  font-size: 1.75rem;
+  font-size: 1.25rem;
   font-weight: 600;
-  margin-bottom: 1.25rem;
+  margin-bottom: 0.75rem;
   color: var(--text-primary);
 }
 
 .accessibility-card h3 {
-  font-size: 1.75rem;
+  font-size: 1.25rem;
   font-weight: 600;
-  margin-bottom: 1.25rem;
+  margin-bottom: 0.75rem;
   color: var(--text-primary);
   text-align: center;
 }
 
 /* Accessibility Card Title - using more specific selectors */
 .accessibility-section .accessibility-grid .accessibility-card h3 {
-  font-size: 1.75rem;
+  font-size: 1.25rem;
   font-weight: 600;
-  margin-bottom: 1.25rem;
+  margin-bottom: 0.75rem;
   color: var(--text-primary);
   text-align: center;
   width: 100%;
@@ -597,11 +597,11 @@
 
   .decision-concept-grid {
     grid-template-columns: 1fr; /* Stack cards vertically */
-    gap: 1.5rem;
+    gap: 1rem;
   }
 
   .decision-concept-card {
-    padding: 1.5rem;
+    padding: 1rem;
   }
 }
 
@@ -701,9 +701,9 @@
 .decision-hotspot-card {
   background: var(--card-bg);
   border: 1px solid var(--card-border);
-  border-radius: 8px;
-  padding: 1.5rem;
-  margin-bottom: 1rem;
+  border-radius: 0;
+  padding: 1rem;
+  margin-bottom: 0.75rem;
 }
 
 /* Main challenge text - increased prominence */

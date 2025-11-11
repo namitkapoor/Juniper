@@ -1,9 +1,6 @@
 /* Global styles */
 .content-width {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 6rem 2rem 4rem 2rem;
+    padding: 0rem;
 }
 
 /* About page container */
@@ -35,7 +32,6 @@
     position: relative;
     width: 100%;
     aspect-ratio: 1;
-    border-radius: 20px;
     overflow: hidden;
     z-index: 1;
 }
@@ -291,10 +287,6 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    .content-width {
-        width: 80%;
-    }
-
     .about-grid,
     .skills-grid {
         grid-template-columns: 1fr;

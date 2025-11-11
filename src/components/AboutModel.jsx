@@ -12,8 +12,12 @@ export default function AboutModel() {
     const materialRef = useRef()
     const displacementRef = useRef({})
     const mouseRef = useRef(new THREE.Vector2(9999, 9999))
+    const isInitializedRef = useRef(false)
     
+    // Initialize scene only once
     useEffect(() => {
+        if (isInitializedRef.current) return;
+        
         // Setup displacement
         const displacement = displacementRef.current
         
@@ -104,17 +108,38 @@ export default function AboutModel() {
         }
 
         gl.domElement.addEventListener('pointermove', handlePointerMove)
+        isInitializedRef.current = true
 
         return () => {
             gl.domElement.removeEventListener('pointermove', handlePointerMove)
             scene.remove(particles)
             particlesGeometry.dispose()
             material.dispose()
+            isInitializedRef.current = false
         }
-    }, [scene, size, gl])
+    }, [scene, gl]) // Removed 'size' from dependencies to prevent resets
+
+    // Handle resize separately without resetting the scene
+    useEffect(() => {
+        if (!materialRef.current) return;
+        
+        const updateResolution = () => {
+            if (materialRef.current && materialRef.current.uniforms.uResolution) {
+                materialRef.current.uniforms.uResolution.value.set(
+                    size.width * window.devicePixelRatio,
+                    size.height * window.devicePixelRatio
+                )
+            }
+        }
+        
+        updateResolution();
+    }, [size])
 
     useFrame((state, delta) => {
         const displacement = displacementRef.current
+        
+        // Safety check - only run if initialized
+        if (!isInitializedRef.current || !displacement.context || !displacement.canvas) return;
 
         // Fade out
         displacement.context.globalCompositeOperation = 'source-over'

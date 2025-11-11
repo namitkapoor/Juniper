@@ -29,11 +29,13 @@
   --card-background: rgba(229, 229, 229, 0.03);
   --tag-background: rgba(164, 191, 199, 0.08);
   --tag-text: #a4bfc7;
+  --accent-success: #4CAF50;
 }
 
 :root[data-theme="light"] {
   /* Core colors - gentler light theme with complementary shades (swapped from dark) */
   --background: #d6cccc;
+  --text-bright: rgba(46, 45, 45, 0.87);
   --text-primary: #2e2d2d;
   --text-secondary: #3a3a3a;
   
@@ -50,9 +52,10 @@
   );
   
   /* UI Elements */
-  --card-background: rgba(42, 42, 42, 0.02);
+  --card-background: rgba(42, 42, 42, 0.1);
   --tag-background: rgba(164, 191, 199, 0.1);
   --tag-text: #718791;
+  --accent-success: #1a5f7a; /* Darker blue-teal for better readability in light mode */
 }
 
 .page-container {
@@ -82,6 +85,7 @@
   align-items: flex-end;
   padding: 2rem;
   border: 2px solid var(--text-primary, #ffffff);
+  border-top: none;
 }
 
 .hero-name-container .hero-name,
@@ -108,6 +112,7 @@ h1.hero-name,
   align-items: flex-start;
   padding: 2rem;
   border: 2px solid var(--text-primary, #ffffff);
+  border-top: none;
   border-left: none;
   border-bottom: 2px solid var(--text-primary, #ffffff);
   text-align: left;
@@ -478,74 +483,7 @@ h1.hero-name,
   margin-top: 1rem;
 }
 
-.case-study-button {
-  padding: 1rem 2rem;
-  background: var(--background, #000000);
-  color: var(--text-primary, #ffffff);
-  border: 2px solid var(--text-primary, #ffffff);
-  border-radius: 0;
-  font-size: 1rem;
-  font-weight: 500;
-  transition: all 0.3s ease;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  position: relative;
-  overflow: hidden;
-}
-
-.case-study-button::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: rgba(255, 255, 255, 0.1);
-  transition: left 0.3s ease;
-}
-
-.case-study-button:hover {
-  background: var(--text-primary, #ffffff);
-  color: var(--background, #000000);
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.3),
-              0 0 40px rgba(255, 255, 255, 0.1);
-}
-
-.case-study-button:hover::before {
-  left: 100%;
-}
-
-.button-icon {
-  width: 1.25rem;
-  height: auto;
-  transition: transform 0.3s ease, filter 0.3s ease;
-  display: inline-block;
-  vertical-align: middle;
-  filter: brightness(0) saturate(100%) invert(1);
-  opacity: 1;
-}
-
-:root[data-theme="dark"] .button-icon {
-  filter: brightness(0) saturate(100%) invert(1);
-}
-
-:root[data-theme="light"] .button-icon {
-  filter: brightness(0) saturate(100%) invert(0);
-}
-
-.case-study-button:hover .button-icon {
-  transform: translateX(4px);
-}
-
-:root[data-theme="dark"] .case-study-button:hover .button-icon {
-  filter: brightness(0) saturate(100%) invert(0);
-}
-
-:root[data-theme="light"] .case-study-button:hover .button-icon {
-  filter: brightness(0) saturate(100%) invert(1);
-}
+/* Button styles moved to button.css */
 
 .case-study-meta {
   margin: 0;
@@ -587,21 +525,7 @@ h1.hero-name,
   filter: grayscale(50%) brightness(0.7);
 }
 
-.case-study-showcase.coming-soon .case-study-button {
-  background: rgba(0, 0, 0, 0.7);
-  border-color: rgba(255, 255, 255, 0.5);
-  color: rgba(255, 255, 255, 1);
-  position: relative;
-  font-weight: 600;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
-}
-
-.case-study-showcase.coming-soon .case-study-button::before {
-  content: '🔒';
-  margin-right: 0.5rem;
-  font-size: 1rem;
-  display: inline-block;
-}
+/* Coming soon button styles moved to button.css */
 
 /* Tags - Neo-Brutalist */
 .tag {
@@ -686,6 +610,10 @@ li {
   box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
 }
 
+:root[data-theme="light"] .scroll-indicator:hover {
+  border-color: var(--text-primary, #000000);
+  box-shadow: 0 0 15px rgba(48, 47, 47, 0.2);
+}
 .scroll-text {
   font-size: 0.9rem;
   color: var(--text-primary, #ffffff);
@@ -738,6 +666,146 @@ li {
 
 
 
+/* Categories Carousel - Continuous Scrolling */
+.categories-carousel-container {
+  margin: 0;
+  width: 100%;
+  position: relative;
+}
+
+.categories-carousel-wrapper {
+  width: 100%;
+  height: 100px;
+  position: relative;
+  overflow: hidden;
+  border: 2px solid var(--text-primary, #ffffff);
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 5%,
+    black 95%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 5%,
+    black 95%,
+    transparent 100%
+  );
+}
+
+.categories-carousel-track {
+  display: flex;
+  width: fit-content;
+  height: 100%;
+  gap: 0;
+  animation: scrollCarousel 60s linear infinite;
+}
+
+.categories-carousel-track.paused {
+  animation-play-state: paused;
+}
+
+@keyframes scrollCarousel {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    /* Move by exactly one set of categories (100vw) for seamless infinite loop */
+    /* With 3 copies, moving by 100vw loops back to the start seamlessly */
+    transform: translateX(-100vw);
+  }
+}
+
+.category-carousel-button {
+  flex-shrink: 0;
+  width: calc(100vw / var(--category-count, 7));
+  min-width: 250px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-right: 2px solid var(--text-primary, #ffffff);
+  background: var(--background, #000000);
+  color: var(--text-primary, #ffffff);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: inherit;
+  padding: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.category-carousel-button:last-child {
+  border-right: 2px solid var(--text-primary, #ffffff);
+}
+
+.category-carousel-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  padding: 0 1.5rem;
+}
+
+.category-carousel-button .category-icon {
+  font-size: 2rem;
+  opacity: 1;
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+}
+
+.category-name {
+  font-size: 1.5rem;
+  font-weight: 600;
+  font-family: var(--font-display);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.category-gradient-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.15;
+  z-index: 1;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.category-carousel-button:hover {
+  background: var(--text-primary, #ffffff);
+  color: var(--background, #000000);
+  z-index: 3;
+}
+
+.category-carousel-button:hover .category-icon {
+  transform: scale(1.15) rotate(5deg);
+}
+
+.category-carousel-button:hover .category-gradient-overlay {
+  opacity: 0.3;
+}
+
+.category-carousel-button.active {
+  background: var(--text-primary, #ffffff);
+  color: var(--background, #000000);
+  z-index: 2;
+}
+
+.category-carousel-button.active .category-gradient-overlay {
+  opacity: 0.3;
+}
+
+/* Legacy category button styles - keeping for backwards compatibility if needed */
 .categories-container {
   margin: 1.5rem auto 3rem;
 }
@@ -787,18 +855,7 @@ li {
 
 
 
-/* Disabled Button */
-.case-study-button.disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-  pointer-events: none;
-}
-
-.case-study-showcase.coming-soon .case-study-button.disabled {
-  opacity: 1;
-  cursor: not-allowed;
-  pointer-events: none;
-}
+/* Disabled button styles moved to button.css */
 
 /* ========================================
    RESPONSIVE BREAKPOINTS
