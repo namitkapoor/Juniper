@@ -1,18 +1,15 @@
-/* Variables */
+/* Variables - using global theme variables */
 :root {
-  --card-bg: rgba(255, 255, 255, 0.03);
+  --card-bg: var(--card-background, rgba(255, 255, 255, 0.03));
   --card-border: rgba(255, 255, 255, 0.1);
-  --text-primary: rgba(255, 255, 255, 0.9);
-  --text-secondary: rgba(255, 255, 255, 0.6);
+  /* Use global theme variables for text colors */
   --accent-success: #4CAF50;
   --accent-error: #FF6B6B;
 }
 
 /* Base content padding */
 .content {
-  width: 92%;
-  margin: 0 auto;
-  padding: 2rem 0;
+  border: 2px solid var(--text-primary, #ffffff);
 }
 
 /* Phase content inherits content width */
@@ -44,7 +41,6 @@
 
 @media (max-width: 768px) {
   .content {
-    width: 92%;
     padding: 1.5rem 0;
   }
 
@@ -74,8 +70,7 @@
 
 @media (max-width: 486px) {
   .content {
-    width: 94%;
-    padding: 1rem 0;
+    padding: 1rem ;
   }
 
   .phase-content,
@@ -246,7 +241,7 @@
   left: 0;
   right: 0;
   background: rgba(0, 0, 0, 0.75);
-  color: white;
+  color: var(--text-primary, white);
   padding: 0.75rem;
   font-size: 0.875rem;
   z-index: 1;

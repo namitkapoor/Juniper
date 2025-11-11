@@ -1,6 +1,6 @@
 /* Create a new file: src/style/fonts.css */
 
-@font-face {
+/* @font-face {
   font-family: 'PP-Eiko';
   src: url('/fonts/PP-Eiko/PPEiko-Thin.otf') format('opentype');
   font-weight: 100;
@@ -39,7 +39,7 @@
   font-style: italic;
   font-display: swap;
 
-}
+} */
 @font-face {
   font-family: 'Satoshi';
   src: url('/fonts/Satoshi/Satoshi-Light.woff2') format('woff2');
@@ -64,11 +64,77 @@
   font-display: swap;
 }
 
+/* Cabinet Grotesk Font Family */
+@font-face {
+  font-family: 'CabinetGrotesk';
+  src: url('/fonts/CabinetGrotesk/CabinetGrotesk-Thin.woff2') format('woff2');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'CabinetGrotesk';
+  src: url('/fonts/CabinetGrotesk/CabinetGrotesk-Extralight.woff2') format('woff2');
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'CabinetGrotesk';
+  src: url('/fonts/CabinetGrotesk/CabinetGrotesk-Light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'CabinetGrotesk';
+  src: url('/fonts/CabinetGrotesk/CabinetGrotesk-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'CabinetGrotesk';
+  src: url('/fonts/CabinetGrotesk/CabinetGrotesk-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'CabinetGrotesk';
+  src: url('/fonts/CabinetGrotesk/CabinetGrotesk-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'CabinetGrotesk';
+  src: url('/fonts/CabinetGrotesk/CabinetGrotesk-Extrabold.woff2') format('woff2');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'CabinetGrotesk';
+  src: url('/fonts/CabinetGrotesk/CabinetGrotesk-Black.woff2') format('woff2');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* Typography System */
 :root {
   /* Font families - with robust fallbacks */
-  --font-display: 'PP-Eiko', Georgia, serif;
+  --font-display: 'CabinetGrotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
   --font-body: 'Satoshi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+  --font-hero: 'CabinetGrotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
 
   /* Font Weights */
   --weight-thin: 100;
@@ -103,8 +169,6 @@ body {
 /* Apply optimized font rendering to key elements */
 h1, h2, h3, h4, h5, h6,
 .hero-display,
-.time-value,
-.countdown-message,
 .tagline,
 .case-study-card h3,
 .toggle-button,
@@ -113,13 +177,6 @@ h1, h2, h3, h4, h5, h6,
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-}
-
-/* Fix for numeric values to ensure consistent width */
-.time-value,
-.countdown-value {
-  font-variant-numeric: tabular-nums;
-  letter-spacing: -0.02em;
 }
 
 /* For very thin fonts, ensure they render properly */
@@ -134,30 +191,6 @@ h1, h2, h3, h4, h5, h6,
   text-rendering: optimizeLegibility;
 }
 
-/* Mobile optimizations */
-@media (max-width: 768px) {
-  .hero-display,
-  h1 {
-    /* Slightly increase weight on mobile for better rendering */
-    font-weight: 200;
-  }
-  
-  .time-value,
-  .countdown-value {
-    /* Reduce size for better rendering on small screens */
-    font-size: 2.2rem !important;
-  }
-}
-
-@media (max-width: 480px) {
-  .time-value,
-  .countdown-value {
-    /* Further reduce size for very small screens */
-    font-size: 1.8rem !important;
-    font-weight: 500 !important;
-  }
-}
-
 /* Animation */
 @keyframes shine {
   to {
@@ -165,51 +198,42 @@ h1, h2, h3, h4, h5, h6,
   }
 }
 
-/* Clear Font Usage Guide */
+/* Font Usage Guide */
 
-/* 2. Main Navigation */
+/* Main Navigation */
 .nav-links {
-  /* Uses Craftwork Grotesk Regular */
   font-family: var(--font-body);
   font-weight: var(--weight-regular);
 }
 
-/* 3. Section Headers */
+/* Section Headers */
 h1, h2, h3 {
-  /* All headings use Craftwork Grotesk */
-  font-family: var(--font-body);
+  font-family: var(--font-display);
   letter-spacing: 0.01em;
 }
 
-/* 4. Case Study Cards */
+/* Case Study Cards */
 .case-study-card h3 {
-  /* Uses Craftwork Grotesk Medium */
-  font-family: var(--font-headings);
+  font-family: var(--font-body);
   font-weight: var(--weight-medium);
 }
 
 .case-study-meta,
 .case-study-card p {
-  /* Uses Craftwork Grotesk Regular */
-  font-family: var(--font-headings);
-  font-weight: var(--weight-regular);
-}
-
-/* 5. Buttons and Interactive Elements */
-.button,
-.toggle-button {
-  /* Uses Craftwork Grotesk Medium */
-  font-family: var(--font-headings);
-  font-weight: var(--weight-medium);
-}
-
-/* 6. Body Text */
-p, 
-.body-text {
-  /* Uses Craftwork Grotesk Regular */
   font-family: var(--font-body);
   font-weight: var(--weight-regular);
 }
 
+/* Buttons and Interactive Elements */
+.button,
+.toggle-button {
+  font-family: var(--font-body);
+  font-weight: var(--weight-medium);
+}
 
-/* Keep existing responsive styles */
+/* Body Text */
+p, 
+.body-text {
+  font-family: var(--font-body);
+  font-weight: var(--weight-regular);
+}

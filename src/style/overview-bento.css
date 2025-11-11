@@ -24,13 +24,13 @@
   font-size: 1.25rem;
   font-weight: 600;
   margin-bottom: 1rem;
-  color: white;
+  color: var(--text-primary, white);
 }
 
 .overview-bento-content p {
   font-size: 1rem;
   line-height: 1.5;
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--text-secondary, rgba(255, 255, 255, 0.8));
 }
 
 /* Timeline specific styles */
@@ -42,13 +42,13 @@
 
 .timeline-item {
   padding: 0.5rem 0;
-  border-left: 2px solid rgba(255, 255, 255, 0.1);
+  border-left: 2px solid var(--bento-border, rgba(255, 255, 255, 0.1));
   padding-left: 1rem;
   margin: 0.5rem 0;
 }
 
 .timeline-item.active {
-  border-left-color: #fff;
+  border-left-color: var(--text-primary, #fff);
 }
 
 /* Stats styling */
@@ -61,10 +61,10 @@
 
 .stat-item {
   padding: 0.5rem;
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--bento-background, rgba(255, 255, 255, 0.08));
   border-radius: 8px;
   font-size: 1.1rem;
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--text-primary, rgba(255, 255, 255, 0.9));
 }
 
 /* Metrics styling */
@@ -81,19 +81,19 @@
   align-items: center;
   text-align: center;
   padding: 0.75rem;
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--bento-background, rgba(255, 255, 255, 0.08));
   border-radius: 8px;
 }
 
 .metric-value {
   font-size: 1.5rem;
   font-weight: 600;
-  color: white;
+  color: var(--text-primary, white);
 }
 
 .metric-label {
   font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--text-secondary, rgba(255, 255, 255, 0.7));
   margin-top: 0.25rem;
 }
 

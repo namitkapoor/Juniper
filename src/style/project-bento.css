@@ -13,8 +13,8 @@
   position: relative;
   border-radius: 16px;
   overflow: hidden;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--bento-background, rgba(255, 255, 255, 0.08));
+  border: 1px solid var(--bento-border, rgba(255, 255, 255, 0.15));
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   backdrop-filter: blur(8px);
   height: 100%;
@@ -92,7 +92,7 @@
 .bento-grid-description p {
   margin: 0;
   font-size: 0.9rem;
-  color: white;
+  color: var(--text-primary, white);
   line-height: 1.4;
 }
 
@@ -110,7 +110,7 @@
   cursor: pointer;
   opacity: 1;
   transition: all 0.3s ease;
-  color: white;
+  color: var(--text-primary, white);
   font-size: 20px;
   display: flex;
   align-items: center;

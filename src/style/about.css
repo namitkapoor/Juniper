@@ -9,7 +9,7 @@
 /* About page container */
 .page-container.about {
     font-size: 20px;
-    font-family: 'Satoshi';
+    font-family: var(--font-body);
     font-weight: 300;
     color: white;
 }

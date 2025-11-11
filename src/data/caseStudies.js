@@ -6,7 +6,9 @@ export const caseStudies = {
       metric: '70 SUS Score',
       tags: ['Mobile Design', 'Research', 'Application'],
       image: '../images/Project Cover Photos/JD Redesign thumbnail vector.svg',
-      description: 'Simplified an operations management app to better serve small farm owners, focusing on usability and scalability for non-technical users.'
+      description: 'Simplified an operations management app to better serve small farm owners, focusing on usability and scalability for non-technical users.',
+      comingSoon: false,
+      enabled: true
     },
     {
       id: 'influencer-marketing',
@@ -14,7 +16,9 @@ export const caseStudies = {
       metric: '28% Less Clicks',
       tags: ['Web Design', 'B2B', 'Dashboard'],
       image: '../images/Project Cover Photos/Campaign Page.svg',
-      description: 'Redesigned a web app to simplify influencer hiring and campaign tracking, boosting user engagement by reducing workflow friction for small business owners.'
+      description: 'Redesigned a web app to simplify influencer hiring and campaign tracking, boosting user engagement by reducing workflow friction for small business owners.',
+      comingSoon: false,
+      enabled: true
     },
     {
       id: 'beauty-school',
@@ -22,7 +26,9 @@ export const caseStudies = {
       metric: '23% More Enrollments',
       tags: ['Web App Design', 'AI', 'Enrollment Chatbot'],
       image: '../images/Project Cover Photos/CV thumbnail.svg',
-      description: 'Redesigned a web app to simplify influencer hiring and campaign tracking, boosting user engagement by reducing workflow friction for small business owners.'
+      description: 'Redesigned a web app to simplify influencer hiring and campaign tracking, boosting user engagement by reducing workflow friction for small business owners.',
+      comingSoon: true,
+      enabled: false
     },
     {
       id: 'product-recommendations',
@@ -30,7 +36,9 @@ export const caseStudies = {
       metric: '23% More Purchases',
       tags: ['Web App Design', 'AI', 'Dashboard'],
       image: '../images/Project Cover Photos/Nuele thumbnail.svg',
-      description: 'Redesigned a web app to simplify influencer hiring and campaign tracking, boosting user engagement by reducing workflow friction for small business owners.'
+      description: 'Redesigned a web app to simplify influencer hiring and campaign tracking, boosting user engagement by reducing workflow friction for small business owners.',
+      comingSoon: true,
+      enabled: false
     }
   ],
   xr: [
@@ -40,7 +48,9 @@ export const caseStudies = {
       metric: '30+ User Studies',
       tags: ['AR', 'Spatial Interface Design', 'Productivity'],
       image: '../images/Project Cover Photos/Anywhere Access Luminote gif.gif',
-      description: 'Created an AR-based task management system combining spatial reminders with adaptive organizational structures to reduce cognitive load.'
+      description: 'Created an AR-based task management system combining spatial reminders with adaptive organizational structures to reduce cognitive load.',
+      comingSoon: false,
+      enabled: true
     },
     {
       id: 'sustainable-packaging',
@@ -48,7 +58,9 @@ export const caseStudies = {
       metric: '30% More Eco-Friendly Choices',
       tags: ['AR', 'Mobile Design', 'Sustainability'],
       image: '../images/Project Cover Photos/SUSpointpopup-cropped.gif',
-      description: 'Designed an AR app to promote sustainable shopping by evaluating product packaging and incentivizing eco-conscious purchases with rewards.'
+      description: 'Designed an AR app to promote sustainable shopping by evaluating product packaging and incentivizing eco-conscious purchases with rewards.',
+      comingSoon: false,
+      enabled: true
     }
   ]
 }; 

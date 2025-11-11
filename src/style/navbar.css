@@ -18,9 +18,9 @@
 }
 
 .logo-text {
-    font-family: 'Satoshi';
+    font-family: var(--font-display);
     font-size: 20px;
-    color: white;
+    color: var(--text-primary, white);
     letter-spacing: 0.5px;
     font-weight: 400;
     opacity: 0.9;
@@ -29,17 +29,18 @@
 
 a {
   text-decoration: none;
-  color: white;
+  color: var(--text-primary, white);
   z-index: 100;
 }
 .navigation {
-  padding: 20px;
+  padding: 2rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
   background: transparent;
   position: relative;
+  border: 2px solid var(--text-primary, #ffffff);
+  border-bottom: none;
 }
 
 .nav-items {
@@ -47,9 +48,8 @@ a {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  width: 80%;
-  max-width: 1200px;
-  font-family: 'Satoshi';
+  width: 100%;
+  font-family: var(--font-display);
   font-size: 20px;
 }
 
@@ -93,7 +93,7 @@ a {
 .hamburger-line {
   width: 100%;
   height: 3px;
-  background-color: white;
+  background-color: var(--text-primary, white);
   border-radius: 2px;
   transition: all 0.3s ease;
   transform-origin: center;
@@ -105,7 +105,7 @@ a {
   top: 100%;
   left: 0;
   right: 0;
-  background: rgba(0, 0, 0, 0.95);
+  background: var(--background, rgba(0, 0, 0, 0.95));
   backdrop-filter: blur(10px);
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   overflow: hidden;
@@ -116,14 +116,14 @@ a {
 .mobile-nav-links {
   display: flex;
   flex-direction: column;
-  padding: 20px;
+  padding: 2rem;
   gap: 20px;
 }
 
 .mobile-nav-item {
-  font-family: 'Satoshi';
+  font-family: var(--font-display);
   font-size: 18px;
-  color: white;
+  color: var(--text-primary, white);
   text-decoration: none;
   padding: 15px 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -147,7 +147,7 @@ a {
 /* Mobile Responsive Styles - Below 480px */
 @media (max-width: 480px) {
   .navigation {
-    padding: 15px 20px;
+    padding: 1.5rem;
     align-items: stretch;
   }
 
@@ -179,7 +179,7 @@ a {
     left: 0;
     right: 0;
     width: 100%;
-    background: rgba(0, 0, 0, 0.95);
+    background: var(--background, rgba(0, 0, 0, 0.95));
     backdrop-filter: blur(10px);
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     z-index: 999;
@@ -192,4 +192,89 @@ a {
     -webkit-text-fill-color: transparent;
     font-weight: bold;
     border-bottom: 2px solid #908ab7; /* Optional underline */
+}
+
+/* Theme Toggle in Navbar */
+.theme-toggle-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: transparent;
+  border: 1px solid var(--text-primary, rgba(255, 255, 255, 0.3));
+  border-radius: 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  padding: 0;
+  margin-left: 10px;
+}
+
+.theme-toggle-nav svg {
+  width: 16px;
+  height: 16px;
+  color: var(--text-primary, white);
+  z-index: 2;
+  position: absolute;
+  transition: opacity 0.3s ease;
+}
+
+.theme-toggle-nav .sun-icon-nav {
+  opacity: 0;
+}
+
+.theme-toggle-nav .moon-icon-nav {
+  opacity: 1;
+}
+
+:root[data-theme="light"] .theme-toggle-nav .sun-icon-nav {
+  opacity: 1;
+  color: var(--text-primary, #1a1a1a);
+}
+
+:root[data-theme="light"] .theme-toggle-nav .moon-icon-nav {
+  opacity: 0;
+}
+
+.theme-toggle-nav:hover {
+  background: var(--text-primary, rgba(255, 255, 255, 0.1));
+  border-color: var(--text-primary, #ffffff);
+}
+
+/* Hover states with higher specificity to override theme colors */
+.theme-toggle-nav:hover .sun-icon-nav,
+:root[data-theme="dark"] .theme-toggle-nav:hover .sun-icon-nav,
+:root[data-theme="light"] .theme-toggle-nav:hover .sun-icon-nav {
+  color: white;
+  opacity: 1;
+}
+
+.theme-toggle-nav:hover .moon-icon-nav,
+:root[data-theme="dark"] .theme-toggle-nav:hover .moon-icon-nav,
+:root[data-theme="light"] .theme-toggle-nav:hover .moon-icon-nav {
+  color: black;
+}
+
+.theme-toggle-nav.mobile {
+  width: 100%;
+  padding: 15px 0;
+  margin: 0;
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0;
+  justify-content: flex-start;
+  font-family: var(--font-display);
+  font-size: 18px;
+  color: var(--text-primary, white);
+}
+
+.theme-toggle-nav.mobile:hover {
+  background: transparent;
+  border-color: rgba(255, 255, 255, 0.1);
+  transform: translateX(10px);
+}
+
+.theme-toggle-nav.mobile span {
+  opacity: 0.9;
 }

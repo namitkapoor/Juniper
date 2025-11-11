@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { useTheme } from './ThemeContext.jsx';
+import { IoSunnyOutline, IoMoonOutline } from 'react-icons/io5';
 import "../style/navbar.css"
 
 export default function Navbar() {
@@ -8,6 +10,7 @@ export default function Navbar() {
     const [isMoving, setIsMoving] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const location = useLocation();
+    const { theme, toggleTheme } = useTheme();
 
     // Eye movement animation
     const eyeMotion = {
@@ -68,35 +71,36 @@ export default function Navbar() {
                                 viewBox="0 0 120 50"
                                 fill="none"
                                 xmlns="http://www.w3.org/2000/svg"
+                                style={{ color: 'var(--text-primary, white)' }}
                             >
                                 {/* Glasses frames */}
                                 <motion.path
                                     d="M20 25C20 16.7157 26.7157 10 35 10C43.2843 10 50 16.7157 50 25C50 33.2843 43.2843 40 35 40C26.7157 40 20 33.2843 20 25Z"
-                                    stroke="white"
+                                    stroke="currentColor"
                                     strokeWidth="2"
                                     strokeLinecap="round"
                                 />
                                 <motion.path
                                     d="M70 25C70 16.7157 76.7157 10 85 10C93.2843 10 100 16.7157 100 25C100 33.2843 93.2843 40 85 40C76.7157 40 70 33.2843 70 25Z"
-                                    stroke="white"
+                                    stroke="currentColor"
                                     strokeWidth="2"
                                     strokeLinecap="round"
                                 />
                                 <motion.path
                                     d="M50 25C50 25 55 25 60 25C65 25 70 25 70 25"
-                                    stroke="white"
+                                    stroke="currentColor"
                                     strokeWidth="2"
                                     strokeLinecap="round"
                                 />
                                 <motion.path
                                     d="M20 25C15 25 10 23 5 20"
-                                    stroke="white"
+                                    stroke="currentColor"
                                     strokeWidth="2"
                                     strokeLinecap="round"
                                 />
                                 <motion.path
                                     d="M100 25C105 25 110 23 115 20"
-                                    stroke="white"
+                                    stroke="currentColor"
                                     strokeWidth="2"
                                     strokeLinecap="round"
                                 />
@@ -107,7 +111,7 @@ export default function Navbar() {
                                     cy="25"
                                     rx="4"
                                     ry="6"
-                                    fill="white"
+                                    fill="currentColor"
                                     animate={!isBlinking ? {
                                         ...(isMoving ? eyeMotion : {}),
                                         scaleY: 1
@@ -121,7 +125,7 @@ export default function Navbar() {
                                     cy="25"
                                     rx="4"
                                     ry="6"
-                                    fill="white"
+                                    fill="currentColor"
                                     animate={!isBlinking ? {
                                         ...(isMoving ? eyeMotion : {}),
                                         scaleY: 1
@@ -131,7 +135,7 @@ export default function Navbar() {
                                     transition={{ duration: 0.1 }}
                                 />
                             </svg>
-                            <span className="logo-text">namit</span>
+                            {/* <span className="logo-text">namit</span> */}
                         </div>
                     </Link>
                 </div>
@@ -140,6 +144,14 @@ export default function Navbar() {
                     <Link className={`nav-item ${location.pathname === '/explore' ? 'active' : ''}`} to="/explore">explore</Link>
                     <Link className={`nav-item ${location.pathname === '/about' ? 'active' : ''}`} to="/about">about</Link>
                     <a className="nav-item" href="/files/KapoorNamit_Resume.pdf" target="_blank" rel="noopener noreferrer">resume</a>
+                    <button 
+                        className="theme-toggle-nav"
+                        onClick={toggleTheme}
+                        aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+                    >
+                        <IoMoonOutline className="moon-icon-nav" />
+                        <IoSunnyOutline className="sun-icon-nav" />
+                    </button>
                 </div>
 
                 {/* Hamburger Menu Button */}
@@ -195,6 +207,18 @@ export default function Navbar() {
                     >
                         resume
                     </a>
+                    <button 
+                        className="theme-toggle-nav mobile"
+                        onClick={() => {
+                            toggleTheme();
+                            setIsMenuOpen(false);
+                        }}
+                        aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+                    >
+                        <IoMoonOutline className="moon-icon-nav" />
+                        <IoSunnyOutline className="sun-icon-nav" />
+                        <span style={{ marginLeft: '0.5rem' }}>{theme === 'dark' ? 'Light Mode' : 'Dark Mode'}</span>
+                    </button>
                 </div>
                 </motion.div>
             )}

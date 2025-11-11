@@ -1,12 +1,10 @@
 // src/components/Contact.jsx
 import React from 'react';
 import '../style/contact.css';
-import { IoLogoLinkedin, IoLogoGithub, IoMailOutline, IoArrowForward, IoArrowUp, IoSunnyOutline, IoMoonOutline } from 'react-icons/io5';
-import { useTheme } from './ThemeContext.jsx';
+import { IoLogoLinkedin, IoLogoGithub, IoMailOutline, IoArrowForward, IoArrowUp, IoSparkles } from 'react-icons/io5';
 import { useNavigate } from 'react-router-dom';
 
 export default function Contact() {
-  const { theme, toggleTheme } = useTheme();
   const navigate = useNavigate();
 
   const scrollToTop = () => {
@@ -93,15 +91,6 @@ export default function Contact() {
 
         <div className="controls-container">
           <button 
-            className="theme-toggle coming-soon"
-            disabled
-            aria-label="Theme toggle coming soon"
-          >
-            <span className="coming-soon-text">Coming Soon</span>
-            <IoMoonOutline className="moon-icon" />
-            <IoSunnyOutline className="sun-icon" />
-          </button>
-          <button 
             className="scroll-top" 
             onClick={scrollToTop} 
             aria-label="Scroll to top"
@@ -112,7 +101,9 @@ export default function Contact() {
 
         <div className="footer">
           <p className="copyright">© 2025 Namit Kapoor. All Rights Reserved.</p>
-          <p className="footer-note">Tuned to experiential wavelengths 💫</p>
+          <p className="footer-note">
+            Tuned to experiential wavelengths <IoSparkles className="footer-icon" />
+          </p>
         </div>
       </div>
     </section>

@@ -11,12 +11,14 @@ const ChangeCard = ({ change, index }) => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.1 }}
     >
+      <div className="change-card-grid">
+        {/* Left Column (2/3) - Main Content */}
+        <div className="change-card-main">
       <div className="change-header">
         <span className="change-number">Change {index + 1}</span>
         <h3 className="change-title">{change.title}</h3>
       </div>
 
-      <div className="change-content">
         {/* What we changed */}
         <div className="change-section">
           <h4 className="section-label what-label">What we changed</h4>
@@ -30,7 +32,7 @@ const ChangeCard = ({ change, index }) => {
               <img 
                 src={change.visual.src} 
                 alt={change.visual.alt}
-                className="change-image"
+                  className={`change-image ${index === 2 ? 'change-image-third' : ''}`}
               />
             )}
             {change.visual.type === 'comparison' && (
@@ -60,19 +62,6 @@ const ChangeCard = ({ change, index }) => {
           </div>
         )}
 
-        {/* Why it mattered */}
-        <div className="change-section">
-          <h4 className="section-label why-label">Why it mattered</h4>
-          <p className="section-text">{change.why}</p>
-          {change.researchInsights && (
-            <ul className="insight-list">
-              {change.researchInsights.map((insight, idx) => (
-                <li key={idx}>{insight}</li>
-              ))}
-            </ul>
-          )}
-        </div>
-
         {/* What we explored but rejected */}
         {change.rejected && change.rejected.length > 0 && (
           <div className="change-section rejected-section">
@@ -87,14 +76,29 @@ const ChangeCard = ({ change, index }) => {
             </div>
           </div>
         )}
+        </div>
 
-        {/* How we validated it */}
+        {/* Right Column (1/3) - Sidebar */}
+        <div className="change-card-sidebar">
+          {/* Top Row (1/3) - Why it mattered */}
+          <div className="change-card-top">
         <div className="change-section">
-          <h4 className="section-label validated-label">How we validated it</h4>
-          {change.validation.description && (
-            <p className="section-text">{change.validation.description}</p>
-          )}
-          {change.validation.metrics && (
+              <h4 className="section-label why-label">Why it mattered</h4>
+              <p className="section-text">{change.why}</p>
+              {change.researchInsights && (
+                <ul className="insight-list">
+                  {change.researchInsights.map((insight, idx) => (
+                    <li key={idx}>{insight}</li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          </div>
+
+          {/* Bottom Row (2/3) - Validation Metrics & User Quotes */}
+          <div className="change-card-bottom">
+            {/* Validation Metrics */}
+            {change.validation && change.validation.metrics && (
             <div className="validation-metrics">
               {change.validation.metrics.map((metric, idx) => (
                 <div key={idx} className="metric-item">
@@ -104,7 +108,9 @@ const ChangeCard = ({ change, index }) => {
               ))}
             </div>
           )}
-          {change.validation.quote && (
+
+            {/* Validation Quote */}
+            {change.validation && change.validation.quote && (
             <blockquote className="validation-quote">
               "{change.validation.quote.text}"
               {change.validation.quote.source && (
@@ -112,13 +118,14 @@ const ChangeCard = ({ change, index }) => {
               )}
             </blockquote>
           )}
+          </div>
         </div>
       </div>
     </motion.div>
   );
 };
 
-const CollapsedPreview = ({ changes }) => {
+const CollapsedPreview = ({ changes, onExpand }) => {
   return (
     <motion.div 
       className="design-changes-preview"
@@ -134,6 +141,7 @@ const CollapsedPreview = ({ changes }) => {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.1 }}
+            onClick={onExpand}
           >
             <div className="preview-header">
               <div className="preview-number">{index + 1}</div>
@@ -183,7 +191,7 @@ const CollapsedPreview = ({ changes }) => {
   );
 };
 
-const DesignChanges = ({ isExpanded, projectId }) => {
+const DesignChanges = ({ isExpanded, projectId, onExpand }) => {
   const data = designChangesData[projectId];
   if (!data) return null;
 
@@ -192,7 +200,10 @@ const DesignChanges = ({ isExpanded, projectId }) => {
       {/* Collapsed Preview - shows when section is closed */}
       <AnimatePresence>
         {!isExpanded && (
-          <CollapsedPreview changes={data.changes} />
+          <CollapsedPreview 
+            changes={data.changes} 
+            onExpand={onExpand}
+          />
         )}
       </AnimatePresence>
 

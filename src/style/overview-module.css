@@ -6,7 +6,7 @@
   font-size: 2.5rem;
   font-weight: 400;
   margin-bottom: 1rem;
-  background: linear-gradient(45deg, #fff, #888);
+  background: var(--gradient-text, linear-gradient(45deg, #fff, #888));
   background-clip: text;
 
   -webkit-text-fill-color: transparent;
@@ -15,7 +15,7 @@
 
 .case-study-overview .case-study-subtitle {
   font-size: 1.25rem;
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--text-secondary, rgba(255, 255, 255, 0.8));
   margin-bottom: 1rem;
   text-align: left;
 }
@@ -23,7 +23,7 @@
 .case-study-overview .case-study-description {
   font-size: 1.1rem;
   line-height: 1.6;
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--text-secondary, rgba(255, 255, 255, 0.8));
   margin-bottom: 2rem;
   text-align: left;
 }

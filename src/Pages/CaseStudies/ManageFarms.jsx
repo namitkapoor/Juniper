@@ -99,6 +99,8 @@ export default function ManageFarms() {
         {/* Overview Section */}
         <Overview projectId="manageFarms" />
 
+        {/* Sections Container */}
+        <div className="sections-container">
         {/* 1. Business Challenge Section */}
         <motion.div
           className="expandable-section"
@@ -156,6 +158,7 @@ export default function ManageFarms() {
           <DesignChanges 
             isExpanded={expandedSections.has('designChanges')} 
             projectId="manageFarms" 
+              onExpand={() => toggleSection('designChanges')}
           />
         </motion.div>
 
@@ -247,6 +250,7 @@ export default function ManageFarms() {
             projectId="manageFarms" 
           />
         </motion.div>
+        </div>
 
         {/* Add Other Projects section at the bottom */}
         <motion.div

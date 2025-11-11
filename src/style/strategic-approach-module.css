@@ -88,7 +88,7 @@
 .phase-title {
   font-size: 0.9rem;
   text-align: center;
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--text-secondary, rgba(255, 255, 255, 0.7));
   transition: all 0.3s ease;
   white-space: nowrap;
   position: relative;
@@ -107,7 +107,7 @@
 }
 
 .timeline-phase.active .phase-title {
-  color: #ffffff;
+  color: var(--text-primary, #ffffff);
 }
 
 /* Content sections with animations */

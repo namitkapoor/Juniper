@@ -1,8 +1,10 @@
 /* src/style/contact.css */
 .contact-section {
+  position: relative;
+  width: 100%;
   padding: 6rem 2rem;
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
+  background-color: var(--background, #000000);
+  color: var(--text-primary, #ffffff);
 }
 
 .contact-wrapper {
@@ -13,8 +15,8 @@
 }
 
 .contact-content {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  flex-direction: column;
   gap: 4rem;
   margin-bottom: 4rem;
   align-items: start;
@@ -206,6 +208,15 @@
 .footer-note {
   font-size: 0.9rem;
   color: var(--footer-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.footer-icon {
+  font-size: 1rem;
+  color: var(--footer-text);
 }
 
 /* Responsive Design */
@@ -232,23 +243,24 @@
   }
 }
 
+/* Theme variables are defined in home.css - using global theme system */
 :root[data-theme="dark"] {
-  --bg-primary: #1a1a1a;
-  --text-primary: rgba(255, 255, 255, 0.9);
-  --text-secondary: rgba(255, 255, 255, 0.7);
+  --bg-primary: var(--background, #1a1a1a);
+  --text-primary: var(--text-primary, rgba(255, 255, 255, 0.9));
+  --text-secondary: var(--text-secondary, rgba(255, 255, 255, 0.7));
   --border-color: rgba(255, 255, 255, 0.1);
-  --card-bg: rgba(255, 255, 255, 0.03);
+  --card-bg: var(--card-background, rgba(255, 255, 255, 0.03));
   --hover-bg: rgba(255, 255, 255, 0.1);
   --icon-color: rgba(255, 255, 255, 0.8);
   --footer-text: rgba(255, 255, 255, 0.6);
 }
 
 :root[data-theme="light"] {
-  --bg-primary: #ffffff;
-  --text-primary: rgba(0, 0, 0, 0.9);
-  --text-secondary: rgba(0, 0, 0, 0.7);
+  --bg-primary: var(--background, #ffffff);
+  --text-primary: var(--text-primary, rgba(0, 0, 0, 0.9));
+  --text-secondary: var(--text-secondary, rgba(0, 0, 0, 0.7));
   --border-color: rgba(0, 0, 0, 0.1);
-  --card-bg: rgba(0, 0, 0, 0.03);
+  --card-bg: var(--card-background, rgba(0, 0, 0, 0.03));
   --hover-bg: rgba(0, 0, 0, 0.1);
   --icon-color: rgba(0, 0, 0, 0.8);
   --footer-text: rgba(0, 0, 0, 0.6);
@@ -305,15 +317,17 @@
 
 .theme-toggle .sun-icon {
   opacity: 0;
+  color: var(--text-primary, white);
 }
 
 .theme-toggle .moon-icon {
-  color: black;
+  color: var(--text-primary, white);
   opacity: 1;
 }
 
 :root[data-theme="light"] .theme-toggle .sun-icon {
   opacity: 1;
+  color: var(--text-primary, #1a1a1a);
 }
 
 :root[data-theme="light"] .theme-toggle .moon-icon {
@@ -336,24 +350,4 @@
   z-index: 100;
 }
 
-.theme-toggle.coming-soon {
-  opacity: 0.5;
-  cursor: not-allowed;
-  position: relative;
-}
-
-.coming-soon-text {
-  position: absolute;
-  top: -25px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 0.75rem;
-  white-space: nowrap;
-  color: var(--text-secondary);
-  pointer-events: none;
-}
-
-.theme-toggle.coming-soon:hover {
-  transform: none;
-  background: var(--card-bg);
-}
+/* Removed coming-soon styles - theme toggle is now active */

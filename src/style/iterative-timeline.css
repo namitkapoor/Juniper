@@ -55,14 +55,14 @@
   transform: scale(1.1);
   background: #1E1E1E;
   border-color: #787878; /* Brighter border for emphasis */
-  color: #ffffff;
+  color: var(--text-primary, #ffffff);
   transform: scale(1.05); /* Slight scale up for emphasis */
 }
 
 .node-button.active {
   background: rgba(24, 24, 24, 0.74);
   border-color: rgba(247, 247, 247, 0.673);
-  color: #ffffff;
+  color: var(--text-primary, #ffffff);
 }
 
 .node-title {

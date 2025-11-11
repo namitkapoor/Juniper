@@ -1,20 +1,19 @@
 /* src/style/case-study.css */
 .case-study-container {
-  background-color: #1a1a1a;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-family: Satoshi;
+  background-color: var(--background, #1a1a1a);
+  color: var(--text-primary, white);
+  font-family: var(--font-body);
   overflow-x: hidden;
-  width: 100%;
+}
+
+/* Navbar styling for case study pages - matches home.css approach */
+.case-study-container .navigation {
+  position: relative;
+  z-index: 1000;
+  border-bottom: 2px solid var(--text-primary, #ffffff);
 }
 
 .content {
-  width: 80%;
-  max-width: 1200px;
-  margin: 0 auto;
   padding: 6rem 2rem 4rem 2rem;
 }
 
@@ -22,7 +21,7 @@
   font-size: 5.5rem;
   font-weight: 500;
   margin-bottom: 2rem;
-  background: linear-gradient(45deg, #fff, #888);
+  background: var(--gradient-text, linear-gradient(45deg, #fff, #888));
   background-clip: text;
   -webkit-text-fill-color: transparent;
   text-align: left;
@@ -46,14 +45,14 @@
 .section-header h2 {
   margin: 0;
   font-weight: 600;
-  background: linear-gradient(45deg, #fff, #888);
+  background: var(--gradient-text, linear-gradient(45deg, #fff, #888));
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .section-header .icon {
   font-size: 2.5rem;
-  color: #fff;
+  color: var(--text-primary, #fff);
   opacity: 0.8;
   display: flex;
   align-items: center;
@@ -110,6 +109,45 @@
   }
 }
 
+/* Expandable Section Styling - Neo-Brutalist borders */
+.expandable-section {
+  border: 2px solid var(--text-primary, #ffffff);
+  margin-bottom: 0;
+  position: relative;
+  overflow: hidden;
+  will-change: height;
+  contain: layout style paint;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  padding: 2rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.expandable-section:not(:last-child) {
+  border-bottom: 2px solid var(--text-primary, #ffffff);
+}
+
+/* Scroll-shrinking section container */
+.scroll-shrink-section {
+  position: sticky;
+  top: 0;
+  margin-bottom: 0;
+  overflow: hidden;
+  background: var(--background, #1a1a1a);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Container for all sections */
+.sections-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  position: relative;
+  gap: 0;
+}
+
 /* Remove special styling for overview section content */
 .expandable-section:first-of-type .section-content {
   background: none;
@@ -158,7 +196,6 @@
 
 @media (max-width: 768px) {
   .content {
-    width: 90%;
     padding: 2rem;
   }
   
@@ -171,7 +208,7 @@
 .section-description {
   font-size: 1.1rem;
   line-height: 1.6;
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--text-secondary, rgba(255, 255, 255, 0.8));
   margin-top: 0.5rem;
   padding-bottom: 2rem;
   text-align: left;
@@ -211,12 +248,21 @@
   opacity: 0.8;
 }
 
-/* Ensure all text elements within sections are left-aligned */
-.section-content h3,
-.section-content p,
+/* Ensure all text elements within sections are left-aligned and use theme colors */
+.section-content h3 {
+  text-align: left;
+  color: var(--text-primary);
+}
+
+.section-content p {
+  text-align: left;
+  color: var(--text-secondary);
+}
+
 .section-content ul,
 .section-content li {
   text-align: left;
+  color: var(--text-secondary);
 }
 
 /* Keep certain elements centered if needed */
@@ -225,31 +271,87 @@
   text-align: center;
 }
 
-/* Business Challenge Section Styling */
+/* Business Challenge Section Styling - Grid Layout */
 .business-challenge {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: 1fr 2fr;
+  gap: 0;
+  height: 100%;
+  min-height: 600px;
+  border: 2px solid var(--text-primary, #ffffff);
+}
+
+
+/* Left Column (2/3) - Main Content */
+.business-challenge-main {
+  grid-column: 1;
+  grid-row: span 2;
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  padding: 2rem;
+  border-right: 2px solid var(--text-primary, #ffffff);
+  overflow-y: auto;
+}
+
+/* Right Column (1/3) - Sidebar */
+.business-challenge-sidebar {
+  grid-column: 2;
+  grid-row: span 2;
+  display: grid;
+  grid-template-rows: 1fr 2fr;
+  gap: 0;
+}
+
+/* Top Row (1/3) in Right Column */
+.business-challenge-top {
+  grid-row: 1;
+  padding: 2rem;
+  border-bottom: 2px solid var(--text-primary, #ffffff);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+/* Bottom Row (2/3) in Right Column */
+.business-challenge-bottom {
+  grid-row: 2;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+
+/* Challenge Carousel Styling */
+.business-challenge-main .challenge-carousel {
+  width: 100%;
+  min-height: 400px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.03);
 }
 
 /* Remove boxes, keep clean typography */
-.market-context,
-.revenue-impact,
-.cost-problems {
-  padding: 1rem 0;
+.business-challenge-main .market-context,
+.business-challenge-main .revenue-impact,
+.business-challenge-main .cost-problems,
+.business-challenge-top .revenue-impact {
+  padding: 0;
 }
 
 .market-context h3,
 .revenue-impact h3,
 .cost-problems h3 {
-  color: #f0f0f0;
+  color: var(--text-primary, #f0f0f0);
   margin-bottom: 1rem;
 }
 
 .market-context p,
 .revenue-impact p,
 .cost-problems p {
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--text-secondary, rgba(255, 255, 255, 0.8));
   line-height: 1.6;
   font-size: 1.1rem;
 }
@@ -264,6 +366,17 @@
 }
 
 /* Pain Points Styling */
+.pain-points {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.pain-points h3 {
+  margin-bottom: 1rem;
+  color: var(--text-primary, #f0f0f0);
+}
+
 .pain-points-list {
   list-style: none;
   padding: 0;
@@ -271,6 +384,8 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  flex: 1;
+  overflow-y: auto;
 }
 
 .pain-point-item {
@@ -298,12 +413,56 @@
   min-width: 40px;
 }
 
+.pain-point-content h4 {
+  margin: 0 0 0.5rem 0;
+  color: var(--text-primary, #f0f0f0);
+}
+
+.pain-point-content p {
+  margin: 0;
+  color: var(--text-secondary, rgba(255, 255, 255, 0.8));
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* Responsive - Business Challenge Grid */
+@media (max-width: 768px) {
+  .business-challenge {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
+
+  .business-challenge-main {
+    grid-column: 1;
+    grid-row: 1;
+    border-right: none;
+    border-bottom: 2px solid var(--text-primary, #ffffff);
+  }
+
+  .business-challenge-sidebar {
+    grid-column: 1;
+    grid-row: 2;
+    grid-template-rows: auto auto;
+  }
+
+  .business-challenge-top {
+    border-bottom: 2px solid var(--text-primary, #ffffff);
+  }
+}
+
 @media (max-width: 486px) {
   .content {
-    width: 92%;
     padding: 0.5rem;
   }
 
+  .business-challenge-main,
+  .business-challenge-top,
+  .business-challenge-bottom {
+    padding: 1rem;
+  }
+  .expandable-section {
+    padding:1rem;
+  }
   .section-content {
     min-height: calc(100vh - 200px);
     display: flex;

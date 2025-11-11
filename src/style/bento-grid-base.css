@@ -12,10 +12,10 @@
 }
 
 .bento-item {
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--bento-background, rgba(255, 255, 255, 0.08));
   border-radius: 16px;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--bento-border, rgba(255, 255, 255, 0.15));
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   backdrop-filter: blur(8px);
   width: 100%;
@@ -42,7 +42,7 @@
   right: 0;
   background: rgba(0, 0, 0, 0.7);
   padding: 1rem;
-  color: white;
+  color: var(--text-primary, white);
   font-size: 0.9rem;
   line-height: 1.4;
 } 

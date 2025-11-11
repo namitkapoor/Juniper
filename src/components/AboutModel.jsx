@@ -36,7 +36,7 @@ export default function AboutModel() {
         // Create displacement texture
         displacement.texture = new THREE.CanvasTexture(displacement.canvas)
 
-        // Create particles geometry
+        // Create particles geometry - reduced resolution for fewer particles
         const particlesGeometry = new THREE.PlaneGeometry(8, 10, 128, 128)
         particlesGeometry.setIndex(null)
         particlesGeometry.deleteAttribute('normal')

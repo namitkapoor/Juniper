@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
-import ReactDOM from 'react-dom/client'
 import {BrowserRouter, Routes, Route} from "react-router-dom"
-import '../style/fonts.css'
+import 'lenis/dist/lenis.css'
 import '../style/app.css'
 import About from './About.jsx'
 import Home from './Home.jsx'
@@ -14,10 +13,12 @@ import { ThemeProvider } from '../components/ThemeContext'
 import { Analytics } from '@vercel/analytics/react'
 import { track } from '@vercel/analytics'
 import PageTransition from '../components/PageTransition'
-
-const root = ReactDOM.createRoot(document.querySelector('#root'))
+import { useLenis } from '../hooks/useLenis'
 
 const App = () => {
+  // Initialize Lenis smooth scroll
+  useLenis();
+
   useEffect(() => {
     track('page_view', { page: 'home' });
   }, []);

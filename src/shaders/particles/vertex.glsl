@@ -58,6 +58,6 @@ void main()
     gl_PointSize = 0.1 * pictureIntensity * uResolution.y;
     gl_PointSize *= (1.0 / - viewPosition.z);
 
-    // Varyings
+    // Varyings - keep pixels light/white
     vColor = vec3(pow(pictureIntensity, 2.0));
 }

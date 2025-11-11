@@ -1,3 +1,5 @@
+/* Import fonts first to ensure proper cascade */
+@import './fonts.css';
 
 html, body {
     margin: 0;
