@@ -93,6 +93,9 @@
     height: 65vh;
     min-height: 450px;
     background: var(--background, #000000);
+    /* Enable touch events on mobile */
+    touch-action: manipulation;
+    -webkit-overflow-scrolling: touch;
 }
 
 .showcase-frame {
@@ -100,7 +103,16 @@
     width: 100%;
     height: 100%;
     position: relative;
-    z-index: 1;
+    z-index: 10;
+    /* Ensure iframe can receive touch events on mobile */
+    pointer-events: auto;
+    touch-action: manipulation;
+    /* Prevent text selection that might interfere with controls */
+    -webkit-user-select: none;
+    user-select: none;
+    /* Enable hardware acceleration for better touch performance */
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
 }
 
 .showcase-video {
@@ -283,6 +295,27 @@
     .video-play-button {
         width: 48px;
         height: 48px;
+    }
+    
+    /* Enhanced mobile touch support for iframe */
+    .iframe-container {
+        /* Ensure container doesn't block touches */
+        pointer-events: auto;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+    }
+    
+    .showcase-frame {
+        /* Ensure iframe receives all touch events on mobile */
+        pointer-events: auto !important;
+        touch-action: manipulation;
+        /* Prevent iOS Safari from blocking interactions */
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        user-select: none;
+        /* Ensure iframe is interactive */
+        position: relative;
+        z-index: 10;
     }
 }
 

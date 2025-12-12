@@ -20,7 +20,10 @@ export default function IframeLoader({ loaded }) {
       animate={{ opacity: loaded ? 0 : 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
-      style={{ display: loaded ? 'none' : 'flex' }}
+      style={{ 
+        display: loaded ? 'none' : 'flex',
+        pointerEvents: loaded ? 'none' : 'auto'
+      }}
     >
       <div className="loader-content">
         <div className="spinner-container">

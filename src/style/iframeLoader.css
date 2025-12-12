@@ -11,6 +11,16 @@
   align-items: center;
   justify-content: center;
   border-radius: 8px;
+  /* Allow touches to pass through when hidden or loading */
+  pointer-events: auto;
+  transition: opacity 0.5s ease, pointer-events 0s linear 0.5s;
+}
+
+/* When loader is hidden, disable pointer events so iframe can receive touches */
+.iframe-loader[style*="display: none"],
+.iframe-loader[style*="opacity: 0"] {
+  pointer-events: none !important;
+  z-index: -1;
 }
 
 .loader-content {

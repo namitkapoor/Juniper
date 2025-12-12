@@ -678,7 +678,6 @@ li {
   height: 100px;
   position: relative;
   overflow: hidden;
-  border: 2px solid var(--text-primary, #ffffff);
   mask-image: linear-gradient(
     to right,
     transparent 0%,
@@ -967,6 +966,7 @@ li {
   .case-studies-carousel {
     gap: 2rem;
     perspective: none;
+    padding-bottom: 0 !important; /* Remove extra padding on mobile */
   }
 
   .case-study-showcase {
@@ -975,6 +975,8 @@ li {
     gap: 0;
     max-height: unset;
     transform-style: flat;
+    position: relative !important; /* Override sticky on mobile */
+    margin-bottom: 2rem; /* Add spacing between items on mobile */
   }
 
   .case-study-title-container {

@@ -1,10 +1,47 @@
-export const projectBentoData = {
+// Log all media files on data load for debugging
+const logAllMediaFiles = (data) => {
+  console.log('[projectBentoData] Loading media files...');
+  const mediaFiles = {
+    images: [],
+    videos: [],
+    models: []
+  };
+  
+  Object.entries(data).forEach(([projectName, projectData]) => {
+    projectData.bentoItems?.forEach((item) => {
+      const src = item.content?.src;
+      const type = item.content?.type;
+      if (src) {
+        if (type === 'image') {
+          mediaFiles.images.push({ project: projectName, src, alt: item.content.alt });
+        } else if (type === 'video') {
+          mediaFiles.videos.push({ project: projectName, src, alt: item.content.alt });
+        } else if (type === 'model') {
+          mediaFiles.models.push({ project: projectName, src, alt: item.content.alt });
+        }
+      }
+    });
+  });
+  
+  console.log('[projectBentoData] Total media files:', {
+    images: mediaFiles.images.length,
+    videos: mediaFiles.videos.length,
+    models: mediaFiles.models.length
+  });
+  console.log('[projectBentoData] All images:', mediaFiles.images);
+  console.log('[projectBentoData] All videos:', mediaFiles.videos);
+  console.log('[projectBentoData] All models:', mediaFiles.models);
+  
+  return data;
+};
+
+export const projectBentoData = logAllMediaFiles({
   "Sanctuary": {
     bentoItems: [
       {
         content: {
           type: 'image',
-          src: "./images/Experiments/Paintings/Sanctuary.jpg",
+          src: "/images/Experiments/Paintings/Sanctuary.jpg",
           alt: "Sanctuary",
           description: "Sanctuary",
           objectFit: 'contain'
@@ -18,10 +55,13 @@ export const projectBentoData = {
       {
         content: {
           type: 'video',
-          src: "./videos/Experiments/Head Gestures/Accessible VR Head gesture.mp4",
+          src: "/videos/Experiments/Head Gestures/Head Gesture - VR Interaction.mp4",
           alt: "VR Interaction",
           description: "VR Interaction",
           objectFit: 'contain'
+          // NOTE: If this video fails to load (decode error), the component will automatically
+          // try the fallback: "Accessible VR Head gesture.mp4"
+          // If you want to use the alternative video directly, change the src above.
         },
         size: 'medium'
       }
@@ -32,7 +72,7 @@ export const projectBentoData = {
       {
         content: {
           type: 'video',
-          src: "./videos/Experiments/Owlette/Owlette animatic 1.mp4",
+          src: "/videos/Experiments/Owlette/Owlette animatic 1.mp4",
           alt: "Animatic 1",
           description: "Animatic 1",
           objectFit: 'contain'
@@ -42,7 +82,7 @@ export const projectBentoData = {
       {
         content: {
           type: 'video',
-          src: "./videos/Experiments/Owlette/Owlette animatic 2.mp4",
+          src: "/videos/Experiments/Owlette/Owlette animatic 2.mp4",
           alt: "Animatic 2",
           description: "Animatic 2",
           objectFit: 'contain'
@@ -52,7 +92,7 @@ export const projectBentoData = {
       {
         content: {
           type: 'video',
-          src: "./videos/Experiments/Owlette/Owlette - Rebirth of a Spirit Guide.mp4",
+          src: "/videos/Experiments/Owlette/Owlette - Rebirth of a Spirit Guide.mp4",
           alt: "Owl blinking",
           description: "Owl blinking",
           objectFit: 'contain'
@@ -66,7 +106,7 @@ export const projectBentoData = {
       {
         content: {
           type: 'video',
-          src: "./videos/Experiments/Dichotomy within/Dichotomy within.mp4",
+          src: "/videos/Experiments/Dichotomy within/Dichotomy within.mp4",
           alt: "Dichotomy Within",
           description: "Dichotomy Within",
           objectFit: 'contain'
@@ -80,7 +120,7 @@ export const projectBentoData = {
       {
         content: {
           type: 'video',
-          src: "./videos/Experiments/Wanda/Wanda ISTS videos.mp4",
+          src: "/videos/Experiments/Wanda/Wanda ISTS videos.mp4",
           alt: "Wanda",
           description: "Wanda",
           objectFit: 'contain'
@@ -94,7 +134,7 @@ export const projectBentoData = {
       {
         content: {
           type: 'image',
-          src: "./images/Experiments/Ciborium/Modern day Ciborium.jpg",
+          src: "/images/Experiments/Ciborium/Modern day Ciborium.jpg",
           alt: "Front View",
           description: "Real-life Ciborium in the Vatican",
           objectFit: 'contain'
@@ -104,7 +144,7 @@ export const projectBentoData = {
       {
         content: {
           type: 'image',
-          src: "./images/Experiments/Ciborium/Rough render of ciborium.jpg",
+          src: "/images/Experiments/Ciborium/Rough render of ciborium.jpg",
           alt: "Full Height View",
           description: "Rough render of the VR Scene",
           objectFit: 'contain'
@@ -114,7 +154,7 @@ export const projectBentoData = {
       {
         content: {
           type: 'image',
-          src: "./images/Experiments/Ciborium/Pattern F.png",
+          src: "/images/Experiments/Ciborium/Pattern F.png",
           alt: "Front View",
           description: "Screenshot of Geometric Pattern made in Maya",
           objectFit: 'contain'
@@ -125,7 +165,7 @@ export const projectBentoData = {
       {
         content: {
           type: 'image',
-          src: "./images/Experiments/Ciborium/Pattern A.png",
+          src: "/images/Experiments/Ciborium/Pattern A.png",
           alt: "Side View",
           description: "Screenshot of Geometric Pattern made in Maya",
           objectFit: 'contain'
@@ -135,7 +175,7 @@ export const projectBentoData = {
       {
         content: {
           type: 'image',
-          src: "./images/Experiments/Ciborium/Pattern D & E.png",
+          src: "/images/Experiments/Ciborium/Pattern D & E.png",
           alt: "Side View",
           description: "Screenshot of Geometric Patterns made in Maya",
           objectFit: 'contain'
@@ -146,7 +186,7 @@ export const projectBentoData = {
       {
         content: {
           type: 'image',
-          src: "./images/Experiments/Ciborium/Textured persp.png",
+          src: "/images/Experiments/Ciborium/Textured persp.png",
           alt: "Full Height View",
           description: "Final Textured Render",
           objectFit: 'contain'
@@ -162,7 +202,7 @@ export const projectBentoData = {
       {
         content: {
           type: 'image',
-          src: "./images/Experiments/Disney Hats/All hats.jpg",
+          src: "/images/Experiments/Disney Hats/All hats.jpg",
           alt: "All Hats",
           description: "Complete vertical composition",
           objectFit: 'contain'
@@ -172,7 +212,7 @@ export const projectBentoData = {
       {
         content: {
           type: 'image',
-          src: "./images/Experiments/Disney Hats/Low poly mesh left persp.png",
+          src: "/images/Experiments/Disney Hats/Low poly mesh left persp.png",
           alt: "All Hats",
           description: "Complete vertical composition",
           objectFit: 'contain'
@@ -182,7 +222,7 @@ export const projectBentoData = {
       {
         content: {
           type: 'image',
-          src: "./images/Experiments/Disney Hats/All textures.png",
+          src: "/images/Experiments/Disney Hats/All textures.png",
           alt: "All Hats",
           description: "Complete vertical composition",
           objectFit: 'contain'
@@ -192,7 +232,7 @@ export const projectBentoData = {
       {
         content: {
           type: 'image',
-          src: "./images/Experiments/Disney Hats/UV w Textures.png",
+          src: "/images/Experiments/Disney Hats/UV w Textures.png",
           alt: "All Hats",
           description: "Complete vertical composition",
           objectFit: 'contain'
@@ -206,7 +246,7 @@ export const projectBentoData = {
       {
         content: {
           type: 'model',
-          src: "./3d models/coach box.glb",
+          src: "/3d models/coach box.glb",
           alt: "Holiday Box",
           description: "3D Model of Holiday Box",
           objectFit: 'contain',
@@ -226,7 +266,7 @@ export const projectBentoData = {
       {
         content: {
           type: 'video',
-          src: "./videos/Experiments/Tiptoe/Macy's Tiptoe - The Holiday Reindeer portfolio reel.mp4",
+          src: "/videos/Experiments/Tiptoe/Macy's Tiptoe - The Holiday Reindeer portfolio reel.mp4",
           alt: "All Hats",
           description: "Complete vertical composition",
           objectFit: 'contain'
@@ -236,7 +276,7 @@ export const projectBentoData = {
       {
         content: {
           type: 'image',
-          src: "./images/Experiments/Tiptoe/Weight paint.jpg",
+          src: "/images/Experiments/Tiptoe/Weight paint.jpg",
           alt: "All Hats",
           description: "Complete vertical composition",
           objectFit: 'contain'
@@ -246,7 +286,7 @@ export const projectBentoData = {
       {
         content: {
           type: 'image',
-          src: "./images/Experiments/Tiptoe/Tiptoe UV w texture.jpg",
+          src: "/images/Experiments/Tiptoe/Tiptoe UV w texture.jpg",
           alt: "All Hats",
           description: "Complete vertical composition",
           objectFit: 'contain'
@@ -261,7 +301,7 @@ export const projectBentoData = {
       {
         content: {
           type: 'video',
-          src: "./videos/Experiments/Swarovski/Aquamarine jewellery.mp4",
+          src: "/videos/Experiments/Swarovski/Aquamarine jewellery.mp4",
           alt: "Jewellery showcase",
           description: "Complete vertical composition",
           objectFit: 'contain'
@@ -271,7 +311,7 @@ export const projectBentoData = {
       {
         content: {
           type: 'video',
-          src: "./videos/Experiments/Swarovski/Black cube swarovski rotation  w jewellery.mp4",
+          src: "/videos/Experiments/Swarovski/Black cube swarovski rotation  w jewellery.mp4",
           alt: "Jewellery showcase",
           description: "Complete vertical composition",
           objectFit: 'contain'
@@ -285,7 +325,7 @@ export const projectBentoData = {
       {
         content: {
           type: 'model',
-          src: "./3d models/bottle.glb",
+          src: "/3d models/bottle.glb",
           alt: "Treatment Lotion Bottle",
           description: "3D Model of Treatment Lotion Bottle",
           objectFit: 'contain',
@@ -300,7 +340,7 @@ export const projectBentoData = {
       {
         content: {
           type: 'image',
-          src: "./images/Experiments/La Mer/La Mer new flow screenshot .png",
+          src: "/images/Experiments/La Mer/La Mer new flow screenshot .png",
           alt: "Product Campaign",
           description: "Complete vertical composition",
           objectFit: 'contain'
@@ -310,7 +350,7 @@ export const projectBentoData = {
       {
         content: {
           type: 'image',
-          src: "./images/Experiments/La Mer/Product Campaign.png",
+          src: "/images/Experiments/La Mer/Product Campaign.png",
           alt: "Product Campaign",
           description: "Complete vertical composition",
           objectFit: 'contain'
@@ -320,7 +360,7 @@ export const projectBentoData = {
       {
         content: {
           type: 'image',
-          src: "./images/Experiments/La Mer/Live product screenshot.jpg",
+          src: "/images/Experiments/La Mer/Live product screenshot.jpg",
           alt: "Live Product",
           description: "Complete vertical composition",
           objectFit: 'contain'
@@ -330,7 +370,7 @@ export const projectBentoData = {
       {
         content: {
           type: 'image',
-          src: "./images/Experiments/La Mer/glass ripple effect low-poly screenshot.jpg",
+          src: "/images/Experiments/La Mer/glass ripple effect low-poly screenshot.jpg",
           alt: "Low Poly",
           description: "Complete vertical composition",
           objectFit: 'contain'
@@ -340,7 +380,7 @@ export const projectBentoData = {
       {
         content: {
           type: 'image',
-          src: "./images/Experiments/La Mer/bottle wireframe.png",
+          src: "/images/Experiments/La Mer/bottle wireframe.png",
           alt: "Low Poly",
           description: "Complete vertical composition",
           objectFit: 'contain'
@@ -350,7 +390,7 @@ export const projectBentoData = {
       {
         content: {
           type: 'image',
-          src: "./images/Experiments/La Mer/Bottle combined texture bake 1.png",
+          src: "/images/Experiments/La Mer/Bottle combined texture bake 1.png",
           alt: "Low Poly",
           description: "Complete vertical composition",
           objectFit: 'contain'
@@ -360,4 +400,4 @@ export const projectBentoData = {
     ]
   }
   // ... other projects' bento items
-}; 
+}); 

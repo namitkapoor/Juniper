@@ -23,23 +23,29 @@ import {
 // import MorphingProjectCards from '../components/MorphingProjectCards';
 
 // Case Study Item Component with Scroll Animation - Optimized
-const CaseStudyItem = React.memo(({ study, index, totalItems, activeCategories, caseStudyCategories, navigate }) => {
+const CaseStudyItem = React.memo(({ study, index, totalItems, activeCategories, caseStudyCategories, navigate, isMobile }) => {
   const itemRef = useRef(null);
   
   // Per-item scroll tracking - starts when item top reaches sticky position
+  // Disable on mobile for better performance
   const { scrollYProgress } = useScroll({
     target: itemRef,
     offset: ["start start", "end start"], // Starts when item top hits viewport top (sticky position)
-    layoutEffect: false
+    layoutEffect: false,
+    enabled: !isMobile // Disable scroll tracking on mobile
   });
   
   // Smooth height transition - collapses as item scrolls past sticky position
-  const height = useTransform(
+  // Always call useTransform (hooks must be called unconditionally), but use 'auto' on mobile
+  const animatedHeight = useTransform(
     scrollYProgress,
     [0, 0.3, 0.6, 1],
     ['800px', '600px', '300px', '160px'],
     { clamp: true }
   );
+  
+  // Use fixed height on mobile, animated height on desktop
+  const height = isMobile ? 'auto' : animatedHeight;
 
   const isVisible = activeCategories.size === 0 || study.categories.some(cat => activeCategories.has(cat));
 
@@ -48,11 +54,11 @@ const CaseStudyItem = React.memo(({ study, index, totalItems, activeCategories, 
       ref={itemRef}
       className={`case-study-showcase ${study.comingSoon ? 'coming-soon' : ''}`}
       style={{
-        height,
+        height: isMobile ? 'auto' : height,
         opacity: isVisible ? 1 : 0.3,
-        position: 'sticky',
-        top: '120px',
-        zIndex: totalItems - index,
+        position: isMobile ? 'relative' : 'sticky',
+        top: isMobile ? 'auto' : '120px',
+        zIndex: isMobile ? 'auto' : totalItems - index,
       }}
       onClick={() => {
         if (study.isExternal) {
@@ -245,6 +251,7 @@ export default function Home() {
   const caseStudiesRef = useRef(null);
   const [heroLottieAnimation, setHeroLottieAnimation] = useState(null);
   const [isCarouselPaused, setIsCarouselPaused] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   // Comment out the first-load check for development
 
@@ -261,6 +268,17 @@ export default function Home() {
       .then(response => response.json())
       .then(data => setHeroLottieAnimation(data))
       .catch(error => console.error('Error loading Lottie animation:', error));
+  }, []);
+
+  // Detect mobile breakpoint (768px matches CSS breakpoint)
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
 
@@ -395,8 +413,9 @@ export default function Home() {
             className="case-studies-carousel"
             style={{
               '--case-studies-count': caseStudies.length,
-              // Minimal padding - just enough for last item to complete collapse
-              paddingBottom: `400px`
+              // Minimal padding - just enough for last item to complete collapse on desktop
+              // No extra padding needed on mobile since items aren't sticky
+              paddingBottom: isMobile ? '0' : '400px'
             }}
           >
             {sortedCaseStudies.map((study, index) => (
@@ -408,6 +427,7 @@ export default function Home() {
                 activeCategories={activeCategories}
                 caseStudyCategories={caseStudyCategories}
                 navigate={navigate}
+                isMobile={isMobile}
               />
             ))}
           </div>

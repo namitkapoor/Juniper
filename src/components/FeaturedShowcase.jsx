@@ -43,8 +43,12 @@ export default function FeaturedShowcase() {
                         className="showcase-frame"
                         allow="autoplay; microphone; camera; fullscreen"
                         loading="lazy"
-                        sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox allow-downloads"
+                        sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox allow-downloads allow-pointer-lock"
                         onLoad={handleIframeLoad}
+                        style={{
+                            pointerEvents: 'auto',
+                            touchAction: 'manipulation'
+                        }}
                     />
                 </div>
             )
