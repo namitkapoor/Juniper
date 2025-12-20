@@ -1,5 +1,5 @@
 import { IoCodeWorkingOutline, IoColorPaletteOutline } from 'react-icons/io5';
-import MediaRenderer from '../../components/MediaRenderer';
+import MediaRenderer from '../../components/media/MediaRenderer';
 
 const baseImplementationPhase = {
   id: 'implementation',

@@ -16,6 +16,11 @@ export function useLenis() {
       infinite: false,
     });
 
+    // Make Lenis available globally for other components
+    if (typeof window !== 'undefined') {
+      window.lenis = lenis;
+    }
+
     // Request animation frame loop
     function raf(time) {
       lenis.raf(time);
@@ -26,6 +31,9 @@ export function useLenis() {
 
     // Cleanup
     return () => {
+      if (typeof window !== 'undefined') {
+        delete window.lenis;
+      }
       lenis.destroy();
     };
   }, []);

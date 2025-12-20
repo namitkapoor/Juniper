@@ -19,6 +19,7 @@
     "vite-plugin-restart": "^0.4.1"
   },
   "dependencies": {
+    "@microsoft/clarity": "^1.0.2",
     "@react-three/drei": "^9.108.1",
     "@react-three/fiber": "^8.16.8",
     "@react-three/postprocessing": "^2.19.1",
@@ -35,6 +36,7 @@
     "r3f-perf": "^7.2.1",
     "react": "18.3",
     "react-dom": "18.3",
+    "react-ga4": "^2.1.0",
     "react-grid-layout": "^1.5.0",
     "react-icons": "^5.4.0",
     "react-resizable": "^3.0.5",

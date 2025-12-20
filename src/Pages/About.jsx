@@ -4,12 +4,12 @@ import { Canvas } from '@react-three/fiber';
 import { IoAdd } from 'react-icons/io5';
 import * as IoIcons from 'react-icons/io5';
 import { aboutSections } from '../data/aboutContent';
-import Contact from '../components/Contact';
-import { useTheme } from '../components/ThemeContext';
+import Contact from '../components/sections/Contact';
+import { useTheme } from '../components/layout/ThemeContext';
 
 // Lazy load components
-const Navbar = lazy(() => import('../components/Navbar'));
-const AboutModel = lazy(() => import('../components/AboutModel'));
+const Navbar = lazy(() => import('../components/layout/Navbar'));
+const AboutModel = lazy(() => import('../components/media/AboutModel'));
 
 // Import styles
 import '../style/about.css';

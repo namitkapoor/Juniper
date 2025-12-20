@@ -235,25 +235,26 @@ h1.hero-name,
   max-width: 600px;
 }
 
-/* Case Studies Carousel - Sticky Scroll Animation */
-.case-studies-carousel {
-  display: flex;
-  flex-direction: column;
+/* Case Studies Grid - Simple Layout */
+.case-studies-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0rem;
   width: 100%;
   position: relative;
-  /* Performance optimizations */
-  contain: layout style paint;
-  /* Padding will be set dynamically via inline style based on item count */
 }
 
-/* Case Study Showcase Card - Neo-Brutalist with Sticky Scroll - Hero Grid Format */
+.case-study-item {
+  width: 100%;
+}
+
+/* Case Study Showcase Card - Neo-Brutalist - Hero Grid Format */
 .case-study-showcase {
-  position: sticky;
   cursor: pointer;
-  will-change: height;
   margin-bottom: 0;
   overflow: hidden;
   contain: layout style paint; /* Prevent layout thrashing */
+  height: 800px;
   max-height: 800px;
   display: grid;
   grid-template-columns: 2fr 1fr;
@@ -262,10 +263,9 @@ h1.hero-name,
   background: var(--background, #000000);
   border-radius: 0;
   position: relative;
-  /* Performance optimizations */
-  transform: translateZ(0); /* Force GPU acceleration */
   backface-visibility: hidden;
   -webkit-font-smoothing: antialiased;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .case-study-showcase::before {
@@ -290,6 +290,7 @@ h1.hero-name,
 }
 
 .case-study-showcase:hover {
+  transform: translateY(-4px);
   box-shadow: 0 0 30px rgba(255, 255, 255, 0.1),
               0 0 60px rgba(255, 255, 255, 0.05);
 }
@@ -418,7 +419,7 @@ h1.hero-name,
   width: 100%;
   max-width: 90%;
   height: auto;
-  max-height: 500px;
+  max-height: 400px;
   object-fit: contain;
   object-position: center;
   display: block;
@@ -963,10 +964,9 @@ li {
   }
   
   /* Case Studies */
-  .case-studies-carousel {
+  .case-studies-grid {
     gap: 2rem;
-    perspective: none;
-    padding-bottom: 0 !important; /* Remove extra padding on mobile */
+    padding: 1rem 0;
   }
 
   .case-study-showcase {
@@ -974,9 +974,8 @@ li {
     grid-template-rows: auto auto auto;
     gap: 0;
     max-height: unset;
-    transform-style: flat;
-    position: relative !important; /* Override sticky on mobile */
-    margin-bottom: 2rem; /* Add spacing between items on mobile */
+    height: auto;
+    min-height: auto;
   }
 
   .case-study-title-container {

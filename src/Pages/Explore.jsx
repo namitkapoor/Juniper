@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import ExploreExperiments from '../components/ExploreExperiments';
-import Navbar from '../components/Navbar';
-import Contact from '../components/Contact';
-import FeaturedShowcase from '../components/FeaturedShowcase';
+import ExploreExperiments from '../components/sections/ExploreExperiments';
+import Navbar from '../components/layout/Navbar';
+import Contact from '../components/sections/Contact';
+import FeaturedShowcase from '../components/sections/FeaturedShowcase';
 import { motion } from 'framer-motion';
 import '../style/explore.css';
 

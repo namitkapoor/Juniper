@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import Navbar from '../../components/Navbar.jsx';
+import Navbar from '../../components/layout/Navbar.jsx';
 import '../../style/case-study.css';
 import { IoAdd } from 'react-icons/io5';
-import BusinessChallenge from '../../components/BusinessChallenge';
-import StrategicApproach from '../../components/StrategicApproach';
-import VisualEvolution from '../../components/VisualEvolution';
-import MeasurableResults from '../../components/MeasurableResults';
-import Overview from '../../components/Overview';
-import OtherProjects from '../../components/OtherProjects';
+import BusinessChallenge from '../../components/case-study/BusinessChallenge';
+import StrategicApproach from '../../components/case-study/StrategicApproach';
+import VisualEvolution from '../../components/case-study/VisualEvolution';
+import MeasurableResults from '../../components/case-study/MeasurableResults';
+import Overview from '../../components/case-study/Overview';
+import OtherProjects from '../../components/sections/OtherProjects';
 
 export default function SustainablePackaging() {
   const [expandedSections, setExpandedSections] = useState(
@@ -92,7 +92,7 @@ export default function SustainablePackaging() {
         <h1 className="page-title">Incentivize Sustainable Packaging</h1>
         
         {/* Overview Section */}
-        <Overview projectId="sustainablePackaging" />
+        <Overview projectId="sustainablePackaging" projectTitle="Incentivize Sustainable Packaging" />
 
         {/* 1. Business Challenge Section */}
         <motion.div

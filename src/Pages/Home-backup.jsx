@@ -3,13 +3,13 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 // import { Canvas } from '@react-three/fiber';
 // import Experience from '../components/Experience.jsx';
-import Contact from '../components/Contact.jsx';
+import Contact from '../components/sections/Contact.jsx';
 import { Button } from 'antd'
 import { useNavigate } from 'react-router-dom';
-import Navbar from "../components/Navbar.jsx";
+import Navbar from "../components/layout/Navbar.jsx";
 import "../style/home.css";
 import { IoChevronDown } from 'react-icons/io5';
-import LoaderScreen from '../components/LoaderScreen';
+import LoaderScreen from '../components/ui/LoaderScreen';
 import { 
   IoColorPalette, // Design
   IoSparkles, // UX

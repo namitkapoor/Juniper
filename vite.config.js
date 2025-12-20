@@ -8,6 +8,7 @@ import { defineConfig } from 'vite'
 export default defineConfig({
     root: 'src/',
     publicDir: '../public/',
+    envDir: '../', // Look for .env files in project root
     plugins: [
         // React support
         react(),
@@ -37,11 +38,27 @@ export default defineConfig({
     build: {
         outDir: '../dist',
         emptyOutDir: true,
-        sourcemap: true,
+        sourcemap: false, // Disable sourcemaps in production for smaller builds
         rollupOptions: {
-            input: resolve(__dirname, 'src/index.html')
+            input: resolve(__dirname, 'src/index.html'),
+            output: {
+                // Manual chunking for better code splitting
+                manualChunks: {
+                    'react-vendor': ['react', 'react-dom', 'react-router-dom'],
+                    'three-vendor': ['three', '@react-three/fiber', '@react-three/drei'],
+                    'animation-vendor': ['framer-motion', 'lottie-react'],
+                    'ui-vendor': ['antd'],
+                }
+            }
         },
-        chunkSizeWarningLimit: 1600,
+        chunkSizeWarningLimit: 1000, // Lower warning threshold
+        minify: 'terser', // Use terser for better minification
+        terserOptions: {
+            compress: {
+                drop_console: true, // Remove console.logs in production
+                drop_debugger: true,
+            }
+        }
     },
     base: './',
     assetsInclude: ['**/*.glb'],

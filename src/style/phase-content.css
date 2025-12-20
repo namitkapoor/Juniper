@@ -9,6 +9,7 @@
 /* Base content padding */
 .content {
   border: 2px solid var(--text-primary, #ffffff);
+  border-top: none;
 }
 
 /* Phase content inherits content width */
