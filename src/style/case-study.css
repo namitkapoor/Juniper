@@ -27,6 +27,29 @@
   text-align: left;
 }
 
+/* Video Section - Replaces Overview */
+.case-study-video-section {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto 4rem;
+  padding: 0 2rem;
+}
+
+.case-study-video-section video {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  display: block;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 768px) {
+  .case-study-video-section {
+    padding: 0 1rem;
+    margin-bottom: 2rem;
+  }
+}
+
 @media (max-width: 768px) {
   .page-title {
     font-size: 2.5rem;

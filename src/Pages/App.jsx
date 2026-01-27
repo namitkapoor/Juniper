@@ -3,9 +3,11 @@ import {BrowserRouter, Routes, Route} from "react-router-dom"
 import 'lenis/dist/lenis.css'
 import '../style/app.css'
 import { ThemeProvider } from '../components/layout/ThemeContext'
+import { TransitionProvider } from '../contexts/TransitionContext'
 import { Analytics } from '@vercel/analytics/react'
 import { track } from '@vercel/analytics'
 import PageTransition from '../components/layout/PageTransition'
+import MaskTransition from '../components/layout/MaskTransition'
 import { useLenis } from '../hooks/useLenis'
 import { useClarity } from '../hooks/useClarity'
 import { useGoogleAnalytics } from '../hooks/useGoogleAnalytics'
@@ -19,6 +21,7 @@ const ManageFarms = lazy(() => import('./CaseStudies/ManageFarms.jsx'))
 const InfluencerMarketing = lazy(() => import('./CaseStudies/InfluencerMarketing.jsx'))
 const TaskReminders = lazy(() => import('./CaseStudies/TaskReminders.jsx'))
 const SustainablePackaging = lazy(() => import('./CaseStudies/SustainablePackaging.jsx'))
+const ChristineValmy = lazy(() => import('./CaseStudies/ChristineValmy.jsx'))
 
 // Wrapper component for GA4 (needs to be inside Router for useLocation)
 const GA4Tracker = () => {
@@ -42,23 +45,27 @@ const App = () => {
 
   return (
     <ThemeProvider>
-      <BrowserRouter>
-        <GA4Tracker />
-        <PageTransition>
-          <Suspense fallback={<div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>Loading...</div>}>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/explore" element={<Explore />} />
-              <Route path="/case-study/manage-farms" element={<ManageFarms />} />
-              <Route path="/case-study/influencer-marketing" element={<InfluencerMarketing />} />
-              <Route path="/case-study/task-reminders" element={<TaskReminders />} />
-              <Route path="/case-study/sustainable-packaging" element={<SustainablePackaging />} />
-            </Routes>
-          </Suspense>
-        </PageTransition>
-      </BrowserRouter>
-      <Analytics />
+      <TransitionProvider>
+        <BrowserRouter>
+          <GA4Tracker />
+          <MaskTransition />
+          <PageTransition>
+            <Suspense fallback={<div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>Loading...</div>}>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/explore" element={<Explore />} />
+                <Route path="/case-study/manage-farms" element={<ManageFarms />} />
+                <Route path="/case-study/influencer-marketing" element={<InfluencerMarketing />} />
+                <Route path="/case-study/task-reminders" element={<TaskReminders />} />
+                <Route path="/case-study/sustainable-packaging" element={<SustainablePackaging />} />
+                <Route path="/case-study/christine-valmy" element={<ChristineValmy />} />
+              </Routes>
+            </Suspense>
+          </PageTransition>
+        </BrowserRouter>
+        <Analytics />
+      </TransitionProvider>
     </ThemeProvider>
   );
 };

@@ -54,6 +54,14 @@ export default function Contact() {
               <div className="case-study-list">
                 <div 
                   className="case-study-link"
+                  onClick={() => navigate('/case-study/christine-valmy')}
+                  style={{ cursor: 'pointer' }}
+                >
+                  <span className="case-title">Improve Beauty School Enrollment</span>
+                  <IoArrowForward className="arrow-icon" />
+                </div>
+                <div 
+                  className="case-study-link"
                   onClick={() => navigate('/case-study/manage-farms')}
                   style={{ cursor: 'pointer' }}
                 >
@@ -68,22 +76,14 @@ export default function Contact() {
                   <span className="case-title">Hire Influencer Marketing</span>
                   <IoArrowForward className="arrow-icon" />
                 </div>
-                <div 
+                {/* <div 
                   className="case-study-link"
                   onClick={() => navigate('/case-study/task-reminders')}
                   style={{ cursor: 'pointer' }}
                 >
                   <span className="case-title">Contextualize Task Reminders</span>
                   <IoArrowForward className="arrow-icon" />
-                </div>
-                <div 
-                  className="case-study-link"
-                  onClick={() => navigate('/case-study/sustainable-packaging')}
-                  style={{ cursor: 'pointer' }}
-                >
-                  <span className="case-title">Incentivize Sustainable Packaging</span>
-                  <IoArrowForward className="arrow-icon" />
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
@@ -100,7 +100,7 @@ export default function Contact() {
         </div>
 
         <div className="footer">
-          <p className="copyright">© 2025 Namit Kapoor. All Rights Reserved.</p>
+          <p className="copyright">© 2026 Namit Kapoor. All Rights Reserved.</p>
           <p className="footer-note">
             Tuned to experiential wavelengths <IoSparkles className="footer-icon" />
           </p>

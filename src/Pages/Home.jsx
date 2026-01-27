@@ -1,9 +1,13 @@
 // HomePage.jsx
-import React, { useState, useEffect, useRef, useMemo, lazy, Suspense } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect, useRef, useMemo, lazy, Suspense, useContext } from 'react';
+import { motion, useInView } from 'framer-motion';
+// Leva controls commented out
+// import { useControls, button } from 'leva';
+import { useTransition } from '../contexts/TransitionContext';
 
 // Lazy load heavy components
 const Lottie = lazy(() => import('lottie-react'));
+import { HeroAnimationContext, DEFAULT_HERO_CONTROLS } from '../contexts/HeroAnimationContext';
 import Contact from '../components/sections/Contact.jsx';
 import Button from '../components/ui/Button'
 import { useNavigate } from 'react-router-dom';
@@ -11,7 +15,8 @@ import Navbar from "../components/layout/Navbar.jsx";
 import "../style/home.css";
 import "../style/button.css";
 import { IoChevronDown } from 'react-icons/io5';
-import LoaderScreen from '../components/ui/LoaderScreen';
+// Preloader commented out
+// import LoaderScreen from '../components/ui/LoaderScreen';
 import {
   IoSparkles, // UX
   IoSearch, // Research
@@ -25,34 +30,81 @@ import {
 // Case Study Card Content Component
 const CaseStudyCard = React.memo(({ study, activeCategories, caseStudyCategories, navigate }) => {
   const isVisible = activeCategories.size === 0 || study.categories.some(cat => activeCategories.has(cat));
+  const { startTransition } = useTransition();
+  const videoRef = useRef(null);
+
+  const handleMouseEnter = () => {
+    if (videoRef.current && study.videoSrc) {
+      videoRef.current.play().catch(() => {});
+    }
+  };
+
+  const handleMouseLeave = () => {
+    if (videoRef.current) {
+      videoRef.current.pause();
+    }
+  };
+
+  const handleClick = (e) => {
+    if (study.isExternal) {
+      window.open(study.path, '_blank');
+    } else if (!study.comingSoon) {
+      // Get click position for mask animation origin
+      const rect = e.currentTarget.getBoundingClientRect();
+      const x = rect.left + rect.width / 2;
+      const y = rect.top + rect.height / 2;
+
+      // No video in transition - video plays on page instead
+      startTransition({
+        path: study.path,
+        videoSrc: null,
+        originX: x,
+        originY: y,
+      });
+    }
+  };
 
   return (
     <div
-      className={`case-study-showcase ${study.comingSoon ? 'coming-soon' : ''}`}
+      className={`case-study-card-nk26 ${study.comingSoon ? 'coming-soon' : ''}`}
       style={{
         opacity: isVisible ? 1 : 0.3,
-        height: '800px',
       }}
-      onClick={() => {
-        if (study.isExternal) {
-          window.open(study.path, '_blank');
-        } else if (!study.comingSoon) {
-          navigate(study.path);
-        }
-      }}
+      onClick={handleClick}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
     >
-      {/* Title - Bottom Left (2/3 area, spanning 2 rows) */}
-      <div
-        className="case-study-title-container"
-        style={{
-          backgroundImage: study.backgroundImage ? `url("${study.backgroundImage}")` : undefined
-        }}
-      >
-        <h3 className="case-study-title">{study.title}</h3>
+      {/* Video Background - Full Width */}
+      {study.videoSrc && (
+        <video
+          ref={videoRef}
+          className="case-study-video-nk26"
+          src={study.videoSrc}
+          muted
+          playsInline
+          loop
+          preload="metadata"
+          poster={study.backgroundImage}
+        />
+      )}
+      {/* Fallback image if no video */}
+      {!study.videoSrc && study.backgroundImage && (
+        <div
+          className="case-study-image-bg-nk26"
+          style={{ backgroundImage: `url("${study.backgroundImage}")` }}
+        />
+      )}
+
+      {/* Dark Overlay */}
+      <div className="case-study-overlay-nk26" />
+
+      {/* Title - Left Side (2/3 area, spanning 2 rows) */}
+      <div className="case-study-title-container-nk26">
+        <h3 className="case-study-title-nk26">{study.title}</h3>
       </div>
 
-      {/* Info Top - Top Right (1/3 area, first row) */}
-      <div className="case-study-info-top">
+      {/* Info Top - Right Side (1/3 area, first row) */}
+      <div className="case-study-info-top-nk26">
         <div className="case-study-tags">
           {study.categories.map(cat => (
             <span
@@ -67,7 +119,7 @@ const CaseStudyCard = React.memo(({ study, activeCategories, caseStudyCategories
         <div className="case-study-meta">
           <span className="metric-highlight">{study.metrics}</span>
         </div>
-        <p className="case-study-description">{study.description}</p>
+        <p className="case-study-description-nk26">{study.description}</p>
         <div className="button-container">
           <Button
             className={`case-study-button ${study.comingSoon ? 'disabled' : ''}`}
@@ -76,7 +128,16 @@ const CaseStudyCard = React.memo(({ study, activeCategories, caseStudyCategories
               if (study.isExternal) {
                 window.open(study.path, '_blank');
               } else if (!study.comingSoon) {
-                navigate(study.path);
+                const rect = e.currentTarget.closest('.case-study-card-nk26')?.getBoundingClientRect();
+                const x = rect ? rect.left + rect.width / 2 : window.innerWidth / 2;
+                const y = rect ? rect.top + rect.height / 2 : window.innerHeight / 2;
+
+                startTransition({
+                  path: study.path,
+                  videoSrc: null,
+                  originX: x,
+                  originY: y,
+                });
               }
             }}
             disabled={study.comingSoon}
@@ -93,15 +154,14 @@ const CaseStudyCard = React.memo(({ study, activeCategories, caseStudyCategories
         </div>
       </div>
 
-      {/* Visual - Bottom Right (2/3 area, second row) */}
-      <div className="case-study-visual">
+      {/* Visual - Right Side (1/3 area, second row) */}
+      <div className="case-study-visual-nk26">
         <div className="visual-container">
           <img
             className="case-study-image"
             src={study.image}
             alt={study.title}
           />
-          <div className="visual-glow"></div>
         </div>
       </div>
     </div>
@@ -148,13 +208,24 @@ const caseStudyCategories = {
 
 const caseStudies = [
   {
+    title: 'Enroll More Students',
+    metrics: '143% More Submissions',
+    categories: ['ux', 'ai', 'development', 'b2b'],
+    image: '../images/Project Cover Photos/CV thumbnail.svg',
+    description: 'Designed a chat-driven enrollment system to simplify beauty school enrollment and tracking, boosting user engagement by reducing workflow friction for enrollment officers.',
+    path: '/case-study/christine-valmy',
+    backgroundImage: '/images/Project Cover Photos/CV on Laptop.png',
+    videoSrc: '/videos/Case Studies/CV/christine-valmy-laptop.mp4'
+  },
+  {
     title: 'Manage Small Farms',
     metrics: '70 SUS Score',
     categories: ['ux', 'research', 'b2c'],
     image: '../images/Project Cover Photos/JD Redesign thumbnail.png',
     description: 'Simplified an operations management app to better serve small farm owners, focusing on usability and scalability for non-technical users.',
     path: '/case-study/manage-farms',
-    backgroundImage: '../images/Project Cover Photos/farmer on phone screenshot 1.png'
+    backgroundImage: '../images/Project Cover Photos/farmer on phone screenshot 1.png',
+    videoSrc: '/videos/Case Studies/JD/Animations/Farmer w: phone anim-left.mp4'
   },
   {
     title: 'Hire Influencer Marketing',
@@ -163,9 +234,10 @@ const caseStudies = [
     image: '../images/Project Cover Photos/Campaign Page.svg',
     description: 'Redesigned a web app to simplify influencer hiring and campaign tracking, boosting user engagement by reducing workflow friction for small business owners.',
     path: '/case-study/influencer-marketing',
-    backgroundImage: '/images/Project Cover Photos/influencer screenshot 1.png'
+    backgroundImage: '/images/Project Cover Photos/MI on Laptop.png',
+    videoSrc: '/videos/Case Studies/MI/MI on laptop.mp4'
   },
-  
+
   // Temporarily removed case studies
   // {
   //   title: 'Contextualize Task Reminders',
@@ -177,7 +249,7 @@ const caseStudies = [
   //   backgroundImage: '/images/Project Cover Photos/Anywhere Access Luminote gif.gif'
   // },
   // {
-  //   title: 'Incentivize Sustainable Packaging', 
+  //   title: 'Incentivize Sustainable Packaging',
   //   metrics: '30% More Eco-Friendly Choices',
   //   categories: ['xr', 'ux', 'development', 'b2c'],
   //   image: '../images/Project Cover Photos/SUSpointpopup-cropped.gif',
@@ -185,55 +257,172 @@ const caseStudies = [
   //   path: '/case-study/sustainable-packaging',
   //   backgroundImage: '/images/Project Cover Photos/SUSpointpopup-cropped.gif'
   // },
-  {
-    title: 'Personalize Product Recommendations',
-    metrics: '23% More Purchases',
-    categories: ['ux', 'development','ai', 'b2b'],
-    image: '../images/Project Cover Photos/Sentry Skin thumbnail.svg',
-    description: 'Developed a conversational product recommendation agent customizable to a brand\'s catalog',
-    path: 'https://www.chekout.ai',
-    comingSoon: false,
-    isExternal: true,
-    backgroundImage: '/images/Project Cover Photos/personalize skincare screenshot.png'
-  },
-  // {
-  //   title: 'Recommend Beauty Products',
-  //   metrics: '23% More Purchases',
-  //   categories: ['ux', 'ai', 'b2c'],
-  //   image: '../images/Project Cover Photos/Nuele thumbnail.svg',
-  //   description: 'Redesigned a web app to simplify influencer hiring and campaign tracking, boosting user engagement by reducing workflow friction for small business owners.',
-  //   path: '/case-study/product-recommendations',
-  //   comingSoon: true,
-  //   backgroundImage: '/images/Project Cover Photos/Nuele thumbnail.svg'
-  // },
-  {
-    title: 'Enroll More Students',
-    metrics: '143% More Submissions',
-    categories: ['ux', 'ai', 'b2b'],
-    image: '../images/Project Cover Photos/CV thumbnail.svg',
-    description: 'Designed a chat-driven enrollment system to simplify beauty school enrollment and tracking, boosting user engagement by reducing workflow friction for enrollment officers.',
-    path: '/case-study/beauty-school',
-    comingSoon: true,
-    backgroundImage: '/images/Project Cover Photos/Beauty school technician screenshot.png'
-  },
 ];
 
+// Animated Hero Name Component - Letter by letter with stagger (timing from Leva / HeroAnimationContext)
+const AnimatedHeroName = ({ text = "namit", animate }) => {
+  const c = useContext(HeroAnimationContext) || DEFAULT_HERO_CONTROLS;
+  return (
+    <motion.h1
+      className="hero-name"
+      initial="hidden"
+      animate={animate}
+      variants={{
+        visible: { transition: { staggerChildren: c.heroNameLetterStagger } },
+        hidden: {},
+      }}
+    >
+      {text.split("").map((char, i) => (
+        <motion.span
+          key={i}
+          variants={{
+            hidden: { opacity: 0, y: 65, x: 0, scale: 1, filter: 'blur(10px)' },
+            visible: {
+              opacity: 1,
+              y: 0,
+              x: 0,
+              scale: 1,
+              filter: 'blur(0px)',
+              transition: { duration: c.heroNameLetterDuration },
+            },
+          }}
+          style={{ display: 'inline-block' }}
+        >
+          {char === ' ' ? '\u00A0' : char}
+        </motion.span>
+      ))}
+    </motion.h1>
+  );
+};
+
+// Animated Tagline Component - Word by word, starts after hero-name (timing from Leva / HeroAnimationContext)
+const AnimatedTagline = ({ text = "Harmonizes pixels to lived experiences", onAnimationComplete, animate }) => {
+  const c = useContext(HeroAnimationContext) || DEFAULT_HERO_CONTROLS;
+  const words = text.split(' ');
+
+  return (
+    <motion.p
+      initial="hidden"
+      animate={animate}
+      onAnimationComplete={onAnimationComplete}
+      variants={{
+        visible: {
+          transition: {
+            staggerChildren: c.taglineWordStagger,
+            delayChildren: c.taglineDelay,
+          },
+        },
+        hidden: {},
+      }}
+      style={{ display: 'flex', flexWrap: 'wrap', gap: '0.3em' }}
+    >
+      {words.map((word, i) => (
+        <motion.span
+          key={i}
+          variants={{
+            hidden: { opacity: 0, y: 0, x: -10, scale: 1, filter: 'blur(10px)' },
+            visible: {
+              opacity: 1,
+              y: 0,
+              x: 0,
+              scale: 1,
+              filter: 'blur(0px)',
+              transition: { duration: c.taglineWordDuration },
+            },
+          }}
+          style={{ display: 'inline-block' }}
+        >
+          {word}
+        </motion.span>
+      ))}
+    </motion.p>
+  );
+};
+
 export default function Home() {
-  const [isLoading, setIsLoading] = useState(true);
+  // Preloader commented out
+  // const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
-  const [activeCategories, setActiveCategories] = useState(new Set());
   const [heroLottieAnimation, setHeroLottieAnimation] = useState(null);
-  const [isCarouselPaused, setIsCarouselPaused] = useState(false);
+  const [showHeroLottie, setShowHeroLottie] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const heroSectionRef = useRef(null);
+  const caseStudiesRef = useRef(null);
+  const heroInView = useInView(heroSectionRef, { once: true });
+  const caseStudiesInView = useInView(caseStudiesRef, { once: false, margin: '-100px' });
+  const lottieTimeoutRef = useRef(null);
+  const [heroReplayKey, setHeroReplayKey] = useState(0);
+
+  const LEVA_STORAGE_KEY = 'leva-hero-animations';
+  const stored = useMemo(() => {
+    try {
+      const s = JSON.parse(localStorage.getItem(LEVA_STORAGE_KEY) || '{}');
+      return { ...DEFAULT_HERO_CONTROLS, ...s };
+    } catch {
+      return { ...DEFAULT_HERO_CONTROLS };
+    }
+  }, []);
+
+  // Leva "Hero Animations": persisted to localStorage. Use Replay to see changes after editing.
+  // COMMENTED OUT FOR NOW
+  /* const heroControls = useControls('Hero Animations', {
+    Replay: button(() => {
+      setShowHeroLottie(false);
+      if (lottieTimeoutRef.current) { clearTimeout(lottieTimeoutRef.current); lottieTimeoutRef.current = null; }
+      setHeroReplayKey((k) => k + 1);
+    }, { label: 'Replay hero animations' }),
+    heroNameLetterStagger: { value: stored.heroNameLetterStagger, min: 0, max: 1, step: 0.05, label: 'Name: letter stagger' },
+    heroNameLetterDuration: { value: stored.heroNameLetterDuration, min: 0.1, max: 2, step: 0.05, label: 'Name: letter duration' },
+    heroNameLeftDuration: { value: stored.heroNameLeftDuration, min: 0.2, max: 3, step: 0.1, label: 'Name stroke L: duration' },
+    heroNameLeftDelay: { value: stored.heroNameLeftDelay, min: 0, max: 2, step: 0.05, label: 'Name stroke L: delay' },
+    heroNameRightDuration: { value: stored.heroNameRightDuration, min: 0.2, max: 3, step: 0.1, label: 'Name stroke R: duration' },
+    heroNameRightDelay: { value: stored.heroNameRightDelay, min: 0, max: 2, step: 0.05, label: 'Name stroke R: delay' },
+    heroNameStrokeDuration: { value: stored.heroNameStrokeDuration, min: 0.5, max: 4, step: 0.1, label: 'Name stroke bottom: duration' },
+    heroNameStrokeDelay: { value: stored.heroNameStrokeDelay, min: 0, max: 2, step: 0.1, label: 'Name stroke bottom: delay' },
+    taglineDelay: { value: stored.taglineDelay, min: 0, max: 4, step: 0.1, label: 'Tagline: delay (after name)' },
+    taglineWordStagger: { value: stored.taglineWordStagger, min: 0, max: 1, step: 0.05, label: 'Tagline: word stagger' },
+    taglineWordDuration: { value: stored.taglineWordDuration, min: 0.1, max: 1, step: 0.05, label: 'Tagline: word duration' },
+    taglineRightDuration: { value: stored.taglineRightDuration, min: 0.2, max: 3, step: 0.1, label: 'Tagline stroke R: duration' },
+    taglineRightDelay: { value: stored.taglineRightDelay, min: 0, max: 2, step: 0.05, label: 'Tagline stroke R: delay' },
+    taglineStrokeDuration: { value: stored.taglineStrokeDuration, min: 0.5, max: 4, step: 0.1, label: 'Tagline stroke bottom: duration' },
+    taglineStrokeDelay: { value: stored.taglineStrokeDelay, min: 0, max: 2, step: 0.05, label: 'Tagline stroke bottom: delay' },
+    lottieDelayAfterTagline: { value: stored.lottieDelayAfterTagline, min: 0, max: 2, step: 0.1, label: 'Lottie: delay after tagline' },
+    lottieFadeDuration: { value: stored.lottieFadeDuration, min: 0.1, max: 1.5, step: 0.05, label: 'Lottie: fade duration' },
+    infoBottomStrokesDelay: { value: stored.infoBottomStrokesDelay, min: 0, max: 8, step: 0.2, label: 'Info-bottom: block delay' },
+    infoBottomRightDuration: { value: stored.infoBottomRightDuration, min: 0.2, max: 3, step: 0.1, label: 'Info-bottom stroke R: duration' },
+    infoBottomRightDelay: { value: stored.infoBottomRightDelay, min: 0, max: 2, step: 0.05, label: 'Info-bottom stroke R: delay' },
+    infoBottomBottomDuration: { value: stored.infoBottomBottomDuration, min: 0.2, max: 3, step: 0.1, label: 'Info-bottom stroke bottom: duration' },
+    infoBottomBottomDelay: { value: stored.infoBottomBottomDelay, min: 0, max: 2, step: 0.05, label: 'Info-bottom stroke bottom: delay' },
+  }); */
+  // Use default controls instead
+  const heroControls = DEFAULT_HERO_CONTROLS;
+
+  // Commented out Leva persistence
+  /* useEffect(() => {
+    try {
+      const toSave = {};
+      Object.keys(DEFAULT_HERO_CONTROLS).forEach((k) => {
+        if (k in heroControls && typeof heroControls[k] !== 'function') toSave[k] = heroControls[k];
+      });
+      localStorage.setItem(LEVA_STORAGE_KEY, JSON.stringify(toSave));
+    } catch (e) {}
+  }, [heroControls]); */
+
+  useEffect(() => {
+    return () => {
+      if (lottieTimeoutRef.current) clearTimeout(lottieTimeoutRef.current);
+    };
+  }, []);
 
   // Comment out the first-load check for development
 
-  useEffect(() => {
-    const hasLoaded = sessionStorage.getItem('hasLoaded');
-    if (hasLoaded) {
-      setIsLoading(false);
-    }
-  }, []);
+  // Preloader commented out
+  // useEffect(() => {
+  //   const hasLoaded = sessionStorage.getItem('hasLoaded');
+  //   if (hasLoaded) {
+  //     setIsLoading(false);
+  //   }
+  // }, []);
 
   useEffect(() => {
     // Load Lottie animation data for hero section
@@ -256,83 +445,207 @@ export default function Home() {
   }, []);
 
 
-  const handleLoadingComplete = () => {
-    setIsLoading(false);
-    // Comment out session storage for development
-    sessionStorage.setItem('hasLoaded', 'true');
-  };
+  // Preloader commented out
+  // const handleLoadingComplete = () => {
+  //   setIsLoading(false);
+  //   // Comment out session storage for development
+  //   sessionStorage.setItem('hasLoaded', 'true');
+  // };
 
-  const toggleCategory = (category) => {
-    setActiveCategories(prev => {
-      const newSet = new Set(prev);
-      if (newSet.has(category)) {
-        newSet.delete(category);
-      } else {
-        newSet.add(category);
-      }
-      return newSet;
-    });
-  };
-
-
-  // Memoize sorted case studies to avoid recalculating on every render
-  const sortedCaseStudies = useMemo(() => {
-    if (activeCategories.size === 0) return caseStudies;
-    
-    return [...caseStudies].sort((a, b) => {
-      const aMatches = a.categories.filter(cat => activeCategories.has(cat)).length;
-      const bMatches = b.categories.filter(cat => activeCategories.has(cat)).length;
-      return bMatches - aMatches;
-    });
-  }, [activeCategories]);
+  const emptyCategories = useMemo(() => new Set(), []);
 
   return (
     <>
-      {isLoading && <LoaderScreen onLoadingComplete={handleLoadingComplete} />}
+      {/* Preloader commented out */}
+      {/* {isLoading && <LoaderScreen onLoadingComplete={handleLoadingComplete} />} */}
       <div className="page-container">
         <Navbar />
         
-        {/* Hero Section - Rule of Thirds Grid */}
-        <section className="hero-section">
-          {/* Name - Bottom Left (2/3 area) */}
+        {/* Hero Section - Rule of Thirds Grid. Leva "Hero Animations" panel drives all timings. */}
+        <HeroAnimationContext.Provider value={heroControls}>
+        <section ref={heroSectionRef} key={heroReplayKey} className="hero-section">
+          {/* Name - Bottom Left. Strokes: left, right (scaleY top→bottom), bottom (scaleX left→right). */}
           <div className="hero-name-container">
-            <h1 className="hero-name">namit</h1>
+            <AnimatedHeroName text="namit" animate={heroInView ? "visible" : "hidden"} />
+          <motion.div 
+              className="hero-name-left-stroke"
+              initial="hidden"
+              animate={heroInView ? "visible" : "hidden"}
+              variants={{
+                hidden: { scaleY: 0 },
+                visible: { scaleY: 1, transition: { duration: heroControls.heroNameLeftDuration, delay: heroControls.heroNameLeftDelay, ease: 'easeInOut' } },
+              }}
+              style={{ position: 'absolute', left: 0, top: 0, width: '2px', height: '100%', background: 'var(--text-primary, #fff)', transformOrigin: 'top' }}
+            />
+            <motion.div
+              className="hero-name-right-stroke"
+              initial="hidden"
+              animate={heroInView ? "visible" : "hidden"}
+              variants={{
+                hidden: { scaleY: 0 },
+                visible: { scaleY: 1, transition: { duration: heroControls.heroNameRightDuration, delay: heroControls.heroNameRightDelay, ease: 'easeInOut' } },
+              }}
+              style={{ position: 'absolute', right: 0, top: 0, width: '2px', height: '100%', background: 'var(--text-primary, #fff)', transformOrigin: 'top' }}
+            />
+            <motion.div
+              className="hero-name-bottom-stroke"
+              initial="hidden"
+              animate={heroInView ? "visible" : "hidden"}
+              variants={{
+                hidden: { scaleX: 0 },
+                visible: {
+                  scaleX: 1,
+                  transition: {
+                    duration: heroControls.heroNameStrokeDuration,
+                    delay: heroControls.heroNameStrokeDelay,
+                    ease: 'easeInOut',
+                  },
+                },
+              }}
+              style={{
+                position: 'absolute',
+                bottom: 0,
+                left: 0,
+                width: '100%',
+                height: '2px',
+                background: 'var(--text-primary, #ffffff)',
+                transformOrigin: 'left',
+              }}
+            />
           </div>
-          
-          {/* Info Top - Top Right (1/3 area, first row) */}
+
+          {/* Info Top - Top Right (1/3 area). Tagline + bottom stroke; timings from Leva. */}
           <div className="hero-info-top">
-            <p>Harmonizes pixels to lived experiences</p>
+            <AnimatedTagline
+              text="Harmonizes pixels to lived experiences"
+              animate={heroInView ? "visible" : "hidden"}
+              onAnimationComplete={() => {
+                if (lottieTimeoutRef.current) clearTimeout(lottieTimeoutRef.current);
+                const delay = (heroControls.lottieDelayAfterTagline ?? 0.5) * 1000;
+                lottieTimeoutRef.current = setTimeout(() => {
+                  setShowHeroLottie(true);
+                  lottieTimeoutRef.current = null;
+                }, delay);
+              }}
+            />
+          <motion.div 
+              className="hero-tagline-right-stroke"
+              initial="hidden"
+              animate={heroInView ? "visible" : "hidden"}
+              variants={{
+                hidden: { scaleY: 0 },
+                visible: {
+                  scaleY: 1,
+                  transition: {
+                    duration: heroControls.taglineRightDuration,
+                    delay: heroControls.taglineDelay + heroControls.taglineRightDelay,
+                    ease: 'easeInOut',
+                  },
+                },
+              }}
+              style={{ position: 'absolute', right: 0, top: 0, width: '2px', height: '100%', background: 'var(--text-primary, #fff)', transformOrigin: 'top' }}
+            />
+            <motion.div
+              className="hero-tagline-bottom-stroke"
+              initial="hidden"
+              animate={heroInView ? "visible" : "hidden"}
+              variants={{
+                hidden: { scaleX: 0 },
+                visible: {
+                  scaleX: 1,
+                  transition: {
+                    duration: heroControls.taglineStrokeDuration,
+                    delay: heroControls.taglineDelay + heroControls.taglineStrokeDelay,
+                    ease: 'easeInOut',
+                  },
+                },
+              }}
+              style={{
+                position: 'absolute',
+                bottom: 0,
+                left: 0,
+                width: '100%',
+                height: '2px',
+                background: 'var(--text-primary, #ffffff)',
+                transformOrigin: 'left',
+              }}
+            />
           </div>
-          
-          {/* Info Bottom - Bottom Right (2/3 area, second row) - Lottie animation */}
+
+          {/* Info Bottom - Bottom Right. Strokes: right (scaleY), bottom (scaleX). */}
           <div className="hero-info-bottom">
             <div className="hero-lottie-container">
-              {heroLottieAnimation && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: showHeroLottie ? 1 : 0 }}
+                transition={{ duration: heroControls.lottieFadeDuration }}
+                style={{ width: '100%', height: '100%' }}
+              >
+                {heroLottieAnimation && (
                 <Suspense fallback={<div style={{ width: '100%', height: '100%' }} />}>
                   <Lottie 
                     animationData={heroLottieAnimation}
-                    loop={true}
+                      loop={true}
                     autoplay={true}
                     className="hero-lottie"
                   />
                 </Suspense>
               )}
+              </motion.div>
             </div>
+            <motion.div
+              className="hero-info-bottom-right-stroke"
+              initial="hidden"
+              animate={heroInView ? "visible" : "hidden"}
+              variants={{
+                hidden: { scaleY: 0 },
+                visible: {
+                  scaleY: 1,
+                  transition: {
+                    duration: heroControls.infoBottomRightDuration,
+                    delay: heroControls.infoBottomStrokesDelay + heroControls.infoBottomRightDelay,
+                    ease: 'easeInOut',
+                  },
+                },
+              }}
+              style={{ position: 'absolute', right: 0, top: 0, width: '2px', height: '100%', background: 'var(--text-primary, #fff)', transformOrigin: 'top' }}
+            />
+            <motion.div
+              className="hero-info-bottom-bottom-stroke"
+              initial="hidden"
+              animate={heroInView ? "visible" : "hidden"}
+              variants={{
+                hidden: { scaleX: 0 },
+                visible: {
+                  scaleX: 1,
+                  transition: {
+                    duration: heroControls.infoBottomBottomDuration,
+                    delay: heroControls.infoBottomStrokesDelay + heroControls.infoBottomBottomDelay,
+                    ease: 'easeInOut',
+                  },
+                },
+              }}
+              style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', height: '2px', background: 'var(--text-primary, #fff)', transformOrigin: 'left' }}
+            />
           </div>
         </section>
+        </HeroAnimationContext.Provider>
 
-        {/* Separate section for scroll indicator */}
+        {/* View Projects: appears after Lottie, hides when case studies section is in view */}
         <motion.div 
           className="scroll-indicator"
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 2 }}
-          style={{ cursor: 'pointer' }}
+          animate={{ 
+            opacity: showHeroLottie && !caseStudiesInView ? 1 : 0, 
+            y: showHeroLottie && !caseStudiesInView ? 0 : 20 
+          }}
+          transition={{ delay: showHeroLottie ? 0.5 : 0, duration: 0.5 }}
+          style={{ 
+            cursor: 'pointer', 
+            pointerEvents: showHeroLottie && !caseStudiesInView ? 'auto' : 'none' 
+          }}
           onClick={() => {
-            document.querySelector('.case-studies').scrollIntoView({ 
-              behavior: 'smooth',
-              block: 'start'
-            });
+            document.querySelector('.case-studies')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
           }}
         >
           <span className="scroll-text">View Projects</span>
@@ -343,53 +656,18 @@ export default function Home() {
           />
         </motion.div>
 
-         {/* Case Studies Section - Original Grid */}
-         <section className="case-studies">
-          <div className="categories-carousel-container">
-            <div 
-              className="categories-carousel-wrapper"
-              onMouseEnter={() => setIsCarouselPaused(true)}
-              onMouseLeave={() => setIsCarouselPaused(false)}
-              style={{ '--category-count': Object.keys(caseStudyCategories).length }}
-            >
-              <motion.div 
-                className={`categories-carousel-track ${isCarouselPaused ? 'paused' : ''}`}
-              >
-                {/* Duplicate items for seamless infinite loop */}
-                {[...Array(3)].map((_, loopIndex) => (
-                  Object.entries(caseStudyCategories).map(([key, { name, color, icon: Icon }]) => (
-                    <motion.button
-                      key={`${key}-${loopIndex}`}
-                      className={`category-carousel-button ${activeCategories.has(key) ? 'active' : ''}`}
-                      onClick={() => toggleCategory(key)}
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                      style={{
-                        '--category-color': color,
-                        '--blend-opacity': activeCategories.has(key) ? '1' : '0.3'
-                      }}
-                    >
-                      <div className="category-carousel-content">
-                        <Icon className="category-icon" />
-                        <span className="category-name">{name}</span>
-                      </div>
-                      <div 
-                        className="category-gradient-overlay"
-                        style={{ background: `linear-gradient(135deg, ${color}, transparent)` }}
-                      />
-                    </motion.button>
-                  ))
-                ))}
-              </motion.div>
-            </div>
+         {/* Case Studies Section - Selected work, no category carousel */}
+         <section ref={caseStudiesRef} className="case-studies">
+          <div className="case-studies-header">
+            <h2 className="case-studies-title">Selected work</h2>
           </div>
 
           <div className="case-studies-grid">
-            {sortedCaseStudies.map((study) => (
+            {caseStudies.map((study) => (
               <div key={study.title} className="case-study-item">
                 <CaseStudyCard
                   study={study}
-                  activeCategories={activeCategories}
+                  activeCategories={emptyCategories}
                   caseStudyCategories={caseStudyCategories}
                   navigate={navigate}
                 />

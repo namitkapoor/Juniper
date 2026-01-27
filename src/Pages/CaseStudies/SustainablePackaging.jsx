@@ -18,7 +18,11 @@ export default function SustainablePackaging() {
 
   // Add scroll to top effect
   useEffect(() => {
-    window.scrollTo(0, 0);
+    if (window.lenis) {
+      window.lenis.scrollTo(0, { immediate: true });
+    } else {
+      window.scrollTo(0, 0);
+    }
   }, []);
 
   const toggleSection = (section) => {

@@ -1,266 +1,340 @@
-// src/Pages/CaseStudies/ManageFarms.jsx
-import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import Navbar from '../../components/layout/Navbar.jsx';
-import '../../style/case-study.css';
-import { IoAdd } from 'react-icons/io5';
-import BusinessChallenge from '../../components/case-study/BusinessChallenge';
-import DesignChanges from '../../components/case-study/DesignChanges';
-import StrategicApproach from '../../components/case-study/StrategicApproach';
-import VisualEvolution from '../../components/case-study/VisualEvolution';
-import MeasurableResults from '../../components/case-study/MeasurableResults';
-import Overview from '../../components/case-study/Overview';
-import OtherProjects from '../../components/sections/OtherProjects';
+import React, { useEffect } from 'react';
+import Navbar from '../../components/layout/Navbar';
 
-export default function ManageFarms() {
-  const [expandedSections, setExpandedSections] = useState(
-    new Set(['strategicApproach', 'approach0', 'measurableResults'])
-  );
-  const [timelineProgress, setTimelineProgress] = useState(0);
+// Import NK26 components
+import {
+  HeroVideo,
+  GridPatternA,
+  GridPatternB,
+  GridPatternC,
+  GridMain,
+  GridMeta,
+  GridText,
+  GridVisual,
+  GridNested,
+  NestedMain,
+  NestedAside,
+  SectionTitle,
+  SubsectionTitle,
+  SectionText,
+  ImageWrapper,
+  MetaItem,
+  TechnicalNote,
+  TechNoteText,
+  BeforeAfterSlider,
+  StickyScrollSection,
+  ContentText,
+  UserQuote,
+  FeatureList,
+  LottieAnimation,
+  ResultsGrid,
+  NextProjectTeaser,
+  PainPointsGrid,
+  DesignRationaleCard,
+  MicroInteractionShowcase
+} from '../../components/case-study-nk26';
 
+// Import data
+import { manageFarmsData as data } from '../../data/manageFarmsData';
+
+// Import styles
+import '../../style/case-study-nk26.css';
+
+const ManageFarms = () => {
+  // Scroll to top when case study loads
   useEffect(() => {
-    window.scrollTo(0, 0);
+    if (window.lenis) {
+      window.lenis.scrollTo(0, { immediate: true });
+    } else {
+      window.scrollTo(0, 0);
+    }
   }, []);
 
-  const toggleSection = (section) => {
-    setExpandedSections(prev => {
-      const newSet = new Set(prev);
-      
-      // Handle subsection toggles within Strategic Approach
-      if (section.startsWith('approach')) {
-        if (!newSet.has('strategicApproach')) {
-          newSet.add('strategicApproach');
-        }
-        
-        if (newSet.has(section)) {
-          newSet.delete(section);
-          const activeSections = [...newSet]
-            .filter(s => s.startsWith('approach'))
-            .map(s => parseInt(s.replace('approach', '')));
-          
-          if (activeSections.length === 0) {
-            newSet.delete('strategicApproach');
-            setTimelineProgress(0);
-          } else {
-            const lastActive = Math.max(...activeSections);
-            setTimelineProgress((lastActive + 1) * 25);
-          }
-        } else {
-          [...newSet].forEach(s => {
-            if (s.startsWith('approach')) {
-              newSet.delete(s);
-            }
-          });
-          newSet.add(section);
-          const sectionNumber = parseInt(section.replace('approach', ''));
-          setTimelineProgress((sectionNumber + 1) * 25);
-        }
-      }
-      // Handle main strategic approach toggle
-      else if (section === 'strategicApproach') {
-        if (newSet.has(section)) {
-          // When closing the main section, remove all subsections
-          [...newSet].forEach(s => {
-            if (s.startsWith('approach')) {
-              newSet.delete(s);
-            }
-          });
-          newSet.delete(section);
-          setTimelineProgress(0);
-        } else {
-          // When opening the main section, always open Research Insights
-          newSet.add(section);
-          newSet.add('approach0');
-          setTimelineProgress(25);
-        }
-      }
-      // For other sections, handle normally
-      else {
-        if (newSet.has(section)) {
-          newSet.delete(section);
-        } else {
-          newSet.add(section);
-        }
-      }
-      return newSet;
-    });
-  };
+  // Build content blocks for sticky scroll section
+  const stickyContentBlocks = data.userResearch.contentBlocks.map((block) => ({
+    trigger: block.trigger,
+    title: block.title,
+    content: (
+      <>
+        {block.paragraphs?.map((p, i) => (
+          <ContentText key={i}>{p}</ContentText>
+        ))}
+        {block.highlight && (
+          <SectionText><strong>{block.highlight}</strong></SectionText>
+        )}
+        {block.quote && (
+          <UserQuote cite={block.quote.cite} image={block.quote.image}>{block.quote.text}</UserQuote>
+        )}
+        {block.findings && (
+          <FeatureList
+            items={block.findings.map(f => (
+              <><strong>{f.stat}</strong> - {f.description}</>
+            ))}
+          />
+        )}
+        {block.kept && (
+          <>
+            <FeatureList
+              items={block.kept.map(k => (
+                <><strong>{k.title}</strong> - {k.description}</>
+              ))}
+            />
+          </>
+        )}
+        {block.lesson && (
+          <ContentText><em>{block.lesson}</em></ContentText>
+        )}
+      </>
+    )
+  }));
 
   return (
-    <div className="case-study-container">
+    <div className="case-study-page-nk26">
       <Navbar />
-      <motion.div 
-        className="content"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-      >
-        <h1 className="page-title">Manage Small Farms</h1>
-        
-        {/* Overview Section */}
-        <Overview projectId="manageFarms" projectTitle="Manage Small Farms" />
 
-        {/* Sections Container */}
-        <div className="sections-container">
-        {/* 1. Business Challenge Section */}
-        <motion.div
-          className="expandable-section"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-        >
-          <div 
-            className="section-header"
-            onClick={() => toggleSection('businessChallenge')}
-          >
-            <h2>1. Business Challenge</h2>
-            <motion.span 
-              className="icon"
-              animate={{ 
-                rotate: expandedSections.has('businessChallenge') ? 45 : 0 
-              }}
-            >
-              <IoAdd />
-            </motion.span>
-          </div>
-          <p className="section-description">
-            Simplifying an overly complex app to better meet the needs of small farm owners and drive adoption.
-          </p>
-          
-          <BusinessChallenge 
-            isExpanded={expandedSections.has('businessChallenge')} 
-            projectId="manageFarms" 
-          />
-        </motion.div>
+      {/* Hero Section */}
+      <HeroVideo
+        videoSrc={data.hero.videoSrc}
+        webmSrc={data.hero.webmSrc}
+        posterSrc={data.hero.posterSrc}
+        title={data.hero.title}
+        subtitle={data.hero.subtitle}
+      />
 
-        {/* 2. Design Changes Section */}
-        <motion.div
-          className="expandable-section"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-        >
-          <div 
-            className="section-header"
-            onClick={() => toggleSection('designChanges')}
-          >
-            <h2>2. Design Changes</h2>
-            <motion.span 
-              className="icon"
-              animate={{ 
-                rotate: expandedSections.has('designChanges') ? 45 : 0 
-              }}
-            >
-              <IoAdd />
-            </motion.span>
-          </div>
-          <p className="section-description">
-            Key design decisions that transformed complexity into clarity—from task planning to crop management.
-          </p>
-          
-          <DesignChanges 
-            isExpanded={expandedSections.has('designChanges')} 
-            projectId="manageFarms" 
-              onExpand={() => toggleSection('designChanges')}
+      {/* Overview Section - Pattern A */}
+      <GridPatternA sectionLabel="Project overview">
+        <GridMain>
+          <SectionTitle>{data.overview.title}</SectionTitle>
+          {data.overview.paragraphs.map((p, i) => (
+            <SectionText key={i}>{p}</SectionText>
+          ))}
+          <ImageWrapper
+            src={data.overview.image.src}
+            alt={data.overview.image.alt}
+            caption={data.overview.image.caption}
+            imageClassName="mf-overview-image-nk26"
           />
-        </motion.div>
+        </GridMain>
 
-        {/* 3. Strategic Approach Section */}
-        <motion.div
-          className="expandable-section"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-        >
-          <div 
-            className="section-header"
-            onClick={() => toggleSection('strategicApproach')}
-          >
-            <h2>3. Strategic Approach</h2>
-            <motion.span 
-              className="icon"
-              animate={{ 
-                rotate: expandedSections.has('strategicApproach') ? 45 : 0 
-              }}
-            >
-              <IoAdd />
-            </motion.span>
-          </div>
-          
-          <StrategicApproach 
-            expandedSections={expandedSections}
-            timelineProgress={timelineProgress}
-            onToggleSection={toggleSection}
-            projectId="manageFarms"
-          />
-        </motion.div>
+        <GridMeta>
+          <MetaItem label="Role" value={data.meta.role} />
+          <MetaItem label="Timeline" value={data.meta.timeline} />
+          <MetaItem label="Team" value={data.meta.team} />
+          <MetaItem label="Platform" value={data.meta.platform} />
+          <MetaItem label="Impact" value={data.meta.impact} />
+          <MetaItem label="Methods" value={data.meta.methods} />
+        </GridMeta>
+      </GridPatternA>
 
-        {/* 4. Measurable Results Section */}
-        <motion.div
-          className="expandable-section"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-        >
-          <div 
-            className="section-header"
-            onClick={() => toggleSection('measurableResults')}
-          >
-            <h2>4. Measurable Results</h2>
-            <motion.span 
-              className="icon"
-              animate={{ 
-                rotate: expandedSections.has('measurableResults') ? 45 : 0 
-              }}
-            >
-              <IoAdd />
-            </motion.span>
-          </div>
-          <p className="section-description">
-            Key metrics and outcomes that demonstrate the impact of our design solutions.
-          </p>
-          
-          <MeasurableResults 
-            isExpanded={expandedSections.has('measurableResults')} 
-            projectId="manageFarms" 
-          />
-        </motion.div>
+      {/* Pain Points Section - Pattern B */}
+      <GridPatternB sectionLabel="User pain points">
+        <GridText>
+          <SectionTitle>Understanding the Problem</SectionTitle>
+          <SectionText>
+            Two perspectives revealed why the existing app failed in the field.
+          </SectionText>
+        </GridText>
 
-        {/* 5. Visual Evolution Section */}
-        <motion.div
-          className="expandable-section"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-        >
-          <div 
-            className="section-header"
-            onClick={() => toggleSection('evolution')}
-          >
-            <h2>5. Visual Evolution</h2>
-            <motion.span 
-              className="icon"
-              animate={{ 
-                rotate: expandedSections.has('evolution') ? 45 : 0
-              }}
-            >
-              <IoAdd />
-            </motion.span>
-          </div>
-          <p className="section-description">
-            From cluttered complexity to intuitive simplicity—key iterations that transformed the user experience.
-          </p>
-          
-          <VisualEvolution 
-            isExpanded={expandedSections.has('evolution')} 
-            projectId="manageFarms" 
-          />
-        </motion.div>
+        <GridVisual>
+          <PainPointsGrid painPoints={data.painPoints} />
+        </GridVisual>
+      </GridPatternB>
+
+      {/* Results - Pattern A - Moved here after Understanding the Problem */}
+      <GridPatternA sectionLabel="Results and impact">
+        <GridMain>
+          <SectionTitle>Measuring Success</SectionTitle>
+          <SectionText>
+            We measured impact through in-field usability testing and post-launch analytics.
+          </SectionText>
+
+          <ResultsGrid results={data.results} />
+
+          <SubsectionTitle>What Farmers Said</SubsectionTitle>
+          {data.userQuotes.map((quote, i) => (
+            <UserQuote key={i} cite={quote.cite} image={quote.image}>
+              {quote.text}
+            </UserQuote>
+          ))}
+        </GridMain>
+
+        <GridMeta sectionLabel="Results metadata">
+          <MetaItem label="Measurement Period" value={data.resultsMeta.measurementPeriod} />
+          <MetaItem label="Test Participants" value={data.resultsMeta.testParticipants} />
+          <MetaItem label="Baseline" value={data.resultsMeta.baseline} />
+          <MetaItem label="Methodology" value={data.resultsMeta.methodology} />
+        </GridMeta>
+      </GridPatternA>
+
+      {/* User Research / Insights - Sticky Scroll */}
+      <StickyScrollSection
+        sectionLabel="Field research and design principles"
+        visualCards={data.userResearch.visualCards}
+        contentBlocks={stickyContentBlocks}
+      />
+
+      {/* Design Principles - Pattern C */}
+      <GridPatternC sectionLabel="Design principles">
+        <SectionTitle full>Four Principles for the Field</SectionTitle>
+        <SectionText>
+          Every design decision was evaluated against these principles derived from our research.
+        </SectionText>
+
+        <div className="design-principles-grid-nk26">
+          {data.designPrinciples.map((principle, i) => (
+            <div key={i} className="design-principle-card-nk26">
+              <SubsectionTitle>{principle.title}</SubsectionTitle>
+              <SectionText>{principle.description}</SectionText>
+              <TechnicalNote>
+                <TechNoteText><strong>Example:</strong> {principle.example}</TechNoteText>
+              </TechnicalNote>
+            </div>
+          ))}
         </div>
+      </GridPatternC>
 
-        {/* Add Other Projects section at the bottom */}
-        <motion.div
-          className="expandable-section"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-        >
-          <OtherProjects currentProjectId="manage-farms" />
-        </motion.div>
-      </motion.div>
+      {/* Map View Design - Pattern B */}
+      <GridPatternB sectionLabel="Map view design">
+        <GridText>
+          <SectionTitle>{data.mapView.title}</SectionTitle>
+          <SectionText>{data.mapView.intro}</SectionText>
+
+          {data.mapView.features.map((feature, i) => (
+            <React.Fragment key={i}>
+              <SubsectionTitle>{feature.title}</SubsectionTitle>
+              <SectionText>{feature.description}</SectionText>
+            </React.Fragment>
+          ))}
+        </GridText>
+
+        <GridVisual>
+          <ImageWrapper
+            src={data.mapView.image.src}
+            alt={data.mapView.image.alt}
+            caption={data.mapView.image.caption}
+            imageClassName="mf-mapview-image-nk26"
+          />
+        </GridVisual>
+      </GridPatternB>
+
+      {/* Design Iterations - Pattern A */}
+      <GridPatternA sectionLabel="Design iterations">
+        <GridMain>
+          <SectionTitle>Design Iterations</SectionTitle>
+          <SectionText>
+            Each iteration was tested with real farmers in actual field conditions.
+            Here are three key changes that made the biggest impact.
+          </SectionText>
+
+          {data.iterations.map((iteration, i) => (
+            <div key={i} className="iteration-container-nk26">
+              <SubsectionTitle>{iteration.title}</SubsectionTitle>
+
+              <BeforeAfterSlider
+                beforeSrc={iteration.beforeImage.src}
+                afterSrc={iteration.afterImage.src}
+                beforeAlt={iteration.beforeImage.alt}
+                afterAlt={iteration.afterImage.alt}
+                caption={iteration.caption}
+              />
+
+              <TechnicalNote>
+                <TechNoteText>{iteration.technicalNote}</TechNoteText>
+              </TechnicalNote>
+
+              <SectionText>
+                <strong>The Fix:</strong> {iteration.fix}
+              </SectionText>
+            </div>
+          ))}
+        </GridMain>
+
+        <GridMeta sectionLabel="Iteration statistics">
+          <MetaItem label="Total Iterations" value={data.iterationStats.totalIterations} />
+          <MetaItem label="User Tests" value={data.iterationStats.userTests} />
+          <MetaItem label="Features Cut" value={data.iterationStats.featuresCut} />
+          <MetaItem label="Accessibility" value={data.iterationStats.accessibilityScore} />
+        </GridMeta>
+      </GridPatternA>
+
+      {/* Micro-interactions - Pattern C */}
+      <GridPatternC sectionLabel="Micro-interactions">
+        <SectionTitle full>Micro-Interactions for the Field</SectionTitle>
+        <SectionText>
+          Every animation serves a purpose: confirming actions, providing feedback,
+          and reducing uncertainty when using the app with dirty hands or in bright sunlight.
+        </SectionText>
+
+        <MicroInteractionShowcase interactions={data.microInteractions} />
+      </GridPatternC>
+
+      {/* Accessibility Features - Pattern C */}
+      <GridPatternC sectionLabel="Accessibility features">
+        <SectionTitle full>Built for Everyone</SectionTitle>
+        <SectionText>
+          Accessibility features designed for farmers with constraints became
+          "everyone features" that improved the experience for all users.
+        </SectionText>
+
+        <div className="accessibility-grid-nk26">
+          {data.accessibilityFeatures.map((feature, i) => (
+            <div key={i} className="accessibility-card-nk26">
+              <SubsectionTitle>{feature.title}</SubsectionTitle>
+              <SectionText>{feature.description}</SectionText>
+            </div>
+          ))}
+        </div>
+      </GridPatternC>
+
+      {/* Final Design - Pattern C */}
+      <GridPatternC sectionLabel="Final design">
+        <SectionTitle full>{data.finalDesign.title}</SectionTitle>
+        <SectionText>{data.finalDesign.intro}</SectionText>
+
+        <div className="final-screens-grid-nk26">
+          {data.finalDesign.screens.map((screen, i) => (
+            <ImageWrapper
+              key={i}
+              src={screen.src}
+              alt={screen.alt}
+              caption={screen.caption}
+              imageClassName={`mf-final-screen-${i}-nk26`}
+            />
+          ))}
+        </div>
+      </GridPatternC>
+
+      {/* Learnings - Pattern C */}
+      <GridPatternC sectionLabel="Learnings">
+        <SectionTitle full>What I Learned</SectionTitle>
+
+        <GridNested>
+          <NestedMain>
+            {data.learnings.map((learning, i) => (
+              <React.Fragment key={i}>
+                <SubsectionTitle>{`${i + 1}. ${learning.title}`}</SubsectionTitle>
+                <SectionText>{learning.description}</SectionText>
+              </React.Fragment>
+            ))}
+          </NestedMain>
+
+          <NestedAside>
+            <DesignRationaleCard
+              title="If I Could Do It Again"
+              items={data.retrospective}
+            />
+          </NestedAside>
+        </GridNested>
+      </GridPatternC>
+
+      {/* Next Project */}
+      <NextProjectTeaser
+        title={data.nextProject.title}
+        description={data.nextProject.description}
+        href={data.nextProject.href}
+      />
     </div>
   );
-}
+};
+
+export default ManageFarms;

@@ -16,7 +16,11 @@ export default function TaskReminders() {
   );  const [timelineProgress, setTimelineProgress] = useState(0);
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    if (window.lenis) {
+      window.lenis.scrollTo(0, { immediate: true });
+    } else {
+      window.scrollTo(0, 0);
+    }
   }, []);
 
   const toggleSection = (section) => {

@@ -129,12 +129,74 @@
   font-display: swap;
 }
 
+/* Craftwork Grotesk Font Family - For new case study pages */
+@font-face {
+  font-family: 'CraftworkGrotesk';
+  src: url('/fonts/CraftworkGrotesk/CraftworkGrotesk-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'CraftworkGrotesk';
+  src: url('/fonts/CraftworkGrotesk/CraftworkGrotesk-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'CraftworkGrotesk';
+  src: url('/fonts/CraftworkGrotesk/CraftworkGrotesk-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'CraftworkGrotesk';
+  src: url('/fonts/CraftworkGrotesk/CraftworkGrotesk-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'CraftworkGrotesk';
+  src: url('/fonts/CraftworkGrotesk/CraftworkGrotesk-Heavy.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* PP Mondwest & PP Neue Bit Bold - Monospace for technical notes */
+@font-face {
+  font-family: 'PPMondwest';
+  src: url('/fonts/Bitmap/PPMondwest-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'PPNeueBitBold';
+  src: url('/fonts/Bitmap/PPNeueBit-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* Typography System */
 :root {
   /* Font families - with robust fallbacks */
   --font-display: 'CabinetGrotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
   --font-body: 'Satoshi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
   --font-hero: 'CabinetGrotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+
+  /* NK26 Design System Fonts */
+  --font-display-nk26: 'CraftworkGrotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  --font-mono-nk26: 'PPMondwest', 'PPNeueBitBold', 'SF Mono', 'Fira Code', monospace;
 
   /* Font Weights */
   --weight-thin: 100;

@@ -8,7 +8,8 @@
     font-size: 20px;
     font-family: var(--font-body);
     font-weight: 300;
-    color: white;
+    color: var(--text-primary, #2e2d2d);
+    background: var(--background, #d6cccc);
 }
 
 /* Grid layouts */
@@ -66,14 +67,14 @@
     margin: 0;
     font-size: 2.5rem;
     font-weight: 600;
-    background: linear-gradient(45deg, #fff, #888);
+    background: linear-gradient(45deg, var(--text-primary, #2e2d2d), #888);
     background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
 .section-header .icon {
     font-size: 2.5rem;
-    color: #fff;
+    color: var(--text-primary, #2e2d2d);
     opacity: 0.8;
     display: flex;
     align-items: center;
@@ -105,7 +106,7 @@
     font-size: 2.5rem;
     font-weight: 600;
     margin: 0;
-    background: linear-gradient(45deg, #fff, #888);
+    background: linear-gradient(45deg, var(--text-primary, #2e2d2d), #888);
     background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -114,7 +115,7 @@
     font-size: 1.2rem;
     opacity: 0.8;
     margin: 0;
-    color: #fff;
+    color: var(--text-primary, #2e2d2d);
     text-align: left;
 }
 
@@ -130,7 +131,8 @@
 }
 
 .skill-card {
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(46, 45, 45, 0.2);
     border-radius: 12px;
     padding: 2rem;
     backdrop-filter: blur(10px);
@@ -138,11 +140,15 @@
     text-align: center;
 }
 
+:root[data-theme="dark"] .skill-card {
+    border-color: rgba(192, 192, 192, 0.2);
+}
+
 .skill-card h4 {
     margin-bottom: 3rem;
     font-size: 1.8rem;
     font-weight: 500;
-    color: #fff;
+    color: var(--text-primary, #2e2d2d);
 }
 
 .skill-icons {
@@ -167,7 +173,8 @@
 .skill-icon + span {
     display: block;
     font-size: 1.1rem;
-    color: rgba(255, 255, 255, 0.9);
+    color: var(--text-primary, #2e2d2d);
+    opacity: 0.9;
     margin-top: 0.5rem;
 }
 
@@ -202,7 +209,7 @@
     position: absolute;
     width: 12px;
     height: 12px;
-    background: #fff;
+    background: var(--text-primary, #2e2d2d);
     border-radius: 50%;
     left: 50%;
     transform: translateX(-50%);
@@ -210,12 +217,17 @@
 }
 
 .custom-timeline-content {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(46, 45, 45, 0.2);
     border-radius: 8px;
     padding: 1rem;
     width: 45%;
     z-index: 2;
     position: relative;
+}
+
+:root[data-theme="dark"] .custom-timeline-content {
+    border-color: rgba(192, 192, 192, 0.2);
 }
 
 .custom-timeline-item.odd .custom-timeline-content {
@@ -228,11 +240,38 @@
     text-align: left;
 }
 
+/* Timeline Icon and Text */
+.timeline-icon {
+    color: var(--text-primary, #2e2d2d);
+    font-size: 1.5rem;
+    margin-right: 1rem;
+}
+
+.timeline-text {
+    color: var(--text-primary, #2e2d2d);
+    flex: 1;
+}
+
+.timeline-year {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--text-primary, #2e2d2d);
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.timeline-text p {
+    color: var(--text-primary, #2e2d2d);
+    opacity: 0.8;
+    margin: 0;
+}
+
 /* Central Line */
 .central-line {
     position: absolute;
     width: 2px;
-    background: #fff;
+    background: var(--text-primary, #2e2d2d);
+    opacity: 0.5;
     top: 0;
     bottom: 0;
     left: 50%;
@@ -255,7 +294,8 @@
 }
 
 .interest-card {
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(46, 45, 45, 0.2);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -263,6 +303,10 @@
     padding: 1.5rem;
     text-align: center;
     transition: transform 0.3s;
+}
+
+:root[data-theme="dark"] .interest-card {
+    border-color: rgba(192, 192, 192, 0.2);
 }
 
 
@@ -276,13 +320,34 @@
 .interest-title {
     font-size: 1.5rem;
     font-weight: 500;
-    color: #fff;
+    color: var(--text-primary, #2e2d2d);
     margin-bottom: 0.5rem;
 }
 
 .interest-description {
     font-size: 1rem;
-    color: rgba(255, 255, 255, 0.8);
+    color: var(--text-primary, #2e2d2d);
+    opacity: 0.8;
+}
+
+/* Bio Section */
+.bio-section {
+    color: var(--text-primary, #2e2d2d);
+}
+
+.bio-section p {
+    color: var(--text-primary, #2e2d2d);
+    opacity: 0.9;
+    margin-bottom: 1.5rem;
+}
+
+.interest-card h4 {
+    color: var(--text-primary, #2e2d2d);
+}
+
+.interest-card p {
+    color: var(--text-primary, #2e2d2d);
+    opacity: 0.8;
 }
 
 /* Responsive Design */

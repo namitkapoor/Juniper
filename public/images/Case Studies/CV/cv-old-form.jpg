@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080">
+  <rect fill="#2a2a2a" width="1920" height="1080"/>
+  <rect fill="#3a3a3a" x="60" y="60" width="1800" height="960" rx="12"/>
+  <text x="960" y="540" font-family="system-ui, sans-serif" font-size="48" fill="#808080" text-anchor="middle" dominant-baseline="middle">Old Form Screenshot</text>
+  <text x="960" y="600" font-family="system-ui, sans-serif" font-size="24" fill="#606060" text-anchor="middle">Replace with actual asset</text>
+</svg>

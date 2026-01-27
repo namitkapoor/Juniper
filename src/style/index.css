@@ -6,6 +6,16 @@ html, body {
     padding: 0;
     width: auto;
     display: block;
+    text-align: left;
+}
+
+/* Leva panel: resizable and easier to read. Drag the bottom-right corner to resize. */
+#leva__root > div {
+  resize: both;
+  overflow: auto;
+  min-width: 340px;
+  min-height: 240px;
+  font-size: 14px;
 }
 
 

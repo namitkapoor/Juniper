@@ -1,6 +1,16 @@
 export const caseStudies = {
   ux: [
     {
+      id: 'christine-valmy',
+      title: 'Improve Beauty School Enrollment',
+      metric: '143% Increase in Enrollments',
+      tags: ['Web App Design', 'AI', 'Enrollment Chatbot'],
+      image: '../images/Project Cover Photos/CV on Laptop.png',
+      description: 'How user research killed my clever bento grid and led to a 143% increase in enrollments',
+      comingSoon: false,
+      enabled: true
+    },
+    {
       id: 'manage-farms',
       title: 'Manage Small Farms',
       metric: '70 SUS Score',
@@ -19,16 +29,6 @@ export const caseStudies = {
       description: 'Redesigned a web app to simplify influencer hiring and campaign tracking, boosting user engagement by reducing workflow friction for small business owners.',
       comingSoon: false,
       enabled: true
-    },
-    {
-      id: 'beauty-school',
-      title: 'Improve Beauty School Enrollment',
-      metric: '23% More Enrollments',
-      tags: ['Web App Design', 'AI', 'Enrollment Chatbot'],
-      image: '../images/Project Cover Photos/CV thumbnail.svg',
-      description: 'Redesigned a web app to simplify influencer hiring and campaign tracking, boosting user engagement by reducing workflow friction for small business owners.',
-      comingSoon: true,
-      enabled: false
     },
     {
       id: 'product-recommendations',

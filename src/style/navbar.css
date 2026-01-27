@@ -20,7 +20,7 @@
 .logo-text {
     font-family: var(--font-display);
     font-size: 20px;
-    color: var(--text-primary, white);
+    color: var(--text-primary, #2e2d2d);
     letter-spacing: 0.5px;
     font-weight: 400;
     opacity: 0.9;
@@ -29,7 +29,7 @@
 
 a {
   text-decoration: none;
-  color: var(--text-primary, white);
+  color: var(--text-primary, #2e2d2d);
   z-index: 100;
 }
 .navigation {
@@ -37,9 +37,9 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: transparent;
+  background: var(--background, #d6cccc);
   position: relative;
-  border: 2px solid var(--text-primary, #ffffff);
+  border: 2px solid var(--text-primary, #2e2d2d);
 }
 
 .nav-items {
@@ -68,6 +68,109 @@ a {
   height: 100%;
 }
 
+/* Legacy nav-item styles */
+.nav-item {
+  color: var(--text-primary, #2e2d2d);
+  text-decoration: none;
+  font-family: var(--font-display);
+  font-size: 20px;
+  transition: opacity 0.3s ease;
+  opacity: 0.9;
+}
+
+.nav-item:hover {
+  opacity: 1;
+}
+
+/* New Nav Item with Vertical Mask Animation */
+.nav-item-nk26 {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  color: var(--text-primary, #2e2d2d);
+  font-family: var(--font-display);
+  font-size: 20px;
+  opacity: 0.9;
+  transition: opacity 0.3s ease;
+}
+
+.nav-item-nk26:hover {
+  opacity: 1;
+}
+
+.nav-arrow-nk26 {
+  font-size: 0.7em;
+  opacity: 0.6;
+  transition: transform 0.35s cubic-bezier(0.65, 0, 0.35, 1), opacity 0.35s ease;
+  display: inline-block;
+}
+
+.nav-item-nk26:hover .nav-arrow-nk26 {
+  transform: rotate(-90deg);
+  opacity: 1;
+}
+
+.nav-text-wrapper-nk26 {
+  position: relative;
+  overflow: hidden;
+  height: 1.3em;
+  display: inline-flex;
+  align-items: center;
+}
+
+.nav-text-nk26 {
+  display: block;
+  transition: transform 0.35s cubic-bezier(0.65, 0, 0.35, 1);
+  line-height: 1.3;
+}
+
+.nav-text-clone-nk26 {
+  position: absolute;
+  top: 100%;
+  left: 0;
+}
+
+.nav-item-nk26:hover .nav-text-nk26 {
+  transform: translateY(-100%);
+}
+
+.nav-item-nk26.active {
+  opacity: 1;
+}
+
+.nav-item-nk26.active .nav-text-nk26:first-child {
+  background: linear-gradient(45deg, var(--text-primary, #2e2d2d), #888);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: bold;
+}
+
+.nav-item-nk26.active .nav-text-clone-nk26 {
+  background: linear-gradient(45deg, var(--text-primary, #2e2d2d), #888);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: bold;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .nav-text-nk26,
+  .nav-arrow-nk26 {
+    transition: none;
+  }
+
+  .nav-item-nk26:hover .nav-text-nk26 {
+    transform: none;
+  }
+
+  .nav-item-nk26:hover .nav-arrow-nk26 {
+    transform: none;
+  }
+}
+
 @media (max-width: 768px) {
   .nav-items {
     width: 80%;
@@ -92,7 +195,7 @@ a {
 .hamburger-line {
   width: 100%;
   height: 3px;
-  background-color: var(--text-primary, white);
+  background-color: var(--text-primary, #2e2d2d);
   border-radius: 2px;
   transition: all 0.3s ease;
   transform-origin: center;
@@ -104,9 +207,9 @@ a {
   top: 100%;
   left: 0;
   right: 0;
-  background: var(--background, rgba(0, 0, 0, 0.95));
+  background: var(--background, #d6cccc);
   backdrop-filter: blur(10px);
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid var(--text-primary, #2e2d2d);
   overflow: hidden;
   z-index: 999;
   width: 100%;
@@ -122,31 +225,27 @@ a {
 .mobile-nav-item {
   font-family: var(--font-display);
   font-size: 18px;
-  color: var(--text-primary, white);
+  color: var(--text-primary, #2e2d2d);
   text-decoration: none;
   padding: 15px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid var(--text-primary, #2e2d2d);
+  opacity: 0.6;
   transition: all 0.3s ease;
-  opacity: 0.9;
 }
 
 .mobile-nav-item:hover {
   opacity: 1;
   transform: translateX(10px);
+  color: var(--text-primary, #2e2d2d);
 }
 
 .mobile-nav-item.active {
-  background: linear-gradient(45deg, #fff, #888);
+  background: linear-gradient(45deg, var(--text-primary, #2e2d2d), #888);
   background-clip: text;
   -webkit-text-fill-color: transparent;
   font-weight: bold;
-  border-bottom: 2px solid #908ab7;
-}
-
-:root[data-theme="light"] .mobile-nav-item.active {
-  background: linear-gradient(45deg, #2e2d2d, #888);
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  border-bottom: 2px solid var(--text-primary, #2e2d2d);
+  opacity: 1;
 }
 
 /* Mobile Responsive Styles - Below 480px */
@@ -184,25 +283,19 @@ a {
     left: 0;
     right: 0;
     width: 100%;
-    background: var(--background, rgba(0, 0, 0, 0.95));
+    background: var(--background, #d6cccc);
     backdrop-filter: blur(10px);
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 1px solid var(--text-primary, #2e2d2d);
     z-index: 999;
   }
 }
 
 .nav-item.active {
-    background: linear-gradient(45deg, #fff, #888);
+    background: linear-gradient(45deg, var(--text-primary, #2e2d2d), #888);
     background-clip: text;
     -webkit-text-fill-color: transparent;
     font-weight: bold;
-    border-bottom: 2px solid #908ab7; /* Optional underline */
-}
-
-:root[data-theme="light"] .nav-item.active {
-    background: linear-gradient(45deg, #2e2d2d, #888);
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
+    border-bottom: 2px solid var(--text-primary, #2e2d2d);
 }
 
 /* Theme Toggle in Navbar */
@@ -225,7 +318,7 @@ a {
 .theme-toggle-nav svg {
   width: 16px;
   height: 16px;
-  color: var(--text-primary, white);
+  color: var(--text-primary, #2e2d2d);
   z-index: 2;
   position: absolute;
   transition: opacity 0.3s ease;
@@ -272,17 +365,19 @@ a {
   padding: 15px 0;
   margin: 0;
   border: none;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid var(--text-primary, #2e2d2d);
+  opacity: 0.6;
   border-radius: 0;
   justify-content: flex-start;
   font-family: var(--font-display);
   font-size: 18px;
-  color: var(--text-primary, white);
+  color: var(--text-primary, #2e2d2d);
 }
 
 .theme-toggle-nav.mobile:hover {
   background: transparent;
-  border-color: rgba(255, 255, 255, 0.1);
+  border-color: var(--text-primary, #2e2d2d);
+  opacity: 1;
   transform: translateX(10px);
 }
 

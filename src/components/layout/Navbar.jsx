@@ -71,7 +71,7 @@ export default function Navbar() {
                                 viewBox="0 0 120 50"
                                 fill="none"
                                 xmlns="http://www.w3.org/2000/svg"
-                                style={{ color: 'var(--text-primary, white)' }}
+                                style={{ color: 'var(--text-primary, #2e2d2d)' }}
                             >
                                 {/* Glasses frames */}
                                 <motion.path
@@ -141,10 +141,28 @@ export default function Navbar() {
                 </div>
                 
                 <div className="nav-links">
-                    <Link className={`nav-item ${location.pathname === '/explore' ? 'active' : ''}`} to="/explore">explore</Link>
-                    <Link className={`nav-item ${location.pathname === '/about' ? 'active' : ''}`} to="/about">about</Link>
-                    <a className="nav-item" href="/files/KapoorNamit_Resume.pdf" target="_blank" rel="noopener noreferrer">resume</a>
-                    <button 
+                    <Link className={`nav-item-nk26 ${location.pathname === '/explore' ? 'active' : ''}`} to="/explore">
+                        <span className="nav-arrow-nk26">↘</span>
+                        <span className="nav-text-wrapper-nk26">
+                            <span className="nav-text-nk26">explore</span>
+                            <span className="nav-text-nk26 nav-text-clone-nk26">explore</span>
+                        </span>
+                    </Link>
+                    <Link className={`nav-item-nk26 ${location.pathname === '/about' ? 'active' : ''}`} to="/about">
+                        <span className="nav-arrow-nk26">↘</span>
+                        <span className="nav-text-wrapper-nk26">
+                            <span className="nav-text-nk26">about</span>
+                            <span className="nav-text-nk26 nav-text-clone-nk26">about</span>
+                        </span>
+                    </Link>
+                    <a className="nav-item-nk26" href="/files/KapoorNamit_Resume.pdf" target="_blank" rel="noopener noreferrer">
+                        <span className="nav-arrow-nk26">↘</span>
+                        <span className="nav-text-wrapper-nk26">
+                            <span className="nav-text-nk26">resume</span>
+                            <span className="nav-text-nk26 nav-text-clone-nk26">resume</span>
+                        </span>
+                    </a>
+                    <button
                         className="theme-toggle-nav"
                         onClick={toggleTheme}
                         aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
