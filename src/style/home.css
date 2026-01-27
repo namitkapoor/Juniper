@@ -33,29 +33,29 @@
 }
 
 :root[data-theme="light"] {
-  /* Core colors - gentler light theme with complementary shades (swapped from dark) */
-  --background: #d6cccc;
-  --text-bright: rgba(46, 45, 45, 0.87);
-  --text-primary: #2e2d2d;
-  --text-secondary: #3a3a3a;
-  
-  /* Bento grid backgrounds - more visible */
-  --bento-background: rgba(42, 42, 42, 0.04);
-  --bento-border: rgba(42, 42, 42, 0.12);
-  
+  /* Core colors - neutral professional light theme */
+  --background: #dddddd;
+  --text-bright: rgba(26, 26, 26, 0.9);
+  --text-primary: #1a1a1a;
+  --text-secondary: #4a4a4a;
+
+  /* Bento grid backgrounds - subtle */
+  --bento-background: rgba(0, 0, 0, 0.03);
+  --bento-border: rgba(0, 0, 0, 0.08);
+
   /* Gradient definitions */
-  --gradient-text: linear-gradient(45deg, #2a2a2a, #4a4a4a);
+  --gradient-text: linear-gradient(45deg, #1a1a1a, #4a4a4a);
   --gradient-card: linear-gradient(
     145deg,
-    rgba(42, 42, 42, 0.02),
-    rgba(42, 42, 42, 0.01)
+    rgba(0, 0, 0, 0.02),
+    rgba(0, 0, 0, 0.01)
   );
-  
+
   /* UI Elements */
-  --card-background: rgba(42, 42, 42, 0.1);
-  --tag-background: rgba(164, 191, 199, 0.1);
-  --tag-text: #718791;
-  --accent-success: #1a5f7a; /* Darker blue-teal for better readability in light mode */
+  --card-background: rgba(0, 0, 0, 0.04);
+  --tag-background: rgba(0, 0, 0, 0.05);
+  --tag-text: #4a4a4a;
+  --accent-success: #1a1a1a;
 }
 
 .page-container {

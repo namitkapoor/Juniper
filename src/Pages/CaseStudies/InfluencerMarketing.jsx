@@ -30,7 +30,8 @@ import {
   NextProjectTeaser,
   PainPointsGrid,
   DesignRationaleCard,
-  MicroInteractionShowcase
+  MicroInteractionShowcase,
+  SideNav
 } from '../../components/case-study-nk26';
 
 // Import data
@@ -49,8 +50,17 @@ const InfluencerMarketing = () => {
     }
   }, []);
 
+  // Define nav sections (max 5)
+  const navSections = [
+    { id: 'im-overview', label: 'Overview' },
+    { id: 'im-concept', label: 'Concept' },
+    { id: 'im-motion', label: 'Motion Design' },
+    { id: 'im-shipped', label: 'What Shipped' },
+    { id: 'im-learnings', label: 'Learnings' }
+  ];
+
   return (
-    <div className="case-study-page-nk26">
+    <div className="case-study-page-nk26" data-case-study="influencer-marketing">
       <Navbar />
 
       {/* Hero Section */}
@@ -62,8 +72,14 @@ const InfluencerMarketing = () => {
         subtitle={data.hero.subtitle}
       />
 
+      {/* Side Navigation */}
+      <SideNav sections={navSections} />
+
+      {/* Main Content Area */}
+      <div className="case-study-content-nk26">
+
       {/* Overview Section - Pattern A */}
-      <GridPatternA sectionLabel="Project overview">
+      <GridPatternA id="im-overview" sectionLabel="Project overview">
         <GridMain>
           <SectionTitle>{data.overview.title}</SectionTitle>
           {data.overview.paragraphs.map((p, i) => (
@@ -130,7 +146,7 @@ const InfluencerMarketing = () => {
       </GridPatternA>
 
       {/* Subway Metaphor - Pattern B */}
-      <GridPatternB sectionLabel="Design concept">
+      <GridPatternB id="im-concept" sectionLabel="Design concept">
         <GridText>
           <SectionTitle>{data.subwayMetaphor.title}</SectionTitle>
           <SectionText>{data.subwayMetaphor.intro}</SectionText>
@@ -153,7 +169,7 @@ const InfluencerMarketing = () => {
       </GridPatternB>
 
       {/* Motion Design Explorations - Pattern C */}
-      <GridPatternC sectionLabel="Motion design explorations">
+      <GridPatternC id="im-motion" sectionLabel="Motion design explorations">
         <SectionTitle full>{data.motionExplorations.title}</SectionTitle>
         <SectionText>{data.motionExplorations.intro}</SectionText>
 
@@ -202,7 +218,7 @@ const InfluencerMarketing = () => {
       </GridPatternC>
 
       {/* What Actually Shipped - Before/After */}
-      <GridPatternA sectionLabel="Final design comparison">
+      <GridPatternA id="im-shipped" sectionLabel="Final design comparison">
         <GridMain>
           <SectionTitle>{data.whatShipped.title}</SectionTitle>
           <SectionText>{data.whatShipped.intro}</SectionText>
@@ -277,7 +293,7 @@ const InfluencerMarketing = () => {
       </GridPatternA>
 
       {/* Learnings - Pattern C */}
-      <GridPatternC sectionLabel="Learnings">
+      <GridPatternC id="im-learnings" sectionLabel="Learnings">
         <SectionTitle full>Honest Learnings About Motion Design</SectionTitle>
 
         <GridNested>
@@ -298,6 +314,9 @@ const InfluencerMarketing = () => {
           </NestedAside>
         </GridNested>
       </GridPatternC>
+
+      </div>
+      {/* End case-study-content-nk26 */}
 
       {/* Next Project */}
       <NextProjectTeaser

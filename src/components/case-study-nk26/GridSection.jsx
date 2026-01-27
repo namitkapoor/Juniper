@@ -18,10 +18,12 @@ const fadeInVariants = {
 export const GridPatternA = ({
   children,
   sectionLabel,
-  className = ''
+  className = '',
+  id
 }) => {
   return (
     <section
+      id={id}
       className={`grid-pattern-a-nk26 ${className}`}
       aria-label={sectionLabel}
     >
@@ -45,10 +47,12 @@ export const GridPatternA = ({
 export const GridPatternB = ({
   children,
   sectionLabel,
-  className = ''
+  className = '',
+  id
 }) => {
   return (
     <section
+      id={id}
       className={`grid-pattern-b-nk26 ${className}`}
       aria-label={sectionLabel}
     >
@@ -72,10 +76,12 @@ export const GridPatternB = ({
 export const GridPatternC = ({
   children,
   sectionLabel,
-  className = ''
+  className = '',
+  id
 }) => {
   return (
     <section
+      id={id}
       className={`grid-pattern-c-nk26 ${className}`}
       aria-label={sectionLabel}
     >

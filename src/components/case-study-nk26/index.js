@@ -33,3 +33,6 @@ export { default as PainPointsGrid } from './PainPointsGrid';
 export { default as DesignRationaleCard } from './DesignRationaleCard';
 export { default as TechStackGrid } from './TechStackGrid';
 export { default as MicroInteractionShowcase } from './MicroInteractionShowcase';
+
+// Layout components
+export { default as SideNav } from './SideNav';

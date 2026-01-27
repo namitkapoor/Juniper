@@ -43,6 +43,7 @@ export const influencerMarketingData = {
   painPoints: [
     {
       title: 'Campaign Managers',
+      icon: '/images/Case Studies/MI/logo/campaign-manager.svg',
       items: [
         'Managing 10-50 influencers per campaign',
         'Missing milestone deadlines buried in tables',
@@ -52,6 +53,7 @@ export const influencerMarketingData = {
     },
     {
       title: 'Interface Problems',
+      icon: '/images/Case Studies/MI/logo/interface-problems.svg',
       items: [
         'Text-heavy status required reading each row',
         'No visual hierarchy for urgent items',
@@ -229,21 +231,25 @@ export const influencerMarketingData = {
   results: [
     {
       number: '28%',
+      icon: '/images/Case Studies/MI/logo/fewer-milestones.svg',
       label: 'Fewer Missed Milestones',
       description: 'Users caught deadline risks earlier with visual status'
     },
     {
       number: '45%',
+      icon: '/images/Case Studies/MI/logo/hourglass.svg',
       label: 'Faster Status Scanning',
       description: 'Time to identify "needs attention" items reduced'
     },
     {
       number: '3 sec',
+      icon: '/images/Case Studies/MI/logo/glance-time.svg',
       label: 'Glance Understanding',
       description: 'Average time to understand campaign health'
     },
     {
       number: '0',
+      icon: '/images/Case Studies/MI/logo/motion.svg',
       label: 'Elaborate Animations',
       description: 'Complex motion concepts that shipped (honest metric)'
     }

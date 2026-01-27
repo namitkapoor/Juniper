@@ -31,7 +31,8 @@ import {
   NextProjectTeaser,
   PainPointsGrid,
   DesignRationaleCard,
-  MicroInteractionShowcase
+  MicroInteractionShowcase,
+  SideNav
 } from '../../components/case-study-nk26';
 
 // Import data
@@ -88,8 +89,17 @@ const ManageFarms = () => {
     )
   }));
 
+  // Define nav sections (max 5)
+  const navSections = [
+    { id: 'mf-overview', label: 'Overview' },
+    { id: 'mf-research', label: 'Research' },
+    { id: 'mf-principles', label: 'Principles' },
+    { id: 'mf-iterations', label: 'Iterations' },
+    { id: 'mf-solution', label: 'Solution' }
+  ];
+
   return (
-    <div className="case-study-page-nk26">
+    <div className="case-study-page-nk26" data-case-study="manage-farms">
       <Navbar />
 
       {/* Hero Section */}
@@ -101,8 +111,14 @@ const ManageFarms = () => {
         subtitle={data.hero.subtitle}
       />
 
+      {/* Side Navigation */}
+      <SideNav sections={navSections} />
+
+      {/* Main Content Area */}
+      <div className="case-study-content-nk26">
+
       {/* Overview Section - Pattern A */}
-      <GridPatternA sectionLabel="Project overview">
+      <GridPatternA id="mf-overview" sectionLabel="Project overview">
         <GridMain>
           <SectionTitle>{data.overview.title}</SectionTitle>
           {data.overview.paragraphs.map((p, i) => (
@@ -168,13 +184,14 @@ const ManageFarms = () => {
 
       {/* User Research / Insights - Sticky Scroll */}
       <StickyScrollSection
+        id="mf-research"
         sectionLabel="Field research and design principles"
         visualCards={data.userResearch.visualCards}
         contentBlocks={stickyContentBlocks}
       />
 
       {/* Design Principles - Pattern C */}
-      <GridPatternC sectionLabel="Design principles">
+      <GridPatternC id="mf-principles" sectionLabel="Design principles">
         <SectionTitle full>Four Principles for the Field</SectionTitle>
         <SectionText>
           Every design decision was evaluated against these principles derived from our research.
@@ -183,7 +200,14 @@ const ManageFarms = () => {
         <div className="design-principles-grid-nk26">
           {data.designPrinciples.map((principle, i) => (
             <div key={i} className="design-principle-card-nk26">
-              <SubsectionTitle>{principle.title}</SubsectionTitle>
+              <div className="design-principle-header-nk26">
+                {principle.icon && (
+                  <div className="design-principle-icon-nk26">
+                    <img src={principle.icon} alt="" aria-hidden="true" />
+                  </div>
+                )}
+                <SubsectionTitle>{principle.title}</SubsectionTitle>
+              </div>
               <SectionText>{principle.description}</SectionText>
               <TechnicalNote>
                 <TechNoteText><strong>Example:</strong> {principle.example}</TechNoteText>
@@ -218,7 +242,7 @@ const ManageFarms = () => {
       </GridPatternB>
 
       {/* Design Iterations - Pattern A */}
-      <GridPatternA sectionLabel="Design iterations">
+      <GridPatternA id="mf-iterations" sectionLabel="Design iterations">
         <GridMain>
           <SectionTitle>Design Iterations</SectionTitle>
           <SectionText>
@@ -287,7 +311,7 @@ const ManageFarms = () => {
       </GridPatternC>
 
       {/* Final Design - Pattern C */}
-      <GridPatternC sectionLabel="Final design">
+      <GridPatternC id="mf-solution" sectionLabel="Final design">
         <SectionTitle full>{data.finalDesign.title}</SectionTitle>
         <SectionText>{data.finalDesign.intro}</SectionText>
 
@@ -326,6 +350,9 @@ const ManageFarms = () => {
           </NestedAside>
         </GridNested>
       </GridPatternC>
+
+      </div>
+      {/* End case-study-content-nk26 */}
 
       {/* Next Project */}
       <NextProjectTeaser

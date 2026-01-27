@@ -34,7 +34,8 @@ import {
   PainPointsGrid,
   DesignRationaleCard,
   TechStackGrid,
-  MicroInteractionShowcase
+  MicroInteractionShowcase,
+  SideNav
 } from '../../components/case-study-nk26';
 
 // Import data
@@ -104,8 +105,17 @@ const ChristineValmy = () => {
     )
   }));
 
+  // Define nav sections (max 5)
+  const navSections = [
+    { id: 'cv-overview', label: 'Overview' },
+    { id: 'cv-initial-vision', label: 'Initial Vision' },
+    { id: 'cv-research', label: 'Research & Pivot' },
+    { id: 'cv-iterations', label: 'Iterations' },
+    { id: 'cv-solution', label: 'Solution' }
+  ];
+
   return (
-    <div className="case-study-page-nk26">
+    <div className="case-study-page-nk26" data-case-study="christine-valmy">
       <Navbar />
 
       {/* Hero Section */}
@@ -117,8 +127,14 @@ const ChristineValmy = () => {
         subtitle={data.hero.subtitle}
       />
 
+      {/* Side Navigation */}
+      <SideNav sections={navSections} />
+
+      {/* Main Content Area */}
+      <div className="case-study-content-nk26">
+
       {/* Overview Section - Pattern A */}
-      <GridPatternA sectionLabel="Project overview">
+      <GridPatternA id="cv-overview" sectionLabel="Project overview">
         <GridMain>
           <SectionTitle>{data.overview.title}</SectionTitle>
           {data.overview.paragraphs.map((p, i) => (
@@ -185,7 +201,7 @@ const ChristineValmy = () => {
       </GridPatternA>
 
       {/* Initial Concept Section - Pattern C */}
-      <GridPatternC sectionLabel="Initial design concepts">
+      <GridPatternC id="cv-initial-vision" sectionLabel="Initial design concepts">
         <SectionTitle full>{data.initialConcept.title}</SectionTitle>
 
         <GridNested>
@@ -196,7 +212,13 @@ const ChristineValmy = () => {
               <React.Fragment key={i}>
                 <SubsectionTitle>{concept.title}</SubsectionTitle>
                 <SectionText>{concept.description}</SectionText>
-                {concept.image && (
+                {concept.lottie ? (
+                  <LottieAnimation
+                    animationPath={concept.lottie.path}
+                    caption={concept.lottie.caption}
+                    loop={true}
+                  />
+                ) : concept.image && (
                   <ImageWrapper
                     src={concept.image.src}
                     alt={concept.image.alt}
@@ -223,31 +245,18 @@ const ChristineValmy = () => {
             />
           </NestedAside>
         </GridNested>
-
-        <ImageWrapper
-          src={data.initialConcept.bentoImage.src}
-          alt={data.initialConcept.bentoImage.alt}
-          caption={data.initialConcept.bentoImage.caption}
-          imageClassName="cv-bento-image-nk26"
-        />
-
-        <LottieAnimation
-          animationPath="/lottie/Bento Grid Lottie.json"
-          loop={false}
-          caption="Interaction pattern: Click tile → View details → Return to grid"
-          ariaLabel="Animated demonstration of clicking topic tiles and viewing detailed information panels"
-        />
       </GridPatternC>
 
       {/* User Research / Pivot - Sticky Scroll */}
       <StickyScrollSection
+        id="cv-research"
         sectionLabel="User research findings and design pivot"
         visualCards={data.userResearch.visualCards}
         contentBlocks={stickyContentBlocks}
       />
 
       {/* Design Iterations - Pattern A */}
-      <GridPatternA sectionLabel="Design iterations and changes">
+      <GridPatternA id="cv-iterations" sectionLabel="Design iterations and changes">
         <GridMain>
           <SectionTitle>Design Iterations</SectionTitle>
           <SectionText>
@@ -335,7 +344,7 @@ const ChristineValmy = () => {
       </GridPatternA>
 
       {/* Final Design - Pattern B */}
-      <GridPatternB sectionLabel="Final design solution">
+      <GridPatternB id="cv-solution" sectionLabel="Final design solution">
         <GridText>
           <SectionTitle>{data.finalDesign.title}</SectionTitle>
           <SectionText>{data.finalDesign.intro}</SectionText>
@@ -420,6 +429,9 @@ const ChristineValmy = () => {
           </NestedAside>
         </GridNested>
       </GridPatternC>
+
+      </div>
+      {/* End case-study-content-nk26 */}
 
       {/* Next Project */}
       <NextProjectTeaser

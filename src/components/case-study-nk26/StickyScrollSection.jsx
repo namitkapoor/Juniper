@@ -8,7 +8,8 @@ const StickyScrollSection = ({
   visualCards,
   contentBlocks,
   sectionLabel = "Design evolution narrative",
-  className = ''
+  className = '',
+  id
 }) => {
   const [activeStep, setActiveStep] = useState(1);
   const contentRefs = useRef([]);
@@ -44,6 +45,7 @@ const StickyScrollSection = ({
 
   return (
     <section
+      id={id}
       className={`sticky-scroll-section-nk26 ${className}`}
       aria-label={sectionLabel}
     >
@@ -109,11 +111,25 @@ export const UserQuote = ({ children, cite, image, className = '' }) => (
 
 export const FeatureList = ({ items, className = '' }) => (
   <ul className={`feature-list-nk26 ${className}`}>
-    {items.map((item, index) => (
-      <li key={index} className="feature-item-nk26">
-        {item}
-      </li>
-    ))}
+    {items.map((item, index) => {
+      const hasIcon = React.isValidElement(item) ? false : (item.icon ? true : false);
+      const content = hasIcon ? (
+        <div className="feature-with-icon-nk26">
+          <div className="feature-icon-nk26">
+            <img src={item.icon} alt="" aria-hidden="true" />
+          </div>
+          <div className="feature-text-nk26">
+            <strong>{item.title}</strong> — {item.description}
+          </div>
+        </div>
+      ) : item;
+
+      return (
+        <li key={index} className={`feature-item-nk26 ${hasIcon ? 'has-icon-nk26' : ''}`}>
+          {content}
+        </li>
+      );
+    })}
   </ul>
 );
 

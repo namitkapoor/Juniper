@@ -37,7 +37,7 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: var(--background, #d6cccc);
+  background: var(--background);
   position: relative;
   border: 2px solid var(--text-primary, #2e2d2d);
 }
@@ -207,7 +207,7 @@ a {
   top: 100%;
   left: 0;
   right: 0;
-  background: var(--background, #d6cccc);
+  background: var(--background);
   backdrop-filter: blur(10px);
   border-top: 1px solid var(--text-primary, #2e2d2d);
   overflow: hidden;
@@ -283,7 +283,7 @@ a {
     left: 0;
     right: 0;
     width: 100%;
-    background: var(--background, #d6cccc);
+    background: var(--background);
     backdrop-filter: blur(10px);
     border-top: 1px solid var(--text-primary, #2e2d2d);
     z-index: 999;

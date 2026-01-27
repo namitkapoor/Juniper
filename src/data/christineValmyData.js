@@ -70,15 +70,18 @@ export const christineValmyData = {
       {
         title: 'Concept 1: Interactive Student ID Card',
         description: 'Students would "fill out" a digital ID card as they progressed through the conversation. This would elegantly collect PII while making the process feel gamified and progressive.',
-        image: {
-          src: '/images/Case Studies/CV/cv-student-id-concept.png',
-          alt: 'Mockup of interactive student ID card with fields filling in progressively',
+        lottie: {
+          path: '/lottie/id-card.json',
           caption: 'The Student ID concept: Progressive information collection disguised as a credential'
         }
       },
       {
         title: 'Concept 2: Bento Grid Knowledge Base',
-        description: 'Instead of forcing students to ask questions, I\'d provide a bento grid of topic tiles they could explore:'
+        description: 'Instead of forcing students to ask questions, I\'d provide a bento grid of topic tiles they could explore:',
+        lottie: {
+          path: '/lottie/Bento Grid Lottie.json',
+          caption: 'The bento grid concept: My favorite design that never shipped'
+        }
       }
     ],
     bentoFeatures: [
@@ -273,7 +276,7 @@ export const christineValmyData = {
       number: '143%',
       label: 'Increase in Submissions',
       description: 'From avg. 28 inquiries/month to 68 inquiries/month',
-      icon: '/images/Case Studies/CV/logo/form.svg'
+      icon: '/images/Case Studies/CV/logo/submission-increase.svg'
     },
     {
       number: '62%',
@@ -285,7 +288,7 @@ export const christineValmyData = {
       number: '18 min',
       label: 'Avg. Time Saved per Officer',
       description: 'Officers had context before first contact, reducing repetitive Q&A',
-      icon: '/images/Case Studies/CV/logo/time-money-save.svg'
+      icon: '/images/Case Studies/CV/logo/time-saved.svg'
     },
     {
       number: '340%',

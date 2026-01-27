@@ -42,6 +42,7 @@ export const manageFarmsData = {
   painPoints: [
     {
       title: 'Small Farm Owners',
+      icon: '/images/Case Studies/JD/logo/farm-owner.svg',
       items: [
         'Working in bright sunlight with dirty/wet hands',
         'Limited time between physical tasks',
@@ -51,6 +52,7 @@ export const manageFarmsData = {
     },
     {
       title: 'Existing App Problems',
+      icon: '/images/Case Studies/JD/logo/existing-app.svg',
       items: [
         'Small tap targets required precision',
         'Text-heavy interface hard to scan',
@@ -109,10 +111,10 @@ export const manageFarmsData = {
           'From our research, we developed four design principles that guided every decision:'
         ],
         kept: [
-          { title: 'Show, Don\'t Tell', description: 'Use color, icons, and spatial layout instead of text' },
-          { title: 'Think Spatially', description: 'Organize information by physical location on the farm' },
-          { title: 'Go Big', description: 'Minimum 48px tap targets, high contrast colors' },
-          { title: 'Forgive Mistakes', description: 'Easy undo, confirmation for destructive actions' }
+          { title: 'Show, Don\'t Tell', description: 'Use color, icons, and spatial layout instead of text', icon: '/images/Case Studies/JD/logo/show-no-tell.svg'},
+          { title: 'Think Spatially', description: 'Organize information by physical location on the farm', icon: '/images/Case Studies/JD/logo/spatialsvg'},
+          { title: 'Go Big', description: 'Minimum 48px tap targets, high contrast colors', icon: '/images/Case Studies/JD/logo/go-big.svg'},
+          { title: 'Forgive Mistakes', description: 'Easy undo, confirmation for destructive actions', icon: '/images/Case Studies/JD/logo/forgive.svg'}
         ],
         lesson: 'These principles became our north star—every design decision was evaluated against them.'
       }
@@ -124,25 +126,25 @@ export const manageFarmsData = {
     {
       title: 'Show, Don\'t Tell',
       description: 'Replace text with visual indicators wherever possible. Color-coded status, iconography, and spatial relationships communicate faster than words.',
-      icon: 'eye',
+      icon: '/images/Case Studies/JD/logo/show-no-tell.svg',
       example: 'Plant health shown as green/yellow/red dots instead of "Healthy/Needs attention/Critical"'
     },
     {
       title: 'Think Spatially',
       description: 'Mirror the physical layout of the farm. Users tap on a visual map to access bed details, matching their mental model of walking through fields.',
-      icon: 'map',
+      icon: '/images/Case Studies/JD/logo/spatial.svg',
       example: 'Main navigation is a top-down farm map, not a list of categories'
     },
     {
       title: 'Go Big',
       description: 'All interactive elements are minimum 48x48px. High contrast colors work in direct sunlight. Text is secondary to visual hierarchy.',
-      icon: 'resize',
+      icon: '/images/Case Studies/JD/logo/go-big.svg',
       example: 'Action buttons are 64px tall with 4.5:1 contrast ratio minimum'
     },
     {
       title: 'Forgive Mistakes',
       description: 'Dirty hands and glare cause mistaps. Every action can be undone within 5 seconds. Destructive actions require explicit confirmation.',
-      icon: 'undo',
+      icon: '/images/Case Studies/JD/logo/forgive.svg',
       example: 'Swipe-to-delete shows "Undo" toast for 5 seconds before committing'
     }
   ],
@@ -318,20 +320,24 @@ export const manageFarmsData = {
     {
       number: '70',
       label: 'SUS Score',
+      icon: '/images/Case Studies/JD/logo/sus-score.svg',
       description: 'System Usability Scale score (industry average: 68)'
     },
     {
       number: '40%',
+      icon: '/images/Case Studies/JD/logo/task-completion.svg',
       label: 'Faster Task Completion',
       description: 'Compared to previous app version'
     },
     {
       number: '3 sec',
+      icon: '/images/Case Studies/JD/logo/glance-time.svg',
       label: 'Average Glance Time',
       description: 'Time to understand farm status from map view'
     },
     {
       number: '89%',
+      icon: '/images/Case Studies/JD/logo/success-rate.svg',
       label: 'Task Success Rate',
       description: 'First-time users completing core tasks without help'
     }
