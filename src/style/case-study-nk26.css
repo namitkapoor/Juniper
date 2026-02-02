@@ -67,6 +67,12 @@
   --duration-base-nk26: 250ms;
   --duration-slow-nk26: 400ms;
   --duration-slower-nk26: 600ms;
+
+  /* Global variable mapping for legacy/shared components */
+  --background: var(--bg-primary-nk26);
+  --text-primary: var(--text-primary-nk26);
+  --text-secondary: var(--text-secondary-nk26);
+  --text-tertiary: var(--text-tertiary-nk26);
 }
 
 /* Dark Mode Overrides */
@@ -92,6 +98,23 @@
   --shadow-md-nk26: 0 4px 6px rgba(0, 0, 0, 0.4);
   --shadow-lg-nk26: 0 10px 15px rgba(0, 0, 0, 0.5);
   --shadow-xl-nk26: 0 20px 25px rgba(0, 0, 0, 0.6);
+
+  /* Global variable mapping for legacy/shared components */
+  --background: var(--bg-primary-nk26);
+  --text-primary: var(--text-primary-nk26);
+  --text-secondary: var(--text-secondary-nk26);
+  --text-tertiary: var(--text-tertiary-nk26);
+
+  /* Icon visibility in dark mode */
+  .pain-point-icon-nk26 img,
+  .bento-icon-nk26 img,
+  .design-principle-icon-nk26 img,
+  .result-icon-nk26 img,
+  .feature-icon-nk26 img,
+  .accessibility-icon-nk26 img,
+  .cv-iteration-1-image-nk26 {
+    filter: brightness(0) invert(1);
+  }
 }
 
 /* ============================================
@@ -252,7 +275,7 @@
   }
 
   .grid-pattern-b-nk26 .grid-container-nk26 {
-    grid-template-columns: 1fr 2fr;
+    grid-template-columns: 1fr 1fr;
     gap: var(--space-3xl-nk26);
   }
 
@@ -391,7 +414,7 @@
 }
 
 /* ============================================
-   Images
+   Images - Base Styles
    ============================================ */
 .image-wrapper-nk26 {
   margin: var(--space-2xl-nk26) 0;
@@ -399,7 +422,6 @@
 
 .section-image-nk26 {
   width: 100%;
-  height: auto;
   border-radius: 8px;
   display: block;
 }
@@ -419,6 +441,152 @@
   margin-top: 0.75rem;
   font-style: italic;
   line-height: 1.5;
+}
+
+/* ============================================
+   Image Wrapper - Size Modifiers
+   ============================================ */
+/* Full width (default) */
+.img-wrapper-full-nk26 {
+  width: 100%;
+}
+
+/* Large - ~80% width, centered */
+.img-wrapper-lg-nk26 {
+  width: 100%;
+  max-width: 900px;
+}
+
+/* Medium - ~60% width, centered */
+.img-wrapper-md-nk26 {
+  width: 100%;
+  max-width: 600px;
+}
+
+/* Small - ~40% width, centered */
+.img-wrapper-sm-nk26 {
+  width: 100%;
+  max-width: 400px;
+}
+
+/* Extra small - for icons/thumbnails */
+.img-wrapper-xs-nk26 {
+  width: 100%;
+  max-width: 240px;
+}
+
+/* ============================================
+   Image Wrapper - Alignment Modifiers
+   ============================================ */
+.img-wrapper-left-nk26 {
+  align-items: flex-start;
+}
+
+.img-wrapper-right-nk26 {
+  align-items: flex-end;
+}
+
+/* No margin variant */
+.img-wrapper-flush-nk26 {
+  margin: 0;
+}
+
+/* ============================================
+   Image - Aspect Ratio Modifiers
+   ============================================ */
+/* Desktop/widescreen (16:9) */
+.img-desktop-nk26 {
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+/* Laptop (16:10) */
+.img-laptop-nk26 {
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+}
+
+/* Standard (4:3) */
+.img-standard-nk26 {
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+/* Square (1:1) */
+.img-square-nk26 {
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
+/* Mobile/portrait (9:16) */
+.img-mobile-nk26 {
+  aspect-ratio: 9 / 16;
+  object-fit: cover;
+}
+
+/* Tablet portrait (3:4) */
+.img-tablet-nk26 {
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+}
+
+/* Auto aspect ratio - use image's natural ratio */
+.img-auto-nk26 {
+  aspect-ratio: auto;
+  object-fit: contain;
+}
+
+/* ============================================
+   Image - Object Fit Modifiers
+   ============================================ */
+.img-contain-nk26 {
+  object-fit: contain;
+}
+
+.img-cover-nk26 {
+  object-fit: cover;
+}
+
+.img-fill-nk26 {
+  object-fit: fill;
+}
+
+/* ============================================
+   Image - Max Height Modifiers
+   ============================================ */
+.img-maxh-sm-nk26 {
+  max-height: 300px;
+}
+
+.img-maxh-md-nk26 {
+  max-height: 450px;
+}
+
+.img-maxh-lg-nk26 {
+  max-height: 600px;
+}
+
+.img-maxh-xl-nk26 {
+  max-height: 800px;
+}
+
+/* ============================================
+   Image - Border/Shadow Modifiers
+   ============================================ */
+.img-shadow-nk26 {
+  box-shadow: var(--shadow-lg-nk26);
+}
+
+.img-no-radius-nk26 {
+  border-radius: 0;
+}
+
+.img-radius-lg-nk26 {
+  border-radius: 16px;
+}
+
+.img-border-nk26 {
+  border: 1px solid var(--border-light-nk26);
 }
 
 /* ============================================
@@ -1090,7 +1258,7 @@
    ============================================ */
 .micro-interaction-showcase-nk26 {
   display: grid;
-  gap: var(--space-2xl-nk26);
+  gap: var(--space-xl-nk26);
   margin: var(--space-2xl-nk26) 0;
 }
 
@@ -1100,17 +1268,11 @@
   }
 }
 
-@media (min-width: 1024px) {
-  .micro-interaction-showcase-nk26 {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
 .micro-interaction-item-nk26 {
   background: var(--bg-secondary-nk26);
   border: 1px solid var(--border-light-nk26);
   border-radius: 12px;
-  padding: var(--space-xl-nk26);
+  padding: var(--space-md-nk26);  
 }
 
 .micro-interaction-item-nk26 .lottie-animation-nk26 {
@@ -1118,8 +1280,22 @@
 }
 
 .micro-interaction-item-nk26 .lottie-player-nk26 {
-  aspect-ratio: 1 / 1;
   max-width: 100%;
+}
+
+.micro-interaction-video-nk26 {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  margin-bottom: var(--space-lg-nk26);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--bg-tertiary-nk26);
+}
+
+.micro-interaction-video-nk26 video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .micro-interaction-description-nk26 {
@@ -1256,18 +1432,272 @@
 }
 
 /* ============================================
-   Final Design Specifics
+   Final Design Showcase Grid
    ============================================ */
+.cv-final-showcase-nk26 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-xl-nk26);
+  margin-top: var(--space-2xl-nk26);
+}
+
+@media (min-width: 768px) {
+  .cv-final-showcase-nk26 {
+    grid-template-columns: 3fr 1fr;
+    gap: var(--space-3xl-nk26);
+  }
+}
+
+.cv-final-components-nk26 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md-nk26);
+}
+
+@media (min-width: 768px) {
+  .cv-final-components-nk26 {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-xl-nk26);
+  }
+}
+
+/* ============================================
+   CV Case Study - Image Specific Overrides
+   ============================================ */
+/* Overview image - Desktop mockup */
+.cv-overview-image-nk26 {
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+}
+
+/* Concept images - varies */
+.cv-concept-0-image-nk26,
+.cv-concept-1-image-nk26 {
+  aspect-ratio: 4 / 3;
+  object-fit: contain;
+  background: var(--bg-tertiary-nk26);
+  padding: var(--space-md-nk26);
+}
+
+/* Iteration 1 - Social media bar (wide/thin) */
+.cv-iteration-1-wrapper-nk26 {
+  margin: 0;
+  width: 100%;
+}
+
+.cv-iteration-1-image-nk26 {
+  width: 100%;
+  max-height: 200px;
+  object-fit: contain;
+}
+
+/* Iteration 2 - Form changes (desktop) */
+.cv-iteration-2-image-nk26 {
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+/* Final design - Desktop (widescreen) */
 .cv-final-desktop-wrapper-nk26 {
-  margin-bottom: var(--space-xl-nk26);
+  margin: 0;
+  width: 100%;
 }
 
+.cv-final-desktop-image-nk26 {
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+}
+
+/* Final design - Mobile (portrait) */
 .cv-final-mobile-wrapper-nk26 {
-  max-width: 400px;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 280px;
 }
 
+@media (min-width: 768px) {
+  .cv-final-mobile-wrapper-nk26 {
+    margin: 0;
+    max-width: 100%;
+  }
+}
+
+.cv-final-mobile-image-nk26 {
+  aspect-ratio: 9 / 16;
+  object-fit: contain;
+}
+
+/* ============================================
+   ManageFarms Case Study - Image Overrides
+   ============================================ */
+/* Overview - Original app screenshot */
+.mf-overview-wrapper-nk26 {
+  margin: 0;
+}
+
+.mf-overview-image-nk26 {
+  aspect-ratio: 16 / 10;
+  object-fit: contain;
+}
+
+/* Map view - Main feature image */
+.mf-map-wrapper-nk26 {
+  max-width: 320px;
+  margin: var(--space-xl-nk26) auto;
+}
+
+.mf-map-image-nk26 {
+  aspect-ratio: 9 / 19;
+  object-fit: cover;
+  border-radius: 24px;
+  box-shadow: var(--shadow-lg-nk26);
+}
+
+/* Field photos - research imagery */
+.mf-field-photo-nk26 {
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+/* Map view wrapper (mobile app) */
+.mf-mapview-wrapper-nk26 {
+  max-width: 280px;
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .mf-mapview-wrapper-nk26 {
+    max-width: 100%;
+    margin: 0;
+  }
+}
+
+/* Map view image */
+.mf-mapview-image-nk26 {
+  aspect-ratio: 9 / 19;
+  width: 70%;
+  object-fit: cover;
+  border-radius: 24px;
+  box-shadow: var(--shadow-lg-nk26);
+}
+
+/* Final screens grid (4-column for mobile screens) */
+.mf-final-screens-grid-nk26 {
+  display: grid;
+  gap: var(--space-lg-nk26);
+  grid-template-columns: repeat(2, 1fr);
+}
+
+@media (min-width: 768px) {
+  .mf-final-screens-grid-nk26 {
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-xl-nk26);
+  }
+}
+
+.mf-final-screens-grid-nk26 .image-wrapper-nk26 {
+  margin: 0;
+}
+
+/* Final screen images (mobile app mockups) */
+.mf-final-screen-0-nk26,
+.mf-final-screen-1-nk26,
+.mf-final-screen-2-nk26,
+.mf-final-screen-3-nk26 {
+  aspect-ratio: 9 / 19;
+  border-radius: 20px;
+  border: 1px solid var(--border-light-nk26);
+  box-shadow: var(--shadow-md-nk26);
+}
+
+/* ============================================
+   Phone Mockup Grid (for mobile app screens)
+   ============================================ */
+.phone-grid-nk26 {
+  display: grid;
+  gap: var(--space-lg-nk26);
+  margin: var(--space-2xl-nk26) 0;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+@media (min-width: 768px) {
+  .phone-grid-nk26 {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-xl-nk26);
+  }
+}
+
+@media (min-width: 1024px) {
+  .phone-grid-nk26 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.phone-grid-nk26 .image-wrapper-nk26 {
+  margin: 0;
+}
+
+/* Phone mockup image - portrait aspect ratio */
+.img-phone-nk26 {
+  aspect-ratio: 9 / 19;
+  object-fit: cover;
+  border-radius: 20px;
+  border: 1px solid var(--border-light-nk26);
+  box-shadow: var(--shadow-md-nk26);
+}
+
+/* Tablet mockup - portrait */
+.img-tablet-portrait-nk26 {
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 1px solid var(--border-light-nk26);
+}
+
+/* Tablet mockup - landscape */
+.img-tablet-landscape-nk26 {
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 1px solid var(--border-light-nk26);
+}
+
+/* Desktop/browser mockup */
+.img-browser-nk26 {
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid var(--border-light-nk26);
+  box-shadow: var(--shadow-lg-nk26);
+}
+
+/* ============================================
+   Influencer Marketing - Image Overrides
+   ============================================ */
+/* Overview - Dashboard screenshot */
+.im-overview-image-nk26 {
+  object-fit: cover;
+  border: 1px solid var(--border-light-nk26);
+  border-radius: 8px;
+  box-shadow: var(--shadow-md-nk26);
+}
+
+/* Subway/metro style visualization */
+.im-subway-image-nk26 {
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+  background: var(--bg-secondary-nk26);
+  padding: var(--space-lg-nk26);
+  border-radius: 12px;
+}
+
+/* Dashboard screenshots */
+.im-dashboard-image-nk26 {
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  border: 1px solid var(--border-light-nk26);
+  border-radius: 8px;
+}
 
 /* ============================================
    Accessibility & Reduced Motion
@@ -1313,6 +1743,29 @@
 }
 
 .lottie-player-nk26 {
+  contain: layout style paint;
+}
+
+/* Video performance optimizations */
+.section-video-nk26,
+.micro-interaction-video-nk26 video,
+.hero-video-element-nk26 {
+  /* Force GPU acceleration for smoother playback */
+  transform: translateZ(0);
+  will-change: contents;
+}
+
+.micro-interaction-video-nk26,
+.image-wrapper-nk26,
+.prototype-card-nk26 {
+  /* Contain layout recalculations */
+  contain: layout style;
+}
+
+/* Reduce paint during scroll by isolating video layers */
+.hero-video-nk26,
+.video-container-nk26 {
+  isolation: isolate;
   contain: layout style paint;
 }
 
@@ -1400,9 +1853,29 @@
   padding: var(--space-xl-nk26);
 }
 
+.accessibility-header-nk26 {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md-nk26);
+  margin-bottom: var(--space-md-nk26);
+}
+
+.accessibility-icon-nk26 {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+}
+
+.accessibility-icon-nk26 img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
 .accessibility-card-nk26 .subsection-title-nk26 {
   margin-top: 0;
   font-size: 1.125rem;
+  margin-bottom: 0;
 }
 
 .accessibility-card-nk26 .section-text-nk26 {
@@ -1612,7 +2085,7 @@
   font-family: var(--font-body);
   font-size: 0.8125rem;
   font-weight: 500;
-  color: var(--text-tertiary-nk26);
+  color: var(--text-secondary-nk26);
   text-decoration: none;
   border-left: 2px solid transparent;
   transition: all var(--duration-fast-nk26) var(--ease-standard-nk26);
@@ -1668,4 +2141,383 @@
 /* Influencer Marketing */
 .case-study-page-nk26[data-case-study="influencer-marketing"] {
   --cs-accent: #4f46e5;
+}
+
+/* ============================================
+   Influencer Marketing - New Sections
+   ============================================ */
+
+/* Problem Cards (consolidated discovery) */
+.problem-cards-nk26 {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg-nk26);
+  margin: var(--space-xl-nk26) 0;
+}
+
+.problem-card-nk26 {
+  background: var(--bg-secondary-nk26);
+  border: 1px solid var(--border-light-nk26);
+  border-radius: 8px;
+  padding: var(--space-lg-nk26);
+}
+
+.problem-icon-nk26 {
+  width: 36px;
+  height: 36px;
+  margin-bottom: var(--space-sm-nk26);
+}
+
+.problem-icon-nk26 img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.problem-card-nk26 strong {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--text-primary-nk26);
+  margin-bottom: var(--space-xs-nk26);
+}
+
+.problem-card-nk26 p {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--text-secondary-nk26);
+  line-height: 1.5;
+  margin: 0 0 var(--space-xs-nk26) 0;
+}
+
+.problem-card-nk26 p:last-child {
+  margin-bottom: 0;
+}
+
+/* Task Analysis Grid (legacy, kept for compatibility) */
+.task-analysis-grid-nk26 {
+  display: grid;
+  gap: var(--space-lg-nk26);
+  margin: var(--space-xl-nk26) 0;
+}
+
+@media (min-width: 768px) {
+  .task-analysis-grid-nk26 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.task-card-nk26 {
+  background: var(--bg-secondary-nk26);
+  border: 1px solid var(--border-light-nk26);
+  border-radius: 8px;
+  padding: var(--space-lg-nk26);
+}
+
+.task-icon-nk26 {
+  width: 40px;
+  height: 40px;
+  margin-bottom: var(--space-md-nk26);
+}
+
+.task-icon-nk26 img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.task-card-nk26 strong {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--text-primary-nk26);
+  margin-bottom: var(--space-sm-nk26);
+}
+
+.task-card-nk26 p {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--text-secondary-nk26);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.workaround-nk26 {
+  margin-top: var(--space-sm-nk26) !important;
+  padding-top: var(--space-sm-nk26);
+  border-top: 1px dashed var(--border-light-nk26);
+  color: var(--text-tertiary-nk26) !important;
+  font-size: 0.85rem !important;
+}
+
+/* Metrics Card */
+.metrics-card-nk26 {
+  background: var(--bg-tertiary-nk26);
+  border-radius: 8px;
+  padding: var(--space-xl-nk26);
+}
+
+.metrics-card-nk26 .meta-item-nk26 {
+  margin-bottom: var(--space-lg-nk26);
+  padding-bottom: var(--space-lg-nk26);
+}
+
+/* Product Analysis Grid */
+.product-analysis-grid-nk26 {
+  display: grid;
+  gap: var(--space-lg-nk26);
+  margin: var(--space-xl-nk26) 0;
+}
+
+@media (min-width: 768px) {
+  .product-analysis-grid-nk26 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.finding-card-nk26 {
+  background: var(--bg-secondary-nk26);
+  border: 1px solid var(--border-light-nk26);
+  border-radius: 8px;
+  padding: var(--space-xl-nk26);
+}
+
+.finding-header-nk26 {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md-nk26);
+  margin-bottom: var(--space-md-nk26);
+}
+
+.finding-icon-nk26 {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
+.finding-header-nk26 strong {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--text-primary-nk26);
+}
+
+.finding-card-nk26 p {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--text-secondary-nk26);
+  line-height: 1.5;
+  margin: 0 0 var(--space-sm-nk26) 0;
+}
+
+.finding-card-nk26 p:last-child {
+  margin-bottom: 0;
+}
+
+.evidence-nk26 {
+  color: var(--text-tertiary-nk26) !important;
+  font-size: 0.85rem !important;
+  padding-top: var(--space-sm-nk26);
+  border-top: 1px dashed var(--border-light-nk26);
+  margin-top: var(--space-sm-nk26) !important;
+}
+
+/* Change Block */
+.change-block-nk26 {
+  margin: var(--space-2xl-nk26) 0;
+  padding: var(--space-xl-nk26);
+  background: var(--bg-tertiary-nk26);
+  border-radius: 8px;
+}
+
+.change-block-nk26 > strong {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 1.125rem;
+  color: var(--text-primary-nk26);
+  margin-bottom: var(--space-md-nk26);
+}
+
+/* Milestones Pills */
+.milestones-nk26 {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm-nk26);
+  margin: var(--space-lg-nk26) 0;
+}
+
+.milestone-pill-nk26 {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-xs-nk26) var(--space-md-nk26);
+  background: var(--bg-secondary-nk26);
+  border: 1px solid var(--border-medium-nk26);
+  border-radius: 20px;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-secondary-nk26);
+  position: relative;
+}
+
+.milestone-pill-nk26:not(:last-child)::after {
+  content: '→';
+  position: absolute;
+  right: -16px;
+  color: var(--text-tertiary-nk26);
+  font-size: 0.75rem;
+}
+
+/* Prototypes Grid */
+.prototypes-grid-nk26 {
+  display: grid;
+  gap: var(--space-xl-nk26);
+  margin: var(--space-2xl-nk26) 0;
+}
+
+@media (min-width: 768px) {
+  .prototypes-grid-nk26 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.prototype-card-nk26 {
+  background: var(--bg-secondary-nk26);
+  border: 1px solid var(--border-light-nk26);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.prototype-card-nk26 .image-wrapper-nk26 {
+  margin: 0;
+}
+
+.prototype-card-nk26 video,
+.prototype-card-nk26 .section-video-nk26 {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  border-radius: 0;
+}
+
+.laptop-video-nk26 video,
+.laptop-video-nk26 .section-video-nk26 {
+  aspect-ratio: 16 / 10;
+}
+
+.prototype-info-nk26 {
+  padding: var(--space-lg-nk26);
+}
+
+.prototype-info-nk26 strong {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 1.125rem;
+  color: var(--text-primary-nk26);
+  margin-bottom: var(--space-xs-nk26);
+}
+
+.prototype-info-nk26 p {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--text-secondary-nk26);
+  line-height: 1.5;
+  margin: 0 0 var(--space-sm-nk26) 0;
+}
+
+.key-feature-nk26 {
+  display: inline-block;
+  font-family: var(--font-mono-nk26);
+  font-size: 0.8rem;
+  color: var(--text-tertiary-nk26);
+  padding: var(--space-xs-nk26) var(--space-sm-nk26);
+  background: var(--tech-note-bg-nk26);
+  border-radius: 4px;
+}
+
+/* Micro-interaction Items (text-only version) */
+.micro-item-nk26 {
+  margin-bottom: var(--space-xl-nk26);
+  padding-bottom: var(--space-xl-nk26);
+  border-bottom: 1px solid var(--border-light-nk26);
+}
+
+.micro-item-nk26:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.micro-item-nk26 strong {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--text-primary-nk26);
+  margin-bottom: var(--space-xs-nk26);
+}
+
+.micro-item-nk26 p {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--text-secondary-nk26);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.micro-type-nk26 {
+  display: inline-block;
+  font-family: var(--font-mono-nk26);
+  font-size: 0.75rem;
+  color: var(--accent-secondary-nk26);
+  padding: var(--space-xs-nk26) var(--space-sm-nk26);
+  background: rgba(139, 92, 246, 0.1);
+  border-radius: 4px;
+  margin: var(--space-sm-nk26) 0;
+}
+
+.micro-purpose-nk26 {
+  font-style: italic;
+  color: var(--text-tertiary-nk26) !important;
+  font-size: 0.85rem !important;
+}
+
+/* Usability Stats Card */
+.usability-stats-nk26 {
+  background: var(--bg-tertiary-nk26);
+  border-radius: 8px;
+  padding: var(--space-xl-nk26);
+}
+
+.usability-stats-nk26 .subsection-title-nk26 {
+  margin-top: 0;
+  margin-bottom: var(--space-lg-nk26);
+  font-size: 1.25rem;
+}
+
+.usability-stats-nk26 .meta-item-nk26 {
+  margin-bottom: var(--space-md-nk26);
+  padding-bottom: var(--space-md-nk26);
+}
+
+/* Redesign Video */
+.redesign-video-nk26 {
+  margin-bottom: var(--space-3xl-nk26);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg-nk26);
+}
+
+.redesign-video-nk26 video,
+.redesign-video-nk26 .section-video-nk26 {
+  border-radius: 12px;
+}
+
+/* Dark mode adjustments */
+[data-theme="dark"] .finding-icon-nk26,
+[data-theme="dark"] .task-icon-nk26 img,
+[data-theme="dark"] .problem-icon-nk26 img {
+  filter: brightness(0) invert(1);
+}
+
+[data-theme="dark"] .micro-type-nk26 {
+  background: rgba(139, 92, 246, 0.2);
 }

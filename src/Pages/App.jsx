@@ -50,7 +50,7 @@ const App = () => {
           <GA4Tracker />
           <MaskTransition />
           <PageTransition>
-            <Suspense fallback={<div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>Loading...</div>}>
+            <Suspense fallback={<div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'var(--background, #1d1d1d)', color: 'var(--text-secondary, #a8a8a8)' }} />}>
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/about" element={<About />} />

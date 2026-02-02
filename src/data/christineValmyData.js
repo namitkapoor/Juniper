@@ -9,7 +9,6 @@ export const christineValmyData = {
   // Hero Section
   hero: {
     videoSrc: '/videos/Case Studies/CV/christine-valmy-laptop.mp4',
-    webmSrc: '/videos/Case Studies/CV/christine-valmy-hero.webm',
     posterSrc: '/images/Case Studies/CV/cv-hero-poster.jpg',
     subtitle: 'How listening to users altered design decisions and led to 143% increase in enrollments'
   },
@@ -172,8 +171,8 @@ export const christineValmyData = {
         ],
         cut: [
           'Student ID card concept',
-          'Bento grid of topic tiles',
-          'Complex analytics dashboard'
+          'Bento grid concept',
+          'Clickable tiles concept'
         ],
         lesson: 'Sometimes the best design decision is admitting your clever solution wasn\'t what users needed.'
       }
@@ -185,11 +184,11 @@ export const christineValmyData = {
     {
       title: 'Iteration 1: The Location Dropdown Mistake',
       beforeImage: {
-        src: '/images/Case Studies/CV/cv-dropdown-before.png',
+        src: '/images/Case Studies/CV/cv-dropdown-after.png',
         alt: 'Interface with dropdown menu for selecting location and course next to chat input'
       },
       afterImage: {
-        src: '/images/Case Studies/CV/cv-dropdown-after.png',
+        src: '/images/Case Studies/CV/cv-dropdown-before.png',
         alt: 'Interface with location and course selection moved to chat conversation'
       },
       caption: 'The Problem: I added location and course dropdowns next to the chat input for technical reasons (easier parsing). Users thought these were "suggested topics" not actual selections. Nobody used them correctly.',
@@ -198,18 +197,18 @@ export const christineValmyData = {
     },
     {
       title: 'Iteration 2: Social Media Placement',
-      videoSrc: '/videos/Case Studies/CV/cv-social-media-iteration.mp4',
+      image: {
+        src: '/images/Case Studies/CV/social-media-bar.svg',
+        alt: 'Social media icons moved directly below the chat widget for easier access',
+        caption: 'Iterating on placement: Moving social proof to the center of the experience'
+      },
       insight: 'Current students told us: "After chatting with the bot, I immediately want to check Instagram to see if the vibe matches."',
       change: 'Moved social media icons from a collapsible sidebar to directly below the chat widget. Made them larger, more prominent, and always visible. Added hover animations to make them feel interactive.',
       result: 'Social media click-through rate increased by 340%. Students who clicked on Instagram were 2x more likely to complete enrollment.'
     },
     {
       title: 'Iteration 3: Spanish Translation',
-      image: {
-        src: '/images/Case Studies/CV/cv-spanish-translation.jpg',
-        alt: 'Side-by-side comparison of English and Spanish chat interfaces',
-        caption: 'Spanish translation wasn\'t an afterthought - it was a requirement'
-      },
+      videoSrc: '/videos/Case Studies/CV/spanish language.mp4',
       discovery: '60% of prospective students spoke Spanish as their first language. Many were intimidated by English-only interfaces.',
       implementation: 'Added language toggle at the top of the widget. The agent responds in the detected language automatically. All UI elements (buttons, labels, error messages) were professionally translated.',
       technicalNote: 'Used Gemini\'s multilingual capabilities with system prompts in Spanish. Rather than translate responses post-generation, the agent thinks in Spanish from the start, resulting in more natural phrasing. Language detection is automatic based on first user message.'
@@ -248,21 +247,21 @@ export const christineValmyData = {
   // Micro-interactions
   microInteractions: [
     {
-      animationPath: '/lottie/cv-input-focus.json',
+      animationPath: '/lottie/input-box-highlight.json',
       title: 'Input Focus State',
       description: 'Subtle scale and shadow animation draws attention to active input. Purple accent color (brand) reinforces focus.',
       ariaLabel: 'Animation showing input field expanding and highlighting on focus',
-      loop: true
+      loop: false
     },
     {
-      animationPath: '/lottie/cv-social-hover.json',
+      animationPath: '/lottie/social-media.json',
       title: 'Social Media Hover',
       description: 'Playful bounce animation on hover makes icons feel clickable and reinforces the "go check us out" call-to-action.',
       ariaLabel: 'Animation showing social media icons bouncing on hover',
       loop: true
     },
     {
-      animationPath: '/lottie/cv-message-send.json',
+      videoSrc: '/videos/Case Studies/CV/message-feedback.mp4',
       title: 'Message Send Feedback',
       description: 'Paper airplane flies from input to chat thread, confirming the message was sent. Adds personality to an otherwise dry interaction.',
       ariaLabel: 'Animation showing message being sent with flying paper airplane',

@@ -15,19 +15,19 @@ export default function MaskTransition() {
         videoRef.current.play().catch(console.error);
       }
 
-      // Navigate after a brief delay to allow mask to start
+      // Navigate after mask starts expanding
       const navigateTimer = setTimeout(() => {
         navigate(transitionData.path);
-      }, 50);
+      }, 100);
 
-      // End transition after mask animation completes
+      // End transition after mask fully covers and page has time to load
       const endTimer = setTimeout(() => {
         if (videoRef.current) {
           videoRef.current.pause();
           videoRef.current.currentTime = 0;
         }
         endTransition();
-      }, 700); // Match the mask animation duration (600ms) + buffer
+      }, 700);
 
       return () => {
         clearTimeout(navigateTimer);
@@ -45,58 +45,26 @@ export default function MaskTransition() {
   return (
     <AnimatePresence>
       {isTransitioning && transitionData && (
-        <>
-          {/* Mask overlay - circular reveal from click position */}
-          <motion.div
-            initial={{ clipPath: `circle(0% at ${originPercentX}% ${originPercentY}%)` }}
-            animate={{ clipPath: `circle(150% at ${originPercentX}% ${originPercentY}%)` }}
-            exit={{ clipPath: `circle(150% at ${originPercentX}% ${originPercentY}%)` }}
-            transition={{ duration: 0.6, ease: [0.43, 0.13, 0.23, 0.96] }}
-            style={{
-              position: 'fixed',
-              top: 0,
-              left: 0,
-              width: '100%',
-              height: '100%',
-              backgroundColor: 'var(--background, #d6cccc)',
-              zIndex: 9999,
-              pointerEvents: 'none',
-            }}
-          />
-          
-          {/* Video overlay for Manage Farms */}
-          {transitionData.videoSrc && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3, delay: 0.2 }}
-              style={{
-                position: 'fixed',
-                top: '50%',
-                left: '50%',
-                transform: 'translate(-50%, -50%)',
-                width: '90vw',
-                maxWidth: '1200px',
-                height: 'auto',
-                zIndex: 10000,
-                pointerEvents: 'none',
-              }}
-            >
-              <video
-                ref={videoRef}
-                src={transitionData.videoSrc}
-                muted
-                playsInline
-                style={{
-                  width: '100%',
-                  height: 'auto',
-                  borderRadius: '8px',
-                }}
-              />
-            </motion.div>
-          )}
-        </>
+        <motion.div
+          key="mask-overlay"
+          initial={{ clipPath: `circle(0% at ${originPercentX}% ${originPercentY}%)` }}
+          animate={{ clipPath: `circle(150% at ${originPercentX}% ${originPercentY}%)` }}
+          exit={{ opacity: 0 }}
+          transition={{
+            clipPath: { duration: 0.5, ease: [0.43, 0.13, 0.23, 0.96] },
+            opacity: { duration: 0.3 }
+          }}
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            backgroundColor: 'var(--background, #1d1d1d)',
+            zIndex: 9999,
+            pointerEvents: 'none',
+          }}
+        />
       )}
     </AnimatePresence>
   );

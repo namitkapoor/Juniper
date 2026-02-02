@@ -21,16 +21,13 @@ import {
   MetaItem,
   TechnicalNote,
   TechNoteText,
-  BeforeAfterSlider,
   ContentText,
   UserQuote,
   FeatureList,
-  LottieAnimation,
   ResultsGrid,
   NextProjectTeaser,
   PainPointsGrid,
   DesignRationaleCard,
-  MicroInteractionShowcase,
   SideNav
 } from '../../components/case-study-nk26';
 
@@ -53,10 +50,10 @@ const InfluencerMarketing = () => {
   // Define nav sections (max 5)
   const navSections = [
     { id: 'im-overview', label: 'Overview' },
-    { id: 'im-concept', label: 'Concept' },
-    { id: 'im-motion', label: 'Motion Design' },
-    { id: 'im-shipped', label: 'What Shipped' },
-    { id: 'im-learnings', label: 'Learnings' }
+    { id: 'im-results', label: 'Results' },
+    { id: 'im-discovery', label: 'Discovery' },
+    { id: 'im-design', label: 'Design' },
+    { id: 'im-prototypes', label: 'Prototypes' }
   ];
 
   return (
@@ -66,7 +63,6 @@ const InfluencerMarketing = () => {
       {/* Hero Section */}
       <HeroVideo
         videoSrc={data.hero.videoSrc}
-        webmSrc={data.hero.webmSrc}
         posterSrc={data.hero.posterSrc}
         title={data.hero.title}
         subtitle={data.hero.subtitle}
@@ -78,242 +74,292 @@ const InfluencerMarketing = () => {
       {/* Main Content Area */}
       <div className="case-study-content-nk26">
 
-      {/* Overview Section - Pattern A */}
-      <GridPatternA id="im-overview" sectionLabel="Project overview">
-        <GridMain>
-          <SectionTitle>{data.overview.title}</SectionTitle>
-          {data.overview.paragraphs.map((p, i) => (
-            <SectionText key={i}>{p}</SectionText>
-          ))}
-          <ImageWrapper
-            src={data.overview.image.src}
-            alt={data.overview.image.alt}
-            caption={data.overview.image.caption}
-            imageClassName="im-overview-image-nk26"
-          />
-        </GridMain>
-
-        <GridMeta>
-          <MetaItem label="Role" value={data.meta.role} />
-          <MetaItem label="Timeline" value={data.meta.timeline} />
-          <MetaItem label="Team" value={data.meta.team} />
-          <MetaItem label="Platform" value={data.meta.platform} />
-          <MetaItem label="Impact" value={data.meta.impact} />
-          <MetaItem label="Honest Take" value={data.meta.challenge} />
-        </GridMeta>
-      </GridPatternA>
-
-      {/* Pain Points Section - Pattern B */}
-      <GridPatternB sectionLabel="User pain points">
-        <GridText>
-          <SectionTitle>The Status Visibility Problem</SectionTitle>
-          <SectionText>
-            Campaign managers needed to track dozens of influencers across different stages.
-            The text-heavy interface made it impossible to scan quickly.
-          </SectionText>
-        </GridText>
-
-        <GridVisual>
-          <PainPointsGrid painPoints={data.painPoints} />
-        </GridVisual>
-      </GridPatternB>
-
-      {/* Results - Pattern A - Moved here after Pain Points */}
-      <GridPatternA sectionLabel="Results and impact">
-        <GridMain>
-          <SectionTitle>The Results (With Honesty)</SectionTitle>
-          <SectionText>
-            The static version—without elaborate animations—delivered strong results.
-            This reinforced that spatial layout and color, not motion, drove the improvements.
-          </SectionText>
-
-          <ResultsGrid results={data.results} />
-
-          <SubsectionTitle>What Users Said</SubsectionTitle>
-          {data.userQuotes.map((quote, i) => (
-            <UserQuote key={i} cite={quote.cite} image={quote.image}>
-              {quote.text}
-            </UserQuote>
-          ))}
-        </GridMain>
-
-        <GridMeta sectionLabel="Results metadata">
-          <MetaItem label="Measurement Period" value={data.resultsMeta.measurementPeriod} />
-          <MetaItem label="Baseline" value={data.resultsMeta.baseline} />
-          <MetaItem label="Test Participants" value={data.resultsMeta.testParticipants} />
-          <MetaItem label="Methodology" value={data.resultsMeta.methodology} />
-        </GridMeta>
-      </GridPatternA>
-
-      {/* Subway Metaphor - Pattern B */}
-      <GridPatternB id="im-concept" sectionLabel="Design concept">
-        <GridText>
-          <SectionTitle>{data.subwayMetaphor.title}</SectionTitle>
-          <SectionText>{data.subwayMetaphor.intro}</SectionText>
-
-          <FeatureList
-            items={data.subwayMetaphor.explanation.map(item => item)}
-          />
-        </GridText>
-
-        <GridVisual>
-          <ImageWrapper
-            src={data.subwayMetaphor.video.src}
-            alt={data.subwayMetaphor.video.alt}
-            caption={data.subwayMetaphor.video.caption}
-            imageClassName="im-subway-image-nk26"
-            type="video"
-            autoPlay
-          />
-        </GridVisual>
-      </GridPatternB>
-
-      {/* Motion Design Explorations - Pattern C */}
-      <GridPatternC id="im-motion" sectionLabel="Motion design explorations">
-        <SectionTitle full>{data.motionExplorations.title}</SectionTitle>
-        <SectionText>{data.motionExplorations.intro}</SectionText>
-
-        {data.motionExplorations.explorations.map((exploration, i) => (
-          <div key={i} className="motion-exploration-nk26">
-            <GridNested>
-              <NestedMain>
-                <SubsectionTitle>{exploration.title}</SubsectionTitle>
-                <SectionText>{exploration.description}</SectionText>
-
-                <TechnicalNote>
-                  <TechNoteText>{exploration.technicalNote}</TechNoteText>
-                </TechnicalNote>
-
-                <div className="verdict-badge-nk26" data-verdict={exploration.verdict === 'Didn\'t ship' ? 'cut' : 'shipped'}>
-                  <strong>{exploration.verdict}</strong>
-                </div>
-                <SectionText><em>Why: {exploration.reason}</em></SectionText>
-              </NestedMain>
-
-              <NestedAside>
-                <LottieAnimation
-                  animationPath={exploration.animationPath}
-                  loop={true}
-                  ariaLabel={`Animation demonstration of ${exploration.title}`}
-                />
-              </NestedAside>
-            </GridNested>
-          </div>
-        ))}
-      </GridPatternC>
-
-      {/* Technical Reality Check - Pattern C */}
-      <GridPatternC sectionLabel="Technical constraints">
-        <SectionTitle full>{data.technicalReality.title}</SectionTitle>
-        <SectionText>{data.technicalReality.intro}</SectionText>
-
-        <div className="reality-check-grid-nk26">
-          {data.technicalReality.reasons.map((reason, i) => (
-            <div key={i} className="reality-check-card-nk26">
-              <SubsectionTitle>{reason.title}</SubsectionTitle>
-              <SectionText>{reason.description}</SectionText>
-            </div>
-          ))}
-        </div>
-      </GridPatternC>
-
-      {/* What Actually Shipped - Before/After */}
-      <GridPatternA id="im-shipped" sectionLabel="Final design comparison">
-        <GridMain>
-          <SectionTitle>{data.whatShipped.title}</SectionTitle>
-          <SectionText>{data.whatShipped.intro}</SectionText>
-
-          <BeforeAfterSlider
-            beforeSrc={data.whatShipped.beforeImage.src}
-            afterSrc={data.whatShipped.afterImage.src}
-            beforeAlt={data.whatShipped.beforeImage.alt}
-            afterAlt={data.whatShipped.afterImage.alt}
-            caption={data.whatShipped.caption}
-          />
-        </GridMain>
-
-        <GridMeta sectionLabel="Iteration statistics">
-          <MetaItem label="Design Versions" value={data.iterationStats.totalIterations} />
-          <MetaItem label="Motion Concepts" value={data.iterationStats.motionConcepts} />
-          <MetaItem label="Animations Shipped" value={data.iterationStats.motionShipped} />
-          <MetaItem label="Time on Motion" value={data.iterationStats.designTime} />
-        </GridMeta>
-      </GridPatternA>
-
-      {/* Micro-interactions That Shipped - Pattern C */}
-      <GridPatternC sectionLabel="Micro-interactions that shipped">
-        <SectionTitle full>What Actually Shipped: Micro-Interactions</SectionTitle>
-        <SectionText>
-          Instead of elaborate animations, we shipped subtle CSS-based micro-interactions.
-          Each one serves a specific purpose without overwhelming the interface.
-        </SectionText>
-
-        <MicroInteractionShowcase interactions={data.microInteractions} />
-      </GridPatternC>
-
-      {/* Design Iterations - Pattern A */}
-      <GridPatternA sectionLabel="Design iterations">
-        <GridMain>
-          <SectionTitle>Key Design Iterations</SectionTitle>
-          <SectionText>
-            Beyond motion explorations, the core visualization went through significant changes.
-          </SectionText>
-
-          {data.iterations.map((iteration, i) => (
-            <div key={i} className="iteration-container-nk26">
-              <SubsectionTitle>{iteration.title}</SubsectionTitle>
-
-              <BeforeAfterSlider
-                beforeSrc={iteration.beforeImage.src}
-                afterSrc={iteration.afterImage.src}
-                beforeAlt={iteration.beforeImage.alt}
-                afterAlt={iteration.afterImage.alt}
-                caption={iteration.caption}
-              />
-
-              <TechnicalNote>
-                <TechNoteText>{iteration.technicalNote}</TechNoteText>
-              </TechnicalNote>
-
-              <SectionText>
-                <strong>The Fix:</strong> {iteration.fix}
-              </SectionText>
-            </div>
-          ))}
-        </GridMain>
-
-        <GridMeta>
-          <DesignRationaleCard
-            title="Motion Graveyard"
-            items={data.motionGraveyard.items.map(item =>
-              `${item.name}: ${item.whyCut}`
-            )}
-          />
-        </GridMeta>
-      </GridPatternA>
-
-      {/* Learnings - Pattern C */}
-      <GridPatternC id="im-learnings" sectionLabel="Learnings">
-        <SectionTitle full>Honest Learnings About Motion Design</SectionTitle>
-
-        <GridNested>
-          <NestedMain>
-            {data.learnings.map((learning, i) => (
-              <React.Fragment key={i}>
-                <SubsectionTitle>{`${i + 1}. ${learning.title}`}</SubsectionTitle>
-                <SectionText>{learning.description}</SectionText>
-              </React.Fragment>
+        {/* Overview Section - Pattern A */}
+        <GridPatternA id="im-overview" sectionLabel="Project overview">
+          <GridMain>
+            <SectionTitle>{data.overview.title}</SectionTitle>
+            {data.overview.paragraphs.map((p, i) => (
+              <SectionText key={i}>{p}</SectionText>
             ))}
-          </NestedMain>
-
-          <NestedAside>
-            <DesignRationaleCard
-              title="If I Could Do It Again"
-              items={data.retrospective}
+            <ImageWrapper
+              src={data.overview.image.src}
+              alt={data.overview.image.alt}
+              caption={data.overview.image.caption}
+              className="img-wrapper-flush-nk26"
+              imageClassName="im-overview-image-nk26"
             />
-          </NestedAside>
-        </GridNested>
-      </GridPatternC>
+          </GridMain>
+
+          <GridMeta>
+            <MetaItem label="Role" value={data.meta.role} />
+            <MetaItem label="Timeline" value={data.meta.timeline} />
+            <MetaItem label="Team" value={data.meta.team} />
+            <MetaItem label="Platform" value={data.meta.platform} />
+            <MetaItem label="Impact" value={data.meta.impact} />
+            <MetaItem label="Context" value={data.meta.context} />
+          </GridMeta>
+        </GridPatternA>
+
+        {/* Pain Points Section - Pattern B */}
+        <GridPatternB sectionLabel="User pain points">
+          <GridText>
+            <SectionTitle>The Status Visibility Problem</SectionTitle>
+            <SectionText>
+              Small business owners needed to track influencers across different campaign stages.
+              The original 5-tab interface made it impossible to see progress at a glance.
+            </SectionText>
+          </GridText>
+
+          <GridVisual>
+            <PainPointsGrid painPoints={data.painPoints} />
+          </GridVisual>
+        </GridPatternB>
+
+        {/* Results - Pattern A - Moved after pain points */}
+        <GridPatternA id="im-results" sectionLabel="Results and impact">
+          <GridMain>
+            <SectionTitle>Results</SectionTitle>
+            <ResultsGrid results={data.results} />
+
+            <SubsectionTitle>What Users Said</SubsectionTitle>
+            {data.userQuotes.map((quote, i) => (
+              <UserQuote key={i} cite={quote.cite}>
+                {quote.text}
+              </UserQuote>
+            ))}
+          </GridMain>
+
+          <GridMeta>
+            <DesignRationaleCard
+              title="Key Findings"
+              items={data.usabilityTesting.keyFindings}
+            />
+          </GridMeta>
+        </GridPatternA>
+
+        {/* Problem Discovery - Pattern B (consolidated) */}
+        <GridPatternB id="im-discovery" sectionLabel="Problem discovery">
+          <GridText>
+            <SectionTitle>{data.problemDiscovery.title}</SectionTitle>
+            <SectionText>{data.problemDiscovery.intro}</SectionText>
+
+            <div className="problem-cards-nk26">
+              {data.problemDiscovery.keyProblems.map((problem, i) => (
+                <div key={i} className="problem-card-nk26">
+                  {problem.icon && (
+                    <div className="problem-icon-nk26">
+                      <img src={problem.icon} alt="" />
+                    </div>
+                  )}
+                  <strong>{problem.title}</strong>
+                  <p>{problem.problem}</p>
+                  <p className="evidence-nk26"><em>{problem.evidence}</em></p>
+                </div>
+              ))}
+            </div>
+
+            <TechnicalNote>
+              <TechNoteText>{data.problemDiscovery.insight}</TechNoteText>
+            </TechnicalNote>
+          </GridText>
+
+          <GridVisual>
+            {data.problemDiscovery.video && (
+              <ImageWrapper
+                src={data.problemDiscovery.video.src}
+                alt="Original interface task flow"
+                caption={data.problemDiscovery.video.caption}
+                type="video"
+                autoPlay
+                loop
+                muted
+                className="img-wrapper-flush-nk26"
+              />
+            )}
+            <div className="metrics-card-nk26" style={{ marginTop: 'var(--space-xl-nk26)' }}>
+              <MetaItem label="Participants" value={data.problemDiscovery.metrics.participants} />
+              <MetaItem label="User Type" value={data.problemDiscovery.metrics.userType} />
+              <MetaItem label="Avg Tab Switches" value={data.problemDiscovery.metrics.avgTabSwitches} />
+            </div>
+          </GridVisual>
+        </GridPatternB>
+
+        {/* Design Decisions - Pattern A */}
+        <GridPatternA id="im-design" sectionLabel="Design decisions">
+          <GridMain>
+            <SectionTitle>{data.designDecisions.title}</SectionTitle>
+            <SectionText>{data.designDecisions.subtitle}</SectionText>
+
+            {/* Summary Video */}
+            {data.designDecisions.summaryVideo && (
+              <ImageWrapper
+                src={data.designDecisions.summaryVideo.src}
+                alt="Redesign walkthrough"
+                caption={data.designDecisions.summaryVideo.caption}
+                type="video"
+                autoPlay
+                loop
+                muted
+                className="img-wrapper-flush-nk26 redesign-video-nk26"
+              />
+            )}
+
+            {/* Iteration 1 */}
+            <SubsectionTitle>{data.designDecisions.iteration1.title}</SubsectionTitle>
+            <SectionText><strong>Problem:</strong> {data.designDecisions.iteration1.problem}</SectionText>
+            <SectionText><strong>Decision:</strong> {data.designDecisions.iteration1.decision}</SectionText>
+
+            <ImageWrapper
+              src={data.designDecisions.iteration1.beforeImage}
+              alt="Tab consolidation comparison"
+              caption={data.designDecisions.iteration1.result}
+              className="img-wrapper-flush-nk26"
+            />
+
+            <TechnicalNote>
+              <TechNoteText>{data.designDecisions.iteration1.metric}</TechNoteText>
+            </TechnicalNote>
+
+            {/* Iteration 2 */}
+            <SubsectionTitle>{data.designDecisions.iteration2.title}</SubsectionTitle>
+            <SectionText><strong>Problem:</strong> {data.designDecisions.iteration2.problem}</SectionText>
+            <SectionText><strong>Decision:</strong> {data.designDecisions.iteration2.decision}</SectionText>
+
+            {data.designDecisions.iteration2.changes.map((change, i) => (
+              <div key={i} className="change-block-nk26">
+                <strong>{change.title}</strong>
+                {change.tabs && (
+                  <FeatureList items={change.tabs} />
+                )}
+                {change.description && <SectionText>{change.description}</SectionText>}
+                {change.milestones && (
+                  <div className="milestones-nk26">
+                    {change.milestones.map((m, j) => (
+                      <span key={j} className="milestone-pill-nk26">{m}</span>
+                    ))}
+                  </div>
+                )}
+                <ImageWrapper
+                  src={change.image}
+                  alt={change.title}
+                  caption={change.reasoning}
+                  className="img-wrapper-flush-nk26"
+                />
+              </div>
+            ))}
+
+            <TechnicalNote>
+              <TechNoteText>{data.designDecisions.iteration2.keyInsight}</TechNoteText>
+            </TechnicalNote>
+
+            <UserQuote cite={data.designDecisions.iteration2.quote.cite}>
+              {data.designDecisions.iteration2.quote.text}
+            </UserQuote>
+          </GridMain>
+
+          <GridMeta>
+            <DesignRationaleCard
+              title="Design Principles"
+              items={data.designDecisions.designPrinciples.map(p =>
+                `${p.title}: ${p.description}`
+              )}
+            />
+          </GridMeta>
+        </GridPatternA>
+
+        {/* Prototypes Section - Pattern C */}
+        <GridPatternC id="im-prototypes" sectionLabel="Shipped prototypes">
+          <SectionTitle full>{data.prototypes.title}</SectionTitle>
+          <SectionText>{data.prototypes.subtitle}</SectionText>
+
+          <div className="prototypes-grid-nk26">
+            {data.prototypes.items.map((prototype, i) => (
+              <div key={i} className="prototype-card-nk26">
+                <ImageWrapper
+                  src={prototype.video}
+                  alt={prototype.title}
+                  type="video"
+                  autoPlay
+                  loop
+                  muted
+                  className={prototype.isLaptop ? 'laptop-video-nk26' : ''}
+                />
+                <div className="prototype-info-nk26">
+                  <strong>{prototype.title}</strong>
+                  <p>{prototype.description}</p>
+                  <span className="key-feature-nk26">{prototype.keyFeature}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </GridPatternC>
+
+        {/* Micro-interactions - Pattern B */}
+        <GridPatternB sectionLabel="Micro-interactions">
+          <GridText>
+            <SectionTitle>{data.microInteractions.title}</SectionTitle>
+            <SectionText>{data.microInteractions.intro}</SectionText>
+
+            {data.microInteractions.items.map((item, i) => (
+              <div key={i} className="micro-item-nk26">
+                <strong>{item.name}</strong>
+                <p>{item.description}</p>
+                <span className="micro-type-nk26">{item.type}</span>
+                <p className="micro-purpose-nk26">{item.purpose}</p>
+              </div>
+            ))}
+
+            <TechnicalNote>
+              <TechNoteText>{data.microInteractions.note}</TechNoteText>
+            </TechnicalNote>
+          </GridText>
+
+          <GridVisual>
+            {data.microInteractions.video && (
+              <ImageWrapper
+                src={data.microInteractions.video.src}
+                alt="Micro-interactions demo"
+                caption={data.microInteractions.video.caption}
+                type="video"
+                autoPlay
+                loop
+                muted
+                className="img-wrapper-flush-nk26"
+              />
+            )}
+            <div className="usability-stats-nk26" style={{ marginTop: 'var(--space-xl-nk26)' }}>
+              <SubsectionTitle>Validation</SubsectionTitle>
+              <MetaItem label="Participants" value={data.usabilityTesting.participants} />
+              <MetaItem label="Tasks Tested" value={data.usabilityTesting.tasksTested} />
+              <MetaItem label="Success Rate" value={data.usabilityTesting.metrics.successRate} />
+              <MetaItem label="Click Reduction" value={data.usabilityTesting.metrics.clickReduction} />
+              <MetaItem label="Time Saved" value={data.usabilityTesting.metrics.timeSaved} />
+            </div>
+          </GridVisual>
+        </GridPatternB>
+
+        {/* Learnings - Pattern C */}
+        <GridPatternC sectionLabel="Learnings">
+          <SectionTitle full>Learnings</SectionTitle>
+
+          <GridNested>
+            <NestedMain>
+              {data.learnings.map((learning, i) => (
+                <React.Fragment key={i}>
+                  <SubsectionTitle>{`${i + 1}. ${learning.title}`}</SubsectionTitle>
+                  <SectionText>{learning.description}</SectionText>
+                </React.Fragment>
+              ))}
+            </NestedMain>
+
+            <NestedAside>
+              <DesignRationaleCard
+                title="If I Could Do It Again"
+                items={data.retrospective}
+              />
+            </NestedAside>
+          </GridNested>
+        </GridPatternC>
 
       </div>
       {/* End case-study-content-nk26 */}

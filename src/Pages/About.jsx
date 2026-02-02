@@ -99,17 +99,17 @@ export default function About() {
               <h3>Skills</h3>
               <div className="skills-grid">
                 {Object.entries(section.content.skills).map(([key, skillCategory], index) => (
-                  <div key={index} className="skill-card">
-                    <h4>{skillCategory.title}</h4>
-                    <div className="skill-icons">
-                      {skillCategory.software.map((skill, idx) => (
-                        <div key={idx}>
-                          <img src={skill.icon} alt={skill.name} title={skill.name} className="skill-icon" />
-                          <span>{skill.name}</span>
-                        </div>
-                      ))}
+                    <div key={index} className="skill-card">
+                      <h4>{skillCategory.title}</h4>
+                      <div className="skill-icons">
+                        {skillCategory.software.map((skill, idx) => (
+                          <div key={idx} className="skill-icon-wrapper">
+                            <img src={skill.icon} alt={skill.name} title={skill.name} className="skill-icon" />
+                            <span>{skill.name}</span>
+                          </div>
+                        ))}
+                      </div>
                     </div>
-                  </div>
                 ))}
               </div>
             </div>
@@ -120,13 +120,12 @@ export default function About() {
         return (
           <div className={`timeline-section ${expandedSections.has('journey') ? 'timeline-visible' : ''}`}>
             <div className="custom-timeline">
-              <div className="central-line"></div>
               {section.content.timeline.map((event, index) => {
                 const IconComponent = IoIcons[event.icon];
                 return (
                   <div 
                     key={index} 
-                    className={`custom-timeline-item ${index % 2 === 0 ? 'even' : 'odd'}`}
+                    className="custom-timeline-item"
                   >
                     <div className="custom-timeline-content">
                       <div className="timeline-icon">

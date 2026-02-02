@@ -27,15 +27,31 @@ import {
   IoPeople // B2C
 } from 'react-icons/io5';
 
+// Case study page imports for preloading
+const caseStudyImports = {
+  '/case-study/christine-valmy': () => import('./CaseStudies/ChristineValmy.jsx'),
+  '/case-study/manage-farms': () => import('./CaseStudies/ManageFarms.jsx'),
+  '/case-study/influencer-marketing': () => import('./CaseStudies/InfluencerMarketing.jsx'),
+  '/case-study/task-reminders': () => import('./CaseStudies/TaskReminders.jsx'),
+  '/case-study/sustainable-packaging': () => import('./CaseStudies/SustainablePackaging.jsx'),
+};
+
 // Case Study Card Content Component
 const CaseStudyCard = React.memo(({ study, activeCategories, caseStudyCategories, navigate }) => {
   const isVisible = activeCategories.size === 0 || study.categories.some(cat => activeCategories.has(cat));
   const { startTransition } = useTransition();
   const videoRef = useRef(null);
+  const hasPreloaded = useRef(false);
 
   const handleMouseEnter = () => {
     if (videoRef.current && study.videoSrc) {
       videoRef.current.play().catch(() => {});
+    }
+
+    // Preload the case study page on hover
+    if (!hasPreloaded.current && !study.comingSoon && !study.isExternal && caseStudyImports[study.path]) {
+      hasPreloaded.current = true;
+      caseStudyImports[study.path]();
     }
   };
 
@@ -467,7 +483,7 @@ export default function Home() {
           {/* Name - Bottom Left. Strokes: left, right (scaleY top→bottom), bottom (scaleX left→right). */}
           <div className="hero-name-container">
             <AnimatedHeroName text="namit" animate={heroInView ? "visible" : "hidden"} />
-          <motion.div 
+          <motion.div
               className="hero-name-left-stroke"
               initial="hidden"
               animate={heroInView ? "visible" : "hidden"}
@@ -528,7 +544,7 @@ export default function Home() {
                 }, delay);
               }}
             />
-          <motion.div 
+          <motion.div
               className="hero-tagline-right-stroke"
               initial="hidden"
               animate={heroInView ? "visible" : "hidden"}
@@ -583,7 +599,7 @@ export default function Home() {
               >
                 {heroLottieAnimation && (
                 <Suspense fallback={<div style={{ width: '100%', height: '100%' }} />}>
-                  <Lottie 
+                  <Lottie
                     animationData={heroLottieAnimation}
                       loop={true}
                     autoplay={true}
@@ -632,12 +648,12 @@ export default function Home() {
         </HeroAnimationContext.Provider>
 
         {/* View Projects: appears after Lottie, hides when case studies section is in view */}
-        <motion.div 
+        <motion.div
           className="scroll-indicator"
           initial={{ opacity: 0, y: 20 }}
-          animate={{ 
-            opacity: showHeroLottie && !caseStudiesInView ? 1 : 0, 
-            y: showHeroLottie && !caseStudiesInView ? 0 : 20 
+          animate={{
+            opacity: showHeroLottie && !caseStudiesInView ? 1 : 0,
+            y: showHeroLottie && !caseStudiesInView ? 0 : 20
           }}
           transition={{ delay: showHeroLottie ? 0.5 : 0, duration: 0.5 }}
           style={{ 

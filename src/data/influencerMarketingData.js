@@ -1,7 +1,6 @@
 /**
  * Influencer Marketing Case Study Data
- * B2B platform for tracking influencer campaigns
- * Narrative: Motion design explorations that didn't ship
+ * From fragmented status tabs to unified campaign tracking
  */
 
 export const influencerMarketingData = {
@@ -10,326 +9,353 @@ export const influencerMarketingData = {
   // Hero Section
   hero: {
     videoSrc: '/videos/Case Studies/MI/MI on laptop.mp4',
-    webmSrc: '/videos/Case Studies/IM/im-hero-subway.webm',
-    posterSrc: '/images/Case Studies/IM/im-hero-poster.jpg',
-    subtitle: 'How elaborate motion design explorations taught me when NOT to animate'
+    posterSrc: '/images/Case Studies/MI/mi-hero-poster.jpg',
+    subtitle: 'How consolidating 5 fragmented tabs reduced clicks by 28% and saved nearly 2 minutes per task'
   },
 
   // Project Metadata
   meta: {
-    role: 'UX Designer + Motion Designer',
-    timeline: '6 weeks (May - July 2023)',
+    role: 'Product Designer',
+    timeline: '6 weeks (May - August 2023)',
     team: '1 designer (me), 1 PM, 4 Developers',
     platform: 'Web Application (B2B SaaS)',
-    impact: '28% fewer missed milestones',
-    challenge: 'Shipped static, learned about motion'
+    impact: '28% fewer clicks, 95% task success rate',
+    context: 'Early-stage startup, fast iteration cycles'
   },
 
-  // Overview / Challenge Section
+  // Overview
   overview: {
     title: 'The Challenge',
     paragraphs: [
-      'My Influency helps small businesses manage influencer marketing campaigns. The problem: users were missing critical milestones because they couldn\'t quickly understand where each influencer was in the campaign pipeline.',
-      'The existing interface used a simple table with text status labels. Users had to read each row carefully to understand progress—cognitive overhead that led to missed deadlines and frustrated clients.'
+      'My Influency helps small businesses manage influencer marketing campaigns. The original design used 5 separate tabs—Overview, Current, Pending, Rejected, Completed—each showing lists of influencers in that state.',
+      'Like Facebook\'s old friend request flow, this status-based fragmentation forced users to check multiple tabs just to find one influencer. Worse, there was no visibility into WHERE an influencer was in the campaign pipeline. Users resorted to texting influencers: "Hey, what\'s your status?"'
     ],
     image: {
-      src: '/images/Case Studies/MI/Original Design/old design campaign.svg',
-      alt: 'Original table-based interface with text status labels',
-      caption: 'The original interface: functional but required careful reading to understand status'
+      src: '/images/Case Studies/MI/Original Design/original design high res.jpg',
+      alt: 'Original 5-tab interface with status-based navigation',
+      caption: 'The original design: 5 tabs grouping influencers by status, no progress visibility'
     }
   },
 
   // Pain Points
   painPoints: [
     {
-      title: 'Campaign Managers',
+      title: 'Small Business Owners',
       icon: '/images/Case Studies/MI/logo/campaign-manager.svg',
       items: [
-        'Managing 10-50 influencers per campaign',
-        'Missing milestone deadlines buried in tables',
-        'No quick way to see "what needs attention"',
-        'Context switching between email and platform'
+        'Managing 5-15 influencers per campaign',
+        'Checking multiple tabs to track one influencer',
+        'No visibility into campaign progress',
+        'Texting influencers for status updates'
       ]
     },
     {
-      title: 'Interface Problems',
+      title: 'Original Design Problems',
       icon: '/images/Case Studies/MI/logo/interface-problems.svg',
       items: [
-        'Text-heavy status required reading each row',
-        'No visual hierarchy for urgent items',
-        'All influencers looked equally important',
-        'Progress not scannable at a glance'
+        '5 status-based tabs at same navigation level',
+        'Influencers grouped by state, not campaign flow',
+        'No timeline showing progress milestones',
+        'Fragmented view of campaign execution'
       ]
     }
   ],
 
-  // The Subway Metaphor
-  subwayMetaphor: {
-    title: 'The Subway Metaphor',
-    intro: 'I proposed visualizing campaign progress as a subway line. Each influencer is a "train" moving through stations (milestones). The metaphor clicked immediately with stakeholders.',
-    explanation: [
-      'Each campaign is a subway line with 5 stations: Contract → Content Brief → Draft Review → Revisions → Published',
-      'Influencers are "trains" that move along the line as they complete milestones',
-      'Color indicates status: on track (green), delayed (yellow), blocked (red)',
-      'The spatial layout lets you see all progress at once—no reading required'
-    ],
+  // Problem Discovery (consolidated)
+  problemDiscovery: {
+    title: 'Problem Discovery',
+    intro: 'Task analysis with 15 small business owners revealed three recurring pain points—all stemming from the original 5-tab, status-based architecture.',
     video: {
-      src: '/videos/Case Studies/MI/Campaign-tracking.mp4',
-      alt: 'Subway line visualization showing influencers as trains at different stations',
-      caption: 'The subway metaphor: campaigns as lines, influencers as trains, milestones as stations'
+      src: '/videos/Case Studies/MI/Redesign.mp4',
+      caption: 'The original interface: users toggled between tabs 8+ times per session'
+    },
+    keyProblems: [
+      {
+        title: 'Tab-Hopping to Find Influencers',
+        icon: '/images/Case Studies/MI/logo/find-influencer.svg',
+        problem: 'Finding one influencer required checking multiple status tabs',
+        evidence: 'Task analysis: "Find influencer within 5 miles" required navigating through 3-5 tabs'
+      },
+      {
+        title: 'No Progress Visibility',
+        icon: '/images/Case Studies/MI/logo/influencer-progress.svg',
+        problem: 'Users couldn\'t see WHERE influencers were stuck—just their final status',
+        evidence: 'Interview: "I have to text them to ask what\'s taking so long"'
+      },
+      {
+        title: 'Acquisition Focus, Not Execution',
+        icon: '/images/Case Studies/MI/logo/active-post.svg',
+        problem: 'Design optimized for finding influencers, not managing active campaigns',
+        evidence: 'Users maintained separate spreadsheets for progress tracking'
+      }
+    ],
+    insight: 'Users needed execution transparency, not status grouping. The priority isn\'t "how many pending?" but "is this influencer on track?"',
+    metrics: {
+      participants: 15,
+      userType: 'Small business owners',
+      avgTabSwitches: '8+ per session'
     }
   },
 
-  // Motion Design Explorations
-  motionExplorations: {
-    title: 'Motion Design Explorations',
-    intro: 'With the subway metaphor approved, I got excited about animation opportunities. Trains should move! Stations should pulse! I spent 2 weeks creating elaborate motion concepts.',
-    explorations: [
+  // Design Decisions
+  designDecisions: {
+    title: 'Information Architecture Redesign',
+    subtitle: 'Two iterations: consolidation, then functional split',
+    // summaryVideo: {
+    //   src: '/videos/Case Studies/MI/Redesign.mp4',
+    //   caption: 'Walkthrough of the redesigned interface: from fragmented tabs to unified tracking'
+    // },
+    
+    // Iteration 1: Tab Consolidation
+    iteration1: {
+      title: 'Iteration 1: Consolidate Status Tabs',
+      problem: '5 separate tabs forced users to hunt for influencers',
+      decision: 'Merged 5 tabs into 1 "Influencers" tab with status filters',
+      beforeImage: '/images/Case Studies/MI/Changes/Tab Restructure.jpg',
+      annotations: [
+        {
+          x: '15%',
+          y: '80%',
+          label: 'Before: 5 separate tabs',
+          detail: 'Overview, Current, Pending, Rejected, Completed—like Facebook friend requests'
+        },
+        {
+          x: '70%',
+          y: '80%',
+          label: 'After: 1 tab with filters',
+          detail: 'Current (4), Pending (2), Completed (1), Rejected (2) became filters within one view'
+        }
+      ],
+      result: 'Users could filter by status WITHOUT navigating away—but still no progress timeline',
+      metric: '28% reduction in clicks for "find influencer X" task'
+    },
+
+    // Iteration 2: Functional Split
+    iteration2: {
+      title: 'Iteration 2: Shift from Acquisition to Execution',
+      problem: 'Consolidation helped, but users still lacked campaign PROGRESS visibility',
+      decision: 'Split by function: Campaign analytics vs. Influencer tracking',
+      changes: [
+        {
+          title: '"Influencers" Became "Tracking"',
+          description: 'Timeline showing each influencer\'s progress through campaign milestones',
+          milestones: [
+            'Sent Request',
+            'Product Pickup',
+            'First Draft',
+            'Second Draft',
+            'Published Post'
+          ],
+          image: '/images/Case Studies/MI/Changes/Influencers to Tracking.jpg',
+          reasoning: 'Like project management software—transparency for both business and influencer'
+        },
+        {
+          title: '"Overview" Split into 3 Tabs',
+          tabs: [
+            'Info/Overview: Campaign summary stats',
+            'Content: Published social posts from influencers',
+            'Analytics: Performance metrics (engagement, impressions, cost per view)'
+          ],
+          image: '/images/Case Studies/MI/Changes/campaign overview.jpg',
+          reasoning: 'Separated campaign-level insights from influencer-level tracking'
+        },
+        
+      ],
+      keyInsight: 'The priority shifted from influencer acquisition (finding/vetting) to campaign execution (contract management + progress transparency)',
+      beforeAfterImages: {
+        before: '/images/Case Studies/MI/Changes/Influencers to Tracking.jpg',
+        after: '/images/Case Studies/MI/Changes/Influencers to Tracking.jpg',
+        caption: 'From status grouping to timeline visualization'
+      },
+      quote: {
+        text: 'Before, I had to text each influencer to ask where they were. Now I just check the timeline.',
+        cite: '— Small business owner, usability testing'
+      }
+    },
+
+    // Design Principles
+    designPrinciples: [
       {
-        title: 'Exploration 1: Stage Progression Animation',
-        description: 'When an influencer completes a milestone, their "train" would animate smoothly to the next station with a satisfying arrival animation.',
-        animationPath: '/lottie/im-train-progression.json',
-        technicalNote: 'Built in After Effects, exported via Bodymovin. 60fps, 2.3 second duration. Train uses spring easing (tension: 180, friction: 12) for playful arrival bounce.',
-        verdict: 'Didn\'t ship',
-        reason: 'Status updates happen in batches (CSV import). Animating 30 trains simultaneously was chaotic, not delightful.'
+        title: 'Function Over Status',
+        description: 'Organize by what users need to DO, not abstract data states',
+        example: 'Analytics for decisions, Tracking for execution—not "Pending" and "Completed"'
       },
       {
-        title: 'Exploration 2: Attention-Seeking Pulse',
-        description: 'Blocked or delayed trains would pulse with a subtle glow, drawing the eye without being annoying.',
-        animationPath: '/lottie/im-attention-pulse.json',
-        technicalNote: 'CSS animation with box-shadow and scale. 3 second loop, ease-in-out. Tested at 0.5x, 1x, and 2x speed to find the "noticeable but not distracting" sweet spot.',
-        verdict: 'Shipped (modified)',
-        reason: 'Simplified to a static red dot with subtle CSS pulse. The elaborate glow was distracting when multiple items needed attention.'
+        title: 'Timeline Transparency',
+        description: 'Visualize progress, don\'t just label status',
+        example: 'Seeing "stuck at First Draft for 5 days" beats reading "Status: In Progress"'
       },
       {
-        title: 'Exploration 3: New Contract Line Drawing',
-        description: 'When a new influencer is added, the subway line would "draw" from the start, with the train appearing at the first station.',
-        animationPath: '/lottie/im-line-drawing.json',
-        technicalNote: 'SVG stroke-dasharray animation. Line draws over 1.5 seconds, train fades in at 1.2 seconds for overlap. Easing: cubic-bezier(0.25, 0.1, 0.25, 1).',
-        verdict: 'Didn\'t ship',
-        reason: 'Users add influencers in bulk. The "wow" moment of one animated entry became tedious when adding 20 influencers.'
+        title: 'Single Source of Truth',
+        description: 'No more tab-hopping or external spreadsheets',
+        example: 'Everything about one influencer visible in Tracking tab'
       }
     ]
   },
 
-  // Technical Reality Check
-  technicalReality: {
-    title: 'Why the Animations Didn\'t Ship',
-    intro: 'After presenting my motion concepts, the engineering team raised valid concerns. Here\'s why we scaled back:',
-    reasons: [
+  // Prototypes (all shipped)
+  prototypes: {
+    title: 'Final Prototypes (All Shipped)',
+    subtitle: 'Screen recordings from the live site',
+    items: [
       {
-        title: 'Batch Operations',
-        description: 'Users import influencers via CSV and update statuses in bulk. Animating 30+ items simultaneously created visual chaos instead of clarity.',
-        icon: 'batch'
+        title: 'Campaign Creation',
+        description: 'Streamlined setup flow for new campaigns',
+        video: '/videos/Case Studies/MI/New campaign high res.mp4',
+        keyFeature: 'Step-by-step campaign details, product info, and usage guidelines',
+        isLaptop: true
       },
       {
-        title: 'Performance Budget',
-        description: 'The app needed to run on budget laptops with 50+ influencers visible. Complex animations would drop frames and feel sluggish.',
-        icon: 'performance'
+        title: 'Contracts Management',
+        description: 'Unified view of influencer agreements',
+        video: '/videos/Case Studies/MI/Contracts high res.mp4',
+        keyFeature: 'Contract status tracking with deadlines',
+        isLaptop: true
       },
       {
-        title: 'Development Time',
-        description: 'Implementing smooth, interruptible animations would add 3 weeks to the timeline. The static version shipped faster with the same usability gains.',
-        icon: 'time'
+        title: 'Influencer Discovery',
+        description: 'Grid view with filtering and key metrics',
+        video: '/videos/Case Studies/MI/Explore high res.mp4',
+        keyFeature: 'Location-based search (within 5 miles), pricing, engagement rates',
+        isLaptop: true
       },
       {
-        title: 'Diminishing Returns',
-        description: 'User testing showed the spatial layout itself (not the animation) drove the usability improvement. Animation was polish, not substance.',
-        icon: 'chart'
+        title: 'Campaign Tracking',
+        description: 'Timeline-based progress for each influencer',
+        video: '/videos/Case Studies/MI/Campaign Tracking high res.mp4',
+        keyFeature: 'Milestones from proposal to published post, transparent to both parties',
+        isLaptop: true
       }
     ]
   },
 
-  // What Actually Shipped
-  whatShipped: {
-    title: 'What Actually Shipped',
-    intro: 'The final design kept the subway metaphor but used strategic micro-animations instead of elaborate transitions.',
-    beforeImage: {
-      src: '/images/Case Studies/IM/im-before-table.jpg',
-      alt: 'Original table view with text status labels'
+  // Micro-interactions (minimal)
+  microInteractions: {
+    title: 'Micro-Animations',
+    intro: 'Minimal, purposeful animations—not elaborate motion design',
+    video: {
+      src: '/videos/Case Studies/MI/Campaign-tracking_1.mp4',
+      caption: 'The tracking timeline in action—status changes and hover interactions'
     },
-    afterImage: {
-      src: '/images/Case Studies/IM/im-after-subway.jpg',
-      alt: 'New subway line visualization with color-coded status'
-    },
-    caption: 'Before: text-heavy table. After: scannable subway visualization with strategic color and minimal animation.'
+    items: [
+      {
+        name: 'Status Change Indication',
+        description: 'Subtle highlight when influencer moves to next milestone',
+        type: 'CSS transition',
+        purpose: 'Confirm update without jarring the view'
+      },
+      {
+        name: 'Tracking Pill Hover',
+        description: 'Pill expands to show milestone details on hover',
+        type: 'CSS transition',
+        purpose: 'Progressive disclosure—details on demand'
+      }
+    ],
+    note: 'Early startup = fast iteration. Elaborate animations weren\'t the priority—clear information architecture was.'
   },
 
-  // Micro-animations that DID ship
-  microInteractions: [
-    {
-      animationPath: '/lottie/im-hover-expand.json',
-      title: 'Hover to Expand',
-      description: 'Hovering over a train reveals the influencer\'s name and next milestone. 150ms transition, no spring physics—just smooth and predictable.',
-      ariaLabel: 'Animation showing train card expanding on hover',
-      loop: true
+  // Usability Testing
+  usabilityTesting: {
+    title: 'Validation',
+    participants: 12,
+    tasksTested: 8,
+    tasks: [
+      'Find influencer within 5 miles',
+      'Create a campaign',
+      'Assign tasks to influencer',
+      'Send request',
+      'Approve influencer contract',
+      'Reschedule delivery',
+      'View active post',
+      'Terminate a contract'
+    ],
+    metrics: {
+      successRate: '95%',
+      avgTimeOnTask: '2.5 min',
+      clickReduction: '28%',
+      timeSaved: '1 minute 47 seconds per task (avg)'
     },
-    {
-      animationPath: '/lottie/im-status-badge.json',
-      title: 'Status Badge Pulse',
-      description: 'Blocked items get a subtle red pulse (CSS only). Just enough to draw attention without being annoying on a screen full of items.',
-      ariaLabel: 'Animation showing subtle pulse on blocked status badge',
-      loop: true
-    },
-    {
-      animationPath: '/lottie/im-drag-feedback.json',
-      title: 'Drag Reorder Feedback',
-      description: 'When dragging to reorder priority, the dragged item lifts with a shadow and other items smoothly make space. Standard drag-drop affordance.',
-      ariaLabel: 'Animation showing drag and drop reordering interaction',
-      loop: false
-    },
-    {
-      animationPath: '/lottie/im-filter-transition.json',
-      title: 'Filter Transition',
-      description: 'When filtering by status, items fade out/in with staggered timing. Helps users track what changed without jarring layout shifts.',
-      ariaLabel: 'Animation showing filtered items fading in with stagger',
-      loop: false
-    }
-  ],
-
-  // Design Iterations
-  iterations: [
-    {
-      title: 'Iteration 1: From Table to Timeline',
-      beforeImage: {
-        src: '/images/Case Studies/IM/im-iter1-before.jpg',
-        alt: 'Original table layout'
-      },
-      afterImage: {
-        src: '/images/Case Studies/IM/im-iter1-after.jpg',
-        alt: 'First timeline visualization attempt'
-      },
-      caption: 'First attempt at visualizing progress. Users liked seeing all statuses at once but found the horizontal scroll problematic.',
-      technicalNote: 'Horizontal scrolling tested poorly—users missed influencers off-screen. Pivoted to vertical subway layout that fits in viewport.',
-      fix: 'Changed to vertical layout with all influencers visible. Horizontal scrolling only for the timeline portion within each card.'
-    },
-    {
-      title: 'Iteration 2: Color System Refinement',
-      beforeImage: {
-        src: '/images/Case Studies/IM/im-iter2-before.jpg',
-        alt: 'Initial color system with 5 status colors'
-      },
-      afterImage: {
-        src: '/images/Case Studies/IM/im-iter2-after.jpg',
-        alt: 'Simplified 3-color system'
-      },
-      caption: 'Reduced from 5 status colors to 3. Users only cared about: fine, needs attention, blocked.',
-      technicalNote: 'Original system: green (complete), blue (in progress), yellow (pending), orange (delayed), red (blocked). Users couldn\'t remember the difference between yellow and orange. Simplified to: green (on track), yellow (attention), red (blocked).',
-      fix: 'Three colors only. Any status that needs action is yellow. Only truly blocked items are red. Everything else is green.'
-    }
-  ],
-
-  // Iteration Stats
-  iterationStats: {
-    totalIterations: '6 design versions',
-    motionConcepts: '3 elaborate animations designed',
-    motionShipped: '4 micro-interactions (CSS only)',
-    designTime: '2 weeks on motion (mostly cut)'
+    keyFindings: [
+      'Timeline visualization eliminated "where is this influencer?" confusion',
+      'Consolidated tabs reduced context switching',
+      'Users no longer maintained external spreadsheets for tracking',
+      'Some requested additional filtering (implemented post-launch)',
+      'Mobile responsiveness flagged for future improvement'
+    ]
   },
 
   // Results
   results: [
     {
       number: '28%',
+      label: 'Fewer Clicks',
       icon: '/images/Case Studies/MI/logo/fewer-milestones.svg',
-      label: 'Fewer Missed Milestones',
-      description: 'Users caught deadline risks earlier with visual status'
+      description: 'Measured via task analysis (find influencer, check status)'
     },
     {
-      number: '45%',
+      number: '1m 47s',
+      label: 'Time Saved',
       icon: '/images/Case Studies/MI/logo/hourglass.svg',
-      label: 'Faster Status Scanning',
-      description: 'Time to identify "needs attention" items reduced'
+      description: 'Average per task (finding influencer status)'
     },
     {
-      number: '3 sec',
-      icon: '/images/Case Studies/MI/logo/glance-time.svg',
-      label: 'Glance Understanding',
-      description: 'Average time to understand campaign health'
+      number: '95%',
+      label: 'Task Success',
+      icon: '/images/Case Studies/MI/logo/task-success.svg',
+      description: '8 core tasks tested with 12 participants'
     },
     {
       number: '0',
-      icon: '/images/Case Studies/MI/logo/motion.svg',
-      label: 'Elaborate Animations',
-      description: 'Complex motion concepts that shipped (honest metric)'
+      label: 'Spreadsheets',
+      icon: '/images/Case Studies/MI/logo/spreadsheet.svg',
+      description: 'Users stopped maintaining external tracking (qualitative)'
     }
   ],
-
-  // Results Metadata
-  resultsMeta: {
-    measurementPeriod: '8 weeks post-launch',
-    baseline: 'Previous table-based interface',
-    testParticipants: '12 campaign managers',
-    methodology: 'A/B test + qualitative interviews'
-  },
 
   // User Quotes
   userQuotes: [
     {
-      text: 'I can finally see my whole campaign at once. Before, I had to scroll through a table and remember who was where. Now I just look at the colors.',
-      cite: '— Jessica, Marketing Agency Owner'
+      text: 'I don\'t have to text my influencers anymore to ask "hey, where are you at?" I just check the timeline.',
+      cite: '— Small business owner, usability testing'
     },
     {
-      text: 'The red dots actually make me check on blocked influencers. Before, those rows just blended in with everything else.',
-      cite: '— Marcus, Campaign Manager'
+      text: 'Before, I had a spreadsheet to track everyone. Now it\'s all in one place.',
+      cite: '— Marketing agency user, post-launch interview'
     }
   ],
 
-  // Honest Learnings
+  // Learnings
   learnings: [
     {
-      title: 'Motion is a Tool, Not a Goal',
-      description: 'I spent 2 weeks on animations that didn\'t ship. The spatial layout—not the animation—drove usability gains. Animation should serve the user, not the designer\'s portfolio.'
+      title: 'Status ≠ Progress',
+      description: 'Grouping by status (pending, completed) doesn\'t show progress. Timelines reveal WHERE things are stuck, status labels just say "it\'s stuck."'
     },
     {
-      title: 'Design for Batch Operations',
-      description: 'Single-item animations feel delightful in prototypes. Real users import 30 influencers at once. Design for the common case, not the demo.'
+      title: 'Consolidation First, Then Split by Function',
+      description: 'Iteration 1 merged tabs to reduce fragmentation. Iteration 2 split by user intent (analytics vs. tracking). Both were necessary.'
     },
     {
-      title: 'CSS > Lottie for UI Animation',
-      description: 'The micro-animations that shipped were all CSS. Faster to implement, easier to tune, better performance. Save Lottie for illustrations, not UI feedback.'
+      title: 'Transparency for Both Parties',
+      description: 'The timeline worked because BOTH businesses and influencers could see progress. Mutual visibility reduced friction.'
     },
     {
-      title: 'Static Can Be Enough',
-      description: 'The subway visualization worked because of spatial layout and color—not animation. Sometimes the best motion design decision is choosing not to animate.'
+      title: 'Fast Iteration > Perfect Design',
+      description: 'Early startup = ship fast, learn, iterate. High-fidelity wireframes straight to dev. No time for elaborate motion design (and didn\'t need it).'
     }
   ],
 
-  // Retrospective - What I'd Do Differently
+  // Retrospective
   retrospective: [
-    '1. Prototype with real data volumes (30+ items) from day one',
-    '2. Check with engineering before deep-diving on animation',
-    '3. Time-box motion explorations (1 day, not 2 weeks)',
-    '4. Test static version first—add animation only if needed'
+    'Should have tested with marketing agencies earlier (not just small businesses)',
+    'Mobile responsiveness should have been priority #1 (flagged late)',
+    'Could have validated timeline concept with paper prototypes before building',
+    'Would conduct follow-up research 3 months post-launch to measure sustained impact'
   ],
-
-  // Motion Design Graveyard - The animations that didn't ship
-  motionGraveyard: {
-    title: 'The Motion Design Graveyard',
-    intro: 'These concepts live in my portfolio, not in production. Each taught me something about when animation helps vs. when it\'s just showing off.',
-    items: [
-      {
-        name: 'Train Arrival Bounce',
-        description: 'Spring physics when train reaches station',
-        whyCut: 'Felt playful in isolation, chaotic with 30 trains'
-      },
-      {
-        name: 'Line Drawing Onboarding',
-        description: 'Animated explanation of the subway metaphor',
-        whyCut: 'Users understood the metaphor instantly—no explanation needed'
-      },
-      {
-        name: 'Celebration Confetti',
-        description: 'Confetti burst when campaign completes',
-        whyCut: 'Felt patronizing for B2B users completing routine work'
-      }
-    ]
-  },
 
   // Next Project
   nextProject: {
-    title: 'Enroll More Students',
-    description: 'AI enrollment assistant where user research killed my favorite design',
+    title: 'Enroll more students',
+    description: 'Designing an AI-chat agent to simplify the enrollment process for beauty school students',
     href: '/case-study/christine-valmy'
   }
 };

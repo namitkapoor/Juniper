@@ -1,29 +1,81 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 
+/**
+ * HeroVideo - Lazy-loaded video with viewport detection
+ * Only loads and plays when visible in viewport
+ * Optimized to not load video until hero is in view
+ */
 const HeroVideo = ({
   videoSrc,
-  webmSrc,
   posterSrc,
   title,
   subtitle,
   showScrollIndicator = true
 }) => {
+  const videoRef = useRef(null);
+  const containerRef = useRef(null);
+  const [isInView, setIsInView] = useState(false);
+  const [hasLoaded, setHasLoaded] = useState(false);
+
+  // Viewport detection using IntersectionObserver
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          setIsInView(entry.isIntersecting);
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    observer.observe(container);
+
+    return () => {
+      observer.unobserve(container);
+    };
+  }, []);
+
+  // Load and play/pause based on viewport visibility
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    if (isInView) {
+      // Load video if not already loaded
+      if (!hasLoaded) {
+        video.src = videoSrc;
+        video.load();
+        setHasLoaded(true);
+      }
+      video.play().catch(() => {
+        // Autoplay may be blocked, that's okay
+      });
+    } else if (hasLoaded) {
+      video.pause();
+    }
+  }, [isInView, hasLoaded, videoSrc]);
+
   return (
-    <section className="hero-video-nk26" aria-label="Project introduction video">
+    <section
+      ref={containerRef}
+      className="hero-video-nk26"
+      aria-label="Project introduction video"
+    >
       <div className="video-container-nk26">
         <video
+          ref={videoRef}
           className="hero-video-element-nk26"
-          autoPlay
           muted
           playsInline
           loop={false}
           poster={posterSrc}
+          preload="none"
           aria-label={`${title} demonstration video`}
-        >
-          {webmSrc && <source src={webmSrc} type="video/webm" />}
-          <source src={videoSrc} type="video/mp4" />
-        </video>
+        />
 
         <div className="video-overlay-nk26" aria-hidden="true" />
 

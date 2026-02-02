@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
 /**
@@ -223,6 +223,87 @@ export const SectionText = ({ children, className = '' }) => {
   );
 };
 
+/**
+ * LazyVideo - Only loads video when visible in viewport
+ * Pauses when scrolled off-screen to save CPU
+ */
+const LazyVideo = ({
+  src,
+  className,
+  controls = true,
+  autoPlay = false,
+  loop = false,
+  muted = true,
+  ariaLabel
+}) => {
+  const videoRef = useRef(null);
+  const containerRef = useRef(null);
+  const [isVisible, setIsVisible] = useState(false);
+  const [hasLoaded, setHasLoaded] = useState(false);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          setIsVisible(entry.isIntersecting);
+        });
+      },
+      {
+        threshold: 0.1,
+        rootMargin: '200px' // Start loading 200px before visible
+      }
+    );
+
+    observer.observe(container);
+
+    return () => {
+      observer.unobserve(container);
+    };
+  }, []);
+
+  // Load video when first becoming visible
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    if (isVisible && !hasLoaded) {
+      video.src = src;
+      video.load();
+      setHasLoaded(true);
+    }
+  }, [isVisible, hasLoaded, src]);
+
+  // Play/pause based on visibility (only for autoPlay videos)
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video || !hasLoaded || !autoPlay) return;
+
+    if (isVisible) {
+      video.play().catch(() => {});
+    } else {
+      video.pause();
+    }
+  }, [isVisible, hasLoaded, autoPlay]);
+
+  return (
+    <div ref={containerRef}>
+      <video
+        ref={videoRef}
+        className={className}
+        controls={controls}
+        playsInline
+        preload="none"
+        loop={loop}
+        muted={muted}
+        aria-label={ariaLabel}
+      />
+    </div>
+  );
+};
+
 // Image wrapper with caption (supports both images and videos)
 export const ImageWrapper = ({
   src,
@@ -238,7 +319,7 @@ export const ImageWrapper = ({
 }) => {
   // Auto-detect media type from file extension if type not provided
   const mediaType = type || (src?.match(/\.(mp4|webm|ogg|mov|avi)$/i) ? 'video' : 'image');
-  
+
   return (
     <motion.div
       className={`image-wrapper-nk26 ${className}`}
@@ -246,16 +327,14 @@ export const ImageWrapper = ({
       transition={{ duration: 0.5 }}
     >
       {mediaType === 'video' ? (
-        <video
+        <LazyVideo
           src={src}
           className={`section-image-nk26 section-video-nk26 ${imageClassName}`}
-          controls
-          playsInline
-          preload="metadata"
+          controls={true}
           autoPlay={autoPlay}
           loop={loop}
           muted={muted}
-          aria-label={alt}
+          ariaLabel={alt}
         />
       ) : (
         <img

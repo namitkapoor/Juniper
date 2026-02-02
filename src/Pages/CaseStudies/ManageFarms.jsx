@@ -52,7 +52,7 @@ const ManageFarms = () => {
   }, []);
 
   // Build content blocks for sticky scroll section
-  const stickyContentBlocks = data.userResearch.contentBlocks.map((block) => ({
+  const stickyContentBlocks = (data.userResearch?.contentBlocks || []).map((block) => ({
     trigger: block.trigger,
     title: block.title,
     content: (
@@ -105,7 +105,6 @@ const ManageFarms = () => {
       {/* Hero Section */}
       <HeroVideo
         videoSrc={data.hero.videoSrc}
-        webmSrc={data.hero.webmSrc}
         posterSrc={data.hero.posterSrc}
         title={data.hero.title}
         subtitle={data.hero.subtitle}
@@ -128,6 +127,7 @@ const ManageFarms = () => {
             src={data.overview.image.src}
             alt={data.overview.image.alt}
             caption={data.overview.image.caption}
+            className="img-wrapper-flush-nk26"
             imageClassName="mf-overview-image-nk26"
           />
         </GridMain>
@@ -152,7 +152,7 @@ const ManageFarms = () => {
         </GridText>
 
         <GridVisual>
-          <PainPointsGrid painPoints={data.painPoints} />
+          {data.painPoints && <PainPointsGrid painPoints={data.painPoints} />}
         </GridVisual>
       </GridPatternB>
 
@@ -174,19 +174,21 @@ const ManageFarms = () => {
           ))}
         </GridMain>
 
-        <GridMeta sectionLabel="Results metadata">
-          <MetaItem label="Measurement Period" value={data.resultsMeta.measurementPeriod} />
-          <MetaItem label="Test Participants" value={data.resultsMeta.testParticipants} />
-          <MetaItem label="Baseline" value={data.resultsMeta.baseline} />
-          <MetaItem label="Methodology" value={data.resultsMeta.methodology} />
-        </GridMeta>
+        {data.resultsMeta && (
+          <GridMeta sectionLabel="Results metadata">
+            <MetaItem label="Measurement Period" value={data.resultsMeta.measurementPeriod} />
+            <MetaItem label="Test Participants" value={data.resultsMeta.testParticipants} />
+            <MetaItem label="Baseline" value={data.resultsMeta.baseline} />
+            <MetaItem label="Methodology" value={data.resultsMeta.methodology} />
+          </GridMeta>
+        )}
       </GridPatternA>
 
       {/* User Research / Insights - Sticky Scroll */}
       <StickyScrollSection
         id="mf-research"
         sectionLabel="Field research and design principles"
-        visualCards={data.userResearch.visualCards}
+        visualCards={data.userResearch?.visualCards || []}
         contentBlocks={stickyContentBlocks}
       />
 
@@ -218,28 +220,31 @@ const ManageFarms = () => {
       </GridPatternC>
 
       {/* Map View Design - Pattern B */}
-      <GridPatternB sectionLabel="Map view design">
-        <GridText>
-          <SectionTitle>{data.mapView.title}</SectionTitle>
-          <SectionText>{data.mapView.intro}</SectionText>
+      {data.mapView && (
+        <GridPatternB sectionLabel="Map view design">
+          <GridText>
+            <SectionTitle>{data.mapView.title}</SectionTitle>
+            <SectionText>{data.mapView.intro}</SectionText>
 
-          {data.mapView.features.map((feature, i) => (
-            <React.Fragment key={i}>
-              <SubsectionTitle>{feature.title}</SubsectionTitle>
-              <SectionText>{feature.description}</SectionText>
-            </React.Fragment>
-          ))}
-        </GridText>
+            {data.mapView.features.map((feature, i) => (
+              <React.Fragment key={i}>
+                <SubsectionTitle>{feature.title}</SubsectionTitle>
+                <SectionText>{feature.description}</SectionText>
+              </React.Fragment>
+            ))}
+          </GridText>
 
-        <GridVisual>
-          <ImageWrapper
-            src={data.mapView.image.src}
-            alt={data.mapView.image.alt}
-            caption={data.mapView.image.caption}
-            imageClassName="mf-mapview-image-nk26"
-          />
-        </GridVisual>
-      </GridPatternB>
+          <GridVisual>
+            <ImageWrapper
+              src={data.mapView.image.src}
+              alt={data.mapView.image.alt}
+              caption={data.mapView.image.caption}
+              className="mf-mapview-wrapper-nk26"
+              imageClassName="mf-mapview-image-nk26"
+            />
+          </GridVisual>
+        </GridPatternB>
+      )}
 
       {/* Design Iterations - Pattern A */}
       <GridPatternA id="mf-iterations" sectionLabel="Design iterations">
@@ -250,7 +255,7 @@ const ManageFarms = () => {
             Here are three key changes that made the biggest impact.
           </SectionText>
 
-          {data.iterations.map((iteration, i) => (
+          {data.iterations?.map((iteration, i) => (
             <div key={i} className="iteration-container-nk26">
               <SubsectionTitle>{iteration.title}</SubsectionTitle>
 
@@ -273,12 +278,14 @@ const ManageFarms = () => {
           ))}
         </GridMain>
 
-        <GridMeta sectionLabel="Iteration statistics">
-          <MetaItem label="Total Iterations" value={data.iterationStats.totalIterations} />
-          <MetaItem label="User Tests" value={data.iterationStats.userTests} />
-          <MetaItem label="Features Cut" value={data.iterationStats.featuresCut} />
-          <MetaItem label="Accessibility" value={data.iterationStats.accessibilityScore} />
-        </GridMeta>
+        {data.iterationStats && (
+          <GridMeta sectionLabel="Iteration statistics">
+            <MetaItem label="Total Iterations" value={data.iterationStats.totalIterations} />
+            <MetaItem label="User Tests" value={data.iterationStats.userTests} />
+            <MetaItem label="Features Cut" value={data.iterationStats.featuresCut} />
+            <MetaItem label="Accessibility" value={data.iterationStats.accessibilityScore} />
+          </GridMeta>
+        )}
       </GridPatternA>
 
       {/* Micro-interactions - Pattern C */}
@@ -289,7 +296,7 @@ const ManageFarms = () => {
           and reducing uncertainty when using the app with dirty hands or in bright sunlight.
         </SectionText>
 
-        <MicroInteractionShowcase interactions={data.microInteractions} />
+        {data.microInteractions && <MicroInteractionShowcase interactions={data.microInteractions} />}
       </GridPatternC>
 
       {/* Accessibility Features - Pattern C */}
@@ -303,7 +310,14 @@ const ManageFarms = () => {
         <div className="accessibility-grid-nk26">
           {data.accessibilityFeatures.map((feature, i) => (
             <div key={i} className="accessibility-card-nk26">
-              <SubsectionTitle>{feature.title}</SubsectionTitle>
+              <div className="accessibility-header-nk26">
+                {feature.icon && (
+                  <div className="accessibility-icon-nk26">
+                    <img src={feature.icon} alt="" aria-hidden="true" />
+                  </div>
+                )}
+                <SubsectionTitle>{feature.title}</SubsectionTitle>
+              </div>
               <SectionText>{feature.description}</SectionText>
             </div>
           ))}
@@ -315,7 +329,7 @@ const ManageFarms = () => {
         <SectionTitle full>{data.finalDesign.title}</SectionTitle>
         <SectionText>{data.finalDesign.intro}</SectionText>
 
-        <div className="final-screens-grid-nk26">
+        <div className="mf-final-screens-grid-nk26">
           {data.finalDesign.screens.map((screen, i) => (
             <ImageWrapper
               key={i}

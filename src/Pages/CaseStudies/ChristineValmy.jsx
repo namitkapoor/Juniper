@@ -121,7 +121,6 @@ const ChristineValmy = () => {
       {/* Hero Section */}
       <HeroVideo
         videoSrc={data.hero.videoSrc}
-        webmSrc={data.hero.webmSrc}
         posterSrc={data.hero.posterSrc}
         title={data.hero.title}
         subtitle={data.hero.subtitle}
@@ -144,6 +143,7 @@ const ChristineValmy = () => {
             src={data.overview.image.src}
             alt={data.overview.image.alt}
             caption={data.overview.image.caption}
+            className="img-wrapper-flush-nk26"
             imageClassName="cv-overview-image-nk26"
           />
         </GridMain>
@@ -223,6 +223,7 @@ const ChristineValmy = () => {
                     src={concept.image.src}
                     alt={concept.image.alt}
                     caption={concept.image.caption}
+                    className="img-wrapper-flush-nk26"
                     imageClassName={`cv-concept-${i}-image-nk26`}
                   />
                 )}
@@ -290,15 +291,25 @@ const ChristineValmy = () => {
           <div className="iteration-container-nk26">
             <SubsectionTitle>{data.iterations[1].title}</SubsectionTitle>
 
-            <div className="video-comparison-nk26">
-              <video
-                className="iteration-video-nk26"
-                src={data.iterations[1].videoSrc}
-                controls
-                playsInline
-                aria-label="Video showing social media icons being moved from sidebar to below chat widget"
+            {data.iterations[1].image ? (
+              <ImageWrapper
+                src={data.iterations[1].image.src}
+                alt={data.iterations[1].image.alt}
+                caption={data.iterations[1].image.caption}
+                className="cv-iteration-1-wrapper-nk26"
+                imageClassName="cv-iteration-1-image-nk26"
               />
-            </div>
+            ) : data.iterations[1].videoSrc && (
+              <div className="video-comparison-nk26">
+                <video
+                  className="iteration-video-nk26"
+                  src={data.iterations[1].videoSrc}
+                  controls
+                  playsInline
+                  aria-label="Video showing social media icons being moved from sidebar to below chat widget"
+                />
+              </div>
+            )}
 
             <SectionText>
               <strong>The Insight:</strong> {data.iterations[1].insight}
@@ -315,12 +326,25 @@ const ChristineValmy = () => {
           <div className="iteration-container-nk26">
             <SubsectionTitle>{data.iterations[2].title}</SubsectionTitle>
 
-            <ImageWrapper
-              src={data.iterations[2].image.src}
-              alt={data.iterations[2].image.alt}
-              caption={data.iterations[2].image.caption}
-              imageClassName="cv-iteration-2-image-nk26"
-            />
+            {data.iterations[2].image ? (
+              <ImageWrapper
+                src={data.iterations[2].image.src}
+                alt={data.iterations[2].image.alt}
+                caption={data.iterations[2].image.caption}
+                className="img-wrapper-flush-nk26"
+                imageClassName="cv-iteration-2-image-nk26"
+              />
+            ) : data.iterations[2].videoSrc && (
+              <div className="video-comparison-nk26">
+                <video
+                  className="iteration-video-nk26"
+                  src={data.iterations[2].videoSrc}
+                  controls
+                  playsInline
+                  aria-label="Video showing Spanish translation interface"
+                />
+              </div>
+            )}
 
             <SectionText>
               <strong>The Discovery:</strong> {data.iterations[2].discovery}
@@ -343,23 +367,33 @@ const ChristineValmy = () => {
         </GridMeta>
       </GridPatternA>
 
-      {/* Final Design - Pattern B */}
-      <GridPatternB id="cv-solution" sectionLabel="Final design solution">
-        <GridText>
-          <SectionTitle>{data.finalDesign.title}</SectionTitle>
-          <SectionText>{data.finalDesign.intro}</SectionText>
+      {/* Final Design - Pattern C (Full Width) */}
+      <GridPatternC id="cv-solution" sectionLabel="Final design solution">
+        <SectionTitle full>{data.finalDesign.title}</SectionTitle>
+        <SectionText>{data.finalDesign.intro}</SectionText>
 
-          <SubsectionTitle>Three Core Components</SubsectionTitle>
-          <ol className="numbered-list-nk26">
-            {data.finalDesign.components.map((comp, i) => (
-              <li key={i}>
-                <strong>{comp.title}</strong> - {comp.description}
-              </li>
-            ))}
-          </ol>
-        </GridText>
+        <GridNested>
+          <NestedMain>
+            <SubsectionTitle>Three Core Components</SubsectionTitle>
+            <ol className="numbered-list-nk26 cv-final-components-nk26">
+              {data.finalDesign.components.map((comp, i) => (
+                <li key={i}>
+                  <strong>{comp.title}</strong> - {comp.description}
+                </li>
+              ))}
+            </ol>
+          </NestedMain>
+          <NestedAside>
+            <TechnicalNote>
+              <TechNoteText>
+                Final build uses standard CSS Flexbox for responsiveness, ensuring the
+                chat widget and social panel adapt to all screen sizes.
+              </TechNoteText>
+            </TechnicalNote>
+          </NestedAside>
+        </GridNested>
 
-        <GridVisual>
+        <div className="cv-final-showcase-nk26">
           <ImageWrapper
             src={data.finalDesign.desktopImage.src}
             alt={data.finalDesign.desktopImage.alt}
@@ -374,8 +408,8 @@ const ChristineValmy = () => {
             className="cv-final-mobile-wrapper-nk26"
             imageClassName="cv-final-mobile-image-nk26"
           />
-        </GridVisual>
-      </GridPatternB>
+        </div>
+      </GridPatternC>
 
       {/* Micro-interactions - Pattern C */}
       <GridPatternC sectionLabel="Micro-interactions and animations">
