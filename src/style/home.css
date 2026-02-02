@@ -41,7 +41,7 @@
 
   /* Bento grid backgrounds - subtle */
   --bento-background: rgba(0, 0, 0, 0.03);
-  --bento-border: rgba(0, 0, 0, 0.08);
+  --bento-border: rgba(0, 0, 0, 0.806);
 
   /* Gradient definitions */
   --gradient-text: linear-gradient(45deg, #1a1a1a, #4a4a4a);
@@ -92,7 +92,7 @@
 .hero-name-container .hero-name,
 h1.hero-name,
 .hero-name {
-  font-family: 'CabinetGrotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  font-family: var(--font-display);
   font-weight: 200;
   font-size: clamp(10rem, 20vw, 18rem);
   line-height: 0.85;
@@ -222,16 +222,69 @@ h1.hero-name,
   width: 100%;
 }
 
-.case-studies-title{
-  font-family: 'PPMondwest', 'SF Mono', 'Fira Code', monospace;
-  font-size: 2rem;
+.case-studies-title {
+  font-family: CabinetGrotesk;
+  font-size: 2.5rem;
   font-weight: 400;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0;
   color: var(--text-primary, #ffffff);
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  text-align: center;
+  text-align: left;
+  padding-left: 3.5rem;
   text-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+/* Selected Work Pixel Animation Reveal - NK26 */
+.selected-work-reveal-nk26 {
+  position: relative;
+  display: flex;
+  align-items: left;
+  justify-content: left;
+  width: 100%;
+  min-height: 120px;
+  overflow: hidden;
+  padding-bottom: 1.5rem;
+  margin-top: 1rem;
+}
+
+.selected-work-text-container-nk26 {
+  position: relative;
+  z-index: 1;
+}
+
+.pixel-animation-wrapper-nk26 {
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.pixel-animation-nk26 {
+  width: 100%;
+  height: 100%;
+}
+
+.pixel-animation-nk26 svg {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.pixel-animation-placeholder-nk26 {
+  width: 100%;
+  height: 120px;
+}
+
+/* Mobile adjustments for pixel animation */
+@media (max-width: 768px) {
+  .selected-work-reveal-nk26 {
+    min-height: 80px;
+  }
+
+  .pixel-animation-wrapper-nk26 {
+    width: 200px;
+  }
+
+  .pixel-animation-placeholder-nk26 {
+    height: 80px;
+  }
 }
 
 .filter-subtitle {
@@ -392,7 +445,7 @@ h1.hero-name,
 }
 
 .case-study-title-nk26 {
-  font-family: 'CabinetGrotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  font-family: var(--font-display);
   font-weight: 200;
   font-size: clamp(3rem, 8vw, 6rem);
   line-height: 0.9;
@@ -571,7 +624,7 @@ h1.hero-name,
 }
 
 .case-study-title {
-  font-family: 'CabinetGrotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  font-family: var(--font-display);
   font-weight: 200;
   font-size: clamp(3rem, 8vw, 6rem);
   line-height: 0.9;

@@ -1,0 +1,398 @@
+/* ============================================
+   Juniper Portfolio - Design System
+   ============================================
+
+   This file consolidates all design tokens and provides
+   a single source of truth for the design system.
+
+   IMPORTANT: Import this file AFTER fonts.css in main.jsx
+
+   Design Philosophy:
+   - Home page: Edge-to-edge brutalist aesthetic (no border-radius)
+   - Case studies: Polished, curved containers with margins
+   - This is INTENTIONAL differentiation, not inconsistency
+
+   ============================================ */
+
+:root {
+  /* ============================================
+     TYPOGRAPHY - Font Families
+     ============================================ */
+
+  /* Display fonts - for headings and titles */
+  --font-display: 'CabinetGrotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  --font-display-nk26: 'CraftworkGrotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+
+  /* Body font - for paragraphs and general text */
+  --font-body: 'Satoshi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+
+  /* Mono fonts - for technical notes, code, labels */
+  --font-mono: 'PPMondwest', 'SF Mono', 'Fira Code', Consolas, monospace;
+  --font-mono-nk26: 'PPMondwest', 'PPNeueBitBold', 'SF Mono', 'Fira Code', monospace;
+
+  /* ============================================
+     TYPOGRAPHY - Font Sizes (Mobile-first)
+     ============================================ */
+
+  /* Display sizes - use clamp() for fluid scaling */
+  --text-display-xl: clamp(3rem, 10vw, 8rem);      /* Hero names, major headings */
+  --text-display-lg: clamp(2.5rem, 8vw, 5rem);     /* Page titles */
+  --text-display-md: clamp(2rem, 5vw, 3.5rem);     /* Section headings */
+  --text-display-sm: clamp(1.5rem, 3vw, 2rem);     /* Subsection headings */
+
+  /* Body sizes - fixed scale */
+  --text-body-xl: 1.25rem;    /* 20px - Large body, intro text */
+  --text-body-lg: 1.125rem;   /* 18px - Featured paragraphs */
+  --text-body-md: 1rem;       /* 16px - Default body */
+  --text-body-sm: 0.875rem;   /* 14px - Secondary text, captions */
+  --text-body-xs: 0.75rem;    /* 12px - Labels, fine print */
+
+  /* Mono sizes */
+  --text-mono-lg: 1.125rem;   /* Technical headings */
+  --text-mono-md: 0.875rem;   /* Technical notes */
+  --text-mono-sm: 0.75rem;    /* Code labels */
+
+  /* ============================================
+     TYPOGRAPHY - Line Heights
+     ============================================ */
+  --leading-none: 1;
+  --leading-tight: 1.1;       /* Display text */
+  --leading-snug: 1.3;        /* Headings */
+  --leading-normal: 1.5;      /* Body text */
+  --leading-relaxed: 1.65;    /* Long-form reading */
+  --leading-loose: 1.8;       /* Spacious text */
+
+  /* ============================================
+     TYPOGRAPHY - Letter Spacing
+     ============================================ */
+  --tracking-tighter: -0.05em;
+  --tracking-tight: -0.025em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.025em;
+  --tracking-wider: 0.05em;
+  --tracking-widest: 0.1em;
+  --tracking-mono: 0.5em;     /* Uppercase monospace labels */
+
+  /* ============================================
+     TYPOGRAPHY - Font Weights
+     ============================================ */
+  --weight-light: 300;
+  --weight-normal: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+  --weight-black: 900;
+
+  /* ============================================
+     COLORS - Semantic Tokens
+     ============================================ */
+
+  /* These map to light/dark mode values below */
+  /* Background hierarchy */
+  --color-bg-primary: var(--bg-primary-nk26);
+  --color-bg-secondary: var(--bg-secondary-nk26);
+  --color-bg-tertiary: var(--bg-tertiary-nk26);
+  --color-bg-elevated: var(--bg-secondary-nk26);
+
+  /* Text hierarchy */
+  --color-text-primary: var(--text-primary-nk26);
+  --color-text-secondary: var(--text-secondary-nk26);
+  --color-text-tertiary: var(--text-tertiary-nk26);
+  --color-text-muted: var(--text-quaternary-nk26);
+
+  /* Border hierarchy */
+  --color-border-light: var(--border-light-nk26);
+  --color-border-medium: var(--border-medium-nk26);
+  --color-border-strong: var(--border-strong-nk26);
+
+  /* ============================================
+     COLORS - Light Mode (Default)
+     ============================================ */
+  --bg-primary-nk26: #dddddd;
+  --bg-secondary-nk26: #ffffff;
+  --bg-tertiary-nk26: #e8e8e8;
+
+  --text-primary-nk26: #1a1a1a;
+  --text-secondary-nk26: #4a4a4a;
+  --text-tertiary-nk26: #7a7a7a;
+  --text-quaternary-nk26: #a0a0a0;
+
+  --border-light-nk26: rgba(0, 0, 0, 0.08);
+  --border-medium-nk26: rgba(0, 0, 0, 0.12);
+  --border-strong-nk26: rgba(0, 0, 0, 0.2);
+
+  /* Technical notes */
+  --tech-note-bg-nk26: rgba(0, 0, 0, 0.03);
+  --tech-note-border-nk26: rgba(0, 0, 0, 0.15);
+  --tech-note-text-nk26: #4a4a4a;
+
+  /* Accents */
+  --accent-primary-nk26: #2b2b2b;
+  --accent-secondary-nk26: #8b5cf6;
+  --accent-tertiary-nk26: #3b82f6;
+
+  /* Legacy mappings for backward compatibility */
+  --background: var(--bg-primary-nk26);
+  --text-primary: var(--text-primary-nk26);
+  --text-secondary: var(--text-secondary-nk26);
+  --text-tertiary: var(--text-tertiary-nk26);
+
+  /* ============================================
+     SPACING SCALE (8px base)
+     ============================================ */
+  --space-0: 0;
+  --space-px: 1px;
+  --space-0-5: 0.125rem;  /* 2px */
+  --space-1: 0.25rem;     /* 4px */
+  --space-2: 0.5rem;      /* 8px */
+  --space-3: 0.75rem;     /* 12px */
+  --space-4: 1rem;        /* 16px */
+  --space-5: 1.25rem;     /* 20px */
+  --space-6: 1.5rem;      /* 24px */
+  --space-8: 2rem;        /* 32px */
+  --space-10: 2.5rem;     /* 40px */
+  --space-12: 3rem;       /* 48px */
+  --space-16: 4rem;       /* 64px */
+  --space-20: 5rem;       /* 80px */
+  --space-24: 6rem;       /* 96px */
+  --space-32: 8rem;       /* 128px */
+
+  /* NK26 naming aliases (for existing code) */
+  --space-xs-nk26: var(--space-1);
+  --space-sm-nk26: var(--space-2);
+  --space-md-nk26: var(--space-4);
+  --space-lg-nk26: var(--space-6);
+  --space-xl-nk26: var(--space-8);
+  --space-2xl-nk26: var(--space-12);
+  --space-3xl-nk26: var(--space-16);
+  --space-4xl-nk26: var(--space-24);
+  --space-5xl-nk26: var(--space-32);
+
+  /* ============================================
+     BORDER RADIUS
+     ============================================
+
+     Design Intent:
+     - Home page: Use --radius-none for brutalist edge-to-edge grids
+     - Case studies: Use --radius-md to --radius-lg for polished look
+     - Buttons/chips: Use --radius-sm to --radius-md
+     - Avatars/badges: Use --radius-full
+
+     ============================================ */
+  --radius-none: 0;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 24px;
+  --radius-full: 9999px;
+
+  /* ============================================
+     SHADOWS
+     ============================================ */
+  --shadow-none: none;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.12);
+  --shadow-2xl: 0 25px 50px rgba(0, 0, 0, 0.15);
+  --shadow-inner: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+
+  /* NK26 aliases */
+  --shadow-sm-nk26: var(--shadow-sm);
+  --shadow-md-nk26: var(--shadow-md);
+  --shadow-lg-nk26: var(--shadow-lg);
+  --shadow-xl-nk26: var(--shadow-xl);
+
+  /* ============================================
+     ANIMATION - Easing Curves
+     ============================================ */
+  --ease-linear: linear;
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  --ease-smooth: cubic-bezier(0.43, 0.13, 0.23, 0.96);
+
+  /* NK26 aliases */
+  --ease-standard-nk26: var(--ease-in-out);
+  --ease-decelerate-nk26: var(--ease-out);
+  --ease-accelerate-nk26: var(--ease-in);
+  --ease-bounce-nk26: var(--ease-bounce);
+
+  /* ============================================
+     ANIMATION - Durations
+     ============================================ */
+  --duration-instant: 0ms;
+  --duration-fast: 150ms;
+  --duration-base: 250ms;
+  --duration-slow: 400ms;
+  --duration-slower: 600ms;
+  --duration-slowest: 1000ms;
+
+  /* NK26 aliases */
+  --duration-fast-nk26: var(--duration-fast);
+  --duration-base-nk26: var(--duration-base);
+  --duration-slow-nk26: var(--duration-slow);
+  --duration-slower-nk26: var(--duration-slower);
+
+  /* ============================================
+     LAYOUT - Container
+     ============================================ */
+  --max-width: 1400px;
+  --max-width-nk26: 1400px;
+  --container-padding-mobile: 5%;
+  --container-padding-tablet: 8%;
+  --container-padding-desktop: 10%;
+
+  /* NK26 aliases */
+  --container-padding-mobile-nk26: var(--container-padding-mobile);
+  --container-padding-tablet-nk26: var(--container-padding-tablet);
+  --container-padding-desktop-nk26: var(--container-padding-desktop);
+
+  /* ============================================
+     BREAKPOINTS (for reference in JS)
+     Use @media (min-width: ...) for mobile-first
+     ============================================ */
+  --breakpoint-sm: 480px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1200px;
+  --breakpoint-2xl: 1440px;
+
+  /* ============================================
+     Z-INDEX SCALE
+     ============================================ */
+  --z-base: 0;
+  --z-dropdown: 10;
+  --z-sticky: 20;
+  --z-fixed: 30;
+  --z-modal-backdrop: 40;
+  --z-modal: 50;
+  --z-popover: 60;
+  --z-tooltip: 70;
+  --z-max: 9999;
+}
+
+/* ============================================
+   DARK MODE OVERRIDES
+   ============================================ */
+[data-theme="dark"] {
+  --bg-primary-nk26: #1a1a1a;
+  --bg-secondary-nk26: #2a2a2a;
+  --bg-tertiary-nk26: #3a3a3a;
+
+  --text-primary-nk26: #f5f5f5;
+  --text-secondary-nk26: #c0c0c0;
+  --text-tertiary-nk26: #909090;
+  --text-quaternary-nk26: #707070;
+
+  --border-light-nk26: rgba(255, 255, 255, 0.08);
+  --border-medium-nk26: rgba(255, 255, 255, 0.12);
+  --border-strong-nk26: rgba(255, 255, 255, 0.2);
+
+  --tech-note-bg-nk26: rgba(255, 255, 255, 0.05);
+  --tech-note-border-nk26: rgba(255, 255, 255, 0.15);
+  --tech-note-text-nk26: #c0c0c0;
+
+  /* Shadows need higher opacity in dark mode */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.5);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.6);
+  --shadow-2xl: 0 25px 50px rgba(0, 0, 0, 0.7);
+}
+
+/* ============================================
+   TYPOGRAPHY UTILITY CLASSES
+   ============================================ */
+
+/* Display typography */
+.text-display-xl {
+  font-family: var(--font-display);
+  font-size: var(--text-display-xl);
+  font-weight: var(--weight-light);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+}
+
+.text-display-lg {
+  font-family: var(--font-display);
+  font-size: var(--text-display-lg);
+  font-weight: var(--weight-normal);
+  line-height: var(--leading-tight);
+}
+
+.text-display-md {
+  font-family: var(--font-display);
+  font-size: var(--text-display-md);
+  font-weight: var(--weight-normal);
+  line-height: var(--leading-snug);
+}
+
+.text-display-sm {
+  font-family: var(--font-display);
+  font-size: var(--text-display-sm);
+  font-weight: var(--weight-medium);
+  line-height: var(--leading-snug);
+}
+
+/* NK26 Display (uses CraftworkGrotesk) */
+.text-display-nk26 {
+  font-family: var(--font-display-nk26);
+  font-weight: var(--weight-normal);
+  line-height: var(--leading-tight);
+}
+
+/* Body typography */
+.text-body-xl {
+  font-family: var(--font-body);
+  font-size: var(--text-body-xl);
+  line-height: var(--leading-relaxed);
+}
+
+.text-body-lg {
+  font-family: var(--font-body);
+  font-size: var(--text-body-lg);
+  line-height: var(--leading-normal);
+}
+
+.text-body-md {
+  font-family: var(--font-body);
+  font-size: var(--text-body-md);
+  line-height: var(--leading-normal);
+}
+
+.text-body-sm {
+  font-family: var(--font-body);
+  font-size: var(--text-body-sm);
+  line-height: var(--leading-normal);
+}
+
+/* Mono typography */
+.text-mono-label {
+  font-family: var(--font-mono);
+  font-size: var(--text-mono-sm);
+  font-weight: var(--weight-normal);
+  letter-spacing: var(--tracking-mono);
+  text-transform: uppercase;
+}
+
+.text-mono-note {
+  font-family: var(--font-mono-nk26);
+  font-size: var(--text-mono-md);
+  line-height: var(--leading-relaxed);
+}
+
+/* ============================================
+   REDUCED MOTION
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

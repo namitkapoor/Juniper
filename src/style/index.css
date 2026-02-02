@@ -1,5 +1,7 @@
 /* Import fonts first to ensure proper cascade */
 @import './fonts.css';
+/* Design system tokens - after fonts, before component styles */
+@import './design-system.css';
 
 html, body {
     margin: 0;

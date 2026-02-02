@@ -36,6 +36,69 @@ const caseStudyImports = {
   '/case-study/sustainable-packaging': () => import('./CaseStudies/SustainablePackaging.jsx'),
 };
 
+// Pixel Animation Lottie - plays on scroll, with custom colors
+const PixelAnimationLottie = React.memo(({ animationData, isInView }) => {
+  const lottieRef = useRef(null);
+  const hasPlayed = useRef(false);
+
+  // Modify Lottie colors - change dark fills to a visible color
+  const colorizedAnimation = useMemo(() => {
+    if (!animationData) return null;
+
+    // Deep clone the animation data
+    const modified = JSON.parse(JSON.stringify(animationData));
+
+    // Function to recursively find and replace colors
+    const replaceColors = (obj) => {
+      if (!obj || typeof obj !== 'object') return;
+
+      // Look for fill color properties (c.k is the color array in Lottie)
+      if (obj.ty === 'fl' && obj.c && obj.c.k) {
+        // Change to a cyan/teal color [R, G, B] in 0-1 range
+        // You can customize this color: [0.4, 0.8, 0.9] = cyan
+        obj.c.k = [0.1, 0.1, 0.1]; // Teal/cyan color
+      }
+
+      // Look for stroke color
+      if (obj.ty === 'st' && obj.c && obj.c.k) {
+        obj.c.k = [0.86, 0.86, 0.86];
+      }
+
+      // Recurse through arrays and objects
+      if (Array.isArray(obj)) {
+        obj.forEach(replaceColors);
+      } else {
+        Object.values(obj).forEach(replaceColors);
+      }
+    };
+
+    replaceColors(modified);
+    return modified;
+  }, [animationData]);
+
+  // Play animation when scrolled into view
+  useEffect(() => {
+    if (isInView && !hasPlayed.current && lottieRef.current) {
+      hasPlayed.current = true;
+      lottieRef.current.goToAndPlay(0);
+    }
+  }, [isInView]);
+
+  if (!colorizedAnimation) return null;
+
+  return (
+    <div className="pixel-animation-wrapper-nk26">
+      <Lottie
+        lottieRef={lottieRef}
+        animationData={colorizedAnimation}
+        loop={false}
+        autoplay={false}
+        className="pixel-animation-nk26"
+      />
+    </div>
+  );
+});
+
 // Case Study Card Content Component
 const CaseStudyCard = React.memo(({ study, activeCategories, caseStudyCategories, navigate }) => {
   const isVisible = activeCategories.size === 0 || study.categories.some(cat => activeCategories.has(cat));
@@ -361,6 +424,7 @@ export default function Home() {
   const navigate = useNavigate();
   const [heroLottieAnimation, setHeroLottieAnimation] = useState(null);
   const [showHeroLottie, setShowHeroLottie] = useState(false);
+  const [pixelAnimation, setPixelAnimation] = useState(null);
   const [isMobile, setIsMobile] = useState(false);
   const heroSectionRef = useRef(null);
   const caseStudiesRef = useRef(null);
@@ -446,6 +510,12 @@ export default function Home() {
       .then(response => response.json())
       .then(data => setHeroLottieAnimation(data))
       .catch(error => console.error('Error loading Lottie animation:', error));
+
+    // Load pixel animation for Selected Work section
+    fetch('/lottie/pixel-animation-blacc.json')
+      .then(response => response.json())
+      .then(data => setPixelAnimation(data))
+      .catch(error => console.error('Error loading pixel animation:', error));
   }, []);
 
 
@@ -491,7 +561,7 @@ export default function Home() {
                 hidden: { scaleY: 0 },
                 visible: { scaleY: 1, transition: { duration: heroControls.heroNameLeftDuration, delay: heroControls.heroNameLeftDelay, ease: 'easeInOut' } },
               }}
-              style={{ position: 'absolute', left: 0, top: 0, width: '2px', height: '100%', background: 'var(--text-primary, #fff)', transformOrigin: 'top' }}
+              style={{ position: 'absolute', left: 0, top: 0, width: '2px', height: '100%', background: 'var(--bento-border)', transformOrigin: 'top' }}
             />
             <motion.div
               className="hero-name-right-stroke"
@@ -501,7 +571,7 @@ export default function Home() {
                 hidden: { scaleY: 0 },
                 visible: { scaleY: 1, transition: { duration: heroControls.heroNameRightDuration, delay: heroControls.heroNameRightDelay, ease: 'easeInOut' } },
               }}
-              style={{ position: 'absolute', right: 0, top: 0, width: '2px', height: '100%', background: 'var(--text-primary, #fff)', transformOrigin: 'top' }}
+              style={{ position: 'absolute', right: 0, top: 0, width: '2px', height: '100%', background: 'var(--bento-border)', transformOrigin: 'top' }}
             />
             <motion.div
               className="hero-name-bottom-stroke"
@@ -524,7 +594,7 @@ export default function Home() {
                 left: 0,
                 width: '100%',
                 height: '2px',
-                background: 'var(--text-primary, #ffffff)',
+                background: 'var(--bento-border)',
                 transformOrigin: 'left',
               }}
             />
@@ -559,7 +629,7 @@ export default function Home() {
                   },
                 },
               }}
-              style={{ position: 'absolute', right: 0, top: 0, width: '2px', height: '100%', background: 'var(--text-primary, #fff)', transformOrigin: 'top' }}
+              style={{ position: 'absolute', right: 0, top: 0, width: '2px', height: '100%', background: 'var(--bento-border)', transformOrigin: 'top' }}
             />
             <motion.div
               className="hero-tagline-bottom-stroke"
@@ -582,7 +652,7 @@ export default function Home() {
                 left: 0,
                 width: '100%',
                 height: '2px',
-                background: 'var(--text-primary, #ffffff)',
+                background: 'var(--bento-border)',
                 transformOrigin: 'left',
               }}
             />
@@ -624,7 +694,7 @@ export default function Home() {
                   },
                 },
               }}
-              style={{ position: 'absolute', right: 0, top: 0, width: '2px', height: '100%', background: 'var(--text-primary, #fff)', transformOrigin: 'top' }}
+              style={{ position: 'absolute', right: 0, top: 0, width: '2px', height: '100%', background: 'var(--bento-border)', transformOrigin: 'top' }}
             />
             <motion.div
               className="hero-info-bottom-bottom-stroke"
@@ -641,7 +711,7 @@ export default function Home() {
                   },
                 },
               }}
-              style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', height: '2px', background: 'var(--text-primary, #fff)', transformOrigin: 'left' }}
+              style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', height: '2px', background: 'var(--bento-border)', transformOrigin: 'left' }}
             />
           </div>
         </section>
@@ -672,10 +742,28 @@ export default function Home() {
           />
         </motion.div>
 
-         {/* Case Studies Section - Selected work, no category carousel */}
+         {/* Case Studies Section - Selected work with pixel animation reveal */}
          <section ref={caseStudiesRef} className="case-studies">
           <div className="case-studies-header">
-            <h2 className="case-studies-title">Selected work</h2>
+            <div className="selected-work-reveal-nk26">
+              <motion.div
+                className="selected-work-text-container-nk26"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true, amount: 0.5 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+              >
+                <h2 className="case-studies-title">Featured work</h2>
+              </motion.div>
+              {pixelAnimation && (
+                <Suspense fallback={<div className="pixel-animation-placeholder-nk26" />}>
+                  <PixelAnimationLottie
+                    animationData={pixelAnimation}
+                    isInView={caseStudiesInView}
+                  />
+                </Suspense>
+              )}
+            </div>
           </div>
 
           <div className="case-studies-grid">
@@ -696,7 +784,7 @@ export default function Home() {
         {/* <Experiments /> */}
 
         {/* Contact Section */}
-        <Contact />
+        <Contact scrollTopShowRef={caseStudiesRef} />
       </div>
     </>
   );

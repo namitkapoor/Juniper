@@ -39,7 +39,7 @@ a {
   align-items: center;
   background: var(--background);
   position: relative;
-  border: 2px solid var(--text-primary, #2e2d2d);
+  border:2px solid var(--bento-border);
 }
 
 .nav-items {

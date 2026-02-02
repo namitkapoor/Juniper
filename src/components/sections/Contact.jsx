@@ -1,18 +1,22 @@
 // src/components/Contact.jsx
-import React from 'react';
+import React, { useRef } from 'react';
+import { useInView } from 'framer-motion';
 import '../../style/contact.css';
 import { IoLogoLinkedin, IoLogoGithub, IoMailOutline, IoArrowForward, IoArrowUp, IoSparkles } from 'react-icons/io5';
 import { useNavigate } from 'react-router-dom';
 
-export default function Contact() {
+export default function Contact({ scrollTopShowRef }) {
   const navigate = useNavigate();
+  const contactSectionRef = useRef(null);
+  const refToObserve = scrollTopShowRef ?? contactSectionRef;
+  const showScrollTop = useInView(refToObserve, { once: false, margin: '-50px' });
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
-    <section className="contact-section">
+    <section ref={contactSectionRef} className="contact-section">
       <div className="contact-wrapper">
         <div className="contact-content">
           <div className="contact-left">
@@ -91,9 +95,10 @@ export default function Contact() {
 
         <div className="controls-container">
           <button 
-            className="scroll-top" 
+            className={`scroll-top${showScrollTop ? ' visible' : ''}`}
             onClick={scrollToTop} 
             aria-label="Scroll to top"
+            aria-hidden={!showScrollTop}
           >
             <IoArrowUp />
           </button>

@@ -185,6 +185,7 @@
 
 .explore-project-description {
   font-family: var(--font-body);
+  text-align: center;
   font-size: 1rem;
   font-weight: var(--weight-light);
   color: var(--text-secondary);
@@ -323,8 +324,6 @@
 /* Expand button for bento grid */
 .explore-expand-button {
   margin: 1rem auto 0;
-  background: transparent;
-  border: none;
   color: var(--text-secondary);
   cursor: pointer;
   width: 40px;
@@ -335,7 +334,6 @@
   justify-content: center;
   transition: all 0.3s ease;
   background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .explore-expand-button:hover {
