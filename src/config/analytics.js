@@ -1,4 +1,4 @@
-// Analytics Configuration
+// Analytics Configuration (reference only — GA4 & Clarity are loaded via GTM; see docs/GTM-SETUP.md)
 // Clarity: https://clarity.microsoft.com
 // Google Analytics: https://analytics.google.com
 

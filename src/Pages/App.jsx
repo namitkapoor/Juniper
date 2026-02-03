@@ -9,9 +9,6 @@ import { track } from '@vercel/analytics'
 import PageTransition from '../components/layout/PageTransition'
 import MaskTransition from '../components/layout/MaskTransition'
 import { useLenis } from '../hooks/useLenis'
-import { useClarity } from '../hooks/useClarity'
-import { useGoogleAnalytics } from '../hooks/useGoogleAnalytics'
-import { analyticsConfig } from '../config/analytics'
 
 // Lazy load pages for code splitting
 const Home = lazy(() => import('./Home.jsx'))
@@ -23,22 +20,13 @@ const TaskReminders = lazy(() => import('./CaseStudies/TaskReminders.jsx'))
 const SustainablePackaging = lazy(() => import('./CaseStudies/SustainablePackaging.jsx'))
 const ChristineValmy = lazy(() => import('./CaseStudies/ChristineValmy.jsx'))
 
-// Wrapper component for GA4 (needs to be inside Router for useLocation)
-const GA4Tracker = () => {
-  useGoogleAnalytics(analyticsConfig.googleAnalytics.measurementId);
-  return null;
-};
-
 const App = () => {
-  // Initialize Lenis smooth scroll
+  // Analytics (GA4 + Clarity) are loaded via Google Tag Manager — see docs/GTM-SETUP.md
   useLenis();
 
-  // Initialize Microsoft Clarity (only if project ID exists)
-  useClarity(analyticsConfig.clarity.projectId);
-
-  // Track page views only in production
+  // Vercel Analytics: track page views in production
   useEffect(() => {
-    if (import.meta.env.PROD && analyticsConfig.googleAnalytics.measurementId) {
+    if (import.meta.env.PROD) {
       track('page_view', { page: 'home' });
     }
   }, []);
@@ -47,7 +35,6 @@ const App = () => {
     <ThemeProvider>
       <TransitionProvider>
         <BrowserRouter>
-          <GA4Tracker />
           <MaskTransition />
           <PageTransition>
             <Suspense fallback={<div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'var(--background, #1d1d1d)', color: 'var(--text-secondary, #a8a8a8)' }} />}>
