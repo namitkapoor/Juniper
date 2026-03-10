@@ -19,6 +19,7 @@ const InfluencerMarketing = lazy(() => import('./CaseStudies/InfluencerMarketing
 const TaskReminders = lazy(() => import('./CaseStudies/TaskReminders.jsx'))
 const SustainablePackaging = lazy(() => import('./CaseStudies/SustainablePackaging.jsx'))
 const ChristineValmy = lazy(() => import('./CaseStudies/ChristineValmy.jsx'))
+const Clutch = lazy(() => import('./CaseStudies/Clutch.jsx'))
 
 const App = () => {
   // Analytics (GA4 + Clarity) are loaded via Google Tag Manager — see docs/GTM-SETUP.md
@@ -47,6 +48,7 @@ const App = () => {
                 <Route path="/case-study/task-reminders" element={<TaskReminders />} />
                 <Route path="/case-study/sustainable-packaging" element={<SustainablePackaging />} />
                 <Route path="/case-study/christine-valmy" element={<ChristineValmy />} />
+                <Route path="/case-study/clutch" element={<Clutch />} />
               </Routes>
             </Suspense>
           </PageTransition>

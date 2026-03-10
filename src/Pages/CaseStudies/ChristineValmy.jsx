@@ -472,6 +472,8 @@ const ChristineValmy = () => {
         title={data.nextProject.title}
         description={data.nextProject.description}
         href={data.nextProject.href}
+        videoSrc={data.nextProject.videoSrc}
+        coverImage={data.nextProject.coverImage}
       />
     </div>
   );

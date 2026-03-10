@@ -683,9 +683,11 @@ export const manageFarmsData = {
 
   // Next Project
   nextProject: {
-    title: 'Influencer Marketing Campaign',
-    description: 'Tracking influencer marketing campaigns for small businesses',
-    href: '/case-study/influencer-marketing'
+    title: 'Hire Influencer Marketing',
+    description: 'Redesigning a B2B platform to simplify influencer hiring and cut missed milestones by 28%',
+    href: '/case-study/influencer-marketing',
+    videoSrc: '/videos/Case Studies/MI/MI on laptop.mp4',
+    coverImage: '/images/Project Cover Photos/MI on Laptop.png'
   }
 };
 

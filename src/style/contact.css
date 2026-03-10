@@ -64,7 +64,7 @@
 }
 
 .social-link:hover {
-  color: rgba(255, 255, 255, 1);
+  color: var(--text-primary);
   transform: translateY(-2px);
 }
 

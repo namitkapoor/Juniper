@@ -1,14 +1,28 @@
 export const caseStudies = {
   ux: [
     {
+      id: 'clutch',
+      title: 'Redesign Post-Game Analytics',
+      metric: 'Data-Dense Mobile Experience',
+      tags: ['Mobile Design', 'Sports Tech', 'Analytics'],
+      image: '../images/Project Cover Photos/cover-photo.png',
+      coverImage: '/images/Case Studies/CLUTCH/cover-photo.png',
+      videoSrc: '/videos/Case Studies/CLUTCH/cover video.mp4',
+      description: 'Designed a data-first post-game experience for competitive padel players — balancing analytical depth with social sharing.',
+      comingSoon: false,
+      enabled: true,
+    },
+    {
       id: 'christine-valmy',
       title: 'Improve Beauty School Enrollment',
       metric: '143% Increase in Enrollments',
       tags: ['Web App Design', 'AI', 'Enrollment Chatbot'],
       image: '../images/Project Cover Photos/CV on Laptop.png',
+      coverImage: '/images/Project Cover Photos/CV on Laptop.png',
+      videoSrc: '/videos/Case Studies/CV/christine-valmy-laptop.mp4',
       description: 'How user research killed my clever bento grid and led to a 143% increase in enrollments',
       comingSoon: false,
-      enabled: true
+      enabled: true,
     },
     {
       id: 'manage-farms',
@@ -16,9 +30,11 @@ export const caseStudies = {
       metric: '70 SUS Score',
       tags: ['Mobile Design', 'Research', 'Application'],
       image: '../images/Project Cover Photos/JD Redesign thumbnail vector.svg',
+      coverImage: '../images/Project Cover Photos/farmer on phone screenshot 1.png',
+      videoSrc: '/videos/Case Studies/JD/Animations/Farmer w: phone anim-left.mp4',
       description: 'Simplified an operations management app to better serve small farm owners, focusing on usability and scalability for non-technical users.',
       comingSoon: false,
-      enabled: true
+      enabled: true,
     },
     {
       id: 'influencer-marketing',
@@ -26,9 +42,11 @@ export const caseStudies = {
       metric: '28% Less Clicks',
       tags: ['Web Design', 'B2B', 'Dashboard'],
       image: '../images/Project Cover Photos/Campaign Page.svg',
+      coverImage: '/images/Project Cover Photos/MI on Laptop.png',
+      videoSrc: '/videos/Case Studies/MI/MI on laptop.mp4',
       description: 'Redesigned a web app to simplify influencer hiring and campaign tracking, boosting user engagement by reducing workflow friction for small business owners.',
       comingSoon: false,
-      enabled: true
+      enabled: true,
     },
     {
       id: 'product-recommendations',
@@ -38,7 +56,7 @@ export const caseStudies = {
       image: '../images/Project Cover Photos/Nuele thumbnail.svg',
       description: 'Redesigned a web app to simplify influencer hiring and campaign tracking, boosting user engagement by reducing workflow friction for small business owners.',
       comingSoon: true,
-      enabled: false
+      enabled: false,
     }
   ],
   xr: [
@@ -50,7 +68,7 @@ export const caseStudies = {
       image: '../images/Project Cover Photos/Anywhere Access Luminote gif.gif',
       description: 'Created an AR-based task management system combining spatial reminders with adaptive organizational structures to reduce cognitive load.',
       comingSoon: false,
-      enabled: true
+      enabled: true,
     },
     {
       id: 'sustainable-packaging',
@@ -60,7 +78,7 @@ export const caseStudies = {
       image: '../images/Project Cover Photos/SUSpointpopup-cropped.gif',
       description: 'Designed an AR app to promote sustainable shopping by evaluating product packaging and incentivizing eco-conscious purchases with rewards.',
       comingSoon: false,
-      enabled: true
+      enabled: true,
     }
   ]
-}; 
+};

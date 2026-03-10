@@ -15,6 +15,7 @@ const caseStudyImports = {
   'influencer-marketing': () => import('../../Pages/CaseStudies/InfluencerMarketing.jsx'),
   'task-reminders': () => import('../../Pages/CaseStudies/TaskReminders.jsx'),
   'sustainable-packaging': () => import('../../Pages/CaseStudies/SustainablePackaging.jsx'),
+  'clutch': () => import('../../Pages/CaseStudies/Clutch.jsx'),
 };
 
 export default function OtherProjects({ currentProjectId }) {
@@ -24,8 +25,8 @@ export default function OtherProjects({ currentProjectId }) {
   
   // Filter projects: exclude current project, coming soon, and disabled projects
   const allProjects = useMemo(() => {
-    return [...caseStudies.ux, ...caseStudies.xr]
-      .filter(project => 
+    return [...(caseStudies.ux || []), ...(caseStudies.xr || [])]
+      .filter(project =>
         project.id !== currentProjectId &&
         !project.comingSoon &&
         project.enabled !== false
@@ -81,49 +82,75 @@ export default function OtherProjects({ currentProjectId }) {
     }
   }, []);
 
-  const ProjectCard = ({ project }) => (
-    <div
-      className="case-study-card"
-      onClick={(e) => handleCardClick(e, project)}
-      onMouseEnter={() => handleCardHover(project)}
-      style={{ cursor: 'pointer' }}
-    >
-      <div className="card-header">
-        <h3>{project.title}</h3>
-      </div>
-
-      <div className="case-study-tags">
-        {project.tags.map(tag => (
-          <span key={tag} className="tag">{tag}</span>
-        ))}
-      </div>
-
-      <img
-        className="case-study-image"
-        src={project.image}
-        alt={project.title}
-      />
-
-      <Button
-        className='case-study-button'
-        onClick={(e) => {
-          e.stopPropagation();
-          const rect = e.currentTarget.closest('.case-study-card')?.getBoundingClientRect();
-          const x = rect ? rect.left + rect.width / 2 : window.innerWidth / 2;
-          const y = rect ? rect.top + rect.height / 2 : window.innerHeight / 2;
-
-          startTransition({
-            path: `/case-study/${project.id}`,
-            videoSrc: null,
-            originX: x,
-            originY: y,
-          });
+  const ProjectCard = ({ project }) => {
+    const videoRef = useRef(null);
+    return (
+      <div
+        className="case-study-card"
+        onClick={(e) => handleCardClick(e, project)}
+        onMouseEnter={() => {
+          handleCardHover(project);
+          if (videoRef.current) {
+            videoRef.current.play();
+            videoRef.current.style.opacity = '1';
+          }
         }}
+        onMouseLeave={() => {
+          if (videoRef.current) {
+            videoRef.current.style.opacity = '0';
+            videoRef.current.pause();
+            videoRef.current.currentTime = 0;
+          }
+        }}
+        style={{ cursor: 'pointer' }}
       >
-        Learn More
-      </Button>
-    </div>
-  );
+        <div className="case-study-card-media">
+          {(project.coverImage || project.image) && (
+            <img
+              className="case-study-card-cover"
+              src={project.coverImage || project.image}
+              alt={project.title}
+            />
+          )}
+          {project.videoSrc && (
+            <video
+              ref={videoRef}
+              src={project.videoSrc}
+              muted
+              loop
+              playsInline
+              preload="none"
+              className="case-study-card-video"
+            />
+          )}
+          <div className="case-study-card-media-overlay" />
+        </div>
+
+        <div className="card-header">
+          <h3>{project.title}</h3>
+        </div>
+
+        <div className="case-study-tags">
+          {project.tags.map(tag => (
+            <span key={tag} className="tag">{tag}</span>
+          ))}
+        </div>
+
+        <Button
+          className='case-study-button'
+          onClick={(e) => {
+            e.stopPropagation();
+            const rect = e.currentTarget.closest('.case-study-card')?.getBoundingClientRect();
+            const x = rect ? rect.left + rect.width / 2 : window.innerWidth / 2;
+            const y = rect ? rect.top + rect.height / 2 : window.innerHeight / 2;
+            startTransition({ path: `/case-study/${project.id}`, videoSrc: null, originX: x, originY: y });
+          }}
+        >
+          Learn More
+        </Button>
+      </div>
+    );
+  };
 
   // Don't render if no projects available
   if (allProjects.length === 0) {

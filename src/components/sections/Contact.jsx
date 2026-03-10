@@ -56,7 +56,15 @@ export default function Contact({ scrollTopShowRef }) {
             <div className="case-study-links">
               <h3>Featured Work</h3>
               <div className="case-study-list">
-                <div 
+                <div
+                  className="case-study-link"
+                  onClick={() => navigate('/case-study/clutch')}
+                  style={{ cursor: 'pointer' }}
+                >
+                  <span className="case-title">Redesign Post-Game Analytics</span>
+                  <IoArrowForward className="arrow-icon" />
+                </div>
+                <div
                   className="case-study-link"
                   onClick={() => navigate('/case-study/christine-valmy')}
                   style={{ cursor: 'pointer' }}

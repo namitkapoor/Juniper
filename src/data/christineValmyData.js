@@ -396,7 +396,9 @@ export const christineValmyData = {
   nextProject: {
     title: 'Manage Small Farms',
     description: 'Designing a mobile app for low-literacy farmers with accessibility constraints',
-    href: '/case-study/manage-farms'
+    href: '/case-study/manage-farms',
+    videoSrc: '/videos/Case Studies/JD/Animations/Farmer w: phone anim-left.mp4',
+    coverImage: '../images/Project Cover Photos/farmer on phone screenshot 1.png'
   }
 };
 

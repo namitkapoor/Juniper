@@ -1321,13 +1321,57 @@
    ============================================ */
 .next-project-nk26 {
   background: var(--bg-tertiary-nk26);
-  padding: var(--space-4xl-nk26) var(--container-padding-mobile-nk26);
+  overflow: hidden;
+  position: relative;
+  z-index: 100;
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
 }
 
 .next-project-container-nk26 {
+  width: 100%;
   max-width: var(--max-width-nk26);
   margin: 0 auto;
+  padding: var(--space-4xl-nk26) var(--container-padding-mobile-nk26);
   text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.next-project-media-nk26 {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.next-project-cover-nk26 {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.next-project-video-nk26 {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.next-project-media-overlay-nk26 {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.72) 100%);
+}
+
+/* Force white text when media is present */
+.next-project-nk26:has(.next-project-media-nk26) .next-project-label-nk26,
+.next-project-nk26:has(.next-project-media-nk26) .next-project-title-nk26,
+.next-project-nk26:has(.next-project-media-nk26) .next-project-description-nk26,
+.next-project-nk26:has(.next-project-media-nk26) .next-project-link-nk26 {
+  color: #fff !important;
 }
 
 .next-project-label-nk26 {
@@ -1372,6 +1416,22 @@
 .next-project-link-nk26:hover {
   color: var(--accent-secondary-nk26);
   transform: translateX(4px);
+}
+
+.next-project-home-nk26 {
+  position: absolute;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 2;
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.6);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.next-project-home-nk26:hover {
+  color: #fff;
 }
 
 @media (min-width: 768px) {
@@ -1612,6 +1672,124 @@
   border-radius: 20px;
   border: 1px solid var(--border-light-nk26);
   box-shadow: var(--shadow-md-nk26);
+}
+
+/* ============================================
+   Clutch Case Study
+   ============================================ */
+
+/* Screen images — constrained to 16:9-ish height like before/after slider */
+.cl-screen-image-nk26 {
+  width: 100%;
+  max-height: 50vh;
+  object-fit: contain;
+}
+
+.cl-screen-wrapper-nk26 {
+  display: grid;
+  gap: var(--space-md-nk26);
+  justify-content: center;
+}
+
+/* Lottie replay button */
+.cl-lottie-replay-nk26 {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  transition: background 0.2s;
+}
+
+.cl-lottie-replay-nk26:hover {
+  background: rgba(0, 0, 0, 0.75);
+}
+
+/* Stat icon grid */
+.cl-stat-icons-grid-nk26 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md-nk26);
+  margin-top: var(--space-md-nk26);
+}
+
+.cl-stat-icon-item-nk26 {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: var(--space-sm-nk26);
+  border: 1px solid var(--bento-border);
+  border-radius: 12px;
+}
+
+.cl-stat-icon-nk26 {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  object-fit: contain;
+  filter: brightness(0);
+}
+
+[data-theme="dark"] .cl-stat-icon-nk26 {
+  filter: brightness(0) invert(1);
+}
+
+.cl-stat-icon-label-nk26 {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.cl-stat-icon-insight-nk26 {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  margin: 0;
+  line-height: 1.4;
+}
+
+@media (max-width: 768px) {
+  .cl-stat-icons-grid-nk26 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Wider screens like comparison panels, multi-select interaction */
+.cl-wide-image-nk26 {
+  width: 100%;
+  max-height: 50vh;
+  object-fit: contain;
+}
+
+/* IA flow diagram */
+.cl-ia-image-nk26 {
+  border-radius: 12px;
+}
+
+/* Court data visualization */
+.cl-court-image-nk26 {
+  width: 100%;
+  max-height: 50vh;
+  object-fit: contain;
+}
+
+.cl-court-wrapper-nk26 {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-md-nk26);
+}
+
+/* Before/after pivot images */
+.cl-pivot-image-nk26 {
+  aspect-ratio: 9 / 19;
+  border-radius: 24px;
+  box-shadow: var(--shadow-lg-nk26);
 }
 
 /* ============================================

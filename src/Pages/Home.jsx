@@ -29,6 +29,7 @@ import {
 
 // Case study page imports for preloading
 const caseStudyImports = {
+  '/case-study/clutch': () => import('./CaseStudies/Clutch.jsx'),
   '/case-study/christine-valmy': () => import('./CaseStudies/ChristineValmy.jsx'),
   '/case-study/manage-farms': () => import('./CaseStudies/ManageFarms.jsx'),
   '/case-study/influencer-marketing': () => import('./CaseStudies/InfluencerMarketing.jsx'),
@@ -163,7 +164,6 @@ const CaseStudyCard = React.memo(({ study, activeCategories, caseStudyCategories
           playsInline
           loop
           preload="metadata"
-          poster={study.backgroundImage}
         />
       )}
       {/* Fallback image if no video */}
@@ -287,6 +287,16 @@ const caseStudyCategories = {
 
 const caseStudies = [
   {
+    title: 'Redesign Post-Game Analytics',
+    metrics: 'Data-Dense Mobile Experience',
+    categories: ['ux', 'b2c'],
+    image: '../images/Project Cover Photos/cover-photo.png',
+    description: 'Designed a data-first post-game experience for competitive padel players — balancing analytical depth with social sharing.',
+    path: '/case-study/clutch',
+    backgroundImage: '/images/Case Studies/CLUTCH/cover-photo.png',
+    videoSrc: '/videos/Case Studies/CLUTCH/cover video.mp4',
+  },
+  {
     title: 'Enroll More Students',
     metrics: '143% More Submissions',
     categories: ['ux', 'ai', 'development', 'b2b'],
@@ -393,7 +403,7 @@ const AnimatedTagline = ({ text = "Harmonizes pixels to lived experiences", onAn
         },
         hidden: {},
       }}
-      style={{ display: 'flex', flexWrap: 'wrap', gap: '0.3em' }}
+      style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: '0.3em' }}
     >
       {words.map((word, i) => (
         <motion.span

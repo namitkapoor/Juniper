@@ -354,9 +354,11 @@ export const influencerMarketingData = {
 
   // Next Project
   nextProject: {
-    title: 'Enroll more students',
-    description: 'Designing an AI-chat agent to simplify the enrollment process for beauty school students',
-    href: '/case-study/christine-valmy'
+    title: 'Redesign Post-Game Analytics',
+    description: 'Designing a data-dense post-game experience for competitive padel players',
+    href: '/case-study/clutch',
+    videoSrc: '/videos/Case Studies/CLUTCH/cover video.mp4',
+    coverImage: '/images/Case Studies/CLUTCH/cover-photo.png'
   }
 };
 

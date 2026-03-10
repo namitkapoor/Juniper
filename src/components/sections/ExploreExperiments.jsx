@@ -75,15 +75,16 @@ export default function ExploreExperiments() {
                     {sortProjects(projects).map((project) => (
                         <motion.div
                             key={project.title}
-                            className={`explore-project-card ${expandedProject === project.title ? 'expanded' : ''}`}
+                            className={`explore-project-card ${expandedProject === project.title ? 'expanded' : ''} ${projectBentoData[project.title] ? 'is-expandable' : ''}`}
                             layout
                             initial={{ opacity: 0, scale: 0.8 }}
-                            animate={{ 
+                            animate={{
                                 opacity: project.categories.some(cat => activeCategories.has(cat)) || activeCategories.size === 0 ? 1 : 0.3,
                                 scale: project.categories.some(cat => activeCategories.has(cat)) || activeCategories.size === 0 ? 1 : 0.95
                             }}
                             exit={{ opacity: 0, scale: 0.8 }}
                             transition={{ duration: 0.3 }}
+                            onClick={() => projectBentoData[project.title] && handleProjectExpand(project.title)}
                         >
                             <div className="explore-project-content">
                                 <div className="explore-project-categories">
@@ -98,8 +99,8 @@ export default function ExploreExperiments() {
                                     ))}
                                 </div>
                                 <h3 className="explore-project-title">{project.title}</h3>
-                                <div className="explore-project-image-container">
-                                    <ModelViewer 
+                                <div className="explore-project-image-container" onClick={e => e.stopPropagation()}>
+                                    <ModelViewer
                                         modelPath={project.model}
                                         imagePath={project.image}
                                         title={project.title}
