@@ -1,110 +1,429 @@
 export const projects = [
-  
+  {
+    title: "Aura",
+    year: "2025",
+    description: "An audio-reactive 3D sculpture. Drop an MP3 or pick a preset to bring it to life.",
+    categories: ['interactive', 'motion'],
+    isBlob: true,
+    image: null,
+    blob: { colorA: '#a0c4ff', colorB: '#6a0dad', amplitude: 0.018, frequency: 0.8, speed: 0.3 },
+    presets: [
+      { label: "Calm",     colorA: '#b8d4e8', colorB: '#1a3a5c', amplitude: 0.008, frequency: 0.5,  speed: 0.15 },
+      { label: "Groove",   colorA: '#ff9a3c', colorB: '#c41230', amplitude: 0.028, frequency: 1.4,  speed: 0.55 },
+      { label: "Ethereal", colorA: '#e8b4f8', colorB: '#2a0a4a', amplitude: 0.012, frequency: 2.0,  speed: 0.25 },
+      { label: "Deep",     colorA: '#1affb2', colorB: '#003366', amplitude: 0.032, frequency: 0.7,  speed: 0.45 },
+    ],
+    suggestedQuestions: [],
+    chatResponses: {},
+  },
   {
     title: "Treatment Lotion",
-    description: "La Mer's AR product campaign for the launch of their new treatment lotion",
+    brand: "La Mer",
+    year: "2022",
+    logo: "./images/Experiments/La Mer/La_Mer_logo_w_bg_try1.png",
+    description: "AR product campaign for the launch of La Mer's new treatment lotion",
     categories: ['motion', 'spatial', 'interactive'],
-    image: "./images/Experiments/La Mer/just bottle.png"
-  },
-  {
-    title: "Central Ciborium",
-    description: "3D model of the Central Ciborium in the Basilica of St. Paul Outside the Walls in Rome, Italy optimized for VR.",
-    categories: ['flat', 'spatial'],
-    image: "./images/Experiments/Ciborium/Textured persp.png"
-  },
-  // {
-  //   title: "VR Head Gestures",
-  //   description: "new interaction modality for notifications in VR",
-  //   categories: ['motion', 'spatial', 'interactive'],
-  //   image: "./images/Experiments/Head Gestures/UI Design 1.png"
-  // },
-  {
-    title: "Tiptoe",
-    description: "Macy's 2021 Holiday Campaign Mascot made AR ready using Blender and three.js",
-    categories: ['motion', 'spatial'],
-    image: "./images/Experiments/Tiptoe/Tiptoe persp view.png"
-  },
-  
-  {
-    title: "Holiday Box",
-    description: "Coach's 2021 Holiday Box made AR ready using Blender and three.js",
-    categories: ['motion', 'spatial'],
-    image: "./images/Experiments/Coach/Green box.png"
+    image: "./images/Experiments/La Mer/just bottle.png",
+    images: [
+      "./images/Experiments/La Mer/just bottle.png",
+      "./images/Experiments/La Mer/Product Campaign.png",
+      "./images/Experiments/La Mer/La Mer new flow screenshot .png",
+      "./images/Experiments/La Mer/Live product screenshot.jpg",
+      "./images/Experiments/La Mer/Blender scene screenshot.jpg",
+      "./images/Experiments/La Mer/Bottle combined texture bake 1.png",
+      "./images/Experiments/La Mer/bottle wireframe.png",
+      "./images/Experiments/La Mer/glass ripple effect low-poly screenshot.jpg",
+    ],
+    model: "./3d models/bottle.glb",
+    size: "medium",
+    blob: { colorA: '#a8d8cc', colorB: '#1a4f47', amplitude: 0.018, frequency: 0.9, speed: 0.3 },
+    suggestedQuestions: [
+      "How was the 3D bottle model made?",
+      "What made this AR campaign unique?",
+      "What tools did you use for the glass shader?",
+    ],
+    chatResponses: {
+      "How was the 3D bottle model made?": "The bottle was modelled in Blender from scratch — starting with a reference photo to nail proportions, then subdividing and sculpting the glass body. The glass material uses a custom shader with refraction, transmission, and a subtle ripple displacement on the surface to capture La Mer's fluid aesthetic.",
+      "What made this AR campaign unique?": "Most AR product campaigns at the time placed a flat image on a surface. This one put a fully interactive 3D model in the user's space — they could walk around it, the glass refracted their environment in real-time, and the campaign video played projected on the side of the bottle.",
+      "What tools did you use for the glass shader?": "The glass shader was written in GLSL, running in Three.js. It uses environment cube-mapping for reflections, a thin-film interference approximation for the iridescent tint, and a low-poly displacement map baked from a high-res Blender sculpt for the surface ripple.",
+    },
   },
   {
     title: "Mother's Day Gifts",
-    description: "Swarovski Mother's day campaign models animated using Blender",
+    brand: "Swarovski",
+    year: "2022",
+    logo: "./images/Experiments/Swarovski/Swarovski-white-logo.png",
+    description: "Swarovski Mother's Day campaign models animated in Blender and made AR-ready",
     categories: ['motion', 'spatial'],
-    image: "./images/Experiments/Swarovski/Just box.png"
+    image: "./images/Experiments/Swarovski/Just box.png",
+    images: [
+      "./images/Experiments/Swarovski/Just box.png",
+    ],
+    video: "./videos/Experiments/Swarovski/Aquamarine jewellery.mp4",
+    size: "wide",
+    blob: { colorA: '#e8f4f8', colorB: '#7cb9d4', amplitude: 0.012, frequency: 0.8, speed: 0.25 },
+    suggestedQuestions: [
+      "How did you handle the crystal material in Blender?",
+      "What was the AR delivery format?",
+      "How long did the animation take to produce?",
+    ],
+    chatResponses: {
+      "How did you handle the crystal material in Blender?": "Swarovski crystals are deceptively hard to render — they need multiple internal bounces to look right. I used Cycles with a glass BSDF stacked with a volume scatter node to simulate subsurface depth, then hand-placed internal facet geometry to catch caustic-like highlights.",
+      "What was the AR delivery format?": "The final assets were exported as USDZ for iOS (ARKit) and glTF for Android (ARCore). The animations were baked into the glTF file as morph targets so they'd play without a game engine runtime.",
+      "How long did the animation take to produce?": "The full motion sequence — unboxing, rotate, and jewellery fly-out — took about 3 weeks. Most of that time was in the Blender rig: getting the box lid's hinge to arc correctly so it felt luxurious rather than mechanical.",
+    },
+  },
+  {
+    title: "Holiday Reindeer",
+    brand: "Macy's",
+    year: "2021",
+    description: "Macy's 2021 Holiday Campaign Mascot made AR-ready using Blender and Three.js",
+    categories: ['motion', 'spatial'],
+    image: "./images/Experiments/Tiptoe/Tiptoe persp view.png",
+    images: [
+      "./images/Experiments/Tiptoe/Tiptoe persp view.png",
+      "./images/Experiments/Tiptoe/Tiptoe UV w texture.jpg",
+      "./images/Experiments/Tiptoe/Weight paint.jpg",
+    ],
+    video: "./videos/Experiments/Tiptoe/Macy's Tiptoe - The Holiday Reindeer portfolio reel.mp4",
+    size: "wide",
+    blob: { colorA: '#e63946', colorB: '#c8a951', amplitude: 0.025, frequency: 1.4, speed: 0.5 },
+    suggestedQuestions: [
+      "How did you rig the reindeer character?",
+      "What were the polygon constraints for AR?",
+      "How does the walk cycle work in Three.js?",
+    ],
+    chatResponses: {
+      "How did you rig the reindeer character?": "Tiptoe's rig uses a standard quadruped skeleton — hips, spine, neck, head, four limb chains — built in Blender with Rigify as a base then customised. The antlers have secondary dynamics baked as a shape key sequence so they jiggle without needing runtime physics.",
+      "What were the polygon constraints for AR?": "AR targets under 50k triangles for smooth 60fps on mid-range phones. Tiptoe came in at around 38k triangles with a single 2048×2048 atlas texture. I ran a decimation pass in Blender and then cleaned topology by hand around the face and joints where deformation matters most.",
+      "How does the walk cycle work in Three.js?": "The animation is a looping glTF clip played back via Three.js AnimationMixer. On mobile the loop blends from idle to walk based on device orientation — tilting the phone forward makes Tiptoe walk toward you. The blend uses AnimationMixer.crossFadeTo() with a 0.3s blend window.",
+    },
+  },
+  {
+    title: "Holiday Box",
+    brand: "Coach",
+    year: "2021",
+    description: "Coach's 2021 Holiday Box made AR-ready using Blender and Three.js",
+    categories: ['motion', 'spatial'],
+    image: "./images/Experiments/Coach/Green box.png",
+    images: [
+      "./images/Experiments/Coach/Green box.png",
+    ],
+    model: "./3d models/coach box.glb",
+    size: "medium",
+    blob: { colorA: '#4a7c59', colorB: '#1a2e22', amplitude: 0.015, frequency: 1.0, speed: 0.35 },
+    suggestedQuestions: [
+      "How did you recreate the Coach leather texture?",
+      "What interaction was designed for AR?",
+      "How was the ribbon animated?",
+    ],
+    chatResponses: {
+      "How did you recreate the Coach leather texture?": "Coach's signature pebbled leather was made with a procedural noise texture in Blender — a Voronoi node driving a bump map with a specular roughness gradient so the highlights vary across the surface. The green dye has slight colour variation baked in to avoid that flat plastic look.",
+      "What interaction was designed for AR?": "Tapping the box in AR triggers an unboxing sequence — the lid lifts, tissue paper parts, and the signature Coach dust bag rises out. A second tap closes it. The whole interaction was designed to be single-handed since most people hold their phone with one hand during AR experiences.",
+      "How was the ribbon animated?": "The ribbon uses cloth simulation baked to shape keys in Blender. I ran the sim with pinned endpoints, let it settle, then key-framed the retie sequence. Baking to shape keys meant the animation could play in glTF without any runtime physics cost.",
+    },
   },
   {
     title: "Disney Hats",
-    description: "Disney Hats made AR ready using Blender and three.js",
+    brand: "Disney",
+    year: "2022",
+    description: "Disney Hats made AR-ready using Blender and Three.js",
     categories: ['interactive', 'spatial'],
-    image: "./images/Experiments/Disney Hats/Black Hat 1.png"
-  },  
-  {
-    title: "Wanda",
-    description: "Vector animation of Wanda - a quick way to share wifi with your guests",
-    categories: ['motion'],
-    image: "./images/Experiments/Wanda/wanda.png"
+    image: "./images/Experiments/Disney Hats/Black Hat 1.png",
+    images: [
+      "./images/Experiments/Disney Hats/Black Hat 1.png",
+      "./images/Experiments/Disney Hats/All hats.jpg",
+      "./images/Experiments/Disney Hats/All textures.png",
+      "./images/Experiments/Disney Hats/Low poly mesh left persp.png",
+      "./images/Experiments/Disney Hats/UV w Textures.png",
+    ],
+    size: "medium",
+    blob: { colorA: '#4fc3f7', colorB: '#1a237e', amplitude: 0.022, frequency: 1.3, speed: 0.45 },
+    suggestedQuestions: [
+      "How did head tracking work for hat try-on?",
+      "How many hat variants were in the collection?",
+      "How did you handle occlusion for the ears?",
+    ],
+    chatResponses: {
+      "How did head tracking work for hat try-on?": "Face tracking used the browser's native MediaPipe face mesh API — 468 facial landmarks at 30fps. I mapped the hat to the forehead landmark cluster and used a low-pass filter on position to damp jitter. Tilt and yaw came from the face mesh's own rotation matrix.",
+      "How many hat variants were in the collection?": "The initial collection had 6 hats — 2 Minnie ear headbands, 2 Mickey beanies, and 2 Star Wars beskar-style helmets for The Mandalorian promotion. Each was a separate glTF file swapped in on selection without reloading the AR session.",
+      "How did you handle occlusion for the ears?": "The ears sit behind the face on real Disneyland hats but AR has no depth for the user's head. I faked it with a head-shaped invisible mesh that writes to the depth buffer — the ears render behind it. It's a classic AR trick and works well enough that most users don't notice.",
+    },
   },
   {
     title: "Owlette",
-    description: "Story of an empathetic psychopomp - guide the souls of the departed to the afterlife",
+    year: "2023",
+    description: "Story of an empathetic psychopomp — guide the souls of the departed to the afterlife",
     categories: ['motion'],
-    image: "./images/Experiments/Owlette/Owlette.png"
+    image: "./images/Experiments/Owlette/Owlette.png",
+    images: [
+      "./images/Experiments/Owlette/Owlette.png",
+      "./images/Experiments/Owlette/Owlette.jpg",
+    ],
+    video: "./videos/Experiments/Owlette/Owlette - Rebirth of a Spirit Guide.mp4",
+    size: "tall",
+    blob: { colorA: '#7b2d8b', colorB: '#ff6b35', amplitude: 0.03, frequency: 1.6, speed: 0.6 },
+    suggestedQuestions: [
+      "What's the story behind Owlette?",
+      "How was the feather simulation done?",
+      "What software was used for compositing?",
+    ],
+    chatResponses: {
+      "What's the story behind Owlette?": "Owlette is a psychopomp — a guide who escorts souls between worlds. The concept came from grief: what does a good death feel like? I wanted to design something that felt tender rather than ominous. The owl is a universal symbol of wisdom and transition; making her small and gentle subverted the grim-reaper trope.",
+      "How was the feather simulation done?": "The wings use a particle system with instanced feather meshes, each with a stiffness curve that stiffens toward the quill and softens at the vane. Wind force fields drive the motion during the glide sequences. The close-up feather detail is a displacement-mapped plane baked from a high-res sculpt.",
+      "What software was used for compositing?": "All compositing was done in Blender's compositor — depth-of-field, bloom, and a hand-drawn grain overlay on top. The colour grade was done with a custom LUT I built in DaVinci Resolve to get that warm dusk palette, then exported as a PNG LUT and applied as a texture in Blender.",
+    },
+  },
+  {
+    title: "VR Head Gestures",
+    year: "2023",
+    description: "New interaction modality for notifications in VR",
+    categories: ['motion', 'spatial', 'interactive'],
+    image: "./images/Experiments/Head Gestures/UI Design 1.png",
+    images: [
+      "./images/Experiments/Head Gestures/UI Design 1.png",
+    ],
+    video: "./videos/Experiments/Head Gestures/Head Gesture - VR Interaction.mp4",
+    size: "wide",
+    blob: { colorA: '#00e5ff', colorB: '#0d47a1', amplitude: 0.02, frequency: 1.5, speed: 0.5 },
+    suggestedQuestions: [
+      "Why head gestures instead of hand gestures?",
+      "How did you prevent accidental triggers?",
+      "Was this tested with real users?",
+    ],
+    chatResponses: {
+      "Why head gestures instead of hand gestures?": "Hand gestures require the user to lift their hands and break flow — especially disruptive during a VR meeting or focused task. Head gestures map to natural social cues (nod to accept, headshake to dismiss) that people perform without thinking. The goal was to let notifications resolve without breaking presence.",
+      "How did you prevent accidental triggers?": "Two safeguards: a dwell time of 600ms (you had to hold the gesture briefly) and a dead zone at the beginning of each axis so normal head movement while talking wouldn't register. The dwell gave a clear visual progress ring so users knew they were committing to an action.",
+      "Was this tested with real users?": "Tested with 8 participants in a prototype Meta Quest session. 6/8 found the nod-to-accept gesture intuitive without instruction. The headshake took slightly more learning. Main feedback was that the dead zone felt slightly too large — dialling it down from 15° to 10° improved discoverability significantly.",
+    },
+  },
+  {
+    title: "Design Fiction",
+    year: "2023",
+    description: "Limitless — a speculative design fiction exploring cognitive augmentation",
+    categories: ['motion', 'interactive'],
+    image: "./images/Experiments/Head Gestures/UI Design 1.png",
+    images: [
+      "./images/Experiments/Head Gestures/UI Design 1.png",
+    ],
+    video: "./videos/Experiments/Design Fiction/Limitless - Design Fiction.mp4",
+    size: "wide",
+    blob: { colorA: '#f5f5f5', colorB: '#212121', amplitude: 0.01, frequency: 0.7, speed: 0.2 },
+    suggestedQuestions: [
+      "What's the Limitless premise?",
+      "What design decisions were deliberately provocative?",
+      "How does this connect to your UX practice?",
+    ],
+    chatResponses: {
+      "What's the Limitless premise?": "Limitless imagines a near-future neural interface that lets users offload working memory to the cloud — essentially giving themselves perfect recall on demand. The fiction explores the social contract around that: who owns your memories, can they be subpoenaed, what happens when the subscription lapses?",
+      "What design decisions were deliberately provocative?": "The UI for revoking memory access was buried six levels deep in Settings — satirising how platforms make data deletion difficult. There's also a 'Memory Loan' feature where you can borrow someone else's skills temporarily. These were designed to make viewers uncomfortable in ways that spark real policy conversations.",
+      "How does this connect to your UX practice?": "Design fiction is a tool for stress-testing assumptions before a product exists. The questions I asked in Limitless — around consent, affordance, and addiction loops — are the same questions I bring to real product decisions. If a real product had these dark patterns, would we notice them?",
+    },
+  },
+  {
+    title: "Wanda",
+    year: "2022",
+    description: "Vector animation of Wanda — a quick way to share wifi with your guests",
+    categories: ['motion'],
+    image: "./images/Experiments/Wanda/wanda.png",
+    images: [
+      "./images/Experiments/Wanda/wanda.png",
+    ],
+    video: "./videos/Experiments/Wanda/Wanda ISTS videos.mp4",
+    size: "medium",
+    blob: { colorA: '#ffb347', colorB: '#e05c00', amplitude: 0.02, frequency: 1.1, speed: 0.4 },
+    suggestedQuestions: [
+      "What problem does Wanda solve?",
+      "How was the character animation done?",
+      "What was the onboarding design challenge?",
+    ],
+    chatResponses: {
+      "What problem does Wanda solve?": "Sharing wifi passwords is surprisingly awkward — you either recite a long string, hand over your phone, or print a QR code. Wanda is a router companion character that generates a tap-to-share NFC card and a voice-activated guest mode. The character makes the process feel warm and intentional rather than technical.",
+      "How was the character animation done?": "Wanda is a vector character animated entirely in After Effects using the Joysticks 'n Sliders plugin for facial expressions and DUIK Bassel for the body rig. All animations were then exported as Lottie JSON files for use in the actual app — keeping the file size under 40KB per state.",
+      "What was the onboarding design challenge?": "The core tension was: how do you explain NFC to someone who's never heard of it without sounding like a manual? The solution was to lead with the outcome ('tap your phone here, your guest is connected') and let Wanda narrate it. Technical explanation only appeared in the help drawer for curious users.",
+    },
+  },
+  {
+    title: "Central Ciborium",
+    year: "2021",
+    description: "3D model of the Central Ciborium in the Basilica of St. Paul Outside the Walls, Rome — optimized for VR",
+    categories: ['flat', 'spatial'],
+    image: "./images/Experiments/Ciborium/Textured persp.png",
+    images: [
+      "./images/Experiments/Ciborium/Textured persp.png",
+      "./images/Experiments/Ciborium/Modern day Ciborium.jpg",
+      "./images/Experiments/Ciborium/Solid w wireframe persp.png",
+      "./images/Experiments/Ciborium/Rough render of ciborium.jpg",
+      "./images/Experiments/Ciborium/Pattern A.png",
+      "./images/Experiments/Ciborium/Pattern B & C.png",
+      "./images/Experiments/Ciborium/Pattern D & E.png",
+      "./images/Experiments/Ciborium/Pattern F.png",
+    ],
+    size: "tall",
+    blob: { colorA: '#d4a96a', colorB: '#5c3d1a', amplitude: 0.01, frequency: 0.6, speed: 0.18 },
+    suggestedQuestions: [
+      "Why reconstruct this specific ciborium?",
+      "How historically accurate is the model?",
+      "What was the VR use case?",
+    ],
+    chatResponses: {
+      "Why reconstruct this specific ciborium?": "The Basilica of St. Paul Outside the Walls contains one of the finest Gothic baldachins in Rome — but most visitors can't get close enough to appreciate the carved detail. This was a digital heritage project to let scholars and visitors experience it at arm's length in VR.",
+      "How historically accurate is the model?": "Highly accurate for the geometry — measurements were taken from archival drawings and on-site reference photos (with permission). The stone colour and surface aging are interpretive: carved marble patina varies so much across centuries that there's no single 'correct' value, so I aimed for plausible rather than definitive.",
+      "What was the VR use case?": "The model was integrated into a Mozilla Hubs virtual tour of the Basilica — visitors could walk around a 1:1 scale replica without needing the physical space. The polygon count was optimised down to 85k triangles with baked AO and normal maps so it ran well in WebXR on standalone headsets.",
+    },
+  },
+  {
+    title: "Dichotomy Within",
+    year: "2022",
+    description: "An optical illusion painting made using chalk on black paper",
+    categories: ['flat'],
+    image: "./images/Experiments/Paintings/Dichotomy Within.jpg",
+    images: [
+      "./images/Experiments/Paintings/Dichotomy Within.jpg",
+      "./images/Experiments/Paintings/Dichotomy Within angled.png",
+    ],
+    video: "./videos/Experiments/Dichotomy within/Dichotomy within.mp4",
+    size: "medium",
+    blob: { colorA: '#ffffff', colorB: '#000000', amplitude: 0.025, frequency: 2.0, speed: 0.7 },
+    suggestedQuestions: [
+      "What's the illusion and how does it work?",
+      "Why chalk on black paper?",
+      "How long did it take to make?",
+    ],
+    chatResponses: {
+      "What's the illusion and how does it work?": "The piece uses a figure-ground reversal — the same set of marks reads as two completely different subjects depending on which negative space your eye treats as foreground. The trick is in the midtone: there's a band of values that are ambiguous enough to flip between readings.",
+      "Why chalk on black paper?": "Chalk on black inverts the normal drawing process — you're adding light rather than subtracting it, which mirrors the conceptual theme of duality. It also produces a natural grain and softness that would be hard to fake digitally. The paper was Strathmore 400 Series black.",
+      "How long did it take to make?": "About 14 hours across three evenings. The compositional planning took longer than the mark-making — I did around 30 thumbnail sketches before finding a geometry that worked for both readings simultaneously.",
+    },
   },
   {
     title: "Sanctuary",
-    description: "Ponder whether you make the room or the room makes you?",
+    year: "2021",
+    description: "Ponder whether you make the room or the room makes you",
     categories: ['flat'],
-    image: "./images/Experiments/Paintings/Sanctuary.jpg"
+    image: "./images/Experiments/Paintings/Sanctuary.jpg",
+    images: [
+      "./images/Experiments/Paintings/Sanctuary.jpg",
+      "./images/Experiments/Paintings/Life in the shadows.jpg",
+    ],
+    size: "small",
+    blob: { colorA: '#e8d5b7', colorB: '#8b6914', amplitude: 0.008, frequency: 0.5, speed: 0.15 },
+    suggestedQuestions: [
+      "What is this painting about?",
+      "What medium was used?",
+      "How does it connect to your design thinking?",
+    ],
+    chatResponses: {
+      "What is this painting about?": "Sanctuary explores the relationship between a person and their space — does your environment shape who you are, or do you impose yourself on it? The room is deliberately ambiguous: it could be a memory, a dream, or a present moment. The figure is absent but implied by the way the space is arranged.",
+      "What medium was used?": "Acrylic on canvas with a palette knife — no brushes. The thick texture creates physical shadows that shift as you move around the piece. The warm ochre tones were layered wet-on-wet and scraped back in places to reveal cooler underpaintings.",
+      "How does it connect to your design thinking?": "Space design and UX share the same fundamental question: how does the shape of an environment change behaviour? The choices I make in painting — where to add friction, where to create flow, what to reveal and what to withhold — are the same choices I make in product design.",
+    },
   },
-  
-  
-  // {
-  //   title: "Go Portal",
-  //   description: "An AR Tourism app which allows creators, small businesses, and artists to showcase their work in community spaces",
-  //   categories: ['spatial', 'interactive', 'motion'],
-  //   image: "./images/Experiments/Go Portal/IMMERSE GT Logo.png"
-  // },
-  
-  {
-    title: "Dichotomy Within",
-    description: "An optical illusion painting made using chalk on black paper",
-    categories: ['flat'],
-    image: "./images/Experiments/Paintings/Dichotomy Within.jpg"
-  },
-  
-  
-  // {
-  //   title: "SenseEasy",
-  //   description: "An interactive AR simulation for tackling overstimulation in everyday life for individuals on the autism spectrum",
-  //   categories: ['spatial', 'interactive', 'motion'],
-  //   image: "./images/Experiments/SenseEasy/Reality hack logo.png"
-  // },
   {
     title: "Guiding Light",
+    year: "2021",
     description: "Every night opens to a bright guiding light",
     categories: ['flat'],
-    image: "./images/Experiments/Paintings/Guiding Light.jpg"
+    image: "./images/Experiments/Paintings/Guiding Light.jpg",
+    images: [
+      "./images/Experiments/Paintings/Guiding Light.jpg",
+    ],
+    size: "small",
+    blob: { colorA: '#fff9c4', colorB: '#f57f17', amplitude: 0.012, frequency: 0.8, speed: 0.3 },
+    suggestedQuestions: [
+      "What inspired this piece?",
+      "How did you achieve the light effect?",
+      "What does the guiding light represent?",
+    ],
+    chatResponses: {
+      "What inspired this piece?": "This was made during a personally difficult period — a meditation on the idea that there's always a way through, even when it's not immediately visible. The composition is deliberately simple: just a single light source and the darkness around it.",
+      "How did you achieve the light effect?": "The glow was built up in layers — starting with a warm yellow centre, then working outward with progressively cooler and darker values mixed wet-on-wet so the edges would bloom softly. The very centre was applied with undiluted titanium white over a dry underpainting.",
+      "What does the guiding light represent?": "It's intentionally open-ended. For me it was about creative practice as a north star — the work that keeps you oriented when everything else is uncertain. But I've had people tell me it reminded them of a person, a place, or a belief.",
+    },
   },
-
-
-  
   {
     title: "Energon",
+    year: "2022",
     description: "A digital painting inspired by the conservation of energy",
     categories: ['flat'],
-    image: "./images/Experiments/Paintings/Energon.jpg"
-  }
-  // Add other projects as needed
+    image: "./images/Experiments/Paintings/Energon.jpg",
+    images: [
+      "./images/Experiments/Paintings/Energon.jpg",
+    ],
+    size: "small",
+    blob: { colorA: '#b3e5fc', colorB: '#0277bd', amplitude: 0.02, frequency: 1.2, speed: 0.45 },
+    suggestedQuestions: [
+      "What's the scientific concept behind this?",
+      "What software was used?",
+      "How does digital painting fit your practice?",
+    ],
+    chatResponses: {
+      "What's the scientific concept behind this?": "The first law of thermodynamics — energy is never created or destroyed, only transformed. The painting visualises a moment of transformation: plasma converging into a stable form. The colour palette moves from chaotic warm reds at the edges to a cool resolved blue-white at the centre.",
+      "What software was used?": "Painted in Procreate on iPad Pro with an Apple Pencil. The particle trails were drawn by hand using a custom brush with opacity jitter tied to pressure — no generative tools. I wanted the marks to feel made rather than calculated.",
+      "How does digital painting fit your practice?": "Digital painting sits at the intersection of craft and systems thinking — you're making aesthetic decisions in real time while managing layers, blending modes, and tool parameters. It trains the same intuition I use when designing complex UI states.",
+    },
+  },
+  {
+    title: "Luminote",
+    year: "2024",
+    description: "Spatial AR notes anchored to physical locations — a mixed reality productivity tool for Meta Quest",
+    categories: ['spatial', 'interactive'],
+    image: "./images/Case Studies/TR/Final Design.jpg",
+    images: [
+      "./images/Case Studies/TR/Final Design.jpg",
+      "./images/Case Studies/TR/Development/LumiNote create new.gif",
+      "./images/Case Studies/TR/Development/Calendar functionality.gif",
+      "./images/Case Studies/TR/Development/Recognizes your physical space.gif",
+      "./images/Case Studies/TR/Design Concepts/AR Note first design w shadow.png",
+      "./images/Case Studies/TR/Design Concepts/Spatial note.png",
+      "./images/Case Studies/TR/Research/Affinity map_Luminote.jpg",
+    ],
+    size: "wide",
+    blob: { colorA: '#ffd89b', colorB: '#b34a00', amplitude: 0.018, frequency: 1.1, speed: 0.38 },
+    suggestedQuestions: [
+      "What problem does Luminote solve?",
+      "How does spatial anchoring work technically?",
+      "Why Meta Quest and not Vision Pro?",
+    ],
+    chatResponses: {
+      "What problem does Luminote solve?": "Digital reminders fail because they live in a separate mental context — you see a phone notification but you're not in the headspace to act on it. Luminote anchors notes to physical locations using spatial awareness: a sticky note appears floating above your desk, a calendar event pops up at your front door. The reminder finds you where you need it.",
+      "How does spatial anchoring work technically?": "Luminote uses Meta's Scene Understanding API to map persistent anchor points to real-world geometry — walls, surfaces, and doorways. Each note stores a world anchor ID. When you re-enter the space, the Quest re-localizes those anchors and the notes reappear exactly where you placed them. Built with Unity and MRTK3.",
+      "Why Meta Quest and not Vision Pro?": "Two reasons: access and research data. Meta Quest has a much larger installed base for spatial research, and I had participants already using Quest for other studies. Vision Pro was also pre-launch when this project started. The interaction paradigms are similar enough that the findings translate — Vision Pro support was designed as the Phase 2 port.",
+    },
+  },
+  {
+    title: "Recyclar",
+    year: "2023",
+    description: "AR packaging scanner that decodes recycling labels and scores products on sustainability",
+    categories: ['spatial', 'interactive'],
+    image: "./images/Case Studies/SP/Cover image.jpg",
+    images: [
+      "./images/Case Studies/SP/Cover image.jpg",
+      "./images/Case Studies/SP/Pain Points/recyling ar prototype.gif",
+      "./images/Case Studies/SP/Pain Points/Sample AR Interface 1.gif",
+      "./images/Case Studies/SP/Interaction Design/Scoring visualization.png",
+      "./images/Case Studies/SP/Interaction Design/Scan flow.png",
+      "./images/Case Studies/SP/Research/storyboard1.jpg",
+      "./images/Case Studies/SP/Sketches/main sketch.png",
+    ],
+    size: "wide",
+    blob: { colorA: '#a8e6cf', colorB: '#1a5c3a', amplitude: 0.014, frequency: 0.9, speed: 0.28 },
+    suggestedQuestions: [
+      "What's the core user problem here?",
+      "How does the scoring system work?",
+      "What did user research reveal?",
+    ],
+    chatResponses: {
+      "What's the core user problem here?": "Recycling labels are genuinely confusing — the chasing arrows symbol appears on items that can't be recycled curbside, rules vary by municipality, and packaging often has multiple materials with different disposal paths. People want to do the right thing but the information system fails them. Recyclar uses AR to scan a product and immediately surface plain-language guidance specific to your location.",
+      "How does the scoring system work?": "The score is a composite of three dimensions: material recyclability (can this actually be recycled at a standard facility?), packaging-to-product ratio (how much of what you're buying is waste?), and brand sustainability commitments (verified third-party certifications). Each dimension gets a colour-coded bar so users understand the breakdown, not just a single opaque number.",
+      "What did user research reveal?": "The most surprising finding was that the primary pain point wasn't confusion about labels — it was trust. Participants had learned that 'recyclable' labels were often misleading, so they'd stopped reading them entirely. The design challenge shifted from 'explain the label' to 'rebuild confidence through verified, location-specific data.' That insight drove the decision to surface municipal recycling rules directly rather than generic guidance.",
+    },
+  },
 ];
 
 export const categories = {
-  motion: { name: 'Motion', color: 'rgba(255, 100, 100, 0.2)' },
-  flat: { name: 'Flat', color: 'rgba(100, 255, 100, 0.2)' },
-  spatial: { name: 'Spatial', color: 'rgba(100, 100, 255, 0.2)' },
-  interactive: { name: 'Interactive', color: 'rgba(255, 255, 100, 0.2)' }
-}; 
+  motion:      { name: 'Motion',      color: 'rgba(255, 100, 100, 0.2)' },
+  flat:        { name: 'Flat',        color: 'rgba(100, 255, 100, 0.2)' },
+  spatial:     { name: 'Spatial',     color: 'rgba(100, 100, 255, 0.2)' },
+  interactive: { name: 'Interactive', color: 'rgba(255, 255, 100, 0.2)' },
+};

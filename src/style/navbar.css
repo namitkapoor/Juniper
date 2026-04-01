@@ -350,7 +350,7 @@ a {
   width: 32px;
   height: 32px;
   background: transparent;
-  border: 1px solid var(--text-primary, rgba(255, 255, 255, 0.3));
+  border: 1px solid var(--border-strong-nk26, rgba(0, 0, 0, 0.2));
   border-radius: 0;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -387,7 +387,7 @@ a {
 
 .theme-toggle-nav:hover {
   background: var(--text-primary, rgba(255, 255, 255, 0.1));
-  border-color: var(--text-primary, #ffffff);
+  border-color: var(--text-primary);
 }
 
 /* Hover states with higher specificity to override theme colors */

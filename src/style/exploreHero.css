@@ -1,0 +1,170 @@
+.explore-hero {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: var(--background);
+    z-index: 0;
+}
+
+/* ── Blob canvas ─────────────────────────────────────────────────────────── */
+
+.blob-hero-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.blob-hero-canvas canvas {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* ── Tagline — centred, above the blob canvas so hover works ─────────────── */
+
+.explore-hero__tagline {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;                        /* above canvas so pointer events reach it */
+    text-align: center;
+    font-family: var(--font-display, 'CabinetGrotesk', sans-serif);
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 200;
+    letter-spacing: -0.03em;
+    line-height: 1.25;
+    color: var(--text-primary);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.15em;
+    white-space: nowrap;
+    pointer-events: none;              /* pass through by default… */
+}
+
+/* First line: dimmed, no interaction */
+.explore-hero__tagline-line {
+    opacity: 0.28;
+    pointer-events: none;
+}
+
+/* Second line: slightly dimmed, interactive */
+.explore-hero__tagline-interactive {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 12em;
+    min-height: 1.4em;
+    cursor: pointer;
+    pointer-events: auto;             /* …except this element */
+    font-size: clamp(0.75rem, 1.4vw, 0.95rem);
+    letter-spacing: 0.04em;
+    font-weight: 400;
+    opacity: 0.35;
+    transition: opacity 0.2s ease;
+}
+
+.explore-hero__tagline-interactive:hover {
+    opacity: 0.75;
+}
+
+/* Inline audio button — inherits size/style from parent */
+.explore-hero__audio-inline {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4em;
+    background: none;
+    border: none;
+    padding: 0;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    letter-spacing: inherit;
+    color: inherit;
+    cursor: pointer;
+}
+
+.explore-hero__audio-inline.is-playing {
+    color: #ff9a3c;
+}
+
+.blob-hero-canvas {
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* Static centering wrapper — never touched by Framer Motion */
+.blob-hero-center-nk26 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70vmin;
+    height: 70vmin;
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* Motion target — only opacity/scale, no positional transform */
+.blob-hero-anim-nk26 {
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.audio-pulse {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #ff9a3c;
+    animation: audioPulse 1s ease-in-out infinite;
+}
+
+@keyframes audioPulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50%       { transform: scale(1.4); opacity: 0.6; }
+}
+
+/* ── Scroll indicator — vertical ─────────────────────────────────────────── */
+
+.explore-hero__scroll {
+    position: absolute;
+    bottom: 2rem;
+    right: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    z-index: 4;
+}
+
+.explore-hero__scroll span {
+    font-size: 0.6rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--text-primary);
+    opacity: 0.5;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+}
+
+.explore-hero__scroll-line {
+    width: 1px;
+    height: 40px;
+    background: var(--text-primary);
+    opacity: 0.3;
+    transform-origin: top;
+    animation: scrollLine 2s ease-in-out infinite;
+}
+
+@keyframes scrollLine {
+    0%, 100% { transform: scaleY(1); opacity: 0.3; }
+    50%       { transform: scaleY(0.4); opacity: 0.7; }
+}

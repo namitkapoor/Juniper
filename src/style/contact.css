@@ -1,16 +1,13 @@
 /* src/style/contact.css */
 .contact-section {
   position: relative;
+  z-index: 200;
   padding: 6rem 2rem;
   background-color: var(--background, #000000);
   color: var(--text-primary, #ffffff);
 }
 
-.contact-wrapper {
-
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
-}
+.contact-wrapper {}
 
 .contact-content {
   display: flex;
@@ -168,7 +165,7 @@
   position: relative;
   margin-top: 4rem;
   padding-top: 2rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid var(--border-medium-nk26);
   text-align: center;
 }
 
@@ -210,13 +207,13 @@
 
 .copyright {
   font-size: 0.9rem;
-  color: var(--footer-text);
+  color: var(--text-secondary);
   margin-bottom: 0.5rem;
 }
 
 .footer-note {
   font-size: 0.9rem;
-  color: var(--footer-text);
+  color: var(--text-secondary);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -225,7 +222,7 @@
 
 .footer-icon {
   font-size: 1rem;
-  color: var(--footer-text);
+  color: var(--text-secondary);
 }
 
 /* Responsive Design */

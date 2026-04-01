@@ -1,0 +1,544 @@
+/* ── Theme tokens ────────────────────────────────────────────────────────── */
+
+:root {
+    --grid-border:      rgba(0, 0, 0, 0.12);
+    --card-inset:       rgba(0, 0, 0, 0.10);
+    --card-inset-sel:   rgba(255, 154, 60, 0.6);
+    --card-stroke:      rgba(0, 0, 0, 0.14);
+    --card-stroke-sel:  rgba(255, 154, 60, 0.55);
+}
+
+[data-theme="dark"] {
+    --grid-border:      rgba(255, 255, 255, 0.10);
+    --card-inset:       rgba(255, 255, 255, 0.08);
+    --card-inset-sel:   rgba(255, 154, 60, 0.6);
+    --card-stroke:      rgba(255, 255, 255, 0.13);
+    --card-stroke-sel:  rgba(255, 154, 60, 0.55);
+}
+
+/* ── Sticky hero (hero-only, no chat inside) ─────────────────────────────── */
+
+.explore-sticky-nk26 {
+    position: sticky;
+    top: 0;
+    height: 80vh;
+    z-index: 0;
+}
+
+/* Grid anchor — scrolls over the sticky hero */
+.explore-grid-anchor-nk26 {
+    position: relative;
+    z-index: 1;
+}
+
+/* ── Fixed chat panel (rendered in Explore.jsx, outside sticky) ──────────── */
+
+.explore-chat-panel-nk26 {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 42%;
+    overflow: hidden;
+    z-index: 100;
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    box-shadow: -4px 0 32px rgba(0, 0, 0, 0.25);
+}
+
+/* ── Grid panel ──────────────────────────────────────────────────────────── */
+
+.editorial-explore {
+    position: relative;
+    background: var(--background);
+    padding: 6rem 2rem;
+    transition: margin-right 0.4s ease;
+}
+
+.editorial-explore.is-split {
+    margin-right: 42%;
+}
+
+/* ── Layout rows ─────────────────────────────────────────────────────────── */
+
+.explore-row-nk26 {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+}
+
+/* ── Card wrapper — carries sizing + drop-shadow stroke ──────────────────── */
+
+.editorial-card-wrap {
+    position: relative;
+    filter:
+        drop-shadow( 1px  0    0 var(--card-stroke))
+        drop-shadow(-1px  0    0 var(--card-stroke))
+        drop-shadow( 0    1px  0 var(--card-stroke))
+        drop-shadow( 0   -1px  0 var(--card-stroke));
+    transition: filter 0.3s ease;
+}
+
+.editorial-card-wrap:has(.editorial-card.is-selected),
+.editorial-card-wrap:hover {
+    filter:
+        drop-shadow( 1px  0    0 var(--card-stroke-sel))
+        drop-shadow(-1px  0    0 var(--card-stroke-sel))
+        drop-shadow( 0    1px  0 var(--card-stroke-sel))
+        drop-shadow( 0   -1px  0 var(--card-stroke-sel));
+}
+
+/* Make article fill wrapper fully */
+.editorial-card {
+    width: 100%;
+    height: 100%;
+}
+
+/* Row 0: Aura — full-width, shorter landscape */
+.explore-row--blob-nk26 .editorial-card-wrap--landscape {
+    flex: 1;
+    height: 280px;
+}
+
+/* Blob card hint overlay */
+.editorial-card__blob-hint {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    pointer-events: none;
+}
+
+.editorial-card__blob-icon {
+    font-size: 2.5rem;
+    opacity: 0.4;
+    animation: blob-spin 6s linear infinite;
+}
+
+.editorial-card__blob-label {
+    font-size: 0.6rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    opacity: 0.6;
+}
+
+@keyframes blob-spin {
+    0%   { transform: rotate(0deg) scale(1); }
+    50%  { transform: rotate(180deg) scale(1.15); }
+    100% { transform: rotate(360deg) scale(1); }
+}
+
+/* Row 1: 3 equal tall vertical columns */
+.explore-row--tall-cols-nk26 {
+    height: 520px;
+}
+
+.explore-row--tall-cols-nk26 .editorial-card-wrap--tall {
+    flex: 1;
+}
+
+/* Row 2: 16:9 pair — each card is 16:9 */
+.explore-row--landscape-pair-nk26 .editorial-card-wrap--landscape {
+    flex: 1;
+    aspect-ratio: 16 / 9;
+}
+
+/* Row 3: two 2×2 squares side by side */
+.explore-row--double-quad-nk26 {
+    align-items: stretch;
+}
+
+.explore-quad-nk26 {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 0.75rem;
+    aspect-ratio: 1 / 1;
+}
+
+.explore-quad-nk26 .editorial-card-wrap--quad {
+    width: 100%;
+    height: 100%;
+}
+
+/* Row 4: full-width 16:9 row */
+.explore-row--full-row-nk26 .editorial-card-wrap--landscape {
+    flex: 1;
+    aspect-ratio: 16 / 9;
+}
+
+.editorial-explore__header {
+    margin-bottom: 3rem;
+}
+
+.editorial-explore__title {
+    font-family: var(--font-display, 'CabinetGrotesk', sans-serif);
+    font-size: clamp(2.5rem, 5vw, 3rem);
+    font-weight: 200;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    margin: 0 0 0.5rem;
+}
+
+.editorial-explore__subtitle {
+    color: var(--text-secondary);
+    font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+    margin: 0;
+}
+
+/* ── Filters ─────────────────────────────────────────────────────────────── */
+
+.editorial-explore__filters {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-bottom: 3rem;
+}
+
+.editorial-filter-btn {
+    padding: 0.4rem 1.1rem;
+    border: 1px solid var(--grid-border);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--text-secondary);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.editorial-filter-btn:hover {
+    color: var(--text-primary);
+    border-color: var(--text-primary);
+}
+
+.editorial-filter-btn.is-active {
+    background: var(--cat-color);
+    border-color: transparent;
+    color: var(--text-primary);
+}
+
+/* old flat grid removed — layout now uses explicit row sections */
+
+/* ── Card ────────────────────────────────────────────────────────────────── */
+
+.editorial-card {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    cursor: pointer;
+    background: var(--bg-secondary-nk26);
+    will-change: transform;
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 44px), calc(100% - 44px) 100%, 0 100%);
+    border-radius: 2px;
+    box-shadow: inset 0 0 0 1px var(--card-inset);
+}
+
+.editorial-card.is-filtered {
+    pointer-events: none;
+}
+
+.editorial-card.is-selected {
+    box-shadow: inset 0 0 0 2px var(--card-inset-sel);
+}
+
+/* ── Media ───────────────────────────────────────────────────────────────── */
+
+.editorial-card__media {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+}
+
+.editorial-card__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease, opacity 0.3s ease;
+}
+
+.editorial-card:hover .editorial-card__image:not(.is-hidden) {
+    transform: scale(1.06);
+}
+
+.editorial-card__image.is-hidden {
+    opacity: 0;
+}
+
+.editorial-card__video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    z-index: 1;
+}
+
+.editorial-card__video.is-playing {
+    opacity: 1;
+}
+
+.editorial-card__model {
+    width: 100%;
+    height: 100%;
+}
+
+/* Gradient overlay — always present, deepens on hover */
+.editorial-card__media::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.8) 0%,
+        rgba(0, 0, 0, 0.15) 50%,
+        rgba(0, 0, 0, 0.05) 100%
+    );
+    z-index: 2;
+    opacity: 0.5;
+    transition: opacity 0.4s ease;
+}
+
+.editorial-card:hover .editorial-card__media::after {
+    opacity: 1;
+}
+
+/* ── Brand watermark ─────────────────────────────────────────────────────── */
+
+.editorial-card__brand-watermark {
+    position: absolute;
+    bottom: 4.5rem;
+    left: 1.25rem;
+    font-family: var(--font-display, 'CabinetGrotesk', sans-serif);
+    font-size: clamp(2.5rem, 5vw, 3rem);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.03em;
+    color: rgba(255, 255, 255, 0.08);
+    pointer-events: none;
+    z-index: 3;
+    line-height: 1;
+    transition: color 0.5s ease, transform 0.5s ease;
+    transform: translateY(12px);
+}
+
+.editorial-card:hover .editorial-card__brand-watermark,
+.editorial-card__brand-watermark.is-visible {
+    color: rgba(255, 255, 255, 0.18);
+    transform: translateY(0);
+}
+
+/* ── Logo ────────────────────────────────────────────────────────────────── */
+
+.editorial-card__logo {
+    position: absolute;
+    top: 1.25rem;
+    right: 1.5rem;
+    max-height: 24px;
+    max-width: 90px;
+    object-fit: contain;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 4;
+    filter: brightness(0) invert(1);
+}
+
+.editorial-card:hover .editorial-card__logo,
+.editorial-card__logo.is-visible {
+    opacity: 0.9;
+}
+
+/* ── Info ────────────────────────────────────────────────────────────────── */
+
+.editorial-card__info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1.25rem 1.5rem;
+    z-index: 5;
+    transform: translateY(10px);
+    opacity: 0;
+    transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+.editorial-card:hover .editorial-card__info,
+.editorial-card__info.is-visible {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.editorial-card__tags {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.5rem;
+}
+
+.editorial-card__tag {
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+    /* Strong contrast in both modes */
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255,255,255,0.3);
+}
+
+.editorial-card__title {
+    font-family: var(--font-display, 'CabinetGrotesk', sans-serif);
+    font-size: clamp(1rem, 2vw, 1.4rem);
+    font-weight: 300;
+    color: #fff;
+    margin: 0 0 0.3rem;
+    letter-spacing: -0.01em;
+    text-shadow: 0 1px 8px rgba(0,0,0,0.6);
+}
+
+.editorial-card__desc {
+    font-size: 0.78rem;
+    color: rgba(255, 255, 255, 0.75);
+    margin: 0;
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+}
+
+/* ── Badge ───────────────────────────────────────────────────────────────── */
+
+.editorial-card__badge {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.9);
+    z-index: 5;
+    background: rgba(0,0,0,0.4);
+    backdrop-filter: blur(6px);
+    padding: 0.25rem 0.6rem;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+/* ── Blob Hero Section ───────────────────────────────────────────────────── */
+
+.blob-hero-section {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+.blob-hero-section iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.blob-hero-label {
+    position: absolute;
+    bottom: 2rem;
+    left: 2rem;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.blob-hero-label h1 {
+    font-family: var(--font-display, 'CabinetGrotesk', sans-serif);
+    font-size: clamp(3rem, 8vw, 3rem);
+    font-weight: 200;
+    letter-spacing: -0.03em;
+    color: #fff;
+    margin: 0;
+    line-height: 1;
+    mix-blend-mode: difference;
+}
+
+.blob-hero-label p {
+    font-size: 0.85rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+    margin: 0.5rem 0 0;
+}
+
+/* ── Corner label — sits inside the clipped notch ────────────────────────── */
+
+.editorial-card__corner-label {
+    position: absolute;
+    bottom: 5px;
+    right: 6px;
+    display: flex;
+    align-items: baseline;
+    gap: 0.45rem;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.editorial-card__corner-brand {
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.65);
+}
+
+.editorial-card__corner-year {
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: #ff9a3c; /* warm orange — from existing audio-reactive palette */
+}
+
+/* ── Responsive ──────────────────────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+    .explore-row-nk26 {
+        flex-direction: column;
+    }
+
+    .explore-row--tall-cols-nk26 {
+        height: auto;
+    }
+
+    .explore-row--tall-cols-nk26 .editorial-card-wrap--tall {
+        aspect-ratio: 16 / 9;
+    }
+
+    .explore-row--double-quad-nk26 {
+        flex-direction: column;
+    }
+
+    .explore-quad-nk26 {
+        aspect-ratio: auto;
+        grid-template-rows: 180px 180px;
+    }
+
+    /* Always show info on mobile since no hover */
+    .editorial-card__info {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .editorial-card__media::after {
+        opacity: 1;
+    }
+}

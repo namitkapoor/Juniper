@@ -1,17 +1,14 @@
 :root {
-  /* Softer, gentler text colors */
-  --text-bright: rgba(229, 229, 229, 0.87);
-  --text-primary: rgba(229, 229, 229, 0.75);
-  --text-secondary: rgba(229, 229, 229, 0.6);
-  --text-tertiary: rgba(229, 229, 229, 0.45);
-
+  /* home-page-only defaults — scoped to dark theme block below, not global */
 }
 
 :root[data-theme="dark"] {
   /* Core colors - gentler dark theme with complementary shades */
   --background: #171616;
+  --text-bright: rgba(229, 229, 229, 0.87);
   --text-primary: #b6b6b6;
   --text-secondary: #a8a8a8;
+  --text-tertiary: rgba(229, 229, 229, 0.45);
   
   /* Bento grid backgrounds - more visible */
   --bento-background: rgba(229, 229, 229, 0.08);
