@@ -136,6 +136,12 @@
   --text-primary: var(--text-primary-nk26);
   --text-secondary: var(--text-secondary-nk26);
   --text-tertiary: var(--text-tertiary-nk26);
+  --text-bright: var(--text-primary-nk26);
+  --bento-background: rgba(0, 0, 0, 0.03);
+  --bento-border: rgba(0, 0, 0, 0.12);
+  --card-background: rgba(0, 0, 0, 0.04);
+  --accent-primary: #2b2b2b;
+  --accent-success: #4CAF50;
 
   /* ============================================
      SPACING SCALE (8px base)
@@ -294,6 +300,12 @@
   --tech-note-bg-nk26: rgba(255, 255, 255, 0.05);
   --tech-note-border-nk26: rgba(255, 255, 255, 0.15);
   --tech-note-text-nk26: #c0c0c0;
+
+  /* Legacy dark overrides */
+  --bento-background: rgba(255, 255, 255, 0.06);
+  --bento-border: rgba(255, 255, 255, 0.12);
+  --card-background: rgba(255, 255, 255, 0.04);
+  --accent-primary: #e0e0e0;
 
   /* Shadows need higher opacity in dark mode */
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
