@@ -35,3 +35,4 @@ public/images/reference images/
 **/*.ai
 **/*.sketch
 **/*.fig
+memory/
