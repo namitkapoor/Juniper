@@ -10,16 +10,24 @@ import PageTransition from '../components/layout/PageTransition'
 import MaskTransition from '../components/layout/MaskTransition'
 import { useLenis } from '../hooks/useLenis'
 
+const STUDIO_URL = import.meta.env.VITE_STUDIO_URL || 'https://studio.namitkapoor.com'
+function ExploreRedirect() {
+  React.useEffect(() => { window.location.replace(STUDIO_URL) }, [])
+  return null
+}
+
 // Lazy load pages for code splitting
 const Home = lazy(() => import('./Home.jsx'))
 const About = lazy(() => import('./About.jsx'))
-const Explore = lazy(() => import('./Explore.jsx'))
+// Explore is now the standalone Studio site — redirect handled by ExploreRedirect
+
 const ManageFarms = lazy(() => import('./CaseStudies/ManageFarms.jsx'))
 const InfluencerMarketing = lazy(() => import('./CaseStudies/InfluencerMarketing.jsx'))
 const TaskReminders = lazy(() => import('./CaseStudies/TaskReminders.jsx'))
 const SustainablePackaging = lazy(() => import('./CaseStudies/SustainablePackaging.jsx'))
 const ChristineValmy = lazy(() => import('./CaseStudies/ChristineValmy.jsx'))
 const Clutch = lazy(() => import('./CaseStudies/Clutch.jsx'))
+const ChekoutAI = lazy(() => import('./CaseStudies/ChekoutAI.jsx'))
 
 const App = () => {
   // Analytics (GA4 + Clarity) are loaded via Google Tag Manager — see docs/GTM-SETUP.md
@@ -42,13 +50,14 @@ const App = () => {
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/about" element={<About />} />
-                <Route path="/explore" element={<Explore />} />
+                <Route path="/explore" element={<ExploreRedirect />} />
                 <Route path="/case-study/manage-farms" element={<ManageFarms />} />
                 <Route path="/case-study/influencer-marketing" element={<InfluencerMarketing />} />
                 <Route path="/case-study/task-reminders" element={<TaskReminders />} />
                 <Route path="/case-study/sustainable-packaging" element={<SustainablePackaging />} />
                 <Route path="/case-study/christine-valmy" element={<ChristineValmy />} />
                 <Route path="/case-study/clutch" element={<Clutch />} />
+                <Route path="/case-study/chekout-ai" element={<ChekoutAI />} />
               </Routes>
             </Suspense>
           </PageTransition>
