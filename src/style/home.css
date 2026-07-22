@@ -248,8 +248,13 @@ h1.hero-name,
   z-index: 1;
 }
 
+/* `inset: 0` is load-bearing. Absolutely positioned with no offsets, this box
+   shrink-wraps the Lottie's own intrinsic size, so the child's `width: 100%`
+   was resolving against a collapsed box rather than the section — the reveal
+   never spanned the heading. */
 .pixel-animation-wrapper-nk26 {
   position: absolute;
+  inset: 0;
   z-index: 0;
   pointer-events: none;
 }
@@ -275,9 +280,8 @@ h1.hero-name,
     min-height: 80px;
   }
 
-  .pixel-animation-wrapper-nk26 {
-    width: 200px;
-  }
+  /* No width override here. A literal 200px was what pinned the reveal to a
+     narrow band on phones — the wrapper now spans the section at every size. */
 
   .pixel-animation-placeholder-nk26 {
     height: 80px;

@@ -95,6 +95,13 @@ const PixelAnimationLottie = React.memo(({ animationData, isInView }) => {
         loop={false}
         autoplay={false}
         className="pixel-animation-nk26"
+        /* The <svg> fills the wrapper, but Lottie defaults to
+           `xMidYMid meet`, which letterboxes the ARTWORK inside it: in a
+           358x107 box a ~16:9 animation drew ~190px wide and centred, which
+           is the narrow band of pixels. `slice` covers the box instead —
+           crops top and bottom, keeps the pixels square (`none` would stretch
+           them into rectangles). */
+        rendererSettings={{ preserveAspectRatio: 'xMidYMid slice' }}
       />
     </div>
   );

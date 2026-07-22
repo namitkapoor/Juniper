@@ -1319,12 +1319,26 @@
 /* ============================================
    Next Project Teaser
    ============================================ */
+/* `min-height` is what decides how much of the cover image survives. The covers
+   are landscape (e.g. CV on Laptop is 2480x1388, ~1.79:1); at 400px tall on a
+   390px viewport the box is 0.84:1, so `object-fit: cover` was discarding
+   **53% of the image width** — measured — and slicing the subject off both
+   sides. Sizing the banner by aspect rather than a fixed height keeps the crop
+   proportional to the art instead of to the phone.
+   `min-height` still floors it so the overlaid text has room. */
 .next-project-nk26 {
   background: var(--bg-tertiary-nk26);
   overflow: hidden;
   position: relative;
   z-index: 100;
-  min-height: 400px;
+  /* width MUST be pinned. `aspect-ratio` resolves in whichever axis is free:
+     with only min-height set, the 280px floor won on a narrow screen and the
+     ratio drove the WIDTH to 280 x 1.6 = 448px, overflowing a 390px viewport
+     by 58px. Definite width means the ratio can only ever drive height. */
+  width: 100%;
+  max-width: 100%;
+  aspect-ratio: 16 / 10;
+  min-height: 280px;
   display: flex;
   align-items: center;
   cursor: pointer;
@@ -1437,6 +1451,10 @@
 @media (min-width: 768px) {
   .next-project-nk26 {
     padding: var(--space-5xl-nk26) var(--container-padding-tablet-nk26);
+    /* Desktop is wide enough that the old fixed height never cropped hard.
+       Restore it rather than letting 16/10 make the banner enormous. */
+    aspect-ratio: auto;
+    min-height: 400px;
   }
 }
 

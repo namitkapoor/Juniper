@@ -10,7 +10,10 @@ import PageTransition from '../components/layout/PageTransition'
 import MaskTransition from '../components/layout/MaskTransition'
 import { useLenis } from '../hooks/useLenis'
 
-const STUDIO_URL = import.meta.env.VITE_STUDIO_URL || 'https://studio.namitkapoor.com'
+// Fallback must match .env / .env.example. Three different values were in play
+// (namitkapoor-studio.vercel.app in .env, studio.namitkapoor.com here and in
+// .env.example) — whichever one is stale is where "explore" quietly sends people.
+const STUDIO_URL = import.meta.env.VITE_STUDIO_URL || 'https://studio.namit.me'
 function ExploreRedirect() {
   React.useEffect(() => { window.location.replace(STUDIO_URL) }, [])
   return null
@@ -27,7 +30,9 @@ const TaskReminders = lazy(() => import('./CaseStudies/TaskReminders.jsx'))
 const SustainablePackaging = lazy(() => import('./CaseStudies/SustainablePackaging.jsx'))
 const ChristineValmy = lazy(() => import('./CaseStudies/ChristineValmy.jsx'))
 const Clutch = lazy(() => import('./CaseStudies/Clutch.jsx'))
-const ChekoutAI = lazy(() => import('./CaseStudies/ChekoutAI.jsx'))
+// ChekoutAI removed: the import pointed at a file that was never committed, so
+// this branch could not build. The ChekOut case study is being split into
+// /chekout-builder and /chekout-agent — those routes land with that work.
 
 const App = () => {
   // Analytics (GA4 + Clarity) are loaded via Google Tag Manager — see docs/GTM-SETUP.md
@@ -57,7 +62,6 @@ const App = () => {
                 <Route path="/case-study/sustainable-packaging" element={<SustainablePackaging />} />
                 <Route path="/case-study/christine-valmy" element={<ChristineValmy />} />
                 <Route path="/case-study/clutch" element={<Clutch />} />
-                <Route path="/case-study/chekout-ai" element={<ChekoutAI />} />
               </Routes>
             </Suspense>
           </PageTransition>
