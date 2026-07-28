@@ -36,3 +36,6 @@ public/images/reference images/
 **/*.sketch
 **/*.fig
 memory/
+
+# Vercel project linkage (project/org IDs) — local only
+.vercel
