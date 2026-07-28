@@ -4,7 +4,10 @@ Sourced from `~/Documents/work/chekout-ai/{sentry-skin-website,chekoutai-fronten
 on 2026-07-27. Videos are 1280w max, h264 + VP9 + poster, audio stripped.
 Nothing exceeds the 10MB video budget in CLAUDE.md.
 
-Totals: images 5.6MB, videos 45MB.
+**Updated 2026-07-28:** added the live **Analytics dashboard — narrated flow**
+capture (see that section). This fills one of the two previously-missing surfaces.
+
+Totals: images 5.6MB, videos ~46MB.
 
 ## Current UI — the redesigned chat + recommendation panel
 
@@ -65,6 +68,33 @@ opened.
 | `images/…/CK/builder/platform-connection.jpg` | Platform connection step |
 | `images/…/CK/builder/shopify-app-thumbnail.jpg` | Shopify app listing thumbnail |
 
+## Analytics dashboard — narrated flow (NEW, 2026-07-28)
+
+The live analytics dashboard, captured as a continuous ~48s walkthrough: top
+metrics settling in → slow scroll through every card → hovering an **insight
+tooltip** ("kivakube is your most searched term…") → the signature **keyword →
+conversation-thread** interaction. Real merchant data throughout (`kiva`, Mar–Jul
+2026 range: 6,637 visitors, real conversation threads, keyword donut, sentiment).
+
+This is the CURRENT dashboard — the one with insights, clickable keywords, and the
+new-vs-returning visitor card. It supersedes the generic dashboard mockup.
+
+| File | Shows |
+|-|-|
+| `videos/…/CK/dashboard/analytics-dashboard-flow.*` | Full narrated dashboard walkthrough, ~48s |
+| `videos/…/CK/dashboard/analytics-dashboard-flow-poster.jpg` | Poster @40s: 6,637 visitors + open insight tooltip + keyword donut |
+
+**Trim before use:** the first ~12s is the date-range being set (dropdown pick)
+plus load skeletons — cut in for the populated board. The insight-tooltip and
+keyword-click beats are in the back half.
+
+**Capture provenance (important for re-shoots):** captured against the **canary**
+build, NOT app.chekout.ai — the new dashboard features (insight lightbulbs,
+clickable keywords, new-vs-returning card) are not on prod yet, so a prod capture
+would silently miss them. Merchant `kiva` (real data on the prod backend);
+`kivakube` only exists in the dev BigQuery. Spec:
+`chekoutai-frontend/e2e/capture/analytics-flow.spec.ts`.
+
 ## Shipping evidence
 
 `images/…/CK/clients/` — 13 named merchants running the product: apto, audab,
@@ -75,13 +105,16 @@ nuthatch, pacsoul, timeless.
 
 ## Still missing
 
-Two surfaces have no usable asset in any repo:
+One surface still has no live capture (the older generic mockup only):
 
 1. **Prompt generator** — the "Auto-generate from catalog" flow in
-   `components/AgentSetup/AIPersona.tsx`.
-2. **Analytics dashboard** — only a generic mockup exists
-   (`images/…/CK/dashboard/dashboard-mockup-tradeschool.png`) plus decorative
-   `bar-chart.png` / `line-chart.png` in the app's own assets.
+   `components/AgentSetup/AIPersona.tsx`. Stills exist in the capture harness
+   (`portfolio.spec.ts`) but haven't been brought into Juniper yet; the narrated
+   *flow* version (shot AG-02 in the shot list) is the next capture to do.
 
-Capture script for both:
-`~/Documents/work/chekout-ai/chekoutai-frontend/e2e/capture/` (see its README).
+~~Analytics dashboard~~ — **DONE 2026-07-28**, see the section above.
+
+Capture tooling:
+`~/Documents/work/chekout-ai/chekoutai-frontend/e2e/capture/` — see its README,
+plus `SHOTLIST.md` (full promo shot list) and `analytics-flow.spec.ts` (the flow
+capture that produced the dashboard clip).

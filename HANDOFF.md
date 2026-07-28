@@ -1,3 +1,203 @@
+# Handoff — 2026-07-28 (Direction: role target, positioning page, content gap)
+
+No code changed in this thread. It settled three decisions that everything
+downstream depends on. Picking up tomorrow starts here.
+
+## TL;DR
+
+Role target is **product engineer**. ChekOut is being wound down — a job
+replaces it, not funds it. The site's **home page becomes a positioning page**
+(one thesis + evidence + three deep links) instead of a four-card case-study
+grid; About is untouched. Everything is now blocked on **one thing**: the
+ChekOut case study doesn't exist.
+
+## 1. Role decision — settled
+
+**Product engineer.** Not technical PM, not FDE.
+
+- Technical PM is out. It's the one option where building stops being what
+  you're paid for, and it puts you against people who've done only that for
+  five years.
+- FDE vs product engineer was the real fork. Product engineer wins: the
+  evidence shows steering through copy, screenshots, positioning, and nav
+  hierarchy rather than technical specs — a product engineer's instrument set,
+  not an FDE's.
+- Corroborated by YC Paxel (https://paxel.ycombinator.com/results/pks7fjn0),
+  which analysed 6 Claude Code sessions and independently landed on "strong
+  AI-directed product engineer."
+
+**Caveat on that result:** it only saw six *marketing-site* sessions
+(2026-06-15 → 07-23). It never saw the design research, the WebGL work, or
+Kyuri.OS. Don't over-fit to it.
+
+## 2. The approach to own
+
+Descriptive, not aspirational — every line has a receipt. That's the guard: if
+a principle has no receipt it doesn't go on the site.
+
+**Thesis: I find the thing that shouldn't exist, remove it, and prove the
+removal worked.**
+
+| Project | Removed | Moved |
+|-|-|-|
+| Christine Valmy | 7 components → 3 (bento grid + Student ID killed) | 143% more submissions |
+| Influencer Marketing | 5 status tabs → 1 | 28% fewer clicks |
+| Manage Farms | Unused features cluttering core workflows | SUS 52 → 70 |
+| Clutch | The whole Duolingo direction, after one founder note | The pivot that made it legible |
+| ChekOut cleanup | Orphaned assets, dead code paths | 0.36 deletion ratio |
+| Capture harness | The pipeline itself | Replaced by 4 recordings |
+
+Four practices under it, each evidenced:
+
+1. **Work backwards from the workflow, not the feature list** — MI reorganised
+   around what users *do* (analytics vs tracking) not data states; Manage Farms
+   found farmers reference crops by location, not category.
+2. **Kill your best idea when the data says so** — the bento grid was your
+   favourite and already built; 8 students ignored it and asked for Instagram.
+3. **Name the exact words** — the Shopify disclaimer catch (copy implied the
+   whole *product* was Shopify-only; reframed as a demo constraint).
+4. **Anchor every change to the working version** — before/after discipline
+   throughout, including refusing a staged "before" for the rec panel.
+
+**The one gap, stated precisely:** you verify *outcomes*, not *implementations*.
+You'll measure a 143% lift but not run the dev server to confirm the CSS landed,
+not write a test, not rotate a key after untracking it. Paxel's three growth
+areas (visual verification, secrets closure, no tests) are all this one thing.
+It's also exactly the product-designer → product-engineer delta, and it's cheap
+to close: say yes when the offer to verify appears.
+
+## 3. Site restructure — decided, not started
+
+The **positioning page replaces Home**, not About.
+
+| Page | Question it answers |
+|-|-|
+| Home (positioning) | How do I work, and what have I shipped? |
+| About | Who am I, and why do I do this? |
+
+About stays exactly as is — "Breaking and Rebuilding", the Design/Development
+split, the timeline, the interests section. It's doing real work and merging it
+into a professional thesis would weaken both.
+
+**The only structural change:** the four-card case-study grid at
+`src/Pages/Home.jsx:295` becomes the evidence table plus three deep links
+(ChekOut · Kyuri.OS · Studio). The hero survives, compressed so the thesis lands
+above the fold or one scroll in.
+
+Nothing gets deleted. `/case-study/manage-farms` and `/case-study/influencer-marketing`
+keep working, they just stop being front-door content. Fully reversible.
+
+**Don't explain the format on the page.** A site that opens with a thesis and
+immediately backs it with removals→numbers doesn't need a note about why it
+isn't a case-study grid. The note is the only thing that would make it read as
+odd.
+
+**Ship on a branch.** Vercel is already building previews; `nk-edits-2026`
+exists at `e39ffd9`. `namit.me` stays on the current build until it's good.
+
+## 4. What's actually blocking it
+
+The **evidence table is writable today** — it draws entirely on projects that
+already have full content (CV, MI, Manage Farms, Clutch). Only the three deep-link
+cards need new material.
+
+| Project | Case study content | Cover video |
+|-|-|-|
+| **ChekOut** | ✗ Doesn't exist — the real blocker | ✓ Have it — `CK/motion/maria-with-ui.mp4`, 1280×720, 14s, matches the existing cover convention exactly |
+| **Kyuri.OS** | ✗ Nothing | ✗ Needs a recording — dashboard is password-gated, so it has to be you |
+| **Studio** | Live site, no writeup | ✗ Needs a recording of the 3D shelf. Studio's `public/videos` has only Experiments |
+
+Kyuri and Studio can ship as cards that link out. The page is gated on ChekOut,
+not on all three.
+
+### Recording list — one sitting
+
+1. **ChekOut prompt generator** — the last missing ChekOut surface (see the
+   07-28 capture entry below; same canary + `kiva` pattern should work)
+2. **Kyuri dashboard** — panel walkthrough. Careful with real job/apartment data
+   on screen
+3. **Studio** — 3D shelf, ~10s, for the cover
+
+All 1280×720, no audio, 10–15s for covers. Transcode to mp4 + webm + poster.
+
+> The analytics dashboard is **done** — see the entry below. The manual shot
+> list in the 07-27 section is superseded for that surface.
+
+## 5. Open items
+
+- **Rotate the two GCP service accounts.** `git show 64d2ed6:shopify-473015-firebase-adminsdk-fbsvc-8651a0e9a2.json`
+  still returns a file containing a private key; second key in `55cb9ba`.
+  `SentrySkin/chekoutai-frontend` is private so this isn't public exposure, and
+  Cloud Run build-time secrets live in Secret Manager separately — but the
+  committed admin key bypasses Firebase security rules for anyone with repo
+  access. Rotation makes the committed blob inert; history rewriting is optional.
+  **User is handling this.**
+- **Credibility fixes** — not urgent, ~10 min, worth doing before anyone
+  technical reads the site: the CV model-vendor contradiction (§ 07-27 below),
+  the `product-recommendations` description, the Home.jsx array drift. Note the
+  first is the only one with real cost; the other two aren't live.
+- **Verify Kyuri's API routes are gated**, not just the UI, before linking it
+  publicly. The shell currently renders panel labels (`SCRATCHPAD`, `Job
+  Pipeline`, `Apartment`) with no data, which is fine — but check the routes.
+- **Uncommitted in this repo right now** (three separate threads, none mine):
+  analytics dashboard assets + `CHEKOUT-ASSETS.md`; the bot-scan trap
+  (`vercel.json` rewrites + `api/trap.js` → Notion); and this handoff.
+
+---
+
+# Handoff — 2026-07-28 (Analytics dashboard capture — shipped)
+
+## TL;DR
+
+Un-parked the capture harness and shipped the **Analytics dashboard** asset — one
+of the two surfaces the 07-27 handoff listed as missing. The 07-27 note said the
+harness was "blocked on backend data" and the flows were "faster to screen-record
+by hand." That diagnosis was wrong: the block was a **target/data-location**
+problem, not a capture problem. Fixing the target made it fully automated.
+
+## What was actually wrong (so it isn't re-learned)
+
+- **Prod runs an older frontend.** `app.chekout.ai` has none of the new dashboard
+  features (insight tooltips, clickable keywords, new-vs-returning card), so a
+  prod capture silently misses them. Capture against the **canary** build instead
+  (built from the current tree).
+- **Data lives in two BigQuery projects.** `kivakube` is dev-only
+  (`shopify-473015`); the prod backend (which canary also uses) only has `kiva`
+  (`production-aibuilder`, 6.8k turns, current). So: **canary + `kiva`**.
+- The dashboard defaults to *today* (empty). The spec now drives the react-date-
+  range picker (dropdown month/year — its inputs are readonly) to Mar→today.
+- Prod builds strip MUI icon `data-testid`, so the insight lightbulb is matched by
+  SVG path, not testid.
+
+## Files added
+
+**In Juniper (this repo):**
+- `public/videos/Case Studies/CK/dashboard/analytics-dashboard-flow.mp4` (457KB)
+- `…/analytics-dashboard-flow.webm` (603KB)
+- `…/analytics-dashboard-flow-poster.jpg` (54KB) — populated board + open insight tooltip
+- `CHEKOUT-ASSETS.md` — new "Analytics dashboard" section; dropped it from "Still missing"
+
+**In `chekoutai-frontend/e2e/capture/` (uncommitted, per that harness's convention):**
+- `analytics-flow.spec.ts` — the flow-capture spec (canary + kiva baked into its header)
+- `SHOTLIST.md` — full promo shot list across all five feature areas
+
+## Reproduce
+
+```bash
+BASE=https://canary---nextjs-l6tdgloqva-uc.a.run.app
+PLAYWRIGHT_BASE_URL=$BASE CAPTURE_MERCHANT_ID=kiva \
+  npx playwright test --config=playwright.capture.config.ts e2e/capture/analytics-flow.spec.ts
+# then the ffmpeg 3-file recipe in e2e/capture/README.md
+```
+
+## Next
+
+- **Prompt generator flow (AG-02)** — the last missing surface. Same pattern:
+  new spec on the canary target, then convert into `CK/builder/`.
+- Trim the first ~12s (date-pick + skeletons) off the dashboard clip before use.
+
+---
+
 # Handoff — 2026-07-27 (Case study audit + ChekOut asset migration)
 
 ## TL;DR

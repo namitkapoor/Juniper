@@ -1,9 +1,21 @@
 {
   "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
-    }
+    { "source": "/.env:rest*", "destination": "/api/trap" },
+    { "source": "/.git/:rest*", "destination": "/api/trap" },
+    { "source": "/.aws/:rest*", "destination": "/api/trap" },
+    { "source": "/.ssh/:rest*", "destination": "/api/trap" },
+    { "source": "/wp-admin/:rest*", "destination": "/api/trap" },
+    { "source": "/wp-includes/:rest*", "destination": "/api/trap" },
+    { "source": "/wp-content/:rest*", "destination": "/api/trap" },
+    { "source": "/wp-login.php", "destination": "/api/trap" },
+    { "source": "/xmlrpc.php", "destination": "/api/trap" },
+    { "source": "/phpmyadmin/:rest*", "destination": "/api/trap" },
+    { "source": "/adminer.php", "destination": "/api/trap" },
+    { "source": "/vendor/:rest*", "destination": "/api/trap" },
+    { "source": "/administrator/:rest*", "destination": "/api/trap" },
+    { "source": "/config.json", "destination": "/api/trap" },
+    { "source": "/credentials", "destination": "/api/trap" },
+    { "source": "/(.*)", "destination": "/index.html" }
   ],
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
