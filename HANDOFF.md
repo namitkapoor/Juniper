@@ -1,3 +1,45 @@
+# Handoff — 2026-07-29 (Asset audit + repo cleanup)
+
+Small session on this repo; the bulk of the day was in `kyuri-dashboard` — see
+its `HANDOFF.md` for the Félix post-mortem and the Q&A data-loss fix.
+
+## Shipped (`2d3802c`, live on namit.me)
+
+- **11 `.DS_Store` files untracked.** They were committed before `.gitignore`
+  covered them, so the ignore rule never applied. Files stay on disk.
+- **`/dev/assets`** — a contact sheet for the ChekOut assets, at
+  `src/Pages/AssetReview.jsx`, routed behind `import.meta.env.DEV`
+  (`src/Pages/App.jsx:66`). Verified tree-shaken out of the prod bundle.
+  Run `npm run dev` → http://localhost:5173/dev/assets.
+
+## ChekOut assets — audited, all healthy
+
+16 video sets, every one with mp4 + webm + poster, no gaps. 22 stills. Largest
+file 2.4MB, well under the 10MB budget. `CHEKOUT-ASSETS.md` matches disk exactly.
+
+Three things to know before cutting anything:
+
+- `builder/agent-builder-full.mp4` is **177s** — needs trimming, "before" only.
+- `dashboard/analytics-dashboard-flow.mp4` — first ~12s is date-picking and
+  load skeletons.
+- `before/rec-panel-before` is 1144×720, off the 1280 grid everything else uses.
+  Fine in a slider, visible next to a 1280 clip.
+
+## Still missing (unchanged from 07-28)
+
+| Project | Gap |
+|-|-|
+| ChekOut | Prompt-generator capture; **and the case study itself** — no route, no data file, no Home card, so all 46MB in `public/` is unreferenced |
+| Kyuri.OS | Everything — zero assets, zero refs in `src/`. Password-gated, so the recording has to be you |
+| Studio | Cover recording of the 3D shelf |
+
+## Note
+
+GitHub flagged **12 Dependabot vulnerabilities** (2 high) on push. Unrelated to
+this work, not looked at.
+
+---
+
 # Handoff — 2026-07-28 (Direction: role target, positioning page, content gap)
 
 No code changed in this thread. It settled three decisions that everything
