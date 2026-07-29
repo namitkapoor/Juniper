@@ -30,6 +30,9 @@ const TaskReminders = lazy(() => import('./CaseStudies/TaskReminders.jsx'))
 const SustainablePackaging = lazy(() => import('./CaseStudies/SustainablePackaging.jsx'))
 const ChristineValmy = lazy(() => import('./CaseStudies/ChristineValmy.jsx'))
 const Clutch = lazy(() => import('./CaseStudies/Clutch.jsx'))
+// Dev-only contact sheet for reviewing case-study assets before they are wired
+// into a page. Guarded below so it is never routed in a production build.
+const AssetReview = lazy(() => import('./AssetReview.jsx'))
 // ChekoutAI removed: the import pointed at a file that was never committed, so
 // this branch could not build. The ChekOut case study is being split into
 // /chekout-builder and /chekout-agent — those routes land with that work.
@@ -62,6 +65,7 @@ const App = () => {
                 <Route path="/case-study/sustainable-packaging" element={<SustainablePackaging />} />
                 <Route path="/case-study/christine-valmy" element={<ChristineValmy />} />
                 <Route path="/case-study/clutch" element={<Clutch />} />
+                {import.meta.env.DEV && <Route path="/dev/assets" element={<AssetReview />} />}
               </Routes>
             </Suspense>
           </PageTransition>
