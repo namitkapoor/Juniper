@@ -39,3 +39,6 @@ memory/
 
 # Vercel project linkage (project/org IDs) — local only
 .vercel
+
+# Video source masters (keep local / cold storage — GitHub caps files at 100MB)
+*.mov
