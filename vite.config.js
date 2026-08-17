@@ -42,12 +42,23 @@ export default defineConfig({
         rollupOptions: {
             input: resolve(__dirname, 'src/index.html'),
             output: {
-                // Manual chunking for better code splitting
+                // Manual chunking for better code splitting.
+                //
+                // Only list packages that are actually in the module graph — a
+                // name here that nothing imports just produces an empty chunk,
+                // which is what the old 'ui-vendor': ['antd'] entry was doing.
+                //
+                // framer-motion is imported by nearly every component, so
+                // motion-vendor really is part of the critical path. lottie is
+                // not: it is lazily imported on Home and otherwise only used by
+                // case-study routes, so it gets its own chunk rather than riding
+                // along inside the preloaded animation bundle. three/fiber are
+                // reached only through the lazy About route.
                 manualChunks: {
                     'react-vendor': ['react', 'react-dom', 'react-router-dom'],
-                    'three-vendor': ['three', '@react-three/fiber', '@react-three/drei'],
-                    'animation-vendor': ['framer-motion', 'lottie-react'],
-                    'ui-vendor': ['antd'],
+                    'three-vendor': ['three', '@react-three/fiber'],
+                    'motion-vendor': ['framer-motion'],
+                    'lottie-vendor': ['lottie-react', 'lottie-web'],
                 }
             }
         },
@@ -60,7 +71,15 @@ export default defineConfig({
             }
         }
     },
-    base: './',
+    // Must be '/', not './'. This is an SPA: vercel.json rewrites every unknown
+    // path to /index.html while the browser keeps the deep URL, so relative asset
+    // URLs resolve against the route rather than the site root — /case-study/x
+    // asked for /case-study/assets/index-*.js, which the catch-all answered with
+    // index.html, so the module script died on a MIME mismatch and the page came
+    // up blank on any direct link or refresh. './' was a leftover from the
+    // GitHub Pages deploy (project pages are served from a subpath); that deploy
+    // path is gone, so absolute URLs are correct now.
+    base: '/',
     assetsInclude: ['**/*.glb'],
     optimizeDeps: {
         exclude: ['react-icons/io5']
