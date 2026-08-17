@@ -42,3 +42,10 @@ memory/
 
 # Video source masters (keep local / cold storage — GitHub caps files at 100MB)
 *.mov
+
+# Vite dep-prebundle cache (was committed by mistake — 49MB of build output)
+.vite/
+
+# Pre-compression video masters — every one has a shipped, compressed
+# counterpart under public/videos/Case Studies/. Keep local, never deploy.
+public/videos/_original/
