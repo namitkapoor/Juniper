@@ -161,16 +161,23 @@ const CaseStudyCard = React.memo(({ study, activeCategories, caseStudyCategories
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      {/* Video Background - Full Width */}
+      {/* Video Background - Full Width.
+          These only ever play on hover (see handleMouseEnter), so there is no
+          reason to fetch them up front. preload="metadata" was not saving
+          anything either: these mp4s carry their moov atom at the end, so the
+          browser pulled the whole file just to read the duration — 7.5 MB of
+          video on a homepage that shows a still frame until you hover. The
+          poster is a ~40 KB WebP, so the card looks identical before hover. */}
       {study.videoSrc && (
         <video
           ref={videoRef}
           className="case-study-video-nk26"
           src={study.videoSrc}
+          poster={study.poster || study.backgroundImage}
           muted
           playsInline
           loop
-          preload="metadata"
+          preload="none"
         />
       )}
       {/* Fallback image if no video */}
@@ -297,11 +304,12 @@ const caseStudies = [
     title: 'Redesign Post-Game Analytics',
     metrics: 'Data-Dense Mobile Experience',
     categories: ['ux', 'b2c'],
-    image: '../images/Project Cover Photos/cover-photo.png',
+    image: '/images/Project Cover Photos/cover-photo.webp',
     description: 'Designed a data-first post-game experience for competitive padel players — balancing analytical depth with social sharing.',
     path: '/case-study/clutch',
     backgroundImage: '/images/Case Studies/CLUTCH/cover-photo.png',
     videoSrc: '/videos/Case Studies/CLUTCH/cover video.mp4',
+    poster: '/images/Card Posters/clutch.webp',
   },
   {
     title: 'Enroll More Students',
@@ -311,17 +319,19 @@ const caseStudies = [
     description: 'Designed a chat-driven enrollment system to simplify beauty school enrollment and tracking, boosting user engagement by reducing workflow friction for enrollment officers.',
     path: '/case-study/christine-valmy',
     backgroundImage: '/images/Project Cover Photos/CV on Laptop.png',
-    videoSrc: '/videos/Case Studies/CV/christine-valmy-laptop.mp4'
+    videoSrc: '/videos/Case Studies/CV/christine-valmy-laptop.mp4',
+    poster: '/images/Card Posters/christine-valmy.webp'
   },
   {
     title: 'Manage Small Farms',
     metrics: '70 SUS Score',
     categories: ['ux', 'research', 'b2c'],
-    image: '../images/Project Cover Photos/JD Redesign thumbnail.png',
+    image: '/images/Project Cover Photos/JD Redesign thumbnail.webp',
     description: 'Simplified an operations management app to better serve small farm owners, focusing on usability and scalability for non-technical users.',
     path: '/case-study/manage-farms',
     backgroundImage: '../images/Project Cover Photos/farmer on phone screenshot 1.png',
-    videoSrc: '/videos/Case Studies/JD/Animations/Farmer w: phone anim-left.mp4'
+    videoSrc: '/videos/Case Studies/JD/Animations/Farmer w: phone anim-left.mp4',
+    poster: '/images/Card Posters/manage-farms.webp'
   },
   {
     title: 'Hire Influencer Marketing',
@@ -331,7 +341,8 @@ const caseStudies = [
     description: 'Redesigned a web app to simplify influencer hiring and campaign tracking, boosting user engagement by reducing workflow friction for small business owners.',
     path: '/case-study/influencer-marketing',
     backgroundImage: '/images/Project Cover Photos/MI on Laptop.png',
-    videoSrc: '/videos/Case Studies/MI/MI on laptop.mp4'
+    videoSrc: '/videos/Case Studies/MI/MI on laptop.mp4',
+    poster: '/images/Card Posters/influencer-marketing.webp'
   },
 
   // Temporarily removed case studies

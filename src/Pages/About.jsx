@@ -1,9 +1,46 @@
 import { lazy, Suspense, useState, useCallback, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Canvas } from '@react-three/fiber';
-import { IoAdd } from 'react-icons/io5';
-import * as IoIcons from 'react-icons/io5';
+import {
+  IoAdd,
+  IoAirplaneOutline,
+  IoBeerOutline,
+  IoBriefcaseOutline,
+  IoCodeOutline,
+  IoDiamondOutline,
+  IoFilmOutline,
+  IoGlassesOutline,
+  IoHeartDislikeOutline,
+  IoPinOutline,
+  IoRocketOutline,
+  IoSchoolOutline,
+  IoSearchOutline,
+  IoStarOutline,
+  IoThumbsDownOutline,
+} from 'react-icons/io5';
 import { aboutSections } from '../data/aboutContent';
+
+// The journey timeline in aboutContent.js names its icons as strings, so they
+// have to be resolved at runtime. This used to be `import * as IoIcons`, which
+// pulled the entire io5 set (~750 kB) into a chunk the entry statically imported
+// — i.e. every visitor downloaded every Ionicon to render 14 of them. Keep this
+// map in sync with the `icon:` values in data/aboutContent.js.
+const TIMELINE_ICONS = {
+  IoAirplaneOutline,
+  IoBeerOutline,
+  IoBriefcaseOutline,
+  IoCodeOutline,
+  IoDiamondOutline,
+  IoFilmOutline,
+  IoGlassesOutline,
+  IoHeartDislikeOutline,
+  IoPinOutline,
+  IoRocketOutline,
+  IoSchoolOutline,
+  IoSearchOutline,
+  IoStarOutline,
+  IoThumbsDownOutline,
+};
 import Contact from '../components/sections/Contact';
 import { useTheme } from '../components/layout/ThemeContext';
 
@@ -121,7 +158,7 @@ export default function About() {
           <div className={`timeline-section ${expandedSections.has('journey') ? 'timeline-visible' : ''}`}>
             <div className="custom-timeline">
               {section.content.timeline.map((event, index) => {
-                const IconComponent = IoIcons[event.icon];
+                const IconComponent = TIMELINE_ICONS[event.icon];
                 return (
                   <div 
                     key={index} 
