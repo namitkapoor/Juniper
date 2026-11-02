@@ -1,0 +1,551 @@
+[
+ {
+  "id": "ff5b2a3f",
+  "claim": "Added offline support to Kyuri so pages open from the last cached copy after a 4s wait, and jobs added with no signal wait in an outbox and send on reconnect, with a pill showing which state applies.",
+  "area": "frontend",
+  "limits": null,
+  "whenStart": "2026-10-27",
+  "whenEnd": "2026-10-27",
+  "context": "Pages load from the last cache after 4 seconds offline. Jobs queued with no signal wait in a local outbox and sync on reconnect. A status pill shows the current state.",
+  "project": "kyuri-os",
+  "sources": [
+   {
+    "commit": "ab7171a",
+    "date": "2026-10-27",
+    "ref": "ab7171a"
+   }
+  ],
+  "media": [],
+  "visibility": "public"
+ },
+ {
+  "id": "f21be06a",
+  "claim": "Built a public resume-tailoring demo on Kyuri that runs through a job queue on his own machine, with polling, a fallback, capped tweaks, redownload and a per-visitor try quota.",
+  "area": "ai",
+  "limits": "Behind a feature flag; visitor counts are not currently tracked.",
+  "whenStart": "2026-10-15",
+  "whenEnd": "2026-10-19",
+  "context": "The public demo at /try runs the full tailoring pipeline through a job queue on Namit's local server. It handles polling, a retry path, a redownload step, and a per-visitor cap on tries.",
+  "project": "kyuri-os",
+  "sources": [
+   {
+    "commit": "282ad60",
+    "date": "2026-10-15",
+    "ref": "282ad60"
+   },
+   {
+    "commit": "4a152af",
+    "date": "2026-10-19",
+    "ref": "e2e/TEST_PLAN.md"
+   }
+  ],
+  "media": [],
+  "visibility": "public"
+ },
+ {
+  "id": "88ce4fc3",
+  "claim": "Wrote data-hygiene rules for the Kyuri end-to-end suite so that every test write targets a row the suite created and teardown removes those rows by recorded id, email domain or hashed IP, never by time window.",
+  "area": "qa",
+  "limits": "From the written test plan; not shown running against live data.",
+  "whenStart": "2026-10-15",
+  "whenEnd": "2026-10-19",
+  "context": "The end-to-end suite tracks every row it writes and tears down those exact rows by recorded ID, email domain, or hashed IP. Teardown never uses a time window, so tests cannot delete unrelated data.",
+  "project": "kyuri-os",
+  "sources": [
+   {
+    "commit": "4a152af",
+    "date": "2026-10-19",
+    "ref": "e2e/TEST_PLAN.md"
+   }
+  ],
+  "media": [],
+  "visibility": "public"
+ },
+ {
+  "id": "de8e5fc1",
+  "claim": "Added a mutation guard to the Kyuri Playwright suite that answers any non-GET API request a page fires on its own with a 418 unless allowlisted, so tests that only view a page cannot spend model credits or dequeue real work.",
+  "area": "qa",
+  "limits": null,
+  "whenStart": "2026-10-15",
+  "whenEnd": "2026-10-19",
+  "context": "A mutation guard in the Playwright suite returns 418 for any unsanctioned POST, PATCH, or DELETE a page fires during a view-only test. View tests cannot spend model credits or trigger real pipeline jobs.",
+  "project": "kyuri-os",
+  "sources": [
+   {
+    "commit": "4a152af",
+    "date": "2026-10-19",
+    "ref": "e2e/TEST_PLAN.md"
+   }
+  ],
+  "media": [],
+  "visibility": "public"
+ },
+ {
+  "id": "ff6a6375",
+  "claim": "Added a page gate to the Kyuri resume build that refuses to publish a resume still over one page at the tightest layout, then runs one trim-to-one-page QA pass and re-lints before rebuilding.",
+  "area": "ai",
+  "limits": "If the resume still overflows after one trim pass, it ships with a page-count warning.",
+  "whenStart": "2026-10-15",
+  "whenEnd": "2026-10-19",
+  "context": "The resume build refuses to publish a resume that is over one page at the tightest layout. Before rebuilding it runs a trim-to-one-page QA pass and a re-lint.",
+  "project": "kyuri-os",
+  "sources": [
+   {
+    "commit": "4a152af",
+    "date": "2026-10-19",
+    "ref": "local-server/evals/README.md"
+   }
+  ],
+  "media": [],
+  "visibility": "public"
+ },
+ {
+  "id": "b2f287c5",
+  "claim": "Built a fit gate into the Kyuri resume pipeline that judges a job posting before tailoring, maps its duties, records a verdict on each run, and steers the later tailoring and QA steps.",
+  "area": "ai",
+  "limits": "The fit gate falls back to a 'possible' verdict when the model is unavailable; there is no record of it blocking a tailoring run.",
+  "whenStart": "2026-10-15",
+  "whenEnd": "2026-10-19",
+  "context": "Before tailoring a resume, the pipeline scores the job posting for fit, maps its duties to Namit's background, and records a verdict. The verdict steers the tailoring and QA steps that follow.",
+  "project": "kyuri-os",
+  "sources": [
+   {
+    "commit": "5cc8009",
+    "date": "2026-10-18",
+    "ref": "5cc8009"
+   },
+   {
+    "commit": "4a152af",
+    "date": "2026-10-19",
+    "ref": "local-server/evals/README.md"
+   }
+  ],
+  "media": [],
+  "visibility": "public"
+ },
+ {
+  "id": "46faab54",
+  "claim": "Built a rolling-24-hour send cap of 200 emails into Kyuri's email module, backed by an email_log table that also serves as an audit trail and dedup signal, with a unit test file for the guard.",
+  "area": "backend-data",
+  "limits": "The cap is documented; actual send counts are not shown here.",
+  "whenStart": "2026-10-16",
+  "whenEnd": "2026-10-16",
+  "context": "Outbound email is capped at 200 sends per 24 hours, enforced by a log table that doubles as an audit trail and a dedup signal. A unit test covers the rate guard.",
+  "project": "kyuri-os",
+  "sources": [
+   {
+    "commit": "240471c",
+    "date": "2026-10-16",
+    "ref": "docs/EMAIL.md"
+   },
+   {
+    "commit": "240471c",
+    "date": "2026-10-16",
+    "ref": "__tests__/email-rate-guard.test.ts"
+   }
+  ],
+  "media": [],
+  "visibility": "public"
+ },
+ {
+  "id": "416d5a0b",
+  "claim": "Added a rate limit in Kyuri to every candidate action that spends model tokens.",
+  "area": "backend-data",
+  "limits": null,
+  "whenStart": "2026-10-14",
+  "whenEnd": "2026-10-14",
+  "context": "Every AI action a candidate can trigger is rate-limited to keep model costs in check.",
+  "project": "kyuri-os",
+  "sources": [
+   {
+    "commit": "bd34a2c",
+    "date": "2026-10-14",
+    "ref": "bd34a2c"
+   }
+  ],
+  "media": [],
+  "visibility": "public"
+ },
+ {
+  "id": "b0b443c6",
+  "claim": "Scoped every Kyuri route and panel to the viewer's access tier (visitor, candidate or owner), and added Google sign-in with a per-candidate allowlist.",
+  "area": "backend-data",
+  "limits": "Based on commit and file evidence, not a security audit.",
+  "whenStart": "2026-10-14",
+  "whenEnd": "2026-10-14",
+  "context": "Three access tiers: visitors see public data, candidates see their own pipeline, and the owner sees everything. Google sign-in gates candidate access against a per-account allowlist.",
+  "project": "kyuri-os",
+  "sources": [
+   {
+    "commit": "008461c",
+    "date": "2026-10-14",
+    "ref": "008461c"
+   },
+   {
+    "commit": "8e51eb5",
+    "date": "2026-10-14",
+    "ref": "8e51eb5"
+   }
+  ],
+  "media": [],
+  "visibility": "public"
+ },
+ {
+  "id": "faca7441",
+  "claim": "Wrote a pre-commit checklist for the ChekOut AI frontend that defines a local check (TypeScript type-check plus ESLint) and a test run to do before pushing, to catch build-time errors such as untyped 'any' usage.",
+  "area": "qa",
+  "limits": null,
+  "whenStart": "2025-12-22",
+  "whenEnd": "2025-12-22",
+  "context": "Added a pre-commit checklist for a startup's frontend: TypeScript, test, build, and lint checks before each commit, plus branch-name and message-format rules.",
+  "project": "ChekOut AI frontend",
+  "sources": [
+   {
+    "commit": "3193982",
+    "date": "2025-12-22"
+   }
+  ],
+  "media": [],
+  "visibility": "private"
+ },
+ {
+  "id": "c7c71106",
+  "claim": "Introduced Vitest to the ChekOut AI frontend, adding its config and setup files, and updated the email and merchant-ID validation logic in the same commit.",
+  "area": "qa",
+  "limits": null,
+  "whenStart": "2025-12-18",
+  "whenEnd": "2025-12-18",
+  "context": "Set up Vitest as the unit test runner for a startup's frontend, including config, setup files, and the first passing test for the email analytics component.",
+  "project": "ChekOut AI frontend",
+  "sources": [
+   {
+    "commit": "ae9a132",
+    "date": "2025-12-18"
+   },
+   {
+    "commit": "596e4eb",
+    "date": "2025-12-18"
+   }
+  ],
+  "media": [],
+  "visibility": "private"
+ },
+ {
+  "id": "8ca0deab",
+  "claim": "Connected a newsletter signup on the ChekOut AI company site to n8n.",
+  "area": "frontend",
+  "limits": null,
+  "whenStart": "2025-12-09",
+  "whenEnd": "2025-12-09",
+  "context": "Connected a newsletter signup form on a startup's marketing site to an n8n automation workflow.",
+  "project": "ChekOut AI company site",
+  "sources": [
+   {
+    "commit": "201332d",
+    "date": "2025-12-09"
+   }
+  ],
+  "media": [],
+  "visibility": "private"
+ },
+ {
+  "id": "868464ba",
+  "claim": "Wrote an architecture document for the ChekOut AI frontend explaining its multi-stage Docker build (deps, builder, runner stages) and Next.js standalone output for Cloud Run.",
+  "area": "infra",
+  "limits": null,
+  "whenStart": "2025-11-24",
+  "whenEnd": "2025-11-24",
+  "context": "Wrote a deployment architecture document for a startup's frontend: multi-stage Docker build, GCP Artifact Registry setup, Cloud Build trigger, and Nginx config.",
+  "project": "ChekOut AI frontend",
+  "sources": [
+   {
+    "commit": "64d2ed6",
+    "date": "2025-11-24"
+   }
+  ],
+  "media": [],
+  "visibility": "private"
+ },
+ {
+  "id": "1b47815a",
+  "claim": "Added PowerShell scripts for the ChekOut AI frontend: deploy.ps1 to run the deployment and pre-deploy-check.ps1 to verify the service-account file, environment variables, gcloud configuration, enabled APIs and Firebase configuration before deploying.",
+  "area": "infra",
+  "limits": null,
+  "whenStart": "2025-11-24",
+  "whenEnd": "2025-11-24",
+  "context": "Added PowerShell scripts to automate a startup's frontend deployment: a prerequisites check script and a deploy script.",
+  "project": "ChekOut AI frontend",
+  "sources": [
+   {
+    "commit": "64d2ed6",
+    "date": "2025-11-24"
+   }
+  ],
+  "media": [],
+  "visibility": "private"
+ },
+ {
+  "id": "df2abd95",
+  "claim": "For the ChekOut AI frontend, Namit set up a deployment path in which a Cloud Build config (cloudbuild.yaml) builds a Docker image and deploys it to a Cloud Run service, with Firebase Hosting rewriting requests to that service.",
+  "area": "infra",
+  "limits": null,
+  "whenStart": "2025-11-24",
+  "whenEnd": "2025-11-24",
+  "context": "Set up a CI/CD pipeline for a startup's frontend: a Cloud Build config that builds and pushes a Docker image to GCP Artifact Registry on each push to main.",
+  "project": "ChekOut AI frontend",
+  "sources": [
+   {
+    "commit": "64d2ed6",
+    "date": "2025-11-24"
+   }
+  ],
+  "media": [],
+  "visibility": "private"
+ },
+ {
+  "id": "fc5b8ee7",
+  "claim": "Built an interactive 3D hair-follicle scene and 3D product models (bottle, dispenser, lipstick) into the early ChekOut AI company site.",
+  "area": "frontend",
+  "limits": "These components were later moved to an archive folder and are not in the production build.",
+  "whenStart": "2024-10-24",
+  "whenEnd": "2025-11-06",
+  "context": "Built interactive 3D product models and a hair-follicle scene into a startup's marketing site using Three.js.",
+  "project": "ChekOut AI company site",
+  "sources": [
+   {
+    "commit": "fd13eec",
+    "date": "2025-03-24"
+   },
+   {
+    "commit": "c010f39",
+    "date": "2024-10-24"
+   },
+   {
+    "commit": "32ca1ff",
+    "date": "2025-11-06"
+   }
+  ],
+  "media": [],
+  "visibility": "private"
+ },
+ {
+  "id": "56ba4fce",
+  "claim": "Made a series of mobile performance and lazy-loading changes to the ChekOut AI company site and adjusted its Vite bundling configuration.",
+  "area": "frontend",
+  "limits": null,
+  "whenStart": "2025-11-06",
+  "whenEnd": "2025-11-06",
+  "context": "Improved load time on mobile for a startup's marketing site with lazy-loading, image optimisation, and desktop layout adjustments.",
+  "project": "ChekOut AI company site",
+  "sources": [
+   {
+    "commit": "1958c3e",
+    "date": "2025-11-06"
+   },
+   {
+    "commit": "87ed3af",
+    "date": "2025-11-06"
+   },
+   {
+    "commit": "270fe00",
+    "date": "2025-11-06"
+   },
+   {
+    "commit": "9a87722",
+    "date": "2025-11-06"
+   }
+  ],
+  "media": [],
+  "visibility": "private"
+ },
+ {
+  "id": "99f2b3cd",
+  "claim": "Replaced the ChekOut AI company site's custom smooth-scroll implementations with the Lenis library and archived the old scroll helpers.",
+  "area": "frontend",
+  "limits": null,
+  "whenStart": "2025-11-06",
+  "whenEnd": "2025-11-06",
+  "context": "Replaced a startup's custom smooth-scroll code with the Lenis library and updated the scroll-triggered animations to match.",
+  "project": "ChekOut AI company site",
+  "sources": [
+   {
+    "commit": "32ca1ff",
+    "date": "2025-11-06"
+   }
+  ],
+  "media": [],
+  "visibility": "private"
+ },
+ {
+  "id": "1e89a20c",
+  "claim": "For the ChekOut AI company site, Namit wrote an archive README documenting the unused 3D, audio and shader components and the steps to restore them, after moving them out of the production build for performance.",
+  "area": "frontend",
+  "limits": null,
+  "whenStart": "2025-11-06",
+  "whenEnd": "2025-11-06",
+  "context": "Wrote an archive document explaining why three features (3D scene, audio assistant, computer-vision skin analysis) were paused and what would be needed to resume each.",
+  "project": "ChekOut AI company site",
+  "sources": [
+   {
+    "commit": "32ca1ff",
+    "date": "2025-11-06"
+   }
+  ],
+  "media": [],
+  "visibility": "private"
+ },
+ {
+  "id": "bb9eabcf",
+  "claim": "Added a Trade School page with routing and a website toggle to the ChekOut AI company site, along with a separate trade school chat API route.",
+  "area": "frontend",
+  "limits": null,
+  "whenStart": "2025-10-29",
+  "whenEnd": "2025-10-31",
+  "context": "Added a Trade School vertical to a startup's marketing site: new page, routing, a site-wide product toggle, and design updates.",
+  "project": "ChekOut AI company site",
+  "sources": [
+   {
+    "commit": "9045ebc",
+    "date": "2025-10-29"
+   },
+   {
+    "commit": "c455e47",
+    "date": "2025-10-31"
+   },
+   {
+    "commit": "56c6c5c",
+    "date": "2025-10-29"
+   }
+  ],
+  "media": [],
+  "visibility": "private"
+ },
+ {
+  "id": "f478b001",
+  "claim": "Added a sitemap to the ChekOut AI company site for SEO.",
+  "area": "frontend",
+  "limits": null,
+  "whenStart": "2025-10-31",
+  "whenEnd": "2025-10-31",
+  "context": "Added an XML sitemap to a startup's marketing site for search-engine indexing.",
+  "project": "ChekOut AI company site",
+  "sources": [
+   {
+    "commit": "7d1414b",
+    "date": "2025-10-31"
+   }
+  ],
+  "media": [],
+  "visibility": "private"
+ },
+ {
+  "id": "339f2c59",
+  "claim": "Wrote integration documentation for EyePop.ai computer-vision skin analysis on the ChekOut AI company site, covering image upload, camera capture and recommendations.",
+  "area": "ai",
+  "limits": null,
+  "whenStart": "2025-09-15",
+  "whenEnd": "2025-09-15",
+  "context": "Wrote integration documentation for a computer-vision skin-analysis API: API setup, demo flow, admin panel, and edge-case handling.",
+  "project": "ChekOut AI company site",
+  "sources": [
+   {
+    "commit": "61530e3",
+    "date": "2025-09-15"
+   }
+  ],
+  "media": [],
+  "visibility": "private"
+ },
+ {
+  "id": "de429446",
+  "claim": "Worked on streaming assistant responses in the ChekOut AI company site, with edits to both the GCP side and the frontend.",
+  "area": "frontend",
+  "limits": "This was exploratory work; the streaming version was later rolled back in favour of the original implementation.",
+  "whenStart": "2025-08-07",
+  "whenEnd": "2025-08-07",
+  "context": "Implemented streaming assistant responses across a startup's GCP server and frontend, replacing batch delivery with incremental rendering.",
+  "project": "ChekOut AI company site",
+  "sources": [
+   {
+    "commit": "6b0cf27",
+    "date": "2025-08-07"
+   },
+   {
+    "commit": "922de7e",
+    "date": "2025-08-07"
+   },
+   {
+    "commit": "389bd37",
+    "date": "2025-08-07"
+   }
+  ],
+  "media": [],
+  "visibility": "private"
+ },
+ {
+  "id": "bb6dd897",
+  "claim": "Added a Vercel API route to the ChekOut AI company site that handles CORS and forwards chat requests to a Google Cloud Function, and wrote a setup document for it.",
+  "area": "ai",
+  "limits": null,
+  "whenStart": "2025-07-01",
+  "whenEnd": "2025-08-07",
+  "context": "Added a Vercel API route to proxy chat requests to a GCP backend, resolving cross-origin restrictions.",
+  "project": "ChekOut AI company site",
+  "sources": [
+   {
+    "commit": "cac5d61",
+    "date": "2025-07-01"
+   },
+   {
+    "commit": "389bd37",
+    "date": "2025-08-07"
+   }
+  ],
+  "media": [],
+  "visibility": "private"
+ },
+ {
+  "id": "bb34f79b",
+  "claim": "Added Google Analytics 4 tracking to the ChekOut AI company site and wrote a setup guide covering tracked events such as page views, scroll depth, button clicks and form interactions.",
+  "area": "backend-data",
+  "limits": "The initial implementation was exploratory; production tracking was not confirmed.",
+  "whenStart": "2025-07-03",
+  "whenEnd": "2025-07-03",
+  "context": "Added Google Analytics 4 to a startup's marketing site and wrote a setup guide covering tracking scope, cookie consent, debug mode, and event naming.",
+  "project": "ChekOut AI company site",
+  "sources": [
+   {
+    "commit": "9f5516c",
+    "date": "2025-07-03"
+   }
+  ],
+  "media": [],
+  "visibility": "private"
+ },
+ {
+  "id": "d70f6969",
+  "claim": "Built audio assistant features into the early ChekOut AI company site, where the assistant spoke and its responses drove movement of a 3D sphere.",
+  "area": "ai",
+  "limits": "These components were later archived and are not in the production build.",
+  "whenStart": "2025-03-10",
+  "whenEnd": "2025-03-10",
+  "context": "Built voice input and output into an early AI assistant prototype: microphone input via Web Speech API and spoken responses via AWS Polly.",
+  "project": "ChekOut AI company site",
+  "sources": [
+   {
+    "commit": "85c0692",
+    "date": "2025-03-10"
+   },
+   {
+    "commit": "fe8c7b1",
+    "date": "2025-03-10"
+   },
+   {
+    "commit": "47a1cd0",
+    "date": "2025-03-10"
+   }
+  ],
+  "media": [],
+  "visibility": "private"
+ }
+]

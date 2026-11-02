@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+<rect width="1600" height="900" fill="#2b3a4a"/>
+<g stroke="#ffffff" stroke-opacity=".12" fill="none"><path d="M0 0L1600 900M1600 0L0 900"/><rect x="160.0" y="90.0" width="1280.0" height="720.0"/></g>
+<text x="800.0" y="450.0" fill="#ffffff" fill-opacity=".55" font-family="monospace" font-size="64.28571428571429" text-anchor="middle" dominant-baseline="middle">FIXTURE wide-16x9 1600x900</text>
+</svg>

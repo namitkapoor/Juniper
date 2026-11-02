@@ -1,0 +1,104 @@
+// Writes src/data/about.json from the resume bases (namit-a/b/d only), case-study data and repo manifests.
+import fs from "node:fs";
+const OUT = "/Users/namit/Documents/personal/code/Juniper/.worktrees/stage-proto/prototypes/stage/src/data/about.json";
+const base = (k, label) => ({ type: "asset", ref: `local-server/skills/_bases/namit-${k}.md`, repo: "kyuri-dashboard", label });
+const A = base("a", "Resume A, Product Designer");
+const B = base("b", "Resume B, Spatial / Creative Technologist");
+const Dd = base("d", "Resume D, Product Engineer");
+const CK = { type: "asset", ref: "src/data/chekoutData.js", repo: "Juniper", date: "2026-10-26", label: "ChekOut AI case study: Role, Timeline, Built with" };
+const CV = { type: "asset", ref: "src/data/christineValmyData.js", repo: "Juniper", date: "2026-10-26", label: "Christine Valmy case study" };
+const OLD = { type: "asset", ref: "src/data/aboutContent.js", repo: "Juniper", label: "Previous About page: bio and interests" };
+const KYHOME = { type: "asset", ref: "assets/kyuri-os/home.webp", url: "https://kyuri.namit.me/", date: "2026-11-02", label: "kyuri.namit.me home: PRODUCT ENGINEER · NEW YORK, I design for the subway test" };
+const commit = (repo, ref, date, label) => ({ type: "commit", ref, repo, date, label });
+const pkg = (repo, ref, label) => ({ type: "asset", ref, repo, label });
+
+const about = {
+  bio: [
+    { kind: "title", id: "about-title", weight: 1, text: "namit", kicker: "PRODUCT ENGINEER · NEW YORK" },
+    { kind: "prose", id: "about-now", weight: 0.95,
+      text: "I'm a product engineer in New York. I co-founded ChekOut AI, where I design and build the AI agents that sell inside merchants' own stores, and I built KYURI.OS, the system that runs my own job search.",
+      receipts: [CK, Dd, KYHOME] },
+    { kind: "prose", id: "about-subway", weight: 0.8,
+      text: "I design for the subway test. Good experiences earn attention in the in-between moments: a commute, a queue, one bar of signal.",
+      receipts: [KYHOME] },
+    { kind: "prose", id: "about-path", weight: 0.7,
+      text: "I got here through AR experiences for fashion and beauty brands at Arlene and a master's in Human-Computer Interaction at Georgia Tech. These days the design and the code come from the same hands, and the job is still making complex ideas accessible, functional and beautiful.",
+      receipts: [A, B, OLD] },
+    { kind: "prose", id: "about-off", weight: 0.5,
+      text: "Off the clock: open-world RPGs, impossible shapes and optical illusions, metaphysics and philosophy, and my synesthesia, which I'm learning to express in TouchDesigner.",
+      receipts: [OLD] },
+  ],
+  timeline: [
+    { start: "2026-04", end: "Present", title: "Builder", org: "KYURI.OS", kind: "project",
+      summary: "I built and run my job search on it: AI resume tailoring with guards, a live pipeline, and a public box that answers from dated receipts.",
+      caseStudy: "kyuri-os",
+      receipts: [commit("kyuri-dashboard", "1be40d8", "2026-04-05", "1be40d8 · first commit"), KYHOME] },
+    { start: "2025-06", end: "2026-02", title: "Design engineer", org: "Christine Valmy International School (a ChekOut AI client)", kind: "project",
+      summary: "A bilingual enrollment agent on the school's site that took visitor conversion from 10% to 23%.",
+      caseStudy: "christine-valmy",
+      receipts: [CV, commit("sentry-skin-website", "4a3eae5", "2025-06-23", "4a3eae5 · Christine valmy added"),
+        { type: "asset", ref: "christine-valmy-wp-zip-versions/cv-floating-chat-12.zip", repo: "chekout-ai (local)", date: "2026-02-13", label: "Last dated plugin build" }] },
+    { start: "2024-08", end: "Present", title: "Design engineer and co-founder", org: "ChekOut AI", kind: "founding",
+      summary: "I design and build the shopper-facing agent, the builder merchants set it up in, and the analytics they read; 20% of Kivakube's add-to-carts came through the agent.",
+      caseStudy: "chekout",
+      receipts: [CK, A, B, Dd] },
+    { start: "2024-02", end: "2024-05", title: "Unity Developer", org: "Georgia Tech", kind: "work",
+      summary: "Procedurally animated a 360 promotional video for the Building Construction program, with C# scripts managing 12+ character animations.",
+      receipts: [B] },
+    { start: "2023-08", end: "2024-05", title: "Design Engineer", org: "Georgia Tech", kind: "work",
+      summary: "My thesis: a spatial task organizer for Meta Quest 3 built in Unity, backed by surveys, interviews and attribute testing.",
+      receipts: [B] },
+    { start: "2023-05", end: "2023-08", title: "UX Design Intern", org: "My Influency", kind: "work",
+      summary: "Redesigned a campaign tracking platform for small businesses: 28% fewer clicks and 95% task success across 8 tasks with 12 participants.",
+      receipts: [A, Dd] },
+    { start: "2023-01", end: "2023-05", title: "Graduate Research Assistant", org: "Georgia Tech", kind: "work",
+      summary: "Built a VR environment mapping 20+ campus buildings to aid future construction planning.",
+      receipts: [B] },
+    { start: "2022-08", end: "2024-05", title: "M.S. in Human-Computer Interaction", org: "Georgia Institute of Technology", kind: "education",
+      summary: "Studied HCI in Atlanta; my thesis was the spatial task organizer on Quest.",
+      receipts: [A, B, Dd] },
+    { start: "2021-10", end: "2022-07", title: "Interaction Designer", org: "Arlene", kind: "work",
+      summary: "Designed AR experiences for brands including Kate Spade, Estée Lauder and Macy's, recognized by WindowsWear, Lenslist and the Webby Awards.",
+      receipts: [A, B, Dd] },
+    { start: "2017-09", end: "2021-06", title: "B.A. in Interdisciplinary Digital Studies", org: "Dartmouth College", kind: "education",
+      summary: "Graduated in 2021 and went straight to my first job, at Arlene.",
+      receipts: [A, B, Dd] },
+  ],
+  stack: [
+    { group: "Build", items: [
+      { name: "TypeScript", evidence: "KYURI.OS and ChekOut's merchant app and widget are TypeScript end to end." },
+      { name: "React", icon: "assets/about/react-logo-vector.svg", evidence: "ChekOut's widget and builder, KYURI.OS, and this portfolio." },
+      { name: "Next.js", icon: "assets/about/next.svg", evidence: "KYURI.OS on Vercel; ChekOut's merchant app and the chat embed." },
+      { name: "Node.js and Express", evidence: "The KYURI.OS box: the local server that runs the resume pipeline." },
+      { name: "Python", icon: "assets/about/python-logo-vector.svg", evidence: "Resume build, lint and leak-guard scripts on the KYURI.OS box." },
+      { name: "Three.js and React Three Fiber", evidence: "The particle portrait on this page; 3D at Arlene and in ChekOut's Shopify quiz." },
+    ] },
+    { group: "AI", items: [
+      { name: "Claude and Claude Code", evidence: "KYURI.OS's tailoring agents run on Claude; I built ChekOut's agent platform with Claude Code." },
+      { name: "Agents and RAG", evidence: "Christine Valmy's enrollment agent answers through RAG from the school's content." },
+      { name: "Langflow", evidence: "ChekOut's per-merchant agent flows." },
+      { name: "Vertex AI", evidence: "ChekOut's agent stack on Google Cloud." },
+    ] },
+    { group: "Data", items: [
+      { name: "Postgres (Neon, pgvector)", evidence: "KYURI.OS accounts, quotas and evidence records in Neon; ChekOut on Postgres with pgvector." },
+      { name: "BigQuery", evidence: "ChekOut's merchant analytics dashboard." },
+      { name: "Notion API", evidence: "KYURI.OS's job pipeline: every application is a Notion row." },
+      { name: "n8n", evidence: "Bridges the Christine Valmy agent to the school's systems on GCP." },
+    ] },
+    { group: "Ship", items: [
+      { name: "Vercel", icon: "assets/about/vercel.svg", evidence: "KYURI.OS and this portfolio deploy there." },
+      { name: "Google Cloud Run", evidence: "ChekOut's Next.js app and services, built with Docker." },
+      { name: "Playwright and Vitest", evidence: "Suites on ChekOut's widget and builder and on KYURI.OS." },
+    ] },
+    { group: "Design", items: [
+      { name: "Figma", icon: "assets/about/figma-logo-vector.svg", evidence: "Design sources for KYURI.OS and ChekOut: tokens, components, architecture boards." },
+      { name: "Design systems", evidence: "ChekOut's one-color widget theming and contrast system; KYURI.OS tokens synced from Figma." },
+      { name: "After Effects", icon: "assets/about/adobe-after-effects-logo-vector.svg", evidence: "Motion design systems for AR brand experiences at Arlene." },
+      { name: "Blender", icon: "assets/about/blender-icon-vector.svg", evidence: "Mesh optimization at Arlene; character rigging at Georgia Tech." },
+      { name: "Unity and C#", icon: "assets/about/unity-logo-vector.svg", evidence: "My Quest 3 thesis prototype and a 360 video at Georgia Tech." },
+    ] },
+  ],
+  portrait: { src: "assets/about/portrait.webp", alt: "Namit Kapoor, professional portrait" },
+};
+fs.writeFileSync(OUT, JSON.stringify(about, null, 2) + "\n");
+console.log("ok");

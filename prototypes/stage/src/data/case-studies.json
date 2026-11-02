@@ -1,0 +1,48 @@
+[
+  {
+    "id": "chekout",
+    "title": "ChekOut AI",
+    "kicker": "PRODUCTION AI · 8 MERCHANTS LIVE · AUG 2024 TO NOW",
+    "summary": "Shoppers had questions a product grid can't answer. I designed and built the agent that answers from the store's own catalog, and 20% of Kivakube's add-to-carts came through it.",
+    "why": "This is Namit's strongest current work and the closest match to the roles he targets: as co-founder he designed and built a shopping agent that is live on 8 merchants' stores, with an outcome a merchant approved for publishing (20% of Kivakube's add-to-carts) and 13,981 shopper sessions from Feb to Jul 2026. It also has the richest media: recorded response shapes, motion clips, the analytics dashboard and the builder. The agent-platform work is folded in as the \"how merchants set it up\" deck, because on a three-slot stage two ChekOut studies would crowd out range.",
+    "hook": "Stores lost curious shoppers because a product grid can't answer questions.",
+    "metric": {
+      "value": "20%",
+      "label": "of KivaKube's add-to-carts, via the agent"
+    },
+    "priority": 1.0,
+    "hookShort": "Product grids can't answer shoppers' questions.",
+    "kickerShort": "CHEKOUT AI · PRODUCTION AI"
+  },
+  {
+    "id": "christine-valmy",
+    "title": "Fewer tiles, more students",
+    "kicker": "BILINGUAL AI ENROLLMENT AGENT · CONVERSION 10% → 23%",
+    "summary": "Prospective students waited on a form while officers answered the same questions on every call. Testing killed my first design, and the bilingual agent that shipped took conversion from 10% to 23%.",
+    "why": "It is the clearest design-process story here, and it ends in numbers: conversion 10% → 23%, $120K in enrolled revenue, about 2× the bad leads flagged and about 3 hours saved per officer per day. It has what the other two lack: real participant quotes, three before and after testing rounds with images, and a WCAG AA audit. It is also a second shipped AI agent, for different users (prospective students and enrollment officers) in a different domain, which keeps the three distinct.",
+    "hook": "Prospective students waited on a form while officers answered the same questions on every call.",
+    "metric": {
+      "value": "10% → 23%",
+      "label": "conversion"
+    },
+    "priority": 0.75,
+    "hookShort": "Students waited on a form. Officers repeated themselves.",
+    "kickerShort": "CHRISTINE VALMY · AI ENROLLMENT"
+  },
+  {
+    "id": "kyuri-os",
+    "title": "KYURI.OS",
+    "kicker": "PERSONAL PROJECT · LIVE SINCE APR 2026",
+    "summary": "My job search needed a tailored resume for every role. I built the system that writes them behind guards and tracks each application: 454 roles captured and 341 applied as of Nov 2026.",
+    "why": "It has the most checkable evidence of anything Namit has built: dated work from April 5, 2026 to today, 26 approved public records of that work, and live numbers anyone can check on kyuri.namit.me (454 roles captured, 341 marked applied, 9 interviewed, 475 resumes across all users). It shows product engineering end to end: multi-agent pipelines with guards and evals, access tiers, rate limits, an offline mode and a Playwright suite. Its weakness, fewer polished visuals, is offset by live screenshots of the public pages.",
+    "hook": "I was rewriting the same resume for every role and losing track of where each one went.",
+    "metric": {
+      "value": "9",
+      "label": "interview invites",
+      "source": "kyuri.namit.me Job Hunt (public): INTERVIEWED 9, as of Nov 2, 2026; Gmail invite screenshots to follow"
+    },
+    "priority": 0.55,
+    "hookShort": "One resume, rewritten for every role, tracked nowhere.",
+    "kickerShort": "KYURI.OS · PERSONAL"
+  }
+]

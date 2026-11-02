@@ -1,0 +1,102 @@
+{
+  "id": "home",
+  "question": "",
+  "thesis": "Namit is a product engineer in New York who designs and ships AI agents, and every number here links to where it came from.",
+  "fills": [
+    {
+      "kind": "title",
+      "id": "home-title",
+      "weight": 1,
+      "text": "namit",
+      "kicker": "PRODUCT ENGINEER · NEW YORK"
+    },
+    {
+      "kind": "prose",
+      "id": "home-currently",
+      "weight": 0.7,
+      "text": "CURRENTLY: Co-founder of ChekOut AI, designing and building the shopping agent live on 8 merchants' stores."
+    },
+    {
+      "kind": "prose",
+      "id": "home-three",
+      "weight": 0.5,
+      "text": "THREE CASE STUDIES"
+    },
+    {
+      "kind": "media",
+      "id": "home-ck",
+      "weight": 0.6,
+      "media": "image",
+      "src": "assets/chekout/cover.webp",
+      "aspect": 1.6211,
+      "alt": "ChekOut AI's agent open on a laptop beside a merchant's storefront",
+      "caption": "ChekOut AI: Shoppers had questions a product grid can't answer. My agent answers from the store's catalog, and 20% of Kivakube's add-to-carts came through it.",
+      "receipts": [
+        {
+          "type": "asset",
+          "ref": "assets/chekout/cover.webp",
+          "repo": "Juniper",
+          "label": "public/images/Project Cover Photos/CK on laptop.webp"
+        }
+      ],
+      "explain": "ChekOut's shopping agent open beside a merchant's storefront. I designed and built the shopper conversation, the product cards, the motion and the merchant dashboard, and the builder merchants use to brand it. Ask how it works or what it changed to see the evidence."
+    },
+    {
+      "kind": "media",
+      "id": "home-cv",
+      "weight": 0.55,
+      "media": "image",
+      "src": "assets/christine-valmy/cover.webp",
+      "aspect": 1.6482,
+      "alt": "Christine Valmy's enrollment agent beside the inquiry form",
+      "caption": "Christine Valmy: Students waited on a form while officers repeated themselves. A bilingual agent took visitor conversion from 10% to 23%.",
+      "receipts": [
+        {
+          "type": "asset",
+          "ref": "assets/christine-valmy/cover.webp",
+          "repo": "Juniper",
+          "label": "public/images/Project Cover Photos/CV thumbnail.webp"
+        }
+      ],
+      "explain": "The enrollment agent beside the school's inquiry form. User testing killed my first design; the bilingual agent that shipped answers students in English or Spanish and sorts every lead for the officers. Ask how testing changed it to see the before and after."
+    },
+    {
+      "kind": "media",
+      "id": "home-ky",
+      "weight": 0.55,
+      "media": "image",
+      "src": "assets/kyuri-os/job-hunt.webp",
+      "aspect": 1.6,
+      "alt": "KYURI.OS Job Hunt page with live pipeline totals",
+      "caption": "KYURI.OS: My own job search, built as a system: 454 roles captured and 341 applications logged since April 2026, with guards on every AI-written resume.",
+      "receipts": [
+        {
+          "type": "asset",
+          "ref": "assets/kyuri-os/job-hunt.webp"
+        },
+        {
+          "type": "asset",
+          "ref": "assets/kyuri-os/job-hunt.webp",
+          "url": "https://kyuri.namit.me/?area=job-hunt",
+          "date": "2026-11-02",
+          "label": "kyuri.namit.me Job Hunt, visitor view, captured 2026-11-02"
+        }
+      ],
+      "explain": "The public Job Hunt page of KYURI.OS, the system I built to run my own search. The totals are live, from the same pipeline that tailors each resume behind a fit gate, a QA gate and a leak guard. Companies and people are left out of the public view.",
+      "kpi": {
+        "value": "454",
+        "label": "roles captured",
+        "period": "as of Nov 2, 2026",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "assets/kyuri-os/job-hunt.webp",
+            "url": "https://kyuri.namit.me/?area=job-hunt",
+            "date": "2026-11-02",
+            "label": "kyuri.namit.me Job Hunt, visitor view, captured 2026-11-02"
+          }
+        ]
+      }
+    }
+  ]
+}

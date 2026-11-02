@@ -1,0 +1,5319 @@
+[
+  {
+    "id": "ck-conversation",
+    "title": "ChekOut: answer the question the shopper asked",
+    "tags": [
+      "chekout",
+      "ai-agent",
+      "conversational-ui",
+      "ecommerce",
+      "retrieval",
+      "product-design",
+      "typography"
+    ],
+    "text": "The ChekOut agent answers the shopper's question first, and what retrieval finds decides the layout: words when no product fits, one card for one clear match, a bundle when products belong together. I re-set the panel from a canned support widget into a reading surface, with product names and prices in bold inside the sentence.",
+    "fills": [
+      {
+        "kind": "media",
+        "id": "u-ck-product",
+        "weight": 0.8,
+        "media": "video",
+        "src": "assets/chekout/shape-product.mp4",
+        "aspect": 1.7778,
+        "alt": "One clear match gets one product card",
+        "poster": "assets/chekout/shape-product.jpg",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "assets/chekout/shape-product.mp4",
+            "repo": "Juniper",
+            "label": "ChekOut AI case study"
+          }
+        ],
+        "caption": "One clear match: one card, and why it fits.",
+        "explain": "A question with one clear answer in the catalog gets a single card and the reason for it, not a carousel. One intent, one product."
+      },
+      {
+        "kind": "media",
+        "id": "u-ck-bundle",
+        "weight": 0.6,
+        "media": "video",
+        "src": "assets/chekout/shape-bundle.mp4",
+        "aspect": 1.7778,
+        "alt": "A bundle of products that belong together",
+        "poster": "assets/chekout/shape-bundle.jpg",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "assets/chekout/shape-bundle.mp4",
+            "repo": "Juniper",
+            "label": "ChekOut AI case study"
+          }
+        ],
+        "caption": "Products that only work together arrive as one set.",
+        "explain": "When the shopper needs several items that belong together, retrieval returns them as a set and the panel shows them as one bundle. The shopper never asked for a bundle mode; the layout followed the answer."
+      },
+      {
+        "kind": "prose",
+        "id": "u-ck-conv",
+        "weight": 0.6,
+        "text": "HOW: The shopper never picks a mode. The panel takes its shape from whatever retrieval returned, as the clips show.",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "src/data/chekoutData.js",
+            "repo": "Juniper",
+            "date": "2026-10-26",
+            "label": "ChekOut AI case study"
+          }
+        ]
+      }
+    ],
+    "receipts": [
+      {
+        "type": "asset",
+        "ref": "assets/chekout/shape-product.mp4",
+        "repo": "Juniper",
+        "label": "ChekOut AI case study"
+      },
+      {
+        "type": "asset",
+        "ref": "assets/chekout/shape-bundle.mp4",
+        "repo": "Juniper",
+        "label": "ChekOut AI case study"
+      },
+      {
+        "type": "asset",
+        "ref": "src/data/chekoutData.js",
+        "repo": "Juniper",
+        "date": "2026-10-26",
+        "label": "ChekOut AI case study"
+      }
+    ]
+  },
+  {
+    "id": "ck-motion",
+    "title": "ChekOut: motion that carries state",
+    "tags": [
+      "chekout",
+      "motion",
+      "micro-interactions",
+      "frontend",
+      "product-design"
+    ],
+    "text": "Every ChekOut animation tells the shopper what the agent is doing: a thinking state while it works, products arriving in a carousel, detail opening beside the thread, and a card that confirms an add in place. I shipped them in July 2026.",
+    "fills": [
+      {
+        "kind": "media",
+        "id": "u-ck-thinking",
+        "weight": 0.5,
+        "media": "video",
+        "src": "assets/chekout/thinking.mp4",
+        "aspect": 1.8367,
+        "alt": "The thinking state, then the reply fades in",
+        "poster": "assets/chekout/thinking.jpg",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "assets/chekout/thinking.mp4",
+            "repo": "Juniper",
+            "label": "ChekOut AI case study"
+          }
+        ],
+        "caption": "The thinking state holds the shopper's place, then the reply fades in.",
+        "explain": "A static panel can't show that the agent is working. The thinking state holds the spot where the answer will land, then the newest reply fades in word by word."
+      },
+      {
+        "kind": "media",
+        "id": "u-ck-carousel",
+        "weight": 0.5,
+        "media": "video",
+        "src": "assets/chekout/rec-carousel.mp4",
+        "aspect": 1.8367,
+        "alt": "Products arrive with the answer in a carousel",
+        "poster": "assets/chekout/rec-carousel.jpg",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "assets/chekout/rec-carousel.mp4",
+            "repo": "Juniper",
+            "label": "ChekOut AI case study"
+          }
+        ],
+        "caption": "Products arrive with the answer, and the thread stays on screen.",
+        "explain": "Products come in with the reply as a carousel, so the shopper can browse without losing the conversation above it."
+      },
+      {
+        "kind": "media",
+        "id": "u-ck-hover",
+        "weight": 0.4,
+        "media": "video",
+        "src": "assets/chekout/launcher-hover.mp4",
+        "aspect": 1.8367,
+        "alt": "The closed launcher offers two suggested questions on hover",
+        "poster": "assets/chekout/launcher-hover.jpg",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "assets/chekout/launcher-hover.mp4",
+            "repo": "Juniper",
+            "label": "Agent platform case study"
+          }
+        ],
+        "caption": "Hovering the closed launcher offers two suggested questions.",
+        "explain": "Before the chat is even open, hovering the launcher on a merchant's store offers two suggested questions, so a shopper who doesn't know what to ask has a place to start. Merchants can turn them off in the builder."
+      },
+      {
+        "kind": "commits",
+        "id": "u-ck-motion-commits",
+        "weight": 0.4,
+        "repo": "chekoutai-frontend",
+        "items": [
+          {
+            "sha": "cef8abf",
+            "date": "2026-07-09",
+            "msg": "Agent messages: word-by-word fade-in on the newest reply"
+          },
+          {
+            "sha": "f56fbdf",
+            "date": "2026-07-08",
+            "msg": "Share-this-chat sheet + launcher hover ripple"
+          },
+          {
+            "sha": "0c93dcc",
+            "date": "2026-07-29",
+            "msg": "Chatbot embed: port the closed-state launcher animations from ChatLauncher"
+          }
+        ]
+      }
+    ],
+    "receipts": [
+      {
+        "type": "asset",
+        "ref": "assets/chekout/thinking.mp4",
+        "repo": "Juniper",
+        "label": "ChekOut AI case study"
+      },
+      {
+        "type": "asset",
+        "ref": "assets/chekout/rec-carousel.mp4",
+        "repo": "Juniper",
+        "label": "ChekOut AI case study"
+      },
+      {
+        "type": "asset",
+        "ref": "assets/chekout/launcher-hover.mp4",
+        "repo": "Juniper",
+        "label": "Agent platform case study"
+      },
+      {
+        "type": "commit",
+        "ref": "cef8abf",
+        "repo": "chekoutai-frontend",
+        "date": "2026-07-09",
+        "label": "cef8abf · Agent messages: word-by-word fade-in on the newest reply"
+      },
+      {
+        "type": "commit",
+        "ref": "f56fbdf",
+        "repo": "chekoutai-frontend",
+        "date": "2026-07-08",
+        "label": "f56fbdf · Share-this-chat sheet + launcher hover ripple"
+      },
+      {
+        "type": "commit",
+        "ref": "0c93dcc",
+        "repo": "chekoutai-frontend",
+        "date": "2026-07-29",
+        "label": "0c93dcc · Chatbot embed: port the closed-state launcher animations from ChatLauncher"
+      }
+    ]
+  },
+  {
+    "id": "ck-cart",
+    "title": "ChekOut: the cart stays the store's",
+    "tags": [
+      "chekout",
+      "ecommerce",
+      "conversion",
+      "shopify",
+      "metrics"
+    ],
+    "text": "20% of Kivakube's add-to-carts came through the ChekOut agent. Shoppers add to cart inside the conversation, View cart opens the store's own cart and checkout, and since May 2026 carts carry ChekOut attribution so the merchant's own orders show what the agent sold. It works with Shopify, Squarespace and Shopline carts.",
+    "fills": [
+      {
+        "kind": "kpi",
+        "id": "u-ck-atc",
+        "weight": 0.9,
+        "value": "20%",
+        "label": "of Kivakube's add-to-carts came through the agent",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "src/data/chekoutData.js",
+            "repo": "Juniper",
+            "date": "2026-10-26",
+            "label": "ChekOut AI case study"
+          }
+        ]
+      },
+      {
+        "kind": "media",
+        "id": "u-ck-viewcart",
+        "weight": 0.6,
+        "media": "video",
+        "src": "assets/chekout/view-cart.mp4",
+        "aspect": 1.8367,
+        "alt": "Two lampshades added in the widget, then View cart opens Rosendahl's own cart",
+        "poster": "assets/chekout/view-cart.jpg",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "assets/chekout/view-cart.mp4",
+            "repo": "Juniper",
+            "label": "ChekOut AI case study"
+          }
+        ],
+        "caption": "Two lampshades added in the chat, then View cart opens Rosendahl's own cart page.",
+        "explain": "On Rosendahl's store the shopper adds two lampshades without leaving the chat, then View cart opens the store's real cart. ChekOut keeps no second cart, so the merchant's discounts and checkout work as they always did.",
+        "kpi": "u-ck-atc"
+      },
+      {
+        "kind": "commits",
+        "id": "u-ck-cart-commits",
+        "weight": 0.35,
+        "repo": "chekoutai-frontend",
+        "items": [
+          {
+            "sha": "d22f151",
+            "date": "2026-05-28",
+            "msg": "Tag Shopify carts with ChekOut AI attribution attributes for order attribution"
+          },
+          {
+            "sha": "62bde85",
+            "date": "2026-03-17",
+            "msg": "Fix add-to-cart for Shopify (422) and Squarespace (404)"
+          },
+          {
+            "sha": "2e113b9",
+            "date": "2026-06-22",
+            "msg": "Support Shopline add-to-cart in chat widget with platform-aware errors"
+          }
+        ]
+      }
+    ],
+    "receipts": [
+      {
+        "type": "asset",
+        "ref": "src/data/chekoutData.js",
+        "repo": "Juniper",
+        "date": "2026-10-26",
+        "label": "ChekOut AI case study"
+      },
+      {
+        "type": "asset",
+        "ref": "assets/chekout/view-cart.mp4",
+        "repo": "Juniper",
+        "label": "ChekOut AI case study"
+      },
+      {
+        "type": "commit",
+        "ref": "d22f151",
+        "repo": "chekoutai-frontend",
+        "date": "2026-05-28",
+        "label": "d22f151 · Tag Shopify carts with ChekOut AI attribution attributes for order attribution"
+      },
+      {
+        "type": "commit",
+        "ref": "62bde85",
+        "repo": "chekoutai-frontend",
+        "date": "2026-03-17",
+        "label": "62bde85 · Fix add-to-cart for Shopify (422) and Squarespace (404)"
+      },
+      {
+        "type": "commit",
+        "ref": "2e113b9",
+        "repo": "chekoutai-frontend",
+        "date": "2026-06-22",
+        "label": "2e113b9 · Support Shopline add-to-cart in chat widget with platform-aware errors"
+      }
+    ]
+  },
+  {
+    "id": "ck-analytics",
+    "title": "ChekOut: merchants read the conversation",
+    "tags": [
+      "chekout",
+      "dashboard",
+      "analytics",
+      "data-viz",
+      "b2b",
+      "bigquery"
+    ],
+    "text": "Shopify's own analytics don't show what shoppers asked, a client told us on a call, so the ChekOut dashboard answers with the conversations themselves. Between June and July 2026 I built it so an insight turns a number into a next step and clicking a keyword opens the threads behind it.",
+    "fills": [
+      {
+        "kind": "media",
+        "id": "u-ck-metrics",
+        "weight": 0.7,
+        "media": "image",
+        "src": "assets/chekout/top-metrics.webp",
+        "aspect": 4.1344,
+        "alt": "126 total visitors, 86% engagement rate, 1 attributed order, $106.19 revenue",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "assets/chekout/top-metrics.webp",
+            "repo": "Juniper",
+            "label": "ChekOut AI case study"
+          }
+        ],
+        "caption": "One live store's top line: visitors, engagement, and the order and revenue the agent drove.",
+        "explain": "The top of the merchant dashboard on a live store, with revenue pulled from the store's own Shopify orders. The attributed order and revenue tiles count only what shoppers bought after the agent helped.",
+        "kpi": "u-ck-rev"
+      },
+      {
+        "kind": "kpi",
+        "id": "u-ck-rev",
+        "weight": 0.5,
+        "value": "$106.19",
+        "label": "revenue from agent-attributed orders on one live store",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "src/data/chekoutData.js",
+            "repo": "Juniper",
+            "date": "2026-10-26",
+            "label": "ChekOut AI case study"
+          }
+        ]
+      },
+      {
+        "kind": "media",
+        "id": "u-ck-analytics",
+        "weight": 0.6,
+        "media": "video",
+        "src": "assets/chekout/analytics.mp4",
+        "aspect": 2.1846,
+        "alt": "Dashboard: an insight tooltip and a keyword opening its threads",
+        "poster": "assets/chekout/analytics.jpg",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "assets/chekout/analytics.mp4",
+            "repo": "Juniper",
+            "label": "ChekOut AI case study"
+          }
+        ],
+        "caption": "An insight flags the most searched term; the keyword opens its threads.",
+        "explain": "The dashboard on Kivakube's data. An insight says which term shoppers searched most and suggests checking its pricing and availability, then a keyword click opens the actual conversations behind the number."
+      },
+      {
+        "kind": "commits",
+        "id": "u-ck-dash-commits",
+        "weight": 0.5,
+        "repo": "chekoutai-frontend",
+        "items": [
+          {
+            "sha": "5264ce8",
+            "date": "2026-07-21",
+            "msg": "Dashboard: wire engagement + Conversation Logs to BigQuery /analytics"
+          },
+          {
+            "sha": "ab03e36",
+            "date": "2026-07-23",
+            "msg": "Dashboard: click a keyword to inspect its conversation threads"
+          },
+          {
+            "sha": "c78b8c4",
+            "date": "2026-07-08",
+            "msg": "Replace Conversion Rate card with Engagement Rate (3+ turn conversations)"
+          },
+          {
+            "sha": "99f80a8",
+            "date": "2026-06-10",
+            "msg": "Add sales-attribution dashboard tiles (Tier 1)"
+          },
+          {
+            "sha": "4c38f1f",
+            "date": "2026-07-24",
+            "msg": "Dashboard: new-vs-returning split on the Total Visitors card"
+          }
+        ]
+      }
+    ],
+    "receipts": [
+      {
+        "type": "asset",
+        "ref": "assets/chekout/top-metrics.webp",
+        "repo": "Juniper",
+        "label": "ChekOut AI case study"
+      },
+      {
+        "type": "asset",
+        "ref": "src/data/chekoutData.js",
+        "repo": "Juniper",
+        "date": "2026-10-26",
+        "label": "ChekOut AI case study"
+      },
+      {
+        "type": "asset",
+        "ref": "assets/chekout/analytics.mp4",
+        "repo": "Juniper",
+        "label": "ChekOut AI case study"
+      },
+      {
+        "type": "commit",
+        "ref": "5264ce8",
+        "repo": "chekoutai-frontend",
+        "date": "2026-07-21",
+        "label": "5264ce8 · Dashboard: wire engagement + Conversation Logs to BigQuery /analytics"
+      },
+      {
+        "type": "commit",
+        "ref": "ab03e36",
+        "repo": "chekoutai-frontend",
+        "date": "2026-07-23",
+        "label": "ab03e36 · Dashboard: click a keyword to inspect its conversation threads"
+      },
+      {
+        "type": "commit",
+        "ref": "c78b8c4",
+        "repo": "chekoutai-frontend",
+        "date": "2026-07-08",
+        "label": "c78b8c4 · Replace Conversion Rate card with Engagement Rate (3+ turn conversations)"
+      },
+      {
+        "type": "commit",
+        "ref": "99f80a8",
+        "repo": "chekoutai-frontend",
+        "date": "2026-06-10",
+        "label": "99f80a8 · Add sales-attribution dashboard tiles (Tier 1)"
+      },
+      {
+        "type": "commit",
+        "ref": "4c38f1f",
+        "repo": "chekoutai-frontend",
+        "date": "2026-07-24",
+        "label": "4c38f1f · Dashboard: new-vs-returning split on the Total Visitors card"
+      },
+      {
+        "type": "asset",
+        "ref": "memory/project_chekout_metrics.md",
+        "repo": "Claude memory (Juniper project)",
+        "date": "2026-07-04",
+        "label": "Client call note, KivaKube: Shopify analytics are basic and do not capture conversational or on-site behavior"
+      }
+    ]
+  },
+  {
+    "id": "ck-scale",
+    "title": "ChekOut: sessions and brands",
+    "tags": [
+      "chekout",
+      "scale",
+      "metrics",
+      "ai-agent",
+      "merchants",
+      "clients",
+      "logos",
+      "live"
+    ],
+    "text": "From February to July 2026 the ChekOut agent ran 13,981 shopper sessions, 6,124 of them on KivaKube. It is live on 8 merchants' stores; KivaKube, Rosendahl Design Group, Pacific Soul Foods and Nuthatch Naturals are four of them.",
+    "fills": [
+      {
+        "kind": "kpi",
+        "id": "u-ck-sessions",
+        "weight": 0.8,
+        "value": "13,981",
+        "label": "shopper sessions with the agent",
+        "period": "FEB 27 TO JUL 4, 2026",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "src/data/chekoutData.js",
+            "repo": "Juniper",
+            "date": "2026-10-26",
+            "label": "ChekOut AI case study"
+          },
+          {
+            "type": "asset",
+            "ref": "memory/project_chekout_metrics.md",
+            "repo": "Claude memory (Juniper project)",
+            "date": "2026-07-04",
+            "label": "ChekOut production analytics: 13,981 conversations, Feb 27 to Jul 4 2026; KivaKube 6,124, May 4 to Jul 4"
+          }
+        ],
+        "breakdown": [
+          {
+            "label": "KivaKube (May 4 to Jul 4)",
+            "value": "6,124",
+            "share": 0.44,
+            "logo": "assets/chekout/logos/kivakube.webp"
+          }
+        ]
+      },
+      {
+        "kind": "kpi",
+        "id": "u-ck-brands",
+        "weight": 0.5,
+        "value": "8",
+        "label": "merchants running the agent on their own store",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "src/data/agentPlatformData.js",
+            "label": "Agent platform case study · Client: ChekOut AI (8 merchants live)"
+          }
+        ]
+      },
+      {
+        "kind": "logos",
+        "id": "u-ck-live-logos",
+        "weight": 0.5,
+        "label": "LIVE ON · 4 OF 8 SHOWN",
+        "items": [
+          {
+            "name": "KivaKube",
+            "src": "assets/chekout/logos/kivakube.webp",
+            "aspect": 7.3394,
+            "url": "https://www.kivakube.com/",
+            "invert": true
+          },
+          {
+            "name": "Rosendahl Design Group",
+            "src": "assets/chekout/logos/rosendahl.webp",
+            "aspect": 1.5474,
+            "url": "https://www.rosendahl.com/",
+            "invert": true
+          },
+          {
+            "name": "Pacific Soul Foods",
+            "src": "assets/chekout/logos/pacsoul.webp",
+            "aspect": 1.9704,
+            "url": "https://pacsoulfoods.com/"
+          },
+          {
+            "name": "Nuthatch Naturals",
+            "src": "assets/chekout/logos/nuthatch.webp",
+            "aspect": 1.0051,
+            "url": "https://nuthatchnaturals.com/"
+          }
+        ],
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "src/data/agentPlatformData.js",
+            "repo": "Juniper",
+            "date": "2026-10-26",
+            "label": "Agent platform case study · Client: ChekOut AI (8 merchants live)"
+          },
+          {
+            "type": "asset",
+            "ref": "storefront:kivakube.com",
+            "url": "https://www.kivakube.com/",
+            "date": "2026-11-02",
+            "label": "Homepage loads chekout.ai/chatbot.js with data-agent-id=\"kiva\", checked 2026-11-02"
+          },
+          {
+            "type": "asset",
+            "ref": "storefront:rosendahl.com",
+            "url": "https://www.rosendahl.com/",
+            "date": "2026-11-02",
+            "label": "Homepage loads chekout.ai/chatbot.js with data-agent-id=\"rosendahl-design-group\", checked 2026-11-02"
+          },
+          {
+            "type": "asset",
+            "ref": "storefront:pacsoulfoods.com",
+            "url": "https://pacsoulfoods.com/",
+            "date": "2026-11-02",
+            "label": "Homepage loads chekout.ai/chatbot.js with data-agent-id=\"pacsoulfoods\", checked 2026-11-02"
+          },
+          {
+            "type": "asset",
+            "ref": "storefront:nuthatchnaturals.com",
+            "url": "https://nuthatchnaturals.com/",
+            "date": "2026-11-02",
+            "label": "Homepage loads chekout.ai/chatbot.js with data-agent-id=\"nuthatch-naturals\", checked 2026-11-02"
+          },
+          {
+            "type": "asset",
+            "ref": "public/images/Case Studies/CK/clients/logos/",
+            "repo": "Juniper",
+            "label": "Merchant logo files (kivakube, rosendahl, pacsoul, nuthatch)"
+          }
+        ]
+      }
+    ],
+    "receipts": [
+      {
+        "type": "asset",
+        "ref": "src/data/chekoutData.js",
+        "repo": "Juniper",
+        "date": "2026-10-26",
+        "label": "ChekOut AI case study"
+      },
+      {
+        "type": "asset",
+        "ref": "memory/project_chekout_metrics.md",
+        "repo": "Claude memory (Juniper project)",
+        "date": "2026-07-04",
+        "label": "ChekOut production analytics: 13,981 conversations, Feb 27 to Jul 4 2026; KivaKube 6,124, May 4 to Jul 4"
+      },
+      {
+        "type": "asset",
+        "ref": "src/data/agentPlatformData.js",
+        "repo": "Juniper",
+        "date": "2026-10-26",
+        "label": "Agent platform case study · Client: ChekOut AI (8 merchants live)"
+      },
+      {
+        "type": "asset",
+        "ref": "storefront:kivakube.com",
+        "url": "https://www.kivakube.com/",
+        "date": "2026-11-02",
+        "label": "Homepage loads chekout.ai/chatbot.js with data-agent-id=\"kiva\", checked 2026-11-02"
+      },
+      {
+        "type": "asset",
+        "ref": "storefront:rosendahl.com",
+        "url": "https://www.rosendahl.com/",
+        "date": "2026-11-02",
+        "label": "Homepage loads chekout.ai/chatbot.js with data-agent-id=\"rosendahl-design-group\", checked 2026-11-02"
+      },
+      {
+        "type": "asset",
+        "ref": "storefront:pacsoulfoods.com",
+        "url": "https://pacsoulfoods.com/",
+        "date": "2026-11-02",
+        "label": "Homepage loads chekout.ai/chatbot.js with data-agent-id=\"pacsoulfoods\", checked 2026-11-02"
+      },
+      {
+        "type": "asset",
+        "ref": "storefront:nuthatchnaturals.com",
+        "url": "https://nuthatchnaturals.com/",
+        "date": "2026-11-02",
+        "label": "Homepage loads chekout.ai/chatbot.js with data-agent-id=\"nuthatch-naturals\", checked 2026-11-02"
+      }
+    ]
+  },
+  {
+    "id": "ap-one-color",
+    "title": "Agent platform: one color in",
+    "tags": [
+      "chekout",
+      "design-system",
+      "theming",
+      "accessibility",
+      "contrast",
+      "wcag"
+    ],
+    "text": "Merchants type one brand color, and the ChekOut widget derives everything else so it stays readable, even when that color is a pale yellow or a neon. Text flips between dark and light by brightness, and since August 2026 the footer measures its own text against WCAG ratios of 7, 5.5 and 4.5 to 1.",
+    "fills": [
+      {
+        "kind": "prose",
+        "id": "u-ap-color",
+        "weight": 0.7,
+        "text": "HOW: Merchants pick one color and the code makes it readable. The footer checks three text tiers against WCAG ratios of 7, 5.5 and 4.5 to 1 and corrects any that fall short.",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "src/data/agentPlatformData.js",
+            "repo": "Juniper",
+            "date": "2026-10-26",
+            "label": "Agent platform case study"
+          },
+          {
+            "type": "commit",
+            "ref": "a57a3e3",
+            "repo": "chekoutai-frontend",
+            "date": "2026-08-10",
+            "label": "a57a3e3 · Chat widget: measure the footer ink instead of hardcoding grey"
+          },
+          {
+            "type": "commit",
+            "ref": "6762f5d",
+            "repo": "chekoutai-frontend",
+            "date": "2026-08-20",
+            "label": "6762f5d · Chat widget: give the footer a surface before measuring its ink"
+          }
+        ]
+      },
+      {
+        "kind": "media",
+        "id": "u-ap-kiva",
+        "weight": 0.5,
+        "media": "image",
+        "src": "assets/chekout/store-kivakube.webp",
+        "aspect": 1.6,
+        "alt": "Kivakube's storefront homepage, a ChekOut merchant",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "assets/chekout/store-kivakube.webp",
+            "repo": "Juniper",
+            "label": "public/images/Case Studies/CK/demo/kivakube/home.webp"
+          }
+        ],
+        "caption": "Kivakube's storefront, one of the ChekOut merchants.",
+        "explain": "Kivakube's homepage, a live ChekOut merchant. The widget has to sit on pages like this one, with the store's own colors, fonts and layout around it, and still read as part of the store."
+      },
+      {
+        "kind": "media",
+        "id": "u-ap-rosen",
+        "weight": 0.5,
+        "media": "image",
+        "src": "assets/chekout/store-rosendahl.webp",
+        "aspect": 1.6,
+        "alt": "Rosendahl's storefront homepage, a ChekOut merchant",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "assets/chekout/store-rosendahl.webp",
+            "repo": "Juniper",
+            "label": "public/images/Case Studies/CK/demo/rosendahl/home.webp"
+          }
+        ],
+        "caption": "Rosendahl's storefront, another ChekOut merchant.",
+        "explain": "Rosendahl's homepage, another live ChekOut merchant with a very different brand from Kivakube. The same widget, given one brand color, has to look at home on both."
+      }
+    ],
+    "receipts": [
+      {
+        "type": "asset",
+        "ref": "src/data/agentPlatformData.js",
+        "repo": "Juniper",
+        "date": "2026-10-26",
+        "label": "Agent platform case study"
+      },
+      {
+        "type": "commit",
+        "ref": "a57a3e3",
+        "repo": "chekoutai-frontend",
+        "date": "2026-08-10",
+        "label": "a57a3e3 · Chat widget: measure the footer ink instead of hardcoding grey"
+      },
+      {
+        "type": "commit",
+        "ref": "6762f5d",
+        "repo": "chekoutai-frontend",
+        "date": "2026-08-20",
+        "label": "6762f5d · Chat widget: give the footer a surface before measuring its ink"
+      },
+      {
+        "type": "asset",
+        "ref": "assets/chekout/store-kivakube.webp",
+        "repo": "Juniper",
+        "label": "public/images/Case Studies/CK/demo/kivakube/home.webp"
+      },
+      {
+        "type": "asset",
+        "ref": "assets/chekout/store-rosendahl.webp",
+        "repo": "Juniper",
+        "label": "public/images/Case Studies/CK/demo/rosendahl/home.webp"
+      }
+    ]
+  },
+  {
+    "id": "ap-preview",
+    "title": "Agent platform: the preview is the widget",
+    "tags": [
+      "chekout",
+      "builder",
+      "b2b",
+      "onboarding",
+      "iframe",
+      "frontend"
+    ],
+    "text": "A ChekOut merchant goes from setup to a live, branded agent in 5 to 30 minutes, in three steps: persona, knowledge base and channel. In July 2026 I replaced the builder's hand-built preview, which had drifted from what shipped, with the real widget in an iframe fed the merchant's unsaved settings.",
+    "fills": [
+      {
+        "kind": "kpi",
+        "id": "u-ap-time",
+        "weight": 0.7,
+        "value": "5 to 30",
+        "label": "from starting setup to a branded agent live on a merchant's store",
+        "unit": "min",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "src/data/agentPlatformData.js",
+            "repo": "Juniper",
+            "date": "2026-10-26",
+            "label": "Agent platform case study"
+          }
+        ]
+      },
+      {
+        "kind": "media",
+        "id": "u-ap-embed",
+        "weight": 0.7,
+        "media": "video",
+        "src": "assets/chekout/embedding-agents.mp4",
+        "aspect": 1.8444,
+        "alt": "The channel step and the embed snippet going into a Shopify theme",
+        "poster": "assets/chekout/embedding-agents.jpg",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "assets/chekout/embedding-agents.mp4",
+            "repo": "Juniper",
+            "label": "Agent platform case study"
+          }
+        ],
+        "caption": "Watch the preview change as the settings change, then the one snippet that goes into the store.",
+        "explain": "The builder's channel step: brand settings on one side, the real widget on the other, updating as they change. Then the embed snippet goes into a Shopify theme, which is the whole install."
+      },
+      {
+        "kind": "commits",
+        "id": "u-ap-prev-commits",
+        "weight": 0.5,
+        "repo": "chekoutai-frontend",
+        "items": [
+          {
+            "sha": "fe5f2a1",
+            "date": "2026-07-09",
+            "msg": "Builder Channels preview: render the real widget in an iframe"
+          },
+          {
+            "sha": "7f4d4c0",
+            "date": "2026-09-18",
+            "msg": "Agent setup: let merchants on a trial finish setup and see the embed code"
+          },
+          {
+            "sha": "ccc8edb",
+            "date": "2026-09-01",
+            "msg": "Agent setup: stop sending self-hosted merchants through Shopify OAuth"
+          }
+        ]
+      }
+    ],
+    "receipts": [
+      {
+        "type": "asset",
+        "ref": "src/data/agentPlatformData.js",
+        "repo": "Juniper",
+        "date": "2026-10-26",
+        "label": "Agent platform case study"
+      },
+      {
+        "type": "asset",
+        "ref": "assets/chekout/embedding-agents.mp4",
+        "repo": "Juniper",
+        "label": "Agent platform case study"
+      },
+      {
+        "type": "commit",
+        "ref": "fe5f2a1",
+        "repo": "chekoutai-frontend",
+        "date": "2026-07-09",
+        "label": "fe5f2a1 · Builder Channels preview: render the real widget in an iframe"
+      },
+      {
+        "type": "commit",
+        "ref": "7f4d4c0",
+        "repo": "chekoutai-frontend",
+        "date": "2026-09-18",
+        "label": "7f4d4c0 · Agent setup: let merchants on a trial finish setup and see the embed code"
+      },
+      {
+        "type": "commit",
+        "ref": "ccc8edb",
+        "repo": "chekoutai-frontend",
+        "date": "2026-09-01",
+        "label": "ccc8edb · Agent setup: stop sending self-hosted merchants through Shopify OAuth"
+      }
+    ]
+  },
+  {
+    "id": "ap-guest",
+    "title": "Agent platform: a guest on someone else's page",
+    "tags": [
+      "chekout",
+      "design-system",
+      "embed",
+      "launcher",
+      "frontend"
+    ],
+    "text": "ChekOut's launcher covered stores' cart drawers and cookie banners, so I replaced a fixed preset with two sliders: distance from the bottom and stacking level. The widget has its own tokens and lives in an iframe, so the store's CSS stays out.",
+    "fills": [
+      {
+        "kind": "prose",
+        "id": "u-ap-guest",
+        "weight": 0.6,
+        "text": "HOW: The builder speaks as ChekOut and the widget speaks as the store. Two sliders, bottom distance and stacking level, replaced a fixed raised preset that covered cart drawers.",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "src/data/agentPlatformData.js",
+            "repo": "Juniper",
+            "date": "2026-10-26",
+            "label": "Agent platform case study"
+          },
+          {
+            "type": "commit",
+            "ref": "2127ede",
+            "repo": "chekoutai-frontend",
+            "date": "2026-04-28",
+            "label": "2127ede · Update to OAuth firebase domain and Agent position ui changes"
+          }
+        ]
+      },
+      {
+        "kind": "media",
+        "id": "u-ap-hover",
+        "weight": 0.5,
+        "media": "video",
+        "src": "assets/chekout/launcher-hover.mp4",
+        "aspect": 1.8367,
+        "alt": "The closed launcher on a merchant's store",
+        "poster": "assets/chekout/launcher-hover.jpg",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "assets/chekout/launcher-hover.mp4",
+            "repo": "Juniper",
+            "label": "Agent platform case study"
+          }
+        ],
+        "caption": "On a merchant's store, the closed launcher offers two suggested questions on hover.",
+        "explain": "The launcher as a shopper first meets it, bottom right on a merchant's page. It has to stay clear of the store's own cart drawer and cookie banner, which is why merchants position it with two sliders instead of a fixed preset."
+      },
+      {
+        "kind": "commits",
+        "id": "u-ap-guest-commits",
+        "weight": 0.4,
+        "repo": "chekoutai-frontend",
+        "items": [
+          {
+            "sha": "35d7869",
+            "date": "2026-02-19",
+            "msg": "Agent positioning + widget sizing + billing text fixes + session storage migration"
+          },
+          {
+            "sha": "2127ede",
+            "date": "2026-04-28",
+            "msg": "Update to OAuth firebase domain and Agent position ui changes"
+          },
+          {
+            "sha": "2e4bff0",
+            "date": "2026-05-28",
+            "msg": "Fix slider mark labels overlapping next section in ChatBoxPosition"
+          },
+          {
+            "sha": "faf5efd",
+            "date": "2026-08-20",
+            "msg": "Builder: let merchants hide the closed-state suggested questions"
+          },
+          {
+            "sha": "106c2d2",
+            "date": "2026-08-21",
+            "msg": "Builder: stop encoding the launcher-questions flag in position"
+          },
+          {
+            "sha": "7a63949",
+            "date": "2026-08-25",
+            "msg": "Builder: let merchants actually turn the launcher questions off"
+          }
+        ]
+      }
+    ],
+    "receipts": [
+      {
+        "type": "asset",
+        "ref": "src/data/agentPlatformData.js",
+        "repo": "Juniper",
+        "date": "2026-10-26",
+        "label": "Agent platform case study"
+      },
+      {
+        "type": "commit",
+        "ref": "2127ede",
+        "repo": "chekoutai-frontend",
+        "date": "2026-04-28",
+        "label": "2127ede · Update to OAuth firebase domain and Agent position ui changes"
+      },
+      {
+        "type": "asset",
+        "ref": "assets/chekout/launcher-hover.mp4",
+        "repo": "Juniper",
+        "label": "Agent platform case study"
+      },
+      {
+        "type": "commit",
+        "ref": "35d7869",
+        "repo": "chekoutai-frontend",
+        "date": "2026-02-19",
+        "label": "35d7869 · Agent positioning + widget sizing + billing text fixes + session storage migration"
+      },
+      {
+        "type": "commit",
+        "ref": "2e4bff0",
+        "repo": "chekoutai-frontend",
+        "date": "2026-05-28",
+        "label": "2e4bff0 · Fix slider mark labels overlapping next section in ChatBoxPosition"
+      },
+      {
+        "type": "commit",
+        "ref": "faf5efd",
+        "repo": "chekoutai-frontend",
+        "date": "2026-08-20",
+        "label": "faf5efd · Builder: let merchants hide the closed-state suggested questions"
+      },
+      {
+        "type": "commit",
+        "ref": "106c2d2",
+        "repo": "chekoutai-frontend",
+        "date": "2026-08-21",
+        "label": "106c2d2 · Builder: stop encoding the launcher-questions flag in position"
+      },
+      {
+        "type": "commit",
+        "ref": "7a63949",
+        "repo": "chekoutai-frontend",
+        "date": "2026-08-25",
+        "label": "7a63949 · Builder: let merchants actually turn the launcher questions off"
+      }
+    ]
+  },
+  {
+    "id": "ap-ios",
+    "title": "Agent platform: the iOS pull-to-refresh bug",
+    "tags": [
+      "chekout",
+      "mobile",
+      "ios",
+      "bug",
+      "frontend",
+      "debugging"
+    ],
+    "text": "On iOS, pulling past the top of the ChekOut chat reached Safari as pull-to-refresh and reloaded the merchant's page mid-conversation. I stopped the gesture at the widget's edge with overscroll-behavior on the embed root and contain on the message list.",
+    "fills": [
+      {
+        "kind": "prose",
+        "id": "u-ap-ios",
+        "weight": 0.7,
+        "text": "A pull past the top of the chat reloaded the merchant's store on iOS. I stopped the gesture at the widget's edge.",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "src/data/agentPlatformData.js",
+            "repo": "Juniper",
+            "date": "2026-10-26",
+            "label": "Agent platform case study"
+          },
+          {
+            "type": "commit",
+            "ref": "bceb8f0",
+            "repo": "chekoutai-frontend",
+            "date": "2026-07-07",
+            "label": "bceb8f0 · Chatbot widget polish, dashboard tier-1 gating, product gallery"
+          },
+          {
+            "type": "commit",
+            "ref": "9f7b1e2",
+            "repo": "chekoutai-frontend",
+            "date": "2026-09-01",
+            "label": "9f7b1e2 · Widget: give the inline section rounded corners and let the page scroll past it"
+          }
+        ]
+      }
+    ],
+    "receipts": [
+      {
+        "type": "asset",
+        "ref": "src/data/agentPlatformData.js",
+        "repo": "Juniper",
+        "date": "2026-10-26",
+        "label": "Agent platform case study"
+      },
+      {
+        "type": "commit",
+        "ref": "bceb8f0",
+        "repo": "chekoutai-frontend",
+        "date": "2026-07-07",
+        "label": "bceb8f0 · Chatbot widget polish, dashboard tier-1 gating, product gallery"
+      },
+      {
+        "type": "commit",
+        "ref": "9f7b1e2",
+        "repo": "chekoutai-frontend",
+        "date": "2026-09-01",
+        "label": "9f7b1e2 · Widget: give the inline section rounded corners and let the page scroll past it"
+      }
+    ]
+  },
+  {
+    "id": "ap-claude-code",
+    "title": "Agent platform: built in the browser with Claude Code",
+    "tags": [
+      "chekout",
+      "claude-code",
+      "ai-tooling",
+      "process",
+      "testing",
+      "playwright"
+    ],
+    "text": "I built most of ChekOut's builder and widget with Claude Code: 577 prompts over 14 sessions, about one in seven a correction. A Playwright suite runs the real widget on a preview page before it reaches a storefront, on desktop Chrome for now.",
+    "fills": [
+      {
+        "kind": "kpi",
+        "id": "u-ap-prompts",
+        "weight": 0.6,
+        "value": "577",
+        "label": "prompts to Claude Code across 14 build sessions",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "src/data/agentPlatformData.js",
+            "repo": "Juniper",
+            "date": "2026-10-26",
+            "label": "Agent platform case study"
+          }
+        ]
+      },
+      {
+        "kind": "commits",
+        "id": "u-ap-cc-commits",
+        "weight": 0.5,
+        "repo": "chekoutai-frontend",
+        "items": [
+          {
+            "sha": "bceb8f0",
+            "date": "2026-07-07",
+            "msg": "Chatbot widget polish, dashboard tier-1 gating, product gallery"
+          },
+          {
+            "sha": "cb6e4a8",
+            "date": "2026-08-03",
+            "msg": "Portfolio capture harness (Playwright)"
+          },
+          {
+            "sha": "67919c7",
+            "date": "2026-07-21",
+            "msg": "test: refresh chatbot/preview/TopMetrics tests to match current components"
+          }
+        ]
+      }
+    ],
+    "receipts": [
+      {
+        "type": "asset",
+        "ref": "src/data/agentPlatformData.js",
+        "repo": "Juniper",
+        "date": "2026-10-26",
+        "label": "Agent platform case study"
+      },
+      {
+        "type": "commit",
+        "ref": "bceb8f0",
+        "repo": "chekoutai-frontend",
+        "date": "2026-07-07",
+        "label": "bceb8f0 · Chatbot widget polish, dashboard tier-1 gating, product gallery"
+      },
+      {
+        "type": "commit",
+        "ref": "cb6e4a8",
+        "repo": "chekoutai-frontend",
+        "date": "2026-08-03",
+        "label": "cb6e4a8 · Portfolio capture harness (Playwright)"
+      },
+      {
+        "type": "commit",
+        "ref": "67919c7",
+        "repo": "chekoutai-frontend",
+        "date": "2026-07-21",
+        "label": "67919c7 · test: refresh chatbot/preview/TopMetrics tests to match current components"
+      }
+    ]
+  },
+  {
+    "id": "cv-loved",
+    "title": "Christine Valmy: the design I loved",
+    "tags": [
+      "christine-valmy",
+      "concept",
+      "bento",
+      "product-design",
+      "process"
+    ],
+    "text": "My first Christine Valmy design made enrollment feel like an app: a student ID card that filled in as the student chatted, and a bento grid of tiles for pricing, courses, alumni and schedules. User testing killed it.",
+    "fills": [
+      {
+        "kind": "media",
+        "id": "u-cv-bento",
+        "weight": 0.7,
+        "media": "image",
+        "src": "assets/christine-valmy/bento-concept.webp",
+        "aspect": 1.9259,
+        "alt": "The bento grid concept around the chat",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "assets/christine-valmy/bento-concept.webp",
+            "repo": "Juniper",
+            "label": "Christine Valmy case study"
+          }
+        ],
+        "caption": "The bento grid: every topic one tap from the chat.",
+        "explain": "My first concept: tiles for pricing, courses, alumni and schedules around the chat, so nobody had to think of a question first and every tap told officers what a student cared about. In testing, students skipped the tiles."
+      },
+      {
+        "kind": "media",
+        "id": "u-cv-id",
+        "weight": 0.5,
+        "media": "image",
+        "src": "assets/christine-valmy/student-id-concept.webp",
+        "aspect": 1.7741,
+        "alt": "Student ID concept: a card with name, email and course picks for nails, haircare, makeup and esthetics",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "assets/christine-valmy/student-id-concept.webp",
+            "repo": "Juniper",
+            "label": "public/images/Case Studies/CV/cv-student-id-concept.png"
+          }
+        ],
+        "caption": "The student ID card that filled in as the student chatted.",
+        "explain": "The other half of the concept: an ID card that collected a student's name, email and course picks as they chatted. It was cut with the grid after testing."
+      }
+    ],
+    "receipts": [
+      {
+        "type": "asset",
+        "ref": "assets/christine-valmy/bento-concept.webp",
+        "repo": "Juniper",
+        "label": "Christine Valmy case study"
+      },
+      {
+        "type": "asset",
+        "ref": "assets/christine-valmy/student-id-concept.webp",
+        "repo": "Juniper",
+        "label": "public/images/Case Studies/CV/cv-student-id-concept.png"
+      }
+    ]
+  },
+  {
+    "id": "cv-testing",
+    "title": "Christine Valmy: what testing showed",
+    "tags": [
+      "christine-valmy",
+      "user-research",
+      "usability-testing",
+      "quotes",
+      "social-proof"
+    ],
+    "text": "In testing, prospective Christine Valmy students skipped the tiles and kept asking whether the school had Instagram: the tiles read as marketing, and photos from real students did not. I cut the ID card and the grid and kept a short inquiry form, the chat and the social links.",
+    "fills": [
+      {
+        "kind": "quote",
+        "id": "u-cv-maria",
+        "weight": 0.7,
+        "text": "The first thing I do after talking to someone about a school is check out their Instagram. That tells me more than any brochure.",
+        "who": "Maria, 19, prospective student (pseudonym)",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "src/data/christineValmyData.js",
+            "repo": "Juniper",
+            "date": "2026-10-26",
+            "label": "Christine Valmy case study"
+          }
+        ]
+      },
+      {
+        "kind": "media",
+        "id": "u-cv-social-before",
+        "weight": 0.5,
+        "media": "image",
+        "src": "assets/christine-valmy/social-before.webp",
+        "aspect": 1.7778,
+        "alt": "Chat with topic buttons and social links in a left column",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "assets/christine-valmy/social-before.webp",
+            "repo": "Juniper",
+            "label": "Christine Valmy case study"
+          }
+        ],
+        "caption": "Before: social links in a side column, away from the chat.",
+        "explain": "Students wanted Instagram right after chatting, but the links sat in a column on the left, apart from the conversation. Session two moved them."
+      },
+      {
+        "kind": "media",
+        "id": "u-cv-final",
+        "weight": 0.5,
+        "media": "image",
+        "src": "assets/christine-valmy/final-design.webp",
+        "aspect": 1.7778,
+        "alt": "Inquiry form beside the chat with social links underneath",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "assets/christine-valmy/final-design.webp",
+            "repo": "Juniper",
+            "label": "Christine Valmy case study"
+          }
+        ],
+        "caption": "After: a short form, the chat, and social links in a row underneath.",
+        "explain": "The design that shipped. Everything students ignored is gone, and the social links they kept asking for sit in a row right under the chat."
+      }
+    ],
+    "receipts": [
+      {
+        "type": "asset",
+        "ref": "src/data/christineValmyData.js",
+        "repo": "Juniper",
+        "date": "2026-10-26",
+        "label": "Christine Valmy case study"
+      },
+      {
+        "type": "asset",
+        "ref": "assets/christine-valmy/social-before.webp",
+        "repo": "Juniper",
+        "label": "Christine Valmy case study"
+      },
+      {
+        "type": "asset",
+        "ref": "assets/christine-valmy/final-design.webp",
+        "repo": "Juniper",
+        "label": "Christine Valmy case study"
+      }
+    ]
+  },
+  {
+    "id": "cv-fixes",
+    "title": "Christine Valmy: three fixes, three sessions",
+    "tags": [
+      "christine-valmy",
+      "iteration",
+      "bilingual",
+      "spanish",
+      "accessibility",
+      "wcag"
+    ],
+    "text": "Three Christine Valmy test sessions each found one thing students tripped on, and I fixed it before the next: dropdowns read as topics, social links sat in the wrong place, and the agent spoke only English when many applicants spoke Spanish first. The agent and every label now work in both languages, and the widget was audited to WCAG AA.",
+    "fills": [
+      {
+        "kind": "media",
+        "id": "u-cv-ddb",
+        "weight": 0.4,
+        "media": "image",
+        "src": "assets/christine-valmy/dropdown-before.webp",
+        "aspect": 1.3943,
+        "alt": "Dropdowns beside the chat input",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "assets/christine-valmy/dropdown-before.webp",
+            "repo": "Juniper",
+            "label": "Christine Valmy case study"
+          }
+        ],
+        "caption": "Before: students read these dropdowns as suggested topics.",
+        "explain": "Location and course dropdowns sat beside the message box because structured values were easier to parse. Students read them as suggested topics instead of typing their own question."
+      },
+      {
+        "kind": "media",
+        "id": "u-cv-dda",
+        "weight": 0.4,
+        "media": "image",
+        "src": "assets/christine-valmy/dropdown-after.webp",
+        "aspect": 1.3386,
+        "alt": "A single message input, no dropdowns",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "assets/christine-valmy/dropdown-after.webp",
+            "repo": "Juniper",
+            "label": "Christine Valmy case study"
+          }
+        ],
+        "caption": "After: one message box; the agent picks location and course from the text.",
+        "explain": "The session one fix: the dropdowns are gone, and the agent reads location and course from plain conversation."
+      },
+      {
+        "kind": "media",
+        "id": "u-cv-es",
+        "weight": 0.5,
+        "media": "image",
+        "src": "assets/christine-valmy/spanish.webp",
+        "aspect": 1.7778,
+        "alt": "The form and chat in Spanish",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "assets/christine-valmy/spanish.webp",
+            "repo": "Juniper",
+            "label": "Christine Valmy case study"
+          }
+        ],
+        "caption": "The same form and agent in Spanish.",
+        "explain": "Many applicants spoke Spanish first, so the agent and every label switch languages, not just the replies. The enrollment officer credits this with more inquiries from the school's target students."
+      },
+      {
+        "kind": "quote",
+        "id": "u-cv-rosa",
+        "weight": 0.6,
+        "text": "The Spanish option was huge for us. We're getting way more inquiries from our target demographic now.",
+        "who": "Rosa, enrollment officer (pseudonym)",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "src/data/christineValmyData.js",
+            "repo": "Juniper",
+            "date": "2026-10-26",
+            "label": "Christine Valmy case study"
+          }
+        ]
+      }
+    ],
+    "receipts": [
+      {
+        "type": "asset",
+        "ref": "assets/christine-valmy/dropdown-before.webp",
+        "repo": "Juniper",
+        "label": "Christine Valmy case study"
+      },
+      {
+        "type": "asset",
+        "ref": "assets/christine-valmy/dropdown-after.webp",
+        "repo": "Juniper",
+        "label": "Christine Valmy case study"
+      },
+      {
+        "type": "asset",
+        "ref": "assets/christine-valmy/spanish.webp",
+        "repo": "Juniper",
+        "label": "Christine Valmy case study"
+      },
+      {
+        "type": "asset",
+        "ref": "src/data/christineValmyData.js",
+        "repo": "Juniper",
+        "date": "2026-10-26",
+        "label": "Christine Valmy case study"
+      }
+    ]
+  },
+  {
+    "id": "cv-agent",
+    "title": "Christine Valmy: an agent that sorts leads",
+    "tags": [
+      "christine-valmy",
+      "ai-agent",
+      "rag",
+      "n8n",
+      "outcomes",
+      "metrics",
+      "lead-scoring"
+    ],
+    "text": "The Christine Valmy enrollment agent took visitor conversion from 10% to 23% and brought in $120K in enrolled revenue. It answers from the school's own content through RAG, keeps class schedules fresh, and sorts each lead into a priority bucket so officers call the students who are ready first.",
+    "fills": [
+      {
+        "kind": "kpi",
+        "id": "u-cv-conv",
+        "weight": 0.9,
+        "value": "10% → 23%",
+        "label": "visitor conversion, before and after the agent",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "src/data/christineValmyData.js",
+            "repo": "Juniper",
+            "date": "2026-10-26",
+            "label": "Christine Valmy case study"
+          }
+        ]
+      },
+      {
+        "kind": "kpi",
+        "id": "u-cv-rev",
+        "weight": 0.7,
+        "value": "$120K",
+        "label": "in enrolled revenue for the school",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "src/data/christineValmyData.js",
+            "repo": "Juniper",
+            "date": "2026-10-26",
+            "label": "Christine Valmy case study"
+          }
+        ]
+      },
+      {
+        "kind": "kpi",
+        "id": "u-cv-hrs",
+        "weight": 0.5,
+        "value": "~3 hrs",
+        "label": "saved per enrollment officer, per day",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "src/data/christineValmyData.js",
+            "repo": "Juniper",
+            "date": "2026-10-26",
+            "label": "Christine Valmy case study"
+          }
+        ]
+      },
+      {
+        "kind": "media",
+        "id": "u-cv-reply",
+        "weight": 0.6,
+        "media": "video",
+        "src": "assets/christine-valmy/agent-reply.mp4",
+        "aspect": 1.9104,
+        "alt": "The agent replying to a new student",
+        "poster": "assets/christine-valmy/agent-reply.jpg",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "assets/christine-valmy/agent-reply.mp4",
+            "repo": "Juniper",
+            "label": "Christine Valmy case study"
+          }
+        ],
+        "caption": "A new student asks a question and the agent answers beside the inquiry form.",
+        "explain": "The shipped agent on the school's site, answering a student from the school's own course content with the inquiry form in reach. Students used to fill in the form and wait for a call."
+      }
+    ],
+    "receipts": [
+      {
+        "type": "asset",
+        "ref": "src/data/christineValmyData.js",
+        "repo": "Juniper",
+        "date": "2026-10-26",
+        "label": "Christine Valmy case study"
+      },
+      {
+        "type": "asset",
+        "ref": "assets/christine-valmy/agent-reply.mp4",
+        "repo": "Juniper",
+        "label": "Christine Valmy case study"
+      }
+    ]
+  },
+  {
+    "id": "ky-live-totals",
+    "title": "KYURI.OS: live job-hunt totals",
+    "tags": [
+      "kyuri",
+      "job-search",
+      "metrics",
+      "live-data",
+      "pipeline",
+      "notion"
+    ],
+    "text": "My job search runs on KYURI.OS: as of Nov 2, 2026 the public Job Hunt page shows 454 roles captured, 341 marked applied and 9 that reached interviews. Across all users it has tailored 475 resumes.",
+    "fills": [
+      {
+        "kind": "kpi",
+        "id": "u-ky-cap",
+        "weight": 0.7,
+        "value": "454",
+        "label": "roles captured into my pipeline",
+        "period": "as of Nov 2, 2026",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "assets/kyuri-os/job-hunt.webp",
+            "url": "https://kyuri.namit.me/?area=job-hunt",
+            "date": "2026-11-02",
+            "label": "kyuri.namit.me Job Hunt, visitor view, captured 2026-11-02"
+          }
+        ]
+      },
+      {
+        "kind": "kpi",
+        "id": "u-ky-sent",
+        "weight": 0.7,
+        "value": "341",
+        "label": "of those marked applied",
+        "period": "as of Nov 2, 2026",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "assets/kyuri-os/job-hunt.webp",
+            "url": "https://kyuri.namit.me/?area=job-hunt",
+            "date": "2026-11-02",
+            "label": "kyuri.namit.me Job Hunt, visitor view, captured 2026-11-02"
+          }
+        ]
+      },
+      {
+        "kind": "kpi",
+        "id": "u-ky-int",
+        "weight": 0.5,
+        "value": "9",
+        "label": "applications that reached an interview",
+        "period": "as of Nov 2, 2026",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "assets/kyuri-os/job-hunt.webp",
+            "url": "https://kyuri.namit.me/?area=job-hunt",
+            "date": "2026-11-02",
+            "label": "kyuri.namit.me Job Hunt, visitor view, captured 2026-11-02"
+          }
+        ]
+      },
+      {
+        "kind": "media",
+        "id": "u-ky-shot",
+        "weight": 0.7,
+        "media": "image",
+        "src": "assets/kyuri-os/job-hunt.webp",
+        "aspect": 1.6,
+        "alt": "KYURI.OS Job Hunt, visitor view",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "assets/kyuri-os/job-hunt.webp"
+          },
+          {
+            "type": "asset",
+            "ref": "assets/kyuri-os/job-hunt.webp",
+            "url": "https://kyuri.namit.me/?area=job-hunt",
+            "date": "2026-11-02",
+            "label": "kyuri.namit.me Job Hunt, visitor view, captured 2026-11-02"
+          }
+        ],
+        "caption": "The public Job Hunt page, signed out, Nov 2, 2026.",
+        "explain": "The Job Hunt page as any visitor sees it. The totals come from the same pipeline that runs my search, so they move as I apply; companies and people are left out.",
+        "kpi": "u-ky-cap"
+      }
+    ],
+    "receipts": [
+      {
+        "type": "asset",
+        "ref": "assets/kyuri-os/job-hunt.webp",
+        "url": "https://kyuri.namit.me/?area=job-hunt",
+        "date": "2026-11-02",
+        "label": "kyuri.namit.me Job Hunt, visitor view, captured 2026-11-02"
+      }
+    ]
+  },
+  {
+    "id": "ky-resume-guards",
+    "title": "KYURI.OS: guards on AI resume tailoring",
+    "tags": [
+      "kyuri",
+      "ai-agent",
+      "guardrails",
+      "evals",
+      "llm",
+      "qa",
+      "resume"
+    ],
+    "text": "In KYURI.OS, code decides what an AI-written resume may say, because on June 17 a resume went out with the agent's own keyword notes printed under SKILLS. Since then code picks the base resume, four facts can never be renamed, a fit gate judges the posting, and a leak guard, QA gate and evals sit between the model and the PDF.",
+    "fills": [
+      {
+        "kind": "commits",
+        "id": "u-ky-guard-commits",
+        "weight": 0.7,
+        "repo": "kyuri-dashboard",
+        "items": [
+          {
+            "sha": "0380547",
+            "date": "2026-08-17",
+            "msg": "resume: route technical roles to the engineering base, not product design"
+          },
+          {
+            "sha": "39023e3",
+            "date": "2026-08-17",
+            "msg": "resume: name the four things tailoring may not rename, and allow same-employer borrowing"
+          },
+          {
+            "sha": "001f2e0",
+            "date": "2026-10-15",
+            "msg": "resume: nothing but the resume reaches the page: leak guard, QA gate, evals"
+          },
+          {
+            "sha": "5cc8009",
+            "date": "2026-10-18",
+            "msg": "fit gate: judge the posting before tailoring, map its duties, reject off-target resumes"
+          },
+          {
+            "sha": "9ae21e2",
+            "date": "2026-08-24",
+            "msg": "resume: correct an off-target tailoring instead of binning the run"
+          }
+        ]
+      },
+      {
+        "kind": "kpi",
+        "id": "u-ky-checks",
+        "weight": 0.4,
+        "value": "3",
+        "label": "agent checks every resume passes before it reaches Drive",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "assets/kyuri-os/job-hunt.webp",
+            "url": "https://kyuri.namit.me/?area=job-hunt",
+            "date": "2026-11-02",
+            "label": "kyuri.namit.me Job Hunt, visitor view, captured 2026-11-02"
+          }
+        ]
+      }
+    ],
+    "receipts": [
+      {
+        "type": "asset",
+        "ref": "assets/kyuri-os/job-hunt.webp",
+        "url": "https://kyuri.namit.me/?area=job-hunt",
+        "date": "2026-11-02",
+        "label": "kyuri.namit.me Job Hunt, visitor view, captured 2026-11-02"
+      },
+      {
+        "type": "commit",
+        "ref": "0380547",
+        "repo": "kyuri-dashboard",
+        "date": "2026-08-17",
+        "label": "0380547 · resume: route technical roles to the engineering base, not product design"
+      },
+      {
+        "type": "commit",
+        "ref": "39023e3",
+        "repo": "kyuri-dashboard",
+        "date": "2026-08-17",
+        "label": "39023e3 · resume: name the four things tailoring may not rename, and allow same-employer borrowing"
+      },
+      {
+        "type": "commit",
+        "ref": "001f2e0",
+        "repo": "kyuri-dashboard",
+        "date": "2026-10-15",
+        "label": "001f2e0 · resume: nothing but the resume reaches the page: leak guard, QA gate, evals"
+      },
+      {
+        "type": "commit",
+        "ref": "5cc8009",
+        "repo": "kyuri-dashboard",
+        "date": "2026-10-18",
+        "label": "5cc8009 · fit gate: judge the posting before tailoring, map its duties, reject off-target resumes"
+      },
+      {
+        "type": "commit",
+        "ref": "9ae21e2",
+        "repo": "kyuri-dashboard",
+        "date": "2026-08-24",
+        "label": "9ae21e2 · resume: correct an off-target tailoring instead of binning the run"
+      }
+    ]
+  },
+  {
+    "id": "ky-public-home",
+    "title": "KYURI.OS: ASK MY WORK and the public site",
+    "tags": [
+      "kyuri",
+      "evidence",
+      "receipts",
+      "rag",
+      "public-site",
+      "portfolio"
+    ],
+    "text": "The public KYURI.OS home answers \"can he do your work?\" only from approved, dated records, each traced to the code or design it came from. As of Nov 2, 2026 it draws on 26 of them.",
+    "fills": [
+      {
+        "kind": "kpi",
+        "id": "u-ky-receipts",
+        "weight": 0.5,
+        "value": "26",
+        "label": "approved public records of my work",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "assets/kyuri-os/home.webp",
+            "url": "https://kyuri.namit.me/",
+            "date": "2026-11-02",
+            "label": "kyuri.namit.me Home, visitor view, captured 2026-11-02"
+          }
+        ]
+      },
+      {
+        "kind": "media",
+        "id": "u-ky-home",
+        "weight": 0.6,
+        "media": "image",
+        "src": "assets/kyuri-os/home.webp",
+        "aspect": 1.6,
+        "alt": "KYURI.OS public home with ASK MY WORK",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "assets/kyuri-os/home.webp"
+          },
+          {
+            "type": "asset",
+            "ref": "assets/kyuri-os/home.webp",
+            "url": "https://kyuri.namit.me/",
+            "date": "2026-11-02",
+            "label": "kyuri.namit.me Home, visitor view, captured 2026-11-02"
+          }
+        ],
+        "caption": "The public home, signed out, with ASK MY WORK.",
+        "explain": "What a visitor sees without signing in. ASK MY WORK answers only from records I approved, each dated and traced to the work it describes; nothing private reaches this view.",
+        "kpi": "u-ky-receipts"
+      },
+      {
+        "kind": "commits",
+        "id": "u-ky-ask-commits",
+        "weight": 0.5,
+        "repo": "kyuri-dashboard",
+        "items": [
+          {
+            "sha": "82bfacf",
+            "date": "2026-11-01",
+            "msg": "evidence miner: facts from Namit's repos, proposed by a tool-less model, approved into the bank"
+          },
+          {
+            "sha": "c2c2a19",
+            "date": "2026-11-01",
+            "msg": "corroboration layer: approved evidence becomes dated, sourced records, a public RECENT WORK feed, and ASK that cites them"
+          },
+          {
+            "sha": "e42e005",
+            "date": "2026-11-01",
+            "msg": "evidence: Figma files as a miner source - frames as refs, renders as screenshots, updates supersede"
+          },
+          {
+            "sha": "e9bc16c",
+            "date": "2026-11-01",
+            "msg": "home: ASK MY WORK leads with the question, on the landing and on Namit's own home"
+          }
+        ]
+      }
+    ],
+    "receipts": [
+      {
+        "type": "asset",
+        "ref": "assets/kyuri-os/home.webp",
+        "url": "https://kyuri.namit.me/",
+        "date": "2026-11-02",
+        "label": "kyuri.namit.me Home, visitor view, captured 2026-11-02"
+      },
+      {
+        "type": "commit",
+        "ref": "82bfacf",
+        "repo": "kyuri-dashboard",
+        "date": "2026-11-01",
+        "label": "82bfacf · evidence miner: facts from Namit's repos, proposed by a tool-less model, approved into the bank"
+      },
+      {
+        "type": "commit",
+        "ref": "c2c2a19",
+        "repo": "kyuri-dashboard",
+        "date": "2026-11-01",
+        "label": "c2c2a19 · corroboration layer: approved evidence becomes dated, sourced records, a public RECENT WORK feed, and ASK that cites them"
+      },
+      {
+        "type": "commit",
+        "ref": "e42e005",
+        "repo": "kyuri-dashboard",
+        "date": "2026-11-01",
+        "label": "e42e005 · evidence: Figma files as a miner source - frames as refs, renders as screenshots, updates supersede"
+      },
+      {
+        "type": "commit",
+        "ref": "e9bc16c",
+        "repo": "kyuri-dashboard",
+        "date": "2026-11-01",
+        "label": "e9bc16c · home: ASK MY WORK leads with the question, on the landing and on Namit's own home"
+      }
+    ]
+  },
+  {
+    "id": "rec-ff5b2a3f",
+    "title": "kyuri-os: Added offline support to Kyuri so pages open from the last cached copy after…",
+    "tags": [
+      "evidence-record",
+      "kyuri",
+      "frontend"
+    ],
+    "text": "Added offline support to Kyuri so pages open from the last cached copy after a 4s wait, and jobs added with no signal wait in an outbox and send on reconnect, with a pill showing which state applies.",
+    "fills": [
+      {
+        "kind": "prose",
+        "id": "rec-ff5b2a3f-p",
+        "weight": 0.7,
+        "text": "Pages load from the last cache after 4 seconds offline. Jobs queued with no signal wait in a local outbox and sync on reconnect. A status pill shows the current state.",
+        "receipts": [
+          {
+            "type": "record",
+            "ref": "ff5b2a3f",
+            "url": "https://kyuri.namit.me/",
+            "date": "2026-10-27",
+            "label": "Added offline support to Kyuri so pages open from the last cached copy after a 4s wait,…"
+          }
+        ]
+      },
+      {
+        "kind": "commits",
+        "id": "rec-ff5b2a3f-c",
+        "weight": 0.4,
+        "repo": "kyuri-dashboard",
+        "items": [
+          {
+            "sha": "ab7171a",
+            "date": "2026-10-27",
+            "msg": "offline: pages open from the last copy after a 4s wait, adds made with no signal wait in an outbox and send on reconnect, a pill says which"
+          }
+        ]
+      },
+      {
+        "kind": "kpi",
+        "id": "rec-ff5b2a3f-k",
+        "weight": 0.4,
+        "value": "4s",
+        "label": "offline wait before the cached copy opens",
+        "receipts": [
+          {
+            "type": "record",
+            "ref": "ff5b2a3f",
+            "url": "https://kyuri.namit.me/",
+            "date": "2026-10-27",
+            "label": "Added offline support to Kyuri so pages open from the last cached copy after a 4s wait,…"
+          }
+        ]
+      }
+    ],
+    "receipts": [
+      {
+        "type": "record",
+        "ref": "ff5b2a3f",
+        "url": "https://kyuri.namit.me/",
+        "date": "2026-10-27",
+        "label": "Added offline support to Kyuri so pages open from the last cached copy after a 4s wait,…"
+      },
+      {
+        "type": "commit",
+        "ref": "ab7171a",
+        "repo": "kyuri-dashboard",
+        "date": "2026-10-27",
+        "label": "ab7171a · offline: pages open from the last copy after a 4s wait, adds made with no signal wait in an outbox and send on reconnect, a pill says which"
+      }
+    ]
+  },
+  {
+    "id": "rec-f21be06a",
+    "title": "kyuri-os: Built a public resume-tailoring demo on Kyuri that runs through a job queue…",
+    "tags": [
+      "evidence-record",
+      "kyuri",
+      "ai-agent",
+      "ai"
+    ],
+    "text": "Built a public resume-tailoring demo on Kyuri that runs through a job queue on his own machine, with polling, a fallback, capped tweaks, redownload and a per-visitor try quota. Limits: Behind a feature flag; visitor counts are not currently tracked.",
+    "fills": [
+      {
+        "kind": "prose",
+        "id": "rec-f21be06a-p",
+        "weight": 0.7,
+        "text": "A public demo at /try runs the full tailoring pipeline through a job queue on my own machine, with polling, a fallback, capped tweaks, redownload and a per-visitor try quota. It sits behind a feature flag.",
+        "receipts": [
+          {
+            "type": "record",
+            "ref": "f21be06a",
+            "url": "https://kyuri.namit.me/",
+            "date": "2026-10-19",
+            "label": "Built a public resume-tailoring demo on Kyuri that runs through a job queue on his own…"
+          }
+        ]
+      },
+      {
+        "kind": "commits",
+        "id": "rec-f21be06a-c",
+        "weight": 0.4,
+        "repo": "kyuri-dashboard",
+        "items": [
+          {
+            "sha": "282ad60",
+            "date": "2026-10-15",
+            "msg": "demo: runs on the box through a job queue, with polling, fallback, capped tweaks and redownload"
+          },
+          {
+            "sha": "4a152af",
+            "date": "2026-10-19",
+            "msg": "outreach as one editor: role → people → message, drafting as a verifier loop; the context bank is trusted"
+          }
+        ]
+      }
+    ],
+    "receipts": [
+      {
+        "type": "record",
+        "ref": "f21be06a",
+        "url": "https://kyuri.namit.me/",
+        "date": "2026-10-19",
+        "label": "Built a public resume-tailoring demo on Kyuri that runs through a job queue on his own…"
+      },
+      {
+        "type": "commit",
+        "ref": "282ad60",
+        "repo": "kyuri-dashboard",
+        "date": "2026-10-15",
+        "label": "282ad60 · demo: runs on the box through a job queue, with polling, fallback, capped tweaks and redownload"
+      },
+      {
+        "type": "commit",
+        "ref": "4a152af",
+        "repo": "kyuri-dashboard",
+        "date": "2026-10-19",
+        "label": "4a152af · outreach as one editor: role → people → message, drafting as a verifier loop; the context bank is trusted"
+      }
+    ]
+  },
+  {
+    "id": "rec-88ce4fc3",
+    "title": "kyuri-os: Wrote data-hygiene rules for the Kyuri end-to-end suite so that every test…",
+    "tags": [
+      "evidence-record",
+      "kyuri",
+      "qa",
+      "testing"
+    ],
+    "text": "Wrote data-hygiene rules for the Kyuri end-to-end suite so that every test write targets a row the suite created and teardown removes those rows by recorded id, email domain or hashed IP, never by time window. Limits: From the written test plan; not shown running against live data.",
+    "fills": [
+      {
+        "kind": "prose",
+        "id": "rec-88ce4fc3-p",
+        "weight": 0.7,
+        "text": "The end-to-end suite tracks every row it writes and tears down those exact rows by recorded ID, email domain, or hashed IP. Teardown never uses a time window, so tests cannot delete unrelated data.",
+        "receipts": [
+          {
+            "type": "record",
+            "ref": "88ce4fc3",
+            "url": "https://kyuri.namit.me/",
+            "date": "2026-10-19",
+            "label": "Wrote data-hygiene rules for the Kyuri end-to-end suite so that every test write targets…"
+          }
+        ]
+      },
+      {
+        "kind": "commits",
+        "id": "rec-88ce4fc3-c",
+        "weight": 0.4,
+        "repo": "kyuri-dashboard",
+        "items": [
+          {
+            "sha": "4a152af",
+            "date": "2026-10-19",
+            "msg": "outreach as one editor: role → people → message, drafting as a verifier loop; the context bank is trusted"
+          }
+        ]
+      }
+    ],
+    "receipts": [
+      {
+        "type": "record",
+        "ref": "88ce4fc3",
+        "url": "https://kyuri.namit.me/",
+        "date": "2026-10-19",
+        "label": "Wrote data-hygiene rules for the Kyuri end-to-end suite so that every test write targets…"
+      },
+      {
+        "type": "commit",
+        "ref": "4a152af",
+        "repo": "kyuri-dashboard",
+        "date": "2026-10-19",
+        "label": "4a152af · outreach as one editor: role → people → message, drafting as a verifier loop; the context bank is trusted"
+      }
+    ]
+  },
+  {
+    "id": "rec-de8e5fc1",
+    "title": "kyuri-os: Added a mutation guard to the Kyuri Playwright suite that answers any…",
+    "tags": [
+      "evidence-record",
+      "kyuri",
+      "qa",
+      "testing"
+    ],
+    "text": "Added a mutation guard to the Kyuri Playwright suite that answers any non-GET API request a page fires on its own with a 418 unless allowlisted, so tests that only view a page cannot spend model credits or dequeue real work.",
+    "fills": [
+      {
+        "kind": "prose",
+        "id": "rec-de8e5fc1-p",
+        "weight": 0.7,
+        "text": "A mutation guard in the Playwright suite returns 418 for any unsanctioned POST, PATCH, or DELETE a page fires during a view-only test. View tests cannot spend model credits or trigger real pipeline jobs.",
+        "receipts": [
+          {
+            "type": "record",
+            "ref": "de8e5fc1",
+            "url": "https://kyuri.namit.me/",
+            "date": "2026-10-19",
+            "label": "Added a mutation guard to the Kyuri Playwright suite that answers any non-GET API request…"
+          }
+        ]
+      },
+      {
+        "kind": "commits",
+        "id": "rec-de8e5fc1-c",
+        "weight": 0.4,
+        "repo": "kyuri-dashboard",
+        "items": [
+          {
+            "sha": "4a152af",
+            "date": "2026-10-19",
+            "msg": "outreach as one editor: role → people → message, drafting as a verifier loop; the context bank is trusted"
+          }
+        ]
+      },
+      {
+        "kind": "kpi",
+        "id": "rec-de8e5fc1-k",
+        "weight": 0.5,
+        "value": "418",
+        "label": "for any unsanctioned write in a view-only test",
+        "receipts": [
+          {
+            "type": "record",
+            "ref": "de8e5fc1",
+            "url": "https://kyuri.namit.me/",
+            "date": "2026-10-19",
+            "label": "Added a mutation guard to the Kyuri Playwright suite that answers any non-GET API request…"
+          }
+        ]
+      }
+    ],
+    "receipts": [
+      {
+        "type": "record",
+        "ref": "de8e5fc1",
+        "url": "https://kyuri.namit.me/",
+        "date": "2026-10-19",
+        "label": "Added a mutation guard to the Kyuri Playwright suite that answers any non-GET API request…"
+      },
+      {
+        "type": "commit",
+        "ref": "4a152af",
+        "repo": "kyuri-dashboard",
+        "date": "2026-10-19",
+        "label": "4a152af · outreach as one editor: role → people → message, drafting as a verifier loop; the context bank is trusted"
+      }
+    ]
+  },
+  {
+    "id": "rec-ff6a6375",
+    "title": "kyuri-os: Added a page gate to the Kyuri resume build that refuses to publish a resume…",
+    "tags": [
+      "evidence-record",
+      "kyuri",
+      "ai-agent",
+      "ai"
+    ],
+    "text": "Added a page gate to the Kyuri resume build that refuses to publish a resume still over one page at the tightest layout, then runs one trim-to-one-page QA pass and re-lints before rebuilding. Limits: If the resume still overflows after one trim pass, it ships with a page-count warning.",
+    "fills": [
+      {
+        "kind": "prose",
+        "id": "rec-ff6a6375-p",
+        "weight": 0.7,
+        "text": "The resume build refuses to publish a resume still over one page at the tightest layout. It runs one trim pass and re-lints before rebuilding; if it still overflows, it ships with a page-count warning.",
+        "receipts": [
+          {
+            "type": "record",
+            "ref": "ff6a6375",
+            "url": "https://kyuri.namit.me/",
+            "date": "2026-10-19",
+            "label": "Added a page gate to the Kyuri resume build that refuses to publish a resume still over…"
+          }
+        ]
+      },
+      {
+        "kind": "commits",
+        "id": "rec-ff6a6375-c",
+        "weight": 0.4,
+        "repo": "kyuri-dashboard",
+        "items": [
+          {
+            "sha": "4a152af",
+            "date": "2026-10-19",
+            "msg": "outreach as one editor: role → people → message, drafting as a verifier loop; the context bank is trusted"
+          }
+        ]
+      }
+    ],
+    "receipts": [
+      {
+        "type": "record",
+        "ref": "ff6a6375",
+        "url": "https://kyuri.namit.me/",
+        "date": "2026-10-19",
+        "label": "Added a page gate to the Kyuri resume build that refuses to publish a resume still over…"
+      },
+      {
+        "type": "commit",
+        "ref": "4a152af",
+        "repo": "kyuri-dashboard",
+        "date": "2026-10-19",
+        "label": "4a152af · outreach as one editor: role → people → message, drafting as a verifier loop; the context bank is trusted"
+      }
+    ]
+  },
+  {
+    "id": "rec-b2f287c5",
+    "title": "kyuri-os: Built a fit gate into the Kyuri resume pipeline that judges a job posting…",
+    "tags": [
+      "evidence-record",
+      "kyuri",
+      "ai-agent",
+      "ai"
+    ],
+    "text": "Built a fit gate into the Kyuri resume pipeline that judges a job posting before tailoring, maps its duties, records a verdict on each run, and steers the later tailoring and QA steps. Limits: The fit gate falls back to a 'possible' verdict when the model is unavailable; there is no record of it blocking a tailoring run.",
+    "fills": [
+      {
+        "kind": "prose",
+        "id": "rec-b2f287c5-p",
+        "weight": 0.7,
+        "text": "Before tailoring a resume, the pipeline scores the job posting for fit, maps its duties to my background, and records a verdict. The verdict steers the tailoring and QA steps that follow.",
+        "receipts": [
+          {
+            "type": "record",
+            "ref": "b2f287c5",
+            "url": "https://kyuri.namit.me/",
+            "date": "2026-10-19",
+            "label": "Built a fit gate into the Kyuri resume pipeline that judges a job posting before…"
+          }
+        ]
+      },
+      {
+        "kind": "commits",
+        "id": "rec-b2f287c5-c",
+        "weight": 0.4,
+        "repo": "kyuri-dashboard",
+        "items": [
+          {
+            "sha": "5cc8009",
+            "date": "2026-10-18",
+            "msg": "fit gate: judge the posting before tailoring, map its duties, reject off-target resumes"
+          },
+          {
+            "sha": "4a152af",
+            "date": "2026-10-19",
+            "msg": "outreach as one editor: role → people → message, drafting as a verifier loop; the context bank is trusted"
+          }
+        ]
+      }
+    ],
+    "receipts": [
+      {
+        "type": "record",
+        "ref": "b2f287c5",
+        "url": "https://kyuri.namit.me/",
+        "date": "2026-10-19",
+        "label": "Built a fit gate into the Kyuri resume pipeline that judges a job posting before…"
+      },
+      {
+        "type": "commit",
+        "ref": "5cc8009",
+        "repo": "kyuri-dashboard",
+        "date": "2026-10-18",
+        "label": "5cc8009 · fit gate: judge the posting before tailoring, map its duties, reject off-target resumes"
+      },
+      {
+        "type": "commit",
+        "ref": "4a152af",
+        "repo": "kyuri-dashboard",
+        "date": "2026-10-19",
+        "label": "4a152af · outreach as one editor: role → people → message, drafting as a verifier loop; the context bank is trusted"
+      }
+    ]
+  },
+  {
+    "id": "rec-46faab54",
+    "title": "kyuri-os: Built a rolling-24-hour send cap of 200 emails into Kyuri's email module",
+    "tags": [
+      "evidence-record",
+      "kyuri",
+      "backend",
+      "data"
+    ],
+    "text": "Built a rolling-24-hour send cap of 200 emails into Kyuri's email module, backed by an email_log table that also serves as an audit trail and dedup signal, with a unit test file for the guard. Limits: The cap is documented; actual send counts are not shown here.",
+    "fills": [
+      {
+        "kind": "prose",
+        "id": "rec-46faab54-p",
+        "weight": 0.7,
+        "text": "Outbound email is capped at 200 sends per 24 hours, enforced by a log table that doubles as an audit trail and a dedup signal. A unit test covers the rate guard.",
+        "receipts": [
+          {
+            "type": "record",
+            "ref": "46faab54",
+            "url": "https://kyuri.namit.me/",
+            "date": "2026-10-16",
+            "label": "Built a rolling-24-hour send cap of 200 emails into Kyuri's email module, backed by an…"
+          }
+        ]
+      },
+      {
+        "kind": "commits",
+        "id": "rec-46faab54-c",
+        "weight": 0.4,
+        "repo": "kyuri-dashboard",
+        "items": [
+          {
+            "sha": "240471c",
+            "date": "2026-10-16",
+            "msg": "auth: self-serve Google sign-up with approval; transactional email"
+          }
+        ]
+      },
+      {
+        "kind": "kpi",
+        "id": "rec-46faab54-k",
+        "weight": 0.6,
+        "value": "200",
+        "label": "emails per rolling 24 hours",
+        "receipts": [
+          {
+            "type": "record",
+            "ref": "46faab54",
+            "url": "https://kyuri.namit.me/",
+            "date": "2026-10-16",
+            "label": "Built a rolling-24-hour send cap of 200 emails into Kyuri's email module, backed by an…"
+          }
+        ]
+      }
+    ],
+    "receipts": [
+      {
+        "type": "record",
+        "ref": "46faab54",
+        "url": "https://kyuri.namit.me/",
+        "date": "2026-10-16",
+        "label": "Built a rolling-24-hour send cap of 200 emails into Kyuri's email module, backed by an…"
+      },
+      {
+        "type": "commit",
+        "ref": "240471c",
+        "repo": "kyuri-dashboard",
+        "date": "2026-10-16",
+        "label": "240471c · auth: self-serve Google sign-up with approval; transactional email"
+      }
+    ]
+  },
+  {
+    "id": "rec-416d5a0b",
+    "title": "kyuri-os: Added a rate limit in Kyuri to every candidate action that spends model tokens",
+    "tags": [
+      "evidence-record",
+      "kyuri",
+      "backend",
+      "data"
+    ],
+    "text": "Added a rate limit in Kyuri to every candidate action that spends model tokens.",
+    "fills": [
+      {
+        "kind": "prose",
+        "id": "rec-416d5a0b-p",
+        "weight": 0.7,
+        "text": "Every AI action a candidate can trigger is rate-limited to keep model costs in check.",
+        "receipts": [
+          {
+            "type": "record",
+            "ref": "416d5a0b",
+            "url": "https://kyuri.namit.me/",
+            "date": "2026-10-14",
+            "label": "Added a rate limit in Kyuri to every candidate action that spends model…"
+          }
+        ]
+      },
+      {
+        "kind": "commits",
+        "id": "rec-416d5a0b-c",
+        "weight": 0.4,
+        "repo": "kyuri-dashboard",
+        "items": [
+          {
+            "sha": "bd34a2c",
+            "date": "2026-10-14",
+            "msg": "quota: rate-limit everything a candidate can do that spends tokens"
+          }
+        ]
+      }
+    ],
+    "receipts": [
+      {
+        "type": "record",
+        "ref": "416d5a0b",
+        "url": "https://kyuri.namit.me/",
+        "date": "2026-10-14",
+        "label": "Added a rate limit in Kyuri to every candidate action that spends model…"
+      },
+      {
+        "type": "commit",
+        "ref": "bd34a2c",
+        "repo": "kyuri-dashboard",
+        "date": "2026-10-14",
+        "label": "bd34a2c · quota: rate-limit everything a candidate can do that spends tokens"
+      }
+    ]
+  },
+  {
+    "id": "rec-b0b443c6",
+    "title": "kyuri-os: Scoped every Kyuri route and panel to the viewer's access tier (visitor",
+    "tags": [
+      "evidence-record",
+      "kyuri",
+      "backend",
+      "data"
+    ],
+    "text": "Scoped every Kyuri route and panel to the viewer's access tier (visitor, candidate or owner), and added Google sign-in with a per-candidate allowlist. Limits: Based on commit and file evidence, not a security audit.",
+    "fills": [
+      {
+        "kind": "prose",
+        "id": "rec-b0b443c6-p",
+        "weight": 0.7,
+        "text": "Three access tiers: visitors see public data, candidates see their own pipeline, and I see everything. Google sign-in gates candidates against a per-candidate allowlist.",
+        "receipts": [
+          {
+            "type": "record",
+            "ref": "b0b443c6",
+            "url": "https://kyuri.namit.me/",
+            "date": "2026-10-14",
+            "label": "Scoped every Kyuri route and panel to the viewer's access tier (visitor, candidate or…"
+          }
+        ]
+      },
+      {
+        "kind": "commits",
+        "id": "rec-b0b443c6-c",
+        "weight": 0.4,
+        "repo": "kyuri-dashboard",
+        "items": [
+          {
+            "sha": "008461c",
+            "date": "2026-10-14",
+            "msg": "auth: scope every route and panel to the viewer: visitor, candidate, or owner"
+          },
+          {
+            "sha": "8e51eb5",
+            "date": "2026-10-14",
+            "msg": "auth: Google sign-in with a per-candidate allowlist; candidates and visitors get their own tiers"
+          }
+        ]
+      }
+    ],
+    "receipts": [
+      {
+        "type": "record",
+        "ref": "b0b443c6",
+        "url": "https://kyuri.namit.me/",
+        "date": "2026-10-14",
+        "label": "Scoped every Kyuri route and panel to the viewer's access tier (visitor, candidate or…"
+      },
+      {
+        "type": "commit",
+        "ref": "008461c",
+        "repo": "kyuri-dashboard",
+        "date": "2026-10-14",
+        "label": "008461c · auth: scope every route and panel to the viewer: visitor, candidate, or owner"
+      },
+      {
+        "type": "commit",
+        "ref": "8e51eb5",
+        "repo": "kyuri-dashboard",
+        "date": "2026-10-14",
+        "label": "8e51eb5 · auth: Google sign-in with a per-candidate allowlist; candidates and visitors get their own tiers"
+      }
+    ]
+  },
+  {
+    "id": "rec-faca7441",
+    "title": "ChekOut AI frontend: Wrote a pre-commit checklist for the ChekOut AI frontend that defines a…",
+    "tags": [
+      "evidence-record",
+      "chekout",
+      "qa",
+      "testing"
+    ],
+    "text": "Wrote a pre-commit checklist for the ChekOut AI frontend that defines a local check (TypeScript type-check plus ESLint) and a test run to do before pushing, to catch build-time errors such as untyped 'any' usage.",
+    "fills": [
+      {
+        "kind": "prose",
+        "id": "rec-faca7441-p",
+        "weight": 0.7,
+        "text": "In December 2025 I wrote ChekOut's checklist for before every push: a TypeScript type-check, ESLint and a test run, to catch build errors like untyped 'any' before the build did.",
+        "receipts": [
+          {
+            "type": "record",
+            "ref": "faca7441",
+            "url": "https://kyuri.namit.me/",
+            "date": "2025-12-22",
+            "label": "Wrote a pre-commit checklist for the ChekOut AI frontend that defines a local check…"
+          }
+        ]
+      },
+      {
+        "kind": "commits",
+        "id": "rec-faca7441-c",
+        "weight": 0.4,
+        "repo": "chekoutai-frontend",
+        "items": [
+          {
+            "sha": "3193982",
+            "date": "2025-12-22",
+            "msg": "Another attempt at fixing build run issues with test"
+          }
+        ]
+      }
+    ],
+    "receipts": [
+      {
+        "type": "record",
+        "ref": "faca7441",
+        "url": "https://kyuri.namit.me/",
+        "date": "2025-12-22",
+        "label": "Wrote a pre-commit checklist for the ChekOut AI frontend that defines a local check…"
+      },
+      {
+        "type": "commit",
+        "ref": "3193982",
+        "repo": "chekoutai-frontend",
+        "date": "2025-12-22",
+        "label": "3193982 · Another attempt at fixing build run issues with test"
+      }
+    ]
+  },
+  {
+    "id": "rec-c7c71106",
+    "title": "ChekOut AI frontend: Introduced Vitest to the ChekOut AI frontend",
+    "tags": [
+      "evidence-record",
+      "chekout",
+      "qa",
+      "testing"
+    ],
+    "text": "Introduced Vitest to the ChekOut AI frontend, adding its config and setup files, and updated the email and merchant-ID validation logic in the same commit.",
+    "fills": [
+      {
+        "kind": "prose",
+        "id": "rec-c7c71106-p",
+        "weight": 0.7,
+        "text": "In December 2025 I brought Vitest into ChekOut's frontend, with its config and setup files, and tightened the email and merchant-ID validation in the same change.",
+        "receipts": [
+          {
+            "type": "record",
+            "ref": "c7c71106",
+            "url": "https://kyuri.namit.me/",
+            "date": "2025-12-18",
+            "label": "Introduced Vitest to the ChekOut AI frontend, adding its config and setup files, and…"
+          }
+        ]
+      },
+      {
+        "kind": "commits",
+        "id": "rec-c7c71106-c",
+        "weight": 0.4,
+        "repo": "chekoutai-frontend",
+        "items": [
+          {
+            "sha": "ae9a132",
+            "date": "2025-12-18",
+            "msg": "added vitest and updated validation logic for merchant id and email"
+          },
+          {
+            "sha": "596e4eb",
+            "date": "2025-12-18",
+            "msg": "frontend tests across login, dashboard, agent creation, billing, crm, and profile"
+          }
+        ]
+      }
+    ],
+    "receipts": [
+      {
+        "type": "record",
+        "ref": "c7c71106",
+        "url": "https://kyuri.namit.me/",
+        "date": "2025-12-18",
+        "label": "Introduced Vitest to the ChekOut AI frontend, adding its config and setup files, and…"
+      },
+      {
+        "type": "commit",
+        "ref": "ae9a132",
+        "repo": "chekoutai-frontend",
+        "date": "2025-12-18",
+        "label": "ae9a132 · added vitest and updated validation logic for merchant id and email"
+      },
+      {
+        "type": "commit",
+        "ref": "596e4eb",
+        "repo": "chekoutai-frontend",
+        "date": "2025-12-18",
+        "label": "596e4eb · frontend tests across login, dashboard, agent creation, billing, crm, and profile"
+      }
+    ]
+  },
+  {
+    "id": "rec-8ca0deab",
+    "title": "ChekOut AI company site: Connected a newsletter signup on the ChekOut AI company site to n8n",
+    "tags": [
+      "evidence-record",
+      "chekout-site",
+      "frontend"
+    ],
+    "text": "Connected a newsletter signup on the ChekOut AI company site to n8n.",
+    "fills": [
+      {
+        "kind": "prose",
+        "id": "rec-8ca0deab-p",
+        "weight": 0.7,
+        "text": "In December 2025 I connected the newsletter signup on ChekOut's company site to n8n.",
+        "receipts": [
+          {
+            "type": "record",
+            "ref": "8ca0deab",
+            "url": "https://kyuri.namit.me/",
+            "date": "2025-12-09",
+            "label": "Connected a newsletter signup on the ChekOut AI company site to…"
+          }
+        ]
+      },
+      {
+        "kind": "commits",
+        "id": "rec-8ca0deab-c",
+        "weight": 0.4,
+        "repo": "sentry-skin-website",
+        "items": [
+          {
+            "sha": "201332d",
+            "date": "2025-12-09",
+            "msg": "Newsletter n8n connection established"
+          }
+        ]
+      }
+    ],
+    "receipts": [
+      {
+        "type": "record",
+        "ref": "8ca0deab",
+        "url": "https://kyuri.namit.me/",
+        "date": "2025-12-09",
+        "label": "Connected a newsletter signup on the ChekOut AI company site to…"
+      },
+      {
+        "type": "commit",
+        "ref": "201332d",
+        "repo": "sentry-skin-website",
+        "date": "2025-12-09",
+        "label": "201332d · Newsletter n8n connection established"
+      }
+    ]
+  },
+  {
+    "id": "rec-868464ba",
+    "title": "ChekOut AI frontend: Wrote an architecture document for the ChekOut AI frontend explaining its…",
+    "tags": [
+      "evidence-record",
+      "chekout",
+      "infra",
+      "devops",
+      "deployment"
+    ],
+    "text": "Wrote an architecture document for the ChekOut AI frontend explaining its multi-stage Docker build (deps, builder, runner stages) and Next.js standalone output for Cloud Run.",
+    "fills": [
+      {
+        "kind": "prose",
+        "id": "rec-868464ba-p",
+        "weight": 0.7,
+        "text": "In November 2025 I documented how ChekOut's frontend ships: a multi-stage Docker build (deps, builder, runner) and Next.js standalone output for Cloud Run.",
+        "receipts": [
+          {
+            "type": "record",
+            "ref": "868464ba",
+            "url": "https://kyuri.namit.me/",
+            "date": "2025-11-24",
+            "label": "Wrote an architecture document for the ChekOut AI frontend explaining its multi-stage…"
+          }
+        ]
+      },
+      {
+        "kind": "commits",
+        "id": "rec-868464ba-c",
+        "weight": 0.4,
+        "repo": "chekoutai-frontend",
+        "items": [
+          {
+            "sha": "64d2ed6",
+            "date": "2025-11-24",
+            "msg": "cloud run + firebase deployment"
+          }
+        ]
+      }
+    ],
+    "receipts": [
+      {
+        "type": "record",
+        "ref": "868464ba",
+        "url": "https://kyuri.namit.me/",
+        "date": "2025-11-24",
+        "label": "Wrote an architecture document for the ChekOut AI frontend explaining its multi-stage…"
+      },
+      {
+        "type": "commit",
+        "ref": "64d2ed6",
+        "repo": "chekoutai-frontend",
+        "date": "2025-11-24",
+        "label": "64d2ed6 · cloud run + firebase deployment"
+      }
+    ]
+  },
+  {
+    "id": "rec-1b47815a",
+    "title": "ChekOut AI frontend: Added PowerShell scripts for the ChekOut AI frontend: deploy",
+    "tags": [
+      "evidence-record",
+      "chekout",
+      "infra",
+      "devops",
+      "deployment"
+    ],
+    "text": "Added PowerShell scripts for the ChekOut AI frontend: deploy.ps1 to run the deployment and pre-deploy-check.ps1 to verify the service-account file, environment variables, gcloud configuration, enabled APIs and Firebase configuration before deploying.",
+    "fills": [
+      {
+        "kind": "prose",
+        "id": "rec-1b47815a-p",
+        "weight": 0.7,
+        "text": "I added deploy scripts for ChekOut's frontend: one deploys, and a pre-deploy check first verifies the service account, environment variables, gcloud setup, enabled APIs and Firebase config.",
+        "receipts": [
+          {
+            "type": "record",
+            "ref": "1b47815a",
+            "url": "https://kyuri.namit.me/",
+            "date": "2025-11-24",
+            "label": "Added PowerShell scripts for the ChekOut AI frontend: deploy.ps1 to run the deployment…"
+          }
+        ]
+      },
+      {
+        "kind": "commits",
+        "id": "rec-1b47815a-c",
+        "weight": 0.4,
+        "repo": "chekoutai-frontend",
+        "items": [
+          {
+            "sha": "64d2ed6",
+            "date": "2025-11-24",
+            "msg": "cloud run + firebase deployment"
+          }
+        ]
+      }
+    ],
+    "receipts": [
+      {
+        "type": "record",
+        "ref": "1b47815a",
+        "url": "https://kyuri.namit.me/",
+        "date": "2025-11-24",
+        "label": "Added PowerShell scripts for the ChekOut AI frontend: deploy.ps1 to run the deployment…"
+      },
+      {
+        "type": "commit",
+        "ref": "64d2ed6",
+        "repo": "chekoutai-frontend",
+        "date": "2025-11-24",
+        "label": "64d2ed6 · cloud run + firebase deployment"
+      }
+    ]
+  },
+  {
+    "id": "rec-df2abd95",
+    "title": "ChekOut AI frontend: For the ChekOut AI frontend",
+    "tags": [
+      "evidence-record",
+      "chekout",
+      "infra",
+      "devops",
+      "deployment"
+    ],
+    "text": "For the ChekOut AI frontend, Namit set up a deployment path in which a Cloud Build config (cloudbuild.yaml) builds a Docker image and deploys it to a Cloud Run service, with Firebase Hosting rewriting requests to that service.",
+    "fills": [
+      {
+        "kind": "prose",
+        "id": "rec-df2abd95-p",
+        "weight": 0.7,
+        "text": "In November 2025 I set up how ChekOut's frontend deploys: Cloud Build builds a Docker image and deploys it to Cloud Run, and Firebase Hosting routes requests to that service.",
+        "receipts": [
+          {
+            "type": "record",
+            "ref": "df2abd95",
+            "url": "https://kyuri.namit.me/",
+            "date": "2025-11-24",
+            "label": "For the ChekOut AI frontend, Namit set up a deployment path in which a Cloud Build config…"
+          }
+        ]
+      },
+      {
+        "kind": "commits",
+        "id": "rec-df2abd95-c",
+        "weight": 0.4,
+        "repo": "chekoutai-frontend",
+        "items": [
+          {
+            "sha": "64d2ed6",
+            "date": "2025-11-24",
+            "msg": "cloud run + firebase deployment"
+          }
+        ]
+      }
+    ],
+    "receipts": [
+      {
+        "type": "record",
+        "ref": "df2abd95",
+        "url": "https://kyuri.namit.me/",
+        "date": "2025-11-24",
+        "label": "For the ChekOut AI frontend, Namit set up a deployment path in which a Cloud Build config…"
+      },
+      {
+        "type": "commit",
+        "ref": "64d2ed6",
+        "repo": "chekoutai-frontend",
+        "date": "2025-11-24",
+        "label": "64d2ed6 · cloud run + firebase deployment"
+      }
+    ]
+  },
+  {
+    "id": "rec-fc5b8ee7",
+    "title": "ChekOut AI company site: Built an interactive 3D hair-follicle scene and 3D product models (bottle",
+    "tags": [
+      "evidence-record",
+      "chekout-site",
+      "frontend"
+    ],
+    "text": "Built an interactive 3D hair-follicle scene and 3D product models (bottle, dispenser, lipstick) into the early ChekOut AI company site. Limits: These components were later moved to an archive folder and are not in the production build.",
+    "fills": [
+      {
+        "kind": "prose",
+        "id": "rec-fc5b8ee7-p",
+        "weight": 0.7,
+        "text": "On ChekOut's early company site I built an interactive 3D hair-follicle scene and 3D product models (bottle, dispenser, lipstick). They were later archived out of the production build.",
+        "receipts": [
+          {
+            "type": "record",
+            "ref": "fc5b8ee7",
+            "url": "https://kyuri.namit.me/",
+            "date": "2025-11-06",
+            "label": "Built an interactive 3D hair-follicle scene and 3D product models (bottle, dispenser,…"
+          }
+        ]
+      },
+      {
+        "kind": "commits",
+        "id": "rec-fc5b8ee7-c",
+        "weight": 0.4,
+        "repo": "sentry-skin-website",
+        "items": [
+          {
+            "sha": "fd13eec",
+            "date": "2025-03-24",
+            "msg": "Interactive hair scene"
+          },
+          {
+            "sha": "c010f39",
+            "date": "2024-10-24",
+            "msg": "Added bottle and lipstick 3d models"
+          },
+          {
+            "sha": "32ca1ff",
+            "date": "2025-11-06",
+            "msg": "performance optimizations and smooth scroll"
+          }
+        ]
+      }
+    ],
+    "receipts": [
+      {
+        "type": "record",
+        "ref": "fc5b8ee7",
+        "url": "https://kyuri.namit.me/",
+        "date": "2025-11-06",
+        "label": "Built an interactive 3D hair-follicle scene and 3D product models (bottle, dispenser,…"
+      },
+      {
+        "type": "commit",
+        "ref": "fd13eec",
+        "repo": "sentry-skin-website",
+        "date": "2025-03-24",
+        "label": "fd13eec · Interactive hair scene"
+      },
+      {
+        "type": "commit",
+        "ref": "c010f39",
+        "repo": "sentry-skin-website",
+        "date": "2024-10-24",
+        "label": "c010f39 · Added bottle and lipstick 3d models"
+      },
+      {
+        "type": "commit",
+        "ref": "32ca1ff",
+        "repo": "sentry-skin-website",
+        "date": "2025-11-06",
+        "label": "32ca1ff · performance optimizations and smooth scroll"
+      }
+    ]
+  },
+  {
+    "id": "rec-56ba4fce",
+    "title": "ChekOut AI company site: Made a series of mobile performance and lazy-loading changes to the ChekOut…",
+    "tags": [
+      "evidence-record",
+      "chekout-site",
+      "frontend"
+    ],
+    "text": "Made a series of mobile performance and lazy-loading changes to the ChekOut AI company site and adjusted its Vite bundling configuration.",
+    "fills": [
+      {
+        "kind": "prose",
+        "id": "rec-56ba4fce-p",
+        "weight": 0.7,
+        "text": "In November 2025 I made ChekOut's company site lighter on mobile: lazy loading, performance fixes and a Vite bundling change.",
+        "receipts": [
+          {
+            "type": "record",
+            "ref": "56ba4fce",
+            "url": "https://kyuri.namit.me/",
+            "date": "2025-11-06",
+            "label": "Made a series of mobile performance and lazy-loading changes to the ChekOut AI company…"
+          }
+        ]
+      },
+      {
+        "kind": "commits",
+        "id": "rec-56ba4fce-c",
+        "weight": 0.4,
+        "repo": "sentry-skin-website",
+        "items": [
+          {
+            "sha": "1958c3e",
+            "date": "2025-11-06",
+            "msg": "mobile performance optimizations"
+          },
+          {
+            "sha": "87ed3af",
+            "date": "2025-11-06",
+            "msg": "pricing card button update and lazy loading"
+          },
+          {
+            "sha": "270fe00",
+            "date": "2025-11-06",
+            "msg": "react vendor bundling fix to vite config"
+          },
+          {
+            "sha": "9a87722",
+            "date": "2025-11-06",
+            "msg": "manual chunking removed - preview works"
+          }
+        ]
+      }
+    ],
+    "receipts": [
+      {
+        "type": "record",
+        "ref": "56ba4fce",
+        "url": "https://kyuri.namit.me/",
+        "date": "2025-11-06",
+        "label": "Made a series of mobile performance and lazy-loading changes to the ChekOut AI company…"
+      },
+      {
+        "type": "commit",
+        "ref": "1958c3e",
+        "repo": "sentry-skin-website",
+        "date": "2025-11-06",
+        "label": "1958c3e · mobile performance optimizations"
+      },
+      {
+        "type": "commit",
+        "ref": "87ed3af",
+        "repo": "sentry-skin-website",
+        "date": "2025-11-06",
+        "label": "87ed3af · pricing card button update and lazy loading"
+      },
+      {
+        "type": "commit",
+        "ref": "270fe00",
+        "repo": "sentry-skin-website",
+        "date": "2025-11-06",
+        "label": "270fe00 · react vendor bundling fix to vite config"
+      },
+      {
+        "type": "commit",
+        "ref": "9a87722",
+        "repo": "sentry-skin-website",
+        "date": "2025-11-06",
+        "label": "9a87722 · manual chunking removed - preview works"
+      }
+    ]
+  },
+  {
+    "id": "rec-99f2b3cd",
+    "title": "ChekOut AI company site: Replaced the ChekOut AI company site's custom smooth-scroll implementations…",
+    "tags": [
+      "evidence-record",
+      "chekout-site",
+      "frontend"
+    ],
+    "text": "Replaced the ChekOut AI company site's custom smooth-scroll implementations with the Lenis library and archived the old scroll helpers.",
+    "fills": [
+      {
+        "kind": "prose",
+        "id": "rec-99f2b3cd-p",
+        "weight": 0.7,
+        "text": "I replaced the custom smooth-scroll code on ChekOut's company site with the Lenis library and archived the old helpers.",
+        "receipts": [
+          {
+            "type": "record",
+            "ref": "99f2b3cd",
+            "url": "https://kyuri.namit.me/",
+            "date": "2025-11-06",
+            "label": "Replaced the ChekOut AI company site's custom smooth-scroll implementations with the…"
+          }
+        ]
+      },
+      {
+        "kind": "commits",
+        "id": "rec-99f2b3cd-c",
+        "weight": 0.4,
+        "repo": "sentry-skin-website",
+        "items": [
+          {
+            "sha": "32ca1ff",
+            "date": "2025-11-06",
+            "msg": "performance optimizations and smooth scroll"
+          }
+        ]
+      }
+    ],
+    "receipts": [
+      {
+        "type": "record",
+        "ref": "99f2b3cd",
+        "url": "https://kyuri.namit.me/",
+        "date": "2025-11-06",
+        "label": "Replaced the ChekOut AI company site's custom smooth-scroll implementations with the…"
+      },
+      {
+        "type": "commit",
+        "ref": "32ca1ff",
+        "repo": "sentry-skin-website",
+        "date": "2025-11-06",
+        "label": "32ca1ff · performance optimizations and smooth scroll"
+      }
+    ]
+  },
+  {
+    "id": "rec-1e89a20c",
+    "title": "ChekOut AI company site: For the ChekOut AI company site",
+    "tags": [
+      "evidence-record",
+      "chekout-site",
+      "frontend"
+    ],
+    "text": "For the ChekOut AI company site, Namit wrote an archive README documenting the unused 3D, audio and shader components and the steps to restore them, after moving them out of the production build for performance.",
+    "fills": [
+      {
+        "kind": "prose",
+        "id": "rec-1e89a20c-p",
+        "weight": 0.7,
+        "text": "When I moved the unused 3D, audio and shader components out of ChekOut's site for performance, I wrote down how to bring each one back.",
+        "receipts": [
+          {
+            "type": "record",
+            "ref": "1e89a20c",
+            "url": "https://kyuri.namit.me/",
+            "date": "2025-11-06",
+            "label": "For the ChekOut AI company site, Namit wrote an archive README documenting the unused 3D,…"
+          }
+        ]
+      },
+      {
+        "kind": "commits",
+        "id": "rec-1e89a20c-c",
+        "weight": 0.4,
+        "repo": "sentry-skin-website",
+        "items": [
+          {
+            "sha": "32ca1ff",
+            "date": "2025-11-06",
+            "msg": "performance optimizations and smooth scroll"
+          }
+        ]
+      }
+    ],
+    "receipts": [
+      {
+        "type": "record",
+        "ref": "1e89a20c",
+        "url": "https://kyuri.namit.me/",
+        "date": "2025-11-06",
+        "label": "For the ChekOut AI company site, Namit wrote an archive README documenting the unused 3D,…"
+      },
+      {
+        "type": "commit",
+        "ref": "32ca1ff",
+        "repo": "sentry-skin-website",
+        "date": "2025-11-06",
+        "label": "32ca1ff · performance optimizations and smooth scroll"
+      }
+    ]
+  },
+  {
+    "id": "rec-bb9eabcf",
+    "title": "ChekOut AI company site: Added a Trade School page with routing and a website toggle to the ChekOut…",
+    "tags": [
+      "evidence-record",
+      "chekout-site",
+      "frontend"
+    ],
+    "text": "Added a Trade School page with routing and a website toggle to the ChekOut AI company site, along with a separate trade school chat API route.",
+    "fills": [
+      {
+        "kind": "prose",
+        "id": "rec-bb9eabcf-p",
+        "weight": 0.7,
+        "text": "In October 2025 I added a Trade School vertical to ChekOut's company site: a page, routing, a site-wide product toggle and its own chat route.",
+        "receipts": [
+          {
+            "type": "record",
+            "ref": "bb9eabcf",
+            "url": "https://kyuri.namit.me/",
+            "date": "2025-10-31",
+            "label": "Added a Trade School page with routing and a website toggle to the ChekOut AI company…"
+          }
+        ]
+      },
+      {
+        "kind": "commits",
+        "id": "rec-bb9eabcf-c",
+        "weight": 0.4,
+        "repo": "sentry-skin-website",
+        "items": [
+          {
+            "sha": "9045ebc",
+            "date": "2025-10-29",
+            "msg": "Trade School website toggle added"
+          },
+          {
+            "sha": "c455e47",
+            "date": "2025-10-31",
+            "msg": "New client testimonial + Trade School page routing"
+          },
+          {
+            "sha": "56c6c5c",
+            "date": "2025-10-29",
+            "msg": "fix to trade school agent"
+          }
+        ]
+      }
+    ],
+    "receipts": [
+      {
+        "type": "record",
+        "ref": "bb9eabcf",
+        "url": "https://kyuri.namit.me/",
+        "date": "2025-10-31",
+        "label": "Added a Trade School page with routing and a website toggle to the ChekOut AI company…"
+      },
+      {
+        "type": "commit",
+        "ref": "9045ebc",
+        "repo": "sentry-skin-website",
+        "date": "2025-10-29",
+        "label": "9045ebc · Trade School website toggle added"
+      },
+      {
+        "type": "commit",
+        "ref": "c455e47",
+        "repo": "sentry-skin-website",
+        "date": "2025-10-31",
+        "label": "c455e47 · New client testimonial + Trade School page routing"
+      },
+      {
+        "type": "commit",
+        "ref": "56c6c5c",
+        "repo": "sentry-skin-website",
+        "date": "2025-10-29",
+        "label": "56c6c5c · fix to trade school agent"
+      }
+    ]
+  },
+  {
+    "id": "rec-f478b001",
+    "title": "ChekOut AI company site: Added a sitemap to the ChekOut AI company site for SEO",
+    "tags": [
+      "evidence-record",
+      "chekout-site",
+      "frontend"
+    ],
+    "text": "Added a sitemap to the ChekOut AI company site for SEO.",
+    "fills": [
+      {
+        "kind": "prose",
+        "id": "rec-f478b001-p",
+        "weight": 0.7,
+        "text": "I added a sitemap to ChekOut's company site for SEO.",
+        "receipts": [
+          {
+            "type": "record",
+            "ref": "f478b001",
+            "url": "https://kyuri.namit.me/",
+            "date": "2025-10-31",
+            "label": "Added a sitemap to the ChekOut AI company site for…"
+          }
+        ]
+      },
+      {
+        "kind": "commits",
+        "id": "rec-f478b001-c",
+        "weight": 0.4,
+        "repo": "sentry-skin-website",
+        "items": [
+          {
+            "sha": "7d1414b",
+            "date": "2025-10-31",
+            "msg": "Added sitemap for SEO tracking"
+          }
+        ]
+      }
+    ],
+    "receipts": [
+      {
+        "type": "record",
+        "ref": "f478b001",
+        "url": "https://kyuri.namit.me/",
+        "date": "2025-10-31",
+        "label": "Added a sitemap to the ChekOut AI company site for…"
+      },
+      {
+        "type": "commit",
+        "ref": "7d1414b",
+        "repo": "sentry-skin-website",
+        "date": "2025-10-31",
+        "label": "7d1414b · Added sitemap for SEO tracking"
+      }
+    ]
+  },
+  {
+    "id": "rec-339f2c59",
+    "title": "ChekOut AI company site: Wrote integration documentation for EyePop",
+    "tags": [
+      "evidence-record",
+      "chekout-site",
+      "ai-agent",
+      "ai"
+    ],
+    "text": "Wrote integration documentation for EyePop.ai computer-vision skin analysis on the ChekOut AI company site, covering image upload, camera capture and recommendations.",
+    "fills": [
+      {
+        "kind": "prose",
+        "id": "rec-339f2c59-p",
+        "weight": 0.7,
+        "text": "In September 2025 I documented the EyePop.ai skin-analysis integration on ChekOut's site: image upload, camera capture and recommendations.",
+        "receipts": [
+          {
+            "type": "record",
+            "ref": "339f2c59",
+            "url": "https://kyuri.namit.me/",
+            "date": "2025-09-15",
+            "label": "Wrote integration documentation for EyePop.ai computer-vision skin analysis on the…"
+          }
+        ]
+      },
+      {
+        "kind": "commits",
+        "id": "rec-339f2c59-c",
+        "weight": 0.4,
+        "repo": "sentry-skin-website",
+        "items": [
+          {
+            "sha": "61530e3",
+            "date": "2025-09-15",
+            "msg": "ChekOut AI style quick update"
+          }
+        ]
+      }
+    ],
+    "receipts": [
+      {
+        "type": "record",
+        "ref": "339f2c59",
+        "url": "https://kyuri.namit.me/",
+        "date": "2025-09-15",
+        "label": "Wrote integration documentation for EyePop.ai computer-vision skin analysis on the…"
+      },
+      {
+        "type": "commit",
+        "ref": "61530e3",
+        "repo": "sentry-skin-website",
+        "date": "2025-09-15",
+        "label": "61530e3 · ChekOut AI style quick update"
+      }
+    ]
+  },
+  {
+    "id": "rec-de429446",
+    "title": "ChekOut AI company site: Worked on streaming assistant responses in the ChekOut AI company site",
+    "tags": [
+      "evidence-record",
+      "chekout-site",
+      "frontend"
+    ],
+    "text": "Worked on streaming assistant responses in the ChekOut AI company site, with edits to both the GCP side and the frontend. Limits: This was exploratory work; the streaming version was later rolled back in favour of the original implementation.",
+    "fills": [
+      {
+        "kind": "prose",
+        "id": "rec-de429446-p",
+        "weight": 0.7,
+        "text": "In August 2025 I tried streaming the assistant's replies on ChekOut's site, across the GCP backend and the frontend, then rolled back to the original version.",
+        "receipts": [
+          {
+            "type": "record",
+            "ref": "de429446",
+            "url": "https://kyuri.namit.me/",
+            "date": "2025-08-07",
+            "label": "Worked on streaming assistant responses in the ChekOut AI company site, with edits to…"
+          }
+        ]
+      },
+      {
+        "kind": "commits",
+        "id": "rec-de429446-c",
+        "weight": 0.4,
+        "repo": "sentry-skin-website",
+        "items": [
+          {
+            "sha": "6b0cf27",
+            "date": "2025-08-07",
+            "msg": "streaming edits in gcp and frontend"
+          },
+          {
+            "sha": "922de7e",
+            "date": "2025-08-07",
+            "msg": "hopefully streaming works"
+          },
+          {
+            "sha": "389bd37",
+            "date": "2025-08-07",
+            "msg": "restoring original chat functionality"
+          }
+        ]
+      }
+    ],
+    "receipts": [
+      {
+        "type": "record",
+        "ref": "de429446",
+        "url": "https://kyuri.namit.me/",
+        "date": "2025-08-07",
+        "label": "Worked on streaming assistant responses in the ChekOut AI company site, with edits to…"
+      },
+      {
+        "type": "commit",
+        "ref": "6b0cf27",
+        "repo": "sentry-skin-website",
+        "date": "2025-08-07",
+        "label": "6b0cf27 · streaming edits in gcp and frontend"
+      },
+      {
+        "type": "commit",
+        "ref": "922de7e",
+        "repo": "sentry-skin-website",
+        "date": "2025-08-07",
+        "label": "922de7e · hopefully streaming works"
+      },
+      {
+        "type": "commit",
+        "ref": "389bd37",
+        "repo": "sentry-skin-website",
+        "date": "2025-08-07",
+        "label": "389bd37 · restoring original chat functionality"
+      }
+    ]
+  },
+  {
+    "id": "rec-bb6dd897",
+    "title": "ChekOut AI company site: Added a Vercel API route to the ChekOut AI company site that handles CORS…",
+    "tags": [
+      "evidence-record",
+      "chekout-site",
+      "ai-agent",
+      "ai"
+    ],
+    "text": "Added a Vercel API route to the ChekOut AI company site that handles CORS and forwards chat requests to a Google Cloud Function, and wrote a setup document for it.",
+    "fills": [
+      {
+        "kind": "prose",
+        "id": "rec-bb6dd897-p",
+        "weight": 0.7,
+        "text": "I added a Vercel API route that handles CORS and forwards chat requests from ChekOut's site to a Google Cloud Function, and wrote its setup doc.",
+        "receipts": [
+          {
+            "type": "record",
+            "ref": "bb6dd897",
+            "url": "https://kyuri.namit.me/",
+            "date": "2025-08-07",
+            "label": "Added a Vercel API route to the ChekOut AI company site that handles CORS and forwards…"
+          }
+        ]
+      },
+      {
+        "kind": "commits",
+        "id": "rec-bb6dd897-c",
+        "weight": 0.4,
+        "repo": "sentry-skin-website",
+        "items": [
+          {
+            "sha": "cac5d61",
+            "date": "2025-07-01",
+            "msg": "google auth is in place need iam permissions probs"
+          },
+          {
+            "sha": "389bd37",
+            "date": "2025-08-07",
+            "msg": "restoring original chat functionality"
+          }
+        ]
+      }
+    ],
+    "receipts": [
+      {
+        "type": "record",
+        "ref": "bb6dd897",
+        "url": "https://kyuri.namit.me/",
+        "date": "2025-08-07",
+        "label": "Added a Vercel API route to the ChekOut AI company site that handles CORS and forwards…"
+      },
+      {
+        "type": "commit",
+        "ref": "cac5d61",
+        "repo": "sentry-skin-website",
+        "date": "2025-07-01",
+        "label": "cac5d61 · google auth is in place need iam permissions probs"
+      },
+      {
+        "type": "commit",
+        "ref": "389bd37",
+        "repo": "sentry-skin-website",
+        "date": "2025-08-07",
+        "label": "389bd37 · restoring original chat functionality"
+      }
+    ]
+  },
+  {
+    "id": "rec-bb34f79b",
+    "title": "ChekOut AI company site: Added Google Analytics 4 tracking to the ChekOut AI company site and wrote a…",
+    "tags": [
+      "evidence-record",
+      "chekout-site",
+      "backend",
+      "data"
+    ],
+    "text": "Added Google Analytics 4 tracking to the ChekOut AI company site and wrote a setup guide covering tracked events such as page views, scroll depth, button clicks and form interactions. Limits: The initial implementation was exploratory; production tracking was not confirmed.",
+    "fills": [
+      {
+        "kind": "prose",
+        "id": "rec-bb34f79b-p",
+        "weight": 0.7,
+        "text": "I added Google Analytics 4 to ChekOut's company site and wrote a setup guide for its events: page views, scroll depth, button clicks and form interactions. It was exploratory; production tracking wasn't confirmed.",
+        "receipts": [
+          {
+            "type": "record",
+            "ref": "bb34f79b",
+            "url": "https://kyuri.namit.me/",
+            "date": "2025-07-03",
+            "label": "Added Google Analytics 4 tracking to the ChekOut AI company site and wrote a setup guide…"
+          }
+        ]
+      },
+      {
+        "kind": "commits",
+        "id": "rec-bb34f79b-c",
+        "weight": 0.4,
+        "repo": "sentry-skin-website",
+        "items": [
+          {
+            "sha": "9f5516c",
+            "date": "2025-07-03",
+            "msg": "Analytics and pricing section update"
+          }
+        ]
+      }
+    ],
+    "receipts": [
+      {
+        "type": "record",
+        "ref": "bb34f79b",
+        "url": "https://kyuri.namit.me/",
+        "date": "2025-07-03",
+        "label": "Added Google Analytics 4 tracking to the ChekOut AI company site and wrote a setup guide…"
+      },
+      {
+        "type": "commit",
+        "ref": "9f5516c",
+        "repo": "sentry-skin-website",
+        "date": "2025-07-03",
+        "label": "9f5516c · Analytics and pricing section update"
+      }
+    ]
+  },
+  {
+    "id": "rec-d70f6969",
+    "title": "ChekOut AI company site: Built audio assistant features into the early ChekOut AI company site",
+    "tags": [
+      "evidence-record",
+      "chekout-site",
+      "ai-agent",
+      "ai"
+    ],
+    "text": "Built audio assistant features into the early ChekOut AI company site, where the assistant spoke and its responses drove movement of a 3D sphere. Limits: These components were later archived and are not in the production build.",
+    "fills": [
+      {
+        "kind": "prose",
+        "id": "rec-d70f6969-p",
+        "weight": 0.7,
+        "text": "In March 2025 I built a voice assistant into ChekOut's early company site: it spoke its answers, and its responses moved a 3D sphere. It was later archived.",
+        "receipts": [
+          {
+            "type": "record",
+            "ref": "d70f6969",
+            "url": "https://kyuri.namit.me/",
+            "date": "2025-03-10",
+            "label": "Built audio assistant features into the early ChekOut AI company site, where the…"
+          }
+        ]
+      },
+      {
+        "kind": "commits",
+        "id": "rec-d70f6969-c",
+        "weight": 0.4,
+        "repo": "sentry-skin-website",
+        "items": [
+          {
+            "sha": "85c0692",
+            "date": "2025-03-10",
+            "msg": "Audio assistants are possible!"
+          },
+          {
+            "sha": "fe8c7b1",
+            "date": "2025-03-10",
+            "msg": "Sentry skin assistant speaks!"
+          },
+          {
+            "sha": "47a1cd0",
+            "date": "2025-03-10",
+            "msg": "Assistant response makes sphere move!"
+          }
+        ]
+      }
+    ],
+    "receipts": [
+      {
+        "type": "record",
+        "ref": "d70f6969",
+        "url": "https://kyuri.namit.me/",
+        "date": "2025-03-10",
+        "label": "Built audio assistant features into the early ChekOut AI company site, where the…"
+      },
+      {
+        "type": "commit",
+        "ref": "85c0692",
+        "repo": "sentry-skin-website",
+        "date": "2025-03-10",
+        "label": "85c0692 · Audio assistants are possible!"
+      },
+      {
+        "type": "commit",
+        "ref": "fe8c7b1",
+        "repo": "sentry-skin-website",
+        "date": "2025-03-10",
+        "label": "fe8c7b1 · Sentry skin assistant speaks!"
+      },
+      {
+        "type": "commit",
+        "ref": "47a1cd0",
+        "repo": "sentry-skin-website",
+        "date": "2025-03-10",
+        "label": "47a1cd0 · Assistant response makes sphere move!"
+      }
+    ]
+  },
+  {
+    "id": "my-influency",
+    "title": "My Influency: one timeline instead of five tabs",
+    "tags": [
+      "influencer-marketing",
+      "ux-research",
+      "b2b",
+      "dashboard",
+      "information-architecture",
+      "usability-testing"
+    ],
+    "text": "On My Influency, task analysis with 12 small business owners showed five status tabs forced tab-hopping and hid where each influencer stood. One timeline replaced them: 28% fewer clicks, 1m 47s saved per task, and 95% task success across 8 core tasks.",
+    "fills": [
+      {
+        "kind": "kpi",
+        "id": "u-im-clicks",
+        "weight": 0.7,
+        "value": "28%",
+        "label": "fewer clicks to find an influencer's status",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "src/data/influencerMarketingData.js",
+            "repo": "Juniper",
+            "date": "2026-10-26",
+            "label": "Influencer marketing case study"
+          }
+        ]
+      },
+      {
+        "kind": "kpi",
+        "id": "u-im-time",
+        "weight": 0.5,
+        "value": "1m 47s",
+        "label": "saved per task once five tabs became one timeline",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "src/data/influencerMarketingData.js",
+            "repo": "Juniper",
+            "date": "2026-10-26",
+            "label": "Influencer marketing case study"
+          }
+        ]
+      },
+      {
+        "kind": "kpi",
+        "id": "u-im-success",
+        "weight": 0.5,
+        "value": "95%",
+        "label": "task success across 8 core tasks",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "src/data/influencerMarketingData.js",
+            "repo": "Juniper",
+            "date": "2026-10-26",
+            "label": "Influencer marketing case study"
+          }
+        ]
+      },
+      {
+        "kind": "media",
+        "id": "u-im-laptop",
+        "weight": 0.6,
+        "media": "image",
+        "src": "assets/other/influencer-laptop.webp",
+        "aspect": 1.8161,
+        "alt": "My Influency campaign timeline on a laptop",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "assets/other/influencer-laptop.webp",
+            "repo": "Juniper",
+            "label": "public/images/Project Cover Photos/MI on Laptop.png"
+          }
+        ],
+        "caption": "Five status tabs became this one timeline.",
+        "explain": "The campaign timeline that replaced five status tabs. Business owners can see where every influencer stands in one row instead of hopping between tabs.",
+        "kpi": "u-im-clicks"
+      },
+      {
+        "kind": "quote",
+        "id": "u-im-quote",
+        "weight": 0.5,
+        "text": "I don't have to text my influencers anymore to ask \"hey, where are you at?\" I just check the timeline.",
+        "who": "Small business owner, usability testing",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "src/data/influencerMarketingData.js",
+            "repo": "Juniper",
+            "date": "2026-10-26",
+            "label": "Influencer marketing case study"
+          }
+        ]
+      }
+    ],
+    "receipts": [
+      {
+        "type": "asset",
+        "ref": "src/data/influencerMarketingData.js",
+        "repo": "Juniper",
+        "date": "2026-10-26",
+        "label": "Influencer marketing case study"
+      },
+      {
+        "type": "asset",
+        "ref": "assets/other/influencer-laptop.webp",
+        "repo": "Juniper",
+        "label": "public/images/Project Cover Photos/MI on Laptop.png"
+      }
+    ]
+  },
+  {
+    "id": "manage-farms",
+    "title": "Manage Small Farms: spatial crop management",
+    "tags": [
+      "manage-farms",
+      "mobile",
+      "ux-research",
+      "usability",
+      "sus",
+      "accessibility"
+    ],
+    "text": "Manage Small Farms (Aug to Dec 2022) moved a farm-operations app for small, diverse-crop farms from lists to a spatial map. In testing, SUS rose from 52 to 70, tasks got 40% faster, and success rose from 50% to 64%.",
+    "fills": [
+      {
+        "kind": "kpi",
+        "id": "u-mf-sus",
+        "weight": 0.6,
+        "value": "70",
+        "label": "SUS score, up from 52",
+        "baseline": "52",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "src/data/manageFarmsData.js",
+            "repo": "Juniper",
+            "date": "2026-10-26",
+            "label": "Manage Small Farms case study"
+          }
+        ],
+        "period": "Aug to Dec 2022"
+      },
+      {
+        "kind": "kpi",
+        "id": "u-mf-fast",
+        "weight": 0.5,
+        "value": "40%",
+        "label": "faster tasks in testing",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "src/data/manageFarmsData.js",
+            "repo": "Juniper",
+            "date": "2026-10-26",
+            "label": "Manage Small Farms case study"
+          }
+        ]
+      },
+      {
+        "kind": "kpi",
+        "id": "u-mf-success",
+        "weight": 0.4,
+        "value": "64%",
+        "label": "task success, up from 50%",
+        "baseline": "50%",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "src/data/manageFarmsData.js",
+            "repo": "Juniper",
+            "date": "2026-10-26",
+            "label": "Manage Small Farms case study"
+          }
+        ]
+      },
+      {
+        "kind": "media",
+        "id": "u-mf-final",
+        "weight": 0.5,
+        "media": "image",
+        "src": "assets/other/farms-final.webp",
+        "aspect": 2.6621,
+        "alt": "Five screens from the Manage Small Farms prototype",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "assets/other/farms-final.webp",
+            "repo": "Juniper",
+            "label": "public/images/Case Studies/JD/Final prototype combined.png"
+          }
+        ],
+        "caption": "Lists became a spatial map of the farm.",
+        "explain": "Five screens from the tested prototype: a status feed, field rows, a weekly work plan and two analysis views. The redesign lays the farm out spatially instead of in lists.",
+        "kpi": "u-mf-sus"
+      }
+    ],
+    "receipts": [
+      {
+        "type": "asset",
+        "ref": "src/data/manageFarmsData.js",
+        "repo": "Juniper",
+        "date": "2026-10-26",
+        "label": "Manage Small Farms case study"
+      },
+      {
+        "type": "asset",
+        "ref": "assets/other/farms-final.webp",
+        "repo": "Juniper",
+        "label": "public/images/Case Studies/JD/Final prototype combined.png"
+      }
+    ]
+  },
+  {
+    "id": "clutch",
+    "title": "Clutch: post-game analytics for padel",
+    "tags": [
+      "clutch",
+      "mobile",
+      "data-viz",
+      "sports",
+      "interview-exercise",
+      "product-design"
+    ],
+    "text": "A head-of-design interview exercise: a data-dense post-game experience for competitive padel players filmed by AI court cameras, balancing analytical depth with something worth sharing in the group chat. I did not get the role.",
+    "fills": [
+      {
+        "kind": "media",
+        "id": "u-clutch",
+        "weight": 0.6,
+        "media": "image",
+        "src": "assets/other/clutch-overview.webp",
+        "aspect": 0.4618,
+        "alt": "Clutch match overview: time in play, longest rally, average rally, winners and errors",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "assets/other/clutch-overview.webp",
+            "repo": "Juniper",
+            "label": "public/images/Case Studies/CLUTCH/ s1-match-overview.png"
+          }
+        ],
+        "caption": "The match overview a player sees after a game.",
+        "explain": "From a head-of-design interview exercise: the post-game overview for padel players filmed by AI court cameras, with time in play, rallies, winners and errors. The brief was to make the data meaningful and worth sharing in the group chat."
+      },
+      {
+        "kind": "prose",
+        "id": "u-clutch-p",
+        "weight": 0.5,
+        "text": "The brief: show players what happened, make the data meaningful, and give them something worth sharing.",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "src/data/clutchData.js",
+            "repo": "Juniper",
+            "label": "Clutch case study"
+          },
+          {
+            "type": "commit",
+            "ref": "143e8a1",
+            "repo": "Juniper",
+            "date": "2026-03-10",
+            "label": "143e8a1 · Clutch Case Study added",
+            "url": "https://github.com/namitkapoor/Juniper/commit/143e8a16b353527b48e89d3fc360f80a269c0c11"
+          }
+        ]
+      }
+    ],
+    "receipts": [
+      {
+        "type": "asset",
+        "ref": "assets/other/clutch-overview.webp",
+        "repo": "Juniper",
+        "label": "public/images/Case Studies/CLUTCH/ s1-match-overview.png"
+      },
+      {
+        "type": "asset",
+        "ref": "src/data/clutchData.js",
+        "repo": "Juniper",
+        "label": "Clutch case study"
+      },
+      {
+        "type": "commit",
+        "ref": "143e8a1",
+        "repo": "Juniper",
+        "date": "2026-03-10",
+        "label": "143e8a1 · Clutch Case Study added",
+        "url": "https://github.com/namitkapoor/Juniper/commit/143e8a16b353527b48e89d3fc360f80a269c0c11"
+      }
+    ]
+  },
+  {
+    "id": "xr-work",
+    "title": "Spatial work: Luminote and Recyclar",
+    "tags": [
+      "xr",
+      "ar",
+      "spatial",
+      "unity",
+      "quest",
+      "sustainability"
+    ],
+    "text": "Luminote anchors notes to physical places on Quest using scene understanding, so a reminder appears where you can act on it. Recyclar scans packaging in AR and gives plain-language, location-specific disposal guidance.",
+    "fills": [
+      {
+        "kind": "prose",
+        "id": "u-xr",
+        "weight": 0.6,
+        "text": "Luminote pins reminders to real-world anchors on Quest, built with Unity and MRTK3. Recyclar uses AR to tell you how to dispose of a package where you live.",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "src/data/projectsData.js",
+            "repo": "Juniper",
+            "label": "projects case study"
+          }
+        ]
+      }
+    ],
+    "receipts": [
+      {
+        "type": "asset",
+        "ref": "src/data/projectsData.js",
+        "repo": "Juniper",
+        "label": "projects case study"
+      }
+    ]
+  },
+  {
+    "id": "portfolio-rebuild",
+    "title": "This portfolio: lighter and readable by agents",
+    "tags": [
+      "portfolio",
+      "performance",
+      "web-vitals",
+      "seo",
+      "agent-readability",
+      "frontend"
+    ],
+    "text": "In the October rebuild I cut page weight (Home 1.40 to 0.77MB, ChekOut 2.50 to 0.72MB) and pre-rendered every case study as static HTML plus llms.txt, so the pages read without JavaScript.",
+    "fills": [
+      {
+        "kind": "kpi",
+        "id": "u-pf-home",
+        "weight": 0.6,
+        "value": "0.77MB",
+        "label": "Home page weight after the rebuild",
+        "baseline": "1.40MB",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "design-plans/HANDOFF-rebuild-2026-10-26.md",
+            "repo": "Juniper",
+            "date": "2026-10-26",
+            "label": "Portfolio rebuild handoff, perf section"
+          }
+        ]
+      },
+      {
+        "kind": "kpi",
+        "id": "u-pf-ck",
+        "weight": 0.5,
+        "value": "0.72MB",
+        "label": "ChekOut case study weight after the rebuild",
+        "baseline": "2.50MB",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "design-plans/HANDOFF-rebuild-2026-10-26.md",
+            "repo": "Juniper",
+            "date": "2026-10-26",
+            "label": "Portfolio rebuild handoff, perf section"
+          }
+        ]
+      },
+      {
+        "kind": "prose",
+        "id": "u-pf-nojs",
+        "weight": 0.5,
+        "text": "A prerender step writes per-route HTML from the case-study data, plus llms.txt and a Markdown copy of each study.",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "design-plans/HANDOFF-rebuild-2026-10-26.md",
+            "repo": "Juniper",
+            "date": "2026-10-26",
+            "label": "Portfolio rebuild handoff, perf section"
+          }
+        ]
+      }
+    ],
+    "receipts": [
+      {
+        "type": "asset",
+        "ref": "design-plans/HANDOFF-rebuild-2026-10-26.md",
+        "repo": "Juniper",
+        "date": "2026-10-26",
+        "label": "Portfolio rebuild handoff, perf section"
+      }
+    ]
+  },
+  {
+    "id": "portfolio-lab",
+    "title": "This portfolio: the /lab stage",
+    "tags": [
+      "portfolio",
+      "generative-ui",
+      "ai-agent",
+      "layout",
+      "lab"
+    ],
+    "text": "Before this stage, /lab normalised the case studies into one schema and gave the page an agent that answers by re-partitioning the layout.",
+    "fills": [
+      {
+        "kind": "commits",
+        "id": "u-lab-commits",
+        "weight": 0.6,
+        "repo": "Juniper",
+        "items": [
+          {
+            "sha": "b65dc6d",
+            "date": "2026-08-17",
+            "msg": "lab: normalise the case studies into one schema, and render them at /lab"
+          },
+          {
+            "sha": "080dd99",
+            "date": "2026-08-17",
+            "msg": "lab: give /lab an agent that answers by re-partitioning the page"
+          },
+          {
+            "sha": "978b9e3",
+            "date": "2026-08-17",
+            "msg": "chekout: bring the case study onto lab-view, and put it in the corpus"
+          }
+        ]
+      }
+    ],
+    "receipts": [
+      {
+        "type": "commit",
+        "ref": "b65dc6d",
+        "repo": "Juniper",
+        "date": "2026-08-17",
+        "label": "b65dc6d · lab: normalise the case studies into one schema, and render them at /lab"
+      },
+      {
+        "type": "commit",
+        "ref": "080dd99",
+        "repo": "Juniper",
+        "date": "2026-08-17",
+        "label": "080dd99 · lab: give /lab an agent that answers by re-partitioning the page"
+      },
+      {
+        "type": "commit",
+        "ref": "978b9e3",
+        "repo": "Juniper",
+        "date": "2026-08-17",
+        "label": "978b9e3 · chekout: bring the case study onto lab-view, and put it in the corpus"
+      }
+    ]
+  },
+  {
+    "id": "chekout-site",
+    "title": "ChekOut company site",
+    "tags": [
+      "chekout-site",
+      "marketing-site",
+      "frontend",
+      "3d",
+      "threejs",
+      "performance"
+    ],
+    "text": "On the ChekOut company site I built early 3D product scenes and a voice assistant, later archived them for performance, swapped custom smooth scroll for Lenis, and added a Trade School vertical.",
+    "fills": [
+      {
+        "kind": "prose",
+        "id": "u-site",
+        "weight": 0.6,
+        "text": "From October 2024 I built 3D product scenes and a voice assistant into ChekOut's company site; in November 2025 a performance pass archived them, with notes on how to bring each one back.",
+        "receipts": [
+          {
+            "type": "record",
+            "ref": "fc5b8ee7",
+            "url": "https://kyuri.namit.me/",
+            "date": "2025-11-06",
+            "label": "Built an interactive 3D hair-follicle scene and 3D product models (bottle, dispenser,…"
+          },
+          {
+            "type": "record",
+            "ref": "1e89a20c",
+            "url": "https://kyuri.namit.me/",
+            "date": "2025-11-06",
+            "label": "For the ChekOut AI company site, Namit wrote an archive README documenting the unused 3D,…"
+          },
+          {
+            "type": "record",
+            "ref": "56ba4fce",
+            "url": "https://kyuri.namit.me/",
+            "date": "2025-11-06",
+            "label": "Made a series of mobile performance and lazy-loading changes to the ChekOut AI company…"
+          }
+        ]
+      },
+      {
+        "kind": "commits",
+        "id": "u-site-commits",
+        "weight": 0.5,
+        "repo": "sentry-skin-website",
+        "items": [
+          {
+            "sha": "c010f39",
+            "date": "2024-10-24",
+            "msg": "Added bottle and lipstick 3d models"
+          },
+          {
+            "sha": "fd13eec",
+            "date": "2025-03-24",
+            "msg": "Interactive hair scene"
+          },
+          {
+            "sha": "85c0692",
+            "date": "2025-03-10",
+            "msg": "Audio assistants are possible!"
+          },
+          {
+            "sha": "32ca1ff",
+            "date": "2025-11-06",
+            "msg": "performance optimizations and smooth scroll"
+          },
+          {
+            "sha": "9045ebc",
+            "date": "2025-10-29",
+            "msg": "Trade School website toggle added"
+          }
+        ]
+      }
+    ],
+    "receipts": [
+      {
+        "type": "record",
+        "ref": "fc5b8ee7",
+        "url": "https://kyuri.namit.me/",
+        "date": "2025-11-06",
+        "label": "Built an interactive 3D hair-follicle scene and 3D product models (bottle, dispenser,…"
+      },
+      {
+        "type": "record",
+        "ref": "1e89a20c",
+        "url": "https://kyuri.namit.me/",
+        "date": "2025-11-06",
+        "label": "For the ChekOut AI company site, Namit wrote an archive README documenting the unused 3D,…"
+      },
+      {
+        "type": "record",
+        "ref": "56ba4fce",
+        "url": "https://kyuri.namit.me/",
+        "date": "2025-11-06",
+        "label": "Made a series of mobile performance and lazy-loading changes to the ChekOut AI company…"
+      },
+      {
+        "type": "commit",
+        "ref": "c010f39",
+        "repo": "sentry-skin-website",
+        "date": "2024-10-24",
+        "label": "c010f39 · Added bottle and lipstick 3d models"
+      },
+      {
+        "type": "commit",
+        "ref": "fd13eec",
+        "repo": "sentry-skin-website",
+        "date": "2025-03-24",
+        "label": "fd13eec · Interactive hair scene"
+      },
+      {
+        "type": "commit",
+        "ref": "85c0692",
+        "repo": "sentry-skin-website",
+        "date": "2025-03-10",
+        "label": "85c0692 · Audio assistants are possible!"
+      },
+      {
+        "type": "commit",
+        "ref": "32ca1ff",
+        "repo": "sentry-skin-website",
+        "date": "2025-11-06",
+        "label": "32ca1ff · performance optimizations and smooth scroll"
+      },
+      {
+        "type": "commit",
+        "ref": "9045ebc",
+        "repo": "sentry-skin-website",
+        "date": "2025-10-29",
+        "label": "9045ebc · Trade School website toggle added"
+      }
+    ]
+  },
+  {
+    "id": "ky-architecture",
+    "title": "KYURI.OS: system architecture",
+    "tags": [
+      "kyuri",
+      "architecture",
+      "system-design",
+      "vercel",
+      "nextjs",
+      "neon",
+      "notion",
+      "cloudflare",
+      "full-stack"
+    ],
+    "text": "The site is Next.js on Vercel and stays up when my laptop sleeps. Notion holds applications, Neon Postgres holds accounts, quotas and evidence, and anything that needs Claude goes through a Cloudflare tunnel to the box, which writes resumes to Google Drive.",
+    "fills": [
+      {
+        "kind": "media",
+        "id": "u-ky-arch",
+        "weight": 1,
+        "media": "image",
+        "src": "assets/kyuri-os/architecture.svg",
+        "aspect": 1.6,
+        "alt": "KYURI.OS system context: people use kyuri.namit.me on Vercel, which talks to Neon, Google and three job boards on its own, reaches the laptop box through a Cloudflare tunnel, and shares Notion, a GitHub vault and Anthropic with the box. The box writes resumes to Google Drive and scouts LinkedIn.",
+        "caption": "Who talks to what. Solid boxes are mine; dashed are outside services.",
+        "explain": "Read it left to right: people only ever touch the site on Vercel. Everything the site can do alone (accounts, sign-in, FIND ROLES) keeps working when my laptop sleeps; only the AI-heavy work crosses the tunnel to the box. Redrawn from the architecture board in Figma.",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "assets/kyuri-os/architecture.svg",
+            "label": "Drawn for the stage from the FigJam board"
+          },
+          {
+            "type": "asset",
+            "ref": "figma:1WNTAaMtC2x7fr5VAB4lRM#27:2045",
+            "date": "2026-11-01",
+            "label": "FigJam: 1. System context"
+          },
+          {
+            "type": "asset",
+            "ref": "docs/architecture.md",
+            "repo": "kyuri-dashboard",
+            "date": "2026-11-01",
+            "label": "KYURI.OS system architecture, drafted from the code at d2fdc53"
+          }
+        ]
+      },
+      {
+        "kind": "prose",
+        "id": "u-ky-arch-problem",
+        "weight": 0.95,
+        "text": "THE PROBLEM: The tailoring agents run on my laptop, on my Claude subscription, but the site has to answer visitors and candidates even when the laptop is asleep.",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "docs/architecture.md",
+            "repo": "kyuri-dashboard",
+            "date": "2026-11-01",
+            "label": "KYURI.OS system architecture, drafted from the code at d2fdc53"
+          }
+        ]
+      },
+      {
+        "kind": "prose",
+        "id": "u-ky-arch-how",
+        "weight": 0.85,
+        "text": "HOW: The site is Next.js on Vercel. It keeps applications in Notion and accounts, quotas and evidence in Neon Postgres. Anything that needs Claude goes through a Cloudflare tunnel to the box, which tailors the resume, checks it and writes the PDF to Google Drive.",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "docs/architecture.md",
+            "repo": "kyuri-dashboard",
+            "date": "2026-11-01",
+            "label": "KYURI.OS system architecture, drafted from the code at d2fdc53"
+          },
+          {
+            "type": "commit",
+            "ref": "282ad60",
+            "repo": "kyuri-dashboard",
+            "date": "2026-10-15",
+            "label": "282ad60 · demo: runs on the box through a job queue, with polling, fallback, capped tweaks and redownload"
+          },
+          {
+            "type": "commit",
+            "ref": "e529892",
+            "repo": "kyuri-dashboard",
+            "date": "2026-10-15",
+            "label": "e529892 · local-server: no agent that reads untrusted text can touch this machine"
+          }
+        ]
+      },
+      {
+        "kind": "commits",
+        "id": "u-ky-arch-commits",
+        "weight": 0.4,
+        "repo": "kyuri-dashboard",
+        "items": [
+          {
+            "sha": "282ad60",
+            "date": "2026-10-15",
+            "msg": "demo: runs on the box through a job queue, with polling, fallback, capped tweaks and redownload"
+          },
+          {
+            "sha": "e529892",
+            "date": "2026-10-15",
+            "msg": "local-server: no agent that reads untrusted text can touch this machine"
+          },
+          {
+            "sha": "4b5f540",
+            "date": "2026-10-15",
+            "msg": "box: async demo tailoring on the subscription, and the box pulls main on restart"
+          },
+          {
+            "sha": "6f124ad",
+            "date": "2026-11-01",
+            "msg": "docs: architecture simplified to match the hand-built board, AWS as the next iteration, and evidence records in Neon"
+          }
+        ]
+      }
+    ],
+    "receipts": [
+      {
+        "type": "asset",
+        "ref": "assets/kyuri-os/architecture.svg",
+        "label": "Drawn for the stage from the FigJam board"
+      },
+      {
+        "type": "asset",
+        "ref": "figma:1WNTAaMtC2x7fr5VAB4lRM#27:2045",
+        "date": "2026-11-01",
+        "label": "FigJam: 1. System context"
+      },
+      {
+        "type": "asset",
+        "ref": "docs/architecture.md",
+        "repo": "kyuri-dashboard",
+        "date": "2026-11-01",
+        "label": "KYURI.OS system architecture, drafted from the code at d2fdc53"
+      },
+      {
+        "type": "commit",
+        "ref": "282ad60",
+        "repo": "kyuri-dashboard",
+        "date": "2026-10-15",
+        "label": "282ad60 · demo: runs on the box through a job queue, with polling, fallback, capped tweaks and redownload"
+      },
+      {
+        "type": "commit",
+        "ref": "e529892",
+        "repo": "kyuri-dashboard",
+        "date": "2026-10-15",
+        "label": "e529892 · local-server: no agent that reads untrusted text can touch this machine"
+      },
+      {
+        "type": "commit",
+        "ref": "4b5f540",
+        "repo": "kyuri-dashboard",
+        "date": "2026-10-15",
+        "label": "4b5f540 · box: async demo tailoring on the subscription, and the box pulls main on restart"
+      },
+      {
+        "type": "commit",
+        "ref": "6f124ad",
+        "repo": "kyuri-dashboard",
+        "date": "2026-11-01",
+        "label": "6f124ad · docs: architecture simplified to match the hand-built board, AWS as the next iteration, and evidence records in Neon"
+      }
+    ]
+  },
+  {
+    "id": "ky-job-boards",
+    "title": "KYURI.OS: job boards it searches",
+    "tags": [
+      "kyuri",
+      "job-boards",
+      "speedrun",
+      "a16z",
+      "designer-fund",
+      "integrations",
+      "find-roles"
+    ],
+    "text": "FIND ROLES searches three boards from Vercel: speedrun startups and the a16z portfolio through the speedrun talent network API, and Designer Fund's Getro board. Signed-in candidates and the owner can use it, not visitors. Greenhouse and Lever studio postings feed the owner's Targets list. LinkedIn is used only for scouting people, never as a job source.",
+    "fills": [
+      {
+        "kind": "prose",
+        "id": "u-ky-boards",
+        "weight": 0.75,
+        "text": "JOB BOARDS: FIND ROLES searches the a16z speedrun talent network (speedrun startups and the whole a16z portfolio) and Designer Fund's board straight from Vercel, so it works with the box asleep. Signed-in candidates and I can use it; visitors can't. LinkedIn is deliberately not a source, because I use that account for outreach.",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "lib/role-queries.ts",
+            "repo": "kyuri-dashboard",
+            "label": "BOARDS: speedrun startups, a16z portfolio, Designer Fund"
+          },
+          {
+            "type": "asset",
+            "ref": "app/api/jobs/roles/route.ts",
+            "repo": "kyuri-dashboard",
+            "label": "Signed-in members only; LinkedIn deliberately not a source"
+          },
+          {
+            "type": "commit",
+            "ref": "564d10b",
+            "repo": "kyuri-dashboard",
+            "date": "2026-11-01",
+            "label": "564d10b · find roles: speedrun and Designer Fund as job sources, behind a glance panel"
+          }
+        ]
+      },
+      {
+        "kind": "kpi",
+        "id": "u-ky-boards-n",
+        "weight": 0.5,
+        "value": "3",
+        "label": "job boards behind FIND ROLES, searched from Vercel",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "lib/role-sources.ts",
+            "repo": "kyuri-dashboard",
+            "label": "FIND ROLES: every board × every role, merged"
+          },
+          {
+            "type": "asset",
+            "ref": "lib/role-queries.ts",
+            "repo": "kyuri-dashboard",
+            "label": "BOARDS: speedrun startups, a16z portfolio, Designer Fund"
+          }
+        ]
+      },
+      {
+        "kind": "prose",
+        "id": "u-ky-studios",
+        "weight": 0.35,
+        "text": "OWNER ONLY: studio postings on Greenhouse and Lever feed my own Targets list, where a RESUME button queues a tailored resume.",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "lib/studio-postings.ts",
+            "repo": "kyuri-dashboard",
+            "label": "Studio postings: Greenhouse API, Lever page, plain HTML"
+          },
+          {
+            "type": "commit",
+            "ref": "99f1030",
+            "repo": "kyuri-dashboard",
+            "date": "2026-10-20",
+            "label": "99f1030 · targets: a RESUME button on every studio role, queued through add-job"
+          }
+        ]
+      },
+      {
+        "kind": "commits",
+        "id": "u-ky-boards-commits",
+        "weight": 0.4,
+        "repo": "kyuri-dashboard",
+        "items": [
+          {
+            "sha": "564d10b",
+            "date": "2026-11-01",
+            "msg": "find roles: speedrun and Designer Fund as job sources, behind a glance panel"
+          },
+          {
+            "sha": "b20205a",
+            "date": "2026-11-01",
+            "msg": "candidate job hunt: the left column is four views taking turns; FIND ROLES hands roles to the ADD JOB drawer"
+          },
+          {
+            "sha": "2564c44",
+            "date": "2026-11-01",
+            "msg": "find roles: say what it does, and ask where, what and how recent"
+          },
+          {
+            "sha": "99f1030",
+            "date": "2026-10-20",
+            "msg": "targets: a RESUME button on every studio role, queued through add-job"
+          }
+        ]
+      }
+    ],
+    "receipts": [
+      {
+        "type": "asset",
+        "ref": "lib/role-queries.ts",
+        "repo": "kyuri-dashboard",
+        "label": "BOARDS: speedrun startups, a16z portfolio, Designer Fund"
+      },
+      {
+        "type": "asset",
+        "ref": "app/api/jobs/roles/route.ts",
+        "repo": "kyuri-dashboard",
+        "label": "Signed-in members only; LinkedIn deliberately not a source"
+      },
+      {
+        "type": "commit",
+        "ref": "564d10b",
+        "repo": "kyuri-dashboard",
+        "date": "2026-11-01",
+        "label": "564d10b · find roles: speedrun and Designer Fund as job sources, behind a glance panel"
+      },
+      {
+        "type": "asset",
+        "ref": "lib/role-sources.ts",
+        "repo": "kyuri-dashboard",
+        "label": "FIND ROLES: every board × every role, merged"
+      },
+      {
+        "type": "asset",
+        "ref": "lib/studio-postings.ts",
+        "repo": "kyuri-dashboard",
+        "label": "Studio postings: Greenhouse API, Lever page, plain HTML"
+      },
+      {
+        "type": "commit",
+        "ref": "99f1030",
+        "repo": "kyuri-dashboard",
+        "date": "2026-10-20",
+        "label": "99f1030 · targets: a RESUME button on every studio role, queued through add-job"
+      },
+      {
+        "type": "commit",
+        "ref": "b20205a",
+        "repo": "kyuri-dashboard",
+        "date": "2026-11-01",
+        "label": "b20205a · candidate job hunt: the left column is four views taking turns; FIND ROLES hands roles to the ADD JOB drawer"
+      },
+      {
+        "type": "commit",
+        "ref": "2564c44",
+        "repo": "kyuri-dashboard",
+        "date": "2026-11-01",
+        "label": "2564c44 · find roles: say what it does, and ask where, what and how recent"
+      }
+    ]
+  },
+  {
+    "id": "ky-design-system",
+    "title": "KYURI.OS: design system in Figma",
+    "tags": [
+      "kyuri",
+      "design-system",
+      "figma",
+      "tokens",
+      "pixel-art",
+      "components",
+      "design-engineering"
+    ],
+    "text": "KYURI.OS has a Figma design source: dark and light color tokens, a pipeline status ramp, Jura and Space Mono type, components and pixel sprites. A figma-sync skill diffs Figma against a baseline and builds each change in the file that renders it.",
+    "fills": [
+      {
+        "kind": "prose",
+        "id": "u-ky-ds",
+        "weight": 0.6,
+        "text": "DESIGN SYSTEM: The UI has a Figma source of truth: color tokens in dark and light modes, a pipeline status ramp, Jura type with Space Mono numbers, and components like the nav tabs, glance panels and a seven-segment clock. A figma-sync skill diffs the file against a baseline and builds each change.",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "figma:qWq0Ce8ovFq7RkKWmGWQDD#0:1",
+            "date": "2026-11-01",
+            "label": "KYURI.OS design source: Tokens page"
+          },
+          {
+            "type": "asset",
+            "ref": "figma:qWq0Ce8ovFq7RkKWmGWQDD#2:2",
+            "date": "2026-11-01",
+            "label": "KYURI.OS design source: Components page"
+          },
+          {
+            "type": "commit",
+            "ref": "84e4a46",
+            "repo": "kyuri-dashboard",
+            "date": "2026-11-01",
+            "label": "84e4a46 · design: the KYURI.OS Figma file as a design source, its baseline, and the figma-sync skill"
+          }
+        ]
+      },
+      {
+        "kind": "media",
+        "id": "u-ky-tokens",
+        "weight": 0.55,
+        "media": "image",
+        "src": "assets/kyuri-os/ds-tokens.webp",
+        "aspect": 0.8273,
+        "alt": "KYURI.OS dark-mode color tokens: near-black surfaces, warm brown borders, a cream-to-tan ink ramp, a copper accent, and green and red status colors, each with its CSS variable and hex",
+        "caption": "Dark-mode tokens, each bound to the CSS variable it ships as.",
+        "explain": "The whole UI is two tones: near-black surfaces and a warm ink ramp from dim brown to cream, with one copper accent. Green and red are the only other hues, kept for status. Each swatch names the CSS variable it ships as, so Figma and the code stay in step.",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "assets/kyuri-os/ds-tokens.webp",
+            "label": "Exported from Figma"
+          },
+          {
+            "type": "asset",
+            "ref": "figma:qWq0Ce8ovFq7RkKWmGWQDD#2:112",
+            "date": "2026-11-01",
+            "label": "Tokens / Dark: Surface & ink"
+          }
+        ]
+      },
+      {
+        "kind": "media",
+        "id": "u-ky-pixel",
+        "weight": 0.45,
+        "media": "image",
+        "src": "assets/kyuri-os/ds-pixel.webp",
+        "aspect": 3.7471,
+        "alt": "Pixel-art sprites from the design source: a pixel person, a subway car in cream and red, and a rat",
+        "caption": "The pixel sprites behind the subway game on the home page.",
+        "explain": "The two-tone pixel language extends to the home page's subway game: every sprite is drawn on a pixel grid in Figma and exported for the site, so the game and the UI share one palette.",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "assets/kyuri-os/ds-pixel.webp",
+            "label": "Exported from Figma"
+          },
+          {
+            "type": "asset",
+            "ref": "figma:qWq0Ce8ovFq7RkKWmGWQDD#33:339",
+            "date": "2026-11-01",
+            "label": "Components: pixel assets"
+          },
+          {
+            "type": "commit",
+            "ref": "79c21cb",
+            "repo": "kyuri-dashboard",
+            "date": "2026-11-01",
+            "label": "79c21cb · add pixel-art assets to subway platform scene"
+          }
+        ]
+      },
+      {
+        "kind": "media",
+        "id": "u-ky-header",
+        "weight": 0.35,
+        "media": "image",
+        "src": "assets/kyuri-os/ds-header.webp",
+        "aspect": 6.5455,
+        "alt": "The KYURI.OS header component in three states: HOME, JOB HUNT and SHENANIGANS tabs, each lit in turn",
+        "caption": "The header component, one variant per area.",
+        "explain": "One component, three variants: the lit tab moves with the area you're in. Building variants in Figma first is what lets the figma-sync skill map a design change to the one file that renders it.",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "assets/kyuri-os/ds-header.webp",
+            "label": "Exported from Figma"
+          },
+          {
+            "type": "asset",
+            "ref": "figma:qWq0Ce8ovFq7RkKWmGWQDD#7:197",
+            "date": "2026-11-01",
+            "label": "Components: Header"
+          }
+        ]
+      }
+    ],
+    "receipts": [
+      {
+        "type": "asset",
+        "ref": "figma:qWq0Ce8ovFq7RkKWmGWQDD#0:1",
+        "date": "2026-11-01",
+        "label": "KYURI.OS design source: Tokens page"
+      },
+      {
+        "type": "asset",
+        "ref": "figma:qWq0Ce8ovFq7RkKWmGWQDD#2:2",
+        "date": "2026-11-01",
+        "label": "KYURI.OS design source: Components page"
+      },
+      {
+        "type": "commit",
+        "ref": "84e4a46",
+        "repo": "kyuri-dashboard",
+        "date": "2026-11-01",
+        "label": "84e4a46 · design: the KYURI.OS Figma file as a design source, its baseline, and the figma-sync skill"
+      },
+      {
+        "type": "asset",
+        "ref": "assets/kyuri-os/ds-tokens.webp",
+        "label": "Exported from Figma"
+      },
+      {
+        "type": "asset",
+        "ref": "figma:qWq0Ce8ovFq7RkKWmGWQDD#2:112",
+        "date": "2026-11-01",
+        "label": "Tokens / Dark: Surface & ink"
+      },
+      {
+        "type": "asset",
+        "ref": "assets/kyuri-os/ds-pixel.webp",
+        "label": "Exported from Figma"
+      },
+      {
+        "type": "asset",
+        "ref": "figma:qWq0Ce8ovFq7RkKWmGWQDD#33:339",
+        "date": "2026-11-01",
+        "label": "Components: pixel assets"
+      },
+      {
+        "type": "commit",
+        "ref": "79c21cb",
+        "repo": "kyuri-dashboard",
+        "date": "2026-11-01",
+        "label": "79c21cb · add pixel-art assets to subway platform scene"
+      },
+      {
+        "type": "asset",
+        "ref": "assets/kyuri-os/ds-header.webp",
+        "label": "Exported from Figma"
+      },
+      {
+        "type": "asset",
+        "ref": "figma:qWq0Ce8ovFq7RkKWmGWQDD#7:197",
+        "date": "2026-11-01",
+        "label": "Components: Header"
+      }
+    ]
+  },
+  {
+    "id": "ck-architecture",
+    "title": "ChekOut: system architecture",
+    "tags": [
+      "chekout",
+      "architecture",
+      "system-design",
+      "langflow",
+      "cloud-run",
+      "shopify",
+      "nextjs"
+    ],
+    "text": "One Next.js app serves the merchant builder and the storefront widget. Chat goes to a Langflow agent per merchant; onboarding, store sync and billing go to backend services on Cloud Run that connect to Shopify.",
+    "fills": [
+      {
+        "kind": "media",
+        "id": "u-ck-arch",
+        "weight": 0.95,
+        "media": "image",
+        "src": "assets/chekout/architecture.webp",
+        "aspect": 2.0645,
+        "alt": "ChekOut AI system context: merchants build and manage agents in the ChekOut front end; shoppers chat on the storefront; the front end sends chat messages to per-merchant Langflow agents and talks to backend services on Cloud Run, which sync with Shopify and read and write Postgres and BigQuery",
+        "caption": "Who uses ChekOut and what the front end talks to. Blue is my work.",
+        "explain": "One Next.js app serves both sides: the merchant builder and the chat widget shoppers meet on a store. Chat goes to a Langflow agent per merchant; setup, store sync and billing go to backend services. Each box is tagged [code] when it is verified in a repo and [notes] when it comes from my notes.",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "assets/chekout/architecture.webp",
+            "label": "Exported from Figma, source footer cropped"
+          },
+          {
+            "type": "asset",
+            "ref": "figma:juckmsHrlBUBKcMkoJCiep#3:39",
+            "date": "2026-11-01",
+            "label": "FigJam: 1 · System context"
+          }
+        ]
+      },
+      {
+        "kind": "prose",
+        "id": "u-ck-system",
+        "weight": 0.7,
+        "text": "HOW IT FITS: Merchants build agents in the Next.js app; shoppers chat through a script and an iframe the same app serves onto their store. Messages go to a Langflow agent per merchant, and onboarding, store sync and billing go to backend services that connect to Shopify.",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "figma:juckmsHrlBUBKcMkoJCiep#3:39",
+            "date": "2026-11-01",
+            "label": "FigJam: 1 · System context"
+          },
+          {
+            "type": "commit",
+            "ref": "91ebf39",
+            "repo": "chekoutai-frontend",
+            "date": "2026-07-01",
+            "label": "91ebf39 · Mount embed via authoritative allowed_domains list from backend"
+          },
+          {
+            "type": "commit",
+            "ref": "e553f4b",
+            "repo": "chekoutai-frontend",
+            "date": "2026-03-26",
+            "label": "e553f4b · Shopify OAuth: fix merchant_id flow, lowercase normalization, disconnect on delete, platform auto-select"
+          }
+        ]
+      },
+      {
+        "kind": "commits",
+        "id": "u-ck-arch-commits",
+        "weight": 0.4,
+        "repo": "chekoutai-frontend",
+        "items": [
+          {
+            "sha": "91ebf39",
+            "date": "2026-07-01",
+            "msg": "Mount embed via authoritative allowed_domains list from backend"
+          },
+          {
+            "sha": "e553f4b",
+            "date": "2026-03-26",
+            "msg": "Shopify OAuth: fix merchant_id flow, lowercase normalization, disconnect on delete, platform auto-select"
+          },
+          {
+            "sha": "5264ce8",
+            "date": "2026-07-21",
+            "msg": "Dashboard: wire engagement + Conversation Logs to BigQuery /analytics"
+          },
+          {
+            "sha": "313d08d",
+            "date": "2026-07-08",
+            "msg": "Add canary deploy (production infra, 0% traffic)"
+          }
+        ]
+      }
+    ],
+    "receipts": [
+      {
+        "type": "asset",
+        "ref": "assets/chekout/architecture.webp",
+        "label": "Exported from Figma, source footer cropped"
+      },
+      {
+        "type": "asset",
+        "ref": "figma:juckmsHrlBUBKcMkoJCiep#3:39",
+        "date": "2026-11-01",
+        "label": "FigJam: 1 · System context"
+      },
+      {
+        "type": "commit",
+        "ref": "91ebf39",
+        "repo": "chekoutai-frontend",
+        "date": "2026-07-01",
+        "label": "91ebf39 · Mount embed via authoritative allowed_domains list from backend"
+      },
+      {
+        "type": "commit",
+        "ref": "e553f4b",
+        "repo": "chekoutai-frontend",
+        "date": "2026-03-26",
+        "label": "e553f4b · Shopify OAuth: fix merchant_id flow, lowercase normalization, disconnect on delete, platform auto-select"
+      },
+      {
+        "type": "commit",
+        "ref": "5264ce8",
+        "repo": "chekoutai-frontend",
+        "date": "2026-07-21",
+        "label": "5264ce8 · Dashboard: wire engagement + Conversation Logs to BigQuery /analytics"
+      },
+      {
+        "type": "commit",
+        "ref": "313d08d",
+        "repo": "chekoutai-frontend",
+        "date": "2026-07-08",
+        "label": "313d08d · Add canary deploy (production infra, 0% traffic)"
+      }
+    ]
+  },
+  {
+    "id": "ck-design-system",
+    "title": "ChekOut: design system in Figma",
+    "tags": [
+      "chekout",
+      "design-system",
+      "figma",
+      "components",
+      "chat-widget"
+    ],
+    "text": "The ChekOut design file documents the shipped widget and builder as tokens and components, including the chat panel in its welcome, conversation and thinking states.",
+    "fills": [
+      {
+        "kind": "media",
+        "id": "u-ck-ds",
+        "weight": 0.5,
+        "media": "image",
+        "src": "assets/chekout/ds-chat-panel.webp",
+        "aspect": 2,
+        "alt": "The ChekOut chat panel component in three states: welcome, a conversation with a shipping answer and suggestion pills, and the thinking loader",
+        "caption": "The chat panel component: welcome, conversation, thinking.",
+        "explain": "The widget's states as components in the ChekOut design file, documented from the shipped code: one panel, three states, with the composer and Powered by footer shared across them. Merchants' brand colors theme these at runtime.",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "assets/chekout/ds-chat-panel.webp",
+            "label": "Exported from Figma"
+          },
+          {
+            "type": "asset",
+            "ref": "figma:LPIuHW2bQIxkq7TWZSxI3G#21:765",
+            "date": "2026-11-01",
+            "label": "Chat panel (current)"
+          },
+          {
+            "type": "commit",
+            "ref": "7f4d4c0",
+            "repo": "chekoutai-frontend",
+            "date": "2026-09-18",
+            "label": "7f4d4c0 · frontend commit the design file was documented at"
+          }
+        ]
+      }
+    ],
+    "receipts": [
+      {
+        "type": "asset",
+        "ref": "assets/chekout/ds-chat-panel.webp",
+        "label": "Exported from Figma"
+      },
+      {
+        "type": "asset",
+        "ref": "figma:LPIuHW2bQIxkq7TWZSxI3G#21:765",
+        "date": "2026-11-01",
+        "label": "Chat panel (current)"
+      },
+      {
+        "type": "commit",
+        "ref": "7f4d4c0",
+        "repo": "chekoutai-frontend",
+        "date": "2026-09-18",
+        "label": "7f4d4c0 · frontend commit the design file was documented at"
+      }
+    ]
+  },
+  {
+    "id": "cv-architecture",
+    "title": "Christine Valmy: agent architecture",
+    "tags": [
+      "christine-valmy",
+      "architecture",
+      "rag",
+      "n8n",
+      "wordpress",
+      "bilingual"
+    ],
+    "text": "A React widget in a WordPress plugin talks to an enrollment agent that answers through RAG from the school's content. A schedule pipeline keeps classes current, and n8n on GCP passes sorted leads to enrollment officers. The agent shipped with Claude and now runs on Gemini.",
+    "fills": [
+      {
+        "kind": "media",
+        "id": "u-cv-arch",
+        "weight": 0.95,
+        "media": "image",
+        "src": "assets/christine-valmy/architecture.svg",
+        "aspect": 1.7778,
+        "alt": "Christine Valmy agent architecture: prospective students chat in English or Spanish on the school's site; the enrollment agent answers through RAG from the school's content, a schedule pipeline keeps classes current, and leads pass through n8n on GCP to enrollment officers in priority buckets",
+        "caption": "From a student's question to a sorted lead.",
+        "explain": "Follow one question: the student asks in the widget on the school's WordPress site, the agent answers from the school's own content, and the conversation becomes a lead that n8n hands to the officers already sorted. Solid boxes are mine; the agent function is a teammate's code. Drawn from the case study and the ChekOut architecture board.",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "assets/christine-valmy/architecture.svg",
+            "label": "Drawn for the stage"
+          },
+          {
+            "type": "asset",
+            "ref": "src/data/christineValmyData.js",
+            "repo": "Juniper",
+            "date": "2026-10-26",
+            "label": "Christine Valmy case study"
+          },
+          {
+            "type": "asset",
+            "ref": "figma:juckmsHrlBUBKcMkoJCiep#4:135",
+            "date": "2026-11-01",
+            "label": "FigJam: 4 · Sophia, enrollment agent"
+          }
+        ]
+      }
+    ],
+    "receipts": [
+      {
+        "type": "asset",
+        "ref": "assets/christine-valmy/architecture.svg",
+        "label": "Drawn for the stage"
+      },
+      {
+        "type": "asset",
+        "ref": "src/data/christineValmyData.js",
+        "repo": "Juniper",
+        "date": "2026-10-26",
+        "label": "Christine Valmy case study"
+      },
+      {
+        "type": "asset",
+        "ref": "figma:juckmsHrlBUBKcMkoJCiep#4:135",
+        "date": "2026-11-01",
+        "label": "FigJam: 4 · Sophia, enrollment agent"
+      }
+    ]
+  },
+  {
+    "id": "ky-open-safely",
+    "title": "How did he open it to other people safely",
+    "tags": [
+      "kyuri",
+      "security",
+      "access-control",
+      "rate-limits",
+      "testing",
+      "multi-user"
+    ],
+    "text": "Before letting other job seekers sign in in October 2026, I scoped every route to an access tier, rate-limited everything that spends tokens, and made the tests unable to touch real data.",
+    "fills": [
+      {
+        "kind": "prose",
+        "id": "u-ky-0-open-problem",
+        "weight": 1,
+        "text": "THE PROBLEM: By May a second person was using it, but the agents run on my machine, spend real model credits, and keep everyone's search beside mine. Letting more people in could not expose anyone's data or run up the bill.",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "assets/kyuri-os/job-hunt.webp",
+            "url": "https://kyuri.namit.me/?area=job-hunt",
+            "date": "2026-11-02",
+            "label": "kyuri.namit.me Job Hunt, visitor view, captured 2026-11-02"
+          },
+          {
+            "type": "record",
+            "ref": "de8e5fc1",
+            "url": "https://kyuri.namit.me/",
+            "date": "2026-10-19",
+            "label": "Added a mutation guard to the Kyuri Playwright suite that answers any non-GET API request…"
+          }
+        ]
+      },
+      {
+        "kind": "prose",
+        "id": "u-ky-tiers",
+        "weight": 0.9,
+        "text": "HOW: In October 2026 I scoped every route and panel to the viewer: visitors see public data, candidates see only their own pipeline, and I see everything. Google sign-in checks candidates against an allowlist.",
+        "receipts": [
+          {
+            "type": "record",
+            "ref": "b0b443c6",
+            "url": "https://kyuri.namit.me/",
+            "date": "2026-10-14",
+            "label": "Scoped every Kyuri route and panel to the viewer's access tier (visitor, candidate or…"
+          },
+          {
+            "type": "commit",
+            "ref": "008461c",
+            "repo": "kyuri-dashboard",
+            "date": "2026-10-14",
+            "label": "008461c · auth: scope every route and panel to the viewer: visitor, candidate, or owner"
+          },
+          {
+            "type": "commit",
+            "ref": "8e51eb5",
+            "repo": "kyuri-dashboard",
+            "date": "2026-10-14",
+            "label": "8e51eb5 · auth: Google sign-in with a per-candidate allowlist; candidates and visitors get their own tiers"
+          }
+        ]
+      },
+      {
+        "kind": "kpi",
+        "id": "u-ky-email-cap",
+        "weight": 0.7,
+        "value": "200",
+        "label": "emails at most in any rolling 24 hours, enforced by a log table",
+        "receipts": [
+          {
+            "type": "record",
+            "ref": "46faab54",
+            "url": "https://kyuri.namit.me/",
+            "date": "2026-10-16",
+            "label": "Built a rolling-24-hour send cap of 200 emails into Kyuri's email module, backed by an…"
+          }
+        ]
+      },
+      {
+        "kind": "kpi",
+        "id": "u-ky-418",
+        "weight": 0.6,
+        "value": "418",
+        "label": "what a view-only test gets for any write, so it can't spend credits or touch real jobs",
+        "receipts": [
+          {
+            "type": "record",
+            "ref": "de8e5fc1",
+            "url": "https://kyuri.namit.me/",
+            "date": "2026-10-19",
+            "label": "Added a mutation guard to the Kyuri Playwright suite that answers any non-GET API request…"
+          }
+        ]
+      },
+      {
+        "kind": "media",
+        "id": "u-ky-home",
+        "weight": 0.75,
+        "media": "image",
+        "src": "assets/kyuri-os/home.webp",
+        "aspect": 1.6,
+        "alt": "KYURI.OS home, visitor view: the subway-test headline, a pixel subway game, and the ASK MY WORK box that cites 26 receipts",
+        "caption": "The public home, signed out: ASK MY WORK answers only from approved, dated records of my work.",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "assets/kyuri-os/home.webp"
+          },
+          {
+            "type": "asset",
+            "ref": "assets/kyuri-os/home.webp",
+            "url": "https://kyuri.namit.me/",
+            "date": "2026-11-02",
+            "label": "kyuri.namit.me Home, visitor view, captured 2026-11-02"
+          }
+        ],
+        "explain": "What a visitor sees without signing in. The ASK MY WORK box answers questions about my work, but only from records I approved, each dated and traced to the work it describes. Nothing private reaches this view: the pipeline, the people and the resumes all sit behind sign-in.",
+        "kpi": {
+          "value": "26",
+          "label": "approved public records the ASK box answers from",
+          "period": "as of Nov 2, 2026",
+          "receipts": [
+            {
+              "type": "asset",
+              "ref": "assets/kyuri-os/home.webp",
+              "url": "https://kyuri.namit.me/",
+              "date": "2026-11-02",
+              "label": "kyuri.namit.me Home, visitor view, captured 2026-11-02"
+            }
+          ]
+        }
+      },
+      {
+        "kind": "prose",
+        "id": "u-ky-hygiene",
+        "weight": 0.45,
+        "text": "TEARDOWN: The end-to-end suite deletes only rows it created, by recorded id, email domain or hashed IP, never by time window.",
+        "receipts": [
+          {
+            "type": "record",
+            "ref": "88ce4fc3",
+            "url": "https://kyuri.namit.me/",
+            "date": "2026-10-19",
+            "label": "Wrote data-hygiene rules for the Kyuri end-to-end suite so that every test write targets…"
+          }
+        ]
+      },
+      {
+        "kind": "prose",
+        "id": "u-ky-offline",
+        "weight": 0.35,
+        "text": "OFFLINE: Pages open from the last cached copy after a 4s wait, and jobs added with no signal wait in an outbox and send on reconnect.",
+        "receipts": [
+          {
+            "type": "record",
+            "ref": "ff5b2a3f",
+            "url": "https://kyuri.namit.me/",
+            "date": "2026-10-27",
+            "label": "Added offline support to Kyuri so pages open from the last cached copy after a 4s wait,…"
+          }
+        ]
+      },
+      {
+        "kind": "commits",
+        "id": "u-ky-open-commits",
+        "weight": 0.4,
+        "repo": "kyuri-dashboard",
+        "items": [
+          {
+            "sha": "008461c",
+            "date": "2026-10-14",
+            "msg": "auth: scope every route and panel to the viewer: visitor, candidate, or owner"
+          },
+          {
+            "sha": "bd34a2c",
+            "date": "2026-10-14",
+            "msg": "quota: rate-limit everything a candidate can do that spends tokens"
+          },
+          {
+            "sha": "282ad60",
+            "date": "2026-10-15",
+            "msg": "demo: runs on the box through a job queue, with polling, fallback, capped tweaks and redownload"
+          },
+          {
+            "sha": "ab7171a",
+            "date": "2026-10-27",
+            "msg": "offline: pages open from the last copy after a 4s wait, adds made with no signal wait in an outbox and send on reconnect, a pill says which"
+          },
+          {
+            "sha": "c2c2a19",
+            "date": "2026-11-01",
+            "msg": "corroboration layer: approved evidence becomes dated, sourced records, a public RECENT WORK feed, and ASK that cites them"
+          }
+        ]
+      }
+    ],
+    "receipts": [
+      {
+        "type": "asset",
+        "ref": "assets/kyuri-os/job-hunt.webp",
+        "url": "https://kyuri.namit.me/?area=job-hunt",
+        "date": "2026-11-02",
+        "label": "kyuri.namit.me Job Hunt, visitor view, captured 2026-11-02"
+      },
+      {
+        "type": "record",
+        "ref": "de8e5fc1",
+        "url": "https://kyuri.namit.me/",
+        "date": "2026-10-19",
+        "label": "Added a mutation guard to the Kyuri Playwright suite that answers any non-GET API request…"
+      },
+      {
+        "type": "record",
+        "ref": "b0b443c6",
+        "url": "https://kyuri.namit.me/",
+        "date": "2026-10-14",
+        "label": "Scoped every Kyuri route and panel to the viewer's access tier (visitor, candidate or…"
+      },
+      {
+        "type": "commit",
+        "ref": "008461c",
+        "repo": "kyuri-dashboard",
+        "date": "2026-10-14",
+        "label": "008461c · auth: scope every route and panel to the viewer: visitor, candidate, or owner"
+      },
+      {
+        "type": "commit",
+        "ref": "8e51eb5",
+        "repo": "kyuri-dashboard",
+        "date": "2026-10-14",
+        "label": "8e51eb5 · auth: Google sign-in with a per-candidate allowlist; candidates and visitors get their own tiers"
+      },
+      {
+        "type": "record",
+        "ref": "46faab54",
+        "url": "https://kyuri.namit.me/",
+        "date": "2026-10-16",
+        "label": "Built a rolling-24-hour send cap of 200 emails into Kyuri's email module, backed by an…"
+      },
+      {
+        "type": "asset",
+        "ref": "assets/kyuri-os/home.webp"
+      },
+      {
+        "type": "record",
+        "ref": "88ce4fc3",
+        "url": "https://kyuri.namit.me/",
+        "date": "2026-10-19",
+        "label": "Wrote data-hygiene rules for the Kyuri end-to-end suite so that every test write targets…"
+      },
+      {
+        "type": "record",
+        "ref": "ff5b2a3f",
+        "url": "https://kyuri.namit.me/",
+        "date": "2026-10-27",
+        "label": "Added offline support to Kyuri so pages open from the last cached copy after a 4s wait,…"
+      },
+      {
+        "type": "commit",
+        "ref": "bd34a2c",
+        "repo": "kyuri-dashboard",
+        "date": "2026-10-14",
+        "label": "bd34a2c · quota: rate-limit everything a candidate can do that spends tokens"
+      },
+      {
+        "type": "commit",
+        "ref": "282ad60",
+        "repo": "kyuri-dashboard",
+        "date": "2026-10-15",
+        "label": "282ad60 · demo: runs on the box through a job queue, with polling, fallback, capped tweaks and redownload"
+      },
+      {
+        "type": "commit",
+        "ref": "ab7171a",
+        "repo": "kyuri-dashboard",
+        "date": "2026-10-27",
+        "label": "ab7171a · offline: pages open from the last copy after a 4s wait, adds made with no signal wait in an outbox and send on reconnect, a pill says which"
+      },
+      {
+        "type": "commit",
+        "ref": "c2c2a19",
+        "repo": "kyuri-dashboard",
+        "date": "2026-11-01",
+        "label": "c2c2a19 · corroboration layer: approved evidence becomes dated, sourced records, a public RECENT WORK feed, and ASK that cites them"
+      }
+    ]
+  }
+]

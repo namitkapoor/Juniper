@@ -1,0 +1,26 @@
+{
+  "name": "stage-proto",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --port 5175 --strictPort",
+    "build": "vite build",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@chenglou/pretext": "latest",
+    "@react-three/fiber": "^8.16.8",
+    "lottie-web": "^5.13.0",
+    "react": "18.3",
+    "react-dom": "18.3",
+    "three": "^0.166.1"
+  },
+  "devDependencies": {
+    "@iconify-json/lucide": "^1.2.150",
+    "@iconify-json/simple-icons": "^1.2.101",
+    "@vitejs/plugin-react": "4.3",
+    "vite": "^5.4.7",
+    "vitest": "^2.1.8"
+  }
+}

@@ -1,0 +1,285 @@
+{
+ "chekout/cover.webp": {
+  "w": 1600,
+  "h": 987,
+  "bytes": 122350,
+  "aspect": 1.6211
+ },
+ "chekout/shape-question.mp4": {
+  "w": 1280,
+  "h": 720,
+  "bytes": 1017821,
+  "dur": 11.9,
+  "aspect": 1.7778
+ },
+ "chekout/shape-question.jpg": {
+  "w": 1280,
+  "h": 720,
+  "bytes": 44801,
+  "aspect": 1.7778
+ },
+ "chekout/shape-product.mp4": {
+  "w": 1280,
+  "h": 720,
+  "bytes": 2566044,
+  "dur": 14.0,
+  "aspect": 1.7778
+ },
+ "chekout/shape-product.jpg": {
+  "w": 1280,
+  "h": 720,
+  "bytes": 114550,
+  "aspect": 1.7778
+ },
+ "chekout/shape-bundle.mp4": {
+  "w": 1280,
+  "h": 720,
+  "bytes": 1096715,
+  "dur": 14.1,
+  "aspect": 1.7778
+ },
+ "chekout/shape-bundle.jpg": {
+  "w": 1280,
+  "h": 720,
+  "bytes": 109739,
+  "aspect": 1.7778
+ },
+ "chekout/thinking.mp4": {
+  "w": 720,
+  "h": 392,
+  "bytes": 166723,
+  "dur": 3.0,
+  "aspect": 1.8367
+ },
+ "chekout/thinking.jpg": {
+  "w": 720,
+  "h": 392,
+  "bytes": 26502,
+  "aspect": 1.8367
+ },
+ "chekout/rec-carousel.mp4": {
+  "w": 720,
+  "h": 392,
+  "bytes": 466781,
+  "dur": 3.1,
+  "aspect": 1.8367
+ },
+ "chekout/rec-carousel.jpg": {
+  "w": 720,
+  "h": 392,
+  "bytes": 38380,
+  "aspect": 1.8367
+ },
+ "chekout/add-to-cart.mp4": {
+  "w": 720,
+  "h": 392,
+  "bytes": 183416,
+  "dur": 3.5,
+  "aspect": 1.8367
+ },
+ "chekout/add-to-cart.jpg": {
+  "w": 720,
+  "h": 392,
+  "bytes": 42133,
+  "aspect": 1.8367
+ },
+ "chekout/view-cart.mp4": {
+  "w": 720,
+  "h": 392,
+  "bytes": 326435,
+  "dur": 4.0,
+  "aspect": 1.8367
+ },
+ "chekout/view-cart.jpg": {
+  "w": 720,
+  "h": 392,
+  "bytes": 43713,
+  "aspect": 1.8367
+ },
+ "chekout/launcher-hover.mp4": {
+  "w": 720,
+  "h": 392,
+  "bytes": 140360,
+  "dur": 2.2,
+  "aspect": 1.8367
+ },
+ "chekout/launcher-hover.jpg": {
+  "w": 720,
+  "h": 392,
+  "bytes": 36795,
+  "aspect": 1.8367
+ },
+ "chekout/top-metrics.webp": {
+  "w": 1600,
+  "h": 387,
+  "bytes": 21196,
+  "aspect": 4.1344
+ },
+ "chekout/analytics.mp4": {
+  "w": 1136,
+  "h": 520,
+  "bytes": 369939,
+  "dur": 35.9,
+  "aspect": 2.1846
+ },
+ "chekout/analytics.jpg": {
+  "w": 1136,
+  "h": 520,
+  "bytes": 37938,
+  "aspect": 2.1846
+ },
+ "chekout/embedding-agents.mp4": {
+  "w": 1280,
+  "h": 694,
+  "bytes": 985391,
+  "dur": 23.9,
+  "aspect": 1.8444
+ },
+ "chekout/embedding-agents.jpg": {
+  "w": 1280,
+  "h": 694,
+  "bytes": 54224,
+  "aspect": 1.8444
+ },
+ "chekout/app-experience.mp4": {
+  "w": 1280,
+  "h": 770,
+  "bytes": 565417,
+  "dur": 15.1,
+  "aspect": 1.6623
+ },
+ "chekout/app-experience.jpg": {
+  "w": 1280,
+  "h": 770,
+  "bytes": 93806,
+  "aspect": 1.6623
+ },
+ "chekout/store-kivakube.webp": {
+  "w": 1280,
+  "h": 800,
+  "bytes": 50818,
+  "aspect": 1.6
+ },
+ "chekout/store-rosendahl.webp": {
+  "w": 1280,
+  "h": 800,
+  "bytes": 57536,
+  "aspect": 1.6
+ },
+ "christine-valmy/cover.webp": {
+  "w": 1040,
+  "h": 631,
+  "bytes": 25282,
+  "aspect": 1.6482
+ },
+ "christine-valmy/bento-concept.webp": {
+  "w": 1352,
+  "h": 702,
+  "bytes": 92428,
+  "aspect": 1.9259
+ },
+ "christine-valmy/student-id-concept.webp": {
+  "w": 1398,
+  "h": 788,
+  "bytes": 33820,
+  "aspect": 1.7741
+ },
+ "christine-valmy/dropdown-before.webp": {
+  "w": 785,
+  "h": 563,
+  "bytes": 44256,
+  "aspect": 1.3943
+ },
+ "christine-valmy/dropdown-after.webp": {
+  "w": 763,
+  "h": 570,
+  "bytes": 28364,
+  "aspect": 1.3386
+ },
+ "christine-valmy/social-before.webp": {
+  "w": 1600,
+  "h": 900,
+  "bytes": 37220,
+  "aspect": 1.7778
+ },
+ "christine-valmy/final-design.webp": {
+  "w": 1600,
+  "h": 900,
+  "bytes": 46806,
+  "aspect": 1.7778
+ },
+ "christine-valmy/spanish.webp": {
+  "w": 1600,
+  "h": 900,
+  "bytes": 57014,
+  "aspect": 1.7778
+ },
+ "christine-valmy/final-mobile.webp": {
+  "w": 402,
+  "h": 1025,
+  "bytes": 35508,
+  "aspect": 0.3922
+ },
+ "christine-valmy/agent-reply.mp4": {
+  "w": 1280,
+  "h": 670,
+  "bytes": 316228,
+  "dur": 22.9,
+  "aspect": 1.9104
+ },
+ "christine-valmy/agent-reply.jpg": {
+  "w": 1280,
+  "h": 670,
+  "bytes": 78040,
+  "aspect": 1.9104
+ },
+ "christine-valmy/laptop.mp4": {
+  "w": 1280,
+  "h": 720,
+  "bytes": 396555,
+  "dur": 6.0,
+  "aspect": 1.7778
+ },
+ "christine-valmy/laptop.jpg": {
+  "w": 1280,
+  "h": 720,
+  "bytes": 48299,
+  "aspect": 1.7778
+ },
+ "kyuri-os/job-hunt.webp": {
+  "w": 1600,
+  "h": 1000,
+  "bytes": 58542,
+  "aspect": 1.6
+ },
+ "kyuri-os/home.webp": {
+  "w": 1600,
+  "h": 1000,
+  "bytes": 63516,
+  "aspect": 1.6
+ },
+ "other/influencer-laptop.webp": {
+  "w": 1600,
+  "h": 881,
+  "bytes": 52694,
+  "aspect": 1.8161
+ },
+ "other/farms-final.webp": {
+  "w": 1174,
+  "h": 441,
+  "bytes": 46362,
+  "aspect": 2.6621
+ },
+ "other/clutch-overview.webp": {
+  "w": 804,
+  "h": 1741,
+  "bytes": 60036,
+  "aspect": 0.4618
+ },
+ "other/farms-sus.webp": {
+  "w": 512,
+  "h": 492,
+  "bytes": 26264,
+  "aspect": 1.0407
+ }
+}
