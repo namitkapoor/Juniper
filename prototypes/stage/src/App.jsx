@@ -565,6 +565,26 @@ export default function App() {
     if (window.history.state?.proof || window.history.state?.focus) window.history.back();
     else { setExpanded([]); setFocus(null); }
   }, []);
+  // An expanded view (media or Source list) closes on a click anywhere outside
+  // it: other cells, the stage's empty frame, the gutters. The chat, the nav,
+  // the depth rail and dialogs keep their own clicks; a text-selection drag
+  // never closes it.
+  useEffect(() => {
+    if (!focus && !expanded.length) return;
+    let downX = 0, downY = 0;
+    const onDown = (e) => { downX = e.clientX; downY = e.clientY; };
+    const onUp = (e) => {
+      if (e.button !== 0 || Math.hypot(e.clientX - downX, e.clientY - downY) > 6) return;
+      if (String(window.getSelection?.() || "").length) return;
+      const t = e.target;
+      if (!(t instanceof Element)) return;
+      if (t.closest(".cell.open, .cell.recede, .chat-wrap, .app-nav, .depth-rail, dialog, [role=dialog], .zoom-toolbar")) return;
+      closeFocusMode();
+    };
+    window.addEventListener("pointerdown", onDown, true);
+    window.addEventListener("pointerup", onUp, true);
+    return () => { window.removeEventListener("pointerdown", onDown, true); window.removeEventListener("pointerup", onUp, true); };
+  }, [focus, expanded, closeFocusMode]);
   useEffect(() => {
     if (!expanded.length) return;
     const onKey = (e) => { if (e.key === "Escape") closeFocusMode(); };

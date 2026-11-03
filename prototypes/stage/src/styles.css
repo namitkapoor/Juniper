@@ -58,10 +58,10 @@
   --media-bg: #d2d2d0;
   /* Receded cells step DOWN a surface, like KYURI.OS light (#c8c8c8 ground under #d8d8d8 panels):
      a clearly darker grey, with ink that still clears 4.5:1 on it (6.3:1 and 4.9:1). */
-  --recede-bg: #c8c8c8;
-  --recede-ink: #3f3f3c;
-  --recede-mute: #4f4f4b;
-  --recede-media: .62;
+  --recede-bg: #bcbcba;
+  --recede-ink: #4a4a47;
+  --recede-mute: #4a4a47;
+  --recede-media: .45;
   --chat-mute: #50504c;
   --logo-filter: brightness(0);
   --logo-inv-filter: brightness(0);
