@@ -24,7 +24,7 @@ import {
 
 // The Source rule lives in one place (engine/fit.js hasRealProof, sourcesOf).
 
-export function CellContent({ drillLabel, onDrill, onCaseLink, onStep, cell, fill, insetFill, attachFill, onTile, hot, preview, reduced, onAskOpen, faceBusy, expanded, onToggle, pad, measure, activeVideo, onOpenCase, onExpand, onCollapse, focused }) {
+export function CellContent({ tileOverlay, drillLabel, onDrill, onCaseLink, onStep, cell, fill, insetFill, attachFill, onTile, hot, preview, reduced, onAskOpen, faceBusy, expanded, onToggle, pad, measure, activeVideo, onOpenCase, onExpand, onCollapse, focused }) {
   const P = pad;
   const open = expanded.has(fill.id);
   const innerW = Math.round(cell.w) - 2 * P;
@@ -80,7 +80,7 @@ export function CellContent({ drillLabel, onDrill, onCaseLink, onStep, cell, fil
       }
       case "gate": return <GateCell fill={fill} P={P} />;
       case "face": return <FaceCell cell={cell} P={P} onAskOpen={onAskOpen} reduced={reduced} busy={faceBusy} />;
-      case "tile": return <TileCell fill={fill} cell={cell} P={P} onTile={onTile} hot={hot} />;
+      case "tile": return <TileCell fill={fill} cell={cell} P={P} onTile={onTile} hot={hot} overlay={tileOverlay?.[fill.caseStudy]} />;
       case "media": return <MediaCell fill={fill} cell={cell} listH={listH} active={activeVideo === fill.id} onOpenCase={onOpenCase} onExpand={onExpand} onCollapse={onCollapse} focused={focused} onStep={onStep} onDrill={onDrill} />;
       case "commits": return <CommitsCell fill={fill} cell={cell} P={P} />;
       default: return null;
@@ -668,7 +668,51 @@ function FaceCell({ cell, P, onAskOpen, reduced, busy }) {
  * A case-study tile: leads with the role and the task; the product shot only
  * appears when the tile is expanded (hover / focus / first tap).
  */
-function TileCell({ fill, cell, P, onTile, hot }) {
+/**
+ * Hero hover: while one case is hovered, every case tile shows that case's impact in
+ * place (the hovered one its headline, the others its next numbers). Display only: the
+ * layout never changes. A covered tile keeps its own name as a small label, so you can
+ * still tell what it opens.
+ */
+function TileOverlay({ o, fill, cell, P, out = false }) {
+  const W = cell.w - 2 * P, H = cell.h - 2 * P;
+  const v = `${o.value}${o.unit || ""}`;
+  const fs = Math.max(28, Math.min(H * 0.42, (W / Math.max(3, v.length)) * 1.55, 120));
+  return (
+    <div className={`tile-overlay ${out ? "out" : ""} ${o.logo ? "has-logo" : ""}`} aria-hidden="true" style={{ padding: P }}>
+      <div className="label tile-ov-k">{o.self ? o.kicker : `${o.kicker} · ${o.about ? "about" : "impact"}`}</div>
+      <div className="tile-ov-num">
+        {o.logo
+          ? <div className="tile-ov-logo" role="img" aria-label={o.value} style={{ WebkitMaskImage: `url(${o.logo})`, maskImage: `url(${o.logo})`, height: Math.round(Math.min(H * 0.5, 150)) }} />
+          : <div className="kpi-value" style={{ fontSize: Math.round(fs) }}>{o.value}{o.unit && <span className="kpi-unit">{o.unit}</span>}</div>}
+        <div className="kpi-label tile-ov-label">{o.label}</div>
+      </div>
+      {!o.self && <div className="label tile-ov-own">{fill.caseTitle} →</div>}
+    </div>
+  );
+}
+
+/**
+ * Cross-fades tile overlays: the outgoing one fades out (and is then unmounted) while the
+ * incoming one fades in, so leaving a tile or moving to another never cuts.
+ */
+const OV_OUT_MS = 260;
+function OverlaySwap({ overlay, fill, cell, P }) {
+  const key = overlay ? `${overlay.kicker}:${overlay.value}` : null;
+  const [layers, setLayers] = useState(() => (overlay ? [{ key, o: overlay, out: false }] : []));
+  useEffect(() => {
+    setLayers((ls) => {
+      const kept = ls.filter((l) => l.key !== key).map((l) => ({ ...l, out: true }));
+      return overlay ? [...kept, { key, o: overlay, out: false }] : kept;
+    });
+    const t = setTimeout(() => setLayers((ls) => ls.filter((l) => !l.out)), OV_OUT_MS);
+    return () => clearTimeout(t);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [key]);
+  return layers.map((l) => <TileOverlay key={l.key} o={l.o} fill={fill} cell={cell} P={P} out={l.out} />);
+}
+
+function TileCell({ fill, cell, P, onTile, hot, overlay }) {
   const step = cell.spec?.step ?? 3;
   const num = cell.spec?.num ?? 0;
   const numH = tileNumH(num, cell.spec?.labelLines ?? 1);
@@ -699,6 +743,7 @@ function TileCell({ fill, cell, P, onTile, hot }) {
         </div>
       )}
       <span className="label tile-open" style={{ right: P, bottom: P, width: TILE.openW }} aria-hidden>Open →</span>
+      <OverlaySwap overlay={overlay} fill={fill} cell={cell} P={P} />
     </div>
   );
 }

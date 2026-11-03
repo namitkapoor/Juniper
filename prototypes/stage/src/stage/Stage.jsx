@@ -84,7 +84,7 @@ function createRuntime() {
 
 const GLIDE_CELLS = ".cell:is(.drills, :has(> .c-tile), :has(> .c-media[data-act]), :has(> .c-face.asks)):not(.recede, .open)";
 
-export function Stage({ onNamit, layout, fillMap, expanded, onToggleReceipts, reduced, measure, height, reserve, onOpenCase, onExpand, onCollapse, focusId, onTile, hot, quick, preview, previewKey, onAskOpen, faceBusy, intro, onIntroDone, openId, onCloseFocus, onStep, onCaseLink, onDrill, drillLabel, onEscapeStage }) {
+export function Stage({ tileOverlay, onNamit, layout, fillMap, expanded, onToggleReceipts, reduced, measure, height, reserve, onOpenCase, onExpand, onCollapse, focusId, onTile, hot, quick, preview, previewKey, onAskOpen, faceBusy, intro, onIntroDone, openId, onCloseFocus, onStep, onCaseLink, onDrill, drillLabel, onEscapeStage }) {
   const rtRef = useRef(null);
   if (!rtRef.current) rtRef.current = createRuntime();
   const rt = rtRef.current;
@@ -346,7 +346,7 @@ export function Stage({ onNamit, layout, fillMap, expanded, onToggleReceipts, re
               {...(layout.mode === "stack" && openId === c.fillId ? swipe(onCloseFocus, onStep) : {})}
               data-fill={c.fillId}
               ref={(el) => { if (el) rt.cellEls.set(c.fillId, el); else rt.cellEls.delete(c.fillId); }}
-              data-case={fill.caseStudy && onTile ? fill.caseStudy : undefined}
+              data-case={fill.caseStudy && onTile ? fill.caseStudy : toAbout && onTile ? "about" : undefined}
               onPointerEnter={(e) => {
                 if (e.pointerType !== "touch") setGlideId(e.currentTarget.matches(GLIDE_CELLS) ? c.fillId : null);
                 if (fill.kind === "face" && onAskOpen) setHoverCell(fill.id);
@@ -357,7 +357,7 @@ export function Stage({ onNamit, layout, fillMap, expanded, onToggleReceipts, re
                 if (isVideo(fill)) setHoverVideo((h) => (h === fill.id ? null : h));
               }}
             >
-              <CellContent
+              <CellContent tileOverlay={tileOverlay}
                 cell={c} fill={fill} insetFill={insetOwners.get(c.fillId)}
                 expanded={expanded} onToggle={onToggleReceipts} pad={layout.mode === "stack" ? 20 : 24} measure={measure}
                 activeVideo={activeVideo} onOpenCase={onOpenCase} onStep={onStep} onCaseLink={onCaseLink} onDrill={onDrill} drillLabel={drillLabel} onTile={onTile} hot={hot === fill.caseStudy}

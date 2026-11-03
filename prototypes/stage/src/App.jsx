@@ -13,7 +13,7 @@ import { Face } from "./chat/Face.jsx";
 import { Navbar } from "./nav/Navbar.jsx";
 import { aboutAnswer, aboutFromJson } from "./about/aboutAnswer.js";
 import { caseName } from "./caseName.js";
-import { heroHome } from "./prelude/heroState.js";
+import { heroHome, caseKpis, aboutFacts } from "./prelude/heroState.js";
 
 const FRAME = 20; // outer gutter around the hairline frame
 const RAIL = 24; // left gutter: the depth rail (24px targets)
@@ -157,6 +157,30 @@ export default function App() {
     return dedupeOpens(answer);
   }, [answer, focus, focusValid, onHomeStage, content, expanded, chatOpen, phone, heroOn]);
   useEffect(() => { if (focus && !focusValid) setFocus(null); }, [focus, focusValid]);
+  // Hero hover: the hovered case's headline on its own tile, its next impact numbers on
+  // the other case tiles. Display only (never fed to the layout), so nothing reshuffles.
+  const tileOverlay = useMemo(() => {
+    if (!heroOn || !hot || !content) return null;
+    const info = homeWithTiles(answer, content.caseStudies, { chatOpen: false });
+    const tiles = info.fills.filter((f) => f.kind === "tile");
+    // Hovering "namit": the About page's facts on the case tiles.
+    if (hot === "about") {
+      const facts = aboutFacts(content.about);
+      const out = {};
+      tiles.forEach((f, i) => { if (facts[i]) out[f.caseStudy] = { kicker: "namit", value: facts[i].value, label: facts[i].label, logo: facts[i].logo, about: true }; });
+      return out;
+    }
+    const own = tiles.find((f) => f.caseStudy === hot);
+    if (!own) return null;
+    const kicker = own.caseTitle || own.role;
+    const out = { [hot]: own.number?.value ? { self: true, kicker: own.role || kicker, value: own.number.value, unit: own.number.unit, label: own.number.label } : null };
+    const more = caseKpis(content.decks, hot, own.number?.value, tiles.length - 1);
+    tiles.filter((f) => f.caseStudy !== hot).forEach((f, i) => {
+      const k = more[i];
+      if (k) out[f.caseStudy] = { kicker, value: k.value, unit: k.unit, label: k.label };
+    });
+    return out;
+  }, [heroOn, hot, content, answer]);
   useEffect(() => { if (onHomeStage && expanded.length) setExpanded([]); }, [onHomeStage]); // eslint-disable-line react-hooks/exhaustive-deps
   const previews = useMemo(() => (content ? heroPreviews(content.home, content.caseStudies) : {}), [content]);
 
@@ -668,6 +692,7 @@ export default function App() {
       <main className="stage-wrap" style={phone ? undefined : { width: rect.w }}>
         <div className={tall > 1 ? "stage-scroll" : "stage-plain"}>
         <Stage
+          tileOverlay={tileOverlay}
           onNamit={isHome ? goAbout : undefined}
           layout={layout} fillMap={fillMap} expanded={new Set(expanded)}
           onToggleReceipts={onToggleReceipts} onMore={onMore} reduced={reduced} measure={measure}

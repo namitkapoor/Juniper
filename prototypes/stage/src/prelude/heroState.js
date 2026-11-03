@@ -63,3 +63,22 @@ export function heroHome(info, { hot = null, decks = [] } = {}) {
   const last = second.includes(A.last) ? A.last : undefined;
   return { ...info, id: `${info.id}+hero${hot ? `~${hot}` : ""}`, fills, split: { axis: A.axis, at: A.at, first, second, last, bento: A.bento } };
 }
+
+/**
+ * Short facts for the "namit" hover, from the About page (src/data/about.json):
+ * the ChekOut AI start year from the timeline, and the HCI master's and Arlene AR work
+ * from the bio. Only what about.json says.
+ */
+export function aboutFacts(about) {
+  const tl = about?.timeline || [];
+  const yr = (d) => (d || "").slice(0, 4);
+  const out = [];
+  const ck = tl.find((t) => /chekout/i.test(t.org || "") && /founder/i.test(t.title || ""));
+  if (ck) out.push({ value: yr(ck.start), label: `co-founded ${ck.org}, where I design and build the AI agents` });
+  for (const t of tl.filter((x) => x.kind === "education")) {
+    const school = /georgia/i.test(t.org) ? "Georgia Tech" : /dartmouth/i.test(t.org) ? "Dartmouth" : t.org;
+    const logo = /georgia/i.test(t.org) ? "/assets/about/logo-georgia-tech.png" : /dartmouth/i.test(t.org) ? "/assets/about/logo-dartmouth.png" : null;
+    out.push({ value: school, label: `${t.title}, ${yr(t.start)} to ${yr(t.end)}`, logo });
+  }
+  return out;
+}

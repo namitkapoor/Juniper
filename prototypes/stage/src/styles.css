@@ -1061,7 +1061,11 @@ kbd { font: 500 12px ui-monospace, Menlo, monospace; padding: 1px 5px; border: 1
 .msg.bot .msg-face.reacting { transform: scale(1); }
 .msg.bot:has(.msg-face.reacting) { min-height: 60px; }
 @media (prefers-reduced-motion: reduce) { .msg.bot .msg-face { transition: none; } }
-.app.phone .msg.bot { padding-left: 0; }
+/* phones: a narrower speaker column; the face scales from 40px (reacting) to 28px */
+.app.phone .msg.bot { padding-left: 46px; min-height: 32px; }
+.app.phone .msg.bot .msg-face { transform: scale(.5); }
+.app.phone .msg.bot .msg-face.reacting { transform: scale(.72); }
+.app.phone .msg.bot:has(.msg-face.reacting) { min-height: 44px; }
 /* clip swaps (idle -> thinking -> reaction) ease in instead of cutting */
 .face-lottie svg { animation: face-in 220ms ease-out both; }
 @keyframes face-in { from { opacity: .35; } to { opacity: 1; } }
@@ -1128,3 +1132,26 @@ kbd { font: 500 12px ui-monospace, Menlo, monospace; padding: 1px 5px; border: 1
 .gate-eye { flex: none; display: flex; align-items: center; justify-content: center; width: 40px; background: none; border: 0; color: var(--mute); cursor: pointer; }
 .gate-eye:hover, .gate-eye[aria-pressed="true"] { color: var(--ink); }
 .gate-eye:focus-visible { outline: 1px solid var(--hair-live); outline-offset: -6px; color: var(--ink); }
+
+/* hero hover: impact numbers cover the case tiles in place (TileOverlay) */
+.tile-overlay { position: absolute; inset: 0; z-index: 3; display: flex; flex-direction: column; background: var(--bg); animation: tile-ov-in 260ms cubic-bezier(.2, .7, .2, 1) both; pointer-events: none; }
+.tile-overlay > * { animation: tile-ov-rise 320ms cubic-bezier(.2, .7, .2, 1) both; }
+.tile-overlay.out { animation: tile-ov-out 260ms ease-in both; z-index: 2; }
+.tile-overlay.out > * { animation: none; }
+@keyframes tile-ov-out { from { opacity: 1; } to { opacity: 0; } }
+@keyframes tile-ov-rise { from { transform: translateY(6px); } to { transform: none; } }
+.tile-ov-k { color: var(--ink-2); }
+.tile-ov-num { margin-top: auto; }
+.tile-ov-num .kpi-value { line-height: .95; }
+.tile-ov-label { margin-top: 8px; color: var(--ink-2); font-size: 14px; line-height: 19px; max-width: 34ch; }
+.tile-ov-own { margin-top: 12px; color: var(--mute); }
+@keyframes tile-ov-in { from { opacity: 0; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .tile-overlay, .tile-overlay > *, .tile-overlay.out { animation: none; } .tile-overlay.out { display: none; } }
+/* phones: the accessibility sign sits beside the menu button (desktop has it in the links) */
+.a11y-phone { display: none; }
+@media (max-width: 760px) { .a11y-phone { display: flex; margin-left: auto; margin-right: 12px; } }
+/* school marks: monochrome alpha masks tinted with the theme ink */
+.tile-ov-logo { width: 100%; background: var(--ink); -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: center; mask-position: center; -webkit-mask-size: contain; mask-size: contain; margin-bottom: 14px; }
+/* a logo tile: the mark centred in the free space, the degree line under it */
+.tile-overlay.has-logo .tile-ov-num { margin-top: 0; flex: 1; display: flex; flex-direction: column; justify-content: center; }
+.tile-overlay.has-logo .tile-ov-label { text-align: center; margin-left: auto; margin-right: auto; }
