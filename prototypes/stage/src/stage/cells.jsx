@@ -680,14 +680,13 @@ function TileOverlay({ o, fill, cell, P, out = false }) {
   const fs = Math.max(28, Math.min(H * 0.42, (W / Math.max(3, v.length)) * 1.55, 120));
   return (
     <div className={`tile-overlay ${out ? "out" : ""} ${o.logo ? "has-logo" : ""}`} aria-hidden="true" style={{ padding: P }}>
-      <div className="label tile-ov-k">{o.self ? o.kicker : `${o.kicker} · ${o.about ? "about" : "impact"}`}</div>
+      <div className="label tile-ov-k">{o.self ? o.kicker : o.about ? "namit · about" : o.kicker === "Open to" ? "namit · open to" : `${o.kicker} · impact`}</div>
       <div className="tile-ov-num">
         {o.logo
           ? <div className="tile-ov-logo" role="img" aria-label={o.value} style={{ WebkitMaskImage: `url(${o.logo})`, maskImage: `url(${o.logo})`, height: Math.round(Math.min(H * 0.5, 150)) }} />
           : <div className="kpi-value" style={{ fontSize: Math.round(fs) }}>{o.value}{o.unit && <span className="kpi-unit">{o.unit}</span>}</div>}
         <div className="kpi-label tile-ov-label">{o.label}</div>
       </div>
-      {!o.self && <div className="label tile-ov-own">{fill.caseTitle} →</div>}
     </div>
   );
 }

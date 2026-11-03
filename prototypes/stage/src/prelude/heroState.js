@@ -73,8 +73,8 @@ export function aboutFacts(about) {
   const tl = about?.timeline || [];
   const yr = (d) => (d || "").slice(0, 4);
   const out = [];
-  const ck = tl.find((t) => /chekout/i.test(t.org || "") && /founder/i.test(t.title || ""));
-  if (ck) out.push({ value: yr(ck.start), label: `co-founded ${ck.org}, where I design and build the AI agents` });
+  // What I'm looking for (owner, 2026-11-03: design engineer, forward-deployed and product design roles).
+  out.push({ value: "Design Engineer", label: "also forward-deployed engineering and product design roles", kicker: "Open to" });
   for (const t of tl.filter((x) => x.kind === "education")) {
     const school = /georgia/i.test(t.org) ? "Georgia Tech" : /dartmouth/i.test(t.org) ? "Dartmouth" : t.org;
     const logo = /georgia/i.test(t.org) ? "/assets/about/logo-georgia-tech.png" : /dartmouth/i.test(t.org) ? "/assets/about/logo-dartmouth.png" : null;
