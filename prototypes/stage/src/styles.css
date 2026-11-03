@@ -956,7 +956,7 @@ kbd { font: 500 12px ui-monospace, Menlo, monospace; padding: 1px 5px; border: 1
 .ru-item { display: flex; gap: var(--r-gap); align-items: flex-start; min-width: 0; animation: ru-in 160ms steps(3, end) calc(var(--i, 0) * 40ms) both; }
 .ru-icon { position: relative; flex: none; display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--hair); color: var(--ink-2); }
 .ru-text { display: flex; flex-direction: column; min-width: 0; }
-.ru-label { font-size: var(--r-size); line-height: var(--r-lh); font-weight: 500; color: var(--ink); }
+.ru-label { font-size: var(--r-size); line-height: var(--r-lh); font-weight: 400; color: var(--ink); }
 .ru-note { display: inline-flex; align-items: center; gap: 4px; margin-top: 2px; font-size: var(--r-note); line-height: var(--r-note-lh); color: var(--mute); }
 .ru-group-head { display: flex; align-items: flex-start; }
 .ru-group.side { display: grid; align-items: start; }

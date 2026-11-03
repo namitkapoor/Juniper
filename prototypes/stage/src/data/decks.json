@@ -4852,31 +4852,36 @@
     "parent": "cv-build",
     "caseStudy": "christine-valmy",
     "question": "How was the agent kept on script?",
-    "thesis": "Review sessions caught where it drifted: too much at once, too many questions, and claiming to be human. Each finding became a rule it now follows.",
+    "thesis": "Testing showed where the agent went wrong, and each problem became a rule. The rest are the school’s own rules for what it says, in what order, and who it turns away.",
     "fills": [
       {
         "kind": "rules",
         "id": "cvs-review",
         "weight": 1,
         "mode": "pairs",
-        "label": "What testing found → what changed",
-        "tag": "Review sessions",
+        "label": "What testing caught → the fix",
+        "tag": "From testing",
         "items": [
           {
             "icon": "lucide:gauge",
-            "from": "Too much at once",
-            "text": "Slow down"
+            "from": "Replies said too much at once",
+            "text": "One step at a time"
           },
           {
             "icon": "lucide:message-circle-question-mark",
-            "from": "Too many questions",
-            "text": "1-2 questions per reply"
+            "from": "It asked several questions in one reply",
+            "text": "One or two questions at most"
+          },
+          {
+            "icon": "lucide:phone",
+            "from": "It gave out the phone number unprompted",
+            "text": "The number only when a student asks"
           },
           {
             "icon": "lucide:user-round",
-            "from": "Claimed to be human",
-            "text": "Hand off to an advisor",
-            "note": "Fix direction"
+            "from": "Asked for a human, it said it was one",
+            "text": "Offer an enrollment advisor instead",
+            "note": "Planned fix"
           }
         ],
         "receipts": [
@@ -4894,8 +4899,8 @@
         "id": "cvs-order",
         "weight": 0.7,
         "mode": "flow",
-        "label": "The order it follows",
-        "tag": "Requirement",
+        "label": "The order every chat follows",
+        "tag": "School’s rules",
         "items": [
           {
             "icon": "lucide:graduation-cap",
@@ -4905,18 +4910,18 @@
             "icon": "lucide:tag",
             "text": "Pricing",
             "lock": true,
-            "note": "Only after a course"
+            "note": "Only once a course is named"
           },
           {
             "icon": "lucide:piggy-bank",
             "text": "Financial aid",
-            "note": "Esthetics only"
+            "note": "Offered for esthetics only"
           }
         ],
         "exit": {
           "icon": "lucide:circle-x",
           "text": "Doesn't qualify",
-          "note": "Says so plainly"
+          "note": "Told directly"
         },
         "receipts": [
           {
@@ -4933,19 +4938,19 @@
         "id": "cvs-reply",
         "weight": 0.55,
         "label": "Every reply",
-        "tag": "Requirement",
+        "tag": "School’s rules",
         "items": [
           {
             "icon": "lucide:list-ordered",
-            "text": "≤4 sentences"
+            "text": "Four sentences or fewer"
           },
           {
             "icon": "lucide:message-square-text",
-            "text": "Plain, warm words"
+            "text": "Short, plain, no jargon"
           },
           {
             "icon": "lucide:file-text",
-            "text": "From school docs"
+            "text": "Facts from the school’s documents"
           },
           {
             "icon": "lucide:message-circle-question-mark",
@@ -4966,41 +4971,37 @@
         "kind": "rules",
         "id": "cvs-guard",
         "weight": 0.5,
-        "label": "Also built in",
-        "tag": "Design",
+        "label": "Guardrails I added",
+        "tag": "Built in",
         "dense": true,
         "items": [
           {
             "icon": "lucide:badge-check",
-            "text": "Verify every program detail"
-          },
-          {
-            "icon": "lucide:phone",
-            "text": "Phone number only when asked"
-          },
-          {
-            "icon": "lucide:id-card",
-            "text": "Scripted identity answers"
+            "text": "Prices and programs checked against the documents"
           },
           {
             "icon": "lucide:text-cursor-input",
-            "text": "300-char cap"
+            "text": "Student messages capped at 300 characters"
           },
           {
             "icon": "lucide:user-round-check",
-            "text": "Officer hand-off"
+            "text": "Hand-off to an enrollment officer after a few messages"
           },
           {
             "icon": "lucide:undo-2",
-            "text": "Off-topic redirect"
+            "text": "Off-topic questions steered back"
+          },
+          {
+            "icon": "lucide:id-card",
+            "text": "A set answer to “who owns you?”"
           },
           {
             "icon": "lucide:shield-x",
-            "text": "SQL injection refused"
+            "text": "Database attacks refused"
           },
           {
             "icon": "lucide:timer",
-            "text": "30s reply target"
+            "text": "Replies within 30 seconds"
           }
         ],
         "receipts": [
@@ -5017,32 +5018,32 @@
         "kind": "rules",
         "id": "cvs-disq",
         "weight": 0.4,
-        "label": "Doesn’t qualify if",
-        "tag": "Requirement",
+        "label": "Turned away if they",
+        "tag": "School’s rules",
         "items": [
           {
             "icon": "lucide:globe",
-            "text": "Outside the US"
+            "text": "Live outside the US"
           },
           {
             "icon": "lucide:hourglass",
-            "text": "Can't do 600 hrs"
+            "text": "Can’t commit to 600 hours"
           },
           {
             "icon": "lucide:map-pin-off",
-            "text": "Can't attend NJ·NY"
+            "text": "Can’t attend in NJ or NY"
           },
           {
             "icon": "lucide:languages",
-            "text": "No English or Spanish"
+            "text": "Speak neither English nor Spanish"
           },
           {
             "icon": "lucide:scroll-text",
-            "text": "No diploma or GED"
+            "text": "Have no diploma or GED"
           },
           {
             "icon": "lucide:stamp",
-            "text": "Needs a visa"
+            "text": "Need a visa"
           }
         ],
         "receipts": [

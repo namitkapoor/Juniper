@@ -174,7 +174,7 @@ export const RULES = {
   /** A dense chip (icon + label [+ note]) at a step: its font and its height. */
   denseFont: (s) => font(BODY, 400, s.dense),
   denseH: (s) => Math.round(s.dense * 1.35) + 10,
-  item: (s) => font(BODY, 500, s.size),
+  item: (s) => font(BODY, 400, s.size),
   noteFont: (s) => font(BODY, 400, s.note),
 };
 export const OFFCLOCK = { headH: 30, intro: font(BODY, 400, 15), introLH: 22, slotMinW: 150, slotH: 96, gap: 12 };
