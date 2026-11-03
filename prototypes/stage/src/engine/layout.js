@@ -252,7 +252,7 @@ function leadIsLargest(L, id) {
 }
 
 function gridLayoutOnce({ rect, weighted, measure, exp, pair }) {
-  const ordered = [...weighted].sort((a, b) => (b.weight - a.weight) || (a.fill.id < b.fill.id ? -1 : 1));
+  const ordered = groupSteps([...weighted].sort((a, b) => (b.weight - a.weight) || (a.fill.id < b.fill.id ? -1 : 1)));
   const xs = gridLines(rect.x, rect.w);
   const ys = gridLines(rect.y, rect.h);
   const totalW = ordered.reduce((s, f) => s + f.weight, 0);
@@ -276,7 +276,7 @@ function gridLayoutOnce({ rect, weighted, measure, exp, pair }) {
         .filter((it) => it !== k)
         .map((it) => (it === prose ? { ...it, weight: it.weight + k.weight * 0.6, inset: k.fill } : it));
       items.sort((a, b) => (b.weight - a.weight) || (a.fill.id < b.fill.id ? -1 : 1));
-      candidates.push({ items, insetBonus: true });
+      candidates.push({ items: groupSteps(items), insetBonus: true });
     }
   }
 
@@ -290,7 +290,7 @@ function gridLayoutOnce({ rect, weighted, measure, exp, pair }) {
       .filter((it) => it !== logos)
       .map((it) => (it === kpi ? { ...it, weight: it.weight + logos.weight * 0.5, attach: logos.fill } : it));
     items.sort((a, b) => (b.weight - a.weight) || (a.fill.id < b.fill.id ? -1 : 1));
-    candidates.push({ items, insetBonus: true });
+    candidates.push({ items: groupSteps(items), insetBonus: true });
   }
 
   // Fit costs depend only on (fill, inset, cell size), so candidates share them.
@@ -472,6 +472,11 @@ function makeSolver({ rect, xs, ys, items, sumW, measure, exp, fitCache, bento =
     return r;
   };
 
+  // A cut between two consecutive steps only where the whole range is steps:
+  // then the steps are siblings under one cut, side by side or stacked, in order.
+  const isStep = (n) => !!items[n]?.fill?.step;
+  const allSteps = (i, j) => { for (let n = i; n < j; n++) if (!isStep(n)) return false; return true; };
+  const splitsRun = (groups, i, j) => !allSteps(i, j) && groups.some(([a]) => a > i && isStep(a - 1) && isStep(a));
   const solve = (gx0, gy0, gx1, gy1, i, j, depth) => {
     const key = `${gx0},${gy0},${gx1},${gy1},${i},${j},${depth}`;
     if (memo.has(key)) return memo.get(key);
@@ -488,6 +493,7 @@ function makeSolver({ rect, xs, ys, items, sumW, measure, exp, fitCache, bento =
         const minPx = axis === "v" ? MIN_CELL.w : MIN_CELL.h;
         for (let k = 2; k <= Math.min(3, j - i); k++) {
           for (const groups of partitions(i, j, k)) {
+            if (splitsRun(groups, i, j)) continue;
             for (const cuts of cutPositions(lo, hi, k, lines, minPx)) {
               // Bento: an even split, or a horizontal cut lining up with one on the
               // other side of the frame (one long grid line), reads as a table.
@@ -521,6 +527,20 @@ function makeSolver({ rect, xs, ys, items, sumW, measure, exp, fitCache, bento =
     return best;
   };
   return solve;
+}
+
+/**
+ * A deck's numbered steps (fill.step, e.g. "STEP 1 OF 2 · INITIAL CONCEPT") are a
+ * chronology: keep them adjacent in the fill order, in step order, at the place
+ * of the heaviest one, so the solver can set them as one aligned run.
+ */
+export function groupSteps(list) {
+  const steps = list.filter((w) => w.fill?.step);
+  if (steps.length < 2) return list;
+  const run = [...steps].sort((a, b) => a.fill.step.n - b.fill.step.n);
+  const at = list.findIndex((w) => w.fill?.step);
+  const rest = list.filter((w) => !w.fill?.step);
+  return [...rest.slice(0, at), ...run, ...rest.slice(at)];
 }
 
 /** Contiguous partitions of [i, j) into k non-empty runs. */

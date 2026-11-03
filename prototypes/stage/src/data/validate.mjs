@@ -120,7 +120,7 @@ function checkFill(f, where, ids) {
     case "prose":
       if (!isStr(f.text)) err(where, "prose.text missing");
       // A problem statement is a claim: it needs a source (research, a client reference, data or code).
-      checkReceipts(f.receipts, where, /^\s*(THE PROBLEM|THREE PROBLEMS)\b/.test(f.text || ""));
+      checkReceipts(f.receipts, where, /^\s*(THE CHALLENGE|THE PROBLEM|THREE PROBLEMS)\b/.test(f.text || ""));
       if (f.status !== undefined) {
         if (!isStr(f.status?.text)) err(where, "prose.status.text missing");
         if (f.status?.link && (!isStr(f.status.link.label) || !/^https:\/\//.test(f.status.link.url || ""))) err(where, "prose.status.link needs label + https url");

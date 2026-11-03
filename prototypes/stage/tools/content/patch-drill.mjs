@@ -46,7 +46,7 @@ children.push({
   question: "How does the cart work inside the conversation?",
   thesis: "Shoppers add to cart without leaving the chat, the store's own cart closes the sale, and tagged carts let the merchant see what the agent sold.",
   fills: [
-    prose("ckc-problem", 1, "THE PROBLEM: Acting on an answer shouldn't cost the shopper their place in the conversation, and a second cart beside the store's would be one more thing to reconcile.", [CK]),
+    prose("ckc-problem", 1, "THE CHALLENGE: Acting on an answer shouldn't cost the shopper their place in the conversation, and a second cart beside the store's would be one more thing to reconcile.", [CK]),
     media("ckc-add", 0.85, "assets/chekout/add-to-cart.mp4", 1.8367, "A product card in the chat confirms the add in place and then shows the quantity",
       "Add to cart, in the chat.", "The card itself confirms the add and keeps showing the quantity, so the shopper never leaves the thread to check.", [CK]),
     media("ckc-view", 0.85, "assets/chekout/view-cart.mp4", 1.8367, "Two lampshades added in the widget, then View cart opens Rosendahl's own cart page",
@@ -60,7 +60,7 @@ children.push({
   question: "What does the merchant dashboard show?",
   thesis: "The dashboard answers a merchant's first question, what are shoppers asking, with the conversations themselves.",
   fills: [
-    prose("ckd-problem", 1, "THE PROBLEM: A merchant's first question after going live is what shoppers are asking, and a count of sessions doesn't answer it.", [CK]),
+    prose("ckd-problem", 1, "THE CHALLENGE: A merchant's first question after going live is what shoppers are asking, and a count of sessions doesn't answer it.", [CK]),
     media("ckd-flow", 0.9, "assets/chekout/analytics.mp4", 2.1846, "The dashboard on Kivakube's data: an insight tooltip, then a keyword opening the conversations behind it",
       "Insight, keyword, threads.", "An insight turns a number into a next step, and clicking a keyword opens every thread that mentions it, so the merchant reads the actual questions.", [CK, cr("chekoutai-frontend", "ab03e36")]),
     prose("ckd-engaged", 0.65, "ENGAGEMENT: I replaced the conversion-rate card with an engagement rate that only counts visitors who actually replied, so a widget that opened and greeted no one doesn't inflate the number.", [cr("chekoutai-frontend", "c78b8c4"), cr("chekoutai-frontend", "3edaa92")]),
@@ -73,7 +73,7 @@ children.push({
   question: "What does the motion in the widget do?",
   thesis: "Each animation tells the shopper what the agent is doing, and each leaves a static cue behind when it ends.",
   fills: [
-    prose("ckm-problem", 1, "THE PROBLEM: A static panel can't show that the agent is working, or that a tap landed.", [CK]),
+    prose("ckm-problem", 1, "THE CHALLENGE: A static panel can't show that the agent is working, or that a tap landed.", [CK]),
     media("ckm-thinking", 0.8, "assets/chekout/thinking.mp4", 1.8367, "The thinking state holds the shopper's place, then the reply fades in word by word",
       "Thinking, then the reply.", "The thinking state holds the shopper's place while retrieval runs, and the newest reply fades in word by word.", [CK, cr("chekoutai-frontend", "cef8abf")]),
     media("ckm-carousel", 0.7, "assets/chekout/rec-carousel.mp4", 1.8367, "Products arrive with the answer in a carousel that keeps the thread on screen",
@@ -88,7 +88,7 @@ children.push({
   question: "How does a merchant set the agent up?",
   thesis: "Three steps in the builder, one brand color, a preview that is the real widget, and an embed that only mounts on the merchant's own domains.",
   fills: [
-    prose("ckb-problem", 1, "THE PROBLEM: Merchants set the agent up once, in our builder, and need to see exactly what their shoppers will see on a page we never control.", [AP]),
+    prose("ckb-problem", 1, "THE CHALLENGE: Merchants set the agent up once, in our builder, and need to see exactly what their shoppers will see on a page we never control.", [AP]),
     media("ckb-flow", 0.9, "assets/chekout/onboarding.webp", 2.6667, "Onboarding and agent builder flow: app-store install, Step 1 AI Persona, store OAuth, product sync, Step 2 Knowledge Base, agent provisioning, Step 3 Channel",
       "From app-store install to a provisioned agent.", "The three builder steps in order, with what happens between them: store OAuth after the persona step, product sync, then agent provisioning before the channel step. Boxes are tagged [code] or [notes] by how each was verified.",
       [figma(CKJ, "3:112", "FigJam: 2 · Onboarding & agent builder")]),
@@ -103,7 +103,7 @@ children.push({
   question: "What is the ChekOut stack?",
   thesis: "One Next.js app on Cloud Run serves the builder and the widget, chat runs through a Langflow agent per merchant, and analytics come from BigQuery.",
   fills: [
-    prose("cks-problem", 1, "THE PROBLEM: The same frontend has to serve merchants in a builder and shoppers inside other people's stores, and ship to both without breaking either.", [figma(CKJ, "3:39", "FigJam: 1 · System context")]),
+    prose("cks-problem", 1, "THE CHALLENGE: The same frontend has to serve merchants in a builder and shoppers inside other people's stores, and ship to both without breaking either.", [figma(CKJ, "3:39", "FigJam: 1 · System context")]),
     media("cks-arch", 0.85, "assets/chekout/architecture.webp", 2.0645, "ChekOut AI system context: merchants and shoppers, the Next.js front end, Langflow agents, backend services on Cloud Run, commerce platforms, Postgres and BigQuery",
       "Who talks to what.", "Chat messages go from the front end to a Langflow agent per merchant; setup, store sync and billing go to backend services. Blue is my work; [code] and [notes] say how each box was verified.",
       [figma(CKJ, "3:39", "FigJam: 1 · System context")]),
@@ -119,7 +119,7 @@ children.push({
   question: "What was the first concept?",
   thesis: "I wanted enrollment to feel like an app, and every piece of it was a guess about what students wanted.",
   fills: [
-    prose("cvc-problem", 1, "THE PROBLEM: Students filled in a form and waited, and officers answered the same questions on every call. I wanted the first visit to do more of that work.", [CV]),
+    prose("cvc-problem", 1, "THE CHALLENGE: Students filled in a form and waited, and officers answered the same questions on every call. I wanted the first visit to do more of that work.", [CV]),
     media("cvc-bento", 0.85, "assets/christine-valmy/bento-concept.webp", 1.9259, "Bento grid concept: green tiles for pricing, courses, alumni and schedule around a chat prompt",
       "Every topic one tap from the chat.", "Tiles for pricing, courses, alumni and schedules sat around the chat, so nobody had to think of a question first, and every tap would tell officers what the student cared about.", [CV]),
     media("cvc-id", 0.75, "assets/christine-valmy/student-id-concept.webp", 1.7741, "Student ID concept: a card with name, email and course picks for nails, haircare, makeup and esthetics",
@@ -132,7 +132,7 @@ children.push({
   question: "How did the agent become bilingual?",
   thesis: "Many applicants spoke Spanish first, so the agent and every label work in both languages, not just the replies.",
   fills: [
-    prose("cvb-problem", 1, "THE PROBLEM: Many applicants spoke Spanish first, and an English-only form and chat lost them before the first question.", [CV]),
+    prose("cvb-problem", 1, "THE CHALLENGE: Many applicants spoke Spanish first, and an English-only form and chat lost them before the first question.", [CV]),
     media("cvb-en", 0.7, "assets/christine-valmy/final-design.webp", 1.7778, "Inquiry form and chat in English with social links under the chat",
       "Before: English only.", "The tested layout from session two, still English only.", [CV], { step: { n: 1, of: 2, stage: "Session 2, English", status: "tested" } }),
     media("cvb-es", 0.85, "assets/christine-valmy/spanish.webp", 1.7778, "The same inquiry form and chat in Spanish",
@@ -146,7 +146,7 @@ children.push({
   question: "How do leads reach the enrollment officers?",
   thesis: "The agent sorts every lead into a priority bucket and flags the bad ones, and n8n carries them to the school's systems.",
   fills: [
-    prose("cvh-problem", 1, "THE PROBLEM: Officers spent their day answering the same questions on every call, with no way to tell a ready student from a bad lead before they dialed.", [CV]),
+    prose("cvh-problem", 1, "THE CHALLENGE: Officers spent their day answering the same questions on every call, with no way to tell a ready student from a bad lead before they dialed.", [CV]),
     media("cvh-arch", 0.85, "assets/christine-valmy/architecture.svg", 1.7778, "Christine Valmy agent architecture from student question to sorted lead",
       "From a question to a sorted lead.", "Follow the bottom of the diagram: the conversation becomes a lead with contact details, n8n on GCP hands it to the school's systems, and officers see it already sorted. Drawn from the case study and the ChekOut architecture board.",
       [CV, figma(CKJ, "4:135", "FigJam: 4 · Sophia, enrollment agent")]),
@@ -160,7 +160,7 @@ children.push({
   question: "What did the accessibility audit change?",
   thesis: "Before launch I audited the widget against WCAG AA and rebuilt the controls a screen reader couldn't use.",
   fills: [
-    prose("cva-problem", 1, "THE PROBLEM: The first widget's language toggle and topic buttons were plain buttons with no accessibility attributes, so a screen-reader user couldn't tell what they did.", [{ type: "asset", ref: "cv-chat-flat/ACCESSIBILITY.md", repo: "chekout-ai (local)", label: "Before and after notes per control" }]),
+    prose("cva-problem", 1, "THE CHALLENGE: The first widget's language toggle and topic buttons were plain buttons with no accessibility attributes, so a screen-reader user couldn't tell what they did.", [{ type: "asset", ref: "cv-chat-flat/ACCESSIBILITY.md", repo: "chekout-ai (local)", label: "Before and after notes per control" }]),
     prose("cva-toggle", 0.75, "LANGUAGE TOGGLE: Now a combobox with labels, arrow keys, Enter, Space and Escape, and an announcement when the language changes.", [{ type: "asset", ref: "cv-chat-flat/ACCESSIBILITY.md", repo: "chekout-ai (local)", label: "1. Language Toggle Button" }]),
     prose("cva-topics", 0.6, "TOPIC BUTTONS: Grouped under one label, each with its own description and hidden help text.", [{ type: "asset", ref: "cv-chat-flat/ACCESSIBILITY.md", repo: "chekout-ai (local)", label: "2. Topic Buttons" }]),
     media("cva-mobile", 0.7, "assets/christine-valmy/final-mobile-framed.webp", 0.4719, "The agent on a phone: a bilingual greeting, a student's question about makeup classes, and the top of the inquiry form",
@@ -174,7 +174,7 @@ children.push({
   question: "How does the job pipeline work?",
   thesis: "Every role is a Notion row; its status is a history I append to, and the current stage is derived from it.",
   fills: [
-    prose("kyp-problem", 1, "THE PROBLEM: A single status field forgets where an application has been, so the funnel can't be counted.", [cr("kyuri-dashboard", "7ee2c40")]),
+    prose("kyp-problem", 1, "THE CHALLENGE: A single status field forgets where an application has been, so the funnel can't be counted.", [cr("kyuri-dashboard", "7ee2c40")]),
     prose("kyp-how", 0.8, "HOW: Status is a multi-select in Notion. Writers append a stage instead of overwriting, the current status is derived from the list, and the funnel is counted from it.", [cr("kyuri-dashboard", "7ee2c40")]),
     media("kyp-ramp", 0.65, "assets/kyuri-os/ds-status-ramp.webp", 2.122, "Pipeline status color ramp: applying, applied, phone, interview, offer, rejected, closed",
       "One color per stage.", "Each stage has its own token in the design source, from the teal of applying through the warm interview and offer tones to rejected and closed, so a status reads the same on every panel.",
@@ -188,7 +188,7 @@ children.push({
   question: "What happens between adding a role and getting a resume?",
   thesis: "Code routes the base resume, a tool-less agent tailors it, a lint checks facts against the base, QA gets two tries, and a leak guard scans the PDF.",
   fills: [
-    prose("kyt-problem", 1, "THE PROBLEM: A model asked to tailor a resume will rename titles, borrow keywords it can't back, and print its own notes if nothing stops it.", [cr("kyuri-dashboard", "39023e3"), cr("kyuri-dashboard", "001f2e0")]),
+    prose("kyt-problem", 1, "THE CHALLENGE: A model asked to tailor a resume will rename titles, borrow keywords it can't back, and print its own notes if nothing stops it.", [cr("kyuri-dashboard", "39023e3"), cr("kyuri-dashboard", "001f2e0")]),
     prose("kyt-route", 0.75, "ROUTE: Code, not the model, picks the base resume, so engineering roles stopped getting the spatial one.", [cr("kyuri-dashboard", "0380547")]),
     prose("kyt-facts", 0.7, "FIXED FACTS: Four things tailoring may never change: titles, companies, dates and degrees.", [cr("kyuri-dashboard", "39023e3")]),
     kpi("kyt-qa", 0.55, "2", "QA attempts before a resume job fails", [LIVE, kyfile("lib/proof.ts", "GUARDS: QA PASSES")]),
@@ -201,7 +201,7 @@ children.push({
   question: "Which job boards does it search?",
   thesis: "FIND ROLES searches speedrun startups, the a16z portfolio and Designer Fund straight from Vercel; LinkedIn is deliberately not a source.",
   fills: [
-    prose("kyb-problem", 1, "THE PROBLEM: Finding roles shouldn't depend on my laptop being awake, and it shouldn't put my LinkedIn account at risk.", [kyfile("app/api/jobs/roles/route.ts", "Why LinkedIn is not a source")]),
+    prose("kyb-problem", 1, "THE CHALLENGE: Finding roles shouldn't depend on my laptop being awake, and it shouldn't put my LinkedIn account at risk.", [kyfile("app/api/jobs/roles/route.ts", "Why LinkedIn is not a source")]),
     prose("kyb-speedrun", 0.75, "SPEEDRUN AND A16Z: The speedrun talent network has a public, read-only API, so one integration covers speedrun's own companies and every a16z-backed company.", [kyfile("lib/speedrun.ts", "speedrun talent network as a job source")]),
     prose("kyb-df", 0.65, "DESIGNER FUND: Its board has no API, but each search page is server-rendered and robots.txt allows it, so one cached page per search stays polite.", [kyfile("lib/designer-fund.ts", "Designer Fund board as a job source")]),
     prose("kyb-match", 0.55, "MATCHING: A role must appear in the title as a phrase, because the boards match loosely and \"product engineer\" once returned a production planner.", [kyfile("lib/role-sources.ts", "Title phrase match")]),
@@ -213,7 +213,7 @@ children.push({
   question: "How does the laptop box fit in?",
   thesis: "The AI work runs on my laptop behind a tunnel, and the site degrades gracefully when the laptop sleeps.",
   fills: [
-    prose("kyx-problem", 1, "THE PROBLEM: The tailoring agents run on my laptop, which sleeps, while the site has to keep answering visitors and candidates.", [ARCH]),
+    prose("kyx-problem", 1, "THE CHALLENGE: The tailoring agents run on my laptop, which sleeps, while the site has to keep answering visitors and candidates.", [ARCH]),
     media("kyx-arch", 0.8, "assets/kyuri-os/architecture.svg", 1.6, "KYURI.OS system context with the box below the site, reached through a Cloudflare tunnel",
       "The box sits behind the tunnel.", "Only the bottom half of this diagram needs the laptop: resume builds, the evidence miner and LinkedIn scouting. Everything above the tunnel keeps working on Vercel when it sleeps.",
       [ARCH, figma(KYJ, "27:2045", "FigJam: 1. System context")]),
@@ -227,7 +227,7 @@ children.push({
   question: "How does the KYURI.OS design system work?",
   thesis: "Figma is the source of truth for tokens and components, and a sync skill builds each design change in the file that renders it.",
   fills: [
-    prose("kyd-problem", 1, "THE PROBLEM: Look-and-feel changes made by guessing in code drift from the design, and nobody can say which version is right.", [kyfile("HANDOFF.md", "Design through Figma, not guesses")]),
+    prose("kyd-problem", 1, "THE CHALLENGE: Look-and-feel changes made by guessing in code drift from the design, and nobody can say which version is right.", [kyfile("HANDOFF.md", "Design through Figma, not guesses")]),
     media("kyd-tokens", 0.75, "assets/kyuri-os/ds-tokens.webp", 0.8273, "KYURI.OS dark-mode color tokens with CSS variable names and hex values",
       "Tokens, named as they ship.", "Each swatch carries the CSS variable it ships as, in dark and light modes, so a token edit in Figma maps to one line of CSS.", [figma(KYF, "2:112", "Tokens / Dark: Surface & ink")]),
     media("kyd-header", 0.6, "assets/kyuri-os/ds-header.webp", 6.5455, "Header component in three variants, one per area",

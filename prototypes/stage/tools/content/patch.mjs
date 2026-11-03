@@ -15,7 +15,7 @@ const DECKS = {
   "ck-merchant-outcomes": {
     thesis: "On Kivakube, 20% of add-to-carts came through the agent, and the dashboard shows the merchant the questions behind them.",
     add: [{ id: "ck-0-problem", weight: 1, rfrom: ["ck-cart-prose"],
-      text: "THE PROBLEM: Shoppers on a merchant's store had questions a product grid can't answer. Once the agent went live, the merchant's first question was what shoppers were asking it." }],
+      text: "THE CHALLENGE: Shoppers on a merchant's store had questions a product grid can't answer. Once the agent went live, the merchant's first question was what shoppers were asking it." }],
     fills: {
       "ck-sessions": { label: "shopper sessions with the agent, across all live stores" },
       "ck-brands": { label: "merchants running the agent on their own store" },
@@ -31,7 +31,7 @@ const DECKS = {
   "ck-conversation": {
     thesis: "The agent answers first, and what retrieval finds decides the layout: words when nothing fits, one card for one match, a bundle when products go together.",
     add: [{ id: "ck-0-conv-problem", weight: 1, rfrom: ["ck-reading-surface"],
-      text: "THE PROBLEM: In January the panel read like a support widget: small type, tight leading, and a canned \"Got it! I recommend:\" above a pile of cards, whatever the shopper had asked." }],
+      text: "THE CHALLENGE: In January the panel read like a support widget: small type, tight leading, and a canned \"Got it! I recommend:\" above a pile of cards, whatever the shopper had asked." }],
     fills: {
       "ck-reading-surface": { text: "HOW: In July I re-set the panel as a reading surface, with larger type, open leading, and names and prices in bold inside the sentence. Then I let retrieval pick the shape; the three clips show each one, and the shopper never picks a mode." },
       "ck-shape-product": { caption: "One clear match: one card, and a sentence saying why it fits.",
@@ -49,7 +49,7 @@ const DECKS = {
   "ck-platform-build": {
     thesis: "A merchant types one brand color, previews the real widget, pastes one snippet, and is live in 5 to 30 minutes; I built the builder and widget mostly with Claude Code.",
     add: [{ id: "ap-0-problem", weight: 1, rfrom: ["ap-preview"],
-      text: "THE PROBLEM: The agent has to live on a page full of someone else's fonts, colors, cookie banner and cart drawer, carry that store's brand, and stay readable when the brand color is pale yellow or neon." }],
+      text: "THE CHALLENGE: The agent has to live on a page full of someone else's fonts, colors, cookie banner and cart drawer, carry that store's brand, and stay readable when the brand color is pale yellow or neon." }],
     fills: {
       "ap-time": { label: "from starting setup to a branded agent live on a merchant's store" },
       "ap-preview": { text: "HOW: The builder's preview was a hand-built copy that drifted from what shipped. In July 2026 I swapped in the real widget in an iframe and fed it the merchant's unsaved settings, so what they edit in the clip is what shoppers get." },
@@ -63,7 +63,7 @@ const DECKS = {
   "cv-results": {
     thesis: "Visitor conversion went from 10% to 23% and brought in $120K in enrolled revenue, while each officer got about 3 hours a day back.",
     add: [{ id: "cv-0-problem", weight: 1, rfrom: ["cv-sorts"],
-      text: "THE PROBLEM: At Christine Valmy, a school that trains estheticians and cosmetologists, prospective students filled in a form and waited for a reply, and enrollment officers answered the same questions on every call." }],
+      text: "THE CHALLENGE: At Christine Valmy, a school that trains estheticians and cosmetologists, prospective students filled in a form and waited for a reply, and enrollment officers answered the same questions on every call." }],
     fills: {
       "cv-conv": { label: "visitor conversion, before and after the agent" },
       "cv-rev": { label: "in enrolled revenue for the school" },
@@ -77,7 +77,7 @@ const DECKS = {
   "cv-testing": {
     thesis: "Testing showed students skipped my tile grid and went looking for Instagram, so I cut it and fixed one problem per session across three rounds.",
     add: [{ id: "cv-0-test-problem", weight: 1, rfrom: ["cv-bento"],
-      text: "THE PROBLEM: I wanted enrollment to feel like an app: a student ID card that filled in as you chatted, and a bento grid of tiles so nobody had to think of a question first. It was a guess until students used it." }],
+      text: "THE CHALLENGE: I wanted enrollment to feel like an app: a student ID card that filled in as you chatted, and a bento grid of tiles so nobody had to think of a question first. It was a guess until students used it." }],
     fills: {
       "cv-cut": { text: "HOW: Students skipped the tiles and kept asking \"Do you have Instagram?\" The tiles read as marketing; photos from real students did not. I cut the grid and the ID card, kept the form, the chat and the social links, then fixed one thing per session: dropdowns, link placement, Spanish." },
       "cv-testing-payoff": { label: "visitor conversion once the tested design shipped" },
@@ -97,7 +97,7 @@ const DECKS = {
   "cv-build": {
     thesis: "I built it as a React widget inside the school's WordPress site, connected it to their systems through n8n on GCP, and audited it to WCAG AA before launch.",
     add: [{ id: "cv-0-build-problem", weight: 0.9, rfrom: ["cv-stack"],
-      text: "THE PROBLEM: The school's site runs on WordPress, its enrollment data lives in other systems, and many applicants speak Spanish first. The agent had to fit inside the existing site and work in both languages." }],
+      text: "THE CHALLENGE: The school's site runs on WordPress, its enrollment data lives in other systems, and many applicants speak Spanish first. The agent had to fit inside the existing site and work in both languages." }],
     fills: {
       "cv-stack": { text: "HOW: The chat ships as a React widget in a WordPress plugin, with n8n on GCP bridging it to the school's systems. I tested the agent across the major models, launched it on Claude, and it now runs on Gemini." },
       "cv-a11y": { text: "BEFORE LAUNCH: I audited the widget against WCAG AA. The language toggle became a combobox with keyboard support and screen-reader announcements, and the topic buttons got a labeled group." },
@@ -111,7 +111,7 @@ const DECKS = {
   "ky-live": {
     thesis: "Yes: since April 2026 it has captured 454 roles and logged 341 applications, and the public Job Hunt page shows those totals live.",
     add: [{ id: "ky-0-problem", weight: 1, rfrom: ["ky-why"],
-      text: "THE PROBLEM: Applying well means a tailored one-page resume for every role and knowing where each application stands. I wanted all of that to start from my phone, the moment I found a role." }],
+      text: "THE CHALLENGE: Applying well means a tailored one-page resume for every role and knowing where each application stands. I wanted all of that to start from my phone, the moment I found a role." }],
     fills: {
       "ky-captured": { label: "roles captured into my pipeline", period: "as of Nov 2, 2026" },
       "ky-sent": { label: "of those marked applied", period: "as of Nov 2, 2026" },
@@ -126,7 +126,7 @@ const DECKS = {
   "ky-guards": {
     thesis: "Code, not the model, decides what a resume may say: a fit gate, fixed facts, a QA gate and a leak guard sit between the model and the PDF.",
     add: [{ id: "ky-0-guards-problem", weight: 1, rfrom: ["ky-incident"],
-      text: "THE PROBLEM: On June 17 a tailored resume went out with the agent's own keyword notes printed under SKILLS. The model's working notes had reached the page." }],
+      text: "THE CHALLENGE: On June 17 a tailored resume went out with the agent's own keyword notes printed under SKILLS. The model's working notes had reached the page." }],
     fills: {
       "ky-incident": { text: "HOW: The fix landed October 15: a leak guard, a QA gate and evals between the model and the page, and a tailoring agent with no tools. Code also picks the base resume, and four facts (titles, companies, dates, degrees) can never be renamed." },
       "ky-checks": { label: "agent checks every resume passes before it reaches Drive" },
@@ -137,7 +137,7 @@ const DECKS = {
   "ky-open": {
     thesis: "Before letting other job seekers sign in in October 2026, I scoped every route to an access tier, rate-limited everything that spends tokens, and made the tests unable to touch real data.",
     add: [{ id: "ky-0-open-problem", weight: 1, rfrom: ["ky-live/ky-jobhunt-shot#1", "ky-418"],
-      text: "THE PROBLEM: By May a second person was using it, but the agents run on my machine, spend real model credits, and keep everyone's search beside mine. Letting more people in could not expose anyone's data or run up the bill." }],
+      text: "THE CHALLENGE: By May a second person was using it, but the agents run on my machine, spend real model credits, and keep everyone's search beside mine. Letting more people in could not expose anyone's data or run up the bill." }],
     fills: {
       "ky-tiers": { text: "HOW: In October 2026 I scoped every route and panel to the viewer: visitors see public data, candidates see only their own pipeline, and I see everything. Google sign-in checks candidates against an allowlist." },
       "ky-email-cap": { label: "emails at most in any rolling 24 hours, enforced by a log table" },
@@ -166,7 +166,7 @@ const DECKS = {
   "other-qa": {
     thesis: "I write tests that protect real users and real data: Vitest and Playwright on ChekOut since December 2025, and a Kyuri suite that can't spend credits or delete what it didn't create.",
     add: [{ id: "qa-0-problem", weight: 1, rfrom: ["qa-ck-preview", "qa-kyuri"],
-      text: "THE PROBLEM: A bug in ChekOut's widget ships straight onto merchants' live stores, and a careless Kyuri test could spend real model credits or delete real rows." }],
+      text: "THE CHALLENGE: A bug in ChekOut's widget ships straight onto merchants' live stores, and a careless Kyuri test could spend real model credits or delete real rows." }],
     fills: {
       "qa-418": { label: "what Kyuri's suite returns to any write a view-only test fires" },
       "qa-kyuri": { text: "IN KYURI: Since October 2026 the Playwright suite answers any non-GET request a page fires on its own with a 418 unless allowlisted, and teardown removes only rows the suite created." },
@@ -177,7 +177,7 @@ const DECKS = {
   "other-research": {
     thesis: "Yes, and it changed the designs: task analysis cut My Influency's clicks by 28%, and testing the Manage Small Farms redesign raised its SUS score from 52 to 70.",
     add: [{ id: "re-0-problem", weight: 1, rfrom: ["re-clicks"],
-      text: "THE PROBLEM: On My Influency, small business owners tracked each influencer across five status tabs and had to hop between them to see where anyone stood." }],
+      text: "THE CHALLENGE: On My Influency, small business owners tracked each influencer across five status tabs and had to hop between them to see where anyone stood." }],
     fills: {
       "re-clicks": { label: "fewer clicks for a business owner to find an influencer's status" },
       "re-time": { label: "saved per task once five tabs became one timeline" },

@@ -3796,7 +3796,7 @@
         "kind": "prose",
         "id": "u-ky-arch-problem",
         "weight": 0.95,
-        "text": "THE PROBLEM: The tailoring agents run on my laptop, on my Claude subscription, but the site has to answer visitors and candidates even when the laptop is asleep.",
+        "text": "THE CHALLENGE: The tailoring agents run on my laptop, on my Claude subscription, but the site has to answer visitors and candidates even when the laptop is asleep.",
         "receipts": [
           {
             "type": "asset",
@@ -4401,7 +4401,7 @@
         "kind": "prose",
         "id": "u-ky-0-open-problem",
         "weight": 1,
-        "text": "THE PROBLEM: By May a second person was using it, but the agents run on my machine, spend real model credits, and keep everyone's search beside mine. Letting more people in could not expose anyone's data or run up the bill.",
+        "text": "THE CHALLENGE: By May a second person was using it, but the agents run on my machine, spend real model credits, and keep everyone's search beside mine. Letting more people in could not expose anyone's data or run up the bill.",
         "receipts": [
           {
             "type": "asset",

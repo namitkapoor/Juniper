@@ -48,7 +48,7 @@ const kyArch = media("ky-arch", 1, "assets/kyuri-os/architecture.svg", 1.6,
   "Read it left to right: people only ever touch the site on Vercel. Everything the site can do alone (accounts, sign-in, FIND ROLES) keeps working when my laptop sleeps; only the AI-heavy work crosses the tunnel to the box. Redrawn from the architecture board in Figma.",
   [asset("assets/kyuri-os/architecture.svg", "Drawn for the stage from the FigJam board"), figma(KYJ, "27:2045", "FigJam: 1. System context"), ARCH_DOC]);
 const kyProblem = prose("ky-build-problem", 0.95,
-  "THE PROBLEM: The tailoring agents run on my laptop, on my Claude subscription, but the site has to answer visitors and candidates even when the laptop is asleep.",
+  "THE CHALLENGE: The tailoring agents run on my laptop, on my Claude subscription, but the site has to answer visitors and candidates even when the laptop is asleep.",
   [ARCH_DOC]);
 const kyHow = prose("ky-build-how", 0.85,
   "HOW: The site is Next.js on Vercel. It keeps applications in Notion and accounts, quotas and evidence in Neon Postgres. Anything that needs Claude goes through a Cloudflare tunnel to the box, which tailors the resume, checks it and writes the PDF to Google Drive.",

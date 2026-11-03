@@ -143,7 +143,7 @@ const resumes = { id: "ky-d-resumes", parent: "ky-live", caseStudy: "kyuri-os",
 const site = { id: "other-site", question: "How was this site built?",
   thesis: "Content is built offline with receipts and validated against one schema; the stage only lays it out, cutting a 12 x 12 grid for each answer.",
   fills: [
-    prose("site-problem", 1, "THE PROBLEM: A static case study answers the questions I guessed a reader would have, not the one a recruiter actually brings, so I wanted a page that rebuilds itself around the question.",
+    prose("site-problem", 1, "THE CHALLENGE: A static case study answers the questions I guessed a reader would have, not the one a recruiter actually brings, so I wanted a page that rebuilds itself around the question.",
       [figma(SITE, "5:12", "Juniper stage: system architecture"), { type: "commit", ref: "080dd99", repo: "Juniper", date: "2026-08-17", label: "080dd99 · lab: give /lab an agent that answers by re-partitioning the page" }]),
     media("site-arch", 0.9, "assets/site/architecture.webp", 1.0025, "Juniper stage system architecture: a content pipeline from sources through generators, the schema and the validator to JSON, and a runtime from the shell through the answerer and layout engine to the renderer",
       "Built offline with receipts; laid out live.", "The top half runs at build time: sources, generators, the schema contract and the validator. The bottom half runs on every question: the answerer picks an answer, the layout engine cuts the stage, and the renderer morphs to it.",

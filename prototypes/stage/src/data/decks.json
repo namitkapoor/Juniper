@@ -12,7 +12,7 @@
         "kind": "prose",
         "id": "ck-0-problem",
         "weight": 1,
-        "text": "THE PROBLEM: Merchants had no way to see what the agent did on their store. On a client call, KivaKube's team said Shopify's analytics are basic and don't capture conversational or on-site behavior.",
+        "text": "THE CHALLENGE: Merchants had no way to see what the agent did on their store. On a client call, KivaKube's team said Shopify's analytics are basic and don't capture conversational or on-site behavior.",
         "receipts": [
           {
             "type": "asset",
@@ -178,7 +178,7 @@
         "kind": "prose",
         "id": "ck-0-conv-problem",
         "weight": 1,
-        "text": "THE PROBLEM: Every reply opened with a canned \"Got it! I recommend:\" over a pile of product cards, so the chat read like an ad bot.",
+        "text": "THE CHALLENGE: Every reply opened with a canned \"Got it! I recommend:\" over a pile of product cards, so the chat read like an ad bot.",
         "receipts": [
           {
             "type": "asset",
@@ -347,7 +347,7 @@
         "kind": "prose",
         "id": "ap-0-problem",
         "weight": 1,
-        "text": "THE PROBLEM: The agent lives on pages full of someone else's fonts, colors, cookie banners and cart drawers, and merchants' brand colors include pale limes that white text can't sit on.",
+        "text": "THE CHALLENGE: The agent lives on pages full of someone else's fonts, colors, cookie banners and cart drawers, and merchants' brand colors include pale limes that white text can't sit on.",
         "receipts": [
           {
             "type": "asset",
@@ -569,7 +569,7 @@
         "kind": "prose",
         "id": "cv-0-problem",
         "weight": 1,
-        "text": "THE PROBLEM: At Christine Valmy, a school that trains estheticians and cosmetologists, prospective students filled in a form and waited for a reply, and enrollment officers answered the same questions on every call.",
+        "text": "THE CHALLENGE: At Christine Valmy, a school that trains estheticians and cosmetologists, prospective students filled in a form and waited for a reply, and enrollment officers answered the same questions on every call.",
         "receipts": [
           {
             "type": "asset",
@@ -676,7 +676,7 @@
         "kind": "prose",
         "id": "cv-0-test-problem",
         "weight": 1,
-        "text": "THE PROBLEM: I wanted enrollment to feel like an app: a student ID card that filled in as you chatted, and a bento grid of tiles so nobody had to think of a question first. It was a guess until students used it.",
+        "text": "THE CHALLENGE: I wanted enrollment to feel like an app: a student ID card that filled in as you chatted, and a bento grid of tiles so nobody had to think of a question first. It was a guess until students used it.",
         "receipts": [
           {
             "type": "asset",
@@ -895,7 +895,7 @@
         "kind": "prose",
         "id": "cv-0-build-problem",
         "weight": 0.9,
-        "text": "THE PROBLEM: The school's site runs on WordPress, its enrollment systems sit elsewhere, and many applicants speak Spanish first, so the agent had to live inside the existing site and work in both languages.",
+        "text": "THE CHALLENGE: The school's site runs on WordPress, its enrollment systems sit elsewhere, and many applicants speak Spanish first, so the agent had to live inside the existing site and work in both languages.",
         "receipts": [
           {
             "type": "asset",
@@ -1015,7 +1015,7 @@
         "kind": "prose",
         "id": "ky-0-problem",
         "weight": 1,
-        "text": "THE PROBLEM: Applying well means a tailored one-page resume for every role and knowing where each application stands. I wanted both to start from my phone, the moment I found a role.",
+        "text": "THE CHALLENGE: Applying well means a tailored one-page resume for every role and knowing where each application stands. I wanted both to start from my phone, the moment I found a role.",
         "receipts": [
           {
             "type": "commit",
@@ -1168,7 +1168,7 @@
         "kind": "prose",
         "id": "ky-0-guards-problem",
         "weight": 1,
-        "text": "THE PROBLEM: On June 17 a tailored resume went out with the agent's own keyword notes printed under SKILLS. The model's working notes had reached the page.",
+        "text": "THE CHALLENGE: On June 17 a tailored resume went out with the agent's own keyword notes printed under SKILLS. The model's working notes had reached the page.",
         "receipts": [
           {
             "type": "commit",
@@ -1310,7 +1310,7 @@
         "kind": "prose",
         "id": "ky-build-problem",
         "weight": 0.95,
-        "text": "THE PROBLEM: The tailoring agents run on my laptop, on my Claude subscription, but the site has to answer visitors and candidates even when the laptop is asleep.",
+        "text": "THE CHALLENGE: The tailoring agents run on my laptop, on my Claude subscription, but the site has to answer visitors and candidates even when the laptop is asleep.",
         "receipts": [
           {
             "type": "asset",
@@ -1768,7 +1768,7 @@
         "kind": "prose",
         "id": "qa-0-problem",
         "weight": 1,
-        "text": "THE PROBLEM: A bug in ChekOut's widget ships straight onto merchants' live stores, and a careless Kyuri test could spend real model credits or delete real rows.",
+        "text": "THE CHALLENGE: A bug in ChekOut's widget ships straight onto merchants' live stores, and a careless Kyuri test could spend real model credits or delete real rows.",
         "receipts": [
           {
             "type": "asset",
@@ -1901,7 +1901,7 @@
         "kind": "prose",
         "id": "re-0-problem",
         "weight": 1,
-        "text": "THE PROBLEM: On My Influency, small business owners tracked each influencer across five status tabs and had to hop between them to see where anyone stood.",
+        "text": "THE CHALLENGE: On My Influency, small business owners tracked each influencer across five status tabs and had to hop between them to see where anyone stood.",
         "receipts": [
           {
             "type": "asset",
@@ -2048,7 +2048,7 @@
         "kind": "prose",
         "id": "ckc-problem",
         "weight": 1,
-        "text": "THE PROBLEM: Adding to cart from inside the chat has to land in each store's own cart, and early on it failed: Shopify answered with a 422 and Squarespace with a 404.",
+        "text": "THE CHALLENGE: Adding to cart from inside the chat has to land in each store's own cart, and early on it failed: Shopify answered with a 422 and Squarespace with a 404.",
         "receipts": [
           {
             "type": "commit",
@@ -2169,7 +2169,7 @@
         "kind": "prose",
         "id": "ckd-problem",
         "weight": 1,
-        "text": "THE PROBLEM: Shopify's own analytics show sessions and orders, not what shoppers asked, and that is what a merchant needs to read to fix their catalog.",
+        "text": "THE CHALLENGE: Shopify's own analytics show sessions and orders, not what shoppers asked, and that is what a merchant needs to read to fix their catalog.",
         "receipts": [
           {
             "type": "asset",
@@ -2400,7 +2400,7 @@
         "kind": "prose",
         "id": "ckb-problem",
         "weight": 1,
-        "text": "THE PROBLEM: The builder's preview was a hand-built copy that drifted from what shipped, and merchants asked for control over how the widget sits on their page: some wanted the launcher without the floating questions.",
+        "text": "THE CHALLENGE: The builder's preview was a hand-built copy that drifted from what shipped, and merchants asked for control over how the widget sits on their page: some wanted the launcher without the floating questions.",
         "receipts": [
           {
             "type": "asset",
@@ -2583,7 +2583,7 @@
         "kind": "prose",
         "id": "cvc-problem",
         "weight": 1,
-        "text": "THE PROBLEM: Students filled in a form and waited, and officers answered the same questions on every call. I wanted the first visit to do more of that work.",
+        "text": "THE BRIEF: Students filled in a form and waited, and officers answered the same questions on every call. I wanted the first visit to do more of that work.",
         "receipts": [
           {
             "type": "asset",
@@ -2619,7 +2619,13 @@
             "date": "2026-10-26",
             "label": "Christine Valmy case study"
           }
-        ]
+        ],
+        "step": {
+          "n": 1,
+          "of": 2,
+          "stage": "Initial concept · bento grid",
+          "status": "cut"
+        }
       },
       {
         "kind": "media",
@@ -2643,13 +2649,19 @@
             "date": "2026-10-26",
             "label": "Christine Valmy case study"
           }
-        ]
+        ],
+        "step": {
+          "n": 2,
+          "of": 2,
+          "stage": "Initial concept · student ID card",
+          "status": "cut"
+        }
       },
       {
         "kind": "prose",
         "id": "cvc-verdict",
         "weight": 0.6,
-        "text": "WHAT HAPPENED: Students skipped the tiles and asked whether the school had Instagram. The grid and the card were both cut.",
+        "text": "WHAT TESTING SHOWED: Students skipped the tiles and asked whether the school had Instagram. The grid and the card were both cut.",
         "receipts": [
           {
             "type": "asset",
@@ -2676,7 +2688,7 @@
         "kind": "prose",
         "id": "cvb-problem",
         "weight": 1,
-        "text": "THE PROBLEM: Many applicants spoke Spanish first, and the form and the chat were English only.",
+        "text": "THE CHALLENGE: Many applicants spoke Spanish first, and the form and the chat were English only.",
         "receipts": [
           {
             "type": "asset",
@@ -2845,7 +2857,7 @@
         "kind": "prose",
         "id": "cva-problem",
         "weight": 1,
-        "text": "THE PROBLEM: The first widget's language toggle and topic buttons were plain buttons with no accessibility attributes, so a screen-reader user couldn't tell what they did.",
+        "text": "THE CHALLENGE: The first widget's language toggle and topic buttons were plain buttons with no accessibility attributes, so a screen-reader user couldn't tell what they did.",
         "receipts": [
           {
             "type": "asset",
@@ -2925,7 +2937,7 @@
         "kind": "prose",
         "id": "kyp-problem",
         "weight": 1,
-        "text": "THE PROBLEM: A single status field forgets where an application has been, so the funnel can't be counted.",
+        "text": "THE CHALLENGE: A single status field forgets where an application has been, so the funnel can't be counted.",
         "receipts": [
           {
             "type": "commit",
@@ -3044,7 +3056,7 @@
         "kind": "prose",
         "id": "kyt-problem",
         "weight": 1,
-        "text": "THE PROBLEM: A model asked to tailor a resume will rename titles, borrow keywords it can't back, and print its own notes if nothing stops it.",
+        "text": "THE CHALLENGE: A model asked to tailor a resume will rename titles, borrow keywords it can't back, and print its own notes if nothing stops it.",
         "receipts": [
           {
             "type": "commit",
@@ -3183,7 +3195,7 @@
         "kind": "prose",
         "id": "kyb-problem",
         "weight": 1,
-        "text": "THE PROBLEM: Finding roles shouldn't depend on my laptop being awake, and it shouldn't put my LinkedIn account at risk.",
+        "text": "THE CHALLENGE: Finding roles shouldn't depend on my laptop being awake, and it shouldn't put my LinkedIn account at risk.",
         "receipts": [
           {
             "type": "asset",
@@ -3279,7 +3291,7 @@
         "kind": "prose",
         "id": "kyx-problem",
         "weight": 1,
-        "text": "THE PROBLEM: The tailoring agents run on my laptop, which sleeps, while the site has to keep answering visitors and candidates.",
+        "text": "THE CHALLENGE: The tailoring agents run on my laptop, which sleeps, while the site has to keep answering visitors and candidates.",
         "receipts": [
           {
             "type": "asset",
@@ -3499,7 +3511,7 @@
         "kind": "prose",
         "id": "kyd-problem",
         "weight": 1,
-        "text": "THE PROBLEM: When I changed the look straight in code, the app and the Figma file drifted apart, and neither was clearly the real design.",
+        "text": "THE CHALLENGE: When I changed the look straight in code, the app and the Figma file drifted apart, and neither was clearly the real design.",
         "receipts": [
           {
             "type": "asset",
@@ -4667,7 +4679,7 @@
         "kind": "prose",
         "id": "site-problem",
         "weight": 1,
-        "text": "THE PROBLEM: A static case study answers the questions I guessed a reader would have, not the one a recruiter actually brings, so I wanted a page that rebuilds itself around the question.",
+        "text": "THE CHALLENGE: A static case study answers the questions I guessed a reader would have, not the one a recruiter actually brings, so I wanted a page that rebuilds itself around the question.",
         "receipts": [
           {
             "type": "asset",

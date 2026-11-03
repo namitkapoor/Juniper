@@ -55,7 +55,7 @@ const setP = (deck, id, text, receipts, evidence) => {
 
 // ChekOut outcomes: the problem is backed by the client call; 13,981 moves to the outcome area.
 setP("ck-merchant-outcomes", "ck-0-problem",
-  "THE PROBLEM: Merchants had no way to see what the agent did on their store. On a client call, KivaKube's team said Shopify's analytics are basic and don't capture conversational or on-site behavior.",
+  "THE CHALLENGE: Merchants had no way to see what the agent did on their store. On a client call, KivaKube's team said Shopify's analytics are basic and don't capture conversational or on-site behavior.",
   [CALL, CK]);
 {
   const d = g("ck-merchant-outcomes");
@@ -66,19 +66,19 @@ setP("ck-merchant-outcomes", "ck-0-problem",
   s.label = "shopper sessions with the agent, across 22 brands";
 }
 setP("ck-d-dashboard", "ckd-problem",
-  "THE PROBLEM: Shopify's own analytics show sessions and orders, not what shoppers asked, and that is what a merchant needs to read to fix their catalog.",
+  "THE CHALLENGE: Shopify's own analytics show sessions and orders, not what shoppers asked, and that is what a merchant needs to read to fix their catalog.",
   [CALL, CK], ["ckd-flow"]);
 setP("ck-d-cart", "ckc-problem",
-  "THE PROBLEM: Adding to cart from inside the chat has to land in each store's own cart, and early on it failed: Shopify answered with a 422 and Squarespace with a 404.",
+  "THE CHALLENGE: Adding to cart from inside the chat has to land in each store's own cart, and early on it failed: Shopify answered with a 422 and Squarespace with a 404.",
   [cr("chekoutai-frontend", "62bde85"), CK], ["ckc-add"]);
 setP("ck-d-motion", "ckm-problem",
   "THE DESIGN CALL: Each moment where the agent works or a tap lands gets one motion and a static cue that stays after it. This came from design review, not a study.",
   [CK]);
 setP("ck-d-builder", "ckb-problem",
-  "THE PROBLEM: The builder's preview was a hand-built copy that drifted from what shipped, and merchants asked for control over how the widget sits on their page: some wanted the launcher without the floating questions.",
+  "THE CHALLENGE: The builder's preview was a hand-built copy that drifted from what shipped, and merchants asked for control over how the widget sits on their page: some wanted the launcher without the floating questions.",
   [AP, cr("chekoutai-frontend", "faf5efd"), cr("chekoutai-frontend", "fe5f2a1")], ["ckb-flow"]);
 setP("ck-d-stack", "cks-problem",
-  "THE PROBLEM: One Next.js app serves both the merchant builder and the widget shoppers meet on stores, so every release ships to both at once.",
+  "THE CHALLENGE: One Next.js app serves both the merchant builder and the widget shoppers meet on stores, so every release ships to both at once.",
   [figma(CKJ, "3:39", "FigJam: 1 · System context ([code] for the front end)")], ["cks-arch"]);
 // ChekOut build: the brand-color problem gets its data.
 {
@@ -89,38 +89,38 @@ setP("ck-d-stack", "cks-problem",
   }
 }
 setP("ck-platform-build", "ap-0-problem",
-  "THE PROBLEM: The agent lives on pages full of someone else's fonts, colors, cookie banners and cart drawers, and merchants' brand colors include pale limes that white text can't sit on.",
+  "THE CHALLENGE: The agent lives on pages full of someone else's fonts, colors, cookie banners and cart drawers, and merchants' brand colors include pale limes that white text can't sit on.",
   [AP, HANDOFF_A11Y, cr("chekoutai-frontend", "2127ede")], ["ap-contrast"]);
 
 // Christine Valmy
 setP("cv-results", "cv-0-problem",
-  "THE PROBLEM: At Christine Valmy, a school that trains estheticians and cosmetologists, prospective students filled in a form and waited for a reply, and enrollment officers answered the same questions on every call.",
+  "THE CHALLENGE: At Christine Valmy, a school that trains estheticians and cosmetologists, prospective students filled in a form and waited for a reply, and enrollment officers answered the same questions on every call.",
   [CV]);
 setP("cv-testing", "cv-0-test-problem",
-  "THE PROBLEM: I wanted enrollment to feel like an app: a student ID card that filled in as you chatted, and a bento grid of tiles so nobody had to think of a question first. It was a guess until students used it.",
+  "THE CHALLENGE: I wanted enrollment to feel like an app: a student ID card that filled in as you chatted, and a bento grid of tiles so nobody had to think of a question first. It was a guess until students used it.",
   [CV], ["cv-bento"]);
 setP("cv-build", "cv-0-build-problem",
-  "THE PROBLEM: The school's site runs on WordPress, its enrollment systems sit elsewhere, and many applicants speak Spanish first, so the agent had to live inside the existing site and work in both languages.",
+  "THE CHALLENGE: The school's site runs on WordPress, its enrollment systems sit elsewhere, and many applicants speak Spanish first, so the agent had to live inside the existing site and work in both languages.",
   [CV], ["cv-arch"]);
 setP("cv-d-bilingual", "cvb-problem",
-  "THE PROBLEM: Many applicants spoke Spanish first, and the form and the chat were English only.",
+  "THE CHALLENGE: Many applicants spoke Spanish first, and the form and the chat were English only.",
   [CV], ["cvb-en"]);
 setP("cv-d-handoff", "cvh-problem",
-  "THE PROBLEM: Officers answered the same questions on every call, and their time went to leads that were never going to enroll.",
+  "THE CHALLENGE: Officers answered the same questions on every call, and their time went to leads that were never going to enroll.",
   [CV]);
 setP("cv-d-concept", "cvc-problem",
-  "THE PROBLEM: Students filled in a form and waited, and officers answered the same questions on every call. I wanted the first visit to do more of that work.",
+  "THE CHALLENGE: Students filled in a form and waited, and officers answered the same questions on every call. I wanted the first visit to do more of that work.",
   [CV], ["cvc-bento"]);
 
 // KYURI.OS: evidence links where a backing fill exists
 setP("ky-live", "ky-0-problem",
-  "THE PROBLEM: Applying well means a tailored one-page resume for every role and knowing where each application stands. I wanted both to start from my phone, the moment I found a role.",
+  "THE CHALLENGE: Applying well means a tailored one-page resume for every role and knowing where each application stands. I wanted both to start from my phone, the moment I found a role.",
   [cr("kyuri-dashboard", "1be40d8"), kyfile("lib/proof.ts", "ITERATIONS: Jobs into Notion from my phone (Apr 12), real resumes (May 26)")], ["ky-jobhunt-shot"]);
 setP("ky-build", "ky-build-problem",
-  "THE PROBLEM: The tailoring agents run on my laptop, on my Claude subscription, but the site has to answer visitors and candidates even when the laptop is asleep.",
+  "THE CHALLENGE: The tailoring agents run on my laptop, on my Claude subscription, but the site has to answer visitors and candidates even when the laptop is asleep.",
   [ARCH], ["ky-arch"]);
 setP("ky-d-box", "kyx-problem",
-  "THE PROBLEM: The tailoring agents run on my laptop, which sleeps, while the site has to keep answering visitors and candidates.",
+  "THE CHALLENGE: The tailoring agents run on my laptop, which sleeps, while the site has to keep answering visitors and candidates.",
   [ARCH], ["kyx-arch"]);
 
 // other work

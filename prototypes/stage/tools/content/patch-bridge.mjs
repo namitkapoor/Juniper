@@ -84,7 +84,7 @@ const bridge = { id: "cv-d-bridge", parent: "cv-d-handoff", caseStudy: "christin
   question: "What exactly happens between the chat and the officers?",
   thesis: "Three calls leave the widget: one per message, one when the chat ends, one when the form is sent; the end-of-chat call is what becomes a lead.",
   fills: [
-    prose("cvbr-problem", 1, "THE PROBLEM: Students close the tab mid-chat, especially on phones, and a conversation that ends that way still has to reach the officers once, not twice.",
+    prose("cvbr-problem", 1, "THE CHALLENGE: Students close the tab mid-chat, especially on phones, and a conversation that ends that way still has to reach the officers once, not twice.",
       [FLOAT], ["cvbr-graph"]),
     media("cvbr-graph", 0.9, "assets/christine-valmy/bridge.svg", 2.1053,
       "The three calls that leave the widget: each message to the n8n chat webhook, the transcript to the n8n transcript webhook when a chat ends, and the inquiry form to the Creatio CRM webhook",

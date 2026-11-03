@@ -59,7 +59,7 @@ const knowledge = { id: "ck-d-knowledge", parent: "ck-d-stack", caseStudy: "chek
   question: "How does the agent learn a store's catalog?",
   thesis: "Product sync turns each store's catalog into embeddings in Postgres with pgvector, and the merchant's agent retrieves from them when a shopper asks.",
   fills: [
-    prose("ckk-problem", 1, "THE PROBLEM: The agent can only answer from what it knows about a store, and a product that loses its embedding becomes invisible to semantic search while the sync still reports clean.",
+    prose("ckk-problem", 1, "THE CHALLENGE: The agent can only answer from what it knows about a store, and a product that loses its embedding becomes invisible to semantic search while the sync still reports clean.",
       [crp("shopline-sync", "f62a338"), NAMIT], ["ckk-diagram"]),
     media("ckk-diagram", 0.95, "assets/chekout/knowledge.svg", 1.7778,
       "How a catalog becomes the agent's knowledge: OAuth install, product sync in FastAPI, Vertex AI embeddings, Postgres with pgvector, a Langflow agent per merchant retrieving at answer time, and conversation logs into BigQuery for the analytics API",
@@ -83,7 +83,7 @@ const backend = { id: "ck-d-backend", parent: "ck-d-stack", caseStudy: "chekout"
   question: "What did I build in the ChekOut backend?",
   thesis: "The store connection end to end: OAuth installs for Shopify and Shopline, a product sync that writes a page at a time, resilient Admin API calls, and FastAPI endpoints behind a builder hosted on Firebase.",
   fills: [
-    prose("ckbe-problem", 1, "THE PROBLEM: Product sync wrote one product at a time, several database round trips each, and a partial payload from Shopify could blank out the fields the agent reads.",
+    prose("ckbe-problem", 1, "THE CHALLENGE: Product sync wrote one product at a time, several database round trips each, and a partial payload from Shopify could blank out the fields the agent reads.",
       [crp("shopify-sync", "2e7c541")], ["ckbe-trips"]),
     kpi("ckbe-trips", 0.85, "~1,250", "database round trips a full 250-product page used to take; now one batched upsert, committed once", [crp("shopify-sync", "2e7c541")]),
     prose("ckbe-oauth", 0.75, "OAUTH: The Shopify install checks a signed state against CSRF, normalizes merchant IDs on the server, runs as an embedded app, and reads each merchant's real scope grant, so order reading stays off until a merchant grants it. On Shopline I built the callback back into the builder.",
