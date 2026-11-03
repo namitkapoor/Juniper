@@ -151,11 +151,11 @@ export default function App() {
   const focusValid = !!(answer && focus && answer.fills.some((f) => f.id === focus && (f.kind === "media" || f.kind === "specimen" || f.kind === "tokens")));
   const stageAnswer = useMemo(() => {
     if (!answer) return answer;
-    if (onHomeStage) { const info = homeWithTiles(answer, content.caseStudies, { chatOpen: chatOpen && !phone }); return heroOn ? heroHome(info, { hot, decks: content.decks }) : info; }
+    if (onHomeStage) { const info = homeWithTiles(answer, content.caseStudies, { chatOpen: chatOpen && !phone }); return heroOn ? heroHome(info) : info; }
     if (focusValid) return focusAnswer(dedupeOpens(answer), focus);
     if (expanded.length && answer.fills.some((f) => f.id === expanded[0])) return recedeAnswer(dedupeOpens(answer), expanded[0]);
     return dedupeOpens(answer);
-  }, [answer, focus, focusValid, onHomeStage, content, expanded, chatOpen, phone, heroOn, hot]);
+  }, [answer, focus, focusValid, onHomeStage, content, expanded, chatOpen, phone, heroOn]);
   useEffect(() => { if (focus && !focusValid) setFocus(null); }, [focus, focusValid]);
   useEffect(() => { if (onHomeStage && expanded.length) setExpanded([]); }, [onHomeStage]); // eslint-disable-line react-hooks/exhaustive-deps
   const previews = useMemo(() => (content ? heroPreviews(content.home, content.caseStudies) : {}), [content]);

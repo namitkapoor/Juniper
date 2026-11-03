@@ -129,17 +129,17 @@ export function Stage({ onNamit, layout, fillMap, expanded, onToggleReceipts, re
   const paintCursor = useCallback(() => {
     const el = cursorEl.current, c = cur.current, r = c.cell;
     if (!el) return;
-    if (r && !c.shown) { el.classList.add("snap"); }
-    if (r) {
-      el.style.transform = `translate3d(${Math.round(r.x)}px, ${Math.round(r.y)}px, 0)`;
-      el.style.width = `${Math.round(r.w)}px`;
-      el.style.height = `${Math.round(r.h)}px`;
-      el.style.setProperty("--mx", `${Math.round(c.px - r.x)}px`);
-      el.style.setProperty("--my", `${Math.round(c.py - r.y)}px`);
-    }
-    el.classList.toggle("on", !!r);
-    if (r && !c.shown) { void el.offsetWidth; el.classList.remove("snap"); }
-    c.shown = !!r;
+    if (!r) { el.classList.remove("on"); c.shown = false; c.lastId = null; return; }
+    const fresh = !c.shown || c.lastId !== c.id; // a new tile: hide, place, then fade in
+    if (fresh) el.classList.remove("on");
+    el.style.transform = `translate3d(${Math.round(r.x)}px, ${Math.round(r.y)}px, 0)`;
+    el.style.width = `${Math.round(r.w)}px`;
+    el.style.height = `${Math.round(r.h)}px`;
+    el.style.setProperty("--mx", `${Math.round(c.px - r.x)}px`);
+    el.style.setProperty("--my", `${Math.round(c.py - r.y)}px`);
+    if (fresh) { void el.offsetWidth; el.classList.add("on"); }
+    c.shown = true;
+    c.lastId = c.id;
   }, []);
 
   const onMove = useCallback((e) => {
@@ -181,6 +181,7 @@ export function Stage({ onNamit, layout, fillMap, expanded, onToggleReceipts, re
   useLayoutEffect(() => {
     const g = glideId && !openId ? scene.cells.find((x) => x.fillId === glideId) : null;
     cur.current.cell = g ? { x: g.x, y: g.y, w: g.w, h: g.h } : null;
+    cur.current.id = g ? g.fillId : null;
     paintCursor();
   });
   const isVideo = (f) => f?.kind === "media" && (f.media === "video" || (f.media === "animation" && /\.(mp4|webm|mov)$/i.test(f.src)));

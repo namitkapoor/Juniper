@@ -1079,8 +1079,8 @@ kbd { font: 500 12px ui-monospace, Menlo, monospace; padding: 1px 5px; border: 1
   box-shadow: inset 0 0 0 1px var(--glow-line), inset 0 0 14px 2px var(--glow-soft);
   --dur-glide: 380ms;
   --ease-glide: linear(0, 0.012, 0.045, 0.1, 0.18, 0.29, 0.43, 0.6, 0.78, 0.93, 1.035, 1.07, 1.06, 1.03, 1.008, 0.996, 0.994, 0.997, 1, 1);
-  transition: transform var(--dur-glide) var(--ease-glide), width var(--dur-glide) var(--ease-glide), height var(--dur-glide) var(--ease-glide), opacity 160ms ease-out;
-  will-change: transform, width, height;
+  /* calm: the highlight fades in on the tile you are on; it never travels or resizes */
+  transition: opacity 140ms ease-out;
 }
 .stage-cursor.on { opacity: 1; }
 .stage-cursor.snap { transition: opacity 160ms ease-out !important; }
