@@ -2553,7 +2553,7 @@
     "aliases": [
       "What is the ChekOut stack?"
     ],
-    "thesis": "The architecture behind this is password-protected. Enter the password I shared with you, or ask me in an interview.",
+    "thesis": "The architecture behind this is password-protected. Enter the password I shared with you, or ask me on a call.",
     "fills": [
       {
         "kind": "gate",
@@ -2815,7 +2815,7 @@
     "aliases": [
       "How do leads reach the enrollment officers?"
     ],
-    "thesis": "The architecture behind this is password-protected. Enter the password I shared with you, or ask me in an interview.",
+    "thesis": "The architecture behind this is password-protected. Enter the password I shared with you, or ask me on a call.",
     "fills": [
       {
         "kind": "gate",
@@ -4786,7 +4786,7 @@
     "aliases": [
       "How does the agent learn a store's catalog?"
     ],
-    "thesis": "The architecture behind this is password-protected. Enter the password I shared with you, or ask me in an interview.",
+    "thesis": "The architecture behind this is password-protected. Enter the password I shared with you, or ask me on a call.",
     "fills": [
       {
         "kind": "gate",
@@ -4810,7 +4810,7 @@
     "aliases": [
       "What did I build in the ChekOut backend?"
     ],
-    "thesis": "The architecture behind this is password-protected. Enter the password I shared with you, or ask me in an interview.",
+    "thesis": "The architecture behind this is password-protected. Enter the password I shared with you, or ask me on a call.",
     "fills": [
       {
         "kind": "gate",
@@ -4831,7 +4831,7 @@
     "parent": "cv-d-handoff",
     "caseStudy": "christine-valmy",
     "question": "What exactly happens between the chat and the officers?",
-    "thesis": "The architecture behind this is password-protected. Enter the password I shared with you, or ask me in an interview.",
+    "thesis": "The architecture behind this is password-protected. Enter the password I shared with you, or ask me on a call.",
     "fills": [
       {
         "kind": "gate",

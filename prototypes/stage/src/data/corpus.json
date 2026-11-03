@@ -1399,7 +1399,7 @@
       "metrics",
       "lead-scoring"
     ],
-    "text": "Christine Valmy: an agent that sorts leads. The architecture behind this is password-protected. Enter the password I shared with you, or ask me in an interview.",
+    "text": "Christine Valmy: an agent that sorts leads. The architecture behind this is password-protected. Enter the password I shared with you, or ask me on a call.",
     "fills": [
       {
         "kind": "gate",
@@ -2383,7 +2383,7 @@
       "qa",
       "testing"
     ],
-    "text": "ChekOut AI frontend: Introduced Vitest to the ChekOut AI frontend. The architecture behind this is password-protected. Enter the password I shared with you, or ask me in an interview.",
+    "text": "ChekOut AI frontend: Introduced Vitest to the ChekOut AI frontend. The architecture behind this is password-protected. Enter the password I shared with you, or ask me on a call.",
     "fills": [
       {
         "kind": "gate",
@@ -2408,7 +2408,7 @@
       "chekout-site",
       "frontend"
     ],
-    "text": "ChekOut AI company site: work record (password-protected). The architecture behind this is password-protected. Enter the password I shared with you, or ask me in an interview.",
+    "text": "ChekOut AI company site: work record (password-protected). The architecture behind this is password-protected. Enter the password I shared with you, or ask me on a call.",
     "fills": [
       {
         "kind": "gate",
@@ -2435,7 +2435,7 @@
       "devops",
       "deployment"
     ],
-    "text": "ChekOut AI frontend: Wrote an architecture document for the ChekOut AI frontend explaining its…. The architecture behind this is password-protected. Enter the password I shared with you, or ask me in an interview.",
+    "text": "ChekOut AI frontend: Wrote an architecture document for the ChekOut AI frontend explaining its…. The architecture behind this is password-protected. Enter the password I shared with you, or ask me on a call.",
     "fills": [
       {
         "kind": "gate",
@@ -2462,7 +2462,7 @@
       "devops",
       "deployment"
     ],
-    "text": "ChekOut AI frontend: Added PowerShell scripts for the ChekOut AI frontend: deploy. The architecture behind this is password-protected. Enter the password I shared with you, or ask me in an interview.",
+    "text": "ChekOut AI frontend: Added PowerShell scripts for the ChekOut AI frontend: deploy. The architecture behind this is password-protected. Enter the password I shared with you, or ask me on a call.",
     "fills": [
       {
         "kind": "gate",
@@ -2489,7 +2489,7 @@
       "devops",
       "deployment"
     ],
-    "text": "ChekOut AI frontend: For the ChekOut AI frontend. The architecture behind this is password-protected. Enter the password I shared with you, or ask me in an interview.",
+    "text": "ChekOut AI frontend: For the ChekOut AI frontend. The architecture behind this is password-protected. Enter the password I shared with you, or ask me on a call.",
     "fills": [
       {
         "kind": "gate",
@@ -3004,7 +3004,7 @@
       "ai-agent",
       "ai"
     ],
-    "text": "ChekOut AI company site: Added a Vercel API route to the ChekOut AI company site that handles CORS…. The architecture behind this is password-protected. Enter the password I shared with you, or ask me in an interview.",
+    "text": "ChekOut AI company site: Added a Vercel API route to the ChekOut AI company site that handles CORS…. The architecture behind this is password-protected. Enter the password I shared with you, or ask me on a call.",
     "fills": [
       {
         "kind": "gate",
@@ -4275,7 +4275,7 @@
       "shopify",
       "nextjs"
     ],
-    "text": "ChekOut: system architecture. The architecture behind this is password-protected. Enter the password I shared with you, or ask me in an interview.",
+    "text": "ChekOut: system architecture. The architecture behind this is password-protected. Enter the password I shared with you, or ask me on a call.",
     "fills": [
       {
         "kind": "gate",
@@ -4367,7 +4367,7 @@
       "bilingual",
       "claude"
     ],
-    "text": "Christine Valmy: agent architecture. The architecture behind this is password-protected. Enter the password I shared with you, or ask me in an interview.",
+    "text": "Christine Valmy: agent architecture. The architecture behind this is password-protected. Enter the password I shared with you, or ask me on a call.",
     "fills": [
       {
         "kind": "gate",

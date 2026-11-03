@@ -54,7 +54,7 @@ const TEXT = {
   deck: "This part covers ChekOut and Christine Valmy system architecture, stack and commit history, which belong to the companies. Enter the password I shared with you to see it.",
   part: "Architecture and commit history for this part are password-protected. Enter the password I shared with you to see them.",
 };
-const THESIS = "The architecture behind this is password-protected. Enter the password I shared with you, or ask me in an interview.";
+const THESIS = "The architecture behind this is password-protected. Enter the password I shared with you, or ask me on a call.";
 
 function gateFill(ownerId, gated, whole) {
   const count = { diagrams: 0, commits: 0, notes: 0 };

@@ -529,7 +529,9 @@ export default function App() {
     setMessages((m) => [...withoutTurn(m, q), { role: "user", text: q }]);
     try {
       const { answer: a, how, text } = await ask(q, content);
-      if (!a && text) setMessages((m) => [...m, { role: "bot", text, mood: "sheepish", match: how }]);
+      // Nothing on record: Kip points to a call, with the home page's booking link right there.
+      const book = content.home?.fills?.find((f) => f.status?.link)?.status.link;
+      if (!a && text) setMessages((m) => [...m, { role: "bot", text, mood: "sheepish", match: how, link: book }]);
       if (a) {
         turned.current.add(a.id);
         go(a);

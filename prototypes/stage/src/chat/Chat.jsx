@@ -384,6 +384,7 @@ export function Chat({ open, messages, chips, onAsk, onChip, busy, onClose, onOp
             <div className="msg bot" data-match={ex.a.match || undefined}>
               <Face size={56} busy={busyFace} mood={ex.a.mood || "answer"} moodKey={`${i}:${ex.a.text}`} reduced={reduced} className="msg-face" />
               <div className="msg-text"><StreamText text={ex.a.text} reduced={reduced} /></div>
+              {ex.a.link && <a className="msg-link" href={ex.a.link.url} target="_blank" rel="noopener noreferrer">{ex.a.link.label} <span aria-hidden>→</span></a>}
               <div className="label msg-how">Kip{ex.a.how ? ` · ${ex.a.how}` : ""}</div>
             </div>
           )}

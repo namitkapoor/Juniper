@@ -135,7 +135,7 @@ export async function localAnswer(q, content) {
     // Real content exists but nothing matched: say so in the chat and leave the
     // stage where it is. Never hand the stage a copy of home.json: only the
     // home builder may render home.
-    return { answer: null, text: "I don't have receipts for that one yet. Try a suggested question, or ask me in an interview.", how: "no match" };
+    return { answer: null, text: "I don't have receipts for that one yet. Try a suggested question, or ask me on a call.", how: "no match" };
   }
   return fixtureFallback(q, content.fixtures);
 }
