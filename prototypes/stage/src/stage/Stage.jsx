@@ -271,7 +271,7 @@ export function Stage({ tileOverlay, onNamit, layout, fillMap, expanded, onToggl
     if (onSelf && (e.key === "Home" || e.key === "End")) { e.preventDefault(); focusCell(e.key === "Home" ? order[0] : order[order.length - 1]); return; }
     if (onSelf && (e.key === "Enter" || e.key === " ")) {
       // A tile's own action first; then Go deeper (the whole cell drills); then inner controls.
-      const target = el.querySelector(".c-tile, .c-face.asks, .c-media[data-act]") || el.querySelector(".drill") || el.querySelector(".play-glyph, .wl-link, .status-link, .spec-expand");
+      const target = el.querySelector(".c-tile, .c-face.asks, .c-media[data-act]") || el.querySelector(".drill") || el.querySelector(".play-glyph, .wl-link, .status-link, .spec-expand") || el.querySelector(".receipts-tag"); // last: a text tile's only action is its sources
       if (target) { e.preventDefault(); target.click(); }
       else if (el.hasAttribute("data-about")) { e.preventDefault(); el.click(); }
       return;
@@ -457,7 +457,7 @@ function swipe(onClose, onStep) {
 
 export const KEYS = [
   ["← ↑ → ↓", "move between tiles"], ["Tab", "into a tile's links and buttons"], ["Enter", "open"],
-  ["P", "source"], ["Esc", "back"], ["?", "all shortcuts"],
+  ["P", "sources (Src)"], ["Esc", "back"], ["?", "all shortcuts"],
 ];
 function KeyHint({ onClose, tip = false }) {
   if (tip) return (
@@ -465,6 +465,7 @@ function KeyHint({ onClose, tip = false }) {
       <span className="tip-k">Tip</span>
       <span><kbd>← ↑ → ↓</kbd> move between tiles</span>
       <span><kbd>Enter</kbd> open</span>
+      <span><kbd>P</kbd> sources</span>
       <span><kbd>?</kbd> all shortcuts</span>
       <button type="button" aria-label="Dismiss keyboard tip" onClick={onClose}>×</button>
     </div>
