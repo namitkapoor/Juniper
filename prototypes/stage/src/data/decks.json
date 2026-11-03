@@ -4851,14 +4851,49 @@
     "parent": "cv-build",
     "caseStudy": "christine-valmy",
     "question": "How was the agent kept on script?",
-    "thesis": "Requirements set the order, the disqualifiers, the shape of every reply and the guardrails, and an evaluation plan checks each one; review sessions found where it drifted.",
+    "thesis": "Review sessions caught where it drifted: too much at once, too many questions, and claiming to be human. Each finding became a rule it now follows.",
     "fills": [
       {
         "kind": "rules",
-        "id": "cvs-order",
+        "id": "cvs-review",
         "weight": 1,
+        "mode": "pairs",
+        "label": "What testing found → what changed",
+        "tag": "Review sessions",
+        "items": [
+          {
+            "icon": "lucide:gauge",
+            "from": "Too much at once",
+            "text": "Slow down"
+          },
+          {
+            "icon": "lucide:message-circle-question-mark",
+            "from": "Too many questions",
+            "text": "1-2 questions per reply"
+          },
+          {
+            "icon": "lucide:user-round",
+            "from": "Claimed to be human",
+            "text": "Hand off to an advisor",
+            "note": "Fix direction"
+          }
+        ],
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "tools/content/sources/christine-valmy-requirements.md",
+            "repo": "Juniper (stage prototype)",
+            "date": "2026-11-02",
+            "label": "Christine Valmy requirements, provided by Namit (redacted)"
+          }
+        ]
+      },
+      {
+        "kind": "rules",
+        "id": "cvs-order",
+        "weight": 0.7,
         "mode": "flow",
-        "label": "The order",
+        "label": "The order it follows",
         "tag": "Requirement",
         "items": [
           {
@@ -4894,28 +4929,46 @@
       },
       {
         "kind": "rules",
-        "id": "cvs-review",
-        "weight": 0.8,
-        "mode": "pairs",
-        "label": "Found → fix",
-        "tag": "Review sessions",
+        "id": "cvs-reply",
+        "weight": 0.55,
+        "label": "Every reply",
+        "tag": "Requirement",
         "items": [
           {
-            "icon": "lucide:gauge",
-            "from": "Too much at once",
-            "text": "Slow down"
+            "icon": "lucide:list-ordered",
+            "text": "≤4 sentences"
+          },
+          {
+            "icon": "lucide:message-square-text",
+            "text": "Plain, warm words"
+          },
+          {
+            "icon": "lucide:file-text",
+            "text": "From school docs"
           },
           {
             "icon": "lucide:message-circle-question-mark",
-            "from": "Too many questions",
-            "text": "1-2 questions per reply"
-          },
+            "text": "Ends with a question"
+          }
+        ],
+        "receipts": [
           {
-            "icon": "lucide:user-round",
-            "from": "Claimed to be human",
-            "text": "Hand off to an advisor",
-            "note": "Fix direction"
-          },
+            "type": "asset",
+            "ref": "tools/content/sources/christine-valmy-requirements.md",
+            "repo": "Juniper (stage prototype)",
+            "date": "2026-11-02",
+            "label": "Christine Valmy requirements, provided by Namit (redacted)"
+          }
+        ]
+      },
+      {
+        "kind": "rules",
+        "id": "cvs-guard",
+        "weight": 0.5,
+        "label": "Also built in",
+        "tag": "Design",
+        "dense": true,
+        "items": [
           {
             "icon": "lucide:badge-check",
             "text": "Verify every program detail"
@@ -4927,95 +4980,18 @@
           {
             "icon": "lucide:id-card",
             "text": "Scripted identity answers"
-          }
-        ],
-        "receipts": [
-          {
-            "type": "asset",
-            "ref": "tools/content/sources/christine-valmy-requirements.md",
-            "repo": "Juniper (stage prototype)",
-            "date": "2026-11-02",
-            "label": "Christine Valmy requirements, provided by Namit (redacted)"
-          }
-        ]
-      },
-      {
-        "kind": "rules",
-        "id": "cvs-disq",
-        "weight": 0.75,
-        "label": "Disqualified if",
-        "tag": "Requirement",
-        "items": [
-          {
-            "icon": "lucide:globe",
-            "text": "Outside the US"
           },
-          {
-            "icon": "lucide:hourglass",
-            "text": "Can't do 600 hrs"
-          },
-          {
-            "icon": "lucide:map-pin-off",
-            "text": "Can't attend NJ·NY",
-            "note": "In person"
-          },
-          {
-            "icon": "lucide:languages",
-            "text": "No English or Spanish"
-          },
-          {
-            "icon": "lucide:scroll-text",
-            "text": "No diploma or GED",
-            "note": "Or accepted equivalent"
-          },
-          {
-            "icon": "lucide:stamp",
-            "text": "Needs a visa"
-          }
-        ],
-        "receipts": [
-          {
-            "type": "asset",
-            "ref": "tools/content/sources/christine-valmy-requirements.md",
-            "repo": "Juniper (stage prototype)",
-            "date": "2026-11-02",
-            "label": "Christine Valmy requirements, provided by Namit (redacted)"
-          }
-        ]
-      },
-      {
-        "kind": "gate",
-        "id": "cv-d-script~gate",
-        "weight": 0.65,
-        "label": "Password-protected",
-        "text": "The stack notes for this part are password-protected. Enter the password I shared with you to see them.",
-        "count": {
-          "diagrams": 0,
-          "commits": 0,
-          "notes": 1
-        }
-      },
-      {
-        "kind": "rules",
-        "id": "cvs-guard",
-        "weight": 0.6,
-        "label": "Guardrails",
-        "tag": "Design",
-        "items": [
           {
             "icon": "lucide:text-cursor-input",
-            "text": "300-char cap",
-            "note": "Inline error"
+            "text": "300-char cap"
           },
           {
             "icon": "lucide:user-round-check",
-            "text": "Officer hand-off",
-            "note": "After set messages"
+            "text": "Officer hand-off"
           },
           {
             "icon": "lucide:undo-2",
-            "text": "Off-topic redirect",
-            "note": "Scripted"
+            "text": "Off-topic redirect"
           },
           {
             "icon": "lucide:shield-x",
@@ -5038,67 +5014,34 @@
       },
       {
         "kind": "rules",
-        "id": "cvs-eval",
-        "weight": 0.55,
-        "label": "Evaluation",
-        "tag": "Plan, not results",
-        "dense": true,
+        "id": "cvs-disq",
+        "weight": 0.4,
+        "label": "Doesn’t qualify if",
+        "tag": "Requirement",
         "items": [
           {
-            "group": "Auto · per reply",
-            "icon": "lucide:shield-check",
-            "text": "Safety"
+            "icon": "lucide:globe",
+            "text": "Outside the US"
           },
           {
-            "group": "Auto · per reply",
-            "icon": "lucide:target",
-            "text": "Accuracy"
+            "icon": "lucide:hourglass",
+            "text": "Can't do 600 hrs"
           },
           {
-            "group": "Auto · per reply",
-            "icon": "lucide:shield-ban",
-            "text": "Off-topic & SQL detection"
+            "icon": "lucide:map-pin-off",
+            "text": "Can't attend NJ·NY"
           },
           {
-            "group": "Auto · per reply",
-            "icon": "lucide:hand-helping",
-            "text": "Helpfulness"
-          },
-          {
-            "group": "Auto · per reply",
-            "icon": "lucide:heart",
-            "text": "Empathy & likeability",
-            "note": "Perspective API"
-          },
-          {
-            "group": "Auto · per reply",
-            "icon": "lucide:scale",
-            "text": "Bias"
-          },
-          {
-            "group": "Auto · per reply",
-            "icon": "lucide:megaphone",
-            "text": "Persuasion"
-          },
-          {
-            "group": "Auto · per reply",
             "icon": "lucide:languages",
-            "text": "Coherence EN·ES"
+            "text": "No English or Spanish"
           },
           {
-            "group": "Human",
-            "icon": "lucide:users",
-            "text": "6 traits × 5-point scale"
+            "icon": "lucide:scroll-text",
+            "text": "No diploma or GED"
           },
           {
-            "group": "Per session",
-            "icon": "lucide:list-checks",
-            "text": "Order kept"
-          },
-          {
-            "group": "Per session",
-            "icon": "lucide:user-x",
-            "text": "Correct disqualification"
+            "icon": "lucide:stamp",
+            "text": "Needs a visa"
           }
         ],
         "receipts": [
@@ -5109,7 +5052,8 @@
             "date": "2026-11-02",
             "label": "Christine Valmy requirements, provided by Namit (redacted)"
           }
-        ]
+        ],
+        "dense": true
       }
     ]
   }

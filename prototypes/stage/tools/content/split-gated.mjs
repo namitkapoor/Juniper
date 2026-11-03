@@ -29,7 +29,7 @@ const STORE = P("private/gated.json");
 // Whole decks that are architecture end to end.
 const WHOLE_DECKS = new Set(["ck-d-stack", "ck-d-knowledge", "ck-d-backend", "cv-d-bridge", "cv-d-handoff"]);
 // Stack prose in otherwise public decks.
-const PROSE = new Set(["ck-system", "cv-stack", "cv-sorts", "ckd-data", "cvs-reply"]);
+const PROSE = new Set(["ck-system", "cv-stack", "cv-sorts", "ckd-data"]);
 // Commit lists from these repos are gated wherever they appear (also in "other work" decks).
 const GATED_REPOS = /chekout|valmy/i;
 // Partly gated decks whose thesis names the stack get this public line instead.
