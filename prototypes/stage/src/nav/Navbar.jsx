@@ -16,7 +16,7 @@ const SITE = "https://www.namit.me";
 const LINKS = [
   { label: "studio", href: "https://studio.namit.me" },
   { label: "about", href: "?page=about", internal: true },
-  { label: "resume", href: `${SITE}/files/KapoorNamit_Resume.pdf` },
+  { label: "resume", href: "/files/KapoorNamit_Resume.pdf" },
 ];
 
 function useBlink() {
