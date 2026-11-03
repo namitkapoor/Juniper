@@ -1,5 +1,6 @@
 {
   "name": "rosendahl-mobile",
+  "theme": "dark",
   "device": "phone",
   "frames": 8,
   "holds": [

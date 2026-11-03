@@ -1,0 +1,44 @@
+{
+  "name": "dashboard-desktop-light",
+  "theme": "light",
+  "device": "laptop",
+  "frames": 4,
+  "holds": [
+    2.2,
+    3.0,
+    2.6,
+    2.4
+  ],
+  "fade": 0.25,
+  "mp4": {
+    "path": "assets/chekout/demos/dashboard-desktop-light.mp4",
+    "w": 1470,
+    "h": 818,
+    "fps": 30,
+    "duration": 10.2,
+    "bytes": 237856
+  },
+  "poster": {
+    "index": 1,
+    "files": {
+      "dashboard-desktop-light.png": 99164,
+      "dashboard-desktop-light.webp": 25188,
+      "dashboard-desktop-light.avif": 15474
+    }
+  },
+  "aspect": 1.7971,
+  "source_frame": [
+    1280,
+    720
+  ],
+  "gif": {
+    "path": "assets/chekout/demos/dashboard-desktop-light.gif",
+    "w": 1470,
+    "h": 818,
+    "fps": 10,
+    "duration": 10.2,
+    "frames": 10,
+    "encoder": "ffmpeg",
+    "bytes": 702310
+  }
+}

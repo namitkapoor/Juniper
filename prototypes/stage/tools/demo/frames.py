@@ -189,6 +189,30 @@ def normalize(frames, size=None, mode="cover"):
     return frames, tuple(size)
 
 
+def find_exact(hay: Image.Image, needle: Image.Image, tol: float = 3.0):
+    """[x, y] where `needle` sits in `hay` (mean abs diff <= tol).
+    Vectorised: keep positions where 24 sample points of the needle match, then verify those."""
+    H = np.asarray(hay.convert("L")).astype(np.int16)
+    N = np.asarray(needle.convert("L")).astype(np.int16)
+    nh, nw = N.shape
+    Hh, Hw = H.shape[0] - nh + 1, H.shape[1] - nw + 1
+    if Hh <= 0 or Hw <= 0:
+        raise SystemExit("overlay match: needle larger than frame")
+    rng = np.random.default_rng(0)
+    pts = list(zip(rng.integers(0, nh, 24), rng.integers(0, nw, 24)))
+    ok = np.ones((Hh, Hw), bool)
+    for dy, dx in pts:
+        ok &= np.abs(H[dy:dy + Hh, dx:dx + Hw] - N[dy, dx]) <= max(8, tol * 3)
+    best = (1e9, None)
+    for y, x in zip(*np.nonzero(ok)):
+        d = float(np.abs(H[y:y + nh, x:x + nw] - N).mean())
+        if d < best[0]:
+            best = (d, [int(x), int(y)])
+    if best[1] is None or best[0] > tol:
+        raise SystemExit(f"overlay match not found (best diff {best[0]:.1f})")
+    return best[1]
+
+
 # ---------------------------------------------------------------- manifest
 def load_manifest(path):
     """JSON:
@@ -217,18 +241,39 @@ def load_manifest(path):
     for e in entries:
         if "index" in e:
             img = sheet_frames[e["index"]]
+        elif "row" in e:
+            # element captures (cards) laid side by side on the page colour, at native scale
+            parts = []
+            for it in e["row"]:  # "file.png" or {"src": ..., "crop": [x, y, w, h]}
+                it = {"src": it} if isinstance(it, str) else it
+                im = Image.open(os.path.join(base, it["src"])).convert("RGB")
+                parts.append(crop_box(im, it["crop"]) if it.get("crop") else im)
+            gap = e.get("gap", 24)
+            fill = tuple(e.get("fill") or edge_color(parts[0]))
+            img = Image.new("RGB", (sum(p.width for p in parts) + gap * (len(parts) - 1), max(p.height for p in parts)), fill)
+            x = 0
+            for p_ in parts:
+                img.paste(p_, (x, 0)); x += p_.width + gap
         else:
             img = Image.open(os.path.join(base, e["src"])).convert("RGB")
+        for ov in e.get("overlay", []):
+            # paste an element capture back where it was taken (e.g. a button's busy state);
+            # "at" is [x, y] in this frame's pixels, or "match": an image whose exact
+            # location in the frame gives the spot
+            piece = Image.open(os.path.join(base, ov["src"])).convert("RGB")
+            at = ov.get("at") or find_exact(img, Image.open(os.path.join(base, ov["match"])).convert("RGB"))
+            img.paste(piece, tuple(at))
         if e.get("crop"):
             img = crop_box(img, e["crop"], e.get("fill"))
         img = trim(img, e.get("trim", m.get("trim", 0)))
-        meta = {k: e[k] for k in ("fit", "fill") if k in e}
+        meta = {k: e[k] for k in ("fit", "fill", "anchor") if k in e}
         out.append(Frame(img, hold=e.get("hold"), label=e.get("label", e.get("src", f"#{e.get('index')}")), meta=meta))
     size = tuple(m["size"]) if m.get("size") else None
     if size:
         for f in out:
             if f.img.size != size:
-                f.img = fit(f.img, size, f.meta.get("fit", "cover"), f.meta.get("fill"))
+                f.img = fit(f.img, size, f.meta.get("fit", "cover"), f.meta.get("fill"),
+                            tuple(f.meta.get("anchor", (0.5, 0.0))))
     return out, m
 
 

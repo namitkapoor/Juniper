@@ -26,6 +26,30 @@ from PIL import Image, ImageDraw
 SS = 4  # supersampling factor for the vector parts
 
 
+# Ground + hairline per stage theme. Dark matches the stage today (--bg #141414, lines ~
+# rgba(255,255,255,.55)); light is the mirror (off-white ground, ~rgba(0,0,0,.5) lines),
+# a guess until the light tokens land: override with bg= / stroke= (hex) when they do.
+THEMES = {
+    "dark": {"bg": (20, 20, 20), "stroke": (150, 150, 150)},
+    "light": {"bg": (244, 244, 241), "stroke": (118, 118, 116)},
+}
+
+
+def hex_rgb(h):
+    h = h.lstrip("#")
+    return tuple(int(h[i:i + 2], 16) for i in (0, 2, 4))
+
+
+def themed(theme="dark", bg=None, stroke=None, **kw):
+    """Style for a theme, with optional '#rrggbb' overrides for ground / hairline."""
+    t = dict(THEMES[theme])
+    if bg:
+        t["bg"] = hex_rgb(bg) if isinstance(bg, str) else tuple(bg)
+    if stroke:
+        t["stroke"] = hex_rgb(stroke) if isinstance(stroke, str) else tuple(stroke)
+    return Style(**t, **kw)
+
+
 @dataclass
 class Style:
     style: str = "outline"          # outline | filled
@@ -265,6 +289,9 @@ def main():
     ap.add_argument("image")
     ap.add_argument("--device", choices=["phone", "laptop"], default="phone")
     ap.add_argument("--style", choices=["outline", "filled"], default="outline")
+    ap.add_argument("--theme", choices=list(THEMES), default="dark")
+    ap.add_argument("--bg", help="ground colour #rrggbb (overrides the theme)")
+    ap.add_argument("--stroke", help="hairline colour #rrggbb (overrides the theme)")
     ap.add_argument("--width", type=int, default=0, help="screen width in px (default: image width)")
     ap.add_argument("--out", required=True)
     ap.add_argument("--svg")
@@ -272,7 +299,7 @@ def main():
     img = Image.open(a.image).convert("RGB")
     if a.width:
         img = img.resize((a.width, round(img.height * a.width / img.width)), Image.LANCZOS)
-    d = Device(a.device, img.size, Style(style=a.style))
+    d = Device(a.device, img.size, themed(a.theme, a.bg, a.stroke, style=a.style))
     d.frame(img).save(a.out)
     if a.svg:
         open(a.svg, "w").write(d.svg())

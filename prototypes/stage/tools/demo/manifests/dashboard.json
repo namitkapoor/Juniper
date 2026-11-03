@@ -1,0 +1,76 @@
+{
+  "name": "dashboard-desktop",
+  "device": "laptop",
+  "gif_scale": 2.0,
+  "base": "/Users/namit/Documents/work/chekout-ai/chekoutai-frontend/portfolio-capture/stills",
+  "_note": "Real ChekOut analytics dashboard on KivaKube (Jul 27 2026). Frame 1 is the 1280x720 viewport; the rest are element captures of cards shown at native scale on the page colour. The number cards (02-05) and visitors-over-time are left out: they come from a different run than the full view (3,712 vs 6,593 visitors), and this deck's claim is about what shoppers asked.",
+  "size": [
+    1280,
+    720
+  ],
+  "frames": [
+    {
+      "src": "dashboard-01-full.png",
+      "hold": 2.2,
+      "label": "dashboard"
+    },
+    {
+      "src": "dashboard-07-conversation-highlights.png",
+      "fit": "none",
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "fill": [
+        245,
+        246,
+        247
+      ],
+      "hold": 3.0,
+      "label": "conversation highlights: every first question"
+    },
+    {
+      "row": [
+        {
+          "src": "dashboard-09-most-used-keywords.png",
+          "crop": [
+            0,
+            20,
+            309,
+            594
+          ]
+        },
+        "dashboard-10-product-leaderboard.png"
+      ],
+      "gap": 24,
+      "fit": "none",
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "fill": [
+        245,
+        246,
+        247
+      ],
+      "hold": 2.6,
+      "label": "keywords + products the AI recommended"
+    },
+    {
+      "src": "dashboard-11-what-customers-are-asking.png",
+      "fit": "none",
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "fill": [
+        245,
+        246,
+        247
+      ],
+      "hold": 2.4,
+      "label": "what customers are asking"
+    }
+  ],
+  "poster": 1
+}

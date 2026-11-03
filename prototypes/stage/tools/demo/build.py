@@ -33,7 +33,7 @@ from PIL import Image, features
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from frames import Frame, load_files, load_manifest, normalize, slice_sheet  # noqa: E402
-from frame_device import Device, Style  # noqa: E402
+from frame_device import THEMES, Device, themed  # noqa: E402
 
 FFMPEG = shutil.which("ffmpeg") or "/opt/homebrew/bin/ffmpeg"
 GIFSKI = shutil.which("gifski")
@@ -67,7 +67,7 @@ def render_states(frames, device, screen_css, scale, style_kw):
     cw = round(screen_css * scale)
     src_w, src_h = frames[0].img.size
     ch = round(src_h * cw / src_w)
-    st = Style(scale=scale, **style_kw)
+    st = themed(scale=scale, **style_kw)
     dev = Device(device, (cw, ch), st) if device != "none" else None
     out = []
     for f in frames:
@@ -164,6 +164,11 @@ def main():
     src.add_argument("--manifest", help="JSON manifest (per-frame crop/fit/hold); see frames.load_manifest")
     ap.add_argument("--device", choices=["phone", "laptop", "none"])
     ap.add_argument("--style", choices=["outline", "filled"])
+    ap.add_argument("--themes", help="comma list of stage themes to render (default dark,light); dark -> NAME.*, light -> NAME-light.*")
+    ap.add_argument("--bg", help="override the dark ground #rrggbb")
+    ap.add_argument("--stroke", help="override the dark hairline #rrggbb")
+    ap.add_argument("--light-bg", help="override the light ground #rrggbb")
+    ap.add_argument("--light-stroke", help="override the light hairline #rrggbb")
     ap.add_argument("--name")
     ap.add_argument("--out", required=True)
     ap.add_argument("--select", help="comma list of 0-based frame indices to keep, in order (e.g. 0,2,3,5)")
@@ -226,56 +231,71 @@ def main():
     assert len(holds) == len(frames), f"{len(holds)} holds for {len(frames)} frames"
 
     os.makedirs(a.out, exist_ok=True)
-    base = os.path.join(a.out, name)
-    work = tempfile.mkdtemp(prefix=f"demo-{name}-")
+    themes = opt("themes", "dark,light")
+    themes = themes.split(",") if isinstance(themes, str) else themes
+    colours = {"dark": (opt("bg", None), opt("stroke", None)),
+               "light": (opt("light-bg", None), opt("light-stroke", None))}
+    root_work = tempfile.mkdtemp(prefix=f"demo-{name}-")
     try:
-        states, _ = render_states(frames, device, screen_css, a.scale, style_kw)
-        W, H = states[0].size
-        dur = timeline(states, holds, fade, a.fps,
-                       ["-c:v", "libx264", "-preset", "slow", "-crf", str(a.crf), "-tune", "stillimage",
-                        "-pix_fmt", "yuv420p", "-movflags", "+faststart", "-an", base + ".mp4"], work, "m")
-        poster_i = opt("poster", None)
-        if poster_i is None:
-            poster_i = max(range(len(holds)), key=lambda i: (holds[i], i))
-        states[poster_i].save(base + ".png", optimize=True)
-        states[poster_i].save(base + ".webp", quality=88, method=6)
-        posters = [base + ".png", base + ".webp"]
-        if features.check("avif"):
-            try:
-                states[poster_i].save(base + ".avif", quality=70)
-                posters.append(base + ".avif")
-            except Exception:
-                pass
-        info = {"name": name, "device": device, "frames": len(frames), "holds": holds, "fade": fade,
-                "mp4": {"path": rel(base + ".mp4"), "w": W, "h": H, "fps": a.fps, "duration": round(dur, 2),
-                        "bytes": os.path.getsize(base + ".mp4")},
-                "poster": {"index": poster_i, "files": {os.path.basename(p): os.path.getsize(p) for p in posters}},
-                "aspect": round(W / H, 4), "source_frame": list(size)}
-        if not a.no_gif:
-            gstates, _ = render_states(frames, device, screen_css, gif_scale, style_kw)
-            enc = opt("gif-encoder", "ffmpeg")
-            if enc == "gifski" and not GIFSKI:
-                enc = "ffmpeg"
-            gdur, n = build_gif(gstates, holds, fade, gif_fps, base + ".gif", work, enc,
-                                opt("gif-quality", 80), opt("gif-lossy", None), opt("gif-motion", 100),
-                                opt("gif-dither", "bayer"))
-            gw, gh = Image.open(base + ".gif").size  # measured, not assumed
-            info["gif"] = {"path": rel(base + ".gif"), "w": gw, "h": gh, "fps": gif_fps,
-                           "duration": round(gdur, 2), "frames": n, "encoder": enc,
-                           "bytes": os.path.getsize(base + ".gif")}
-        json.dump(info, open(base + ".json", "w"), indent=2)
-        kb = lambda b: f"{b / 1024:.0f} KB" if b < 1 << 20 else f"{b / (1 << 20):.2f} MB"
-        print(f"{name}: {len(frames)} states, {dur:.1f}s")
-        print(f"  mp4 {W}x{H} {a.fps}fps {kb(info['mp4']['bytes'])}")
-        if "gif" in info:
-            g = info["gif"]
-            print(f"  gif {g['w']}x{g['h']} {g['fps']}fps {kb(g['bytes'])} ({g['encoder']})")
-        print("  poster " + ", ".join(f"{k} {kb(v)}" for k, v in info["poster"]["files"].items()))
+        for theme in themes:
+            assert theme in THEMES, theme
+            kw = dict(style_kw, theme=theme, bg=colours[theme][0], stroke=colours[theme][1])
+            out_name = name if theme == "dark" else f"{name}-{theme}"
+            work = os.path.join(root_work, theme)
+            os.makedirs(work)
+            emit(a, opt, frames, size, device, screen_css, gif_scale, gif_fps, holds, fade, kw,
+                 os.path.join(a.out, out_name), out_name, theme, work)
     finally:
         if not os.environ.get("DEMO_KEEP"):
-            shutil.rmtree(work, ignore_errors=True)
+            shutil.rmtree(root_work, ignore_errors=True)
         else:
-            print("  work dir kept:", work)
+            print("  work dir kept:", root_work)
+
+
+def emit(a, opt, frames, size, device, screen_css, gif_scale, gif_fps, holds, fade, style_kw, base, name, theme, work):
+    """One theme: MP4 + posters + GIF + JSON."""
+    states, _ = render_states(frames, device, screen_css, a.scale, style_kw)
+    W, H = states[0].size
+    dur = timeline(states, holds, fade, a.fps,
+                   ["-c:v", "libx264", "-preset", "slow", "-crf", str(a.crf), "-tune", "stillimage",
+                    "-pix_fmt", "yuv420p", "-movflags", "+faststart", "-an", base + ".mp4"], work, "m")
+    poster_i = opt("poster", None)
+    if poster_i is None:
+        poster_i = max(range(len(holds)), key=lambda i: (holds[i], i))
+    states[poster_i].save(base + ".png", optimize=True)
+    states[poster_i].save(base + ".webp", quality=88, method=6)
+    posters = [base + ".png", base + ".webp"]
+    if features.check("avif"):
+        try:
+            states[poster_i].save(base + ".avif", quality=70)
+            posters.append(base + ".avif")
+        except Exception:
+            pass
+    info = {"name": name, "theme": theme, "device": device, "frames": len(frames), "holds": holds, "fade": fade,
+            "mp4": {"path": rel(base + ".mp4"), "w": W, "h": H, "fps": a.fps, "duration": round(dur, 2),
+                    "bytes": os.path.getsize(base + ".mp4")},
+            "poster": {"index": poster_i, "files": {os.path.basename(p): os.path.getsize(p) for p in posters}},
+            "aspect": round(W / H, 4), "source_frame": list(size)}
+    if not a.no_gif:
+        gstates, _ = render_states(frames, device, screen_css, gif_scale, style_kw)
+        enc = opt("gif-encoder", "ffmpeg")
+        if enc == "gifski" and not GIFSKI:
+            enc = "ffmpeg"
+        gdur, n = build_gif(gstates, holds, fade, gif_fps, base + ".gif", work, enc,
+                            opt("gif-quality", 80), opt("gif-lossy", None), opt("gif-motion", 100),
+                            opt("gif-dither", "bayer"))
+        gw, gh = Image.open(base + ".gif").size  # measured, not assumed
+        info["gif"] = {"path": rel(base + ".gif"), "w": gw, "h": gh, "fps": gif_fps,
+                       "duration": round(gdur, 2), "frames": n, "encoder": enc,
+                       "bytes": os.path.getsize(base + ".gif")}
+    json.dump(info, open(base + ".json", "w"), indent=2)
+    kb = lambda b: f"{b / 1024:.0f} KB" if b < 1 << 20 else f"{b / (1 << 20):.2f} MB"
+    print(f"{name}: {len(frames)} states, {dur:.1f}s")
+    print(f"  mp4 {W}x{H} {a.fps}fps {kb(info['mp4']['bytes'])}")
+    if "gif" in info:
+        g = info["gif"]
+        print(f"  gif {g['w']}x{g['h']} {g['fps']}fps {kb(g['bytes'])} ({g['encoder']})")
+    print("  poster " + ", ".join(f"{k} {kb(v)}" for k, v in info["poster"]["files"].items()))
 
 
 if __name__ == "__main__":

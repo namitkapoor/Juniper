@@ -7,6 +7,7 @@ framed in a hairline iPhone or laptop outline on the stage's #141414 ground:
 - `NAME.gif`: what the Proof list plays. Exact encoder (see below), 1.5x for a phone and 1.25x for a laptop, crossfades at 10fps.
 - `NAME.webp` / `NAME.avif` / `NAME.png`: the poster, a still of the key state. The stage shows the webp until hover.
 - `NAME.json`: sizes, fps, durations and holds, plus the numbers `Receipt.preview` needs.
+- `NAME-light.*`: the same set on the light stage ground (see Themes).
 
 Needs Python 3 with Pillow and numpy, plus ffmpeg (`/opt/homebrew/bin/ffmpeg`).
 gifski is optional and only used if you ask for it.
@@ -36,6 +37,7 @@ Useful flags:
 - `--hold 1.5` sets the seconds per state. `--holds 1.4,1.6,...` sets each state, and `--key 3,7` holds those states 1.6x longer.
 - `--fade 0.25` sets the crossfade. The last state fades back into the first, so the loop doesn't jump.
 - `--style outline|filled`: outline is the default. Filled uses a near-black bezel.
+- `--themes dark,light` (default both) renders `NAME.*` and `NAME-light.*`. `--bg/--stroke` and `--light-bg/--light-stroke` (`#rrggbb`) override the ground and hairline once the stage's light tokens exist.
 - `--screen-css 310` sets the screen width in CSS px (phone 310, laptop 600). The device adds about 17% (phone) or 22% (laptop).
 - `--scale 2` sets the MP4/poster density. `--gif-scale` and `--gif-fps` size the GIF.
 - `--poster N` picks the poster state. The default is the longest hold.
@@ -66,6 +68,9 @@ python3 tools/demo/frame_device.py shot.png --device phone --width 620 --out fra
 
 - `crop` is `[x, y, w, h]` in source pixels. It may run outside the image, and the overflow is filled with `fill` (default: the image's edge color). Use it to line up shots taken at different crops: pick a fixed element, such as an input box, and offset each crop so that element lands in the same place in every frame.
 - `index` picks a cell from `sheet` (0-based, reading order).
+- `row: ["a.png", {"src": "b.png", "crop": [x, y, w, h]}]` lays element captures (dashboard cards) side by side on `fill`, at native scale (`gap` defaults to 24).
+- `overlay: [{"src": "busy.png", "match": "idle.png"}]` pastes an element capture back where it was taken. `match` finds the exact spot of the idle twin in the frame by pixel match; `at: [x, y]` sets it directly. The builder's "Analyzing your catalog" state is made this way: its 780x67 capture replaces the identical-size idle control at (380,323).
+- `anchor: [0.5, 0.5]` places a frame with `fit: "none"` (native scale, centred) instead of top-centre.
 - `fit` (`cover` | `contain` | `none`) controls how a frame of a different size is fitted to the common size.
 - Any CLI option can also go at the top level (`hold`, `fade`, `key`, `gif_scale`, `screen_css`, `style`, `status_bar: "none"`).
 
@@ -82,13 +87,15 @@ The base paths in `manifests/` are absolute: the round-4 recordings live in the 
   3. It encodes with `-gifflags -transdiff`. Each frame is still cropped to its changed rectangle, but nothing is ever "kept because it was close".
 
   Fades run at 10fps (2 to 3 frames per 250ms fade): fade frames are the bulk of the bytes, and holds are nearly free. `--gif-encoder gifski` stays available for comparison.
-- **Phone GIFs at 1.5x, not 2x.** At 2x the GIF needs no dither to fit 4 MB, and that bands the chat widget's gradients. At 1.5x with bayer dither it stays smooth and lands at about 3 MB. The sheet cells are only 300px wide, so 2x adds no text detail. The 2x master is the MP4.
+- **Themes.** Dark is the stage today: ground #141414, hairline #969696, about `rgba(255,255,255,.55)`. Light is its mirror: ground #f4f4f1, hairline #767674. The stage has no light tokens yet, so pass the real ones with `--light-bg/--light-stroke` when they land. Each theme is rendered on a solid ground rather than transparent: GIF alpha is 1-bit, so the anti-aliased hairlines would halo on any ground they weren't blended against, and MP4 has no alpha at all. The schema has one `src`, so a light theme can swap `NAME.gif` for `NAME-light.gif` by suffix (likewise the webp poster).
+- **Phone GIFs at 1.5x, not 2x.** At 2x the GIF needs no dither to fit 4 MB, and that bands the chat widget's gradients. At 1.5x with bayer dither it stays smooth and lands at about 3 MB. The sheet cells are only 300px wide, so 2x adds no text detail. The 2x master is the MP4. Laptop GIFs from half-size sheets use 1.25x. Full 1280px captures of dense UI (the builder, the dashboard) set `"gif_scale": 2` in their manifest, so text stays near 1:1; they're flat UIs, so that's still under 1 MB.
 
 ## Wiring into the stage
 
-`tools/demo/attach.mjs` adds each demo as its own `asset` receipt on the fill it backs, with
-`preview: { src: <gif>, poster: <webp>, aspect: gif w/h, frame: "phone" | "laptop" }`. It leaves existing
-receipts alone, because they describe other evidence, and it's idempotent. The GIFs are already framed, so
+`tools/demo/attach.mjs` sets `preview: { src: <gif>, poster: <webp>, aspect: gif w/h, frame: "phone" | "laptop" }`.
+By default each demo becomes its own `asset` receipt on the fill it backs. `receipt: {...}` makes that new receipt
+a specific one instead, such as the commit that shipped the UI; check it with `git log -S "<ui string>"`. `onReceipt: "<ref>"`
+puts the preview on a receipt that's already there. It's idempotent. The GIFs are already framed, so
 `frame` only tells the engine how to lay the preview out (phone 150px wide, laptop up to 360px).
 `src/data/validate.mjs` checks every preview: `src` and `poster` exist under `public/`, `aspect` is greater than 0,
 `frame` is one of `phone`/`laptop`/`none`, and there are no unknown keys.
@@ -97,7 +104,7 @@ receipts alone, because they describe other evidence, and it's idempotent. The G
 
 | Count | Where | What |
 |---|---|---|
-| 22 | `~/Documents/work/chekout-ai/chekoutai-frontend/portfolio-capture/stills` | **The real merchant builder** (`builder-01-persona-form` … `builder-06-generated-prompt`) plus dashboard stills. This is the right source for the ck-d-builder deck. |
+| 22 | `~/Documents/work/chekout-ai/chekoutai-frontend/portfolio-capture/stills` | **Used** (`manifests/builder.json`, `manifests/dashboard.json`). The dashboard number cards 02-05 and 08 come from a different run than `dashboard-01-full` (6,593 vs 3,712 visitors), so they're left out. |
 | 8 / 8 / 9 | `~/Documents/kyuri-dashboard/e2e/screenshots/{phone,tablet,desktop}` | KYURI.OS e2e baselines per viewport |
 | 78 / 91 / 96 | `~/Documents/kyuri-dashboard/e2e/screenshots/failures/{phone,tablet,desktop}` | e2e failure captures (debug, not demo material) |
 | 191 | `/private/tmp/claude-501/-Users-namit-Documents-kyuri-dashboard/cb7d3ac0-c58e-453b-8bb4-32bf6a48924d/scratchpad/stage` | stage prototype review shots by round (`r2` 18, `r3` 19, `r5` 28, `r10` 21, …). Temp dir, so it will disappear. |

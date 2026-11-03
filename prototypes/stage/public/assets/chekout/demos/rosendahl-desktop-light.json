@@ -1,0 +1,48 @@
+{
+  "name": "rosendahl-desktop-light",
+  "theme": "light",
+  "device": "laptop",
+  "frames": 8,
+  "holds": [
+    1.4,
+    1.2,
+    1.4,
+    1.2,
+    2.4,
+    1.2,
+    1.2,
+    2.6
+  ],
+  "fade": 0.25,
+  "mp4": {
+    "path": "assets/chekout/demos/rosendahl-desktop-light.mp4",
+    "w": 1470,
+    "h": 892,
+    "fps": 30,
+    "duration": 12.6,
+    "bytes": 887861
+  },
+  "poster": {
+    "index": 7,
+    "files": {
+      "rosendahl-desktop-light.png": 526926,
+      "rosendahl-desktop-light.webp": 62034,
+      "rosendahl-desktop-light.avif": 43706
+    }
+  },
+  "aspect": 1.648,
+  "source_frame": [
+    720,
+    450
+  ],
+  "gif": {
+    "path": "assets/chekout/demos/rosendahl-desktop-light.gif",
+    "w": 918,
+    "h": 558,
+    "fps": 10,
+    "duration": 12.6,
+    "frames": 22,
+    "encoder": "ffmpeg",
+    "bytes": 2912146
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "name": "builder-desktop",
+  "device": "laptop",
+  "gif_scale": 2.0,
+  "base": "/Users/namit/Documents/work/chekout-ai/chekoutai-frontend/portfolio-capture/stills",
+  "_note": "Real ChekOut merchant builder (chekoutai-frontend portfolio-capture, Jul 27 2026, 1280x720). The 'analyzing' state is builder-05 (a 780x67 element capture of the Regenerate control) pasted back into builder-04 at the exact spot where its idle twin builder-02 matches (380,323); everything else in that frame is builder-04 as captured.",
+  "size": [
+    1280,
+    720
+  ],
+  "frames": [
+    {
+      "src": "builder-01-persona-form.png",
+      "hold": 1.8,
+      "label": "connect the store"
+    },
+    {
+      "src": "builder-04-regenerate-confirm.png",
+      "hold": 2.0,
+      "label": "persona: name, theme, template prompt"
+    },
+    {
+      "src": "builder-04-regenerate-confirm.png",
+      "overlay": [
+        {
+          "src": "builder-05-generating.png",
+          "match": "builder-02-generator-affordance.png"
+        }
+      ],
+      "hold": 1.4,
+      "label": "regenerate from catalog: analyzing"
+    },
+    {
+      "src": "builder-06-generated-prompt.png",
+      "hold": 3.0,
+      "label": "prompt written from the store's catalog"
+    }
+  ],
+  "poster": 3
+}

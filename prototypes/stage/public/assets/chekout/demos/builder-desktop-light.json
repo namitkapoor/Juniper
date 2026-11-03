@@ -1,0 +1,44 @@
+{
+  "name": "builder-desktop-light",
+  "theme": "light",
+  "device": "laptop",
+  "frames": 4,
+  "holds": [
+    1.8,
+    2.0,
+    1.4,
+    3.0
+  ],
+  "fade": 0.25,
+  "mp4": {
+    "path": "assets/chekout/demos/builder-desktop-light.mp4",
+    "w": 1470,
+    "h": 818,
+    "fps": 30,
+    "duration": 8.2,
+    "bytes": 267754
+  },
+  "poster": {
+    "index": 3,
+    "files": {
+      "builder-desktop-light.png": 208654,
+      "builder-desktop-light.webp": 59202,
+      "builder-desktop-light.avif": 48032
+    }
+  },
+  "aspect": 1.7971,
+  "source_frame": [
+    1280,
+    720
+  ],
+  "gif": {
+    "path": "assets/chekout/demos/builder-desktop-light.gif",
+    "w": 1470,
+    "h": 818,
+    "fps": 10,
+    "duration": 8.2,
+    "frames": 10,
+    "encoder": "ffmpeg",
+    "bytes": 877859
+  }
+}

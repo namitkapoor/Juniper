@@ -1,5 +1,6 @@
 {
   "name": "rosendahl-desktop",
+  "theme": "dark",
   "device": "laptop",
   "frames": 8,
   "holds": [

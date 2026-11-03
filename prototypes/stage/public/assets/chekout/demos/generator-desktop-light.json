@@ -1,0 +1,44 @@
+{
+  "name": "generator-desktop-light",
+  "theme": "light",
+  "device": "laptop",
+  "frames": 4,
+  "holds": [
+    1.6,
+    1.4,
+    2.8,
+    2.0
+  ],
+  "fade": 0.25,
+  "mp4": {
+    "path": "assets/chekout/demos/generator-desktop-light.mp4",
+    "w": 1470,
+    "h": 892,
+    "fps": 30,
+    "duration": 7.8,
+    "bytes": 317321
+  },
+  "poster": {
+    "index": 2,
+    "files": {
+      "generator-desktop-light.png": 355819,
+      "generator-desktop-light.webp": 61882,
+      "generator-desktop-light.avif": 51325
+    }
+  },
+  "aspect": 1.648,
+  "source_frame": [
+    1440,
+    900
+  ],
+  "gif": {
+    "path": "assets/chekout/demos/generator-desktop-light.gif",
+    "w": 918,
+    "h": 558,
+    "fps": 10,
+    "duration": 7.8,
+    "frames": 10,
+    "encoder": "ffmpeg",
+    "bytes": 542116
+  }
+}

@@ -1,5 +1,6 @@
 {
   "name": "generator-desktop",
+  "theme": "dark",
   "device": "laptop",
   "frames": 4,
   "holds": [
