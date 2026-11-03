@@ -863,6 +863,21 @@ function specimenFit(fill, w, h, ctx) {
   return { cost: ar < 1.1 ? 0.6 * (1.1 - ar) : 0, spec: { listH } };
 }
 
+/** A password gate: a short note + the password field; >= 240 x 210. */
+function gateFit(fill, w, h) {
+  if (w < 240 || h < 210) return { cost: INFEASIBLE + 6 };
+  const ar = w / h;
+  return { cost: ar > 3 ? 0.3 * (ar - 3) : 0 };
+}
+
+/** A token sheet tile: >= 220x170 (values only, clipped); the full sheet in focus wants room. */
+function tokensFit(fill, w, h, ctx) {
+  const listH = ctx.expanded ? receiptsListH(fill, ctx.measure, w - 2 * ctx.pad) : 0;
+  const minW = fill.focused ? 520 : 220, minH = fill.focused ? 360 : 170;
+  if (w < minW || h - listH < minH) return { cost: INFEASIBLE + 6 };
+  return { cost: 0, spec: { listH } };
+}
+
 function portraitFit(fill, w, h) {
   if (w < 200 || h < 220) return { cost: INFEASIBLE + 10 };
   const box = mediaBox(fill.aspect, w, h);
@@ -982,6 +997,18 @@ export function mediaLayout(fill, w, h, measure, expanded, phone = false) {
   // Caption, step, Proof and Expand stay anchored to the cell; only an expanded clip's
   // caption follows the image.
   for (const v of variants) {
+    // Beside: a media shorter than the cell (a phone clip next to its caption) is centred vertically.
+    if (v.layout === "beside" && v.box.h < H - 1) v.box = { ...v.box, y: Math.floor((H - v.box.h) / 2) };
+    // Below, when media + strip leave the cell taller than they need (a contained phone
+    // clip), the whole block sits in the vertical middle instead of leaving a gap under it.
+    if (v.layout === "below" && v.box.fit === "contain" && !fill.focused && H - v.used > 1) {
+      const dy = Math.floor((H - v.used) / 2);
+      v.box = { ...v.box, y: v.box.y + dy };
+      if (v.cap) v.cap = { ...v.cap, y: v.cap.y + dy };
+      if (v.step) v.step = { ...v.step, y: v.step.y + dy };
+      if (v.ctrl) v.ctrl = { ...v.ctrl, y: v.ctrl.y + dy };
+      v.dy = dy;
+    }
     if (v.layout === "below" && v.box.w < w - 1) {
       const dx = Math.floor((w - v.box.w) / 2);
       v.box = { ...v.box, x: dx };
@@ -1017,9 +1044,15 @@ export function mediaLayout(fill, w, h, measure, expanded, phone = false) {
   return best;
 }
 
+export const MEDIA_STEP_MIN_W = 260;
 function mediaFit(fill, w, h, ctx) {
   if (h - (ctx.expanded ? receiptsListH(fill, ctx.measure, w - 2 * ctx.pad) : 0) < 96) return { cost: INFEASIBLE + 10 };
+  // A process step ("STEP 2 OF 6 · SESSION 1, BEFORE" + status chip + track) needs room,
+  // or the label wraps a word per line and the image shrinks to a thumbnail.
+  if (fill.step && !ctx.phone && w < MEDIA_STEP_MIN_W) return { cost: INFEASIBLE + 8 };
   const r = mediaLayout(fill, w, h, ctx.measure, ctx.expanded, ctx.phone);
+  // Any media under ~220px wide reads as a thumbnail: allowed, but a last resort.
+  if (r && !fill.focused && !ctx.phone && w < 220) r.cost += 2 + (220 - w) / 40;
   // An expanded media takes the majority of the stage (>= ~70% of its area).
   if (fill.focused && ctx.stage && r) {
     const share = (w * h) / (ctx.stage.w * ctx.stage.h);
@@ -1050,12 +1083,14 @@ export function fitFill(fill, w, h, ctx) {
     case "stack": r = stackFit(fill, w, h, ctx); break;
     case "portrait": r = portraitFit(fill, w, h); break;
     case "specimen": r = specimenFit(fill, w, h, ctx); break;
+    case "tokens": r = tokensFit(fill, w, h, ctx); break;
+    case "gate": r = gateFit(fill, w, h); break;
     case "offclock": r = offclockFit(fill, w, h, ctx); break;
     case "rules": r = rulesFit(fill, w, h, ctx); break;
     default: r = { cost: INFEASIBLE + 20 };
   }
   // Generic shape sanity for text cells: no slivers.
-  if (fill.kind !== "media" && fill.kind !== "title" && fill.kind !== "portrait" && fill.kind !== "specimen") {
+  if (fill.kind !== "media" && fill.kind !== "title" && fill.kind !== "portrait" && fill.kind !== "specimen" && fill.kind !== "tokens") {
     const ar = w / h;
     if (ar > 4 || ar < 0.25) r.cost += 0.6 * Math.abs(Math.log(ar / (ar > 1 ? 4 : 0.25)));
   }
@@ -1102,6 +1137,8 @@ export function naturalHeight(fill, w, ctx) {
     case "stack": return 2 * P + STACK.groupH + stackTableH(ctx.measure, fill, innerW) + 8;
     case "portrait": return Math.round(Math.min(w / fill.aspect, 520));
     case "specimen": return Math.max(280, Math.round(w * 0.7)) + extra;
+    case "tokens": return (fill.focused ? 640 : 230) + extra;
+    case "gate": return 250;
     case "offclock": return 2 * P + offclockLayout(ctx.measure, fill, innerW).h;
     case "rules": return rulesNaturalH(fill, w, ctx);
     case "timeline": return 2 * P + TIMELINE.headH + TIMELINE.rowH * fill.items.length + 4;

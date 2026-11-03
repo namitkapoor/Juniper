@@ -53,16 +53,16 @@
       "id": "home-cv",
       "weight": 0.55,
       "media": "image",
-      "src": "assets/christine-valmy/cover.webp",
-      "aspect": 1.6482,
-      "alt": "Christine Valmy's enrollment agent beside the inquiry form",
+      "src": "assets/christine-valmy/cover-devices.webp",
+      "aspect": 1.6211,
+      "alt": "Christine Valmy's enrollment agent beside the inquiry form on a laptop, and the same agent on a phone",
       "caption": "Christine Valmy: Students waited on a form while officers repeated themselves. A bilingual agent took visitor conversion from 10% to 23%.",
       "receipts": [
         {
           "type": "asset",
-          "ref": "assets/christine-valmy/cover.webp",
+          "ref": "assets/christine-valmy/cover-devices.webp",
           "repo": "Juniper",
-          "label": "public/images/Project Cover Photos/CV thumbnail.webp"
+          "label": "public/images/Case Studies/CV/cv-final-design.png and cv-final-mobile.png, in the ChekOut cover's laptop and phone frame"
         }
       ],
       "explain": "The enrollment agent beside the school's inquiry form. User testing killed my first design; the bilingual agent that shipped answers students in English or Spanish and sorts every lead for the officers. Ask how testing changed it to see the before and after."
@@ -72,14 +72,17 @@
       "id": "home-ky",
       "weight": 0.55,
       "media": "image",
-      "src": "assets/kyuri-os/job-hunt.webp",
-      "aspect": 1.6,
-      "alt": "KYURI.OS Job Hunt page with live pipeline totals",
+      "src": "assets/kyuri-os/cover-devices.webp",
+      "aspect": 1.6211,
+      "alt": "KYURI.OS Job Hunt page with live pipeline totals on a laptop, and its pipeline panel on a phone",
       "caption": "KYURI.OS: My own job search, built as a system: 454 roles captured and 341 applications logged since April 2026, with guards on every AI-written resume.",
       "receipts": [
         {
           "type": "asset",
-          "ref": "assets/kyuri-os/job-hunt.webp"
+          "ref": "assets/kyuri-os/cover-devices.webp",
+          "url": "https://kyuri.namit.me/?area=job-hunt",
+          "date": "2026-11-03",
+          "label": "kyuri.namit.me Job Hunt, visitor view at 1600px and 393px, captured 2026-11-03, in the ChekOut cover's laptop and phone frame"
         },
         {
           "type": "asset",

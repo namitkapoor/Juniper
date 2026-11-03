@@ -10,6 +10,7 @@ import { fixtureHome, fixtureAnswers } from "./fixtures/index.js";
 import { setCaseNames, caseName } from "./caseName.js";
 import { useEffect, useState } from "react";
 import MANIFEST from "../tools/content/manifest.json";
+import { fetchGated, mergeGated } from "./gate.js";
 
 const files = import.meta.glob("./data/*.json");
 
@@ -42,6 +43,8 @@ export function cleanFill(f) {
     case "media": return f.src && isNum(f.aspect) && f.aspect > 0 ? { ...f, weight } : null;
     case "commits": return Array.isArray(f.items) && f.items.length ? { ...f, weight } : null;
     case "specimen": return f.sample && Array.isArray(f.scale) && f.scale.length >= 2 ? { ...f, weight } : null;
+    case "gate": return f.text ? { ...f, weight, receipts: [] } : null;
+    case "tokens": return f.section ? { ...f, weight, receipts: f.receipts || [] } : null;
     case "rules": {
       const items = (f.items || []).filter((it) => it && it.text && it.icon);
       return f.label && items.length ? { ...f, items, weight, receipts: f.receipts || [] } : null;
@@ -85,7 +88,7 @@ export function cleanAnswer(a) {
  */
 const LIGHT = new Set(Object.keys(MANIFEST).filter((k) => /-light\.[a-z0-9]+$/i.test(k)).map((k) => `assets/${k}`));
 export const lightVariant = (src) => (src ? src.replace(/(\.[a-z0-9]+)$/i, "-light$1") : src);
-export const hasLight = (src) => !!src && (/\/demos\//.test(src) || LIGHT.has(lightVariant(src)));
+export const hasLight = (src) => !!src && (/\/demos\//.test(src) || LIGHT.has(lightVariant(src).replace(/^\/?gated\//, "assets/")));
 export const themedSrc = (src, light) => (light && hasLight(src) ? lightVariant(src) : src);
 const isLight = () => typeof document !== "undefined" && document.documentElement.dataset.theme === "light";
 /** Re-renders when <html data-theme> flips. */
@@ -103,9 +106,11 @@ export function useLightTheme() {
 export const assetUrl = (src) => (!src ? src : /^(https?:)?\/\//.test(src) || src.startsWith("/") ? src : `/${src}`);
 
 export async function loadContent() {
-  const [decks, corpus, home, caseStudies, about] = await Promise.all([
-    load("decks"), load("corpus"), load("home"), load("case-studies"), load("about"),
+  const [rawDecks, rawCorpus, home, caseStudies, about, gated] = await Promise.all([
+    load("decks"), load("corpus"), load("home"), load("case-studies"), load("about"), fetchGated(),
   ]);
+  // Unlocked browsers get the password-protected fills back in place (src/gate.js).
+  const { decks, corpus } = mergeGated(rawDecks, rawCorpus, gated);
   const realDecks = Array.isArray(decks) ? decks.map(cleanAnswer).filter(Boolean) : [];
   const realCorpus = Array.isArray(corpus)
     ? corpus.map((u) => ({ ...u, fills: (u.fills || []).map(cleanFill).filter(Boolean) })).filter((u) => u.fills.length)
@@ -132,6 +137,7 @@ export async function loadContent() {
     caseStudies: cases,
     about: about && Array.isArray(about.bio) ? about : null,
     fixtures: fixtureAnswers.map((a) => cleanAnswer(a) || a),
+    unlocked: !!gated,
     source: { home: realHome ? "data" : "fixture", decks: realDecks.length ? "data" : "fixture", corpus: realCorpus.length ? "data" : "none" },
   };
 }

@@ -2,3 +2,6 @@ node_modules/
 dist/
 __pycache__/
 .vercel
+
+# IP gate: gated content and diagrams never go to git (served by api/gate*.js)
+private/

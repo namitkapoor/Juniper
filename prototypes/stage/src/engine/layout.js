@@ -91,6 +91,35 @@ function splitLayout({ rect, weighted, measure, exp, split }) {
   const items = [...A, ...B].map((w) => ({ ...w, inset: null }));
   const sumW = items.reduce((s, it) => s + it.weight, 0);
   const fitCache = new Map();
+  // Pixel-exact band (a long page's first band is far finer than one grid row): the band
+  // and the rest each get their own rect and grid, joined by one full-width line.
+  if (split.px && split.axis === "h" && split.px < rect.h - 200) {
+    const rA = { x: rect.x, y: rect.y, w: rect.w, h: Math.round(split.px) };
+    const rB = { x: rect.x, y: rect.y + rA.h, w: rect.w, h: rect.h - rA.h };
+    const part = (r, from, to, prefix, bentoOpt) => {
+      const pxs = gridLines(r.x, r.w), pys = gridLines(r.y, r.h);
+      const solve = makeSolver({ rect: r, xs: pxs, ys: pys, items, sumW, measure, exp, fitCache: new Map(), bento: bentoOpt });
+      const t = solve(0, 0, GRID, GRID, from, to, 1);
+      if (!t) return null;
+      const cells = [], strokes = [];
+      emit(t.tree, prefix, 1, { rect: r, xs: pxs, ys: pys, cells, strokes, measure, exp });
+      return { cells, strokes, cost: t.cost };
+    };
+    const pa = part(rA, 0, A.length, "rA", null);
+    const pb = pa && part(rB, A.length, items.length, "rB", split.bento ? { even: 0.35, aligned: 0.6, avoidY: new Set() } : null);
+    if (pa && pb) {
+      const cells = [...pa.cells, ...pb.cells];
+      const strokes = [
+        { id: "split-h", axis: "h", path: "r", depth: 0, index: 0, origin: "start", x1: rect.x, y1: rB.y, x2: rect.x + rect.w, y2: rB.y, pos: rB.y },
+        ...pa.strokes, ...pb.strokes,
+      ];
+      strokes.sort((p, q) => (p.depth - q.depth) || (p.path < q.path ? -1 : p.path > q.path ? 1 : 0) || (p.index - q.index));
+      strokes.forEach((st, i) => { st.order = i; });
+      tileHierarchy(cells, weighted);
+      equalizeHomeType(cells, weighted, measure, false);
+      return { mode: "grid", rect, cells, strokes, dropped: [], score: pa.cost + pb.cost };
+    }
+  }
   const solveA = makeSolver({ rect, xs, ys, items, sumW, measure, exp, fitCache, bento: split.bento ? { even: 0.35, aligned: 0, avoidY: new Set() } : null });
   const ideal = Math.round(split.at * GRID);
   let best = null;
@@ -154,7 +183,7 @@ function stackLayout({ rect, weighted, measure, exp, split }) {
     const nh = naturalHeight(fill, rect.w, { ...ctx, expanded: exp.has(fill.id) });
     let h = typeof nh === "number" ? nh : nh.h;
     let spec = typeof nh === "number" ? undefined : nh.spec;
-    if (["media", "quote", "kpi", "commits", "logos", "tile", "timeline", "worklog", "stack", "portrait", "offclock", "specimen", "rules"].includes(fill.kind)) {
+    if (["media", "quote", "kpi", "commits", "logos", "tile", "timeline", "worklog", "stack", "portrait", "offclock", "specimen", "rules", "tokens", "gate"].includes(fill.kind)) {
       spec = fitFill(fill, rect.w, h, { ...ctx, expanded: exp.has(fill.id) }).spec;
     }
     h = Math.max(h, MIN_CELL.h);

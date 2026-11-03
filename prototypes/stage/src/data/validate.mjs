@@ -4,12 +4,17 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { FILL_KINDS } from "./schema.js";
+import { mergeGated } from "../gate.js";
 
 const DATA = path.dirname(fileURLToPath(import.meta.url));
 const PUBLIC = path.resolve(DATA, "../../public");
 const errors = [];
 const err = (where, msg) => errors.push(`${where}: ${msg}`);
 const load = (f) => JSON.parse(fs.readFileSync(path.join(DATA, f), "utf8"));
+// IP gate: validate the FULL content (public + private/gated.json), as an unlocked visitor sees it.
+const STORE = path.resolve(DATA, "../../private/gated.json");
+const GATED = fs.existsSync(STORE) ? JSON.parse(fs.readFileSync(STORE, "utf8")) : null;
+const PRIVATE = path.resolve(DATA, "../../private");
 
 const isStr = (v) => typeof v === "string" && v.length > 0;
 const isDate = (v) => typeof v === "string" && /^\d{4}-\d{2}-\d{2}/.test(v);
@@ -25,6 +30,10 @@ function walkStrings(v, where) {
 const assetsSeen = new Set();
 function checkAsset(p, where) {
   if (!isStr(p)) return err(where, "asset path missing");
+  if (p.startsWith("gated/")) {
+    if (!fs.existsSync(path.join(PRIVATE, p))) return err(where, `gated asset not found: private/${p}`);
+    return void assetsSeen.add(p);
+  }
   if (!p.startsWith("assets/")) return err(where, `asset path must start with assets/: ${p}`);
   if (!fs.existsSync(path.join(PUBLIC, p))) return err(where, `asset file not found: public/${p}`);
   assetsSeen.add(p);
@@ -179,6 +188,17 @@ function checkFill(f, where, ids) {
       checkReceipts(f.receipts, where, false);
       break;
     }
+    case "gate": {
+      if (!isStr(f.label)) err(where, "gate.label missing");
+      if (!isStr(f.text)) err(where, "gate.text missing");
+      break;
+    }
+    case "tokens": {
+      if (!["color", "type", "radius", "shadow"].includes(f.section)) err(where, `tokens.section must be color|type|radius|shadow, got ${f.section}`);
+      if (f.group !== undefined && !isStr(f.group)) err(where, "tokens.group must be a non-empty string");
+      checkReceipts(f.receipts, where, false);
+      break;
+    }
     case "rules": {
       const icon = (v, w) => { if (!/^lucide:[a-z0-9-]+$/.test(v || "")) err(w, `icon must be a Lucide id (lucide:name), got ${v}`); };
       if (!isStr(f.label)) err(where, "rules.label missing");
@@ -306,7 +326,9 @@ cases.forEach((c, i) => {
 });
 
 // ---- decks.json
-const decks = load("decks.json");
+const PUBLIC_DECKS = load("decks.json");
+const PUBLIC_CORPUS = load("corpus.json");
+const { decks, corpus } = mergeGated(PUBLIC_DECKS, PUBLIC_CORPUS, GATED);
 walkStrings(decks, "decks");
 const deckIds = new Set();
 decks.forEach((d, i) => {
@@ -381,7 +403,7 @@ if (other < 2 || other > 4) err("decks", `${other} "any other work" decks, want 
 }
 
 // ---- corpus.json
-const corpus = load("corpus.json");
+// (corpus is loaded and merged above, with the decks)
 walkStrings(corpus, "corpus");
 const unitIds = new Set();
 corpus.forEach((u, i) => {
@@ -515,3 +537,11 @@ if (errors.length) {
   process.exit(1);
 }
 console.log("\nPASS");
+
+// IP gate: nothing public may name a gated diagram.
+{
+  const pub = JSON.stringify(PUBLIC_DECKS) + JSON.stringify(PUBLIC_CORPUS) + fs.readFileSync(path.join(DATA, "home.json"), "utf8");
+  const leak = pub.match(/assets\/(chekout|christine-valmy)\/(system-context|onboarding-flow|knowledge|data-observability|architecture|bridge|data-flow)(-light)?\.[a-z]+/g);
+  if (leak && GATED) { console.log(`GATE LEAK: public data references ${[...new Set(leak)].join(", ")}`); process.exitCode = 1; }
+  if (GATED) console.log(`gate: validated with private/gated.json (${Object.keys(GATED.decks).length} decks, ${Object.keys(GATED.corpus).length} corpus units gated)`);
+}

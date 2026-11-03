@@ -7,62 +7,68 @@
 @font-face { font-family: "Satoshi"; src: url("/fonts/Satoshi-Medium.woff2") format("woff2"); font-weight: 500; font-display: block; }
 
 :root {
-  --bg: #141414;
-  --panel: #171717;
-  --ink: #ececea;
-  --ink-2: #b9b9b5;
-  --mute: #85857f; /* >= 4.5:1 on the stage */
-  --hair: rgba(255, 255, 255, 0.16);
-  --hair-live: rgba(255, 255, 255, 0.55);
-  --accent: #e8e6df;
+  /* Carbon: warm charcoal paper for the stage, on a darker warm ground; the chat and
+     hover use the lighter Dusk sheet (--lift-bg) so the chat reads as a side component. */
+  --bg: #1b1916;
+  --panel: #1e1b18;
+  --ink: #f1ebdf;
+  --ink-2: #c0b9ad;
+  --mute: #979188; /* >= 4.5:1 on stage, chat and media */
+  --hair: rgba(239, 231, 217, 0.15);
+  --hair-live: rgba(239, 231, 217, 0.55);
+  --accent: #e8e3d7;
   --display: "CabinetGrotesk", "Helvetica Neue", Arial, sans-serif;
   --body: "Satoshi", "Helvetica Neue", Arial, sans-serif;
-  --hair-soft: rgba(255, 255, 255, 0.07);
-  --hair-ctl: rgba(255, 255, 255, 0.36);
-  --hair-ctl-raw: rgba(255, 255, 255, 0.36);
-  --ring: rgba(255, 255, 255, 0.85);
-  --overlay: rgba(20, 20, 20, 0.85);
-  --scrim: rgba(10, 10, 10, 0.92);
-  --panel-2: #191919;
-  --media-bg: #0d0d0d;
-  --recede-ink: #4e4e4b;
-  --recede-mute: #4e4e4b;
-  --recede-bg: #0e0e0e;            /* receded blocks go to solid black under a dense dark halftone */
+  --hair-soft: rgba(239, 231, 217, 0.07);
+  --hair-ctl: rgba(239, 231, 217, 0.41);
+  --hair-ctl-raw: rgba(239, 231, 217, 0.41);
+  --ring: rgba(241, 235, 223, 0.85);
+  --overlay: rgba(27, 25, 22, 0.86);
+  --scrim: rgba(18, 17, 16, 0.93);
+  --panel-2: #1b1916;
+  --media-bg: #151310;
+  --ground: #121110;
+  --recede-ink: #4c4944;
+  --recede-mute: #4c4944;
+  --recede-bg: #0f0e0c;
   --recede-media: .3;
-  --chat-mute: #92928c;
+  --chat-mute: #a49e94;
   --logo-filter: none;            /* logos as delivered (dark marks are flipped by .inv) */
-  --logo-inv-filter: brightness(0) invert(1);
-  --face-filter: invert(0.92);    /* the pixel face is drawn dark; flip it on the dark stage */
-  --portrait-bg: #141414;
+  --logo-inv-filter: brightness(0) invert(0.92) sepia(0.12);
+  --face-filter: invert(0.9) sepia(0.14); /* the pixel face is drawn dark; flip it, warm */
+  --portrait-bg: #1b1916;
   color-scheme: dark;
 }
+/* both themes: the ground shows only around the frame */
+.app { background: var(--bg); }
 
 /* Light theme: namit.me's light palette (#dddddd ground, #1a1a1a ink, rgba(0,0,0,.12) hairlines),
    tuned so every text token is >= 4.5:1 and control borders >= 3:1 on both surfaces. */
 :root[data-theme="light"] {
-  --bg: #dddddd;
-  --panel: #e2e2e0;
-  --ink: #1a1a1a;
-  --ink-2: #3a3a38;
-  --mute: #545450;
-  --hair: rgba(0, 0, 0, 0.16);
-  --hair-live: rgba(0, 0, 0, 0.62);
-  --accent: #1a1a1a;
-  --hair-soft: rgba(0, 0, 0, 0.08);
-  --hair-ctl: rgba(0, 0, 0, 0.46);
-  --hair-ctl-raw: rgba(0, 0, 0, 0.46);
-  --ring: rgba(0, 0, 0, 0.85);
-  --overlay: rgba(225, 225, 223, 0.9);
-  --scrim: rgba(221, 221, 221, 0.95);
-  --panel-2: #e6e6e4;
-  --media-bg: #d2d2d0;
-  /* Receded cells step DOWN a surface, like KYURI.OS light (#c8c8c8 ground under #d8d8d8 panels):
-     a clearly darker grey, with ink that still clears 4.5:1 on it (6.3:1 and 4.9:1). */
-  --recede-bg: #bcbcba;
-  --recede-ink: #858582;
-  --recede-mute: #858582;
+  /* Paper: one warm off-white surface for cells, nav and chat (grouped as one frame),
+     set on a warm grey ground. Ink and hairlines are warm too. */
+  --bg: #f6f3eb;
+  --panel: #f3efe6;
+  --ink: #1b1915;
+  --ink-2: #3a362f;
+  --mute: #57524a;
+  --hair: rgba(52, 38, 14, 0.17);
+  --hair-live: rgba(52, 38, 14, 0.64);
+  --accent: #1b1915;
+  --hair-soft: rgba(52, 38, 14, 0.08);
+  --hair-ctl: rgba(52, 38, 14, 0.56);
+  --hair-ctl-raw: rgba(52, 38, 14, 0.56);
+  --ring: rgba(27, 25, 21, 0.85);
+  --overlay: rgba(246, 243, 235, 0.9);
+  --scrim: rgba(246, 243, 235, 0.95);
+  --panel-2: #f6f3eb;
+  --media-bg: #ebe6db;
+  --ground: #dcd6ca;
+  --recede-bg: #d4ccbc;
+  --recede-ink: #8d8576;
+  --recede-mute: #8d8576;
   --recede-media: .3;
-  --chat-mute: #50504c;
+  --chat-mute: #54504a;
   --logo-filter: brightness(0);
   --logo-inv-filter: brightness(0);
   --face-filter: none;
@@ -74,7 +80,7 @@
 * { box-sizing: border-box; }
 html, body, #root { margin: 0; height: 100%; }
 body {
-  background: var(--bg);
+  background: var(--ground);
   color: var(--ink);
   font-family: var(--body);
   -webkit-font-smoothing: antialiased;
@@ -623,8 +629,11 @@ body:has(.app.phone) { overflow: hidden; }
 .oc-figure svg { width: 28px !important; height: 28px !important; max-width: none; }
 
 /* chat as a distinct side panel: raised surface, body-size replies, collapsed history */
-.chat { background: var(--panel-2); box-shadow: inset 1px 0 0 var(--hair); }
-.chat-head, .chips, .chat-input { background: var(--panel-2); }
+/* The chat is a side component in either theme: it sits on the hover (lift) surface,
+   one step off the stage. */
+/* no edge of its own: the stage's right stroke is the one divider (a second line doubled it) */
+.chat { background: var(--lift-bg); box-shadow: none; }
+.chat-head, .chips, .chat-input { background: var(--lift-bg); }
 .chat-list { gap: 6px; }
 .turn-collapsed button { display: block; width: 100%; text-align: left; background: none; border: 0; padding: 6px 0; color: var(--mute); font-size: 12.5px; line-height: 17px; white-space: normal; cursor: pointer; border-bottom: 1px solid var(--hair-soft); }
 .turn-collapsed button:hover { color: var(--ink-2); }
@@ -757,8 +766,8 @@ kbd { font: 500 12px ui-monospace, Menlo, monospace; padding: 1px 5px; border: 1
    a receded cell still closes focus mode) and never covers glyphs.
    Worst-case ink on a line / the ground: dark 4.67:1 on #3d3d3a (8.28:1 on #0e0e0e);
    light 7.25:1 on #e8e8e6 (4.67:1 on #bcbcba). The open cell stays clean. */
-:root { --recede-hatch: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='6' height='6' fill='%233d3d3a' shape-rendering='crispEdges'><rect x='0' y='5' width='1' height='1'/><rect x='1' y='4' width='1' height='1'/><rect x='2' y='3' width='1' height='1'/><rect x='3' y='2' width='1' height='1'/><rect x='4' y='1' width='1' height='1'/><rect x='5' y='0' width='1' height='1'/></svg>"); }
-:root[data-theme="light"] { --recede-hatch: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='6' height='6' fill='%23e8e8e6' shape-rendering='crispEdges'><rect x='0' y='5' width='1' height='1'/><rect x='1' y='4' width='1' height='1'/><rect x='2' y='3' width='1' height='1'/><rect x='3' y='2' width='1' height='1'/><rect x='4' y='1' width='1' height='1'/><rect x='5' y='0' width='1' height='1'/></svg>"); }
+:root { --recede-hatch: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='6' height='6' fill='%23403e39' shape-rendering='crispEdges'><rect x='0' y='5' width='1' height='1'/><rect x='1' y='4' width='1' height='1'/><rect x='2' y='3' width='1' height='1'/><rect x='3' y='2' width='1' height='1'/><rect x='4' y='1' width='1' height='1'/><rect x='5' y='0' width='1' height='1'/></svg>"); }
+:root[data-theme="light"] { --recede-hatch: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='6' height='6' fill='%23f1ece2' shape-rendering='crispEdges'><rect x='0' y='5' width='1' height='1'/><rect x='1' y='4' width='1' height='1'/><rect x='2' y='3' width='1' height='1'/><rect x='3' y='2' width='1' height='1'/><rect x='4' y='1' width='1' height='1'/><rect x='5' y='0' width='1' height='1'/></svg>"); }
 .cell.recede {
   background-color: var(--recede-bg);
   background-image: var(--recede-hatch);
@@ -779,8 +788,8 @@ kbd { font: 500 12px ui-monospace, Menlo, monospace; padding: 1px 5px; border: 1
    a crisp 1px line plus a 14px soft falloff, drawn on a top layer (::before) so media edges glow too.
    Text tokens are untouched. Lifted grounds, worst text: dark #1c1c1c (mute #85857f 4.6:1),
    light #d3d3d3 (mute #545450 5.1:1). Keyboard focus keeps the 2px ring (--ring, >= 10:1). */
-:root { --lift-bg: #1c1c1c; --glow-line: rgba(255, 255, 255, 0.30); --glow-soft: rgba(255, 255, 255, 0.09); }
-:root[data-theme="light"] { --lift-bg: #d3d3d3; --glow-line: rgba(0, 0, 0, 0.30); --glow-soft: rgba(0, 0, 0, 0.10); }
+:root { --lift-bg: #292623; --glow-line: rgba(239, 231, 217, 0.36); --glow-soft: rgba(239, 231, 217, 0.09); }
+:root[data-theme="light"] { --lift-bg: #ebe5d8; --glow-line: rgba(60, 40, 8, 0.38); --glow-soft: rgba(60, 40, 8, 0.10); }
 .cell:is(.drills, :has(> .c-tile), :has(> .c-media[data-act]), :has(> .c-face.asks)):not(.recede, .open) {
   transition: background-color 120ms steps(2, end);
 }
@@ -790,13 +799,12 @@ kbd { font: 500 12px ui-monospace, Menlo, monospace; padding: 1px 5px; border: 1
   opacity: 0; transition: opacity 160ms ease-out;
 }
 .cell.drills { cursor: pointer; }
-.cell:is(.drills, :has(> .c-tile), :has(> .c-media[data-act]), :has(> .c-face.asks)):not(.recede, .open):is(:focus-visible, :has(> .c-tile:focus-visible), :has(> .c-tile.hot)) { background-color: var(--lift-bg); }
-.cell:is(.drills, :has(> .c-tile), :has(> .c-media[data-act]), :has(> .c-face.asks)):not(.recede, .open):is(:focus-visible, :has(> .c-tile:focus-visible), :has(> .c-tile.hot))::before { opacity: 1; }
+.cell:is(.drills, :has(> .c-tile), :has(> .c-media[data-act]), :has(> .c-face.asks)):not(.recede, .open):is(:focus-visible, :has(> .c-tile:focus-visible)) { background-color: var(--lift-bg); }
+.cell:is(.drills, :has(> .c-tile), :has(> .c-media[data-act]), :has(> .c-face.asks)):not(.recede, .open):is(:focus-visible, :has(> .c-tile:focus-visible))::before { opacity: 1; }
 /* a tile's own focus (Tab onto .c-tile) gets the same 2px ring the cell has */
 .cell:has(> .c-tile:focus-visible) { outline: 2px solid var(--ring); outline-offset: -5px; }
 @media (hover: hover) {
-  .cell:is(.drills, :has(> .c-tile), :has(> .c-media[data-act]), :has(> .c-face.asks)):not(.recede, .open):hover { background-color: var(--lift-bg); }
-  .cell:is(.drills, :has(> .c-tile), :has(> .c-media[data-act]), :has(> .c-face.asks)):not(.recede, .open):hover::before { opacity: 1; }
+  /* pointer hover: the .hover-glide behind the cells does the lift (it moves between tiles) */
   /* a Go-deeper cell lights its button too, the same as hovering the button */
   .cell.drills:hover .drill { background: var(--ink); color: var(--bg); }
 }
@@ -997,3 +1005,120 @@ kbd { font: 500 12px ui-monospace, Menlo, monospace; padding: 1px 5px; border: 1
 .ru-foot.inline .ru-foot-label { height: var(--r-dense-h); }
 @keyframes ru-in { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) { .ru-item, .ru-pair, .ru-chip { animation: none; } }
+
+/* suggested questions: filled blocks with a control border, ink text and an arrow cue,
+   so they read as the next step rather than as quiet history. Home/back stay quiet. */
+.chip:not(.chip-home) {
+  position: relative; background: var(--bg); border-color: var(--hair-ctl); color: var(--ink);
+  padding-right: 30px;
+}
+.chip:not(.chip-home)::after {
+  content: "→"; position: absolute; right: 10px; bottom: 6px; color: var(--ink-2);
+  transition: transform 120ms steps(2, end);
+}
+.chip:not(.chip-home) .chip-k { color: var(--ink-2); }
+.chip:not(.chip-home):is(:hover, :focus-visible):not(:disabled) {
+  background: var(--lift-bg); border-color: var(--glow-line);
+  box-shadow: inset 0 0 0 1px var(--glow-line), 0 0 12px 1px var(--glow-soft);
+}
+.chip:not(.chip-home):is(:hover, :focus-visible):not(:disabled)::after { transform: translateX(3px); }
+@media (prefers-reduced-motion: reduce) { .chip:not(.chip-home)::after { transition: none; } }
+
+/* Kip's reply streams in: each word fades in on two pixel steps */
+.st-w { animation: st-in 140ms steps(2, end) both; }
+@keyframes st-in { from { opacity: 0; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .st-w { animation: none; } }
+
+/* chat zones (v3): paper header, suggestions and input; the conversation sits on the
+   hover surface between two hairlines; suggestion buttons flip to the hover surface */
+.chat-head, .chips, .chat-input { background: var(--bg); }
+.chat-list { box-shadow: inset 0 1px 0 var(--hair), inset 0 -1px 0 var(--hair); }
+.chat .chip:not(.chip-home) { background: var(--lift-bg); border-color: var(--hair-ctl); }
+.chat .chip:not(.chip-home):is(:hover, :focus-visible):not(:disabled) { background: var(--bg); }
+
+/* password gate (GateCell): a note, what's behind it, and one field + button */
+.c-gate { display: flex; flex-direction: column; justify-content: center; gap: 10px; min-width: 0; container: gate / inline-size; }
+.gate-label { display: inline-flex; align-items: center; gap: 8px; color: var(--ink-2); }
+.gate-text { margin: 0; color: var(--ink); font-size: 15px; line-height: 22px; max-width: 46ch; }
+.gate-count { margin: 0; color: var(--mute); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; }
+.gate-form { display: flex; margin-top: 8px; border: 1px solid var(--hair-ctl); max-width: 420px; }
+.gate-form input { flex: 1; min-width: 0; background: var(--bg); border: 0; color: var(--ink); font: 15px var(--body); padding: 11px 14px; outline: none; }
+.gate-form input::placeholder { color: var(--mute); }
+.gate-form:focus-within { border-color: var(--hair-live); box-shadow: 0 0 0 1px var(--hair-live); }
+.gate-form button { flex: none; background: var(--lift-bg); color: var(--ink); border: 0; border-left: 1px solid var(--hair-ctl); padding: 0 16px; font: 500 12px var(--body); letter-spacing: .12em; text-transform: uppercase; cursor: pointer; }
+.gate-form button:disabled { color: var(--mute); cursor: default; }
+.gate-form button:not(:disabled):hover { box-shadow: inset 0 0 0 1px var(--glow-line); }
+.gate-err { margin: 0; min-height: 16px; color: var(--ink-2); font-size: 12.5px; line-height: 16px; }
+@container gate (max-width: 300px) {
+  .gate-form { flex-direction: column; }
+  .gate-form button { border-left: 0; border-top: 1px solid var(--hair-ctl); padding: 10px 16px; text-align: left; }
+}
+
+/* Kip beside the latest reply: large (56px) while he reacts to it, then he settles to a
+   36px speaker mark. Scaled, not resized, so the reply text never reflows. */
+.msg.bot { padding-left: 64px; min-height: 40px; }
+.msg.bot .msg-face { transform: scale(.643); transform-origin: 0 0; transition: transform 520ms cubic-bezier(.2, .7, .2, 1); }
+.msg.bot .msg-face.reacting { transform: scale(1); }
+.msg.bot:has(.msg-face.reacting) { min-height: 60px; }
+@media (prefers-reduced-motion: reduce) { .msg.bot .msg-face { transition: none; } }
+.app.phone .msg.bot { padding-left: 0; }
+/* clip swaps (idle -> thinking -> reaction) ease in instead of cutting */
+.face-lottie svg { animation: face-in 220ms ease-out both; }
+@keyframes face-in { from { opacity: .35; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .face-lottie svg { animation: none; } }
+
+/* The hover highlight (Stage.jsx .stage-cursor): glides tile to tile on an ease-in spring,
+   over the content as a light tint + glow ring, with a spotlight that follows the pointer.
+   The real cursor stays. */
+.stage-cursor {
+  position: absolute; left: 0; top: 0; z-index: 9; pointer-events: none; opacity: 0;
+  --mx: 50%; --my: 50%;
+  background:
+    radial-gradient(240px circle at var(--mx) var(--my), color-mix(in srgb, var(--ink) 9%, transparent), transparent 72%),
+    color-mix(in srgb, var(--ink) 4%, transparent);
+  box-shadow: inset 0 0 0 1px var(--glow-line), inset 0 0 14px 2px var(--glow-soft);
+  --dur-glide: 380ms;
+  --ease-glide: linear(0, 0.012, 0.045, 0.1, 0.18, 0.29, 0.43, 0.6, 0.78, 0.93, 1.035, 1.07, 1.06, 1.03, 1.008, 0.996, 0.994, 0.997, 1, 1);
+  transition: transform var(--dur-glide) var(--ease-glide), width var(--dur-glide) var(--ease-glide), height var(--dur-glide) var(--ease-glide), opacity 160ms ease-out;
+  will-change: transform, width, height;
+}
+.stage-cursor.on { opacity: 1; }
+.stage-cursor.snap { transition: opacity 160ms ease-out !important; }
+.stage.focus-mode .stage-cursor { display: none; }
+@media (hover: none), (pointer: coarse) { .stage-cursor { display: none; } }
+@media (prefers-reduced-motion: reduce) { .stage-cursor { transition: opacity 120ms linear; } }
+.stage .cell { z-index: 1; }
+.stage .cell.is-focus { z-index: 2; }
+.cell.to-about { cursor: pointer; }
+
+
+/* depth rail: ticks were near-invisible (0.41 alpha hairline). Mute ink, 2px, wider:
+   >= 3:1 against the ground in both themes, still quieter than the puck. */
+.depth-rail .tick { width: 14px; height: 2px; background: var(--mute); }
+.depth-rail li.passed .tick { background: var(--ink-2); }
+.depth-rail button:hover .tick, .depth-rail button:focus-visible .tick { background: var(--ink); width: 18px; }
+
+/* accessibility sign (nav) + its panel */
+.a11y-nav { display: flex; align-items: center; justify-content: center; background: none; border: 0; padding: 4px; min-width: 28px; min-height: 28px; color: var(--ink-2); cursor: pointer; }
+.a11y-nav:hover, .a11y-nav:focus-visible { color: var(--ink); }
+.a11y-panel { background: var(--bg); color: var(--ink); border: 1px solid var(--hair-live); padding: 28px; width: min(640px, calc(100vw - 32px)); max-height: calc(100vh - 64px); overflow: auto; }
+.a11y-panel::backdrop { background: rgba(0, 0, 0, .6); }
+.a11y-lede { margin: 8px 0 18px; color: var(--ink-2); font-size: 15px; line-height: 22px; }
+.a11y-list { list-style: none; margin: 0 0 22px; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); border-top: 1px solid var(--hair); border-left: 1px solid var(--hair); }
+.a11y-list li { padding: 14px 16px; border-right: 1px solid var(--hair); border-bottom: 1px solid var(--hair); }
+.a11y-list h3 { margin: 0 0 6px; font: 500 14px/18px var(--body); color: var(--ink); }
+.a11y-list p { margin: 0; font-size: 13.5px; line-height: 20px; color: var(--ink-2); }
+.a11y-keys-h { margin: 0 0 10px; }
+.a11y-keys { margin: 0 0 22px; display: grid; gap: 8px; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+.a11y-keys div { display: grid; grid-template-columns: 84px 1fr; align-items: center; }
+.a11y-keys dd { margin: 0; color: var(--ink-2); font-size: 14px; }
+.a11y-panel .close-btn { position: static; }
+
+/* the arrow-key tip for pointer users (once per session) */
+.key-hint.tip { gap: 6px 12px; }
+.key-hint.tip .tip-k { color: var(--ink); font-weight: 500; letter-spacing: .12em; text-transform: uppercase; font-size: 11.5px; }
+/* gate field: one focus ring (the box's), not the input's own outline on top of it */
+.gate-form input:focus-visible { outline: none; }
+.gate-form:focus-within { border-color: var(--hair-live); box-shadow: 0 0 0 1px var(--hair-live); }
+.gate-form button:focus-visible { outline: 1px solid var(--hair-live); outline-offset: -4px; }
+.gate-form button:not(:disabled):focus-visible { outline: none; background: var(--ink); color: var(--bg); }

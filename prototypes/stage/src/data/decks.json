@@ -145,30 +145,16 @@
         "opensPrimary": true
       },
       {
-        "kind": "media",
-        "id": "ck-arch-main",
+        "kind": "gate",
+        "id": "ck-merchant-outcomes~gate",
         "weight": 0.7,
-        "media": "image",
-        "src": "assets/chekout/system-context.svg",
-        "aspect": 2.0253,
-        "alt": "ChekOut AI system context: merchants and shoppers, the Next.js front end, Langflow agents, backend services, commerce platforms and the data stores",
-        "caption": "ARCHITECTURE: how the pieces connect.",
-        "explain": "One front end serves merchants in the builder and shoppers on their stores; chat goes to a Langflow agent per merchant. Open it for how it is built.",
-        "receipts": [
-          {
-            "type": "asset",
-            "ref": "assets/chekout/architecture.webp",
-            "label": "The FigJam export this is redrawn from (1 · System context)"
-          },
-          {
-            "type": "asset",
-            "ref": "figma:juckmsHrlBUBKcMkoJCiep#3:39",
-            "date": "2026-11-01",
-            "label": "FigJam: 1 · System context"
-          }
-        ],
-        "opens": "ck-platform-build",
-        "opensPrimary": true
+        "label": "Password-protected",
+        "text": "The architecture diagram for this part is password-protected. Enter the password I shared with you to see it.",
+        "count": {
+          "diagrams": 1,
+          "commits": 0,
+          "notes": 0
+        }
       },
       {
         "kind": "prose",
@@ -186,13 +172,13 @@
     "aliases": [
       "How does the shopper conversation work?"
     ],
-    "thesis": "The agent answers first, and what retrieval finds decides the layout: words when nothing fits, one card for one match, a bundle when products go together.",
+    "thesis": "The agent answers first. Cards follow only when the catalog search finds a match: none, one, or a set that goes together.",
     "fills": [
       {
         "kind": "prose",
         "id": "ck-0-conv-problem",
         "weight": 1,
-        "text": "THE PROBLEM: In January the panel read like a support widget: small type, tight leading, and a canned \"Got it! I recommend:\" above a pile of cards, whatever the shopper had asked.",
+        "text": "THE PROBLEM: Every reply opened with a canned \"Got it! I recommend:\" over a pile of product cards, so the chat read like an ad bot.",
         "receipts": [
           {
             "type": "asset",
@@ -275,7 +261,7 @@
         "kind": "prose",
         "id": "ck-reading-surface",
         "weight": 0.6,
-        "text": "HOW: In July I re-set the panel as a reading surface, with larger type, open leading, and names and prices in bold inside the sentence. Then I let retrieval pick the shape; the three clips show each one, and the shopper never picks a mode.",
+        "text": "HOW: Six months later I rebuilt the chat to read like a conversation: larger text, room between lines, and product names and prices in bold inside the reply. Cards appear only when the catalog search finds a match, as none, one, or a set. The three clips show each case.",
         "receipts": [
           {
             "type": "asset",
@@ -335,32 +321,16 @@
         "explain": "The shopper adds a product without leaving the conversation. Watch the card itself confirm the add and keep the quantity visible afterwards, so the tap visibly landed and the thread stays where it was."
       },
       {
-        "kind": "commits",
-        "id": "ck-conv-commits",
+        "kind": "gate",
+        "id": "ck-conversation~gate",
         "weight": 0.35,
-        "repo": "chekoutai-frontend",
-        "items": [
-          {
-            "sha": "cef8abf",
-            "date": "2026-07-09",
-            "msg": "Agent messages: word-by-word fade-in on the newest reply"
-          },
-          {
-            "sha": "8d840f3",
-            "date": "2026-07-29",
-            "msg": "Chat widget: place a new reply by its start, not its tail"
-          },
-          {
-            "sha": "3987a9b",
-            "date": "2026-07-29",
-            "msg": "Chat widget: link affordance, tighter mobile carousel gap, bubble that opens"
-          },
-          {
-            "sha": "ae7b695",
-            "date": "2026-07-09",
-            "msg": "Improve agent-message + product-description typography"
-          }
-        ]
+        "label": "Password-protected",
+        "text": "The commit history for this part is password-protected. Enter the password I shared with you to see it.",
+        "count": {
+          "diagrams": 0,
+          "commits": 4,
+          "notes": 0
+        }
       }
     ]
   },
@@ -441,71 +411,16 @@
         ]
       },
       {
-        "kind": "media",
-        "id": "ck-arch",
+        "kind": "gate",
+        "id": "ck-platform-build~gate",
         "weight": 0.95,
-        "media": "image",
-        "src": "assets/chekout/system-context.svg",
-        "aspect": 2.0253,
-        "alt": "ChekOut AI system context: merchants build and manage agents in the ChekOut front end; shoppers chat on the storefront; the front end sends chat messages to per-merchant Langflow agents and talks to backend services on Cloud Run, which sync with Shopify and read and write Postgres and BigQuery",
-        "caption": "Who uses ChekOut and what the front end talks to. Solid boxes are mine; dashed are a teammate's or an outside service.",
-        "explain": "One Next.js app serves both sides: the merchant builder and the chat widget shoppers meet on a store. Chat goes to a Langflow agent per merchant; setup, store sync and billing go to backend services. Each box is tagged [code] when it is verified in a repo and [notes] when it comes from my notes.",
-        "receipts": [
-          {
-            "type": "asset",
-            "ref": "assets/chekout/architecture.webp",
-            "label": "The FigJam export this is redrawn from (1 · System context)"
-          },
-          {
-            "type": "asset",
-            "ref": "figma:juckmsHrlBUBKcMkoJCiep#3:39",
-            "date": "2026-11-01",
-            "label": "FigJam: 1 · System context"
-          }
-        ],
-        "opens": "ck-d-stack",
-        "opensPrimary": true
-      },
-      {
-        "kind": "prose",
-        "id": "ck-system",
-        "weight": 0.7,
-        "text": "HOW IT FITS: The builder is a Next.js app on Cloud Run behind Firebase Hosting, and shoppers chat through a script and an iframe the same app serves. Each merchant's agent is a Langflow flow retrieving from pgvector embeddings; FastAPI services handle OAuth, product sync and analytics; conversation logs land in BigQuery.",
-        "receipts": [
-          {
-            "type": "asset",
-            "ref": "figma:juckmsHrlBUBKcMkoJCiep#3:39",
-            "date": "2026-11-01",
-            "label": "FigJam: 1 · System context"
-          },
-          {
-            "type": "asset",
-            "ref": "firebase.json",
-            "repo": "chekoutai-frontend",
-            "label": "Firebase Hosting rewrites every request to the Cloud Run service nextjs"
-          },
-          {
-            "type": "asset",
-            "ref": "app/models.py",
-            "repo": "shopify-sync",
-            "label": "pgvector embeddings",
-            "url": "https://github.com/adk-sentryskin/shopify-sync/blob/main/app/models.py"
-          },
-          {
-            "type": "asset",
-            "ref": "requirements.txt",
-            "repo": "shopify-sync",
-            "label": "fastapi",
-            "url": "https://github.com/adk-sentryskin/shopify-sync/blob/main/requirements.txt"
-          },
-          {
-            "type": "asset",
-            "ref": "namit-confirmation-2026-11-02",
-            "date": "2026-11-02",
-            "label": "Confirmed by Namit, Nov 2 2026"
-          }
-        ],
-        "opens": "ck-d-stack"
+        "label": "Password-protected",
+        "text": "The architecture diagram, stack notes and commit history for this part are password-protected. Enter the password I shared with you to see them.",
+        "count": {
+          "diagrams": 1,
+          "commits": 7,
+          "notes": 1
+        }
       },
       {
         "kind": "kpi",
@@ -521,49 +436,6 @@
             "repo": "Juniper",
             "date": "2026-10-26",
             "label": "Agent platform case study"
-          }
-        ]
-      },
-      {
-        "kind": "commits",
-        "id": "ap-commits",
-        "weight": 0.85,
-        "repo": "chekoutai-frontend",
-        "items": [
-          {
-            "sha": "fe5f2a1",
-            "date": "2026-07-09",
-            "msg": "Builder Channels preview: render the real widget in an iframe"
-          },
-          {
-            "sha": "91ebf39",
-            "date": "2026-07-01",
-            "msg": "Mount embed via authoritative allowed_domains list from backend"
-          },
-          {
-            "sha": "e553f4b",
-            "date": "2026-03-26",
-            "msg": "Shopify OAuth: fix merchant_id flow, lowercase normalization, disconnect on delete, platform auto-select"
-          },
-          {
-            "sha": "5264ce8",
-            "date": "2026-07-21",
-            "msg": "Dashboard: wire engagement + Conversation Logs to BigQuery /analytics"
-          },
-          {
-            "sha": "d22f151",
-            "date": "2026-05-28",
-            "msg": "Tag Shopify carts with ChekOut AI attribution attributes for order attribution"
-          },
-          {
-            "sha": "bceb8f0",
-            "date": "2026-07-07",
-            "msg": "Chatbot widget polish, dashboard tier-1 gating, product gallery"
-          },
-          {
-            "sha": "2127ede",
-            "date": "2026-04-28",
-            "msg": "Update to OAuth firebase domain and Agent position ui changes"
           }
         ]
       },
@@ -774,80 +646,20 @@
             "label": "Christine Valmy case study · agent"
           }
         ],
-        "explain": "The shipped agent on the school's site. Watch it answer a new student's question from the school's own course content, with the short inquiry form still in reach. Students used to fill in the form and wait; now the answer comes first and the officer gets a lead that already knows the options."
+        "explain": "The shipped agent on the school's site. Watch it answer a new student's question from the school's own course content, with the short inquiry form still in reach. Students used to fill in the form and wait; now the answer comes first and the officer gets a lead that already knows the options.",
+        "opens": "cv-testing"
       },
       {
-        "kind": "prose",
-        "id": "cv-sorts",
-        "weight": 0.45,
-        "text": "HOW: The agent answers from the school's own content through RAG, and an automated pipeline keeps class schedules fresh. It sorts every lead into a priority bucket and flags the bad ones, so officers call the students who are ready first.",
-        "receipts": [
-          {
-            "type": "asset",
-            "ref": "src/data/christineValmyData.js",
-            "repo": "Juniper",
-            "date": "2026-10-26",
-            "label": "Christine Valmy case study"
-          }
-        ],
-        "opens": "cv-d-handoff"
-      },
-      {
-        "kind": "media",
-        "id": "cv-arch-main",
+        "kind": "gate",
+        "id": "cv-results~gate",
         "weight": 0.7,
-        "media": "image",
-        "src": "assets/christine-valmy/architecture.svg",
-        "aspect": 1.7778,
-        "alt": "Christine Valmy agent architecture: students use the widget on the school's WordPress site; each message goes to n8n on Google Cloud, which reaches the agent (RAG, routed through MCP: Claude for English, Gemini for Spanish); finished chats become leads for officers; conversation and lead data land in BigQuery; the inquiry form creates a lead in the school's Creatio CRM",
-        "caption": "ARCHITECTURE: how the pieces connect.",
-        "explain": "A widget on the school's WordPress site, an n8n workflow on Google Cloud in front of the agent, BigQuery for the data, and finished chats turned into leads. Open it for how it is built.",
-        "receipts": [
-          {
-            "type": "asset",
-            "ref": "assets/christine-valmy/architecture.svg"
-          },
-          {
-            "type": "asset",
-            "ref": "src/data/christineValmyData.js",
-            "repo": "Juniper",
-            "date": "2026-10-26",
-            "label": "Christine Valmy case study"
-          },
-          {
-            "type": "asset",
-            "ref": "figma:juckmsHrlBUBKcMkoJCiep#4:135",
-            "date": "2026-11-01",
-            "label": "FigJam: 4 · Sophia, enrollment agent"
-          },
-          {
-            "type": "asset",
-            "ref": "cv-chat-flat/christine-valmy-floating.js",
-            "repo": "chekout-ai (local)",
-            "label": "N8nService: chat and transcript webhooks, payloads, completion stages"
-          },
-          {
-            "type": "asset",
-            "ref": "cv-chat-flat/claude.md",
-            "repo": "chekout-ai (local)",
-            "label": "Plugin notes: endpoint connectors (n8n chat, n8n transcript, Creatio CRM), WordPress settings"
-          },
-          {
-            "type": "asset",
-            "ref": "tools/content/sources/christine-valmy-requirements.md",
-            "repo": "Juniper (stage prototype)",
-            "date": "2026-11-02",
-            "label": "Christine Valmy requirements, provided by Namit (redacted)"
-          },
-          {
-            "type": "asset",
-            "ref": "namit-confirmation-2026-11-02",
-            "date": "2026-11-02",
-            "label": "Confirmed by Namit, Nov 2 2026"
-          }
-        ],
-        "opens": "cv-build",
-        "opensPrimary": true
+        "label": "Password-protected",
+        "text": "The architecture diagram and stack notes for this part are password-protected. Enter the password I shared with you to see them.",
+        "count": {
+          "diagrams": 1,
+          "commits": 0,
+          "notes": 1
+        }
       }
     ]
   },
@@ -1077,7 +889,7 @@
     "aliases": [
       "How is the Christine Valmy agent built?"
     ],
-    "thesis": "I built it as a React widget in a WordPress plugin, wired to an n8n workflow on Google Cloud with BigQuery for the data, and audited it to WCAG AA before launch.",
+    "thesis": "I designed and built the enrollment agent's chat widget and its WordPress plugin; the architecture behind it is password-protected.",
     "fills": [
       {
         "kind": "prose",
@@ -1098,96 +910,16 @@
         ]
       },
       {
-        "kind": "media",
-        "id": "cv-arch",
+        "kind": "gate",
+        "id": "cv-build~gate",
         "weight": 0.95,
-        "media": "image",
-        "src": "assets/christine-valmy/architecture.svg",
-        "aspect": 1.7778,
-        "alt": "Christine Valmy agent architecture: students use the widget on the school's WordPress site; each message goes to n8n on Google Cloud, which reaches the agent (RAG, routed through MCP: Claude for English, Gemini for Spanish); finished chats become leads for officers; conversation and lead data land in BigQuery; the inquiry form creates a lead in the school's Creatio CRM",
-        "caption": "From a student's question to a sorted lead.",
-        "explain": "Follow a student's message: the widget sends it to n8n on Google Cloud, n8n reaches the agent, and the reply comes back with the conversation stage. The agent answers from the school's documents through RAG, Claude in English and Gemini in Spanish, routed through MCP. Finished chats become leads, the data lands in BigQuery, and the inquiry form goes to the school's CRM.",
-        "receipts": [
-          {
-            "type": "asset",
-            "ref": "assets/christine-valmy/architecture.svg",
-            "label": "Drawn for the stage"
-          },
-          {
-            "type": "asset",
-            "ref": "src/data/christineValmyData.js",
-            "repo": "Juniper",
-            "date": "2026-10-26",
-            "label": "Christine Valmy case study"
-          },
-          {
-            "type": "asset",
-            "ref": "figma:juckmsHrlBUBKcMkoJCiep#4:135",
-            "date": "2026-11-01",
-            "label": "FigJam: 4 · Sophia, enrollment agent"
-          },
-          {
-            "type": "asset",
-            "ref": "cv-chat-flat/christine-valmy-floating.js",
-            "repo": "chekout-ai (local)",
-            "label": "N8nService: chat and transcript webhooks, payloads, completion stages"
-          },
-          {
-            "type": "asset",
-            "ref": "cv-chat-flat/claude.md",
-            "repo": "chekout-ai (local)",
-            "label": "Plugin notes: endpoint connectors (n8n chat, n8n transcript, Creatio CRM), WordPress settings"
-          },
-          {
-            "type": "asset",
-            "ref": "tools/content/sources/christine-valmy-requirements.md",
-            "repo": "Juniper (stage prototype)",
-            "date": "2026-11-02",
-            "label": "Christine Valmy requirements, provided by Namit (redacted)"
-          },
-          {
-            "type": "asset",
-            "ref": "namit-confirmation-2026-11-02",
-            "date": "2026-11-02",
-            "label": "Confirmed by Namit, Nov 2 2026"
-          }
-        ]
-      },
-      {
-        "kind": "prose",
-        "id": "cv-stack",
-        "weight": 0.85,
-        "text": "HOW: The chat ships as a React widget in a WordPress plugin. Every message goes to an n8n workflow on Google Cloud in front of the agent, finished chats become leads, conversation and lead data land in BigQuery, and the inquiry form writes to the school's Creatio CRM. Routing runs through MCP: Claude answers in English, Gemini in Spanish.",
-        "receipts": [
-          {
-            "type": "asset",
-            "ref": "src/data/christineValmyData.js",
-            "repo": "Juniper",
-            "date": "2026-10-26",
-            "label": "Christine Valmy case study"
-          },
-          {
-            "type": "asset",
-            "ref": "cv-chat-flat/christine-valmy-floating.js",
-            "repo": "chekout-ai (local)",
-            "label": "Widget: chat and transcript calls, payloads, completion stages"
-          },
-          {
-            "type": "asset",
-            "ref": "tools/content/sources/christine-valmy-requirements.md",
-            "repo": "Juniper (stage prototype)",
-            "date": "2026-11-02",
-            "label": "Christine Valmy requirements, provided by Namit (redacted)"
-          },
-          {
-            "type": "asset",
-            "ref": "namit-confirmation-2026-11-02",
-            "date": "2026-11-02",
-            "label": "Confirmed by Namit, Nov 2 2026"
-          }
-        ],
-        "opens": "cv-d-script",
-        "opensPrimary": true
+        "label": "Password-protected",
+        "text": "The architecture diagram, stack notes and commit history for this part are password-protected. Enter the password I shared with you to see them.",
+        "count": {
+          "diagrams": 1,
+          "commits": 5,
+          "notes": 1
+        }
       },
       {
         "kind": "media",
@@ -1208,39 +940,6 @@
         ],
         "explain": "The same widget on a phone. Watch the order: the agent greets in both languages, answers a question about makeup classes, and the inquiry form starts underneath: the same pieces that survived testing on desktop.",
         "opens": "cv-d-a11y"
-      },
-      {
-        "kind": "commits",
-        "id": "cv-commits",
-        "weight": 0.65,
-        "repo": "sentry-skin-website",
-        "items": [
-          {
-            "sha": "4a3eae5",
-            "date": "2025-06-23",
-            "msg": "Christine valmy added"
-          },
-          {
-            "sha": "2aef9aa",
-            "date": "2025-07-21",
-            "msg": "CV Client update"
-          },
-          {
-            "sha": "9045ebc",
-            "date": "2025-10-29",
-            "msg": "Trade School website toggle added"
-          },
-          {
-            "sha": "56c6c5c",
-            "date": "2025-10-29",
-            "msg": "fix to trade school agent"
-          },
-          {
-            "sha": "c455e47",
-            "date": "2025-10-31",
-            "msg": "New client testimonial + Trade School page routing"
-          }
-        ]
       },
       {
         "kind": "prose",
@@ -1298,7 +997,8 @@
           }
         ],
         "caption": "The enrollment agent open on the school's site.",
-        "explain": "The live Christine Valmy site with the agent open. It runs inside the school's own WordPress site as a plugin, not on a separate page, so students meet it where they were already looking at courses."
+        "explain": "The live Christine Valmy site with the agent open. It runs inside the school's own WordPress site as a plugin, not on a separate page, so students meet it where they were already looking at courses.",
+        "opens": "cv-testing"
       }
     ]
   },
@@ -2043,27 +1743,16 @@
         ]
       },
       {
-        "kind": "commits",
-        "id": "oa-commits",
+        "kind": "gate",
+        "id": "other-agents~gate",
         "weight": 0.4,
-        "repo": "chekoutai-frontend",
-        "items": [
-          {
-            "sha": "4828dd9",
-            "date": "2026-07-20",
-            "msg": "Chatbot: fire the silent auto-'Hi' exactly once"
-          },
-          {
-            "sha": "329e82d",
-            "date": "2026-07-20",
-            "msg": "AIPersona: keep only questions in the top-3 fields, route answers to the prompt"
-          },
-          {
-            "sha": "fe5f2a1",
-            "date": "2026-07-09",
-            "msg": "Builder Channels preview: render the real widget in an iframe"
-          }
-        ]
+        "label": "Password-protected",
+        "text": "The commit history for this part is password-protected. Enter the password I shared with you to see it.",
+        "count": {
+          "diagrams": 0,
+          "commits": 3,
+          "notes": 0
+        }
       }
     ]
   },
@@ -2172,47 +1861,16 @@
         ]
       },
       {
-        "kind": "commits",
-        "id": "qa-ck-commits",
+        "kind": "gate",
+        "id": "other-qa~gate",
         "weight": 0.75,
-        "repo": "chekoutai-frontend",
-        "items": [
-          {
-            "sha": "ae9a132",
-            "date": "2025-12-18",
-            "msg": "added vitest and updated validation logic for merchant id and email"
-          },
-          {
-            "sha": "596e4eb",
-            "date": "2025-12-18",
-            "msg": "frontend tests across login, dashboard, agent creation, billing, crm, and profile"
-          },
-          {
-            "sha": "c7a46a7",
-            "date": "2026-01-07",
-            "msg": "Login flow integration tests completed"
-          },
-          {
-            "sha": "5cd35a6",
-            "date": "2026-01-08",
-            "msg": "Billing, Agent Creation, and Preview Integration tests"
-          },
-          {
-            "sha": "04aef3a",
-            "date": "2026-01-20",
-            "msg": "Merged latest push + Playwright E2E Testing started"
-          },
-          {
-            "sha": "3193982",
-            "date": "2025-12-22",
-            "msg": "Another attempt at fixing build run issues with test"
-          },
-          {
-            "sha": "67919c7",
-            "date": "2026-07-21",
-            "msg": "test: refresh chatbot/preview/TopMetrics tests to match current components"
-          }
-        ]
+        "label": "Password-protected",
+        "text": "The commit history for this part is password-protected. Enter the password I shared with you to see it.",
+        "count": {
+          "diagrams": 0,
+          "commits": 7,
+          "notes": 0
+        }
       },
       {
         "kind": "prose",
@@ -2484,32 +2142,16 @@
         ]
       },
       {
-        "kind": "commits",
-        "id": "ckc-commits",
+        "kind": "gate",
+        "id": "ck-d-cart~gate",
         "weight": 0.5,
-        "repo": "chekoutai-frontend",
-        "items": [
-          {
-            "sha": "d22f151",
-            "date": "2026-05-28",
-            "msg": "Tag Shopify carts with ChekOut AI attribution attributes for order attribution"
-          },
-          {
-            "sha": "62bde85",
-            "date": "2026-03-17",
-            "msg": "Fix add-to-cart for Shopify (422) and Squarespace (404)"
-          },
-          {
-            "sha": "2e113b9",
-            "date": "2026-06-22",
-            "msg": "Support Shopline add-to-cart in chat widget with platform-aware errors"
-          },
-          {
-            "sha": "249c3ce",
-            "date": "2026-06-22",
-            "msg": "Only strike through compare-at price for genuine discounts"
-          }
-        ]
+        "label": "Password-protected",
+        "text": "The commit history for this part is password-protected. Enter the password I shared with you to see it.",
+        "count": {
+          "diagrams": 0,
+          "commits": 4,
+          "notes": 0
+        }
       }
     ]
   },
@@ -2603,70 +2245,16 @@
         ]
       },
       {
-        "kind": "prose",
-        "id": "ckd-data",
+        "kind": "gate",
+        "id": "ck-d-dashboard~gate",
         "weight": 0.55,
-        "text": "DATA: The cards read from a BigQuery-backed analytics payload, with a new-versus-returning split on visitors.",
-        "receipts": [
-          {
-            "type": "commit",
-            "ref": "5264ce8",
-            "repo": "chekoutai-frontend",
-            "date": "2026-07-21",
-            "label": "5264ce8 · Dashboard: wire engagement + Conversation Logs to BigQuery /analytics",
-            "preview": {
-              "src": "assets/chekout/demos/dashboard-desktop.gif",
-              "poster": "assets/chekout/demos/dashboard-desktop.webp",
-              "aspect": 1.7971,
-              "frame": "laptop"
-            }
-          },
-          {
-            "type": "commit",
-            "ref": "4c38f1f",
-            "repo": "chekoutai-frontend",
-            "date": "2026-07-24",
-            "label": "4c38f1f · Dashboard: new-vs-returning split on the Total Visitors card"
-          }
-        ]
-      },
-      {
-        "kind": "commits",
-        "id": "ckd-commits",
-        "weight": 0.5,
-        "repo": "chekoutai-frontend",
-        "items": [
-          {
-            "sha": "5264ce8",
-            "date": "2026-07-21",
-            "msg": "Dashboard: wire engagement + Conversation Logs to BigQuery /analytics"
-          },
-          {
-            "sha": "e957eb7",
-            "date": "2026-07-20",
-            "msg": "Dashboard: move Funnel + PassiveVisitors to the BigQuery /analytics payload"
-          },
-          {
-            "sha": "ab03e36",
-            "date": "2026-07-23",
-            "msg": "Dashboard: click a keyword to inspect its conversation threads"
-          },
-          {
-            "sha": "c78b8c4",
-            "date": "2026-07-08",
-            "msg": "Replace Conversion Rate card with Engagement Rate (3+ turn conversations)"
-          },
-          {
-            "sha": "4c38f1f",
-            "date": "2026-07-24",
-            "msg": "Dashboard: new-vs-returning split on the Total Visitors card"
-          },
-          {
-            "sha": "abe96e9",
-            "date": "2026-07-27",
-            "msg": "Dashboard: type the /analytics payload (replace dashboardData: any)"
-          }
-        ]
+        "label": "Password-protected",
+        "text": "The stack notes and commit history for this part are password-protected. Enter the password I shared with you to see them.",
+        "count": {
+          "diagrams": 0,
+          "commits": 6,
+          "notes": 1
+        }
       }
     ]
   },
@@ -2785,37 +2373,16 @@
         "poster": "assets/chekout/launcher-hover.jpg"
       },
       {
-        "kind": "commits",
-        "id": "ckm-commits",
+        "kind": "gate",
+        "id": "ck-d-motion~gate",
         "weight": 0.45,
-        "repo": "chekoutai-frontend",
-        "items": [
-          {
-            "sha": "cef8abf",
-            "date": "2026-07-09",
-            "msg": "Agent messages: word-by-word fade-in on the newest reply"
-          },
-          {
-            "sha": "f56fbdf",
-            "date": "2026-07-08",
-            "msg": "Share-this-chat sheet + launcher hover ripple"
-          },
-          {
-            "sha": "0c93dcc",
-            "date": "2026-07-29",
-            "msg": "Chatbot embed: port the closed-state launcher animations from ChatLauncher"
-          },
-          {
-            "sha": "46525f2",
-            "date": "2026-07-09",
-            "msg": "Header frost: scroll-depth-driven opacity instead of motion toggle"
-          },
-          {
-            "sha": "8d840f3",
-            "date": "2026-07-29",
-            "msg": "Chat widget: place a new reply by its start, not its tail"
-          }
-        ]
+        "label": "Password-protected",
+        "text": "The commit history for this part is password-protected. Enter the password I shared with you to see it.",
+        "count": {
+          "diagrams": 0,
+          "commits": 5,
+          "notes": 0
+        }
       }
     ]
   },
@@ -2862,39 +2429,32 @@
         ]
       },
       {
-        "kind": "media",
-        "id": "ckb-flow",
+        "kind": "gate",
+        "id": "ck-d-builder~gate",
         "weight": 0.9,
-        "media": "image",
-        "src": "assets/chekout/onboarding-flow.svg",
-        "aspect": 2.5,
-        "alt": "Onboarding and agent builder flow: app-store install, Step 1 AI Persona, store OAuth, product sync, Step 2 Knowledge Base, agent provisioning, Step 3 Channel",
-        "caption": "From app-store install to a provisioned agent.",
-        "explain": "The three builder steps in order, with what happens between them: store OAuth after the persona step, product sync, then agent provisioning before the channel step. Boxes are tagged [code] or [notes] by how each was verified.",
+        "label": "Password-protected",
+        "text": "The architecture diagram and commit history for this part are password-protected. Enter the password I shared with you to see them.",
+        "count": {
+          "diagrams": 1,
+          "commits": 7,
+          "notes": 0
+        }
+      },
+      {
+        "kind": "media",
+        "id": "ckb-prompt",
+        "weight": 0.85,
+        "media": "video",
+        "src": "assets/chekout/prompt-generator.mp4",
+        "poster": "assets/chekout/prompt-generator.jpg",
+        "aspect": 1.8338,
+        "alt": "In the ChekOut builder, a merchant clicks Regenerate from catalog. The template prompt with [BRAND NAME] placeholders is replaced by one written from the store’s own products and policies.",
+        "caption": "The prompt writes itself from the catalog.",
+        "explain": "Instead of filling a template, the merchant clicks Regenerate from catalog and the agent’s instructions are written from the store’s own products and answers to its top questions. Recorded on our dev store, which runs Shopify’s sample snowboard catalog.",
         "receipts": [
           {
             "type": "asset",
-            "ref": "assets/chekout/onboarding.webp",
-            "label": "The FigJam export this is redrawn from (2 · Onboarding & agent builder)"
-          },
-          {
-            "type": "asset",
-            "ref": "figma:juckmsHrlBUBKcMkoJCiep#3:112",
-            "date": "2026-11-01",
-            "label": "FigJam: 2 · Onboarding & agent builder"
-          },
-          {
-            "type": "commit",
-            "ref": "9596ff6",
-            "repo": "chekoutai-frontend",
-            "date": "2026-07-16",
-            "label": "9596ff6 · Shopline connection state, prompt-gen fixes, dashboard + pricing polish",
-            "preview": {
-              "src": "assets/chekout/demos/builder-desktop.gif",
-              "poster": "assets/chekout/demos/builder-desktop.webp",
-              "aspect": 1.7971,
-              "frame": "laptop"
-            }
+            "ref": "assets/chekout/prompt-generator.mp4"
           }
         ]
       },
@@ -2982,49 +2542,6 @@
             "label": "2127ede · Update to OAuth firebase domain and Agent position ui changes"
           }
         ]
-      },
-      {
-        "kind": "commits",
-        "id": "ckb-commits",
-        "weight": 0.45,
-        "repo": "chekoutai-frontend",
-        "items": [
-          {
-            "sha": "fe5f2a1",
-            "date": "2026-07-09",
-            "msg": "Builder Channels preview: render the real widget in an iframe"
-          },
-          {
-            "sha": "91ebf39",
-            "date": "2026-07-01",
-            "msg": "Mount embed via authoritative allowed_domains list from backend"
-          },
-          {
-            "sha": "2127ede",
-            "date": "2026-04-28",
-            "msg": "Update to OAuth firebase domain and Agent position ui changes"
-          },
-          {
-            "sha": "2e4bff0",
-            "date": "2026-05-28",
-            "msg": "Fix slider mark labels overlapping next section in ChatBoxPosition"
-          },
-          {
-            "sha": "faf5efd",
-            "date": "2026-08-20",
-            "msg": "Builder: let merchants hide the closed-state suggested questions"
-          },
-          {
-            "sha": "7a63949",
-            "date": "2026-08-25",
-            "msg": "Builder: let merchants actually turn the launcher questions off"
-          },
-          {
-            "sha": "7f4d4c0",
-            "date": "2026-09-18",
-            "msg": "Agent setup: let merchants on a trial finish setup and see the embed code"
-          }
-        ]
       }
     ]
   },
@@ -3036,181 +2553,19 @@
     "aliases": [
       "What is the ChekOut stack?"
     ],
-    "thesis": "One Next.js app on Cloud Run serves the builder and the widget, chat runs through a Langflow agent per merchant, and analytics come from BigQuery.",
+    "thesis": "The architecture behind this is password-protected. Enter the password I shared with you, or ask me in an interview.",
     "fills": [
       {
-        "kind": "prose",
-        "id": "cks-problem",
+        "kind": "gate",
+        "id": "ck-d-stack~gate",
         "weight": 1,
-        "text": "THE PROBLEM: One Next.js app serves both the merchant builder and the widget shoppers meet on stores, so every release ships to both at once.",
-        "receipts": [
-          {
-            "type": "asset",
-            "ref": "figma:juckmsHrlBUBKcMkoJCiep#3:39",
-            "date": "2026-11-01",
-            "label": "FigJam: 1 · System context ([code] for the front end)"
-          }
-        ],
-        "evidence": [
-          "cks-arch"
-        ]
-      },
-      {
-        "kind": "media",
-        "id": "cks-arch",
-        "weight": 0.85,
-        "media": "image",
-        "src": "assets/chekout/system-context.svg",
-        "aspect": 2.0253,
-        "alt": "ChekOut AI system context: merchants and shoppers, the Next.js front end, Langflow agents, backend services on Cloud Run, commerce platforms, Postgres and BigQuery",
-        "caption": "Who talks to what.",
-        "explain": "Chat messages go from the front end to a Langflow agent per merchant; setup, store sync and billing go to backend services. Solid boxes are mine; dashed are a teammate's or an outside service; [code] and [notes] say how each box was verified.",
-        "receipts": [
-          {
-            "type": "asset",
-            "ref": "assets/chekout/architecture.webp",
-            "label": "The FigJam export this is redrawn from (1 · System context)"
-          },
-          {
-            "type": "asset",
-            "ref": "figma:juckmsHrlBUBKcMkoJCiep#3:39",
-            "date": "2026-11-01",
-            "label": "FigJam: 1 · System context"
-          }
-        ],
-        "opens": "ck-d-knowledge"
-      },
-      {
-        "kind": "prose",
-        "id": "cks-knowledge",
-        "weight": 0.7,
-        "text": "KNOWLEDGE: Each store's catalog is synced, embedded with Vertex AI and stored in Postgres with pgvector; the merchant's Langflow agent retrieves from it at answer time, and conversation logs land in BigQuery.",
-        "receipts": [
-          {
-            "type": "asset",
-            "ref": "app/models.py",
-            "repo": "shopify-sync",
-            "label": "Product.embedding = Vector(768)",
-            "url": "https://github.com/adk-sentryskin/shopify-sync/blob/main/app/models.py"
-          },
-          {
-            "type": "asset",
-            "ref": "namit-confirmation-2026-11-02",
-            "date": "2026-11-02",
-            "label": "Confirmed by Namit, Nov 2 2026"
-          },
-          {
-            "type": "asset",
-            "ref": "figma:juckmsHrlBUBKcMkoJCiep#2:39",
-            "date": "2026-11-01",
-            "label": "FigJam: 5 · Data & observability"
-          }
-        ],
-        "opens": "ck-d-knowledge",
-        "opensPrimary": true
-      },
-      {
-        "kind": "prose",
-        "id": "cks-ship",
-        "weight": 0.65,
-        "text": "SHIPPING: The builder runs on Cloud Run behind Firebase Hosting, which rewrites every request to the Next.js service, with a canary service beside production that takes no live traffic. The backend services are FastAPI.",
-        "receipts": [
-          {
-            "type": "asset",
-            "ref": "firebase.json",
-            "repo": "chekoutai-frontend",
-            "label": "Firebase Hosting rewrites every request to the Cloud Run service nextjs"
-          },
-          {
-            "type": "commit",
-            "ref": "64d2ed6",
-            "repo": "chekoutai-frontend",
-            "date": "2025-11-24",
-            "label": "64d2ed6 · cloud run + firebase deployment"
-          },
-          {
-            "type": "commit",
-            "ref": "313d08d",
-            "repo": "chekoutai-frontend",
-            "date": "2026-07-08",
-            "label": "313d08d · Add canary deploy (production infra, 0% traffic)"
-          },
-          {
-            "type": "asset",
-            "ref": "requirements.txt",
-            "repo": "shopify-sync",
-            "label": "fastapi",
-            "url": "https://github.com/adk-sentryskin/shopify-sync/blob/main/requirements.txt"
-          },
-          {
-            "type": "asset",
-            "ref": "namit-confirmation-2026-11-02",
-            "date": "2026-11-02",
-            "label": "Confirmed by Namit, Nov 2 2026"
-          }
-        ],
-        "opens": "ck-d-backend",
-        "opensPrimary": true
-      },
-      {
-        "kind": "prose",
-        "id": "cks-watch",
-        "weight": 0.5,
-        "text": "WATCHING IT: Datadog RUM measures latency in shoppers' browsers and stamps each session with the build it ran.",
-        "receipts": [
-          {
-            "type": "commit",
-            "ref": "e8fc7b7",
-            "repo": "chekoutai-frontend",
-            "date": "2026-07-16",
-            "label": "e8fc7b7 · Add Datadog RUM for frontend latency + APM trace linking"
-          },
-          {
-            "type": "commit",
-            "ref": "9bfc792",
-            "repo": "chekoutai-frontend",
-            "date": "2026-08-03",
-            "label": "9bfc792 · RUM: derive env from hostname, stamp a real SHA on both pipelines"
-          }
-        ]
-      },
-      {
-        "kind": "commits",
-        "id": "cks-commits",
-        "weight": 0.45,
-        "repo": "chekoutai-frontend",
-        "items": [
-          {
-            "sha": "64d2ed6",
-            "date": "2025-11-24",
-            "msg": "cloud run + firebase deployment"
-          },
-          {
-            "sha": "313d08d",
-            "date": "2026-07-08",
-            "msg": "Add canary deploy (production infra, 0% traffic)"
-          },
-          {
-            "sha": "e8fc7b7",
-            "date": "2026-07-16",
-            "msg": "Add Datadog RUM for frontend latency + APM trace linking"
-          },
-          {
-            "sha": "9bfc792",
-            "date": "2026-08-03",
-            "msg": "RUM: derive env from hostname, stamp a real SHA on both pipelines"
-          },
-          {
-            "sha": "5264ce8",
-            "date": "2026-07-21",
-            "msg": "Dashboard: wire engagement + Conversation Logs to BigQuery /analytics"
-          },
-          {
-            "sha": "8fb5e0e",
-            "date": "2026-04-21",
-            "msg": "Wire Databricks prod catalog to Cloud Run, fix date filtering, switch conversation view to backend"
-          }
-        ]
+        "label": "Password-protected",
+        "text": "This part covers ChekOut and Christine Valmy system architecture, stack and commit history, which belong to the companies. Enter the password I shared with you to see it.",
+        "count": {
+          "diagrams": 1,
+          "commits": 6,
+          "notes": 4
+        }
       }
     ]
   },
@@ -3460,149 +2815,19 @@
     "aliases": [
       "How do leads reach the enrollment officers?"
     ],
-    "thesis": "Finished chats travel through an n8n workflow on Google Cloud that turns them into leads, sorted into priority buckets with bad leads flagged, with conversation and lead data in BigQuery.",
+    "thesis": "The architecture behind this is password-protected. Enter the password I shared with you, or ask me in an interview.",
     "fills": [
       {
-        "kind": "prose",
-        "id": "cvh-problem",
+        "kind": "gate",
+        "id": "cv-d-handoff~gate",
         "weight": 1,
-        "text": "THE PROBLEM: Officers answered the same questions on every call, and their time went to leads that were never going to enroll.",
-        "receipts": [
-          {
-            "type": "asset",
-            "ref": "src/data/christineValmyData.js",
-            "repo": "Juniper",
-            "date": "2026-10-26",
-            "label": "Christine Valmy case study"
-          }
-        ]
-      },
-      {
-        "kind": "media",
-        "id": "cvh-arch",
-        "weight": 0.85,
-        "media": "image",
-        "src": "assets/christine-valmy/architecture.svg",
-        "aspect": 1.7778,
-        "alt": "Christine Valmy agent architecture: students use the widget on the school's WordPress site; each message goes to n8n on Google Cloud, which reaches the agent (RAG, routed through MCP: Claude for English, Gemini for Spanish); finished chats become leads for officers; conversation and lead data land in BigQuery; the inquiry form creates a lead in the school's Creatio CRM",
-        "caption": "From a question to a sorted lead.",
-        "explain": "Follow a student's message: the widget sends it to n8n on Google Cloud, n8n reaches the agent, and the reply comes back with the conversation stage. The agent answers from the school's documents through RAG, Claude in English and Gemini in Spanish, routed through MCP. Finished chats become leads, the data lands in BigQuery, and the inquiry form goes to the school's CRM.",
-        "receipts": [
-          {
-            "type": "asset",
-            "ref": "assets/christine-valmy/architecture.svg"
-          },
-          {
-            "type": "asset",
-            "ref": "src/data/christineValmyData.js",
-            "repo": "Juniper",
-            "date": "2026-10-26",
-            "label": "Christine Valmy case study"
-          },
-          {
-            "type": "asset",
-            "ref": "figma:juckmsHrlBUBKcMkoJCiep#4:135",
-            "date": "2026-11-01",
-            "label": "FigJam: 4 · Sophia, enrollment agent"
-          },
-          {
-            "type": "asset",
-            "ref": "cv-chat-flat/christine-valmy-floating.js",
-            "repo": "chekout-ai (local)",
-            "label": "N8nService: chat and transcript webhooks, payloads, completion stages"
-          },
-          {
-            "type": "asset",
-            "ref": "cv-chat-flat/claude.md",
-            "repo": "chekout-ai (local)",
-            "label": "Plugin notes: endpoint connectors (n8n chat, n8n transcript, Creatio CRM), WordPress settings"
-          },
-          {
-            "type": "asset",
-            "ref": "tools/content/sources/christine-valmy-requirements.md",
-            "repo": "Juniper (stage prototype)",
-            "date": "2026-11-02",
-            "label": "Christine Valmy requirements, provided by Namit (redacted)"
-          },
-          {
-            "type": "asset",
-            "ref": "namit-confirmation-2026-11-02",
-            "date": "2026-11-02",
-            "label": "Confirmed by Namit, Nov 2 2026"
-          }
-        ]
-      },
-      {
-        "kind": "prose",
-        "id": "cvh-buckets",
-        "weight": 0.7,
-        "text": "SORTING: The agent puts each lead in a priority bucket and flags the bad ones, so officers know whom to call first.",
-        "receipts": [
-          {
-            "type": "asset",
-            "ref": "src/data/christineValmyData.js",
-            "repo": "Juniper",
-            "date": "2026-10-26",
-            "label": "Christine Valmy case study"
-          }
-        ]
-      },
-      {
-        "kind": "prose",
-        "id": "cvh-fresh",
-        "weight": 0.55,
-        "text": "FRESH ANSWERS: The agent answers from the school's own documents through RAG, with the session's chat history, and an automated pipeline keeps class schedules current. Routing runs through MCP: Claude answers in English, Gemini in Spanish.",
-        "receipts": [
-          {
-            "type": "asset",
-            "ref": "src/data/christineValmyData.js",
-            "repo": "Juniper",
-            "date": "2026-10-26",
-            "label": "Christine Valmy case study"
-          },
-          {
-            "type": "asset",
-            "ref": "tools/content/sources/christine-valmy-requirements.md",
-            "repo": "Juniper (stage prototype)",
-            "date": "2026-11-02",
-            "label": "Christine Valmy requirements, provided by Namit (redacted)"
-          }
-        ]
-      },
-      {
-        "kind": "prose",
-        "id": "cvh-n8n",
-        "weight": 0.5,
-        "text": "THE BRIDGE: The widget sends every message to an n8n workflow on Google Cloud that reaches the agent. Finished chats become leads for the officers, conversation and lead data land in BigQuery, and the inquiry form writes to the school's Creatio CRM.",
-        "receipts": [
-          {
-            "type": "asset",
-            "ref": "cv-chat-flat/christine-valmy-floating.js",
-            "repo": "chekout-ai (local)",
-            "label": "Widget: chat and transcript calls, payloads, completion stages"
-          },
-          {
-            "type": "asset",
-            "ref": "cv-chat-flat/claude.md",
-            "repo": "chekout-ai (local)",
-            "label": "Plugin notes: endpoint connectors and WordPress settings"
-          },
-          {
-            "type": "asset",
-            "ref": "tools/content/sources/christine-valmy-requirements.md",
-            "repo": "Juniper (stage prototype)",
-            "date": "2026-11-02",
-            "label": "Christine Valmy requirements, provided by Namit (redacted)"
-          },
-          {
-            "type": "asset",
-            "ref": "namit-confirmation-2026-11-02",
-            "date": "2026-11-02",
-            "label": "Confirmed by Namit, Nov 2 2026"
-          }
-        ],
-        "opens": "cv-d-bridge",
-        "opensPrimary": true
+        "label": "Password-protected",
+        "text": "This part covers ChekOut and Christine Valmy system architecture, stack and commit history, which belong to the companies. Enter the password I shared with you to see it.",
+        "count": {
+          "diagrams": 1,
+          "commits": 0,
+          "notes": 4
+        }
       }
     ]
   },
@@ -4427,8 +3652,44 @@
       },
       {
         "kind": "media",
+        "id": "ckl-kivakube",
+        "weight": 0.95,
+        "media": "video",
+        "src": "assets/chekout/live-kivakube.mp4",
+        "poster": "assets/chekout/live-kivakube.jpg",
+        "aspect": 1.6,
+        "alt": "On the KivaKube store, a shopper asks the ChekOut agent for the best seller, then which one suits a small patio. The agent opens a product sheet and recommends the Founder’s Edition.",
+        "caption": "A second store: KivaKube.",
+        "explain": "Same agent, another merchant’s brand and catalog. Asked for a best seller and then for a small patio, it opens a product sheet and narrows to the Founder’s Edition.",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "assets/chekout/live-kivakube.mp4"
+          }
+        ]
+      },
+      {
+        "kind": "media",
+        "id": "ckl-kivakube-mobile",
+        "weight": 0.6,
+        "media": "video",
+        "src": "assets/chekout/live-kivakube-mobile.mp4",
+        "poster": "assets/chekout/live-kivakube-mobile.jpg",
+        "aspect": 0.4621,
+        "alt": "The same KivaKube conversation on a phone: the agent answers, opens a product sheet, then returns to the chat with two recommended products.",
+        "caption": "KivaKube on a phone.",
+        "explain": "The phone version of the KivaKube exchange: the product sheet slides up over the chat, then the chat returns with the two recommended products.",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "assets/chekout/live-kivakube-mobile.mp4"
+          }
+        ]
+      },
+      {
+        "kind": "media",
         "id": "ckl-mobile",
-        "weight": 0.8,
+        "weight": 0.7,
         "media": "video",
         "src": "assets/chekout/live-rosendahl-mobile.mp4",
         "aspect": 0.4621,
@@ -4465,8 +3726,8 @@
       {
         "kind": "prose",
         "id": "ckl-live",
-        "weight": 0.6,
-        "text": "LIVE, NOT A MOCKUP: Both clips are the deployed widget on a merchant that approved being shown.",
+        "weight": 0.4,
+        "text": "LIVE, NOT A MOCKUP: Every clip is the deployed widget on a merchant’s own store.",
         "receipts": [
           {
             "type": "asset",
@@ -4492,7 +3753,7 @@
       {
         "kind": "prose",
         "id": "ckl-read",
-        "weight": 0.5,
+        "weight": 0.35,
         "text": "WHAT TO LOOK FOR: The agent names products and prices inside the sentence, then shows the cards, so the answer reads first and the products prove it.",
         "receipts": [
           {
@@ -4605,27 +3866,16 @@
         ]
       },
       {
-        "kind": "commits",
-        "id": "cklv-commits",
+        "kind": "gate",
+        "id": "ck-d-live-stores~gate",
         "weight": 0.45,
-        "repo": "chekoutai-frontend",
-        "items": [
-          {
-            "sha": "91ebf39",
-            "date": "2026-07-01",
-            "msg": "Mount embed via authoritative allowed_domains list from backend"
-          },
-          {
-            "sha": "0956b17",
-            "date": "2026-06-15",
-            "msg": "Add data-force-mount=\"true\" to the HTML embed snippet"
-          },
-          {
-            "sha": "b343c7e",
-            "date": "2026-09-01",
-            "msg": "Widget: let self-hosted merchants embed the agent as an in-flow section"
-          }
-        ]
+        "label": "Password-protected",
+        "text": "The commit history for this part is password-protected. Enter the password I shared with you to see it.",
+        "count": {
+          "diagrams": 0,
+          "commits": 3,
+          "notes": 0
+        }
       }
     ]
   },
@@ -4640,85 +3890,38 @@
     "thesis": "I documented the shipped widget and builder in Figma from the code, so every token and component points at the file it ships from.",
     "fills": [
       {
-        "kind": "specimen",
-        "id": "spec-chekout-scale",
+        "kind": "tokens",
+        "id": "ckds-type",
         "weight": 0.95,
-        "mode": "scale",
-        "direction": "up",
-        "title": "ChekOut type scale",
-        "sample": "Add to cart",
-        "font": "Sorts Mill Goudy",
-        "scale": [
-          {
-            "role": "body-3",
-            "size": 12,
-            "lineHeight": 18,
-            "tracking": 0,
-            "weight": 400
-          },
-          {
-            "role": "body-2",
-            "size": 14,
-            "lineHeight": 21,
-            "tracking": 0,
-            "weight": 400
-          },
-          {
-            "role": "body-1",
-            "size": 16,
-            "lineHeight": 24,
-            "tracking": 0,
-            "weight": 400
-          },
-          {
-            "role": "heading-5",
-            "size": 18,
-            "lineHeight": 25.2,
-            "tracking": 0,
-            "weight": 700
-          },
-          {
-            "role": "heading-4",
-            "size": 20,
-            "lineHeight": 26,
-            "tracking": 0,
-            "weight": 700
-          },
-          {
-            "role": "heading-3",
-            "size": 24,
-            "lineHeight": 31.2,
-            "tracking": 0,
-            "weight": 700
-          },
-          {
-            "role": "heading-2",
-            "size": 28,
-            "lineHeight": 33.6,
-            "tracking": 0,
-            "weight": 700
-          },
-          {
-            "role": "heading-1",
-            "size": 32,
-            "lineHeight": 38.4,
-            "tracking": 0,
-            "weight": 700
-          },
-          {
-            "role": "title-1",
-            "size": 48,
-            "lineHeight": 57.6,
-            "tracking": 0,
-            "weight": 700
-          }
-        ],
+        "section": "type",
+        "group": "Widget",
+        "label": "Widget type",
+        "caption": "The widget type ramp, at its shipped sizes.",
+        "explain": "Sizes, weights and tracking read from the widget components. The widget ships whichever font the merchant picks, so the samples use Helvetica, one of the seven options.",
         "receipts": [
           {
             "type": "asset",
-            "ref": "theme/typography.ts",
+            "ref": "components/Chatbot/ChatBoxView.tsx",
             "repo": "chekoutai-frontend",
-            "label": "theme/typography.ts (MUI variants 48 to 12)"
+            "label": "components/Chatbot/ChatBoxView.tsx @ 9f7b1e2"
+          },
+          {
+            "type": "asset",
+            "ref": "components/Chatbot/ConversationView.tsx",
+            "repo": "chekoutai-frontend",
+            "label": "components/Chatbot/ConversationView.tsx @ 9f7b1e2"
+          },
+          {
+            "type": "asset",
+            "ref": "components/Chatbot/ChatLauncher.tsx",
+            "repo": "chekoutai-frontend",
+            "label": "components/Chatbot/ChatLauncher.tsx @ f56fbdf"
+          },
+          {
+            "type": "asset",
+            "ref": "public/chatbot.js",
+            "repo": "chekoutai-frontend",
+            "label": "public/chatbot.js @ b343c7e"
           }
         ]
       },
@@ -4760,25 +3963,38 @@
         ]
       },
       {
-        "kind": "media",
-        "id": "ckds-tokens",
-        "weight": 0.7,
-        "media": "image",
-        "src": "assets/chekout/ds-widget-tokens.webp",
-        "aspect": 2.5688,
-        "alt": "Widget and builder tokens: component colors, widget sizes, radii and shadows, each with its source file",
-        "caption": "Widget tokens with their sources.",
-        "explain": "The widget's own colors, sizes, corners and shadows, each labeled with the code file it comes from, so the design file can't quietly drift from what ships.",
+        "kind": "tokens",
+        "id": "ckds-color",
+        "weight": 0.75,
+        "section": "color",
+        "group": "Widget",
+        "label": "Widget color",
+        "caption": "Widget colors, each with its source file.",
+        "explain": "The widget’s own colors for brand, messages, status, launcher, footer and outlines, copied from the code. Merchants’ brand colors theme the brand slots at runtime.",
         "receipts": [
           {
             "type": "asset",
-            "ref": "assets/chekout/ds-widget-tokens.webp"
+            "ref": "components/Chatbot/ChatbotWidget.tsx",
+            "repo": "chekoutai-frontend",
+            "label": "components/Chatbot/ChatbotWidget.tsx @ 9f7b1e2"
           },
           {
             "type": "asset",
-            "ref": "figma:LPIuHW2bQIxkq7TWZSxI3G#16:23",
-            "date": "2026-11-01",
-            "label": "Widget & builder tokens, added at 7f4d4c0"
+            "ref": "components/Chatbot/ChatBoxView.tsx",
+            "repo": "chekoutai-frontend",
+            "label": "components/Chatbot/ChatBoxView.tsx @ 9f7b1e2"
+          },
+          {
+            "type": "asset",
+            "ref": "components/Chatbot/BlobBackground.tsx",
+            "repo": "chekoutai-frontend",
+            "label": "components/Chatbot/BlobBackground.tsx @ bceb8f0"
+          },
+          {
+            "type": "asset",
+            "ref": "components/Chatbot/ConversationView.tsx",
+            "repo": "chekoutai-frontend",
+            "label": "components/Chatbot/ConversationView.tsx @ 9f7b1e2"
           }
         ]
       },
@@ -4794,6 +4010,64 @@
             "repo": "Juniper",
             "date": "2026-10-26",
             "label": "Agent platform case study"
+          }
+        ]
+      },
+      {
+        "kind": "tokens",
+        "id": "ckds-radius",
+        "weight": 0.5,
+        "section": "radius",
+        "label": "Corners",
+        "caption": "Corner radii, including the chat bubbles’ shapes.",
+        "explain": "Every radius the widget uses, from the pill launcher to the asymmetric AI and shopper bubbles.",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "components/Chatbot/theme/tokens.ts",
+            "repo": "chekoutai-frontend",
+            "label": "components/Chatbot/theme/tokens.ts @ 9596ff6"
+          },
+          {
+            "type": "asset",
+            "ref": "theme/typography.ts",
+            "repo": "chekoutai-frontend",
+            "label": "theme/typography.ts @ 194a57d"
+          }
+        ]
+      },
+      {
+        "kind": "tokens",
+        "id": "ckds-shadow",
+        "weight": 0.45,
+        "section": "shadow",
+        "label": "Shadows",
+        "caption": "Shadows, drawn on a light storefront.",
+        "explain": "The widget sits on someone else’s page, so its shadows are tuned for light storefronts and shown here on one.",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "components/Chatbot/theme/tokens.ts",
+            "repo": "chekoutai-frontend",
+            "label": "components/Chatbot/theme/tokens.ts @ 9596ff6"
+          },
+          {
+            "type": "asset",
+            "ref": "public/chatbot.js",
+            "repo": "chekoutai-frontend",
+            "label": "public/chatbot.js @ b343c7e"
+          },
+          {
+            "type": "asset",
+            "ref": "components/Chatbot/ProductDetails/SimilarProducts.tsx",
+            "repo": "chekoutai-frontend",
+            "label": "components/Chatbot/ProductDetails/SimilarProducts.tsx @ 9596ff6"
+          },
+          {
+            "type": "asset",
+            "ref": "styles/globals.css",
+            "repo": "chekoutai-frontend",
+            "label": "styles/globals.css @ 194a57d"
           }
         ]
       }
@@ -5511,189 +4785,19 @@
     "aliases": [
       "How does the agent learn a store's catalog?"
     ],
-    "thesis": "Product sync turns each store's catalog into embeddings in Postgres with pgvector, and the merchant's agent retrieves from them when a shopper asks.",
+    "thesis": "The architecture behind this is password-protected. Enter the password I shared with you, or ask me in an interview.",
     "fills": [
       {
-        "kind": "prose",
-        "id": "ckk-problem",
+        "kind": "gate",
+        "id": "ck-d-knowledge~gate",
         "weight": 1,
-        "text": "THE PROBLEM: The agent can only answer from what it knows about a store, and a product that loses its embedding becomes invisible to semantic search while the sync still reports clean.",
-        "receipts": [
-          {
-            "type": "commit",
-            "ref": "f62a338",
-            "repo": "shopline-sync",
-            "date": "2026-08-06",
-            "label": "f62a338 · Retry transient embedding failures; count the ones that still fail"
-          },
-          {
-            "type": "asset",
-            "ref": "namit-confirmation-2026-11-02",
-            "date": "2026-11-02",
-            "label": "Confirmed by Namit, Nov 2 2026"
-          }
-        ]
-      },
-      {
-        "kind": "media",
-        "id": "ckk-diagram",
-        "weight": 0.95,
-        "media": "image",
-        "src": "assets/chekout/knowledge.svg",
-        "aspect": 1.7778,
-        "alt": "How a catalog becomes the agent's knowledge: OAuth install, product sync in FastAPI, Vertex AI embeddings, Postgres with pgvector, a Langflow agent per merchant retrieving at answer time, and conversation logs into BigQuery for the analytics API",
-        "caption": "From a merchant's catalog to an answer.",
-        "explain": "Follow the top row: install, sync, embed. Product sync sends each product's text to Vertex AI and stores the vector beside the product in Postgres. The middle row is answer time: the merchant's agent retrieves products from those vectors. Solid boxes are mine. Drawn from the sync and backend repos and the ChekOut architecture board.",
-        "receipts": [
-          {
-            "type": "asset",
-            "ref": "assets/chekout/knowledge.svg"
-          },
-          {
-            "type": "asset",
-            "ref": "app/services/embedding_service.py",
-            "repo": "shopify-sync",
-            "label": "Vertex AI embedding service",
-            "url": "https://github.com/adk-sentryskin/shopify-sync/blob/main/app/services/embedding_service.py"
-          },
-          {
-            "type": "asset",
-            "ref": "figma:juckmsHrlBUBKcMkoJCiep#3:39",
-            "date": "2026-11-01",
-            "label": "FigJam: 1 · System context"
-          },
-          {
-            "type": "asset",
-            "ref": "namit-confirmation-2026-11-02",
-            "date": "2026-11-02",
-            "label": "Confirmed by Namit, Nov 2 2026"
-          }
-        ]
-      },
-      {
-        "kind": "prose",
-        "id": "ckk-how",
-        "weight": 0.75,
-        "text": "HOW: Product sync builds one text per product, with its variant options and HTML entities cleaned, embeds it with Vertex AI's text-embedding-004, and stores the vector with the product in Postgres through pgvector. Each merchant's agent is a Langflow flow that retrieves from those vectors when a shopper asks.",
-        "receipts": [
-          {
-            "type": "asset",
-            "ref": "app/models.py",
-            "repo": "shopify-sync",
-            "label": "Product.embedding = Vector(768)",
-            "url": "https://github.com/adk-sentryskin/shopify-sync/blob/main/app/models.py"
-          },
-          {
-            "type": "commit",
-            "ref": "859a164",
-            "repo": "shopify-sync",
-            "date": "2026-05-05",
-            "label": "859a164 · Normalize merchant IDs server-side, improve embedding quality",
-            "url": "https://github.com/adk-sentryskin/shopify-sync/commit/859a1648c658b253eab630ed725b72c473206069"
-          },
-          {
-            "type": "asset",
-            "ref": "namit-confirmation-2026-11-02",
-            "date": "2026-11-02",
-            "label": "Confirmed by Namit, Nov 2 2026"
-          },
-          {
-            "type": "asset",
-            "ref": "figma:juckmsHrlBUBKcMkoJCiep#3:39",
-            "date": "2026-11-01",
-            "label": "Langflow agents per merchant via /run"
-          }
-        ]
-      },
-      {
-        "kind": "kpi",
-        "id": "ckk-dims",
-        "weight": 0.6,
-        "value": "768",
-        "label": "dimensions in each product embedding, Vertex AI text-embedding-004",
-        "receipts": [
-          {
-            "type": "asset",
-            "ref": "app/models.py",
-            "repo": "shopify-sync",
-            "label": "embedding = Column(Vector(768)) # 768-dim embedding from Vertex AI text-embedding-004",
-            "url": "https://github.com/adk-sentryskin/shopify-sync/blob/main/app/models.py"
-          }
-        ]
-      },
-      {
-        "kind": "prose",
-        "id": "ckk-safe",
-        "weight": 0.55,
-        "text": "NEVER SILENTLY BLIND: Transient Vertex failures are retried with backoff and products left without a vector are counted, and a batched write never overwrites a stored embedding with nothing.",
-        "receipts": [
-          {
-            "type": "commit",
-            "ref": "f62a338",
-            "repo": "shopline-sync",
-            "date": "2026-08-06",
-            "label": "f62a338 · Retry transient embedding failures; count the ones that still fail"
-          },
-          {
-            "type": "commit",
-            "ref": "2e7c541",
-            "repo": "shopify-sync",
-            "date": "2026-08-26",
-            "label": "2e7c541 · Page-batch product sync writes and guard against payload-driven data loss",
-            "url": "https://github.com/adk-sentryskin/shopify-sync/commit/2e7c541e5b243018001c4ba62735b59f0aa8921f"
-          }
-        ]
-      },
-      {
-        "kind": "media",
-        "id": "ckk-logs",
-        "weight": 0.5,
-        "media": "image",
-        "src": "assets/chekout/data-observability.svg",
-        "aspect": 2.0253,
-        "alt": "ChekOut data and observability: chat agent functions log to Cloud Logging and stream rows into BigQuery, which feeds merchant analytics and reporting",
-        "caption": "Conversations land in BigQuery.",
-        "explain": "Every agent turn is logged and streamed into BigQuery; merchant analytics query it on demand. I wrote the analytics endpoints on top; the logging functions are a teammate's.",
-        "receipts": [
-          {
-            "type": "asset",
-            "ref": "assets/chekout/data-flow.webp",
-            "label": "The FigJam export this is redrawn from (5 · Data & observability)"
-          },
-          {
-            "type": "asset",
-            "ref": "figma:juckmsHrlBUBKcMkoJCiep#2:39",
-            "date": "2026-11-01",
-            "label": "FigJam: 5 · Data & observability"
-          },
-          {
-            "type": "commit",
-            "ref": "14cc82b",
-            "repo": "chekout-backend",
-            "date": "2026-07-20",
-            "label": "14cc82b · Analytics: engaged_sessions, first_real_message, richer keywords/intent"
-          }
-        ]
-      },
-      {
-        "kind": "commits",
-        "id": "ckk-commits",
-        "weight": 0.45,
-        "repo": "shopify-sync",
-        "items": [
-          {
-            "sha": "859a164",
-            "date": "2026-05-05",
-            "msg": "Normalize merchant IDs server-side, improve embedding quality",
-            "url": "https://github.com/adk-sentryskin/shopify-sync/commit/859a1648c658b253eab630ed725b72c473206069"
-          },
-          {
-            "sha": "2e7c541",
-            "date": "2026-08-26",
-            "msg": "Page-batch product sync writes and guard against payload-driven data loss",
-            "url": "https://github.com/adk-sentryskin/shopify-sync/commit/2e7c541e5b243018001c4ba62735b59f0aa8921f"
-          }
-        ]
+        "label": "Password-protected",
+        "text": "This part covers ChekOut and Christine Valmy system architecture, stack and commit history, which belong to the companies. Enter the password I shared with you to see it.",
+        "count": {
+          "diagrams": 2,
+          "commits": 2,
+          "notes": 4
+        }
       }
     ]
   },
@@ -5705,194 +4809,19 @@
     "aliases": [
       "What did I build in the ChekOut backend?"
     ],
-    "thesis": "The store connection end to end: OAuth installs for Shopify and Shopline, a product sync that writes a page at a time, resilient Admin API calls, and FastAPI endpoints behind a builder hosted on Firebase.",
+    "thesis": "The architecture behind this is password-protected. Enter the password I shared with you, or ask me in an interview.",
     "fills": [
       {
-        "kind": "prose",
-        "id": "ckbe-problem",
+        "kind": "gate",
+        "id": "ck-d-backend~gate",
         "weight": 1,
-        "text": "THE PROBLEM: Product sync wrote one product at a time, several database round trips each, and a partial payload from Shopify could blank out the fields the agent reads.",
-        "receipts": [
-          {
-            "type": "commit",
-            "ref": "2e7c541",
-            "repo": "shopify-sync",
-            "date": "2026-08-26",
-            "label": "2e7c541 · Page-batch product sync writes and guard against payload-driven data loss",
-            "url": "https://github.com/adk-sentryskin/shopify-sync/commit/2e7c541e5b243018001c4ba62735b59f0aa8921f"
-          }
-        ]
-      },
-      {
-        "kind": "kpi",
-        "id": "ckbe-trips",
-        "weight": 0.85,
-        "value": "~1,250",
-        "label": "database round trips a full 250-product page used to take; now one batched upsert, committed once",
-        "receipts": [
-          {
-            "type": "commit",
-            "ref": "2e7c541",
-            "repo": "shopify-sync",
-            "date": "2026-08-26",
-            "label": "2e7c541 · Page-batch product sync writes and guard against payload-driven data loss",
-            "url": "https://github.com/adk-sentryskin/shopify-sync/commit/2e7c541e5b243018001c4ba62735b59f0aa8921f"
-          }
-        ]
-      },
-      {
-        "kind": "prose",
-        "id": "ckbe-oauth",
-        "weight": 0.75,
-        "text": "OAUTH: The Shopify install checks a signed state against CSRF, normalizes merchant IDs on the server, runs as an embedded app, and reads each merchant's real scope grant, so order reading stays off until a merchant grants it. On Shopline I built the callback back into the builder.",
-        "receipts": [
-          {
-            "type": "commit",
-            "ref": "f325a58",
-            "repo": "shopify-sync",
-            "date": "2026-03-26",
-            "label": "f325a58 · Shopify OAuth: signed state CSRF fix, lowercase merchant_id normalization, embedded=true, extension api_version",
-            "url": "https://github.com/adk-sentryskin/shopify-sync/commit/f325a580a6f53950b0347ebad6d6a13d5efed62e"
-          },
-          {
-            "type": "commit",
-            "ref": "8e718d9",
-            "repo": "shopify-sync",
-            "date": "2026-05-28",
-            "label": "8e718d9 · Add 6 benign Shopify read scopes; harden custom-app scope handling",
-            "url": "https://github.com/adk-sentryskin/shopify-sync/commit/8e718d97e4ac9f9d9b37ff736d1d2943119fe8c8"
-          },
-          {
-            "type": "commit",
-            "ref": "f62229c",
-            "repo": "shopline-sync",
-            "date": "2026-06-15",
-            "label": "f62229c · Redirect OAuth callback back to the chekoutai builder",
-            "url": "https://github.com/adk-sentryskin/shopline-sync/commit/f62229c1b80dac35837ddf5eebeac9a5b7da10e4"
-          },
-          {
-            "type": "asset",
-            "ref": "namit-confirmation-2026-11-02",
-            "date": "2026-11-02",
-            "label": "Confirmed by Namit, Nov 2 2026"
-          }
-        ]
-      },
-      {
-        "kind": "prose",
-        "id": "ckbe-retry",
-        "weight": 0.6,
-        "text": "RESILIENCE: Every Shopify Admin API call got an explicit timeout and a bounded backoff that only replays requests that can't be applied twice.",
-        "receipts": [
-          {
-            "type": "commit",
-            "ref": "9927b62",
-            "repo": "shopify-sync",
-            "date": "2026-08-06",
-            "label": "9927b62 · Add timeouts and bounded retry to Shopify Admin API calls",
-            "url": "https://github.com/adk-sentryskin/shopify-sync/commit/9927b6266f71f54d0c5259607bbc584baf7816aa"
-          }
-        ]
-      },
-      {
-        "kind": "prose",
-        "id": "ckbe-host",
-        "weight": 0.6,
-        "text": "SERVICES AND HOSTING: The sync services and the analytics endpoints are FastAPI. The builder is a Next.js app on Cloud Run behind Firebase Hosting, which rewrites every request to it.",
-        "receipts": [
-          {
-            "type": "asset",
-            "ref": "requirements.txt",
-            "repo": "shopify-sync",
-            "label": "fastapi",
-            "url": "https://github.com/adk-sentryskin/shopify-sync/blob/main/requirements.txt"
-          },
-          {
-            "type": "asset",
-            "ref": "requirements.txt",
-            "repo": "chekout-backend",
-            "label": "fastapi, google-cloud-bigquery"
-          },
-          {
-            "type": "asset",
-            "ref": "firebase.json",
-            "repo": "chekoutai-frontend",
-            "label": "Firebase Hosting rewrites every request to the Cloud Run service nextjs"
-          },
-          {
-            "type": "commit",
-            "ref": "64d2ed6",
-            "repo": "chekoutai-frontend",
-            "date": "2025-11-24",
-            "label": "64d2ed6 · cloud run + firebase deployment"
-          },
-          {
-            "type": "asset",
-            "ref": "namit-confirmation-2026-11-02",
-            "date": "2026-11-02",
-            "label": "Confirmed by Namit, Nov 2 2026"
-          }
-        ]
-      },
-      {
-        "kind": "prose",
-        "id": "ckbe-orders",
-        "weight": 0.5,
-        "text": "ORDERS: Agent-attributed orders persist in Postgres with a PII-free field allowlist, kept on a rolling 60-day window and deleted when a merchant uninstalls.",
-        "receipts": [
-          {
-            "type": "commit",
-            "ref": "b3fccad",
-            "repo": "shopify-sync",
-            "date": "2026-05-28",
-            "label": "b3fccad · Add Postgres persistence for agent-attributed orders",
-            "url": "https://github.com/adk-sentryskin/shopify-sync/commit/b3fccad1d165142c50c39b2e66b68115155a7fd7"
-          }
-        ]
-      },
-      {
-        "kind": "commits",
-        "id": "ckbe-commits",
-        "weight": 0.5,
-        "repo": "shopify-sync",
-        "items": [
-          {
-            "sha": "f325a58",
-            "date": "2026-03-26",
-            "msg": "Shopify OAuth: signed state CSRF fix, lowercase merchant_id normalization, embedded=true, extension api_version",
-            "url": "https://github.com/adk-sentryskin/shopify-sync/commit/f325a580a6f53950b0347ebad6d6a13d5efed62e"
-          },
-          {
-            "sha": "8e718d9",
-            "date": "2026-05-28",
-            "msg": "Add 6 benign Shopify read scopes; harden custom-app scope handling",
-            "url": "https://github.com/adk-sentryskin/shopify-sync/commit/8e718d97e4ac9f9d9b37ff736d1d2943119fe8c8"
-          },
-          {
-            "sha": "b3fccad",
-            "date": "2026-05-28",
-            "msg": "Add Postgres persistence for agent-attributed orders",
-            "url": "https://github.com/adk-sentryskin/shopify-sync/commit/b3fccad1d165142c50c39b2e66b68115155a7fd7"
-          },
-          {
-            "sha": "7bd249c",
-            "date": "2026-06-10",
-            "msg": "Provision order access on read_orders grant",
-            "url": "https://github.com/adk-sentryskin/shopify-sync/commit/7bd249c7c4a591639872cbc00675fe1fc55c8fef"
-          },
-          {
-            "sha": "9927b62",
-            "date": "2026-08-06",
-            "msg": "Add timeouts and bounded retry to Shopify Admin API calls",
-            "url": "https://github.com/adk-sentryskin/shopify-sync/commit/9927b6266f71f54d0c5259607bbc584baf7816aa"
-          },
-          {
-            "sha": "2e7c541",
-            "date": "2026-08-26",
-            "msg": "Page-batch product sync writes and guard against payload-driven data loss",
-            "url": "https://github.com/adk-sentryskin/shopify-sync/commit/2e7c541e5b243018001c4ba62735b59f0aa8921f"
-          }
-        ]
+        "label": "Password-protected",
+        "text": "This part covers ChekOut and Christine Valmy system architecture, stack and commit history, which belong to the companies. Enter the password I shared with you to see it.",
+        "count": {
+          "diagrams": 0,
+          "commits": 6,
+          "notes": 6
+        }
       }
     ]
   },
@@ -5901,156 +4830,19 @@
     "parent": "cv-d-handoff",
     "caseStudy": "christine-valmy",
     "question": "What exactly happens between the chat and the officers?",
-    "thesis": "Three calls leave the widget: one per message, one when the chat ends, one when the form is sent; n8n runs on Google Cloud and the conversation and lead data land in BigQuery.",
+    "thesis": "The architecture behind this is password-protected. Enter the password I shared with you, or ask me in an interview.",
     "fills": [
       {
-        "kind": "prose",
-        "id": "cvbr-problem",
+        "kind": "gate",
+        "id": "cv-d-bridge~gate",
         "weight": 1,
-        "text": "THE PROBLEM: Students close the tab mid-chat, especially on phones, and a conversation that ends that way still has to reach the officers once, not twice.",
-        "receipts": [
-          {
-            "type": "asset",
-            "ref": "cv-chat-flat/christine-valmy-floating.js",
-            "repo": "chekout-ai (local)",
-            "label": "N8nService: chat and transcript webhooks, payloads, completion stages"
-          }
-        ]
-      },
-      {
-        "kind": "media",
-        "id": "cvbr-graph",
-        "weight": 0.9,
-        "media": "image",
-        "src": "assets/christine-valmy/bridge.svg",
-        "aspect": 2.1053,
-        "alt": "The three calls that leave the widget: each message to the n8n workflow on Google Cloud, which also writes conversation and lead data to BigQuery; the transcript when a chat ends, which becomes a lead; and the inquiry form to the Creatio CRM",
-        "caption": "Three calls, in the order a student triggers them.",
-        "explain": "Read top to bottom. Every message carries the conversation so far; the reply carries the stage. Reaching enrollment collection, completion or post enrollment, or closing the widget or the tab, sends the transcript once. n8n answers whether a lead was made, and the widget stops sending after that. Drawn from the plugin code and Namit's confirmation.",
-        "receipts": [
-          {
-            "type": "asset",
-            "ref": "assets/christine-valmy/bridge.svg"
-          },
-          {
-            "type": "asset",
-            "ref": "cv-chat-flat/christine-valmy-floating.js",
-            "repo": "chekout-ai (local)",
-            "label": "N8nService: chat and transcript webhooks, payloads, completion stages"
-          },
-          {
-            "type": "asset",
-            "ref": "cv-chat-flat/claude.md",
-            "repo": "chekout-ai (local)",
-            "label": "Plugin notes: endpoint connectors (n8n chat, n8n transcript, Creatio CRM), WordPress settings"
-          },
-          {
-            "type": "asset",
-            "ref": "namit-confirmation-2026-11-02",
-            "date": "2026-11-02",
-            "label": "Confirmed by Namit, Nov 2 2026"
-          }
-        ]
-      },
-      {
-        "kind": "prose",
-        "id": "cvbr-msg",
-        "weight": 0.7,
-        "text": "1 · EACH MESSAGE: The widget sends the question, user and thread ids, the history and a reCAPTCHA v3 token to the n8n workflow on Google Cloud. The reply carries the answer, the conversation stage, the enrollment state and whether the chat is complete.",
-        "receipts": [
-          {
-            "type": "asset",
-            "ref": "cv-chat-flat/christine-valmy-floating.js",
-            "repo": "chekout-ai (local)",
-            "label": "N8nService: chat and transcript webhooks, payloads, completion stages"
-          },
-          {
-            "type": "asset",
-            "ref": "cv-chat-flat/claude.md",
-            "repo": "chekout-ai (local)",
-            "label": "Plugin notes: endpoint connectors (n8n chat, n8n transcript, Creatio CRM), WordPress settings"
-          },
-          {
-            "type": "asset",
-            "ref": "tools/content/sources/christine-valmy-requirements.md",
-            "repo": "Juniper (stage prototype)",
-            "date": "2026-11-02",
-            "label": "Christine Valmy requirements, provided by Namit (redacted)"
-          },
-          {
-            "type": "asset",
-            "ref": "namit-confirmation-2026-11-02",
-            "date": "2026-11-02",
-            "label": "Confirmed by Namit, Nov 2 2026"
-          }
-        ]
-      },
-      {
-        "kind": "prose",
-        "id": "cvbr-end",
-        "weight": 0.65,
-        "text": "2 · WHEN IT ENDS: A completing stage, closing the widget or hiding the tab sends the full transcript, the reason, the message count and the page to the workflow, once per reason and by sendBeacon when the tab is closing. If n8n reports a lead was made, nothing more is sent.",
-        "receipts": [
-          {
-            "type": "asset",
-            "ref": "cv-chat-flat/christine-valmy-floating.js",
-            "repo": "chekout-ai (local)",
-            "label": "N8nService: chat and transcript webhooks, payloads, completion stages"
-          }
-        ]
-      },
-      {
-        "kind": "prose",
-        "id": "cvbr-form",
-        "weight": 0.55,
-        "text": "3 · THE FORM: The inquiry form creates the lead in the school's Creatio CRM through its webhook. The CRM and transcript webhook addresses are set in the plugin's WordPress settings.",
-        "receipts": [
-          {
-            "type": "asset",
-            "ref": "cv-chat-flat/claude.md",
-            "repo": "chekout-ai (local)",
-            "label": "Plugin notes: endpoint connectors (n8n chat, n8n transcript, Creatio CRM), WordPress settings"
-          },
-          {
-            "type": "asset",
-            "ref": "cv-chat-flat/christine-valmy-step1.php",
-            "repo": "chekout-ai (local)",
-            "label": "WordPress plugin: settings page and config passed to the widget"
-          }
-        ]
-      },
-      {
-        "kind": "prose",
-        "id": "cvbr-who",
-        "weight": 0.45,
-        "text": "WHO BUILT WHAT: The widget, the plugin, the persona and the prompt are mine; the agent's function is a teammate's. The priority buckets and bad-lead flags run inside the n8n workflow, which isn't exported in my sources, so its nodes aren't shown. Conversation and lead data land in BigQuery.",
-        "receipts": [
-          {
-            "type": "asset",
-            "ref": "figma:juckmsHrlBUBKcMkoJCiep#4:135",
-            "date": "2026-11-01",
-            "label": "FigJam: 4 · Sophia, enrollment agent (agent function marked a teammate's)"
-          },
-          {
-            "type": "asset",
-            "ref": "src/data/christineValmyData.js",
-            "repo": "Juniper",
-            "date": "2026-10-26",
-            "label": "Christine Valmy case study"
-          },
-          {
-            "type": "asset",
-            "ref": "cv-chat-flat/claude.md",
-            "repo": "chekout-ai (local)",
-            "label": "Plugin notes: endpoint connectors (n8n chat, n8n transcript, Creatio CRM), WordPress settings"
-          },
-          {
-            "type": "asset",
-            "ref": "namit-confirmation-2026-11-02",
-            "date": "2026-11-02",
-            "label": "Confirmed by Namit, Nov 2 2026"
-          }
-        ]
+        "label": "Password-protected",
+        "text": "This part covers ChekOut and Christine Valmy system architecture, stack and commit history, which belong to the companies. Enter the password I shared with you to see it.",
+        "count": {
+          "diagrams": 1,
+          "commits": 0,
+          "notes": 5
+        }
       }
     ]
   },
@@ -6192,51 +4984,16 @@
         ]
       },
       {
-        "kind": "rules",
-        "id": "cvs-reply",
+        "kind": "gate",
+        "id": "cv-d-script~gate",
         "weight": 0.65,
-        "label": "Every reply",
-        "tag": "Requirement",
-        "items": [
-          {
-            "icon": "lucide:list-ordered",
-            "text": "≤4 sentences"
-          },
-          {
-            "icon": "lucide:message-square-text",
-            "text": "Plain, warm words"
-          },
-          {
-            "icon": "lucide:file-text",
-            "text": "From school docs"
-          },
-          {
-            "icon": "lucide:message-circle-question-mark",
-            "text": "Ends with a question"
-          }
-        ],
-        "chips": {
-          "label": "Routed via MCP",
-          "items": [
-            {
-              "icon": "lucide:bot",
-              "text": "EN → Claude"
-            },
-            {
-              "icon": "lucide:bot",
-              "text": "ES → Gemini"
-            }
-          ]
-        },
-        "receipts": [
-          {
-            "type": "asset",
-            "ref": "tools/content/sources/christine-valmy-requirements.md",
-            "repo": "Juniper (stage prototype)",
-            "date": "2026-11-02",
-            "label": "Christine Valmy requirements, provided by Namit (redacted)"
-          }
-        ]
+        "label": "Password-protected",
+        "text": "The stack notes for this part are password-protected. Enter the password I shared with you to see them.",
+        "count": {
+          "diagrams": 0,
+          "commits": 0,
+          "notes": 1
+        }
       },
       {
         "kind": "rules",

@@ -4,7 +4,11 @@
   "outputDirectory": "dist",
   "rewrites": [
     {
-      "source": "/((?!assets/|fonts/|.*\\.[a-z0-9]+$).*)",
+      "source": "/gated/:path*",
+      "destination": "/api/gated-asset?p=:path*"
+    },
+    {
+      "source": "/((?!api/|gated/|assets/|fonts/|.*\\.[a-z0-9]+$).*)",
       "destination": "/index.html"
     }
   ],
@@ -24,5 +28,10 @@
         }
       ]
     }
-  ]
+  ],
+  "functions": {
+    "api/*.js": {
+      "includeFiles": "private/**"
+    }
+  }
 }

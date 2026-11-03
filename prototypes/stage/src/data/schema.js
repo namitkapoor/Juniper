@@ -51,6 +51,11 @@
  *                               status: "explored" | "tested" | "cut" | "shipped" },  // sequential process,
  *                                              // e.g. { n: 1, of: 4, stage: "First concept", status: "cut" }
  *                      receipts?: Receipt[] } |
+ *   { kind: "gate",    id: string, weight: number, label: string, text: string,   // stands in for password-
+ *                      count?: { diagrams, commits, notes } } |               // protected fills (src/gate.js)
+ *   { kind: "tokens",  id: string, weight: number,          // a project's real design tokens (src/data/tokens-*.json)
+ *                      section: "color" | "type" | "radius" | "shadow", group?: string,
+ *                      label?: string, receipts?: Receipt[] } |     // tile = values only; Expand = the full sheet
  *   { kind: "rules",   id: string, weight: number,          // icon + short-label items: rules, a flow,
  *                      label: string,                         // before -> after pairs ("THE ORDER")
  *                      tag?: string,                          // provenance, shown as a small chip:
@@ -143,4 +148,4 @@
  *                        portrait: { src: string, alt: string }           // the image the particle portrait samples
  *                      }
  */
-export const FILL_KINDS = ["title", "kpi", "prose", "quote", "media", "commits", "logos", "specimen", "rules"];
+export const FILL_KINDS = ["title", "kpi", "prose", "quote", "media", "commits", "logos", "specimen", "rules", "tokens", "gate"];

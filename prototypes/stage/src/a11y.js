@@ -35,6 +35,8 @@ export function cellLabel(fill, { drillLabel } = {}) {
     case "offclock": s = [fill.label || "Off the clock"]; break;
     case "rules": s = [fill.tag ? `${fill.label} (${fill.tag})` : fill.label, `${fill.items.length} ${fill.mode === "flow" ? "steps" : "items"}`, fill.mode === "flow" ? fill.items.map((i) => i.text).join(", then ") : ""]; break;
     case "portrait": s = [fill.alt]; break;
+    case "gate": s = [fill.label, fill.text]; break;
+    case "tokens": s = [fill.label || `ChekOut ${fill.section} tokens`, fill.group || ""]; break;
     case "specimen": s = [fill.title || "Type specimen", `${fill.scale.length} steps, ${fill.scale.map((x) => x.size).join(" / ")} px`]; break;
     default: s = [fill.text || fill.kind];
   }

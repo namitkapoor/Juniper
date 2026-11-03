@@ -13,6 +13,7 @@ import { Face } from "./chat/Face.jsx";
 import { Navbar } from "./nav/Navbar.jsx";
 import { aboutAnswer, aboutFromJson } from "./about/aboutAnswer.js";
 import { caseName } from "./caseName.js";
+import { heroHome } from "./prelude/heroState.js";
 
 const FRAME = 20; // outer gutter around the hairline frame
 const RAIL = 24; // left gutter: the depth rail (24px targets)
@@ -99,6 +100,22 @@ export default function App() {
     });
   }, []);
 
+  // The IP gate (src/gate.js): after unlock (or lock), reload content and show the
+  // same deck again with its real fills.
+  useEffect(() => {
+    const onGate = () => loadContent().then((c) => {
+      layoutCache.current.clear(); // layouts are cached by deck id; the same deck now has other fills
+      setContent(c);
+      for (const d of c.decks) answers.current.set(d.id, d);
+      const d = c.decks.find((x) => x.id === currentId.current);
+      if (d) setAnswer(d);
+      // Say so in the chat, with the real answer for the deck on stage.
+      if (c.unlocked) setMessages((m) => [...m, { role: "bot", text: d?.thesis && !/password-protected/.test(d.thesis) ? d.thesis : "Unlocked: the architecture, stack notes and commit history are now on the stage.", how: "unlocked" }]);
+    });
+    window.addEventListener("stage:unlocked", onGate);
+    return () => window.removeEventListener("stage:unlocked", onGate);
+  }, []);
+
   const measure = fontsReady ? pretextMeasure : fakeMeasure;
 
   // Desktop: the chat covers the right side; the stage is what's left.
@@ -109,7 +126,8 @@ export default function App() {
   // The About stage is a long page: taller than the frame, scrolled inside it,
   // so the whole work history and stack fit without cutting anything.
   const isLongPage = answer?.page === "about" && !phone;
-  const stageW = frameW - chatW;
+  // .app.desk has a 1px border each side: stage + chat fill its content box, not its border box.
+  const stageW = frameW - 2 - chatW;
   // A long page's height comes from its content: the stacked heights of its
   // fills at half the width, over two columns, with room to spare.
   const longH = useMemo(() => {
@@ -126,14 +144,18 @@ export default function App() {
   const onHomeStage = !!(content && answer && answer.id === content.home.id);
   // Raw home.json never reaches the stage: home is ALWAYS the tile home, whatever
   // focus/expanded state is left over; a focus the answer doesn't have is ignored (and cleared below).
-  const focusValid = !!(answer && focus && answer.fills.some((f) => f.id === focus && (f.kind === "media" || f.kind === "specimen")));
+  // Desktop home is the namit.me HERO (src/prelude/heroState.js); opening the chat
+  // (Ask Kip, or any other way) morphs the same stage to the detailed INFO home beside
+  // it, and closing the chat morphs back. Phones keep the info stack.
+  const heroOn = onHomeStage && !phone && !chatOpen;
+  const focusValid = !!(answer && focus && answer.fills.some((f) => f.id === focus && (f.kind === "media" || f.kind === "specimen" || f.kind === "tokens")));
   const stageAnswer = useMemo(() => {
     if (!answer) return answer;
-    if (onHomeStage) return homeWithTiles(answer, content.caseStudies, { chatOpen: chatOpen && !phone });
+    if (onHomeStage) { const info = homeWithTiles(answer, content.caseStudies, { chatOpen: chatOpen && !phone }); return heroOn ? heroHome(info, { hot, decks: content.decks }) : info; }
     if (focusValid) return focusAnswer(dedupeOpens(answer), focus);
     if (expanded.length && answer.fills.some((f) => f.id === expanded[0])) return recedeAnswer(dedupeOpens(answer), expanded[0]);
     return dedupeOpens(answer);
-  }, [answer, focus, focusValid, onHomeStage, content, expanded, chatOpen, phone]);
+  }, [answer, focus, focusValid, onHomeStage, content, expanded, chatOpen, phone, heroOn, hot]);
   useEffect(() => { if (focus && !focusValid) setFocus(null); }, [focus, focusValid]);
   useEffect(() => { if (onHomeStage && expanded.length) setExpanded([]); }, [onHomeStage]); // eslint-disable-line react-hooks/exhaustive-deps
   const previews = useMemo(() => (content ? heroPreviews(content.home, content.caseStudies) : {}), [content]);
@@ -146,14 +168,18 @@ export default function App() {
     let L = layoutCache.current.get(key);
     if (!L) {
       const t = performance.now();
-      L = layoutStage({ rect, fills: A.fills, measure, expanded, promote, viewportW: vp.w, split: A.split });
+      // A long page's first band (About: portrait + name) is a share of the WHOLE page; cap
+      // it to ~60% of the visible frame so the name and the next row show on first load.
+      let split = A.split;
+      if (split && A.page === "about" && rect.h > frameH) split = { ...split, px: Math.min(split.at * rect.h, Math.max(300, frameH * 0.62)) };
+      L = layoutStage({ rect, fills: A.fills, measure, expanded, promote, viewportW: vp.w, split });
       L.ms = Math.round(performance.now() - t);
       layoutCache.current.set(key, L);
       if (layoutCache.current.size > 80) layoutCache.current.delete(layoutCache.current.keys().next().value);
     }
     return L;
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [rect.w, rect.h, vp.w, expanded, promote, fontsReady, measure]);
+  }, [rect.w, rect.h, vp.w, expanded, promote, fontsReady, measure, frameH]);
 
   const layout = useMemo(() => {
     if (!stageAnswer || !fontsReady) return null;
@@ -254,13 +280,23 @@ export default function App() {
     if (cs === hotRef.current) return;
     setHot(cs);
   }, []);
-  const onTile = useCallback((cs, kind) => {
+  const hoverLock = useRef(null);
+  const lastMove = useRef(null);
+  const onTile = useCallback((cs, kind, e) => {
     if (kind === "move") {
+      // The hero's hover view re-lays the stage, so another case's strip can slide under
+      // a still pointer. After a switch, a different case only takes over once the
+      // pointer has deliberately moved (>= 28px) from where the switch happened.
+      if (e) lastMove.current = { x: e.clientX, y: e.clientY };
+      const at = hoverLock.current;
+      if (at && cs && cs !== hotRef.current && e && Math.hypot(e.clientX - at.x, e.clientY - at.y) < 28) return;
+      if (e && cs && cs === hotRef.current) hoverLock.current = { x: e.clientX, y: e.clientY };
       if (cs === pending.current) return;
       clearTimeout(hoverT.current);
       pending.current = cs;
       if (cs === hotRef.current) return;
-      hoverT.current = setTimeout(() => commitHot(cs), cs ? 120 : 320);
+      // Lock where the pointer IS when the switch lands (the morph starts there), not where it was.
+      hoverT.current = setTimeout(() => { if (cs && lastMove.current) hoverLock.current = { ...lastMove.current }; commitHot(cs); }, cs ? 120 : 320);
     } else if (kind === "focus") {
       // A tap focuses the tile too; let the tap itself decide (preview first, open second).
       if (lastPointer.current === "touch" && performance.now() - lastDownAt.current < 800) return;
@@ -415,7 +451,7 @@ export default function App() {
   const [announce, setAnnounce] = useState("");
   useEffect(() => {
     if (!stageAnswer) return;
-    if (focus) { const f = stageAnswer.fills.find((x) => x.id === focus); setAnnounce(`Expanded: ${f?.alt || (f?.kind === "specimen" ? "type specimen" : "media")}`); }
+    if (focus) { const f = stageAnswer.fills.find((x) => x.id === focus); setAnnounce(`Expanded: ${f?.alt || (f?.kind === "specimen" ? "type specimen" : f?.kind === "tokens" ? `${f.section} tokens` : "media")}`); }
     else if (expanded.length) setAnnounce("Source open. Escape to close.");
     else setAnnounce(isHome ? "Showing: home" : answer?.page === "about" ? "Showing: about" : `Showing: ${answer?.question || ""}`);
   }, [stageAnswer]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -470,7 +506,7 @@ export default function App() {
     setMessages((m) => [...withoutTurn(m, q), { role: "user", text: q }]);
     try {
       const { answer: a, how, text } = await ask(q, content);
-      if (!a && text) setMessages((m) => [...m, { role: "bot", text, how: "kip", match: how }]);
+      if (!a && text) setMessages((m) => [...m, { role: "bot", text, mood: "sheepish", match: how }]);
       if (a) {
         turned.current.add(a.id);
         go(a);
@@ -632,6 +668,7 @@ export default function App() {
       <main className="stage-wrap" style={phone ? undefined : { width: rect.w }}>
         <div className={tall > 1 ? "stage-scroll" : "stage-plain"}>
         <Stage
+          onNamit={isHome ? goAbout : undefined}
           layout={layout} fillMap={fillMap} expanded={new Set(expanded)}
           onToggleReceipts={onToggleReceipts} onMore={onMore} reduced={reduced} measure={measure}
           height={phone || tall > 1 ? layout.rect.h : undefined}

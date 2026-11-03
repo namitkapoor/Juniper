@@ -12,6 +12,8 @@ import { Glyph } from "../about/Glyph.jsx";
 import { ZoomImage } from "./ZoomImage.jsx";
 import { useHeroIntro } from "./HeroIntro.jsx";
 import Specimen from "./specimen/Specimen.jsx";
+import TokenSheet from "./TokenSheet.jsx";
+import { unlockGate } from "../gate.js";
 import { shortName } from "../a11y.js";
 import { assetUrl, INVERT_LOGOS, themedSrc, useLightTheme } from "../content.js";
 import { ctrlItems, ctrlReserve, receiptsOf, sourcesOf, receiptImage, thumbBox, THUMB, SOURCE_MORE_H, sourceLineH, receiptsListH, kpiValueSize, tileNumLabelH, tileNumH, kickerH, kickerW, receiptRowH, previewBox, commitCardParts, commitTitle, commitMetaText, receiptText, breakdownRowHs, splitPeriod, BD_COLS, stepText, STEP_CHIP_W, worklogMeta, worklogLink, fmtDate, OFFCLOCK_GROUPS, STATUS_H, rulesGroups } from "../engine/fit.js";
@@ -59,6 +61,24 @@ export function CellContent({ drillLabel, onDrill, onCaseLink, onStep, cell, fil
           </div>
         </>);
       }
+      case "tokens": {
+        const strip = tag || onExpand || focused;
+        const full = !!(focused || fill.focused);
+        return (<>
+          {focused && (
+            <div className="media-toolbar" style={{ height: 36 }} onClick={(e) => e.stopPropagation()}>
+              <button type="button" className="close-btn" aria-label="Close the token sheet" onClick={(e) => { e.stopPropagation(); onCollapse(); }}>
+                <span aria-hidden>×</span> Close
+              </button>
+            </div>
+          )}
+          <div className={`c-tokens ${full ? "is-full" : ""}`} tabIndex={full ? 0 : undefined} aria-label={full ? `${fill.section} tokens` : undefined}
+            style={{ position: "absolute", left: P, right: P, top: strip ? 40 : P, bottom: listH + (full ? P : 8) }}>
+            <TokenSheet section={fill.section} group={full ? undefined : fill.group} compact={!full} headingLevel={3} />
+          </div>
+        </>);
+      }
+      case "gate": return <GateCell fill={fill} P={P} />;
       case "face": return <FaceCell cell={cell} P={P} onAskOpen={onAskOpen} reduced={reduced} busy={faceBusy} />;
       case "tile": return <TileCell fill={fill} cell={cell} P={P} onTile={onTile} hot={hot} />;
       case "media": return <MediaCell fill={fill} cell={cell} listH={listH} active={activeVideo === fill.id} onOpenCase={onOpenCase} onExpand={onExpand} onCollapse={onCollapse} focused={focused} onStep={onStep} onDrill={onDrill} />;
@@ -846,13 +866,13 @@ function CommitsCell({ fill, cell, P }) {
  */
 function CtrlGroup({ fill, cell, P, open, listH, measure, focused, onToggle, onDrill, drillLabel, onExpand, onOpenCase }) {
   const drill = !!(fill.opens && onDrill);
-  const exp = !!(onExpand && !focused && (fill.kind === "specimen" || (fill.kind === "media" && !(fill.caseStudy && onOpenCase))));
+  const exp = !!(onExpand && !focused && (fill.kind === "specimen" || fill.kind === "tokens" || (fill.kind === "media" && !(fill.caseStudy && onOpenCase))));
   const items = ctrlItems(fill, measure, { drill, exp });
   if (!items.length) return null;
   const W = Math.round(cell.w);
   let place;
   if (fill.kind === "media" && cell.spec?.ctrl) place = { top: cell.spec.ctrl.y, right: cell.spec.ctrl.right, maxWidth: cell.spec.ctrl.w };
-  else if (fill.kind === "specimen") place = { top: 2, right: CTRL.inset, maxWidth: W - 2 * CTRL.inset };
+  else if (fill.kind === "specimen" || fill.kind === "tokens") place = { top: 2, right: CTRL.inset, maxWidth: W - 2 * CTRL.inset };
   else {
     // The open list sits at the cell bottom unless it was placed beside / right under the text.
     const listAtBottom = open && !cell.spec?.side && !((fill.kind === "prose" || fill.kind === "quote") && cell.spec?.need != null);
@@ -1062,3 +1082,38 @@ function ReceiptsList({ fill, P, h, measure, innerW, highlight, place }) {
 }
 
 export { PAD };
+
+/**
+ * Stands in for password-protected fills (src/gate.js). The password is checked
+ * on the server; a correct one sets an HttpOnly cookie and the app reloads the
+ * content with the real fills in place.
+ */
+function GateCell({ fill, P }) {
+  const [pw, setPw] = useState("");
+  const [state, setState] = useState({ busy: false, error: "" });
+  const uid = `gate-${fill.id}`;
+  const c = fill.count || {};
+  const parts = [c.diagrams && `${c.diagrams} diagram${c.diagrams > 1 ? "s" : ""}`, c.commits && `${c.commits} commits`, c.notes && `${c.notes} note${c.notes > 1 ? "s" : ""}`].filter(Boolean);
+  const submit = async (e) => {
+    e.preventDefault();
+    if (!pw || state.busy) return;
+    setState({ busy: true, error: "" });
+    const r = await unlockGate(pw);
+    setState({ busy: false, error: r.ok ? "" : r.error });
+    if (!r.ok) setPw("");
+  };
+  return (
+    <div className="c-gate" style={{ position: "absolute", inset: P }} onClick={(e) => e.stopPropagation()} onKeyDown={(e) => e.stopPropagation()}>
+      <div className="label gate-label"><svg width="12" height="14" viewBox="0 0 6 7" aria-hidden="true" shapeRendering="crispEdges" fill="currentColor"><path d="M1 0h4v1H1zM0 1h1v2H0zM5 1h1v2H5zM0 3h6v4H0z" /><path d="M2.5 4h1v2h-1z" fill="var(--bg)" /></svg> {fill.label}</div>
+      <p className="gate-text">{fill.text}</p>
+      {parts.length > 0 && <p className="gate-count">{parts.join(" · ")}</p>}
+      <form className="gate-form" onSubmit={submit}>
+        <label htmlFor={uid} className="sr-only">Password</label>
+        <input id={uid} type="password" autoComplete="current-password" value={pw} onChange={(e) => setPw(e.target.value)}
+          placeholder="Password" aria-invalid={state.error ? "true" : undefined} aria-describedby={state.error ? `${uid}-err` : undefined} disabled={state.busy} />
+        <button type="submit" disabled={!pw || state.busy}>{state.busy ? "Checking" : "Unlock"} <span aria-hidden>→</span></button>
+      </form>
+      <p className="gate-err" id={`${uid}-err`} role="alert">{state.error}</p>
+    </div>
+  );
+}

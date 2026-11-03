@@ -164,27 +164,16 @@
         "explain": "Before the chat is even open, hovering the launcher on a merchant's store offers two suggested questions, so a shopper who doesn't know what to ask has a place to start. Merchants can turn them off in the builder."
       },
       {
-        "kind": "commits",
-        "id": "u-ck-motion-commits",
+        "kind": "gate",
+        "id": "ck-motion~gate",
         "weight": 0.4,
-        "repo": "chekoutai-frontend",
-        "items": [
-          {
-            "sha": "cef8abf",
-            "date": "2026-07-09",
-            "msg": "Agent messages: word-by-word fade-in on the newest reply"
-          },
-          {
-            "sha": "f56fbdf",
-            "date": "2026-07-08",
-            "msg": "Share-this-chat sheet + launcher hover ripple"
-          },
-          {
-            "sha": "0c93dcc",
-            "date": "2026-07-29",
-            "msg": "Chatbot embed: port the closed-state launcher animations from ChatLauncher"
-          }
-        ]
+        "label": "Password-protected",
+        "text": "The commit history for this part is password-protected. Enter the password I shared with you to see it.",
+        "count": {
+          "diagrams": 0,
+          "commits": 3,
+          "notes": 0
+        }
       }
     ],
     "receipts": [
@@ -279,27 +268,16 @@
         "kpi": "u-ck-atc"
       },
       {
-        "kind": "commits",
-        "id": "u-ck-cart-commits",
+        "kind": "gate",
+        "id": "ck-cart~gate",
         "weight": 0.35,
-        "repo": "chekoutai-frontend",
-        "items": [
-          {
-            "sha": "d22f151",
-            "date": "2026-05-28",
-            "msg": "Tag Shopify carts with ChekOut AI attribution attributes for order attribution"
-          },
-          {
-            "sha": "62bde85",
-            "date": "2026-03-17",
-            "msg": "Fix add-to-cart for Shopify (422) and Squarespace (404)"
-          },
-          {
-            "sha": "2e113b9",
-            "date": "2026-06-22",
-            "msg": "Support Shopline add-to-cart in chat widget with platform-aware errors"
-          }
-        ]
+        "label": "Password-protected",
+        "text": "The commit history for this part is password-protected. Enter the password I shared with you to see it.",
+        "count": {
+          "diagrams": 0,
+          "commits": 3,
+          "notes": 0
+        }
       }
     ],
     "receipts": [
@@ -392,37 +370,16 @@
         "explain": "The dashboard on Kivakube's data. An insight says which term shoppers searched most and suggests checking its pricing and availability, then a keyword click opens the actual conversations behind the number."
       },
       {
-        "kind": "commits",
-        "id": "u-ck-dash-commits",
+        "kind": "gate",
+        "id": "ck-analytics~gate",
         "weight": 0.5,
-        "repo": "chekoutai-frontend",
-        "items": [
-          {
-            "sha": "5264ce8",
-            "date": "2026-07-21",
-            "msg": "Dashboard: wire engagement + Conversation Logs to BigQuery /analytics"
-          },
-          {
-            "sha": "ab03e36",
-            "date": "2026-07-23",
-            "msg": "Dashboard: click a keyword to inspect its conversation threads"
-          },
-          {
-            "sha": "c78b8c4",
-            "date": "2026-07-08",
-            "msg": "Replace Conversion Rate card with Engagement Rate (3+ turn conversations)"
-          },
-          {
-            "sha": "99f80a8",
-            "date": "2026-06-10",
-            "msg": "Add sales-attribution dashboard tiles (Tier 1)"
-          },
-          {
-            "sha": "4c38f1f",
-            "date": "2026-07-24",
-            "msg": "Dashboard: new-vs-returning split on the Total Visitors card"
-          }
-        ]
+        "label": "Password-protected",
+        "text": "The commit history for this part is password-protected. Enter the password I shared with you to see it.",
+        "count": {
+          "diagrams": 0,
+          "commits": 5,
+          "notes": 0
+        }
       }
     ],
     "receipts": [
@@ -848,27 +805,16 @@
         "explain": "The builder's channel step: brand settings on one side, the real widget on the other, updating as they change. Then the embed snippet goes into a Shopify theme, which is the whole install."
       },
       {
-        "kind": "commits",
-        "id": "u-ap-prev-commits",
+        "kind": "gate",
+        "id": "ap-preview~gate",
         "weight": 0.5,
-        "repo": "chekoutai-frontend",
-        "items": [
-          {
-            "sha": "fe5f2a1",
-            "date": "2026-07-09",
-            "msg": "Builder Channels preview: render the real widget in an iframe"
-          },
-          {
-            "sha": "7f4d4c0",
-            "date": "2026-09-18",
-            "msg": "Agent setup: let merchants on a trial finish setup and see the embed code"
-          },
-          {
-            "sha": "ccc8edb",
-            "date": "2026-09-01",
-            "msg": "Agent setup: stop sending self-hosted merchants through Shopify OAuth"
-          }
-        ]
+        "label": "Password-protected",
+        "text": "The commit history for this part is password-protected. Enter the password I shared with you to see it.",
+        "count": {
+          "diagrams": 0,
+          "commits": 3,
+          "notes": 0
+        }
       }
     ],
     "receipts": [
@@ -963,42 +909,16 @@
         "explain": "The launcher as a shopper first meets it, bottom right on a merchant's page. It has to stay clear of the store's own cart drawer and cookie banner, which is why merchants position it with two sliders instead of a fixed preset."
       },
       {
-        "kind": "commits",
-        "id": "u-ap-guest-commits",
+        "kind": "gate",
+        "id": "ap-guest~gate",
         "weight": 0.4,
-        "repo": "chekoutai-frontend",
-        "items": [
-          {
-            "sha": "35d7869",
-            "date": "2026-02-19",
-            "msg": "Agent positioning + widget sizing + billing text fixes + session storage migration"
-          },
-          {
-            "sha": "2127ede",
-            "date": "2026-04-28",
-            "msg": "Update to OAuth firebase domain and Agent position ui changes"
-          },
-          {
-            "sha": "2e4bff0",
-            "date": "2026-05-28",
-            "msg": "Fix slider mark labels overlapping next section in ChatBoxPosition"
-          },
-          {
-            "sha": "faf5efd",
-            "date": "2026-08-20",
-            "msg": "Builder: let merchants hide the closed-state suggested questions"
-          },
-          {
-            "sha": "106c2d2",
-            "date": "2026-08-21",
-            "msg": "Builder: stop encoding the launcher-questions flag in position"
-          },
-          {
-            "sha": "7a63949",
-            "date": "2026-08-25",
-            "msg": "Builder: let merchants actually turn the launcher questions off"
-          }
-        ]
+        "label": "Password-protected",
+        "text": "The commit history for this part is password-protected. Enter the password I shared with you to see it.",
+        "count": {
+          "diagrams": 0,
+          "commits": 6,
+          "notes": 0
+        }
       }
     ],
     "receipts": [
@@ -1156,27 +1076,16 @@
         ]
       },
       {
-        "kind": "commits",
-        "id": "u-ap-cc-commits",
+        "kind": "gate",
+        "id": "ap-claude-code~gate",
         "weight": 0.5,
-        "repo": "chekoutai-frontend",
-        "items": [
-          {
-            "sha": "bceb8f0",
-            "date": "2026-07-07",
-            "msg": "Chatbot widget polish, dashboard tier-1 gating, product gallery"
-          },
-          {
-            "sha": "cb6e4a8",
-            "date": "2026-08-03",
-            "msg": "Portfolio capture harness (Playwright)"
-          },
-          {
-            "sha": "67919c7",
-            "date": "2026-07-21",
-            "msg": "test: refresh chatbot/preview/TopMetrics tests to match current components"
-          }
-        ]
+        "label": "Password-protected",
+        "text": "The commit history for this part is password-protected. Enter the password I shared with you to see it.",
+        "count": {
+          "diagrams": 0,
+          "commits": 3,
+          "notes": 0
+        }
       }
     ],
     "receipts": [
@@ -1486,98 +1395,26 @@
     "tags": [
       "christine-valmy",
       "ai-agent",
-      "rag",
-      "n8n",
       "outcomes",
       "metrics",
       "lead-scoring"
     ],
-    "text": "The Christine Valmy enrollment agent took visitor conversion from 10% to 23% and brought in $120K in enrolled revenue. It answers from the school's own content through RAG, keeps class schedules fresh, and sorts each lead into a priority bucket so officers call the students who are ready first.",
+    "text": "Christine Valmy: an agent that sorts leads. The architecture behind this is password-protected. Enter the password I shared with you, or ask me in an interview.",
     "fills": [
       {
-        "kind": "kpi",
-        "id": "u-cv-conv",
-        "weight": 0.9,
-        "value": "10% → 23%",
-        "label": "visitor conversion, before and after the agent",
-        "receipts": [
-          {
-            "type": "asset",
-            "ref": "src/data/christineValmyData.js",
-            "repo": "Juniper",
-            "date": "2026-10-26",
-            "label": "Christine Valmy case study"
-          }
-        ]
-      },
-      {
-        "kind": "kpi",
-        "id": "u-cv-rev",
-        "weight": 0.7,
-        "value": "$120K",
-        "label": "in enrolled revenue for the school",
-        "receipts": [
-          {
-            "type": "asset",
-            "ref": "src/data/christineValmyData.js",
-            "repo": "Juniper",
-            "date": "2026-10-26",
-            "label": "Christine Valmy case study"
-          }
-        ]
-      },
-      {
-        "kind": "kpi",
-        "id": "u-cv-hrs",
-        "weight": 0.5,
-        "value": "~3 hrs",
-        "label": "saved per enrollment officer, per day",
-        "receipts": [
-          {
-            "type": "asset",
-            "ref": "src/data/christineValmyData.js",
-            "repo": "Juniper",
-            "date": "2026-10-26",
-            "label": "Christine Valmy case study"
-          }
-        ]
-      },
-      {
-        "kind": "media",
-        "id": "u-cv-reply",
-        "weight": 0.6,
-        "media": "video",
-        "src": "assets/christine-valmy/agent-reply.mp4",
-        "aspect": 1.9104,
-        "alt": "The agent replying to a new student",
-        "poster": "assets/christine-valmy/agent-reply.jpg",
-        "receipts": [
-          {
-            "type": "asset",
-            "ref": "assets/christine-valmy/agent-reply.mp4",
-            "repo": "Juniper",
-            "label": "Christine Valmy case study"
-          }
-        ],
-        "caption": "A new student asks a question and the agent answers beside the inquiry form.",
-        "explain": "The shipped agent on the school's site, answering a student from the school's own course content with the inquiry form in reach. Students used to fill in the form and wait for a call."
+        "kind": "gate",
+        "id": "cv-agent~gate",
+        "weight": 1,
+        "label": "Password-protected",
+        "text": "This part covers ChekOut and Christine Valmy system architecture, stack and commit history, which belong to the companies. Enter the password I shared with you to see it.",
+        "count": {
+          "diagrams": 1,
+          "commits": 0,
+          "notes": 3
+        }
       }
     ],
-    "receipts": [
-      {
-        "type": "asset",
-        "ref": "src/data/christineValmyData.js",
-        "repo": "Juniper",
-        "date": "2026-10-26",
-        "label": "Christine Valmy case study"
-      },
-      {
-        "type": "asset",
-        "ref": "assets/christine-valmy/agent-reply.mp4",
-        "repo": "Juniper",
-        "label": "Christine Valmy case study"
-      }
-    ]
+    "receipts": []
   },
   {
     "id": "ky-live-totals",
@@ -1935,17 +1772,16 @@
         ]
       },
       {
-        "kind": "commits",
-        "id": "rec-ff5b2a3f-c",
+        "kind": "gate",
+        "id": "rec-ff5b2a3f~gate",
         "weight": 0.4,
-        "repo": "kyuri-dashboard",
-        "items": [
-          {
-            "sha": "ab7171a",
-            "date": "2026-10-27",
-            "msg": "offline: pages open from the last copy after a 4s wait, adds made with no signal wait in an outbox and send on reconnect, a pill says which"
-          }
-        ]
+        "label": "Password-protected",
+        "text": "The commit history for this part is password-protected. Enter the password I shared with you to see it.",
+        "count": {
+          "diagrams": 0,
+          "commits": 1,
+          "notes": 0
+        }
       },
       {
         "kind": "kpi",
@@ -2008,22 +1844,16 @@
         ]
       },
       {
-        "kind": "commits",
-        "id": "rec-f21be06a-c",
+        "kind": "gate",
+        "id": "rec-f21be06a~gate",
         "weight": 0.4,
-        "repo": "kyuri-dashboard",
-        "items": [
-          {
-            "sha": "282ad60",
-            "date": "2026-10-15",
-            "msg": "demo: runs on the box through a job queue, with polling, fallback, capped tweaks and redownload"
-          },
-          {
-            "sha": "4a152af",
-            "date": "2026-10-19",
-            "msg": "outreach as one editor: role → people → message, drafting as a verifier loop; the context bank is trusted"
-          }
-        ]
+        "label": "Password-protected",
+        "text": "The commit history for this part is password-protected. Enter the password I shared with you to see it.",
+        "count": {
+          "diagrams": 0,
+          "commits": 2,
+          "notes": 0
+        }
       }
     ],
     "receipts": [
@@ -2077,17 +1907,16 @@
         ]
       },
       {
-        "kind": "commits",
-        "id": "rec-88ce4fc3-c",
+        "kind": "gate",
+        "id": "rec-88ce4fc3~gate",
         "weight": 0.4,
-        "repo": "kyuri-dashboard",
-        "items": [
-          {
-            "sha": "4a152af",
-            "date": "2026-10-19",
-            "msg": "outreach as one editor: role → people → message, drafting as a verifier loop; the context bank is trusted"
-          }
-        ]
+        "label": "Password-protected",
+        "text": "The commit history for this part is password-protected. Enter the password I shared with you to see it.",
+        "count": {
+          "diagrams": 0,
+          "commits": 1,
+          "notes": 0
+        }
       }
     ],
     "receipts": [
@@ -2134,17 +1963,16 @@
         ]
       },
       {
-        "kind": "commits",
-        "id": "rec-de8e5fc1-c",
+        "kind": "gate",
+        "id": "rec-de8e5fc1~gate",
         "weight": 0.4,
-        "repo": "kyuri-dashboard",
-        "items": [
-          {
-            "sha": "4a152af",
-            "date": "2026-10-19",
-            "msg": "outreach as one editor: role → people → message, drafting as a verifier loop; the context bank is trusted"
-          }
-        ]
+        "label": "Password-protected",
+        "text": "The commit history for this part is password-protected. Enter the password I shared with you to see it.",
+        "count": {
+          "diagrams": 0,
+          "commits": 1,
+          "notes": 0
+        }
       },
       {
         "kind": "kpi",
@@ -2207,17 +2035,16 @@
         ]
       },
       {
-        "kind": "commits",
-        "id": "rec-ff6a6375-c",
+        "kind": "gate",
+        "id": "rec-ff6a6375~gate",
         "weight": 0.4,
-        "repo": "kyuri-dashboard",
-        "items": [
-          {
-            "sha": "4a152af",
-            "date": "2026-10-19",
-            "msg": "outreach as one editor: role → people → message, drafting as a verifier loop; the context bank is trusted"
-          }
-        ]
+        "label": "Password-protected",
+        "text": "The commit history for this part is password-protected. Enter the password I shared with you to see it.",
+        "count": {
+          "diagrams": 0,
+          "commits": 1,
+          "notes": 0
+        }
       }
     ],
     "receipts": [
@@ -2264,22 +2091,16 @@
         ]
       },
       {
-        "kind": "commits",
-        "id": "rec-b2f287c5-c",
+        "kind": "gate",
+        "id": "rec-b2f287c5~gate",
         "weight": 0.4,
-        "repo": "kyuri-dashboard",
-        "items": [
-          {
-            "sha": "5cc8009",
-            "date": "2026-10-18",
-            "msg": "fit gate: judge the posting before tailoring, map its duties, reject off-target resumes"
-          },
-          {
-            "sha": "4a152af",
-            "date": "2026-10-19",
-            "msg": "outreach as one editor: role → people → message, drafting as a verifier loop; the context bank is trusted"
-          }
-        ]
+        "label": "Password-protected",
+        "text": "The commit history for this part is password-protected. Enter the password I shared with you to see it.",
+        "count": {
+          "diagrams": 0,
+          "commits": 2,
+          "notes": 0
+        }
       }
     ],
     "receipts": [
@@ -2333,17 +2154,16 @@
         ]
       },
       {
-        "kind": "commits",
-        "id": "rec-46faab54-c",
+        "kind": "gate",
+        "id": "rec-46faab54~gate",
         "weight": 0.4,
-        "repo": "kyuri-dashboard",
-        "items": [
-          {
-            "sha": "240471c",
-            "date": "2026-10-16",
-            "msg": "auth: self-serve Google sign-up with approval; transactional email"
-          }
-        ]
+        "label": "Password-protected",
+        "text": "The commit history for this part is password-protected. Enter the password I shared with you to see it.",
+        "count": {
+          "diagrams": 0,
+          "commits": 1,
+          "notes": 0
+        }
       },
       {
         "kind": "kpi",
@@ -2406,17 +2226,16 @@
         ]
       },
       {
-        "kind": "commits",
-        "id": "rec-416d5a0b-c",
+        "kind": "gate",
+        "id": "rec-416d5a0b~gate",
         "weight": 0.4,
-        "repo": "kyuri-dashboard",
-        "items": [
-          {
-            "sha": "bd34a2c",
-            "date": "2026-10-14",
-            "msg": "quota: rate-limit everything a candidate can do that spends tokens"
-          }
-        ]
+        "label": "Password-protected",
+        "text": "The commit history for this part is password-protected. Enter the password I shared with you to see it.",
+        "count": {
+          "diagrams": 0,
+          "commits": 1,
+          "notes": 0
+        }
       }
     ],
     "receipts": [
@@ -2463,22 +2282,16 @@
         ]
       },
       {
-        "kind": "commits",
-        "id": "rec-b0b443c6-c",
+        "kind": "gate",
+        "id": "rec-b0b443c6~gate",
         "weight": 0.4,
-        "repo": "kyuri-dashboard",
-        "items": [
-          {
-            "sha": "008461c",
-            "date": "2026-10-14",
-            "msg": "auth: scope every route and panel to the viewer: visitor, candidate, or owner"
-          },
-          {
-            "sha": "8e51eb5",
-            "date": "2026-10-14",
-            "msg": "auth: Google sign-in with a per-candidate allowlist; candidates and visitors get their own tiers"
-          }
-        ]
+        "label": "Password-protected",
+        "text": "The commit history for this part is password-protected. Enter the password I shared with you to see it.",
+        "count": {
+          "diagrams": 0,
+          "commits": 2,
+          "notes": 0
+        }
       }
     ],
     "receipts": [
@@ -2532,17 +2345,16 @@
         ]
       },
       {
-        "kind": "commits",
-        "id": "rec-faca7441-c",
+        "kind": "gate",
+        "id": "rec-faca7441~gate",
         "weight": 0.4,
-        "repo": "chekoutai-frontend",
-        "items": [
-          {
-            "sha": "3193982",
-            "date": "2025-12-22",
-            "msg": "Another attempt at fixing build run issues with test"
-          }
-        ]
+        "label": "Password-protected",
+        "text": "The commit history for this part is password-protected. Enter the password I shared with you to see it.",
+        "count": {
+          "diagrams": 0,
+          "commits": 1,
+          "notes": 0
+        }
       }
     ],
     "receipts": [
@@ -2571,121 +2383,47 @@
       "qa",
       "testing"
     ],
-    "text": "Introduced Vitest to the ChekOut AI frontend, adding its config and setup files, and updated the email and merchant-ID validation logic in the same commit.",
+    "text": "ChekOut AI frontend: Introduced Vitest to the ChekOut AI frontend. The architecture behind this is password-protected. Enter the password I shared with you, or ask me in an interview.",
     "fills": [
       {
-        "kind": "prose",
-        "id": "rec-c7c71106-p",
-        "weight": 0.7,
-        "text": "In December 2025 I brought Vitest into ChekOut's frontend, with its config and setup files, and tightened the email and merchant-ID validation in the same change.",
-        "receipts": [
-          {
-            "type": "record",
-            "ref": "c7c71106",
-            "url": "https://kyuri.namit.me/",
-            "date": "2025-12-18",
-            "label": "Introduced Vitest to the ChekOut AI frontend, adding its config and setup files, and…"
-          }
-        ]
-      },
-      {
-        "kind": "commits",
-        "id": "rec-c7c71106-c",
-        "weight": 0.4,
-        "repo": "chekoutai-frontend",
-        "items": [
-          {
-            "sha": "ae9a132",
-            "date": "2025-12-18",
-            "msg": "added vitest and updated validation logic for merchant id and email"
-          },
-          {
-            "sha": "596e4eb",
-            "date": "2025-12-18",
-            "msg": "frontend tests across login, dashboard, agent creation, billing, crm, and profile"
-          }
-        ]
+        "kind": "gate",
+        "id": "rec-c7c71106~gate",
+        "weight": 1,
+        "label": "Password-protected",
+        "text": "This part covers ChekOut and Christine Valmy system architecture, stack and commit history, which belong to the companies. Enter the password I shared with you to see it.",
+        "count": {
+          "diagrams": 0,
+          "commits": 2,
+          "notes": 1
+        }
       }
     ],
-    "receipts": [
-      {
-        "type": "record",
-        "ref": "c7c71106",
-        "url": "https://kyuri.namit.me/",
-        "date": "2025-12-18",
-        "label": "Introduced Vitest to the ChekOut AI frontend, adding its config and setup files, and…"
-      },
-      {
-        "type": "commit",
-        "ref": "ae9a132",
-        "repo": "chekoutai-frontend",
-        "date": "2025-12-18",
-        "label": "ae9a132 · added vitest and updated validation logic for merchant id and email"
-      },
-      {
-        "type": "commit",
-        "ref": "596e4eb",
-        "repo": "chekoutai-frontend",
-        "date": "2025-12-18",
-        "label": "596e4eb · frontend tests across login, dashboard, agent creation, billing, crm, and profile"
-      }
-    ]
+    "receipts": []
   },
   {
     "id": "rec-8ca0deab",
-    "title": "ChekOut AI company site: Connected a newsletter signup on the ChekOut AI company site to n8n",
+    "title": "ChekOut AI company site: work record (password-protected)",
     "tags": [
       "evidence-record",
       "chekout-site",
       "frontend"
     ],
-    "text": "Connected a newsletter signup on the ChekOut AI company site to n8n.",
+    "text": "ChekOut AI company site: work record (password-protected). The architecture behind this is password-protected. Enter the password I shared with you, or ask me in an interview.",
     "fills": [
       {
-        "kind": "prose",
-        "id": "rec-8ca0deab-p",
-        "weight": 0.7,
-        "text": "In December 2025 I connected the newsletter signup on ChekOut's company site to n8n.",
-        "receipts": [
-          {
-            "type": "record",
-            "ref": "8ca0deab",
-            "url": "https://kyuri.namit.me/",
-            "date": "2025-12-09",
-            "label": "Connected a newsletter signup on the ChekOut AI company site to…"
-          }
-        ]
-      },
-      {
-        "kind": "commits",
-        "id": "rec-8ca0deab-c",
-        "weight": 0.4,
-        "repo": "sentry-skin-website",
-        "items": [
-          {
-            "sha": "201332d",
-            "date": "2025-12-09",
-            "msg": "Newsletter n8n connection established"
-          }
-        ]
+        "kind": "gate",
+        "id": "rec-8ca0deab~gate",
+        "weight": 1,
+        "label": "Password-protected",
+        "text": "This part covers ChekOut and Christine Valmy system architecture, stack and commit history, which belong to the companies. Enter the password I shared with you to see it.",
+        "count": {
+          "diagrams": 0,
+          "commits": 1,
+          "notes": 1
+        }
       }
     ],
-    "receipts": [
-      {
-        "type": "record",
-        "ref": "8ca0deab",
-        "url": "https://kyuri.namit.me/",
-        "date": "2025-12-09",
-        "label": "Connected a newsletter signup on the ChekOut AI company site to…"
-      },
-      {
-        "type": "commit",
-        "ref": "201332d",
-        "repo": "sentry-skin-website",
-        "date": "2025-12-09",
-        "label": "201332d · Newsletter n8n connection established"
-      }
-    ]
+    "receipts": []
   },
   {
     "id": "rec-868464ba",
@@ -2697,53 +2435,22 @@
       "devops",
       "deployment"
     ],
-    "text": "Wrote an architecture document for the ChekOut AI frontend explaining its multi-stage Docker build (deps, builder, runner stages) and Next.js standalone output for Cloud Run.",
+    "text": "ChekOut AI frontend: Wrote an architecture document for the ChekOut AI frontend explaining its…. The architecture behind this is password-protected. Enter the password I shared with you, or ask me in an interview.",
     "fills": [
       {
-        "kind": "prose",
-        "id": "rec-868464ba-p",
-        "weight": 0.7,
-        "text": "In November 2025 I documented how ChekOut's frontend ships: a multi-stage Docker build (deps, builder, runner) and Next.js standalone output for Cloud Run.",
-        "receipts": [
-          {
-            "type": "record",
-            "ref": "868464ba",
-            "url": "https://kyuri.namit.me/",
-            "date": "2025-11-24",
-            "label": "Wrote an architecture document for the ChekOut AI frontend explaining its multi-stage…"
-          }
-        ]
-      },
-      {
-        "kind": "commits",
-        "id": "rec-868464ba-c",
-        "weight": 0.4,
-        "repo": "chekoutai-frontend",
-        "items": [
-          {
-            "sha": "64d2ed6",
-            "date": "2025-11-24",
-            "msg": "cloud run + firebase deployment"
-          }
-        ]
+        "kind": "gate",
+        "id": "rec-868464ba~gate",
+        "weight": 1,
+        "label": "Password-protected",
+        "text": "This part covers ChekOut and Christine Valmy system architecture, stack and commit history, which belong to the companies. Enter the password I shared with you to see it.",
+        "count": {
+          "diagrams": 0,
+          "commits": 1,
+          "notes": 1
+        }
       }
     ],
-    "receipts": [
-      {
-        "type": "record",
-        "ref": "868464ba",
-        "url": "https://kyuri.namit.me/",
-        "date": "2025-11-24",
-        "label": "Wrote an architecture document for the ChekOut AI frontend explaining its multi-stage…"
-      },
-      {
-        "type": "commit",
-        "ref": "64d2ed6",
-        "repo": "chekoutai-frontend",
-        "date": "2025-11-24",
-        "label": "64d2ed6 · cloud run + firebase deployment"
-      }
-    ]
+    "receipts": []
   },
   {
     "id": "rec-1b47815a",
@@ -2755,53 +2462,22 @@
       "devops",
       "deployment"
     ],
-    "text": "Added PowerShell scripts for the ChekOut AI frontend: deploy.ps1 to run the deployment and pre-deploy-check.ps1 to verify the service-account file, environment variables, gcloud configuration, enabled APIs and Firebase configuration before deploying.",
+    "text": "ChekOut AI frontend: Added PowerShell scripts for the ChekOut AI frontend: deploy. The architecture behind this is password-protected. Enter the password I shared with you, or ask me in an interview.",
     "fills": [
       {
-        "kind": "prose",
-        "id": "rec-1b47815a-p",
-        "weight": 0.7,
-        "text": "I added deploy scripts for ChekOut's frontend: one deploys, and a pre-deploy check first verifies the service account, environment variables, gcloud setup, enabled APIs and Firebase config.",
-        "receipts": [
-          {
-            "type": "record",
-            "ref": "1b47815a",
-            "url": "https://kyuri.namit.me/",
-            "date": "2025-11-24",
-            "label": "Added PowerShell scripts for the ChekOut AI frontend: deploy.ps1 to run the deployment…"
-          }
-        ]
-      },
-      {
-        "kind": "commits",
-        "id": "rec-1b47815a-c",
-        "weight": 0.4,
-        "repo": "chekoutai-frontend",
-        "items": [
-          {
-            "sha": "64d2ed6",
-            "date": "2025-11-24",
-            "msg": "cloud run + firebase deployment"
-          }
-        ]
+        "kind": "gate",
+        "id": "rec-1b47815a~gate",
+        "weight": 1,
+        "label": "Password-protected",
+        "text": "This part covers ChekOut and Christine Valmy system architecture, stack and commit history, which belong to the companies. Enter the password I shared with you to see it.",
+        "count": {
+          "diagrams": 0,
+          "commits": 1,
+          "notes": 1
+        }
       }
     ],
-    "receipts": [
-      {
-        "type": "record",
-        "ref": "1b47815a",
-        "url": "https://kyuri.namit.me/",
-        "date": "2025-11-24",
-        "label": "Added PowerShell scripts for the ChekOut AI frontend: deploy.ps1 to run the deployment…"
-      },
-      {
-        "type": "commit",
-        "ref": "64d2ed6",
-        "repo": "chekoutai-frontend",
-        "date": "2025-11-24",
-        "label": "64d2ed6 · cloud run + firebase deployment"
-      }
-    ]
+    "receipts": []
   },
   {
     "id": "rec-df2abd95",
@@ -2813,53 +2489,22 @@
       "devops",
       "deployment"
     ],
-    "text": "For the ChekOut AI frontend, Namit set up a deployment path in which a Cloud Build config (cloudbuild.yaml) builds a Docker image and deploys it to a Cloud Run service, with Firebase Hosting rewriting requests to that service.",
+    "text": "ChekOut AI frontend: For the ChekOut AI frontend. The architecture behind this is password-protected. Enter the password I shared with you, or ask me in an interview.",
     "fills": [
       {
-        "kind": "prose",
-        "id": "rec-df2abd95-p",
-        "weight": 0.7,
-        "text": "In November 2025 I set up how ChekOut's frontend deploys: Cloud Build builds a Docker image and deploys it to Cloud Run, and Firebase Hosting routes requests to that service.",
-        "receipts": [
-          {
-            "type": "record",
-            "ref": "df2abd95",
-            "url": "https://kyuri.namit.me/",
-            "date": "2025-11-24",
-            "label": "For the ChekOut AI frontend, Namit set up a deployment path in which a Cloud Build config…"
-          }
-        ]
-      },
-      {
-        "kind": "commits",
-        "id": "rec-df2abd95-c",
-        "weight": 0.4,
-        "repo": "chekoutai-frontend",
-        "items": [
-          {
-            "sha": "64d2ed6",
-            "date": "2025-11-24",
-            "msg": "cloud run + firebase deployment"
-          }
-        ]
+        "kind": "gate",
+        "id": "rec-df2abd95~gate",
+        "weight": 1,
+        "label": "Password-protected",
+        "text": "This part covers ChekOut and Christine Valmy system architecture, stack and commit history, which belong to the companies. Enter the password I shared with you to see it.",
+        "count": {
+          "diagrams": 0,
+          "commits": 1,
+          "notes": 1
+        }
       }
     ],
-    "receipts": [
-      {
-        "type": "record",
-        "ref": "df2abd95",
-        "url": "https://kyuri.namit.me/",
-        "date": "2025-11-24",
-        "label": "For the ChekOut AI frontend, Namit set up a deployment path in which a Cloud Build config…"
-      },
-      {
-        "type": "commit",
-        "ref": "64d2ed6",
-        "repo": "chekoutai-frontend",
-        "date": "2025-11-24",
-        "label": "64d2ed6 · cloud run + firebase deployment"
-      }
-    ]
+    "receipts": []
   },
   {
     "id": "rec-fc5b8ee7",
@@ -2887,27 +2532,16 @@
         ]
       },
       {
-        "kind": "commits",
-        "id": "rec-fc5b8ee7-c",
+        "kind": "gate",
+        "id": "rec-fc5b8ee7~gate",
         "weight": 0.4,
-        "repo": "sentry-skin-website",
-        "items": [
-          {
-            "sha": "fd13eec",
-            "date": "2025-03-24",
-            "msg": "Interactive hair scene"
-          },
-          {
-            "sha": "c010f39",
-            "date": "2024-10-24",
-            "msg": "Added bottle and lipstick 3d models"
-          },
-          {
-            "sha": "32ca1ff",
-            "date": "2025-11-06",
-            "msg": "performance optimizations and smooth scroll"
-          }
-        ]
+        "label": "Password-protected",
+        "text": "The commit history for this part is password-protected. Enter the password I shared with you to see it.",
+        "count": {
+          "diagrams": 0,
+          "commits": 3,
+          "notes": 0
+        }
       }
     ],
     "receipts": [
@@ -2967,32 +2601,16 @@
         ]
       },
       {
-        "kind": "commits",
-        "id": "rec-56ba4fce-c",
+        "kind": "gate",
+        "id": "rec-56ba4fce~gate",
         "weight": 0.4,
-        "repo": "sentry-skin-website",
-        "items": [
-          {
-            "sha": "1958c3e",
-            "date": "2025-11-06",
-            "msg": "mobile performance optimizations"
-          },
-          {
-            "sha": "87ed3af",
-            "date": "2025-11-06",
-            "msg": "pricing card button update and lazy loading"
-          },
-          {
-            "sha": "270fe00",
-            "date": "2025-11-06",
-            "msg": "react vendor bundling fix to vite config"
-          },
-          {
-            "sha": "9a87722",
-            "date": "2025-11-06",
-            "msg": "manual chunking removed - preview works"
-          }
-        ]
+        "label": "Password-protected",
+        "text": "The commit history for this part is password-protected. Enter the password I shared with you to see it.",
+        "count": {
+          "diagrams": 0,
+          "commits": 4,
+          "notes": 0
+        }
       }
     ],
     "receipts": [
@@ -3059,17 +2677,16 @@
         ]
       },
       {
-        "kind": "commits",
-        "id": "rec-99f2b3cd-c",
+        "kind": "gate",
+        "id": "rec-99f2b3cd~gate",
         "weight": 0.4,
-        "repo": "sentry-skin-website",
-        "items": [
-          {
-            "sha": "32ca1ff",
-            "date": "2025-11-06",
-            "msg": "performance optimizations and smooth scroll"
-          }
-        ]
+        "label": "Password-protected",
+        "text": "The commit history for this part is password-protected. Enter the password I shared with you to see it.",
+        "count": {
+          "diagrams": 0,
+          "commits": 1,
+          "notes": 0
+        }
       }
     ],
     "receipts": [
@@ -3115,17 +2732,16 @@
         ]
       },
       {
-        "kind": "commits",
-        "id": "rec-1e89a20c-c",
+        "kind": "gate",
+        "id": "rec-1e89a20c~gate",
         "weight": 0.4,
-        "repo": "sentry-skin-website",
-        "items": [
-          {
-            "sha": "32ca1ff",
-            "date": "2025-11-06",
-            "msg": "performance optimizations and smooth scroll"
-          }
-        ]
+        "label": "Password-protected",
+        "text": "The commit history for this part is password-protected. Enter the password I shared with you to see it.",
+        "count": {
+          "diagrams": 0,
+          "commits": 1,
+          "notes": 0
+        }
       }
     ],
     "receipts": [
@@ -3171,27 +2787,16 @@
         ]
       },
       {
-        "kind": "commits",
-        "id": "rec-bb9eabcf-c",
+        "kind": "gate",
+        "id": "rec-bb9eabcf~gate",
         "weight": 0.4,
-        "repo": "sentry-skin-website",
-        "items": [
-          {
-            "sha": "9045ebc",
-            "date": "2025-10-29",
-            "msg": "Trade School website toggle added"
-          },
-          {
-            "sha": "c455e47",
-            "date": "2025-10-31",
-            "msg": "New client testimonial + Trade School page routing"
-          },
-          {
-            "sha": "56c6c5c",
-            "date": "2025-10-29",
-            "msg": "fix to trade school agent"
-          }
-        ]
+        "label": "Password-protected",
+        "text": "The commit history for this part is password-protected. Enter the password I shared with you to see it.",
+        "count": {
+          "diagrams": 0,
+          "commits": 3,
+          "notes": 0
+        }
       }
     ],
     "receipts": [
@@ -3251,17 +2856,16 @@
         ]
       },
       {
-        "kind": "commits",
-        "id": "rec-f478b001-c",
+        "kind": "gate",
+        "id": "rec-f478b001~gate",
         "weight": 0.4,
-        "repo": "sentry-skin-website",
-        "items": [
-          {
-            "sha": "7d1414b",
-            "date": "2025-10-31",
-            "msg": "Added sitemap for SEO tracking"
-          }
-        ]
+        "label": "Password-protected",
+        "text": "The commit history for this part is password-protected. Enter the password I shared with you to see it.",
+        "count": {
+          "diagrams": 0,
+          "commits": 1,
+          "notes": 0
+        }
       }
     ],
     "receipts": [
@@ -3308,17 +2912,16 @@
         ]
       },
       {
-        "kind": "commits",
-        "id": "rec-339f2c59-c",
+        "kind": "gate",
+        "id": "rec-339f2c59~gate",
         "weight": 0.4,
-        "repo": "sentry-skin-website",
-        "items": [
-          {
-            "sha": "61530e3",
-            "date": "2025-09-15",
-            "msg": "ChekOut AI style quick update"
-          }
-        ]
+        "label": "Password-protected",
+        "text": "The commit history for this part is password-protected. Enter the password I shared with you to see it.",
+        "count": {
+          "diagrams": 0,
+          "commits": 1,
+          "notes": 0
+        }
       }
     ],
     "receipts": [
@@ -3349,42 +2952,16 @@
     "text": "Worked on streaming assistant responses in the ChekOut AI company site, with edits to both the GCP side and the frontend. Limits: This was exploratory work; the streaming version was later rolled back in favour of the original implementation.",
     "fills": [
       {
-        "kind": "prose",
-        "id": "rec-de429446-p",
+        "kind": "gate",
+        "id": "rec-de429446~gate",
         "weight": 0.7,
-        "text": "In August 2025 I tried streaming the assistant's replies on ChekOut's site, across the GCP backend and the frontend, then rolled back to the original version.",
-        "receipts": [
-          {
-            "type": "record",
-            "ref": "de429446",
-            "url": "https://kyuri.namit.me/",
-            "date": "2025-08-07",
-            "label": "Worked on streaming assistant responses in the ChekOut AI company site, with edits to…"
-          }
-        ]
-      },
-      {
-        "kind": "commits",
-        "id": "rec-de429446-c",
-        "weight": 0.4,
-        "repo": "sentry-skin-website",
-        "items": [
-          {
-            "sha": "6b0cf27",
-            "date": "2025-08-07",
-            "msg": "streaming edits in gcp and frontend"
-          },
-          {
-            "sha": "922de7e",
-            "date": "2025-08-07",
-            "msg": "hopefully streaming works"
-          },
-          {
-            "sha": "389bd37",
-            "date": "2025-08-07",
-            "msg": "restoring original chat functionality"
-          }
-        ]
+        "label": "Password-protected",
+        "text": "The stack notes and commit history for this part are password-protected. Enter the password I shared with you to see them.",
+        "count": {
+          "diagrams": 0,
+          "commits": 3,
+          "notes": 1
+        }
       }
     ],
     "receipts": [
@@ -3427,65 +3004,22 @@
       "ai-agent",
       "ai"
     ],
-    "text": "Added a Vercel API route to the ChekOut AI company site that handles CORS and forwards chat requests to a Google Cloud Function, and wrote a setup document for it.",
+    "text": "ChekOut AI company site: Added a Vercel API route to the ChekOut AI company site that handles CORS…. The architecture behind this is password-protected. Enter the password I shared with you, or ask me in an interview.",
     "fills": [
       {
-        "kind": "prose",
-        "id": "rec-bb6dd897-p",
-        "weight": 0.7,
-        "text": "I added a Vercel API route that handles CORS and forwards chat requests from ChekOut's site to a Google Cloud Function, and wrote its setup doc.",
-        "receipts": [
-          {
-            "type": "record",
-            "ref": "bb6dd897",
-            "url": "https://kyuri.namit.me/",
-            "date": "2025-08-07",
-            "label": "Added a Vercel API route to the ChekOut AI company site that handles CORS and forwards…"
-          }
-        ]
-      },
-      {
-        "kind": "commits",
-        "id": "rec-bb6dd897-c",
-        "weight": 0.4,
-        "repo": "sentry-skin-website",
-        "items": [
-          {
-            "sha": "cac5d61",
-            "date": "2025-07-01",
-            "msg": "google auth is in place need iam permissions probs"
-          },
-          {
-            "sha": "389bd37",
-            "date": "2025-08-07",
-            "msg": "restoring original chat functionality"
-          }
-        ]
+        "kind": "gate",
+        "id": "rec-bb6dd897~gate",
+        "weight": 1,
+        "label": "Password-protected",
+        "text": "This part covers ChekOut and Christine Valmy system architecture, stack and commit history, which belong to the companies. Enter the password I shared with you to see it.",
+        "count": {
+          "diagrams": 0,
+          "commits": 2,
+          "notes": 1
+        }
       }
     ],
-    "receipts": [
-      {
-        "type": "record",
-        "ref": "bb6dd897",
-        "url": "https://kyuri.namit.me/",
-        "date": "2025-08-07",
-        "label": "Added a Vercel API route to the ChekOut AI company site that handles CORS and forwards…"
-      },
-      {
-        "type": "commit",
-        "ref": "cac5d61",
-        "repo": "sentry-skin-website",
-        "date": "2025-07-01",
-        "label": "cac5d61 · google auth is in place need iam permissions probs"
-      },
-      {
-        "type": "commit",
-        "ref": "389bd37",
-        "repo": "sentry-skin-website",
-        "date": "2025-08-07",
-        "label": "389bd37 · restoring original chat functionality"
-      }
-    ]
+    "receipts": []
   },
   {
     "id": "rec-bb34f79b",
@@ -3514,17 +3048,16 @@
         ]
       },
       {
-        "kind": "commits",
-        "id": "rec-bb34f79b-c",
+        "kind": "gate",
+        "id": "rec-bb34f79b~gate",
         "weight": 0.4,
-        "repo": "sentry-skin-website",
-        "items": [
-          {
-            "sha": "9f5516c",
-            "date": "2025-07-03",
-            "msg": "Analytics and pricing section update"
-          }
-        ]
+        "label": "Password-protected",
+        "text": "The commit history for this part is password-protected. Enter the password I shared with you to see it.",
+        "count": {
+          "diagrams": 0,
+          "commits": 1,
+          "notes": 0
+        }
       }
     ],
     "receipts": [
@@ -3571,27 +3104,16 @@
         ]
       },
       {
-        "kind": "commits",
-        "id": "rec-d70f6969-c",
+        "kind": "gate",
+        "id": "rec-d70f6969~gate",
         "weight": 0.4,
-        "repo": "sentry-skin-website",
-        "items": [
-          {
-            "sha": "85c0692",
-            "date": "2025-03-10",
-            "msg": "Audio assistants are possible!"
-          },
-          {
-            "sha": "fe8c7b1",
-            "date": "2025-03-10",
-            "msg": "Sentry skin assistant speaks!"
-          },
-          {
-            "sha": "47a1cd0",
-            "date": "2025-03-10",
-            "msg": "Assistant response makes sphere move!"
-          }
-        ]
+        "label": "Password-protected",
+        "text": "The commit history for this part is password-protected. Enter the password I shared with you to see it.",
+        "count": {
+          "diagrams": 0,
+          "commits": 3,
+          "notes": 0
+        }
       }
     ],
     "receipts": [
@@ -4749,135 +4271,26 @@
       "chekout",
       "architecture",
       "system-design",
-      "langflow",
       "cloud-run",
       "shopify",
       "nextjs"
     ],
-    "text": "One Next.js app serves the merchant builder and the storefront widget. Chat goes to a Langflow agent per merchant; onboarding, store sync and billing go to backend services on Cloud Run that connect to Shopify.",
+    "text": "ChekOut: system architecture. The architecture behind this is password-protected. Enter the password I shared with you, or ask me in an interview.",
     "fills": [
       {
-        "kind": "media",
-        "id": "u-ck-arch",
-        "weight": 0.95,
-        "media": "image",
-        "src": "assets/chekout/system-context.svg",
-        "aspect": 2.0253,
-        "alt": "ChekOut AI system context: merchants build and manage agents in the ChekOut front end; shoppers chat on the storefront; the front end sends chat messages to per-merchant Langflow agents and talks to backend services on Cloud Run, which sync with Shopify and read and write Postgres and BigQuery",
-        "caption": "Who uses ChekOut and what the front end talks to. Solid boxes are mine; dashed are a teammate's or an outside service.",
-        "explain": "One Next.js app serves both sides: the merchant builder and the chat widget shoppers meet on a store. Chat goes to a Langflow agent per merchant; setup, store sync and billing go to backend services. Each box is tagged [code] when it is verified in a repo and [notes] when it comes from my notes.",
-        "receipts": [
-          {
-            "type": "asset",
-            "ref": "assets/chekout/architecture.webp",
-            "label": "The FigJam export this is redrawn from (1 · System context)"
-          },
-          {
-            "type": "asset",
-            "ref": "figma:juckmsHrlBUBKcMkoJCiep#3:39",
-            "date": "2026-11-01",
-            "label": "FigJam: 1 · System context"
-          }
-        ]
-      },
-      {
-        "kind": "prose",
-        "id": "u-ck-system",
-        "weight": 0.7,
-        "text": "HOW IT FITS: Merchants build agents in the Next.js app; shoppers chat through a script and an iframe the same app serves onto their store. Messages go to a Langflow agent per merchant, and onboarding, store sync and billing go to backend services that connect to Shopify.",
-        "receipts": [
-          {
-            "type": "asset",
-            "ref": "figma:juckmsHrlBUBKcMkoJCiep#3:39",
-            "date": "2026-11-01",
-            "label": "FigJam: 1 · System context"
-          },
-          {
-            "type": "commit",
-            "ref": "91ebf39",
-            "repo": "chekoutai-frontend",
-            "date": "2026-07-01",
-            "label": "91ebf39 · Mount embed via authoritative allowed_domains list from backend"
-          },
-          {
-            "type": "commit",
-            "ref": "e553f4b",
-            "repo": "chekoutai-frontend",
-            "date": "2026-03-26",
-            "label": "e553f4b · Shopify OAuth: fix merchant_id flow, lowercase normalization, disconnect on delete, platform auto-select"
-          }
-        ]
-      },
-      {
-        "kind": "commits",
-        "id": "u-ck-arch-commits",
-        "weight": 0.4,
-        "repo": "chekoutai-frontend",
-        "items": [
-          {
-            "sha": "91ebf39",
-            "date": "2026-07-01",
-            "msg": "Mount embed via authoritative allowed_domains list from backend"
-          },
-          {
-            "sha": "e553f4b",
-            "date": "2026-03-26",
-            "msg": "Shopify OAuth: fix merchant_id flow, lowercase normalization, disconnect on delete, platform auto-select"
-          },
-          {
-            "sha": "5264ce8",
-            "date": "2026-07-21",
-            "msg": "Dashboard: wire engagement + Conversation Logs to BigQuery /analytics"
-          },
-          {
-            "sha": "313d08d",
-            "date": "2026-07-08",
-            "msg": "Add canary deploy (production infra, 0% traffic)"
-          }
-        ]
+        "kind": "gate",
+        "id": "ck-architecture~gate",
+        "weight": 1,
+        "label": "Password-protected",
+        "text": "This part covers ChekOut and Christine Valmy system architecture, stack and commit history, which belong to the companies. Enter the password I shared with you to see it.",
+        "count": {
+          "diagrams": 1,
+          "commits": 4,
+          "notes": 1
+        }
       }
     ],
-    "receipts": [
-      {
-        "type": "asset",
-        "ref": "assets/chekout/architecture.webp",
-        "label": "Exported from Figma, source footer cropped"
-      },
-      {
-        "type": "asset",
-        "ref": "figma:juckmsHrlBUBKcMkoJCiep#3:39",
-        "date": "2026-11-01",
-        "label": "FigJam: 1 · System context"
-      },
-      {
-        "type": "commit",
-        "ref": "91ebf39",
-        "repo": "chekoutai-frontend",
-        "date": "2026-07-01",
-        "label": "91ebf39 · Mount embed via authoritative allowed_domains list from backend"
-      },
-      {
-        "type": "commit",
-        "ref": "e553f4b",
-        "repo": "chekoutai-frontend",
-        "date": "2026-03-26",
-        "label": "e553f4b · Shopify OAuth: fix merchant_id flow, lowercase normalization, disconnect on delete, platform auto-select"
-      },
-      {
-        "type": "commit",
-        "ref": "5264ce8",
-        "repo": "chekoutai-frontend",
-        "date": "2026-07-21",
-        "label": "5264ce8 · Dashboard: wire engagement + Conversation Logs to BigQuery /analytics"
-      },
-      {
-        "type": "commit",
-        "ref": "313d08d",
-        "repo": "chekoutai-frontend",
-        "date": "2026-07-08",
-        "label": "313d08d · Add canary deploy (production infra, 0% traffic)"
-      }
-    ]
+    "receipts": []
   },
   {
     "id": "ck-design-system",
@@ -4950,120 +4363,26 @@
     "tags": [
       "christine-valmy",
       "architecture",
-      "rag",
-      "n8n",
       "wordpress",
       "bilingual",
-      "bigquery",
-      "gcp",
-      "mcp",
-      "gemini",
       "claude"
     ],
-    "text": "A React widget in a WordPress plugin sends each message to an n8n workflow on Google Cloud in front of the agent, which answers through RAG from the school's documents. Routing runs through MCP: Claude answers in English, Gemini in Spanish. Finished chats become leads in priority buckets, conversation and lead data land in BigQuery, and the inquiry form writes to the school's Creatio CRM.",
+    "text": "Christine Valmy: agent architecture. The architecture behind this is password-protected. Enter the password I shared with you, or ask me in an interview.",
     "fills": [
       {
-        "kind": "media",
-        "id": "u-cv-arch",
-        "weight": 0.95,
-        "media": "image",
-        "src": "assets/christine-valmy/architecture.svg",
-        "aspect": 1.7778,
-        "alt": "Christine Valmy agent architecture: students use the widget on the school's WordPress site; each message goes to n8n on Google Cloud, which reaches the agent (RAG, routed through MCP: Claude for English, Gemini for Spanish); finished chats become leads for officers; conversation and lead data land in BigQuery; the inquiry form creates a lead in the school's Creatio CRM",
-        "caption": "From a student's question to a sorted lead.",
-        "explain": "Follow a student's message: the widget sends it to n8n on Google Cloud, n8n reaches the agent, and the reply comes back with the conversation stage. The agent answers from the school's documents through RAG, Claude in English and Gemini in Spanish, routed through MCP. Finished chats become leads, the data lands in BigQuery, and the inquiry form goes to the school's CRM.",
-        "receipts": [
-          {
-            "type": "asset",
-            "ref": "assets/christine-valmy/architecture.svg",
-            "label": "Drawn for the stage"
-          },
-          {
-            "type": "asset",
-            "ref": "src/data/christineValmyData.js",
-            "repo": "Juniper",
-            "date": "2026-10-26",
-            "label": "Christine Valmy case study"
-          },
-          {
-            "type": "asset",
-            "ref": "figma:juckmsHrlBUBKcMkoJCiep#4:135",
-            "date": "2026-11-01",
-            "label": "FigJam: 4 · Sophia, enrollment agent"
-          },
-          {
-            "type": "asset",
-            "ref": "cv-chat-flat/christine-valmy-floating.js",
-            "repo": "chekout-ai (local)",
-            "label": "N8nService: chat and transcript webhooks, payloads, completion stages"
-          },
-          {
-            "type": "asset",
-            "ref": "cv-chat-flat/claude.md",
-            "repo": "chekout-ai (local)",
-            "label": "Plugin notes: endpoint connectors (n8n chat, n8n transcript, Creatio CRM), WordPress settings"
-          },
-          {
-            "type": "asset",
-            "ref": "tools/content/sources/christine-valmy-requirements.md",
-            "repo": "Juniper (stage prototype)",
-            "date": "2026-11-02",
-            "label": "Christine Valmy requirements, provided by Namit (redacted)"
-          },
-          {
-            "type": "asset",
-            "ref": "namit-confirmation-2026-11-02",
-            "date": "2026-11-02",
-            "label": "Confirmed by Namit, Nov 2 2026"
-          }
-        ]
+        "kind": "gate",
+        "id": "cv-architecture~gate",
+        "weight": 1,
+        "label": "Password-protected",
+        "text": "This part covers ChekOut and Christine Valmy system architecture, stack and commit history, which belong to the companies. Enter the password I shared with you to see it.",
+        "count": {
+          "diagrams": 1,
+          "commits": 0,
+          "notes": 0
+        }
       }
     ],
-    "receipts": [
-      {
-        "type": "asset",
-        "ref": "assets/christine-valmy/architecture.svg",
-        "label": "Drawn for the stage"
-      },
-      {
-        "type": "asset",
-        "ref": "src/data/christineValmyData.js",
-        "repo": "Juniper",
-        "date": "2026-10-26",
-        "label": "Christine Valmy case study"
-      },
-      {
-        "type": "asset",
-        "ref": "figma:juckmsHrlBUBKcMkoJCiep#4:135",
-        "date": "2026-11-01",
-        "label": "FigJam: 4 · Sophia, enrollment agent"
-      },
-      {
-        "type": "asset",
-        "ref": "cv-chat-flat/christine-valmy-floating.js",
-        "repo": "chekout-ai (local)",
-        "label": "N8nService: chat and transcript webhooks, payloads, completion stages"
-      },
-      {
-        "type": "asset",
-        "ref": "cv-chat-flat/claude.md",
-        "repo": "chekout-ai (local)",
-        "label": "Plugin notes: endpoint connectors (n8n chat, n8n transcript, Creatio CRM), WordPress settings"
-      },
-      {
-        "type": "asset",
-        "ref": "tools/content/sources/christine-valmy-requirements.md",
-        "repo": "Juniper (stage prototype)",
-        "date": "2026-11-02",
-        "label": "Christine Valmy requirements, provided by Namit (redacted)"
-      },
-      {
-        "type": "asset",
-        "ref": "namit-confirmation-2026-11-02",
-        "date": "2026-11-02",
-        "label": "Confirmed by Namit, Nov 2 2026"
-      }
-    ]
+    "receipts": []
   },
   {
     "id": "ky-open-safely",

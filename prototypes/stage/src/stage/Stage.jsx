@@ -82,7 +82,9 @@ function createRuntime() {
   return rt;
 }
 
-export function Stage({ layout, fillMap, expanded, onToggleReceipts, reduced, measure, height, reserve, onOpenCase, onExpand, onCollapse, focusId, onTile, hot, quick, preview, previewKey, onAskOpen, faceBusy, intro, onIntroDone, openId, onCloseFocus, onStep, onCaseLink, onDrill, drillLabel, onEscapeStage }) {
+const GLIDE_CELLS = ".cell:is(.drills, :has(> .c-tile), :has(> .c-media[data-act]), :has(> .c-face.asks)):not(.recede, .open)";
+
+export function Stage({ onNamit, layout, fillMap, expanded, onToggleReceipts, reduced, measure, height, reserve, onOpenCase, onExpand, onCollapse, focusId, onTile, hot, quick, preview, previewKey, onAskOpen, faceBusy, intro, onIntroDone, openId, onCloseFocus, onStep, onCaseLink, onDrill, drillLabel, onEscapeStage }) {
   const rtRef = useRef(null);
   if (!rtRef.current) rtRef.current = createRuntime();
   const rt = rtRef.current;
@@ -118,23 +120,69 @@ export function Stage({ layout, fillMap, expanded, onToggleReceipts, reduced, me
     rt.kick();
   }, [scene, rt]);
 
+  // The hover highlight: one surface that GLIDES (spring) from lit tile to lit tile and
+  // follows a morph of its tile; inside it a soft spotlight tracks the pointer. The real
+  // cursor is never replaced. Off a lit tile it fades where it is; coming back from off
+  // it appears in place, so only tile-to-tile moves travel.
+  const cursorEl = useRef(null);
+  const cur = useRef({ px: 0, py: 0, cell: null, shown: false });
+  const paintCursor = useCallback(() => {
+    const el = cursorEl.current, c = cur.current, r = c.cell;
+    if (!el) return;
+    if (r && !c.shown) { el.classList.add("snap"); }
+    if (r) {
+      el.style.transform = `translate3d(${Math.round(r.x)}px, ${Math.round(r.y)}px, 0)`;
+      el.style.width = `${Math.round(r.w)}px`;
+      el.style.height = `${Math.round(r.h)}px`;
+      el.style.setProperty("--mx", `${Math.round(c.px - r.x)}px`);
+      el.style.setProperty("--my", `${Math.round(c.py - r.y)}px`);
+    }
+    el.classList.toggle("on", !!r);
+    if (r && !c.shown) { void el.offsetWidth; el.classList.remove("snap"); }
+    c.shown = !!r;
+  }, []);
+
   const onMove = useCallback((e) => {
     const r = stageEl.current.getBoundingClientRect();
     rt.pointer.x = e.clientX - r.left;
     rt.pointer.y = e.clientY - r.top;
     rt.pointer.inside = e.pointerType !== "touch";
+    if (e.pointerType !== "touch") {
+      const c = cur.current;
+      c.px = rt.pointer.x; c.py = rt.pointer.y;
+      maybeTip();
+      // Spotlight: only two custom properties per move (no layout); rAF-batched.
+      if (c.cell && cursorEl.current && !c.raf) c.raf = requestAnimationFrame(() => {
+        c.raf = 0;
+        if (!c.cell || !cursorEl.current) return;
+        cursorEl.current.style.setProperty("--mx", `${Math.round(c.px - c.cell.x)}px`);
+        cursorEl.current.style.setProperty("--my", `${Math.round(c.py - c.cell.y)}px`);
+      });
+    }
     // Tile hover is driven by pointer MOVEMENT, so a stationary pointer that
     // a morph slides a different tile under never flips the expansion.
     if (onTile && e.pointerType !== "touch") onTile(e.target.closest?.("[data-case]")?.dataset.case ?? null, "move", e);
   }, [rt, onTile]);
   const onLeave = useCallback((e) => {
     rt.pointer.inside = false;
+    setGlideId(null);
+    cur.current.cell = null; paintCursor();
     if (onTile && e.pointerType !== "touch") onTile(null, "move", e);
   }, [rt, onTile]);
 
   // No autoplay anywhere: a video plays only while hovered (never under
   // reduced motion); otherwise on an explicit click / Enter (see Video).
   const [hoverVideo, setHoverVideo] = useState(null);
+  // One hover highlight that GLIDES from tile to tile with the pointer (instead of each
+  // tile switching its own on and off). It sits behind the cells and follows the hovered
+  // cell's rect, so a morph carries it along too.
+  const [glideId, setGlideId] = useState(null);
+  // Lit tile -> the cursor takes its rect (and follows a morph of it); none -> back to the circle.
+  useLayoutEffect(() => {
+    const g = glideId && !openId ? scene.cells.find((x) => x.fillId === glideId) : null;
+    cur.current.cell = g ? { x: g.x, y: g.y, w: g.w, h: g.h } : null;
+    paintCursor();
+  });
   const isVideo = (f) => f?.kind === "media" && (f.media === "video" || (f.media === "animation" && /\.(mp4|webm|mov)$/i.test(f.src)));
   const activeVideo = reduced ? null : hoverVideo;
 
@@ -206,6 +254,7 @@ export function Stage({ layout, fillMap, expanded, onToggleReceipts, reduced, me
       // A tile's own action first; then Go deeper (the whole cell drills); then inner controls.
       const target = el.querySelector(".c-tile, .c-face.asks, .c-media[data-act]") || el.querySelector(".drill") || el.querySelector(".play-glyph, .wl-link, .status-link, .spec-expand");
       if (target) { e.preventDefault(); target.click(); }
+      else if (el.hasAttribute("data-about")) { e.preventDefault(); el.click(); }
       return;
     }
     if (onSelf && (e.key === "p" || e.key === "P")) {
@@ -235,6 +284,18 @@ export function Stage({ layout, fillMap, expanded, onToggleReceipts, reduced, me
 
   // The first keyboard focus on a tile shows the key hint once per session.
   const [hint, setHint] = useState(false);
+  // Pointer users get a one-time tip that the arrow keys work too (after a few seconds
+  // of mouse use on the stage, once per session; it leaves on its own).
+  const tipTimer = useRef(0);
+  const maybeTip = useCallback(() => {
+    if (tipTimer.current) return;
+    try { if (sessionStorage.getItem("stage-kbd-hint")) { tipTimer.current = -1; return; } } catch { tipTimer.current = -1; return; }
+    tipTimer.current = window.setTimeout(() => {
+      try { if (sessionStorage.getItem("stage-kbd-hint")) return; sessionStorage.setItem("stage-kbd-hint", "1"); } catch { return; }
+      setHint("tip");
+      window.setTimeout(() => setHint((h) => (h === "tip" ? false : h)), 9000);
+    }, 3500);
+  }, []);
   const maybeHint = useCallback((e) => {
     try {
       if (sessionStorage.getItem("stage-kbd-hint") || !e.currentTarget.matches(":focus-visible")) return;
@@ -260,28 +321,33 @@ export function Stage({ layout, fillMap, expanded, onToggleReceipts, reduced, me
         onPointerMove={onMove}
         onPointerLeave={onLeave}
       >
+        <div ref={cursorEl} className="stage-cursor" aria-hidden="true" />
         {scene.cells.map((c) => {
           const fill = fillMap.get(c.fillId);
           if (!fill) return null;
           // Go deeper: the whole cell is the target (not while receded or open).
           const drills = !!(fill.opens && onDrill && !fill.recede && openId !== c.fillId && focusId !== c.fillId);
+          // The "namit" wordmark on home opens the About page.
+          const toAbout = !!(onNamit && fill.kind === "title" && fill.text === "namit" && !fill.recede);
           return (
             <section
               key={c.fillId}
               role="group" aria-roledescription="tile"
-              aria-label={cellLabel(fill, { drillLabel })}
+              aria-label={toAbout ? "namit: open the About page" : cellLabel(fill, { drillLabel })}
               tabIndex={liveIds.has(c.fillId) && !fill.recede ? (c.fillId === stopId ? 0 : -1) : undefined}
               aria-hidden={!liveIds.has(c.fillId) || fill.recede ? true : undefined}
               onKeyDown={(e) => onCellKey(e, c)}
               onFocus={(e) => { hadFocus.current = true; if (e.target === e.currentTarget) { setCurrent(c.fillId); maybeHint(e); } }}
-              className={`cell k-${c.kind} ${fill.recede ? "recede" : ""} ${openId === c.fillId ? "open" : ""} ${focusId === c.fillId ? "is-focus" : ""} ${drills ? "drills" : ""}`}
+              className={`cell k-${c.kind} ${fill.recede ? "recede" : ""} ${openId === c.fillId ? "open" : ""} ${focusId === c.fillId ? "is-focus" : ""} ${drills ? "drills" : ""} ${toAbout ? "drills to-about" : ""}`}
               onClickCapture={fill.recede && onCloseFocus ? (e) => { e.preventDefault(); e.stopPropagation(); onCloseFocus(); } : undefined}
-              onClick={drills ? (e) => onCellDrill(e, fill) : undefined}
+              onClick={drills ? (e) => onCellDrill(e, fill) : toAbout ? (e) => { if (!e.defaultPrevented && !e.target.closest?.("a, button")) onNamit(); } : undefined}
+              data-about={toAbout ? "" : undefined}
               {...(layout.mode === "stack" && openId === c.fillId ? swipe(onCloseFocus, onStep) : {})}
               data-fill={c.fillId}
               ref={(el) => { if (el) rt.cellEls.set(c.fillId, el); else rt.cellEls.delete(c.fillId); }}
               data-case={fill.caseStudy && onTile ? fill.caseStudy : undefined}
               onPointerEnter={(e) => {
+                if (e.pointerType !== "touch") setGlideId(e.currentTarget.matches(GLIDE_CELLS) ? c.fillId : null);
                 if (fill.kind === "face" && onAskOpen) setHoverCell(fill.id);
                 if (isVideo(fill)) setHoverVideo(fill.id);
               }}
@@ -311,7 +377,7 @@ export function Stage({ layout, fillMap, expanded, onToggleReceipts, reduced, me
           />
         ))}
       </div>
-      {hint && <KeyHint onClose={() => setHint(false)} />}
+      {hint && <KeyHint tip={hint === "tip"} onClose={() => setHint(false)} />}
       <Highlight layout={layout} fillMap={fillMap} hot={hot} openId={openId} cellId={hoverCell && liveIds.has(hoverCell) ? hoverCell : null} />
     </RuntimeCtx.Provider>
   );
@@ -374,7 +440,16 @@ export const KEYS = [
   ["← ↑ → ↓", "move between tiles"], ["Tab", "into a tile's links and buttons"], ["Enter", "open"],
   ["P", "source"], ["Esc", "back"], ["?", "all shortcuts"],
 ];
-function KeyHint({ onClose }) {
+function KeyHint({ onClose, tip = false }) {
+  if (tip) return (
+    <div className="key-hint tip" role="note">
+      <span className="tip-k">Tip</span>
+      <span><kbd>← ↑ → ↓</kbd> move between tiles</span>
+      <span><kbd>Enter</kbd> open</span>
+      <span><kbd>?</kbd> all shortcuts</span>
+      <button type="button" aria-label="Dismiss keyboard tip" onClick={onClose}>×</button>
+    </div>
+  );
   return (
     <div className="key-hint" role="note">
       {KEYS.slice(0, 5).map(([k, v]) => <span key={k}><kbd>{k}</kbd> {v}</span>)}

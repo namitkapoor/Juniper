@@ -1,0 +1,7 @@
+# Explicit, so the CLI never falls back to .gitignore (which excludes private/,
+# the gated content the api/ functions must ship with).
+node_modules
+dist
+.env
+.env.*
+.git

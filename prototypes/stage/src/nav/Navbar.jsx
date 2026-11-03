@@ -9,6 +9,7 @@
  *  - framer-motion is swapped for CSS keyframes (same blink/glance timing);
  *  - the theme toggle switches light / dark (default: the OS preference; remembered).
  */
+import { A11yButton } from "./A11yPanel.jsx";
 import { useEffect, useRef, useState } from "react";
 import { Glyph } from "../about/Glyph.jsx";
 
@@ -132,6 +133,7 @@ export function Navbar({ onHome, onAbout, crumbs, isHome, isAbout, theme, onTogg
               {!l.internal && <span className="sr-only"> (opens in a new tab)</span>}
             </a>
           ))}
+          <A11yButton />
           <button className="theme-toggle-nav" type="button" onClick={onToggleTheme} aria-pressed={theme === "light"}
             aria-label={theme === "light" ? "Switch to dark mode" : "Switch to light mode"}>
             <Glyph name={theme === "light" ? "lucide:moon" : "lucide:sun"} size={18} />

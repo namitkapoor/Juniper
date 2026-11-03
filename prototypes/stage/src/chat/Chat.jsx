@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { flushSync } from "react-dom";
 import { Face } from "./Face.jsx";
 
@@ -97,6 +97,33 @@ const snapMs = (dist, span) => Math.round(Math.max(160, Math.min(SNAP_MS, (SNAP_
  * arrives on the stage as a layout. Messages, suggested questions, input.
  * Renders its own wrap (.chat-wrap). Desktop opens from Kip's face tile or the gutter "Ask Kip" button.
  */
+/**
+ * Kip's reply streams in word by word (about 30 words a second), each word
+ * fading in on two pixel steps. Screen readers get the whole reply at once
+ * (sr-only copy); the animated words are aria-hidden. Reduced motion: instant.
+ */
+function StreamText({ text, reduced }) {
+  const parts = useMemo(() => String(text || "").split(/(\s+)/), [text]);
+  const [n, setN] = useState(reduced ? parts.length : 0);
+  useEffect(() => {
+    if (reduced) { setN(parts.length); return undefined; }
+    setN(0);
+    let i = 0;
+    const id = setInterval(() => {
+      i = Math.min(parts.length, i + 2); // a word and the space after it
+      setN(i);
+      if (i >= parts.length) clearInterval(id);
+    }, 33);
+    return () => clearInterval(id);
+  }, [parts, reduced]);
+  return (
+    <>
+      <span className="sr-only">{text}</span>
+      <span aria-hidden="true">{parts.slice(0, n).map((w, i) => <span key={i} className="st-w">{w}</span>)}</span>
+    </>
+  );
+}
+
 export function Chat({ open, messages, chips, onAsk, onChip, busy, onClose, onOpen, phone, busyFace, reduced, onReopen, focusNonce, chatW = 0, openW = 0 }) {
   const [q, setQ] = useState("");
   // Phone: the chat is a bottom sheet. Peek = face + latest reply + chips + input;
@@ -333,6 +360,8 @@ export function Chat({ open, messages, chips, onAsk, onChip, busy, onClose, onOp
   };
 
   const lastBot = phone && messages.length > 0 ? [...messages].reverse().find((m) => m.role === "bot") : null;
+  const latestBot = [...messages].reverse().find((m) => m.role === "bot");
+  const faceMood = latestBot ? { mood: latestBot.mood || "answer", moodKey: `${messages.length}:${latestBot.text}` } : {};
   const sliding = drag === "drag" || drag === "settle";
 
   const listEl = (
@@ -353,8 +382,8 @@ export function Chat({ open, messages, chips, onAsk, onChip, busy, onClose, onOp
           {ex.q && <div className="msg user"><div className="msg-text">{ex.q}</div></div>}
           {ex.a && (
             <div className="msg bot" data-match={ex.a.match || undefined}>
-              <Face size={22} busy={busyFace} reduced={reduced} className="msg-face" />
-              <div className="msg-text">{ex.a.text}</div>
+              <Face size={56} busy={busyFace} mood={ex.a.mood || "answer"} moodKey={`${i}:${ex.a.text}`} reduced={reduced} className="msg-face" />
+              <div className="msg-text"><StreamText text={ex.a.text} reduced={reduced} /></div>
               <div className="label msg-how">Kip{ex.a.how ? ` · ${ex.a.how}` : ""}</div>
             </div>
           )}
@@ -377,12 +406,12 @@ export function Chat({ open, messages, chips, onAsk, onChip, busy, onClose, onOp
                 onClick={() => setSheet((v) => !v)} {...sheetDrag.bind}
               >
                 <span className="grip" aria-hidden />
-                <Face size={30} busy={busyFace} reduced={reduced} />
+                <Face size={30} busy={busyFace} {...faceMood} reduced={reduced} />
                 <span className="label">Ask Kip</span>
               </button>
               <div className="sheet-body" ref={body}>
                 {listEl}
-                {lastBot && <div className="phone-reply" ref={reply} tabIndex={0} role="region" aria-label="Kip's latest reply">{lastBot.text}</div>}
+                {lastBot && <div className="phone-reply" ref={reply} tabIndex={0} role="region" aria-label="Kip's latest reply"><StreamText text={lastBot.text} reduced={reduced} /></div>}
               </div>
             </div>
           ) : (
@@ -390,7 +419,7 @@ export function Chat({ open, messages, chips, onAsk, onChip, busy, onClose, onOp
               {/* One face: big and centered while the conversation is empty, then it
                   shrinks into the header mark when the first answer arrives (a move,
                   not a swap). */}
-              <div className="chat-face"><Face size="100%" busy={busyFace} reduced={reduced} /></div>
+              <div className="chat-face"><Face size="100%" busy={busyFace} {...faceMood} reduced={reduced} /></div>
               <header className="chat-head" {...sheetDrag.bind}>
                 <span className="chat-title"><span className="face-spot" aria-hidden /><span className="label">Ask Kip</span></span>
                 <button type="button" className="label link" onClick={onClose}>close</button>
