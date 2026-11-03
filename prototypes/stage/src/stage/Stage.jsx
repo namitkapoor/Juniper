@@ -8,7 +8,7 @@
  * moves, the loop sleeps. The pointer position is tracked (for a future Lottie
  * face, see FlowText.jsx) but never moves text.
  */
-import { useLayoutEffect, useRef, useState, useMemo, useCallback } from "react";
+import { useEffect, useLayoutEffect, useRef, useState, useMemo, useCallback } from "react";
 import { RuntimeCtx } from "./runtimeCtx.js";
 import { planMorph, strokeAt, cellAt, snapshot } from "./morph.js";
 import { CellContent } from "./cells.jsx";
@@ -238,6 +238,24 @@ export function Stage({ tileOverlay, onNamit, layout, fillMap, expanded, onToggl
       }
     }
   });
+  // Keyboard entry: with nothing focused (fresh load, or after a mouse click on
+  // empty space), the first arrow key or Enter lands on the current tile, so
+  // the keyboard works straight away instead of needing a Tab first.
+  useEffect(() => {
+    const ENTRY = new Set(["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown", "Enter"]);
+    const onKey = (e) => {
+      if (!ENTRY.has(e.key) || e.defaultPrevented || e.metaKey || e.ctrlKey || e.altKey) return;
+      const a = document.activeElement;
+      if (a && a !== document.body && a !== document.documentElement) return;
+      if (document.querySelector("dialog[open]")) return;
+      const id = stopId ?? order[0];
+      if (!id || !rt.cellEls.get(id)) return;
+      e.preventDefault();
+      focusCell(id);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [stopId, order, focusCell, rt]);
   const onCellKey = useCallback((e, c) => {
     // A specimen owns its keys (←/→/Space) while it has focus.
     if (e.target.closest?.(".spec") && e.target !== rt.cellEls.get(c.fillId)) return;
