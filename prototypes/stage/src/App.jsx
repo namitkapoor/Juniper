@@ -174,7 +174,7 @@ export default function App() {
     const own = tiles.find((f) => f.caseStudy === hot);
     if (!own) return null;
     const kicker = own.caseTitle || own.role;
-    const out = { [hot]: own.number?.value ? { self: true, kicker: own.role || kicker, value: own.number.value, unit: own.number.unit, label: own.number.label } : null };
+    const out = { [hot]: own.number?.value ? { self: true, kicker: `${kicker} · impact`, value: own.number.value, unit: own.number.unit, label: own.number.label } : null };
     const more = caseKpis(content.decks, hot, own.number?.value, tiles.length - 1);
     tiles.filter((f) => f.caseStudy !== hot).forEach((f, i) => {
       const k = more[i];
