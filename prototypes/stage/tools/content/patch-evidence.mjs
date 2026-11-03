@@ -71,17 +71,26 @@ newDecks.push({ id: "ck-d-live", parent: "ck-conversation", caseStudy: "chekout"
     prose("ckl-read", 0.5, "WHAT TO LOOK FOR: The agent names products and prices inside the sentence, then shows the cards, so the answer reads first and the products prove it.", [CK]),
   ] });
 // ---- ChekOut: which stores are live
+// A phone demo (framed mp4, webp poster; -light siblings swap in the light theme); plays on hover.
+const demo = (id, weight, name, cover, link, aspect, alt, caption, explain) => ({ kind: "media", id, weight, media: "video",
+  src: `assets/chekout/demos/${name}.mp4`, poster: `assets/chekout/demos/${name}.webp`, aspect, alt, caption, explain,
+  receipts: [{ type: "asset", ref: cover, label: `The ${link.ref.replace("storefront:", "")} homepage, captured for the stage` }, link] });
 const logos = g("ck-merchant-outcomes").fills.find((f) => f.kind === "logos");
 const storefront = logos.receipts.filter((r) => String(r.ref).startsWith("storefront:"));
 newDecks.push({ id: "ck-d-live-stores", parent: "ck-merchant-outcomes", caseStudy: "chekout",
   question: "Which stores is the agent live on?",
   thesis: "Four of the live stores can be checked from the outside: each homepage loads the ChekOut embed with its own agent id.",
   fills: [
-    prose("cklv-how", 1, "HOW I CHECKED: On November 2, 2026 each of these homepages loaded ChekOut's embed with its own agent id: KivaKube, Rosendahl Design Group, Pacific Soul Foods and Nuthatch Naturals.", storefront),
-    media("cklv-kiva", 0.7, "assets/chekout/store-kivakube.webp", 1.6, "KivaKube's storefront homepage", "KivaKube, a portable grill brand.",
-      "One of the stores the agent is live on. Its homepage loads the ChekOut embed with the agent id kiva.", [storefront[0]]),
-    media("cklv-rosen", 0.7, "assets/chekout/store-rosendahl.webp", 1.6, "Rosendahl Design Group's storefront homepage", "Rosendahl Design Group, Danish homeware.",
-      "Another live store. Its homepage loads the embed with the agent id rosendahl-design-group.", [storefront[1]]),
+    // The agent running leads: the two phone demos are the biggest tiles; the homepage covers are their Source.
+    demo("cklv-kiva", 1, "kivakube-mobile", "assets/chekout/store-kivakube.webp", storefront[0], 0.4732,
+      "Herb, the ChekOut agent on KivaKube, answering on a phone: the best seller, then which grill suits a small patio",
+      "Herb, the agent live on KivaKube.",
+      "Recorded on kivakube.com on a phone. A shopper asks for the best seller, then which one suits a small patio, and Herb answers in a sentence before showing the products. The homepage loads the ChekOut embed with the agent id kiva."),
+    demo("cklv-rosen", 0.95, "rosendahl-mobile", "assets/chekout/store-rosendahl.webp", storefront[1], 0.4726,
+      "Søren, the ChekOut agent on Rosendahl Design Group, answering a shopper on a phone",
+      "Søren, the agent live on Rosendahl Design Group.",
+      "Recorded on rosendahl.com on a phone: Søren answers a shopper in the widget on the live store. The homepage loads the embed with the agent id rosendahl-design-group."),
+    prose("cklv-how", 0.7, "HOW I CHECKED: On November 2, 2026 each of these homepages loaded ChekOut's embed with its own agent id: KivaKube, Rosendahl Design Group, Pacific Soul Foods and Nuthatch Naturals.", storefront),
     commits("cklv-commits", 0.45, "chekoutai-frontend", ["91ebf39", "0956b17", "b343c7e"]),
   ] });
 // ---- ChekOut: the design system in Figma

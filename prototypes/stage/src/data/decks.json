@@ -4514,9 +4514,61 @@
     "thesis": "Four of the live stores can be checked from the outside: each homepage loads the ChekOut embed with its own agent id.",
     "fills": [
       {
+        "kind": "media",
+        "id": "cklv-kiva",
+        "weight": 1,
+        "media": "video",
+        "src": "assets/chekout/demos/kivakube-mobile.mp4",
+        "poster": "assets/chekout/demos/kivakube-mobile.webp",
+        "aspect": 0.4732,
+        "alt": "Herb, the ChekOut agent on KivaKube, answering on a phone: the best seller, then which grill suits a small patio",
+        "caption": "Herb, the agent live on KivaKube.",
+        "explain": "Recorded on kivakube.com on a phone. A shopper asks for the best seller, then which one suits a small patio, and Herb answers in a sentence before showing the products. The homepage loads the ChekOut embed with the agent id kiva.",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "assets/chekout/store-kivakube.webp",
+            "label": "The kivakube.com homepage, captured for the stage"
+          },
+          {
+            "type": "asset",
+            "ref": "storefront:kivakube.com",
+            "url": "https://www.kivakube.com/",
+            "date": "2026-11-02",
+            "label": "Homepage loads chekout.ai/chatbot.js with data-agent-id=\"kiva\", checked 2026-11-02"
+          }
+        ]
+      },
+      {
+        "kind": "media",
+        "id": "cklv-rosen",
+        "weight": 0.95,
+        "media": "video",
+        "src": "assets/chekout/demos/rosendahl-mobile.mp4",
+        "poster": "assets/chekout/demos/rosendahl-mobile.webp",
+        "aspect": 0.4726,
+        "alt": "Søren, the ChekOut agent on Rosendahl Design Group, answering a shopper on a phone",
+        "caption": "Søren, the agent live on Rosendahl Design Group.",
+        "explain": "Recorded on rosendahl.com on a phone: Søren answers a shopper in the widget on the live store. The homepage loads the embed with the agent id rosendahl-design-group.",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "assets/chekout/store-rosendahl.webp",
+            "label": "The rosendahl.com homepage, captured for the stage"
+          },
+          {
+            "type": "asset",
+            "ref": "storefront:rosendahl.com",
+            "url": "https://www.rosendahl.com/",
+            "date": "2026-11-02",
+            "label": "Homepage loads chekout.ai/chatbot.js with data-agent-id=\"rosendahl-design-group\", checked 2026-11-02"
+          }
+        ]
+      },
+      {
         "kind": "prose",
         "id": "cklv-how",
-        "weight": 1,
+        "weight": 0.7,
         "text": "HOW I CHECKED: On November 2, 2026 each of these homepages loaded ChekOut's embed with its own agent id: KivaKube, Rosendahl Design Group, Pacific Soul Foods and Nuthatch Naturals.",
         "receipts": [
           {
@@ -4546,78 +4598,6 @@
             "url": "https://nuthatchnaturals.com/",
             "date": "2026-11-02",
             "label": "Homepage loads chekout.ai/chatbot.js with data-agent-id=\"nuthatch-naturals\", checked 2026-11-02"
-          }
-        ]
-      },
-      {
-        "kind": "media",
-        "id": "cklv-kiva",
-        "weight": 0.7,
-        "media": "image",
-        "src": "assets/chekout/store-kivakube.webp",
-        "aspect": 1.6,
-        "alt": "KivaKube's storefront homepage",
-        "caption": "KivaKube, a portable grill brand.",
-        "explain": "One of the stores the agent is live on. Its homepage loads the ChekOut embed with the agent id kiva.",
-        "receipts": [
-          {
-            "type": "asset",
-            "ref": "assets/chekout/store-kivakube.webp"
-          },
-          {
-            "type": "asset",
-            "ref": "storefront:kivakube.com",
-            "url": "https://www.kivakube.com/",
-            "date": "2026-11-02",
-            "label": "Homepage loads chekout.ai/chatbot.js with data-agent-id=\"kiva\", checked 2026-11-02"
-          },
-          {
-            "type": "asset",
-            "ref": "assets/chekout/demos/kivakube-mobile.gif",
-            "date": "2026-10-27",
-            "label": "The agent answering on kivakube.com, recorded on a phone: best seller, then which one suits a small patio",
-            "preview": {
-              "src": "assets/chekout/demos/kivakube-mobile.gif",
-              "poster": "assets/chekout/demos/kivakube-mobile.webp",
-              "aspect": 0.4747,
-              "frame": "phone"
-            }
-          }
-        ]
-      },
-      {
-        "kind": "media",
-        "id": "cklv-rosen",
-        "weight": 0.7,
-        "media": "image",
-        "src": "assets/chekout/store-rosendahl.webp",
-        "aspect": 1.6,
-        "alt": "Rosendahl Design Group's storefront homepage",
-        "caption": "Rosendahl Design Group, Danish homeware.",
-        "explain": "Another live store. Its homepage loads the embed with the agent id rosendahl-design-group.",
-        "receipts": [
-          {
-            "type": "asset",
-            "ref": "assets/chekout/store-rosendahl.webp"
-          },
-          {
-            "type": "asset",
-            "ref": "storefront:rosendahl.com",
-            "url": "https://www.rosendahl.com/",
-            "date": "2026-11-02",
-            "label": "Homepage loads chekout.ai/chatbot.js with data-agent-id=\"rosendahl-design-group\", checked 2026-11-02"
-          },
-          {
-            "type": "asset",
-            "ref": "assets/chekout/demos/rosendahl-mobile.gif",
-            "date": "2026-10-27",
-            "label": "The agent answering on rosendahl.com, recorded on a phone",
-            "preview": {
-              "src": "assets/chekout/demos/rosendahl-mobile.gif",
-              "poster": "assets/chekout/demos/rosendahl-mobile.webp",
-              "aspect": 0.4739,
-              "frame": "phone"
-            }
           }
         ]
       },
