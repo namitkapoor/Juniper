@@ -167,7 +167,7 @@ export default function App() {
     if (hot === "about") {
       const facts = aboutFacts(content.about);
       const out = {};
-      tiles.forEach((f, i) => { if (facts[i]) out[f.caseStudy] = { kicker: facts[i].kicker || "namit", value: facts[i].value, label: facts[i].label, logo: facts[i].logo, about: !facts[i].kicker }; });
+      tiles.forEach((f, i) => { if (facts[i]) out[f.caseStudy] = { kicker: facts[i].kicker || "namit", value: facts[i].value, label: facts[i].label, logo: facts[i].logo, about: facts[i].kicker !== "Open to" }; });
       return out;
     }
     const own = tiles.find((f) => f.caseStudy === hot);

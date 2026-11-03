@@ -46,7 +46,31 @@ export function orderFills(fills) {
  * @param {boolean} [args.phone]      force phone mode (default: rect.w < 760)
  * @param {number} [args.viewportW]   viewport width for the phone decision
  */
-export function layoutStage({ rect, fills, measure, expanded = [], promote = [], phone, viewportW, split }) {
+/**
+ * Numbers side by side read as one set, so KPIs in the same row (same top and
+ * height, give or take a pixel) share the smallest size any of them fit at.
+ * Each one fits its own box, so narrow digits ("341") would otherwise set larger
+ * than wide ones ("454") beside them.
+ */
+export function harmonizeKpis(L) {
+  if (!L?.cells) return L;
+  const kp = L.cells.filter((c) => c.kind === "kpi" && c.spec?.size);
+  const rows = [];
+  for (const c of kp) {
+    const r = rows.find((g) => Math.abs(g[0].y - c.y) < 2 && Math.abs(g[0].h - c.h) < 2);
+    if (r) r.push(c); else rows.push([c]);
+  }
+  for (const r of rows) {
+    if (r.length < 2) continue;
+    const min = Math.min(...r.map((c) => c.spec.size));
+    for (const c of r) if (c.spec.size !== min) c.spec = { ...c.spec, size: min };
+  }
+  return L;
+}
+
+export function layoutStage(args) { return harmonizeKpis(layoutStageRaw(args)); }
+
+function layoutStageRaw({ rect, fills, measure, expanded = [], promote = [], phone, viewportW, split }) {
   const isPhone = phone ?? (viewportW ?? rect.w) < PHONE_BREAKPOINT;
   const exp = new Set(expanded);
   const prom = new Set(promote);

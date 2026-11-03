@@ -3499,7 +3499,7 @@
         "kind": "prose",
         "id": "kyd-problem",
         "weight": 1,
-        "text": "THE PROBLEM: Look-and-feel changes made by guessing in code drift from the design, and nobody can say which version is right.",
+        "text": "THE PROBLEM: When I changed the look straight in code, the app and the Figma file drifted apart, and neither was clearly the real design.",
         "receipts": [
           {
             "type": "asset",
@@ -4143,22 +4143,23 @@
       },
       {
         "kind": "prose",
-        "id": "kyl-dots",
+        "id": "kyl-access",
         "weight": 0.45,
-        "text": "LIVE OR DATED: A dot beside a number means it is read live; the resume count carries its date instead.",
+        "text": "WHO SEES WHAT: Anyone can open the dashboard and see my counts with names removed. Signing in with Google, on an allowlist I control, unlocks more: I see everything, and each job seeker I invite sees only their own pipeline.",
         "receipts": [
           {
-            "type": "asset",
-            "ref": "assets/kyuri-os/job-hunt.webp",
-            "url": "https://kyuri.namit.me/?area=job-hunt",
-            "date": "2026-11-02",
-            "label": "kyuri.namit.me Job Hunt, visitor view"
+            "type": "commit",
+            "ref": "8e51eb5",
+            "repo": "kyuri-dashboard",
+            "date": "2026-10-14",
+            "label": "8e51eb5 · auth: Google sign-in with a per-candidate allowlist; candidates and visitors get their own tiers"
           },
           {
-            "type": "asset",
-            "ref": "lib/proof.ts",
+            "type": "commit",
+            "ref": "c0ffdee",
             "repo": "kyuri-dashboard",
-            "label": "A snapshot, not live"
+            "date": "2026-10-14",
+            "label": "c0ffdee · auth: invite-link onboarding binds a candidate's Google account in Neon"
           }
         ]
       }

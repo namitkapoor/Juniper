@@ -78,7 +78,8 @@ export function aboutFacts(about) {
   for (const t of tl.filter((x) => x.kind === "education")) {
     const school = /georgia/i.test(t.org) ? "Georgia Tech" : /dartmouth/i.test(t.org) ? "Dartmouth" : t.org;
     const logo = /georgia/i.test(t.org) ? "/assets/about/logo-georgia-tech.png" : /dartmouth/i.test(t.org) ? "/assets/about/logo-dartmouth.png" : null;
-    out.push({ value: school, label: `${t.title}, ${yr(t.start)} to ${yr(t.end)}`, logo });
+    const level = /^(m\.|master)/i.test(t.title) ? "Masters" : /^(b\.|bachelor)/i.test(t.title) ? "Undergrad" : null;
+    out.push({ value: school, label: `${t.title}, ${yr(t.start)} to ${yr(t.end)}`, logo, kicker: level });
   }
   return out;
 }

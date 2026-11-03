@@ -680,7 +680,7 @@ function TileOverlay({ o, fill, cell, P, out = false }) {
   const fs = Math.max(28, Math.min(H * 0.42, (W / Math.max(3, v.length)) * 1.55, 120));
   return (
     <div className={`tile-overlay ${out ? "out" : ""} ${o.logo ? "has-logo" : ""}`} aria-hidden="true" style={{ padding: P }}>
-      <div className="label tile-ov-k">{o.self ? o.kicker : o.about ? "namit · about" : o.kicker === "Open to" ? "namit · open to" : `${o.kicker} · impact`}</div>
+      <div className="label tile-ov-k">{o.self ? o.kicker : o.about ? (o.kicker && o.kicker !== "namit" ? o.kicker : "namit · about") : o.kicker === "Open to" ? "namit · open to" : `${o.kicker} · impact`}</div>
       <div className="tile-ov-num">
         {o.logo
           ? <div className="tile-ov-logo" role="img" aria-label={o.value} style={{ WebkitMaskImage: `url(${o.logo})`, maskImage: `url(${o.logo})`, height: Math.round(Math.min(H * 0.5, 150)) }} />
