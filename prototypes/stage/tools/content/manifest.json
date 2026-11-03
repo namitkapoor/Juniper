@@ -22,7 +22,7 @@
   "w": 1280,
   "h": 720,
   "bytes": 2566044,
-  "dur": 14.0,
+  "dur": 14,
   "aspect": 1.7778
  },
  "chekout/shape-product.jpg": {
@@ -48,7 +48,7 @@
   "w": 720,
   "h": 392,
   "bytes": 166723,
-  "dur": 3.0,
+  "dur": 3,
   "aspect": 1.8367
  },
  "chekout/thinking.jpg": {
@@ -87,7 +87,7 @@
   "w": 720,
   "h": 392,
   "bytes": 326435,
-  "dur": 4.0,
+  "dur": 4,
   "aspect": 1.8367
  },
  "chekout/view-cart.jpg": {
@@ -237,7 +237,7 @@
   "w": 1280,
   "h": 720,
   "bytes": 396555,
-  "dur": 6.0,
+  "dur": 6,
   "aspect": 1.7778
  },
  "christine-valmy/laptop.jpg": {
@@ -293,5 +293,89 @@
   "h": 996,
   "bytes": 43422,
   "aspect": 0.4719
+ },
+ "chekout/system-context.svg": {
+  "w": 1600,
+  "h": 790,
+  "bytes": 12212,
+  "aspect": 2.0253
+ },
+ "chekout/system-context-light.svg": {
+  "w": 1600,
+  "h": 790,
+  "bytes": 12127,
+  "aspect": 2.0253
+ },
+ "chekout/onboarding-flow.svg": {
+  "w": 1600,
+  "h": 640,
+  "bytes": 12289,
+  "aspect": 2.5
+ },
+ "chekout/onboarding-flow-light.svg": {
+  "w": 1600,
+  "h": 640,
+  "bytes": 12208,
+  "aspect": 2.5
+ },
+ "chekout/data-observability.svg": {
+  "w": 1600,
+  "h": 790,
+  "bytes": 11560,
+  "aspect": 2.0253
+ },
+ "chekout/data-observability-light.svg": {
+  "w": 1600,
+  "h": 790,
+  "bytes": 11470,
+  "aspect": 2.0253
+ },
+ "chekout/knowledge.svg": {
+  "w": 1600,
+  "h": 900,
+  "bytes": 11397,
+  "aspect": 1.7778
+ },
+ "chekout/knowledge-light.svg": {
+  "w": 1600,
+  "h": 900,
+  "bytes": 11285,
+  "aspect": 1.7778
+ },
+ "kyuri-os/architecture.svg": {
+  "w": 1600,
+  "h": 1000,
+  "bytes": 13919,
+  "aspect": 1.6
+ },
+ "kyuri-os/architecture-light.svg": {
+  "w": 1600,
+  "h": 1000,
+  "bytes": 13753,
+  "aspect": 1.6
+ },
+ "christine-valmy/architecture.svg": {
+  "w": 1600,
+  "h": 900,
+  "bytes": 10082,
+  "aspect": 1.7778
+ },
+ "christine-valmy/architecture-light.svg": {
+  "w": 1600,
+  "h": 900,
+  "bytes": 9974,
+  "aspect": 1.7778
+ },
+ "christine-valmy/bridge.svg": {
+  "w": 1600,
+  "h": 760,
+  "bytes": 8786,
+  "aspect": 2.1053
+ },
+ "christine-valmy/bridge-light.svg": {
+  "w": 1600,
+  "h": 760,
+  "bytes": 8700,
+  "aspect": 2.1053
  }
 }

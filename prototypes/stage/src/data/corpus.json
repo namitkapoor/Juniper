@@ -4761,16 +4761,16 @@
         "id": "u-ck-arch",
         "weight": 0.95,
         "media": "image",
-        "src": "assets/chekout/architecture.webp",
-        "aspect": 2.0645,
+        "src": "assets/chekout/system-context.svg",
+        "aspect": 2.0253,
         "alt": "ChekOut AI system context: merchants build and manage agents in the ChekOut front end; shoppers chat on the storefront; the front end sends chat messages to per-merchant Langflow agents and talks to backend services on Cloud Run, which sync with Shopify and read and write Postgres and BigQuery",
-        "caption": "Who uses ChekOut and what the front end talks to. Blue is my work.",
+        "caption": "Who uses ChekOut and what the front end talks to. Solid boxes are mine; dashed are a teammate's or an outside service.",
         "explain": "One Next.js app serves both sides: the merchant builder and the chat widget shoppers meet on a store. Chat goes to a Langflow agent per merchant; setup, store sync and billing go to backend services. Each box is tagged [code] when it is verified in a repo and [notes] when it comes from my notes.",
         "receipts": [
           {
             "type": "asset",
             "ref": "assets/chekout/architecture.webp",
-            "label": "Exported from Figma, source footer cropped"
+            "label": "The FigJam export this is redrawn from (1 · System context)"
           },
           {
             "type": "asset",

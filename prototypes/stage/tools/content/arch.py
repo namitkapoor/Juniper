@@ -1,7 +1,7 @@
 # Draws the hairline architecture SVGs for the stage (dark, 1px lines).
 import html, os
 OUT = "/Users/namit/Documents/personal/code/Juniper/.worktrees/stage-proto/prototypes/stage/public/assets"
-BG, INK, MUTE, BODY = "#141414", "#ececea", "#7d7d79", "#a9a9a4"
+BG, INK, MUTE, BODY = "#141414", "#ececea", "#85857f", "#a9a9a4"
 HAIR, LIVE = "rgba(255,255,255,0.22)", "rgba(255,255,255,0.6)"
 SANS = "Helvetica Neue, Helvetica, Arial, sans-serif"
 MONO = "ui-monospace, Menlo, Consolas, monospace"

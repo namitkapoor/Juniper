@@ -149,15 +149,16 @@
         "id": "ck-arch-main",
         "weight": 0.7,
         "media": "image",
-        "src": "assets/chekout/architecture.webp",
-        "aspect": 2.0645,
+        "src": "assets/chekout/system-context.svg",
+        "aspect": 2.0253,
         "alt": "ChekOut AI system context: merchants and shoppers, the Next.js front end, Langflow agents, backend services, commerce platforms and the data stores",
         "caption": "ARCHITECTURE: how the pieces connect.",
         "explain": "One front end serves merchants in the builder and shoppers on their stores; chat goes to a Langflow agent per merchant. Open it for how it is built.",
         "receipts": [
           {
             "type": "asset",
-            "ref": "assets/chekout/architecture.webp"
+            "ref": "assets/chekout/architecture.webp",
+            "label": "The FigJam export this is redrawn from (1 · System context)"
           },
           {
             "type": "asset",
@@ -444,16 +445,16 @@
         "id": "ck-arch",
         "weight": 0.95,
         "media": "image",
-        "src": "assets/chekout/architecture.webp",
-        "aspect": 2.0645,
+        "src": "assets/chekout/system-context.svg",
+        "aspect": 2.0253,
         "alt": "ChekOut AI system context: merchants build and manage agents in the ChekOut front end; shoppers chat on the storefront; the front end sends chat messages to per-merchant Langflow agents and talks to backend services on Cloud Run, which sync with Shopify and read and write Postgres and BigQuery",
-        "caption": "Who uses ChekOut and what the front end talks to. Blue is my work.",
+        "caption": "Who uses ChekOut and what the front end talks to. Solid boxes are mine; dashed are a teammate's or an outside service.",
         "explain": "One Next.js app serves both sides: the merchant builder and the chat widget shoppers meet on a store. Chat goes to a Langflow agent per merchant; setup, store sync and billing go to backend services. Each box is tagged [code] when it is verified in a repo and [notes] when it comes from my notes.",
         "receipts": [
           {
             "type": "asset",
             "ref": "assets/chekout/architecture.webp",
-            "label": "Exported from Figma, source footer cropped"
+            "label": "The FigJam export this is redrawn from (1 · System context)"
           },
           {
             "type": "asset",
@@ -2865,15 +2866,16 @@
         "id": "ckb-flow",
         "weight": 0.9,
         "media": "image",
-        "src": "assets/chekout/onboarding.webp",
-        "aspect": 2.6667,
+        "src": "assets/chekout/onboarding-flow.svg",
+        "aspect": 2.5,
         "alt": "Onboarding and agent builder flow: app-store install, Step 1 AI Persona, store OAuth, product sync, Step 2 Knowledge Base, agent provisioning, Step 3 Channel",
         "caption": "From app-store install to a provisioned agent.",
         "explain": "The three builder steps in order, with what happens between them: store OAuth after the persona step, product sync, then agent provisioning before the channel step. Boxes are tagged [code] or [notes] by how each was verified.",
         "receipts": [
           {
             "type": "asset",
-            "ref": "assets/chekout/onboarding.webp"
+            "ref": "assets/chekout/onboarding.webp",
+            "label": "The FigJam export this is redrawn from (2 · Onboarding & agent builder)"
           },
           {
             "type": "asset",
@@ -3058,15 +3060,16 @@
         "id": "cks-arch",
         "weight": 0.85,
         "media": "image",
-        "src": "assets/chekout/architecture.webp",
-        "aspect": 2.0645,
+        "src": "assets/chekout/system-context.svg",
+        "aspect": 2.0253,
         "alt": "ChekOut AI system context: merchants and shoppers, the Next.js front end, Langflow agents, backend services on Cloud Run, commerce platforms, Postgres and BigQuery",
         "caption": "Who talks to what.",
-        "explain": "Chat messages go from the front end to a Langflow agent per merchant; setup, store sync and billing go to backend services. Blue is my work; [code] and [notes] say how each box was verified.",
+        "explain": "Chat messages go from the front end to a Langflow agent per merchant; setup, store sync and billing go to backend services. Solid boxes are mine; dashed are a teammate's or an outside service; [code] and [notes] say how each box was verified.",
         "receipts": [
           {
             "type": "asset",
-            "ref": "assets/chekout/architecture.webp"
+            "ref": "assets/chekout/architecture.webp",
+            "label": "The FigJam export this is redrawn from (1 · System context)"
           },
           {
             "type": "asset",
@@ -5646,15 +5649,16 @@
         "id": "ckk-logs",
         "weight": 0.5,
         "media": "image",
-        "src": "assets/chekout/data-flow.webp",
-        "aspect": 2.7119,
+        "src": "assets/chekout/data-observability.svg",
+        "aspect": 2.0253,
         "alt": "ChekOut data and observability: chat agent functions log to Cloud Logging and stream rows into BigQuery, which feeds merchant analytics and reporting",
         "caption": "Conversations land in BigQuery.",
         "explain": "Every agent turn is logged and streamed into BigQuery; merchant analytics query it on demand. I wrote the analytics endpoints on top; the logging functions are a teammate's.",
         "receipts": [
           {
             "type": "asset",
-            "ref": "assets/chekout/data-flow.webp"
+            "ref": "assets/chekout/data-flow.webp",
+            "label": "The FigJam export this is redrawn from (5 · Data & observability)"
           },
           {
             "type": "asset",
