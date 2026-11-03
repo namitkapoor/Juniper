@@ -2573,7 +2573,7 @@
     "aliases": [
       "What does the merchant dashboard show?"
     ],
-    "thesis": "The dashboard answers a merchant's first question, what are shoppers asking, with the conversations themselves.",
+    "thesis": "The dashboard shows merchants what shoppers asked the agent, down to the conversations themselves.",
     "fills": [
       {
         "kind": "prose",

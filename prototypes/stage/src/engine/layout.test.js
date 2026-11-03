@@ -320,3 +320,47 @@ describe("Proof only where it's real", async () => {
     expect(hasRealProof({ kind: "kpi", receipts: [{ type: "asset", ref: "a.webp" }] })).toBe(false);
   });
 });
+
+describe("spatial keyboard navigation", async () => {
+  const { neighbor, readingOrder } = await import("./nav.js");
+  const fs = await import("node:fs");
+  const path = await import("node:path");
+  const url = await import("node:url");
+  const DATA = path.resolve(path.dirname(url.fileURLToPath(import.meta.url)), "../data");
+  const decks = fs.existsSync(path.join(DATA, "decks.json")) ? JSON.parse(fs.readFileSync(path.join(DATA, "decks.json"), "utf8")) : [];
+  it("moves to the adjacent cell on a known grid", () => {
+    const cells = [
+      { fillId: "a", x: 0, y: 0, w: 100, h: 100 }, { fillId: "b", x: 100, y: 0, w: 100, h: 50 },
+      { fillId: "c", x: 100, y: 50, w: 100, h: 50 }, { fillId: "d", x: 0, y: 100, w: 200, h: 50 },
+    ];
+    expect(neighbor(cells, "a", "right")).toBe("b");
+    expect(neighbor(cells, "b", "down")).toBe("c");
+    expect(neighbor(cells, "c", "left")).toBe("a");
+    expect(neighbor(cells, "a", "down")).toBe("d");
+    expect(neighbor(cells, "d", "up")).toBe("a");
+    expect(neighbor(cells, "a", "left")).toBe(null);
+    expect(readingOrder(cells)).toEqual(["a", "b", "c", "d"]);
+  });
+  for (const d of decks) {
+    it(`every cell of ${d.id} is reachable by arrows, moves are geometric`, () => {
+      const L = run(d, RECTS[1]);
+      const seen = new Set([L.cells[0].fillId]);
+      const queue = [L.cells[0].fillId];
+      while (queue.length) {
+        const id = queue.shift();
+        const a = L.cells.find((c) => c.fillId === id);
+        for (const dir of ["left", "right", "up", "down"]) {
+          const n = neighbor(L.cells, id, dir);
+          if (!n) continue;
+          const b = L.cells.find((c) => c.fillId === n);
+          if (dir === "right") expect(b.x).toBeGreaterThanOrEqual(a.x + a.w - 1);
+          if (dir === "left") expect(b.x + b.w).toBeLessThanOrEqual(a.x + 1);
+          if (dir === "down") expect(b.y).toBeGreaterThanOrEqual(a.y + a.h - 1);
+          if (dir === "up") expect(b.y + b.h).toBeLessThanOrEqual(a.y + 1);
+          if (!seen.has(n)) { seen.add(n); queue.push(n); }
+        }
+      }
+      expect(seen.size).toBe(L.cells.length);
+    });
+  }
+});

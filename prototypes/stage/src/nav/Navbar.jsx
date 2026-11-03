@@ -105,7 +105,7 @@ export function Navbar({ onHome, onAbout, crumbs, isHome, isAbout }) {
               {crumbs.onCase
                 ? <button type="button" className="crumb-case" onClick={crumbs.onCase}>{crumbs.case}</button>
                 : <span className="crumb-case">{crumbs.case || "Other work"}</span>}
-              {crumbs.q && <><span aria-hidden>/</span><span className="crumb-q">{crumbs.q}</span></>}
+              {crumbs.q && <><span aria-hidden>/</span><span className="crumb-q" aria-current="page">{crumbs.q}</span></>}
             </div>
           )}
         </div>

@@ -10,6 +10,7 @@ import { Face } from "../chat/Face.jsx";
 import { StackIcon } from "../about/StackIcon.jsx";
 import { Glyph } from "../about/Glyph.jsx";
 import { ZoomImage } from "./ZoomImage.jsx";
+import { shortName } from "../a11y.js";
 import { assetUrl, INVERT_LOGOS } from "../content.js";
 import { receiptsOf, receiptsListH, kpiValueSize, tileNumLabelH, kickerH, kickerW, receiptRowH, previewBox, commitCardParts, commitTitle, commitMetaText, receiptText, breakdownRowHs, splitPeriod, BD_COLS, stepText, STEP_CHIP_W, worklogMeta, worklogLink, fmtDate, OFFCLOCK_GROUPS, STATUS_H } from "../engine/fit.js";
 import {
@@ -19,7 +20,7 @@ import {
 
 // The Proof rule lives in one place (engine/fit.js hasRealProof).
 
-export function CellContent({ onDrill, onCaseLink, onStep, cell, fill, insetFill, attachFill, onTile, hot, preview, reduced, onAskOpen, faceBusy, expanded, onToggle, pad, measure, activeVideo, onOpenCase, onExpand, onCollapse, focused }) {
+export function CellContent({ drillLabel, onDrill, onCaseLink, onStep, cell, fill, insetFill, attachFill, onTile, hot, preview, reduced, onAskOpen, faceBusy, expanded, onToggle, pad, measure, activeVideo, onOpenCase, onExpand, onCollapse, focused }) {
   const P = pad;
   const open = expanded.has(fill.id);
   const innerW = Math.round(cell.w) - 2 * P;
@@ -49,7 +50,7 @@ export function CellContent({ onDrill, onCaseLink, onStep, cell, fill, insetFill
     <>
       {body}
       {fill.opens && onDrill && (
-        <button type="button" className="drill label" style={{ right: P, bottom: Math.max(10, P - 8) + listH }} onClick={(e) => { e.stopPropagation(); onDrill(fill.opens); }}>
+        <button type="button" className="drill label" aria-label={`Go deeper: ${drillLabel?.(fill.opens) || "more on this"}`} style={{ right: P, bottom: Math.max(10, P - 8) + listH }} onClick={(e) => { e.stopPropagation(); onDrill(fill.opens); }}>
           Go deeper <span aria-hidden>→</span>
         </button>
       )}
@@ -495,9 +496,9 @@ function FaceCell({ cell, P, onAskOpen, reduced, busy }) {
         <Face size={size} reduced={reduced} busy={busy} />
       </div>
       {onAskOpen && (
-        <button type="button" tabIndex={-1} className="ask-btn in-cell label" onClick={(e) => { e.stopPropagation(); onAskOpen(); }} style={{ bottom: P - 4 }}>
-          Ask Kip <span aria-hidden>→</span>
-        </button>
+        <span className="ask-btn in-cell label" aria-hidden="true" style={{ bottom: P - 4 }}>
+          Ask Kip <span>→</span>
+        </span>
       )}
     </div>
   );
@@ -518,12 +519,12 @@ function TileCell({ fill, cell, P, onTile, hot }) {
   return (
     <div
       className={`c-tile ${hot ? "hot" : ""}`} role="button" tabIndex={0}
-      aria-label={`${fill.role}. ${fill.task}. Open the ${fill.caseTitle} case study`}
       onClick={act}
       onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); act(e); } }}
       onFocus={() => onTile?.(fill.caseStudy, "focus")}
       onBlur={() => onTile?.(fill.caseStudy, "blur")}
     >
+      <p className="sr-only">{cell.spec?.useShort && fill.taskShort ? fill.taskShort : fill.task}</p>
       <div className="label tile-role" style={{ left: P, top: P, right: P }}>{cell.spec?.roleShort && fill.roleShort ? fill.roleShort : fill.role}</div>
       <FlowText
         flowKey={`${fill.id}:task`} fillId={fill.id} text={cell.spec?.useShort && fill.taskShort ? fill.taskShort : fill.task} steps={TILE.steps} mkFont={TILE_FONT}
@@ -582,12 +583,13 @@ function MediaCell({ fill, cell, listH, active, onOpenCase, onExpand, onCollapse
   const act = opens ? () => onOpenCase(fill.caseStudy) : drills ? () => onDrill(fill.opens) : expands ? () => onExpand(fill.id) : null;
   const label = opens ? `Open the ${fill.caseTitle || ""} case study` : drills ? `Go deeper: ${fill.alt}` : expands ? `Expand: ${fill.alt}` : undefined;
   return (
-    <figure
+    <div
+      role="figure" aria-label={fill.alt}
       className={`c-media ${opens ? "opens" : ""} ${expands ? "expands" : ""} ${focused ? "focused" : ""}`}
       {...(act ? {
-        role: "button", tabIndex: 0, "aria-label": label,
+        // Mouse: click the media. Keyboard: the tile (cell) is the control; Enter runs this.
+        "data-act": label,
         onClick: act,
-        onKeyDown: (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); act(); } },
       } : {})}
       onClick={focused && !isVideo ? onCollapse : act || undefined}
     >
@@ -631,11 +633,11 @@ function MediaCell({ fill, cell, listH, active, onOpenCase, onExpand, onCollapse
       )}
 
       {fill.caption && cap && (
-        <figcaption className="caption" style={{ left: pct(cap.x, W), top: pct(cap.y, H), width: pct(cap.w, W) }}>
+        <div className="caption" style={{ left: pct(cap.x, W), top: pct(cap.y, H), width: pct(cap.w, W) }}>
           <span className="cap-t" style={{ WebkitLineClamp: Math.max(1, cap.lines) }}>{fill.caption}</span>
-        </figcaption>
+        </div>
       )}
-    </figure>
+    </div>
   );
 }
 
@@ -707,7 +709,7 @@ function ReceiptsTag({ fill, open, onToggle, P, at }) {
       className={`receipts-tag ${open ? "open" : ""}`}
       style={style}
       aria-expanded={open}
-      aria-label={open ? "Hide proof" : `Show proof: ${list.length} source${list.length === 1 ? "" : "s"}`}
+      aria-label={open ? `Hide proof for ${shortName(fill)}` : `Show proof for ${shortName(fill)} (${list.length} source${list.length === 1 ? "" : "s"})`}
       onClick={(e) => { e.stopPropagation(); onToggle(fill.id); }}
     >
       {!open && types.map((t) => <Icon key={t} type={t} size={11} />)}

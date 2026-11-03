@@ -12,6 +12,8 @@ import { useLayoutEffect, useRef, useState, useMemo, useCallback } from "react";
 import { RuntimeCtx } from "./runtimeCtx.js";
 import { planMorph, strokeAt, cellAt, snapshot } from "./morph.js";
 import { CellContent } from "./cells.jsx";
+import { neighbor, readingOrder } from "../engine/nav.js";
+import { cellLabel } from "../a11y.js";
 
 function createRuntime() {
   const rt = {
@@ -80,7 +82,7 @@ function createRuntime() {
   return rt;
 }
 
-export function Stage({ layout, fillMap, expanded, onToggleReceipts, reduced, measure, height, reserve, onOpenCase, onExpand, onCollapse, focusId, onTile, hot, quick, preview, previewKey, onAskOpen, faceBusy, intro, onIntroDone, openId, onCloseFocus, onStep, onCaseLink, onDrill }) {
+export function Stage({ layout, fillMap, expanded, onToggleReceipts, reduced, measure, height, reserve, onOpenCase, onExpand, onCollapse, focusId, onTile, hot, quick, preview, previewKey, onAskOpen, faceBusy, intro, onIntroDone, openId, onCloseFocus, onStep, onCaseLink, onDrill, drillLabel, onEscapeStage }) {
   const rtRef = useRef(null);
   if (!rtRef.current) rtRef.current = createRuntime();
   const rt = rtRef.current;
@@ -136,6 +138,78 @@ export function Stage({ layout, fillMap, expanded, onToggleReceipts, reduced, me
   const isVideo = (f) => f?.kind === "media" && (f.media === "video" || (f.media === "animation" && /\.(mp4|webm|mov)$/i.test(f.src)));
   const activeVideo = reduced ? null : hoverVideo;
 
+  /* ---- keyboard: one tab stop for the stage, arrows move between tiles ---- */
+  const [current, setCurrent] = useState(null); // fillId holding the roving tab stop
+  const hadFocus = useRef(false);
+  const liveIds = useMemo(() => new Set(layout?.cells.map((c) => c.fillId)), [layout]);
+  const order = useMemo(() => (layout ? readingOrder(layout.cells) : []), [layout]);
+  const stopId = current && liveIds.has(current) ? current : order[0];
+  const focusCell = useCallback((id) => {
+    if (!id) return;
+    setCurrent(id);
+    rt.cellEls.get(id)?.focus({ preventScroll: false });
+  }, [rt]);
+  // After a morph: focus stays on the tile that caused it, else the first tile (only if focus was in the stage).
+  useLayoutEffect(() => {
+    if (!hadFocus.current || !layout) return;
+    const el = document.activeElement;
+    if (el && el !== document.body && stageEl.current?.contains(el) && el.closest(".cell") && liveIds.has(el.closest(".cell").dataset.fill)) return;
+    // the new scene mounts on the next frame
+    requestAnimationFrame(() => focusCell(current && liveIds.has(current) ? current : order[0]));
+  }, [layout]); // eslint-disable-line react-hooks/exhaustive-deps
+  // Closing an open cell (proof / expanded) returns focus to that tile.
+  const prevOpen = useRef(null);
+  useLayoutEffect(() => {
+    const was = prevOpen.current;
+    prevOpen.current = openId;
+    if (was && !openId && hadFocus.current) {
+      const el = document.activeElement;
+      if (!el || el === document.body || rt.cellEls.get(was)?.contains(el)) requestAnimationFrame(() => focusCell(liveIds.has(was) ? was : order[0]));
+    }
+  }, [openId]); // eslint-disable-line react-hooks/exhaustive-deps
+  // Inner controls are reachable by keys, not Tab, except inside the open (focused) cell.
+  useLayoutEffect(() => {
+    for (const [id, el] of rt.cellEls) {
+      const inner = el.querySelectorAll("a, button, [tabindex], video, input");
+      for (const n of inner) {
+        if (n === el) continue;
+        if (!n.hasAttribute("data-ti")) n.setAttribute("data-ti", n.getAttribute("tabindex") ?? "");
+        if (id === openId) { const o = n.getAttribute("data-ti"); if (o === "") n.removeAttribute("tabindex"); else n.setAttribute("tabindex", o); }
+        else n.setAttribute("tabindex", "-1");
+      }
+    }
+  });
+  const onCellKey = useCallback((e, c) => {
+    const el = rt.cellEls.get(c.fillId);
+    const onSelf = e.target === el;
+    const dirs = { ArrowLeft: "left", ArrowRight: "right", ArrowUp: "up", ArrowDown: "down" };
+    if (onSelf && dirs[e.key]) {
+      e.preventDefault();
+      const n = neighbor(layout.cells.filter((x) => liveIds.has(x.fillId)), c.fillId, dirs[e.key]);
+      if (n) focusCell(n);
+      return;
+    }
+    if (onSelf && (e.key === "Home" || e.key === "End")) { e.preventDefault(); focusCell(e.key === "Home" ? order[0] : order[order.length - 1]); return; }
+    if (onSelf && (e.key === "Enter" || e.key === " ")) {
+      const target = el.querySelector(".c-tile, .c-face.asks, .drill, .c-media[data-act], .play-glyph, .wl-link");
+      if (target) { e.preventDefault(); target.click(); }
+      return;
+    }
+    if (onSelf && (e.key === "p" || e.key === "P")) {
+      const tag = el.querySelector(".receipts-tag");
+      if (tag) { e.preventDefault(); tag.click(); }
+      return;
+    }
+    if (onSelf && e.key === "Escape" && !openId) { e.preventDefault(); onEscapeStage?.(); return; }
+    // Focus trap inside an open (focused) cell.
+    if (e.key === "Tab" && openId === c.fillId) {
+      const f = [el, ...el.querySelectorAll("a[href], button:not([disabled]), [tabindex]:not([tabindex='-1']), video[controls]")].filter((n) => n.offsetParent !== null || n === el);
+      const i = f.indexOf(document.activeElement);
+      const next = e.shiftKey ? (i <= 0 ? f.length - 1 : i - 1) : (i >= f.length - 1 ? 0 : i + 1);
+      e.preventDefault(); f[next]?.focus();
+    }
+  }, [layout, liveIds, order, focusCell, openId, onEscapeStage, rt]);
+
   const insetOwners = useMemo(() => {
     const m = new Map();
     for (const c of scene.cells) if (c.inset) m.set(c.fillId, fillMap.get(c.inset.fillId));
@@ -146,6 +220,8 @@ export function Stage({ layout, fillMap, expanded, onToggleReceipts, reduced, me
     <RuntimeCtx.Provider value={rt}>
       <div
         className={`stage ${introOn ? "intro" : ""} ${openId ? "focus-mode" : ""}`}
+        role="region" aria-label="Stage. Arrow keys move between tiles, Enter opens, P shows proof, Escape goes back."
+        onBlur={(e) => { if (e.relatedTarget && !stageEl.current?.contains(e.relatedTarget)) hadFocus.current = false; }}
         ref={stageEl}
         style={height ? { height } : undefined}
         onPointerMove={onMove}
@@ -154,15 +230,19 @@ export function Stage({ layout, fillMap, expanded, onToggleReceipts, reduced, me
         {scene.cells.map((c) => {
           const fill = fillMap.get(c.fillId);
           if (!fill) return null;
-          const ariaLabel = fill.kind === "media" ? fill.alt : undefined;
           return (
             <section
               key={c.fillId}
+              role="group" aria-roledescription="tile"
+              aria-label={cellLabel(fill, { drillLabel })}
+              tabIndex={liveIds.has(c.fillId) && !fill.recede ? (c.fillId === stopId ? 0 : -1) : undefined}
+              aria-hidden={!liveIds.has(c.fillId) || fill.recede ? true : undefined}
+              onKeyDown={(e) => onCellKey(e, c)}
+              onFocus={(e) => { hadFocus.current = true; if (e.target === e.currentTarget) setCurrent(c.fillId); }}
               className={`cell k-${c.kind} ${fill.recede ? "recede" : ""} ${openId === c.fillId ? "open" : ""}`}
               onClickCapture={fill.recede && onCloseFocus ? (e) => { e.preventDefault(); e.stopPropagation(); onCloseFocus(); } : undefined}
               {...(layout.mode === "stack" && openId === c.fillId ? swipe(onCloseFocus, onStep) : {})}
               data-fill={c.fillId}
-              aria-label={ariaLabel}
               ref={(el) => { if (el) rt.cellEls.set(c.fillId, el); else rt.cellEls.delete(c.fillId); }}
               data-case={fill.caseStudy && onTile ? fill.caseStudy : undefined}
               onPointerEnter={(e) => {
@@ -175,7 +255,7 @@ export function Stage({ layout, fillMap, expanded, onToggleReceipts, reduced, me
               <CellContent
                 cell={c} fill={fill} insetFill={insetOwners.get(c.fillId)}
                 expanded={expanded} onToggle={onToggleReceipts} pad={layout.mode === "stack" ? 20 : 24} measure={measure}
-                activeVideo={activeVideo} onOpenCase={onOpenCase} onStep={onStep} onCaseLink={onCaseLink} onDrill={onDrill} onTile={onTile} hot={hot === fill.caseStudy}
+                activeVideo={activeVideo} onOpenCase={onOpenCase} onStep={onStep} onCaseLink={onCaseLink} onDrill={onDrill} drillLabel={drillLabel} onTile={onTile} hot={hot === fill.caseStudy}
                 attachFill={c.attach ? fillMap.get(c.attach.fillId) : undefined}
                 preview={fill.kind === "title" && fill.text === "namit" && onTile ? { current: preview, key: previewKey } : undefined}
                 reduced={reduced} onAskOpen={onAskOpen} faceBusy={faceBusy}
@@ -187,7 +267,7 @@ export function Stage({ layout, fillMap, expanded, onToggleReceipts, reduced, me
         {scene.strokes.map((s) => (
           <div
             key={s.id}
-            className={`stroke ${s.axis}`}
+            className={`stroke ${s.axis}`} aria-hidden="true"
             data-stroke={s.id}
             ref={(el) => { if (el) rt.strokeEls.set(s.id, el); else rt.strokeEls.delete(s.id); }}
           />

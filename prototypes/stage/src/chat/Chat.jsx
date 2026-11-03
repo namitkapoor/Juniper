@@ -14,7 +14,13 @@ export function Chat({ open, messages, chips, onAsk, onChip, busy, onClose, phon
   const list = useRef(null);
   const input = useRef(null);
   useEffect(() => { list.current?.scrollTo({ top: list.current.scrollHeight, behavior: "smooth" }); }, [messages]);
-  useEffect(() => { if (open && !phone) input.current?.focus({ preventScroll: true }); }, [open, phone]);
+  // Opening the chat focuses its input, unless the visitor is working the stage by keyboard.
+  useEffect(() => {
+    if (!open || phone) return;
+    const a = document.activeElement;
+    if (a && a !== document.body && a.closest?.(".stage")) return;
+    input.current?.focus({ preventScroll: true });
+  }, [open, phone]);
 
   // user + bot pairs
   const exchanges = [];
@@ -33,7 +39,7 @@ export function Chat({ open, messages, chips, onAsk, onChip, busy, onClose, phon
     <aside className={`chat ${open ? "open" : ""} ${messages.length === 0 ? "empty" : ""} ${reduced ? "instant" : ""} ${phone && sheet ? "sheet-open" : ""}`} aria-label="Ask Kip" aria-hidden={!open && !phone}>
       {phone && (
         <button
-          type="button" className="sheet-handle" aria-expanded={sheet} aria-label={sheet ? "Collapse the conversation" : "Expand the conversation"}
+          type="button" className="sheet-handle" aria-expanded={sheet} aria-label={sheet ? "Ask Kip, collapse the conversation" : "Ask Kip, expand the conversation"}
           onClick={() => setSheet((v) => !v)}
           onPointerDown={(e) => { drag.current = e.clientY; }}
           onPointerUp={(e) => { if (drag.current != null) { const dy = e.clientY - drag.current; if (dy < -24) setSheet(true); if (dy > 24) setSheet(false); } drag.current = null; }}
@@ -81,9 +87,9 @@ export function Chat({ open, messages, chips, onAsk, onChip, busy, onClose, phon
         const last = [...messages].reverse().find((m) => m.role === "bot");
         return last ? <div className="phone-reply" aria-live="polite">{last.text}</div> : null;
       })()}
-      <div className="chips" role="list">
+      <div className="chips" role="group" aria-label="Suggested questions">
         {chips.map((c) => (
-          <button key={c.label} type="button" role="listitem" className={`chip ${c.home || c.back ? "chip-home" : ""}`} onClick={() => onChip(c)} disabled={busy}>
+          <button key={c.label} type="button" className={`chip ${c.home || c.back ? "chip-home" : ""}`} onClick={() => onChip(c)} disabled={busy}>
             {c.kicker && <span className="chip-k">{c.kicker}</span>}
             {(c.home || c.back) && <span aria-hidden>← </span>}{c.label}
           </button>

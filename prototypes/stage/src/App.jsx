@@ -342,6 +342,19 @@ export default function App() {
     if (child) openDeck(child);
   }, [deckById, openDeck]);
   const backTarget = answer?.parent ? rootOf(answer) : null;
+  // Escape on the stage backs out one level: a drill-down -> its parent, a deck -> home.
+  const escapeStage = useCallback(() => {
+    if (answer?.parent) { const p = deckById(answer.parent); if (p) return openDeck(p, { silent: true }); }
+    if (!isHome) goHome();
+  }, [answer, deckById, openDeck, isHome, goHome]);
+  // Layout changes are announced politely.
+  const [announce, setAnnounce] = useState("");
+  useEffect(() => {
+    if (!stageAnswer) return;
+    if (focus) setAnnounce(`Expanded: ${stageAnswer.fills.find((f) => f.id === focus)?.alt || "media"}`);
+    else if (expanded.length) setAnnounce("Proof open. Escape to close.");
+    else setAnnounce(isHome ? "Showing: home" : answer?.page === "about" ? "Showing: about" : `Showing: ${answer?.question || ""}`);
+  }, [stageAnswer]); // eslint-disable-line react-hooks/exhaustive-deps
   const backLabel = backTarget ? (answer.caseStudy ? caseTitle(answer.caseStudy) : backTarget.question) : null;
 
   const chips = useMemo(() => {
@@ -518,6 +531,7 @@ export default function App() {
     {!phone && <div className={`app-nav ${introPending && (isHome || isAbout) ? "intro" : ""}`}>{nav}</div>}
     <div className={`app ${phone ? "phone" : "desk"} ${introPending && (isHome || isAbout) ? "intro" : ""}`} style={phone ? undefined : { left: FRAME, right: FRAME, bottom: FRAME, top: FRAME + NAV_H - 1 }}>
       {phone && <div className="app-nav">{nav}</div>}
+      <div className="sr-only" role="status" aria-live="polite">{announce}</div>
       <main className="stage-wrap" style={phone ? undefined : { width: rect.w }}>
         <div className={tall > 1 ? "stage-scroll" : "stage-plain"}>
         <Stage
@@ -532,6 +546,7 @@ export default function App() {
           intro={introPending && (isHome || isAbout)} onIntroDone={onIntroDone}
           onExpand={isHome ? undefined : onExpand} onCollapse={onCollapse} focusId={focus}
           openId={expanded[0] || focus || null} onCloseFocus={closeFocusMode} onStep={onStep} onCaseLink={onOpenCase} onDrill={onDrill}
+          drillLabel={(id) => deckById(id)?.question} onEscapeStage={escapeStage}
         />
         </div>
         <div className="gutter-left">
