@@ -120,11 +120,19 @@ const ABOUT_Q = new RegExp([
   String.raw`^\s*(?:about|bio|who)\s*\??\s*$`,
 ].join("|"), "i");
 export const isAboutQuestion = (q) => ABOUT_Q.test(q || "");
+/** Addressed to Kip himself: "who are you", "introduce yourself", "what are you". */
+const KIP_Q = /\b(?:who|what)\s*(?:'re|\s+are)\s+you\b|\byourself\b|\byour\s+(?:name|background|bio|story)\b/i;
+export const isKipQuestion = (q) => KIP_Q.test(q || "");
 
 export async function localAnswer(q, content) {
   if (isAboutQuestion(q)) {
     const about = content.about ? aboutFromJson(content.about, content.caseStudies) : aboutAnswer();
-    return { answer: { ...about, thesis: "Here's who I am: the work history, the stack, and what each skill was used for." }, how: "about (intent)" };
+    // Kip is not Namit: a question aimed at Kip ("who are you") gets Kip introducing
+    // himself, then handing over to Namit's page; one about Namit gets Namit's page.
+    const thesis = isKipQuestion(q)
+      ? "I'm Kip, Namit's guide to this site. Here's Namit."
+      : "Here's Namit: his work, his stack, and what he used each skill for.";
+    return { answer: { ...about, thesis }, how: "about (intent)" };
   }
   const d = content.decks.length ? matchDeck(q, content.decks) : null;
   if (d) return d;

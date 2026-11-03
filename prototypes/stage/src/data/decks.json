@@ -131,7 +131,7 @@
         "kind": "prose",
         "id": "ck-cart-prose",
         "weight": 0.6,
-        "text": "HOW: Shoppers add to cart inside the chat, and View cart opens the store's own cart and checkout, so there is no second cart to reconcile. The dashboard then shows the merchant what the agent sold and, one click on a keyword later, what shoppers asked.",
+        "text": "HOW: Shoppers add to cart in the chat and check out in the store's own cart. The dashboard shows what the agent sold and what shoppers asked.",
         "receipts": [
           {
             "type": "asset",

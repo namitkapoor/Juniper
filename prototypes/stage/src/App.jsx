@@ -352,7 +352,7 @@ export default function App() {
     turned.current.add(answer.id);
     if (lastQ.current === answer.question) return;
     lastQ.current = answer.question;
-    setMessages((m) => [...withoutTurn(m, answer.question), { role: "user", text: answer.question }, { role: "bot", text: answer.thesis, how: answer.caseStudy ? caseName(answer.caseStudy) : "other work" }]);
+    setMessages((m) => [...withoutTurn(m, answer.question), { role: "user", text: answer.question }, { role: "bot", text: answer.thesis, how: answer.page === "about" ? "about" : answer.caseStudy ? caseName(answer.caseStudy) : "other work" }]);
   }, [answer, content]);
 
   // Back / Forward replay the stage (and reopen the chat for answers).
@@ -536,7 +536,7 @@ export default function App() {
         turned.current.add(a.id);
         go(a);
         // The tag is the case study; the match kind/score is debug-only (data-match).
-        setMessages((m) => [...m, { role: "bot", text: a.thesis, how: a.caseStudy ? caseName(a.caseStudy) : "other work", match: how }]);
+        setMessages((m) => [...m, { role: "bot", text: a.thesis, how: a.page === "about" ? "about" : a.caseStudy ? caseName(a.caseStudy) : "other work", match: how }]);
       }
     } finally {
       setBusy(false);
