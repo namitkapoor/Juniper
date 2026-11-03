@@ -129,6 +129,12 @@ export function Chat({ open, messages, chips, onAsk, onChip, busy, onClose, onOp
   // Phone: the chat is a bottom sheet. Peek = face + latest reply + chips + input;
   // drag (or tap) the handle up to see the whole conversation, down to peek again.
   const [sheet, setSheet] = useState(false);
+  // Phone: Kip can be put away to a 48px "Ask Kip" bar (Hide), so the stage gets
+  // the whole screen. Remembered for the session; a new reply brings him back.
+  const [min, setMinState] = useState(() => { try { return sessionStorage.getItem("kip-min") === "1"; } catch { return false; } });
+  const setMin = (v) => { setMinState(v); try { sessionStorage.setItem("kip-min", v ? "1" : "0"); } catch { /* private mode */ } };
+  const seenMsgs = useRef(messages.length);
+  useEffect(() => { if (messages.length > seenMsgs.current && messages[messages.length - 1]?.role === "bot") setMin(false); seenMsgs.current = messages.length; }, [messages]); // eslint-disable-line react-hooks/exhaustive-deps
   // null | "drag" (finger down) | "settle" (snapping) | "settled" (one frame, no width transition)
   const [drag, setDrag] = useState(null);
   const aside = useRef(null);
@@ -398,18 +404,23 @@ export function Chat({ open, messages, chips, onAsk, onChip, busy, onClose, onOp
     <>
       <div ref={wrap} className={`chat-wrap ${sliding ? "dragging" : ""} ${drag === "settled" ? "settled" : ""}`} style={phone ? undefined : { width: drag ? openW : chatW }}>
         <aside ref={aside} id="kip-chat" onKeyDown={onKeyDown}
-          className={`chat ${open ? "open" : ""} ${messages.length === 0 ? "empty" : ""} ${reduced ? "instant" : ""} ${phone && sheet ? "sheet-open" : ""} ${sliding ? "dragging" : ""}`}
+          className={`chat ${open ? "open" : ""} ${messages.length === 0 ? "empty" : ""} ${reduced ? "instant" : ""} ${phone && sheet ? "sheet-open" : ""} ${phone && min && !sheet ? "min" : ""} ${sliding ? "dragging" : ""}`}
           aria-label="Ask Kip" aria-hidden={!open && !phone}>
           {phone ? (
             <div className="sheet-drawer" ref={drawer}>
               <button
                 type="button" className="sheet-handle" aria-expanded={sheet} aria-label={sheet ? "Ask Kip, collapse the conversation" : "Ask Kip, expand the conversation"}
-                onClick={() => setSheet((v) => !v)} {...sheetDrag.bind}
+                onClick={() => { if (min) { setMin(false); return; } setSheet((v) => !v); }} {...sheetDrag.bind}
               >
                 <span className="grip" aria-hidden />
                 <Face size={30} busy={busyFace} {...faceMood} reduced={reduced} />
                 <span className="label">Ask Kip</span>
               </button>
+              {!min && (
+                <button type="button" className="label link sheet-hide" onClick={() => { setSheet(false); setMin(true); }} aria-label="Hide Kip">
+                  hide
+                </button>
+              )}
               <div className="sheet-body" ref={body}>
                 {listEl}
                 {lastBot && <div className="phone-reply" ref={reply} tabIndex={0} role="region" aria-label="Kip's latest reply"><StreamText text={lastBot.text} reduced={reduced} /></div>}

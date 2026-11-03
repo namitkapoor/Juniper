@@ -87,6 +87,9 @@ function LottieSwap({ res, back }) {
 export function Navbar({ onHome, onAbout, crumbs, isHome, isAbout, theme, onToggleTheme }) {
   const [open, setOpen] = useState(false);
   const burger = useRef(null);
+  // The panel is fixed to the viewport and starts at the bar's bottom edge.
+  const [menuTop, setMenuTop] = useState(0);
+  useEffect(() => { if (open) setMenuTop(Math.round(burger.current?.closest("nav")?.getBoundingClientRect().bottom || 56)); }, [open]);
   useEffect(() => {
     if (!open) return;
     const on = (e) => { if (e.key === "Escape") { setOpen(false); burger.current?.focus(); } };
@@ -140,20 +143,27 @@ export function Navbar({ onHome, onAbout, crumbs, isHome, isAbout, theme, onTogg
           </button>
         </div>
         <span className="a11y-phone"><A11yButton /></span>
-        <button ref={burger} className="hamburger-menu" type="button" onClick={() => setOpen(!open)} aria-label={open ? "Close menu" : "Open menu"} aria-expanded={open}>
+        <button ref={burger} className="hamburger-menu" type="button" onClick={() => setOpen(!open)} aria-label={open ? "Close menu" : "Open menu"} aria-expanded={open} aria-controls="mobile-nav">
           <span className={`hamburger-line ${open ? "l1" : ""}`} />
           <span className={`hamburger-line ${open ? "l2" : ""}`} />
           <span className={`hamburger-line ${open ? "l3" : ""}`} />
         </button>
       </div>
       {open && (
-        <div className="mobile-nav-menu">
+        // Same menu as studio.namit.me: a full panel under the bar (nothing shows
+        // through), the three links, then the theme row naming what it switches to.
+        <div className="mobile-nav-menu" id="mobile-nav" style={{ top: menuTop }}>
           <div className="mobile-nav-links">
             {LINKS.map((l) => (
-              <a key={l.label} className="mobile-nav-item" href={l.href}
+              <a key={l.label} className={`mobile-nav-item ${l.internal && isAbout ? "active" : ""}`} href={l.href}
+                aria-current={l.internal && isAbout ? "page" : undefined}
                 {...(l.internal || l.sameTab ? {} : { target: "_blank", rel: "noopener noreferrer" })}
                 onClick={(e) => { setOpen(false); if (l.internal) { e.preventDefault(); onAbout(); } }}>{l.label}</a>
             ))}
+            <button type="button" className="mobile-nav-item mobile-theme" onClick={onToggleTheme}>
+              <Glyph name={theme === "light" ? "lucide:moon" : "lucide:sun"} size={18} />
+              {theme === "light" ? "Dark mode" : "Light mode"}
+            </button>
           </div>
         </div>
       )}

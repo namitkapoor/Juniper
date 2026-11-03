@@ -924,7 +924,7 @@ kbd { font: 500 12px ui-monospace, Menlo, monospace; padding: 1px 5px; border: 1
   border: 1px solid transparent; background: none; transition: border-color .3s; }
 @media (max-width: 760px) { .hamburger-menu { display: block; } }
 .hamburger-menu::after { content: ""; position: absolute; inset: -3px; }
-.hamburger-menu[aria-expanded="true"] { border-color: var(--hair-ctl); }
+
 .hamburger-line { position: absolute; left: 50%; top: 50%; width: 20px; height: 1.5px; margin: -0.75px 0 0 -10px;
   background: var(--ink); transition: transform .3s cubic-bezier(.4,0,.2,1), opacity .2s; }
 .hamburger-line:nth-child(1) { transform: translateY(-6px); }
@@ -1164,3 +1164,17 @@ kbd { font: 500 12px ui-monospace, Menlo, monospace; padding: 1px 5px; border: 1
    scrolling inside, so Kip's reply is never squeezed to one clipped line on a
    short window. The log keeps the rest. */
 .app:not(.phone) .chat:not(.empty) > .chips { flex: 0 1 auto; max-height: 40%; min-height: 0; overflow-y: auto; overscroll-behavior: contain; }
+
+/* Phone menu, shared look with studio.namit.me: a full panel from the bar down,
+   22px links on hairlines, the current page on a 1.5px ink rule, then the theme row. */
+.mobile-nav-menu { position: fixed; left: 0; right: 0; bottom: 0; border: 0; border-top: 1px solid var(--hair); background: var(--bg); z-index: 80; overflow-y: auto; }
+.mobile-nav-links { padding: 8px 20px 24px; }
+.mobile-nav-item { display: flex; align-items: center; gap: 10px; min-height: 56px; padding: 0; font-family: var(--display); font-size: 22px; color: var(--ink-2); border: 0; border-bottom: 1px solid var(--hair); background: none; text-align: left; width: 100%; cursor: pointer; }
+.mobile-nav-item.active { color: var(--ink); border-bottom: 1.5px solid var(--ink); }
+.mobile-nav-item:focus-visible { outline: 2px solid var(--ring); outline-offset: -2px; }
+.mobile-theme { font-size: 17px; }
+
+/* Phone: Kip put away (Hide) shows only the 48px "Ask Kip" bar, like the short-screen collapse. */
+.app.phone .chat.min > :not(.sheet-drawer), .app.phone .chat.min .phone-reply, .app.phone .chat.min .sheet-body { display: none !important; }
+.sheet-drawer { position: relative; }
+.sheet-hide { position: absolute; right: 12px; top: 8px; min-height: 32px; padding: 0 8px; z-index: 2; color: var(--ink-2); }
