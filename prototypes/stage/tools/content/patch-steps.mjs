@@ -20,7 +20,7 @@ const CV_DATA = { type: "asset", ref: "src/data/christineValmyData.js", repo: "J
     m.kpi = { value: eng.value, label: eng.label, receipts: eng.receipts };
     drop(d, "ck-engagement");
   }
-  m.caption = "One live store's top line: visitors, engagement, and the order and revenue the agent drove.";
+  m.caption = "One live store's top line: visitors and engagement.";
 }
 // ---------------- ChekOut: build (the 8-merchant count and logos live in the outcomes deck)
 {

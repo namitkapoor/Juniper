@@ -10,12 +10,13 @@ import { Face } from "../chat/Face.jsx";
 import { StackIcon } from "../about/StackIcon.jsx";
 import { Glyph } from "../about/Glyph.jsx";
 import { ZoomImage } from "./ZoomImage.jsx";
+import Specimen from "./specimen/Specimen.jsx";
 import { shortName } from "../a11y.js";
 import { assetUrl, INVERT_LOGOS } from "../content.js";
-import { receiptsOf, receiptsListH, kpiValueSize, tileNumLabelH, kickerH, kickerW, receiptRowH, previewBox, commitCardParts, commitTitle, commitMetaText, receiptText, breakdownRowHs, splitPeriod, BD_COLS, stepText, STEP_CHIP_W, worklogMeta, worklogLink, fmtDate, OFFCLOCK_GROUPS, STATUS_H } from "../engine/fit.js";
+import { ctrlItems, ctrlReserve, receiptsOf, receiptsListH, kpiValueSize, tileNumLabelH, kickerH, kickerW, receiptRowH, previewBox, commitCardParts, commitTitle, commitMetaText, receiptText, breakdownRowHs, splitPeriod, BD_COLS, stepText, STEP_CHIP_W, worklogMeta, worklogLink, fmtDate, OFFCLOCK_GROUPS, STATUS_H } from "../engine/fit.js";
 import {
   PAD, proseSteps, stepsFor, PROSE_FONT, QUOTE_STEPS, QUOTE_FONT, QUOTE_WHO_H, TITLE_FONT, titleLineHeight, titleFontFor, titleLHFor,
-  KICKER_H, RECEIPTS, COMMITS, MEDIA, DRILL_H, WORDS, HEADING, headingH, LOGOS, BREAKDOWN, TILE, TILE_FONT, tileRoleH, TIMELINE, WORKLOG, STACK, OFFCLOCK,
+  KICKER_H, RECEIPTS, COMMITS, MEDIA, DRILL_H, CTRL, WORDS, HEADING, headingH, LOGOS, BREAKDOWN, TILE, TILE_FONT, tileRoleH, TIMELINE, WORKLOG, STACK, OFFCLOCK,
 } from "../engine/typo.js";
 
 // The Proof rule lives in one place (engine/fit.js hasRealProof).
@@ -30,15 +31,32 @@ export function CellContent({ drillLabel, onDrill, onCaseLink, onStep, cell, fil
   const body = (() => {
     switch (fill.kind) {
       case "title": return <TitleCell fill={fill} cell={cell} P={P} listH={listH} preview={preview} reduced={reduced} measure={measure} />;
-      case "prose": return <ProseCell fill={fill} cell={cell} P={P} listH={listH} tag={tag && !open} insetFill={insetFill} measure={measure} />;
-      case "quote": return <QuoteCell fill={fill} cell={cell} P={P} listH={listH} tag={tag && !open} />;
+      case "prose": return <ProseCell fill={fill} cell={cell} P={P} listH={listH} insetFill={insetFill} measure={measure} />;
+      case "quote": return <QuoteCell fill={fill} cell={cell} P={P} listH={listH} measure={measure} />;
       case "kpi": return <KpiCell fill={fill} cell={cell} P={P} listH={listH} attachFill={attachFill} measure={measure} innerW={innerW} />;
-      case "logos": return <LogosCell fill={fill} cell={cell} P={P} listH={listH} />;
+      case "logos": return <LogosCell fill={fill} cell={cell} P={P} listH={listH} measure={measure} />;
       case "timeline": return <TimelineCell fill={fill} cell={cell} P={P} />;
       case "worklog": return <WorklogCell fill={fill} cell={cell} P={P} onCaseLink={onCaseLink} />;
       case "stack": return <StackCell fill={fill} cell={cell} P={P} />;
       case "offclock": return <OffClockCell fill={fill} cell={cell} P={P} />;
       case "portrait": return <PortraitCell fill={fill} cell={cell} reduced={reduced} />;
+      case "specimen": {
+        // A 36px top strip holds the controls (Expand / Close, Proof), never the specimen itself.
+        // Controls anchor to the cell; Proof keeps its usual top-right place.
+        const strip = tag || onExpand || focused;
+        return (<>
+          {focused && (
+            <div className="media-toolbar" style={{ height: 36 }} onClick={(e) => e.stopPropagation()}>
+              <button type="button" className="close-btn" aria-label="Close the expanded specimen" onClick={(e) => { e.stopPropagation(); onCollapse(); }}>
+                <span aria-hidden>×</span> Close
+              </button>
+            </div>
+          )}
+          <div className="c-specimen" style={{ position: "absolute", left: 0, right: 0, top: strip ? 36 : 0, bottom: listH }}>
+            <Specimen fill={fill} active={open || !!focused || !!fill.focused} reduced={reduced} pad={20} />
+          </div>
+        </>);
+      }
       case "face": return <FaceCell cell={cell} P={P} onAskOpen={onAskOpen} reduced={reduced} busy={faceBusy} />;
       case "tile": return <TileCell fill={fill} cell={cell} P={P} onTile={onTile} hot={hot} />;
       case "media": return <MediaCell fill={fill} cell={cell} listH={listH} active={activeVideo === fill.id} onOpenCase={onOpenCase} onExpand={onExpand} onCollapse={onCollapse} focused={focused} onStep={onStep} onDrill={onDrill} />;
@@ -49,12 +67,8 @@ export function CellContent({ drillLabel, onDrill, onCaseLink, onStep, cell, fil
   return (
     <>
       {body}
-      {fill.opens && onDrill && (
-        <button type="button" className="drill label" aria-label={`Go deeper: ${drillLabel?.(fill.opens) || "more on this"}`} style={{ right: P, bottom: Math.max(10, P - 8) + listH }} onClick={(e) => { e.stopPropagation(); onDrill(fill.opens); }}>
-          Go deeper <span aria-hidden>→</span>
-        </button>
-      )}
-      {tag && <ReceiptsTag fill={fill} open={open} onToggle={onToggle} P={P} at={fill.kind === "media" ? cell.spec?.tag : null} />}
+      <CtrlGroup fill={fill} cell={cell} P={P} open={open} listH={listH} measure={measure} focused={focused}
+        onToggle={onToggle} onDrill={onDrill} drillLabel={drillLabel} onExpand={onExpand} onOpenCase={onOpenCase} />
       {open && fill.kind !== "stack" && (
         // Focus mode: beside the text when the engine set it there, else right under it.
         cell.spec?.side
@@ -82,7 +96,7 @@ function TitleCell({ fill, cell, P, listH, preview, reduced, measure }) {
   return (
     <div className={`c-title ${showing ? "previewing" : ""}`}>
       <div className="wordmark">
-        {fill.kicker && <div className="label kicker" style={{ left: P, top: P, width: kickerW(fill, Math.round(cell.w) - 2 * P) }}>{fill.kicker}</div>}
+        {fill.kicker && <p className="label kicker" style={{ left: P, top: P, width: kickerW(fill, Math.round(cell.w) - 2 * P) }}>{fill.kicker}</p>}
         <h2 className="sr-only">{fill.text}</h2>
         <FlowText
           flowKey={`${fill.id}:t`} fillId={fill.id} text={fill.text} steps={steps} mkFont={titleFontFor(fill)}
@@ -136,28 +150,28 @@ function HeroPreview({ fillId, P, preview, reduced }) {
 
 /* ---------------------------------------------------------------- prose */
 
-function ProseCell({ fill, cell, P, listH, tag, insetFill, measure }) {
+function ProseCell({ fill, cell, P, listH, insetFill, measure }) {
   const inset = cell.inset;
+  const ctl = ctrlReserve(fill, measure, Math.round(cell.w), P);
   const headH = fill.heading ? headingH(measure, fill.heading, Math.round(cell.w) - 2 * P) : 0;
   const kw = kickerW(fill, Math.round(cell.w) - 2 * P);
   const kickOnly = kickerH(measure, fill.kicker, kw);
   const kick = kickOnly + headH;
   return (
     <div className="c-prose">
-      {fill.kicker && <div className="label kicker" style={{ left: P, top: P, width: kw }}>{fill.kicker}</div>}
+      {fill.kicker && <h2 className="label kicker" style={{ left: P, top: P, width: kw, margin: 0 }}>{fill.kicker}</h2>}
       {fill.heading && (
         <h3 className="p-heading" style={{ left: P, right: P, top: P + kickOnly, font: `300 ${HEADING.size}px/${HEADING.lineHeight}px CabinetGrotesk` }}>{fill.heading}</h3>
       )}
-      <p className="sr-only">{fill.kicker ? `${fill.kicker}: ` : ""}{fill.text}</p>
+      <p className="sr-only">{fill.text}</p>
       <FlowText
-        flowKey={`${fill.id}:p`} fillId={fill.id} text={fill.text} steps={stepsFor(fill)} mkFont={PROSE_FONT}
+        flowKey={`${fill.id}:p`} fillId={fill.id} text={fill.text} steps={stepsFor(fill, P === PAD.phone)} mkFont={PROSE_FONT}
         startStep={cell.spec?.step ?? 0}
         box={(w, h) => (cell.spec?.side && listH
-          ? { x: P, y: P + kick, w: cell.spec.side.textW, h: h - 2 * P - kick - (fill.opens ? DRILL_H : 0) }
-          : { x: P, y: P + kick, w: w - 2 * P, h: h - 2 * P - kick - listH - (fill.opens ? DRILL_H : 0) })}
+          ? { x: P, y: P + kick, w: cell.spec.side.textW, h: h - 2 * P - kick - ctl }
+          : { x: P, y: P + kick, w: w - 2 * P, h: h - 2 * P - kick - listH - ctl })}
         statics={(b) => {
           const o = [];
-          if (tag && !fill.kicker && !headH) o.push({ x: b.w - RECEIPTS.tagW - 10, y: 0, w: RECEIPTS.tagW + 10, h: RECEIPTS.tagH + 4 });
           if (inset) o.push({ x: b.w - inset.w - 18, y: inset.y - P - kick, w: inset.w + 18, h: inset.h + 10 });
           return o;
         }}
@@ -180,18 +194,18 @@ function ProseCell({ fill, cell, P, listH, tag, insetFill, measure }) {
 
 /* ---------------------------------------------------------------- quote */
 
-function QuoteCell({ fill, cell, P, listH, tag }) {
+function QuoteCell({ fill, cell, P, listH, measure }) {
+  const ctl = ctrlReserve(fill, measure, Math.round(cell.w), P);
   return (
     <div className="c-quote">
       <blockquote className="sr-only">{fill.text} — {fill.who}</blockquote>
       <FlowText
         flowKey={`${fill.id}:q`} fillId={fill.id} text={`“${fill.text}”`} steps={QUOTE_STEPS} mkFont={QUOTE_FONT}
         startStep={cell.spec?.step ?? 0}
-        box={(w, h) => ({ x: P, y: P, w: w - 2 * P, h: h - 2 * P - (cell.spec?.whoH ?? QUOTE_WHO_H) - listH })}
-        statics={(b) => (tag ? [{ x: b.w - RECEIPTS.tagW - 10, y: 0, w: RECEIPTS.tagW + 10, h: RECEIPTS.tagH + 4 }] : [])}
+        box={(w, h) => ({ x: P, y: P, w: w - 2 * P, h: h - 2 * P - (cell.spec?.whoH ?? QUOTE_WHO_H) - listH - ctl })}
         className="t-quote"
       />
-      <div className="label who" style={{ left: P, right: P, bottom: P + listH }}>{fill.who}</div>
+      <div className="label who" style={{ left: P, right: P, bottom: P + listH + ctl }}>{fill.who}</div>
     </div>
   );
 }
@@ -202,7 +216,7 @@ function KpiCell({ fill, cell, P, listH, attachFill, measure, innerW }) {
   const bd = cell.spec?.breakdown;
   const at = cell.attach && attachFill;
   return (
-    <div className="c-kpi" style={{ padding: P, paddingBottom: P + listH + (fill.opens ? DRILL_H : 0), paddingTop: P + RECEIPTS.tagH + 4 }}>
+    <div className="c-kpi" style={{ padding: P, paddingBottom: P + listH + ctrlReserve(fill, measure, Math.round(cell.w), P) }}>
       <KpiBody fill={fill} size={cell.spec?.size} />
       {bd === "rows" && <BreakdownRows fill={fill} measure={measure} innerW={innerW} />}
       {bd === "bar" && <BreakdownBar fill={fill} />}
@@ -292,10 +306,10 @@ function LogoRow({ items, logoH, label }) {
   );
 }
 
-function LogosCell({ fill, cell, P, listH }) {
+function LogosCell({ fill, cell, P, listH, measure }) {
   const label = fill.label || (fill.receipts?.length ? " " : "");
   return (
-    <div className="c-logos" style={{ padding: P, paddingBottom: P + listH + (fill.opens ? DRILL_H : 0) }}>
+    <div className="c-logos" style={{ padding: P, paddingBottom: P + listH + ctrlReserve(fill, measure, Math.round(cell.w), P) }}>
       <LogoRow items={fill.items} logoH={cell.spec?.logoH ?? 28} label={label} />
     </div>
   );
@@ -398,7 +412,7 @@ function StackCell({ fill, cell, P }) {
                 {(it.jobs || []).length > 0 && (
                   <div className="st-jobs">
                     {it.jobs.map((j) => (
-                      <button key={j} type="button" className={`st-job ${sel?.job === j ? "on" : ""}`} aria-pressed={sel?.job === j}
+                      <button key={j} type="button" className={`st-job ${sel?.job === j ? "on" : ""}`} aria-pressed={sel?.job === j} aria-label={`${it.name} at ${j}: show every skill used there`}
                         onClick={() => setSel((s) => (s?.job === j ? null : { job: j }))}>{j}</button>
                     ))}
                   </div>
@@ -474,7 +488,7 @@ function PortraitCell({ fill, cell, reduced }) {
   }, []);
   return (
     <div className="c-portrait" role="img" aria-label={fill.alt}>
-      <div style={at}>{ready && <Suspense fallback={null}><ParticlePortrait src={assetUrl(fill.src)} reduced={reduced} /></Suspense>}</div>
+      <div style={at}>{ready && <Suspense fallback={null}><ParticlePortrait src={assetUrl(fill.src)} reduced={reduced} background={getComputedStyle(document.documentElement).getPropertyValue("--portrait-bg").trim() || "#141414"} /></Suspense>}</div>
     </div>
   );
 }
@@ -600,11 +614,6 @@ function MediaCell({ fill, cell, listH, active, onOpenCase, onExpand, onCollapse
           focused ? <ZoomImage src={src} alt={fill.alt} slot={zoomSlot} /> : <img src={src} alt={fill.alt} draggable={false} />
         )}
       </div>
-      {(opens || expands) && <span className="open-tag" style={{ left: box.x + 12, top: box.y + 12 }} aria-hidden>{opens ? "Open →" : "Expand ↗"}</span>}
-      {drills && onExpand && (
-        <button type="button" className="expand-mini" style={{ left: box.x + 10, top: box.y + 10 }} aria-label={`Expand: ${fill.alt}`}
-          onClick={(e) => { e.stopPropagation(); onExpand(fill.id); }}>↗</button>
-      )}
       {focused && (
         // The toolbar sits above the image, never on it: close, step nav, zoom.
         <div className="media-toolbar" style={{ height: spec.toolbar?.h ?? 36 }} onClick={(e) => e.stopPropagation()}>
@@ -662,7 +671,7 @@ function Video({ src, poster, alt, active, controls }) {
       <video ref={v} src={src} poster={poster} muted loop playsInline preload="metadata" controls={controls} aria-label={alt}
         onPlay={() => setPlaying(true)} onPause={() => setPlaying(false)} />
       {!controls && (
-        <button type="button" className={`play-glyph ${playing ? "is-playing" : ""}`} aria-label={playing ? `Pause: ${alt}` : `Play: ${alt}`} onClick={toggle}
+        <button type="button" className={`play-glyph ${playing ? "is-playing" : ""}`} aria-label={`Play: ${alt}`} aria-pressed={playing} onClick={toggle}
           onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(e); } }}>
           <span aria-hidden>{playing ? "❚❚" : "▶"}</span>
         </button>
@@ -699,10 +708,49 @@ function CommitsCell({ fill, cell, P }) {
 
 /* ------------------------------------------------------------- receipts */
 
-function ReceiptsTag({ fill, open, onToggle, P, at }) {
+/**
+ * The control group: [GO DEEPER →] [PROOF] [↗], one height, one type style, right-aligned
+ * at the cell's 16px inset. Media place it in their strip (spec.ctrl); a specimen in its
+ * top strip; every other kind at the bottom, above an open Proof list. Widths come from
+ * the engine (ctrlItems) so the DOM wraps exactly where the layout reserved room.
+ */
+function CtrlGroup({ fill, cell, P, open, listH, measure, focused, onToggle, onDrill, drillLabel, onExpand, onOpenCase }) {
+  const drill = !!(fill.opens && onDrill);
+  const exp = !!(onExpand && !focused && (fill.kind === "specimen" || (fill.kind === "media" && !(fill.caseStudy && onOpenCase))));
+  const items = ctrlItems(fill, measure, { drill, exp });
+  if (!items.length) return null;
+  const W = Math.round(cell.w);
+  let place;
+  if (fill.kind === "media" && cell.spec?.ctrl) place = { top: cell.spec.ctrl.y, right: cell.spec.ctrl.right, maxWidth: cell.spec.ctrl.w };
+  else if (fill.kind === "specimen") place = { top: 2, right: CTRL.inset, maxWidth: W - 2 * CTRL.inset };
+  else {
+    // The open list sits at the cell bottom unless it was placed beside / right under the text.
+    const listAtBottom = open && !cell.spec?.side && !((fill.kind === "prose" || fill.kind === "quote") && cell.spec?.need != null);
+    place = { bottom: CTRL.inset + (listAtBottom ? listH : 0), right: CTRL.inset, maxWidth: W - 2 * CTRL.inset };
+  }
+  return (
+    <div className="ctrl-group" style={place}>
+      {items.map((it) => it.k === "drill" ? (
+        <button key="drill" type="button" className="drill" style={{ width: it.w }} aria-label={`Go deeper: ${drillLabel?.(fill.opens) || "more on this"}`}
+          onClick={(e) => { e.stopPropagation(); onDrill(fill.opens); }}>
+          Go deeper <span aria-hidden>→</span>
+        </button>
+      ) : it.k === "proof" ? (
+        <ReceiptsTag key="proof" fill={fill} open={open} onToggle={onToggle} width={it.w} />
+      ) : (
+        <button key="exp" type="button" className={`expand-mini ${fill.kind === "specimen" ? "spec-expand" : ""}`} style={{ width: it.w }}
+          aria-label={`Expand: ${fill.alt || shortName(fill)}`} onClick={(e) => { e.stopPropagation(); onExpand(fill.id); }}>
+          <span aria-hidden>↗</span>
+        </button>
+      ))}
+    </div>
+  );
+}
+
+function ReceiptsTag({ fill, open, onToggle, width }) {
   const list = receiptsOf(fill);
   const types = [...new Set(list.map((r) => r.type))].slice(0, 3);
-  const style = at ? { left: at.x, top: at.y, height: RECEIPTS.tagH } : { top: P - 4, right: P - 6, height: RECEIPTS.tagH };
+  const style = { width };
   return (
     <button
       type="button"
@@ -735,7 +783,7 @@ export function relativeDate(iso, now = Date.now()) {
 function CommitCard({ r, measure, innerW }) {
   const p = commitCardParts(measure, r, innerW);
   return (
-    <li className="commit-card" style={{ height: receiptRowH(measure, r, innerW) }}>
+    <li className="commit-card" style={{ height: receiptRowH(measure, { ...r, preview: undefined }, innerW) }}>
       <div className="cc-title" style={{ height: p.title }}><Icon type="commit" size={14} /><span>{commitTitle(r)}</span></div>
       <div className="cc-meta" style={{ height: p.meta }}>
         <code>{r.ref.slice(0, 7)}</code> · Namit Kapoor
@@ -759,22 +807,36 @@ function ReceiptPreview({ p, innerW, alt }) {
   const box = previewBox(p, innerW);
   const [hover, setHover] = useState(false);
   const [big, setBig] = useState(false);
+  const btn = useRef(null);
+  const dlg = useRef(null);
+  // A real modal: showModal() traps focus; Escape (cancel) closes; focus returns to the preview.
+  useEffect(() => {
+    if (!big) return;
+    dlg.current?.showModal?.();
+    dlg.current?.querySelector(".close-btn")?.focus();
+  }, [big]);
+  const close = () => { setBig(false); requestAnimationFrame(() => btn.current?.focus()); };
   const reduced = typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   // Poster until hovered; the animated GIF only while the pointer is on it.
-  const src = assetUrl(hover && !reduced ? p.src : p.poster || p.src);
+  // Light theme: the demo's NAME-light variant (same file name + "-light").
+  const light = typeof document !== "undefined" && document.documentElement.dataset.theme === "light";
+  const themed = (u) => (u && light && /\/demos\//.test(u) ? u.replace(/(\.[a-z0-9]+)$/i, "-light$1") : u);
+  const src = assetUrl(themed(hover && !reduced ? p.src : p.poster || p.src));
   return (
     <>
-      <button type="button" className={`r-preview f-${p.frame || "none"}`} style={{ width: box.w, height: box.h }}
+      <button ref={btn} type="button" className={`r-preview f-${p.frame || "none"}`} style={{ width: box.w, height: box.h }}
         onPointerEnter={(e) => e.pointerType !== "touch" && setHover(true)} onPointerLeave={() => setHover(false)}
         onClick={() => setBig(true)} aria-label={`Play: ${alt}`}>
         <img src={src} alt="" draggable={false} />
         {!hover && <span className="play-glyph static" aria-hidden>▶</span>}
       </button>
       {big && (
-        <div className="preview-big" role="dialog" aria-label={alt} onClick={() => setBig(false)} onKeyDown={(e) => e.key === "Escape" && setBig(false)} tabIndex={-1}>
-          <img src={assetUrl(p.src)} alt={alt} style={{ aspectRatio: p.aspect }} />
-          <button type="button" className="close-btn" style={{ position: "fixed", top: 20, right: 20 }} onClick={() => setBig(false)}><span aria-hidden>×</span> Close</button>
-        </div>
+        <dialog ref={dlg} className="preview-big" aria-modal="true" aria-label={alt}
+          onCancel={(e) => { e.preventDefault(); close(); }} onClick={(e) => { if (e.target === dlg.current) close(); }}
+          onKeyDown={(e) => { if (e.key === "Escape") { e.preventDefault(); e.stopPropagation(); close(); } }}>
+          <img src={assetUrl(themed(reduced ? p.poster || p.src : p.src))} alt={alt} style={{ aspectRatio: p.aspect }} />
+          <button type="button" className="close-btn" onClick={close}><span aria-hidden>×</span> Close</button>
+        </dialog>
       )}
     </>
   );
@@ -788,7 +850,12 @@ function ReceiptsList({ fill, P, h, measure, innerW, highlight, place }) {
       <div className="label receipts-head" style={{ height: RECEIPTS.headerH }}>{WORDS.proof}</div>
       <ul>
         {list.map((r, i) => {
-          if (r.type === "commit") return <CommitCard key={`${r.ref}-${i}`} r={r} measure={measure} innerW={innerW} />;
+          if (r.type === "commit") return (
+            <li key={`${r.ref}-${i}`} className="commit-wrap" style={{ height: receiptRowH(measure, r, innerW) }}>
+              <ul className="cc-inner"><CommitCard r={r} measure={measure} innerW={innerW} /></ul>
+              {r.preview && <ReceiptPreview p={r.preview} innerW={innerW} alt={commitTitle(r)} />}
+            </li>
+          );
           const text = receiptText(r);
           return (
             <li key={`${r.ref}-${i}`} className={`r-row ${r.preview ? "has-preview" : ""} ${highlight && (r.item || r.ref) === highlight ? "hi" : ""}`} style={{ height: receiptRowH(measure, r, innerW) }}>

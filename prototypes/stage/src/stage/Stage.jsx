@@ -158,6 +158,13 @@ export function Stage({ layout, fillMap, expanded, onToggleReceipts, reduced, me
     // the new scene mounts on the next frame
     requestAnimationFrame(() => focusCell(current && liveIds.has(current) ? current : order[0]));
   }, [layout]); // eslint-disable-line react-hooks/exhaustive-deps
+  // Receded cells (focus mode) are inert: out of the tab order and the a11y tree.
+  useLayoutEffect(() => {
+    for (const [id, el] of rt.cellEls) {
+      const f = fillMap.get(id);
+      if (f?.recede) el.setAttribute("inert", ""); else el.removeAttribute("inert");
+    }
+  });
   // Closing an open cell (proof / expanded) returns focus to that tile.
   const prevOpen = useRef(null);
   useLayoutEffect(() => {
@@ -168,19 +175,23 @@ export function Stage({ layout, fillMap, expanded, onToggleReceipts, reduced, me
       if (!el || el === document.body || rt.cellEls.get(was)?.contains(el)) requestAnimationFrame(() => focusCell(liveIds.has(was) ? was : order[0]));
     }
   }, [openId]); // eslint-disable-line react-hooks/exhaustive-deps
-  // Inner controls are reachable by keys, not Tab, except inside the open (focused) cell.
+  // Focus group: the tile holding the tab stop (and an open tile) lets Tab walk
+  // into its own controls; every other tile's controls wait their turn.
   useLayoutEffect(() => {
     for (const [id, el] of rt.cellEls) {
+      const reachable = id === openId || (!openId && id === stopId);
       const inner = el.querySelectorAll("a, button, [tabindex], video, input");
       for (const n of inner) {
         if (n === el) continue;
         if (!n.hasAttribute("data-ti")) n.setAttribute("data-ti", n.getAttribute("tabindex") ?? "");
-        if (id === openId) { const o = n.getAttribute("data-ti"); if (o === "") n.removeAttribute("tabindex"); else n.setAttribute("tabindex", o); }
+        if (reachable) { const o = n.getAttribute("data-ti"); if (o === "" || o === "-1") n.removeAttribute("tabindex"); else n.setAttribute("tabindex", o); }
         else n.setAttribute("tabindex", "-1");
       }
     }
   });
   const onCellKey = useCallback((e, c) => {
+    // A specimen owns its keys (←/→/Space) while it has focus.
+    if (e.target.closest?.(".spec") && e.target !== rt.cellEls.get(c.fillId)) return;
     const el = rt.cellEls.get(c.fillId);
     const onSelf = e.target === el;
     const dirs = { ArrowLeft: "left", ArrowRight: "right", ArrowUp: "up", ArrowDown: "down" };
@@ -192,7 +203,7 @@ export function Stage({ layout, fillMap, expanded, onToggleReceipts, reduced, me
     }
     if (onSelf && (e.key === "Home" || e.key === "End")) { e.preventDefault(); focusCell(e.key === "Home" ? order[0] : order[order.length - 1]); return; }
     if (onSelf && (e.key === "Enter" || e.key === " ")) {
-      const target = el.querySelector(".c-tile, .c-face.asks, .drill, .c-media[data-act], .play-glyph, .wl-link");
+      const target = el.querySelector(".c-tile, .c-face.asks, .drill, .c-media[data-act], .play-glyph, .wl-link, .status-link, .spec-expand");
       if (target) { e.preventDefault(); target.click(); }
       return;
     }
@@ -211,6 +222,16 @@ export function Stage({ layout, fillMap, expanded, onToggleReceipts, reduced, me
     }
   }, [layout, liveIds, order, focusCell, openId, onEscapeStage, rt]);
 
+  // The first keyboard focus on a tile shows the key hint once per session.
+  const [hint, setHint] = useState(false);
+  const maybeHint = useCallback((e) => {
+    try {
+      if (sessionStorage.getItem("stage-kbd-hint") || !e.currentTarget.matches(":focus-visible")) return;
+      sessionStorage.setItem("stage-kbd-hint", "1");
+    } catch { return; }
+    setHint(true);
+  }, []);
+
   const insetOwners = useMemo(() => {
     const m = new Map();
     for (const c of scene.cells) if (c.inset) m.set(c.fillId, fillMap.get(c.inset.fillId));
@@ -223,7 +244,7 @@ export function Stage({ layout, fillMap, expanded, onToggleReceipts, reduced, me
         className={`stage ${introOn ? "intro" : ""} ${openId ? "focus-mode" : ""}`}
         role="region" aria-label="Stage. Arrow keys move between tiles, Enter opens, P shows proof, Escape goes back."
         onBlur={(e) => { if (e.relatedTarget && !stageEl.current?.contains(e.relatedTarget)) hadFocus.current = false; }}
-        ref={stageEl}
+        ref={stageEl} id="stage"
         style={height ? { height } : undefined}
         onPointerMove={onMove}
         onPointerLeave={onLeave}
@@ -239,7 +260,7 @@ export function Stage({ layout, fillMap, expanded, onToggleReceipts, reduced, me
               tabIndex={liveIds.has(c.fillId) && !fill.recede ? (c.fillId === stopId ? 0 : -1) : undefined}
               aria-hidden={!liveIds.has(c.fillId) || fill.recede ? true : undefined}
               onKeyDown={(e) => onCellKey(e, c)}
-              onFocus={(e) => { hadFocus.current = true; if (e.target === e.currentTarget) setCurrent(c.fillId); }}
+              onFocus={(e) => { hadFocus.current = true; if (e.target === e.currentTarget) { setCurrent(c.fillId); maybeHint(e); } }}
               className={`cell k-${c.kind} ${fill.recede ? "recede" : ""} ${openId === c.fillId ? "open" : ""}`}
               onClickCapture={fill.recede && onCloseFocus ? (e) => { e.preventDefault(); e.stopPropagation(); onCloseFocus(); } : undefined}
               {...(layout.mode === "stack" && openId === c.fillId ? swipe(onCloseFocus, onStep) : {})}
@@ -276,6 +297,7 @@ export function Stage({ layout, fillMap, expanded, onToggleReceipts, reduced, me
           />
         ))}
       </div>
+      {hint && <KeyHint onClose={() => setHint(false)} />}
       <Highlight layout={layout} fillMap={fillMap} hot={hot} openId={openId} cellId={hoverCell && liveIds.has(hoverCell) ? hoverCell : null} />
     </RuntimeCtx.Provider>
   );
@@ -332,4 +354,17 @@ function swipe(onClose, onStep) {
       x0 = y0 = null;
     },
   };
+}
+
+export const KEYS = [
+  ["← ↑ → ↓", "move between tiles"], ["Tab", "into a tile's links and buttons"], ["Enter", "open"],
+  ["P", "proof"], ["Esc", "back"], ["?", "all shortcuts"],
+];
+function KeyHint({ onClose }) {
+  return (
+    <div className="key-hint" role="note">
+      {KEYS.slice(0, 5).map(([k, v]) => <span key={k}><kbd>{k}</kbd> {v}</span>)}
+      <button type="button" aria-label="Dismiss keyboard hint" onClick={onClose}>×</button>
+    </div>
+  );
 }

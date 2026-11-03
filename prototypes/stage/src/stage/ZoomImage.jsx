@@ -117,7 +117,7 @@ export function ZoomImage({ src, alt, slot }) {
       {(() => { const ctl = (
       <div className="zoom-ctl" onPointerDown={(e) => e.stopPropagation()} onClick={(e) => e.stopPropagation()}>
         <button type="button" aria-label="Zoom out" onClick={() => zoomAt(0.8, ...center())}>−</button>
-        <span className="zoom-pct">{Math.round(t.s * fitScale.current * 100)}%</span>
+        <span className="zoom-pct" role="status" aria-live="polite">{Math.round(t.s * fitScale.current * 100)}%</span>
         <button type="button" aria-label="Zoom in" onClick={() => zoomAt(1.25, ...center())}>+</button>
         <button type="button" aria-label="Fit" onClick={() => setT({ s: 1, x: 0, y: 0 })}>Fit</button>
       </div>); return slot ? createPortal(ctl, slot) : ctl; })()}

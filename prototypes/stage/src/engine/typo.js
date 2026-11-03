@@ -16,7 +16,7 @@ export const fontString = (f) => `${f.weight} ${f.size}px ${f.family}`;
 export const PAD = { desktop: 24, phone: 20 };
 
 /** Small wide-tracked caps label (kickers, receipt tags, kpi labels). */
-export const LABEL = { family: BODY, weight: 500, size: 11, letterSpacingEm: 0.2, lineHeight: 16 };
+export const LABEL = { family: BODY, weight: 500, size: 12, letterSpacingEm: 0.12, lineHeight: 16 };
 
 /** Prose steps, largest first. The engine picks the largest that fits. */
 export const PROSE_STEPS = [
@@ -36,7 +36,11 @@ export const glueHyphens = (t) => (t ? t.replace(/(\S)-(?=\S)/g, "$1-\u2060") : 
 const PROSE_BIG = [{ size: 30, lineHeight: 38 }, { size: 26, lineHeight: 34 }];
 export const proseSteps = (text) => (text.length < 150 ? [...PROSE_BIG, ...PROSE_STEPS] : PROSE_STEPS);
 /** Steps for a prose fill: `small` (an expanded media's caption/explain) stays at body size. */
-export const stepsFor = (fill) => (fill.small ? PROSE_STEPS.slice(2) : proseSteps(fill.text || ""));
+export const stepsFor = (fill, phone = false) => {
+  const s = fill.small ? PROSE_STEPS.slice(2) : proseSteps(fill.text || "");
+  // Phones: body copy never under 16px.
+  return phone ? s.filter((x) => x.size >= 16) : s;
+};
 
 export const QUOTE_STEPS = [
   { size: 34, lineHeight: 40 },
@@ -48,7 +52,7 @@ export const QUOTE_STEPS = [
 export const QUOTE_FONT = (size) => font(DISPLAY, 300, size);
 export const QUOTE_WHO_H = 30;
 /** Small tracked caps (kickers, attributions, meta): every line counted, never cut. */
-export const CAPS_FONT = font(BODY, 500, 11, 0.2);
+export const CAPS_FONT = font(BODY, 500, 12, 0.12);
 export const capsH = (measure, text, innerW) => (text ? measure.lines(text.toUpperCase(), CAPS_FONT, innerW) * 16 : 0);
 export const quoteWhoH = (measure, who, innerW) => (who ? 14 + capsH(measure, who, innerW) : 0);
 
@@ -98,12 +102,15 @@ export const MEDIA = {
   beside: { min: 190, max: 280 },
 };
 export const CAPTION_FONT = font(BODY, 400, MEDIA.cap.size);
+// Phones render captions at the 16px body floor (styles.css S2); measure them there too.
+export const CAPTION_PHONE = { size: 16, lineHeight: 23 };
+export const CAPTION_FONT_PHONE = font(BODY, 400, CAPTION_PHONE.size);
 
 /** Merchant logo row: monochrome marks sized by aspect, wrapped greedily. */
 export const LOGOS = { labelH: 26, gapX: 28, gapY: 16, maxH: 40, minH: 18, attachMaxH: 26 };
 
 /** The split behind a KPI: rows (logo · name · value · share) or a thin stacked bar. */
-export const BREAKDOWN = { headH: 24, rowH: 24, barH: 38, maxRows: 8, nameFont: font(BODY, 400, 12.5), legendFont: font(BODY, 400, 11) };
+export const BREAKDOWN = { headH: 24, rowH: 24, barH: 38, maxRows: 8, nameFont: font(BODY, 400, 12.5), legendFont: font(BODY, 400, 12) };
 
 /** A case-study tile at rest: role line, task line (display), headline number. */
 export const TILE = {
@@ -129,7 +136,7 @@ export const hookTarget = () => HOOK_SIZE;
 export const metricMax = (priority = 0.5) => Math.round(TILE.numMax * (0.6 + 0.4 * priority));
 // Descriptive text set large is LIGHT (Cabinet Grotesk 300), beside the 200 wordmark; numbers stay bold.
 export const TILE_FONT = (size) => font(DISPLAY, 300, size, -0.01);
-export const TILE_ROLE_FONT = font(BODY, 500, 11, 0.2);
+export const TILE_ROLE_FONT = font(BODY, 500, 12, 0.12);
 export const tileRoleH = (lines) => lines * 16 + 16;
 
 /** A year · line list (the About page's story). */
@@ -147,5 +154,11 @@ export const OFFCLOCK = { headH: 30, intro: font(BODY, 400, 15), introLH: 22, sl
 
 /** "Go deeper →" on a tile that opens a child deck: its own row at the bottom. */
 export const DRILL_H = 26;
+/**
+ * A cell's controls are ONE group, always in this order: [GO DEEPER →] [PROOF] [↗].
+ * One height, one type style, an 8px gap, right-aligned to the cell's 16px inset;
+ * the whole group moves to its own row before it ever splits.
+ */
+export const CTRL = { h: 32, gap: 8, padX: 12, icon: 11, iconGap: 6, expW: 32, inset: 16, above: 8, drillText: "Go deeper →" };
 
 export const MIN_CELL = { w: 150, h: 104 };

@@ -358,8 +358,8 @@
         "weight": 0.7,
         "media": "image",
         "src": "assets/chekout/top-metrics.webp",
-        "aspect": 4.1344,
-        "alt": "126 total visitors, 86% engagement rate, 1 attributed order, $106.19 revenue",
+        "aspect": 2.0103,
+        "alt": "126 total visitors, 86% engagement rate",
         "receipts": [
           {
             "type": "asset",
@@ -368,25 +368,8 @@
             "label": "ChekOut AI case study"
           }
         ],
-        "caption": "One live store's top line: visitors, engagement, and the order and revenue the agent drove.",
-        "explain": "The top of the merchant dashboard on a live store, with revenue pulled from the store's own Shopify orders. The attributed order and revenue tiles count only what shoppers bought after the agent helped.",
-        "kpi": "u-ck-rev"
-      },
-      {
-        "kind": "kpi",
-        "id": "u-ck-rev",
-        "weight": 0.5,
-        "value": "$106.19",
-        "label": "revenue from agent-attributed orders on one live store",
-        "receipts": [
-          {
-            "type": "asset",
-            "ref": "src/data/chekoutData.js",
-            "repo": "Juniper",
-            "date": "2026-10-26",
-            "label": "ChekOut AI case study"
-          }
-        ]
+        "caption": "One live store's top line: visitors and engagement.",
+        "explain": "The top of the merchant dashboard on a live store. Engagement counts only visitors who sent the agent a real message."
       },
       {
         "kind": "media",
@@ -4970,9 +4953,14 @@
       "rag",
       "n8n",
       "wordpress",
-      "bilingual"
+      "bilingual",
+      "bigquery",
+      "gcp",
+      "mcp",
+      "gemini",
+      "claude"
     ],
-    "text": "A React widget in a WordPress plugin posts each message to an n8n webhook in front of the agent's Cloud Function, which answers through RAG from the school's content. Finished chats go to a second n8n webhook that turns them into leads in priority buckets, and the inquiry form writes to the school's Creatio CRM. The agent shipped with Claude and now runs on Gemini.",
+    "text": "A React widget in a WordPress plugin sends each message to an n8n workflow on Google Cloud in front of the agent, which answers through RAG from the school's documents. Routing runs through MCP: Claude answers in English, Gemini in Spanish. Finished chats become leads in priority buckets, conversation and lead data land in BigQuery, and the inquiry form writes to the school's Creatio CRM.",
     "fills": [
       {
         "kind": "media",
@@ -4981,9 +4969,9 @@
         "media": "image",
         "src": "assets/christine-valmy/architecture.svg",
         "aspect": 1.7778,
-        "alt": "Christine Valmy agent architecture: students use the widget on the school's WordPress site; each message goes to an n8n chat webhook that reaches the agent's Cloud Function, finished chats go to an n8n transcript webhook that produces a lead for officers, and the inquiry form creates a lead in the school's Creatio CRM",
+        "alt": "Christine Valmy agent architecture: students use the widget on the school's WordPress site; each message goes to n8n on Google Cloud, which reaches the agent (RAG, routed through MCP: Claude for English, Gemini for Spanish); finished chats become leads for officers; conversation and lead data land in BigQuery; the inquiry form creates a lead in the school's Creatio CRM",
         "caption": "From a student's question to a sorted lead.",
-        "explain": "Follow a student's message: the widget posts it to n8n, n8n reaches the agent (a teammate's Cloud Function; the persona and prompt are mine), and the reply comes back with the conversation stage. When the chat ends, the transcript goes to a second n8n webhook that turns it into a lead; the inquiry form goes straight to the school's Creatio CRM. Drawn from the plugin code and the ChekOut architecture board.",
+        "explain": "Follow a student's message: the widget sends it to n8n on Google Cloud, n8n reaches the agent, and the reply comes back with the conversation stage. The agent answers from the school's documents through RAG, Claude in English and Gemini in Spanish, routed through MCP. Finished chats become leads, the data lands in BigQuery, and the inquiry form goes to the school's CRM.",
         "receipts": [
           {
             "type": "asset",
@@ -5014,6 +5002,19 @@
             "ref": "cv-chat-flat/claude.md",
             "repo": "chekout-ai (local)",
             "label": "Plugin notes: endpoint connectors (n8n chat, n8n transcript, Creatio CRM), WordPress settings"
+          },
+          {
+            "type": "asset",
+            "ref": "tools/content/sources/christine-valmy-requirements.md",
+            "repo": "Juniper (stage prototype)",
+            "date": "2026-11-02",
+            "label": "Christine Valmy requirements, provided by Namit (redacted)"
+          },
+          {
+            "type": "asset",
+            "ref": "namit-confirmation-2026-11-02",
+            "date": "2026-11-02",
+            "label": "Confirmed by Namit, Nov 2 2026"
           }
         ]
       }
@@ -5048,6 +5049,19 @@
         "ref": "cv-chat-flat/claude.md",
         "repo": "chekout-ai (local)",
         "label": "Plugin notes: endpoint connectors (n8n chat, n8n transcript, Creatio CRM), WordPress settings"
+      },
+      {
+        "type": "asset",
+        "ref": "tools/content/sources/christine-valmy-requirements.md",
+        "repo": "Juniper (stage prototype)",
+        "date": "2026-11-02",
+        "label": "Christine Valmy requirements, provided by Namit (redacted)"
+      },
+      {
+        "type": "asset",
+        "ref": "namit-confirmation-2026-11-02",
+        "date": "2026-11-02",
+        "label": "Confirmed by Namit, Nov 2 2026"
       }
     ]
   },

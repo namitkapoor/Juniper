@@ -5,7 +5,7 @@ import { Face } from "./Face.jsx";
  * The chat column: the reply is the thesis (one sentence); the evidence
  * arrives on the stage as a layout. Messages, suggested questions, input.
  */
-export function Chat({ open, messages, chips, onAsk, onChip, busy, onClose, phone, busyFace, reduced, onReopen }) {
+export function Chat({ open, messages, chips, onAsk, onChip, busy, onClose, phone, busyFace, reduced, onReopen, focusNonce }) {
   const [q, setQ] = useState("");
   // Phone: the chat is a bottom sheet. Peek = face + latest reply + chips + input;
   // tap or drag the handle up to see the whole conversation, down to peek again.
@@ -20,6 +20,8 @@ export function Chat({ open, messages, chips, onAsk, onChip, busy, onClose, phon
   const list = useRef(null);
   const input = useRef(null);
   useEffect(() => { list.current?.scrollTo({ top: list.current.scrollHeight, behavior: "smooth" }); }, [messages]);
+  // Asking Kip explicitly always lands in the input.
+  useEffect(() => { if (focusNonce) requestAnimationFrame(() => input.current?.focus({ preventScroll: true })); }, [focusNonce]);
   // Opening the chat focuses its input, unless the visitor is working the stage by keyboard.
   useEffect(() => {
     if (!open || phone) return;
@@ -91,11 +93,11 @@ export function Chat({ open, messages, chips, onAsk, onChip, busy, onClose, phon
       </ol>
       {phone && !sheet && messages.length > 0 && (() => {
         const last = [...messages].reverse().find((m) => m.role === "bot");
-        return last ? <div className="phone-reply" aria-live="polite">{last.text}</div> : null;
+        return last ? <div className="phone-reply" tabIndex={0} role="region" aria-label="Kip's latest reply">{last.text}</div> : null;
       })()}
       <div className="chips" role="group" aria-label="Suggested questions">
         {chips.map((c) => (
-          <button key={c.label} type="button" className={`chip ${c.home || c.back ? "chip-home" : ""}`} onClick={() => onChip(c)} disabled={busy}>
+          <button key={c.label} type="button" className={`chip ${c.home || c.back ? "chip-home" : ""}`} aria-label={c.aria} onClick={() => onChip(c)} disabled={busy}>
             {c.kicker && <span className="chip-k">{c.kicker}</span>}
             {(c.home || c.back) && <span aria-hidden>← </span>}{c.label}
           </button>

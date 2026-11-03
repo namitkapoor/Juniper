@@ -9,7 +9,7 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@chenglou/pretext": "latest",
+    "@chenglou/pretext": "1.0.0",
     "@react-three/fiber": "^8.16.8",
     "lottie-web": "^5.13.0",
     "react": "18.3",

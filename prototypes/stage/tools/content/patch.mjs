@@ -21,8 +21,8 @@ const DECKS = {
       "ck-brands": { label: "merchants running the agent on their own store" },
       "ck-engagement": { label: "engagement rate on one live store (conversations of 3+ turns)" },
       "ck-cart-prose": { text: "HOW: Shoppers add to cart inside the chat, and View cart opens the store's own cart and checkout, so there is no second cart to reconcile. The dashboard then shows the merchant what the agent sold and, one click on a keyword later, what shoppers asked." },
-      "ck-top-metrics": { caption: "One live store's top line: 126 visitors, 86% engaged, and the order and revenue the agent drove.",
-        explain: "This is the top of the merchant dashboard on a live store, pulling revenue from the store's own Shopify orders. Watch the attributed order and revenue tiles: they count only what shoppers bought after the agent helped. Merchants asked what the agent was worth, and this answers it in their own numbers.",
+      "ck-top-metrics": { caption: "One live store's top line: visitors and engagement.",
+        explain: "This is the top of the merchant dashboard on a live store. Engagement counts only visitors who sent the agent a real message. Merchants asked what the agent was worth, and this answers it in their own numbers.",
         kpi: "ck-engagement" },
       "ck-analytics": { caption: "An insight flags the most searched term; clicking the keyword opens the conversations that mention it.",
         explain: "The dashboard running on Kivakube's data. Watch the insight tooltip turn a number into a next step (check pricing and availability for the most searched term), then a keyword click open the actual threads. Merchants wanted to know what shoppers ask, so the answer is the conversations themselves, not a chart." },
@@ -220,8 +220,7 @@ const CORPUS = {
   "ck-analytics": {
     text: "After going live, a merchant's first question is what shoppers are asking, so the ChekOut dashboard answers with the conversations themselves. Between June and July 2026 I built it so an insight turns a number into a next step and clicking a keyword opens the threads behind it.",
     fills: {
-      "u-ck-rev": { label: "revenue from agent-attributed orders on one live store" },
-      "u-ck-metrics": { caption: "One live store's top line: visitors, engagement, and the order and revenue the agent drove.", explain: "The top of the merchant dashboard on a live store, with revenue pulled from the store's own Shopify orders. The attributed order and revenue tiles count only what shoppers bought after the agent helped.", kpi: "u-ck-rev" },
+      "u-ck-metrics": { caption: "One live store's top line: visitors and engagement.", explain: "The top of the merchant dashboard on a live store. Engagement counts only visitors who sent the agent a real message." },
       "u-ck-analytics": { caption: "An insight flags the most searched term; the keyword opens its threads.", explain: "The dashboard on Kivakube's data. An insight says which term shoppers searched most and suggests checking its pricing and availability, then a keyword click opens the actual conversations behind the number." },
     },
   },

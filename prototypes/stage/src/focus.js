@@ -6,7 +6,7 @@
  * "+N more"). The stage morphs to it with the same stroke grammar.
  */
 export function focusAnswer(answer, mediaId) {
-  const m = answer.fills.find((f) => f.id === mediaId && f.kind === "media");
+  const m = answer.fills.find((f) => f.id === mediaId && (f.kind === "media" || f.kind === "specimen"));
   if (!m) return answer;
   let kpi = null;
   if (typeof m.kpi === "string") kpi = answer.fills.find((f) => f.id === m.kpi && f.kind === "kpi") || null;

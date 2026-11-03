@@ -52,7 +52,28 @@
  *                                              // e.g. { n: 1, of: 4, stage: "First concept", status: "cut" }
  *                      receipts?: Receipt[] } |
  *   { kind: "commits", id: string, weight: number, repo: string,
- *                      items: { sha: string, date: string, msg: string, url?: string }[] }
+ *                      items: { sha: string, date: string, msg: string, url?: string }[] } |
+ *   { kind: "specimen", id: string, weight: number,          // a design system drawn as a live,
+ *                      sample: string,                        // measured close-up (src/stage/specimen/)
+ *                      font: "display" | "body" | string,     // default face; "display"/"body" = the
+ *                                                             // stage's own, any other string = a CSS family
+ *                      scale: { role: string, size: number,   // px
+ *                               lineHeight: number,           // px (not a ratio)
+ *                               tracking: number,             // em, e.g. 0.12 or -0.02
+ *                               weight: number,
+ *                               font?: string,                // per-step face override
+ *                               upper?: boolean }[],          // set the sample in caps for this step
+ *                      spacing?: { name: string, value: number }[],  // px; spacing[i] is drawn as the
+ *                                                             // gap below step i (the last one repeats)
+ *                      mode?: "scale" | "fit",                // scale: the close-up steps through the ladder;
+ *                                                             // fit: a cell shrinks and the line steps DOWN to
+ *                                                             // the largest step that fits (the engine's rule)
+ *                      direction?: "up" | "down",             // play order (sorted by size); omitted = data order.
+ *                                                             // fit always plays largest first
+ *                      fit?: { pad: number,                   // cell padding, px (PAD.desktop 24)
+ *                              floor?: number },              // steps under this size are marked (phone floor 16)
+ *                      title?: string,                        // accessible name
+ *                      receipts?: Receipt[] }                 // where the values were read from
  * )} Fill
  *
  * Any fill may carry `opens?: string`: the id of a child deck (same case study, `parent` set)
@@ -106,4 +127,4 @@
  *                        portrait: { src: string, alt: string }           // the image the particle portrait samples
  *                      }
  */
-export const FILL_KINDS = ["title", "kpi", "prose", "quote", "media", "commits", "logos"];
+export const FILL_KINDS = ["title", "kpi", "prose", "quote", "media", "commits", "logos", "specimen"];

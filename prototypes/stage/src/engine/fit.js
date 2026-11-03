@@ -10,14 +10,15 @@
 import {
   PROSE_STEPS, proseSteps, stepsFor, PROSE_FONT, paragraphs, PARA_GAP, QUOTE_STEPS, QUOTE_FONT, QUOTE_WHO_H,
   TITLE_FONT, titleLineHeight, titleFontFor, titleLHFor, isWordmark, KICKER_H, headingH, KPI_FONT, KPI_LABEL_H, KPI_META_H, KPI_LABEL_FONT, CAPS_FONT, capsH, quoteWhoH, COMMIT_MSG_FONT,
-  COMMITS, RECEIPTS, MEDIA, DRILL_H, CAPTION_FONT, LABEL, font, LOGOS, BREAKDOWN, TILE, TILE_FONT, TILE_ROLE_FONT, TIMELINE, WORKLOG, STACK, OFFCLOCK, tileRoleH, hookTarget, metricMax,
+  COMMITS, RECEIPTS, MEDIA, DRILL_H, CTRL, WORDS, CAPTION_FONT, CAPTION_FONT_PHONE, CAPTION_PHONE, LABEL, font, LOGOS, BREAKDOWN, TILE, TILE_FONT, TILE_ROLE_FONT, TIMELINE, WORKLOG, STACK, OFFCLOCK, tileRoleH, hookTarget, metricMax,
 } from "./typo.js";
 
 export const INFEASIBLE = 50;
 /** A status line under a prose block ("• OPEN TO … ROLES" + a quiet link). */
 export const STATUS_H = 64;
 /** A kicker shares its first row with the Proof tag, so it wraps in the width left of it. */
-export const kickerW = (fill, innerW) => innerW - ((fill.receipts || []).length ? RECEIPTS.tagW + 12 : 0);
+// The kicker has the full width: Proof no longer sits on its row (controls are one group at the bottom).
+export const kickerW = (fill, innerW) => innerW;
 /** Kicker block: all its lines (tracked caps) plus the gap under it. */
 export const kickerH = (measure, kicker, innerW) => (kicker ? Math.max(KICKER_H, capsH(measure, kicker, innerW) + 14) : 0);
 const BODY_FAMILY = "Satoshi";
@@ -39,12 +40,48 @@ export function hasRealProof(fill) {
 }
 export const receiptsOf = (fill) => (hasRealProof(fill) ? fill.receipts : []);
 
+/* ---- the control group: [GO DEEPER →] [PROOF] [↗] -------------------------- */
+const ctrlTextW = (measure, t) => Math.ceil(measure?.width ? measure.width(t.toUpperCase(), CAPS_FONT) : t.length * 9.5);
+/** The group's items with their widths, in order. `exp`: the media/specimen expand square. */
+export function ctrlItems(fill, measure, { drill = !!fill.opens, exp = false } = {}) {
+  const items = [];
+  if (drill) items.push({ k: "drill", w: 2 * CTRL.padX + ctrlTextW(measure, CTRL.drillText) + 4 });
+  const rs = receiptsOf(fill);
+  if (rs.length) {
+    const icons = Math.min(3, new Set(rs.map((r) => r.type)).size);
+    const text = Math.max(ctrlTextW(measure, WORDS.proof), ctrlTextW(measure, WORDS.proofClose));
+    items.push({ k: "proof", w: 2 * CTRL.padX + icons * (CTRL.icon + CTRL.iconGap) + text + 4 });
+  }
+  if (exp) items.push({ k: "exp", w: CTRL.expW });
+  return items;
+}
+/** Rows for the group within availW: one row if it fits, else it wraps (greedy, in order). */
+export function ctrlRows(items, availW) {
+  if (!items.length) return { rows: [], w: 0, h: 0 };
+  const rows = [[]]; let rw = 0;
+  for (const it of items) {
+    const add = (rows.at(-1).length ? CTRL.gap : 0) + it.w;
+    if (rows.at(-1).length && rw + add > availW) { rows.push([it]); rw = it.w; } else { rows.at(-1).push(it); rw += add; }
+  }
+  const w = Math.max(...rows.map((r) => r.reduce((a, it, i) => a + it.w + (i ? CTRL.gap : 0), 0)));
+  return { rows, w, h: rows.length * CTRL.h + (rows.length - 1) * CTRL.gap };
+}
+export const ctrlFullW = (items) => items.reduce((a, it, i) => a + it.w + (i ? CTRL.gap : 0), 0);
+/**
+ * Height a bottom-anchored group takes from a cell's content box (below the pad):
+ * the group sits CTRL.inset from the bottom, with CTRL.above clear space over it.
+ */
+export function ctrlReserve(fill, measure, w, P, opts) {
+  const g = ctrlRows(ctrlItems(fill, measure, opts), w - 2 * CTRL.inset);
+  return g.h ? Math.max(0, g.h + CTRL.inset + CTRL.above - P) : 0;
+}
+
 /* ---- the Proof list: every row measured, nothing ellipsized ---------------- */
 
 const ROW_FONT = font("Satoshi", 400, 12.5);
 const ROW_LH = 17;
 const CARD_TITLE_FONT = font("Satoshi", 400, 14);
-const CARD_META_FONT = font("Satoshi", 400, 11.5);
+const CARD_META_FONT = font("Satoshi", 400, 12);
 const DATE_W = 84;
 const LIST_PAD = 24; // the list's side padding (the cell pad)
 
@@ -145,7 +182,7 @@ function proseLike(fill, w, h, ctx, steps, mkFont, reserveBottom) {
   const innerW = side ? side.textW : outerW;
   const listW = side ? outerW - side.textW - side.gap : outerW;
   const listH = ctx.expanded ? receiptsListH(fill, ctx.measure, listW) : 0;
-  const boxH = h - 2 * P - reserveBottom - (fill.opens ? DRILL_H : 0) - (fill.status ? STATUS_H : 0) - kickerH(ctx.measure, fill.kicker, kickerW(fill, innerW)) - headingH(ctx.measure, fill.heading, innerW);
+  const boxH = h - 2 * P - reserveBottom - ctrlReserve(fill, ctx.measure, w, P) - (fill.status ? STATUS_H : 0) - kickerH(ctx.measure, fill.kicker, kickerW(fill, innerW)) - headingH(ctx.measure, fill.heading, innerW);
   if (side && listH > h - 2 * P) return { cost: INFEASIBLE + 4 };
   let availH = side ? boxH : boxH - listH;
   if (availH < 40) return { cost: INFEASIBLE + 10 };
@@ -153,12 +190,10 @@ function proseLike(fill, w, h, ctx, steps, mkFont, reserveBottom) {
   const inset = ctx.inset;
   let insetArea = 0;
   if (inset) {
-    // availH is already below the kicker; the inset also clears the Proof tag.
-    const tagGap = (fill.receipts || []).length && !fill.kicker ? 32 : 0;
-    if (inset.w > innerW - 140 || inset.h + tagGap > availH) return { cost: INFEASIBLE + 5 };
+    // availH is already below the kicker.
+    if (inset.w > innerW - 140 || inset.h > availH) return { cost: INFEASIBLE + 5 };
     insetArea = (inset.w + 18) * (inset.h + 42);
   }
-  if (hasTag && !ctx.expanded) insetArea += (RECEIPTS.tagW + 12) * (RECEIPTS.tagH + 6);
   // Every step that fits is a candidate; the cheapest one wins (big type in a
   // narrow column is worse than smaller type at a comfortable measure).
   let best = null;
@@ -189,7 +224,7 @@ function proseLike(fill, w, h, ctx, steps, mkFont, reserveBottom) {
 function titleFit(fill, w, h, ctx) {
   const P = ctx.pad;
   const innerW = w - 2 * P;
-  let availH = h - 2 * P - (fill.opens ? DRILL_H : 0) - kickerH(ctx.measure, fill.kicker, kickerW(fill, w - 2 * P));
+  let availH = h - 2 * P - ctrlReserve(fill, ctx.measure, w, P) - kickerH(ctx.measure, fill.kicker, kickerW(fill, w - 2 * P));
   if (innerW < 100 || availH < 24) return { cost: INFEASIBLE + 10 };
   const { measure } = ctx;
   const TF = titleFontFor(fill), TLH = titleLHFor(fill);
@@ -256,7 +291,7 @@ export function logosLayout(items, innerW, availH, maxH = LOGOS.maxH, labelH = 0
 function kpiFit(fill, w, h, ctx) {
   const P = ctx.pad;
   const innerW = w - 2 * P;
-  let innerH = h - 2 * P - RECEIPTS.tagH - 4 - (fill.opens ? DRILL_H : 0);
+  let innerH = h - 2 * P - ctrlReserve(fill, ctx.measure, w, P);
   if (ctx.expanded) innerH -= receiptsListH(fill, ctx.measure, innerW);
   if (innerW < 90 || innerH < 60) return { cost: INFEASIBLE + 10 };
   if (w / h < 0.6) return { cost: INFEASIBLE + 3 }; // a number never sits in a sliver
@@ -298,7 +333,7 @@ function kpiFit(fill, w, h, ctx) {
 function logosFit(fill, w, h, ctx) {
   const P = ctx.pad;
   const innerW = w - 2 * P;
-  let innerH = h - 2 * P - (fill.opens ? DRILL_H : 0);
+  let innerH = h - 2 * P - ctrlReserve(fill, ctx.measure, w, P);
   if (ctx.expanded) innerH -= receiptsListH(fill, ctx.measure, innerW);
   const labelH = fill.label || receiptsOf(fill).length ? LOGOS.labelH : 0;
   const L = innerW > 100 ? logosLayout(fill.items, innerW, innerH, LOGOS.maxH, labelH) : null;
@@ -551,6 +586,15 @@ function offclockFit(fill, w, h, ctx) {
   const empty = 1 - L.h / (h - 2 * P);
   return { cost: empty > 0.3 ? (empty - 0.3) * 1.2 : 0, spec: L };
 }
+/** A type specimen (src/stage/specimen): >= ~300x240 as a tile, >= 520 wide in focus; prefers landscape. */
+function specimenFit(fill, w, h, ctx) {
+  const listH = ctx.expanded ? receiptsListH(fill, ctx.measure, w - 2 * ctx.pad) : 0;
+  const minW = fill.focused ? 520 : 300;
+  if (w < minW || h - listH < 240) return { cost: INFEASIBLE + 6 };
+  const ar = w / Math.max(1, h - listH);
+  return { cost: ar < 1.1 ? 0.6 * (1.1 - ar) : 0, spec: { listH } };
+}
+
 function portraitFit(fill, w, h) {
   if (w < 200 || h < 220) return { cost: INFEASIBLE + 10 };
   const box = mediaBox(fill.aspect, w, h);
@@ -562,7 +606,7 @@ function commitsFit(fill, w, h, ctx) {
   const innerW = w - 2 * P;
   if (innerW < 180) return { cost: INFEASIBLE + 10 };
   const headH = commitsHeadH(ctx.measure, fill, innerW);
-  const innerH = h - 2 * P - headH - (fill.opens ? DRILL_H : 0);
+  const innerH = h - 2 * P - headH - ctrlReserve(fill, ctx.measure, w, P);
   const rowHs = commitRows(ctx.measure, fill, innerW);
   const n = rowHs.length;
   let used = 0, shown = 0;
@@ -605,32 +649,46 @@ export const STEP_CHIP_W = 84;
 export const stepText = (st) => `Step ${st.n} of ${st.of} · ${st.stage}`;
 
 export const MEDIA_TOOLBAR_H = 36;
-export function mediaLayout(fill, w, h, measure, expanded) {
-  const C = MEDIA.cap;
+export function mediaLayout(fill, w, h, measure, expanded, phone = false) {
+  const C = phone ? { ...MEDIA.cap, ...CAPTION_PHONE } : MEDIA.cap;
+  const CF = phone ? CAPTION_FONT_PHONE : CAPTION_FONT;
   // An expanded media gets a slim toolbar (close, steps, zoom) ABOVE the image, never on it.
   const TB = fill.focused ? MEDIA_TOOLBAR_H : 0;
-  const H = h - TB - (expanded ? receiptsListH(fill, measure, w - 2 * LIST_PAD) : 0) - (fill.opens ? DRILL_H : 0);
-  const hasTag = receiptsOf(fill).length > 0; // the Proof tag lives in the strip, open or closed
+  const H = h - TB - (expanded ? receiptsListH(fill, measure, w - 2 * LIST_PAD) : 0);
+  // The control group [GO DEEPER →] [PROOF] [↗] lives in the strip, never on the media.
+  // ↗ (expand in place) is for deck media only.
+  const hasExp = !fill.focused && !fill.caseStudy;
+  const items = ctrlItems(fill, measure, { exp: hasExp });
+  const gFull = ctrlFullW(items);
   const cap = fill.caption || "";
-  const capLines = (cw) => (cap ? measure.lines(cap, CAPTION_FONT, cw) : 0);
+  const capLines = (cw) => (cap ? measure.lines(cap, CF, cw) : 0);
   // A process step ("STEP 1 OF 6 · FIRST CONCEPT" + status chip, + a track
   // when the deck has a sequence) sits on its own line in the strip.
   const stepH = (cw) => (fill.step ? measure.lines(stepText(fill.step).toUpperCase(), CAPS_FONT, cw - STEP_CHIP_W) * 16 + (fill.stepTrack ? 12 : 0) + 8 : 0);
   const variants = [];
+  const availG = w - 2 * C.side;
 
   // Below: strip under the media box, full cell width.
   {
-    const cw = w - 2 * C.side - (hasTag ? RECEIPTS.tagW + 12 : 0);
-    const n = cw > 80 ? capLines(cw) : 99;
+    // The whole group shares the caption's row when the caption keeps >= 180px; otherwise
+    // the WHOLE group drops to its own row under the caption (it wraps only if that row is too narrow).
+    const inline = items.length > 0 && (cap ? availG - gFull - 12 >= 180 : !fill.step && gFull <= availG);
+    const cw = availG - (inline && cap ? gFull + 12 : 0);
+    const n = cap ? (cw > 80 ? capLines(cw) : 99) : 0;
     const sH = stepH(cw);
-    const textH = Math.max(sH + n * C.lineHeight, hasTag ? RECEIPTS.tagH : 0);
-    const stripH = cap || hasTag || fill.step ? textH + C.padTop + C.padBottom : 0;
+    const g = inline ? { h: CTRL.h } : ctrlRows(items, availG);
+    const textBlock = sH + n * C.lineHeight;
+    // Inline, the 32px group is centred on the caption's first line (it starts 7px above it).
+    const lift = Math.round((CTRL.h - C.lineHeight) / 2);
+    const textH = !items.length ? textBlock : inline ? Math.max(textBlock, CTRL.h - lift) : textBlock + (textBlock ? 8 : 0) + g.h;
+    const stripH = cap || items.length || fill.step ? textH + C.padTop + C.padBottom : 0;
     const box = mediaBox(fill.aspect, w, Math.max(1, H - stripH));
+    const ctrlY = inline ? box.h + C.padTop - lift : box.h + C.padTop + textBlock + (textBlock ? 8 : 0);
     variants.push({
       layout: "below", box, n, ok: n <= C.maxLines && H - stripH >= 90,
       step: fill.step ? { x: C.side, y: box.h + C.padTop, w: cw, h: sH } : null,
       cap: cap ? { x: C.side, y: box.h + C.padTop + sH, w: cw, h: n * C.lineHeight, lines: n } : null,
-      tag: hasTag ? { x: w - C.side - RECEIPTS.tagW, y: box.h + C.padTop - 2 } : null,
+      ctrl: items.length ? { y: ctrlY, right: C.side, w: availG } : null,
       used: box.h + stripH,
     });
   }
@@ -642,22 +700,27 @@ export function mediaLayout(fill, w, h, measure, expanded) {
     const cw = w - cx - C.side;
     const n = cw > 120 ? capLines(cw) : 99;
     const sH = stepH(cw);
-    const top = 24 + (hasTag ? RECEIPTS.tagH + 10 : 0);
+    const g = ctrlRows(items, cw);
+    const top = 24 + (g.h ? g.h + 12 - 8 : 0);
     variants.push({
       layout: "beside", box, n, ok: n <= C.maxLines + 3 && top + sH + n * C.lineHeight + 20 <= H,
       step: fill.step ? { x: cx, y: top, w: cw, h: sH } : null,
       cap: { x: cx, y: top + sH, w: cw, h: n * C.lineHeight, lines: n },
-      tag: hasTag ? { x: w - C.side - RECEIPTS.tagW, y: 22 } : null,
+      ctrl: items.length ? { y: 16, right: C.side, w: cw } : null,
       used: H, beside: true,
     });
   }
-  // An expanded portrait clip is centred in its cell, its caption under it.
-  if (fill.focused) for (const v of variants) {
+  // Media narrower than its cell (fit-contain, e.g. a portrait) is centred horizontally.
+  // Caption, step, Proof and Expand stay anchored to the cell; only an expanded clip's
+  // caption follows the image.
+  for (const v of variants) {
     if (v.layout === "below" && v.box.w < w - 1) {
       const dx = Math.floor((w - v.box.w) / 2);
       v.box = { ...v.box, x: dx };
-      if (v.cap) v.cap = { ...v.cap, x: Math.max(C.side, dx) };
-      if (v.step) v.step = { ...v.step, x: Math.max(C.side, dx) };
+      if (fill.focused) {
+        if (v.cap) v.cap = { ...v.cap, x: Math.max(C.side, dx) };
+        if (v.step) v.step = { ...v.step, x: Math.max(C.side, dx) };
+      }
     }
   }
   let best = null;
@@ -677,18 +740,18 @@ export function mediaLayout(fill, w, h, measure, expanded) {
     cost += 4 * Math.max(0, waste);
     if (!v.ok) cost += INFEASIBLE;
     if (v.box.w < 150 || v.box.h < 96) cost += INFEASIBLE;
-    if (!best || cost < best.cost - 1e-9) best = { cost, spec: { layout: v.layout, box: v.box, cap: v.cap, tag: v.tag, step: v.step } };
+    if (!best || cost < best.cost - 1e-9) best = { cost, spec: { layout: v.layout, box: v.box, cap: v.cap, step: v.step, ctrl: v.ctrl } };
   }
   if (best && TB) {
     const dn = (r) => (r ? { ...r, y: r.y + TB } : r);
-    best.spec = { ...best.spec, box: dn(best.spec.box), cap: dn(best.spec.cap), tag: dn(best.spec.tag), step: dn(best.spec.step), toolbar: { h: TB } };
+    best.spec = { ...best.spec, box: dn(best.spec.box), cap: dn(best.spec.cap), step: dn(best.spec.step), ctrl: dn(best.spec.ctrl), toolbar: { h: TB } };
   }
   return best;
 }
 
 function mediaFit(fill, w, h, ctx) {
   if (h - (ctx.expanded ? receiptsListH(fill, ctx.measure, w - 2 * ctx.pad) : 0) < 96) return { cost: INFEASIBLE + 10 };
-  const r = mediaLayout(fill, w, h, ctx.measure, ctx.expanded);
+  const r = mediaLayout(fill, w, h, ctx.measure, ctx.expanded, ctx.phone);
   // An expanded media takes the majority of the stage (>= ~70% of its area).
   if (fill.focused && ctx.stage && r) {
     const share = (w * h) / (ctx.stage.w * ctx.stage.h);
@@ -700,7 +763,7 @@ function mediaFit(fill, w, h, ctx) {
 export function fitFill(fill, w, h, ctx) {
   let r;
   switch (fill.kind) {
-    case "prose": r = proseLike(fill, w, h, ctx, stepsFor(fill), PROSE_FONT, 0); break;
+    case "prose": r = proseLike(fill, w, h, ctx, stepsFor(fill, ctx.phone), PROSE_FONT, 0); break;
     case "quote": {
       const whoH = quoteWhoH(ctx.measure, fill.who, w - 2 * ctx.pad);
       r = proseLike(fill, w, h, ctx, QUOTE_STEPS, QUOTE_FONT, whoH);
@@ -718,11 +781,12 @@ export function fitFill(fill, w, h, ctx) {
     case "worklog": r = worklogFit(fill, w, h, ctx); break;
     case "stack": r = stackFit(fill, w, h, ctx); break;
     case "portrait": r = portraitFit(fill, w, h); break;
+    case "specimen": r = specimenFit(fill, w, h, ctx); break;
     case "offclock": r = offclockFit(fill, w, h, ctx); break;
     default: r = { cost: INFEASIBLE + 20 };
   }
   // Generic shape sanity for text cells: no slivers.
-  if (fill.kind !== "media" && fill.kind !== "title" && fill.kind !== "portrait") {
+  if (fill.kind !== "media" && fill.kind !== "title" && fill.kind !== "portrait" && fill.kind !== "specimen") {
     const ar = w / h;
     if (ar > 4 || ar < 0.25) r.cost += 0.6 * Math.abs(Math.log(ar / (ar > 1 ? 4 : 0.25)));
   }
@@ -736,7 +800,7 @@ export function naturalHeight(fill, w, ctx) {
   const P = ctx.pad;
   const innerW = w - 2 * P;
   const extra = ctx.expanded ? receiptsListH(fill, ctx.measure, innerW) : 0;
-  const tag = receiptsOf(fill).length ? RECEIPTS.tagH + 8 : 0;
+  const tag = ctrlReserve(fill, ctx.measure, w, P);
   switch (fill.kind) {
     case "prose": {
       const s = PROSE_STEPS[2];
@@ -744,7 +808,7 @@ export function naturalHeight(fill, w, ctx) {
     }
     case "quote": {
       const s = QUOTE_STEPS[2];
-      return Math.ceil(ctx.measure.lines(fill.text, QUOTE_FONT(s.size), innerW) * s.lineHeight) + quoteWhoH(ctx.measure, fill.who, innerW) + 2 * P + extra;
+      return Math.ceil(ctx.measure.lines(fill.text, QUOTE_FONT(s.size), innerW) * s.lineHeight) + quoteWhoH(ctx.measure, fill.who, innerW) + 2 * P + extra + tag;
     }
     case "title": {
       const target = Math.min(18 + 170 * Math.pow(Math.max(0.05, fill.weight), 1.4), 900 / Math.sqrt(fill.text.length + 4));
@@ -768,6 +832,7 @@ export function naturalHeight(fill, w, ctx) {
     case "worklog": return 2 * P + WORKLOG.headH + fill.items.reduce((s, it) => s + worklogRowH(ctx.measure, it, innerW), 0) + 4;
     case "stack": return 2 * P + STACK.groupH + stackTableH(ctx.measure, fill, innerW) + 8;
     case "portrait": return Math.round(Math.min(w / fill.aspect, 520));
+    case "specimen": return Math.max(280, Math.round(w * 0.7)) + extra;
     case "offclock": return 2 * P + offclockLayout(ctx.measure, fill, innerW).h;
     case "timeline": return 2 * P + TIMELINE.headH + TIMELINE.rowH * fill.items.length + 4;
     case "tile": {
@@ -789,7 +854,7 @@ export function naturalHeight(fill, w, ctx) {
       const mh = Math.round(Math.min(w / fill.aspect, 600));
       let h = mh + 40;
       for (let i = 0; i < 12; i++) {
-        const L = mediaLayout(fill, w, h + extra, ctx.measure, ctx.expanded);
+        const L = mediaLayout(fill, w, h + extra, ctx.measure, ctx.expanded, ctx.phone);
         if (L.spec.layout === "below" && L.spec.box.h >= mh - 1) break;
         h += 18;
       }

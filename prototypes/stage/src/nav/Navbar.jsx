@@ -7,7 +7,7 @@
  *  - the breadcrumb (case study / question) sits in the bar, next to it;
  *  - about opens the prototype's own About stage; studio/resume point at the live site;
  *  - framer-motion is swapped for CSS keyframes (same blink/glance timing);
- *  - the theme toggle is inert here (the prototype is dark only).
+ *  - the theme toggle switches light / dark (default: the OS preference; remembered).
  */
 import { useEffect, useRef, useState } from "react";
 import { Glyph } from "../about/Glyph.jsx";
@@ -23,6 +23,8 @@ function useBlink() {
   const [blink, setBlink] = useState(false);
   const [glance, setGlance] = useState(false);
   useEffect(() => {
+    // Reduced motion: the glasses stay still.
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return undefined;
     let t1, t2, t3, t4;
     const blinkLoop = () => { t1 = setTimeout(() => { setBlink(true); t2 = setTimeout(() => { setBlink(false); blinkLoop(); }, 200); }, Math.random() * 4000 + 2000); };
     const glanceLoop = () => { t3 = setTimeout(() => { setGlance(true); t4 = setTimeout(() => { setGlance(false); glanceLoop(); }, 2000); }, Math.random() * 5000 + 3000); };
@@ -81,8 +83,15 @@ function LottieSwap({ res, back }) {
   return <span ref={box} className="logo-lottie" aria-hidden />;
 }
 
-export function Navbar({ onHome, onAbout, crumbs, isHome, isAbout }) {
+export function Navbar({ onHome, onAbout, crumbs, isHome, isAbout, theme, onToggleTheme }) {
   const [open, setOpen] = useState(false);
+  const burger = useRef(null);
+  useEffect(() => {
+    if (!open) return;
+    const on = (e) => { if (e.key === "Escape") { setOpen(false); burger.current?.focus(); } };
+    window.addEventListener("keydown", on);
+    return () => window.removeEventListener("keydown", on);
+  }, [open]);
   const swap = useLottieSwap();
   const back = !isHome;
   const backText = isAbout ? "Home" : "All work";
@@ -115,18 +124,20 @@ export function Navbar({ onHome, onAbout, crumbs, isHome, isAbout }) {
               key={l.label} className={`nav-item-nk26 ${l.internal && isAbout ? "active" : ""}`} href={l.href}
               {...(l.internal ? { onClick: (e) => { e.preventDefault(); onAbout(); }, "aria-current": isAbout ? "page" : undefined } : { target: "_blank", rel: "noopener noreferrer" })}
             >
-              <span className="nav-arrow-nk26">↘</span>
+              <span className="nav-arrow-nk26" aria-hidden="true">↘</span>
               <span className="nav-text-wrapper-nk26">
                 <span className="nav-text-nk26">{l.label}</span>
                 <span className="nav-text-nk26 nav-text-clone-nk26" aria-hidden="true">{l.label}</span>
               </span>
+              {!l.internal && <span className="sr-only"> (opens in a new tab)</span>}
             </a>
           ))}
-          <button className="theme-toggle-nav" type="button" aria-disabled="true" title="The prototype is dark only">
-            <Glyph name="lucide:moon" size={18} />
+          <button className="theme-toggle-nav" type="button" onClick={onToggleTheme} aria-pressed={theme === "light"}
+            aria-label={theme === "light" ? "Switch to dark mode" : "Switch to light mode"}>
+            <Glyph name={theme === "light" ? "lucide:moon" : "lucide:sun"} size={18} />
           </button>
         </div>
-        <button className="hamburger-menu" type="button" onClick={() => setOpen(!open)} aria-label="Toggle navigation menu" aria-expanded={open}>
+        <button ref={burger} className="hamburger-menu" type="button" onClick={() => setOpen(!open)} aria-label="Toggle navigation menu" aria-expanded={open}>
           <span className={`hamburger-line ${open ? "l1" : ""}`} />
           <span className={`hamburger-line ${open ? "l2" : ""}`} />
           <span className={`hamburger-line ${open ? "l3" : ""}`} />

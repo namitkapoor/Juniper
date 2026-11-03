@@ -20,7 +20,7 @@
  * lightest fills dropped (reported in `dropped`) when they do not fit.
  * Deterministic: no randomness, fixed iteration order, strict tie-breaks.
  */
-import { fitFill, naturalHeight, INFEASIBLE, kickerH, kickerW, hookFits, STATUS_H } from "./fit.js";
+import { fitFill, naturalHeight, INFEASIBLE, kickerH, kickerW, hookFits, STATUS_H, ctrlReserve } from "./fit.js";
 import { MIN_CELL, PAD, TILE, KPI_LABEL_FONT, capsH, headingH, proseSteps, stepsFor, QUOTE_STEPS } from "./typo.js";
 const TILE_STEPS = TILE.steps.length;
 
@@ -154,7 +154,7 @@ function stackLayout({ rect, weighted, measure, exp, split }) {
     const nh = naturalHeight(fill, rect.w, { ...ctx, expanded: exp.has(fill.id) });
     let h = typeof nh === "number" ? nh : nh.h;
     let spec = typeof nh === "number" ? undefined : nh.spec;
-    if (["media", "quote", "kpi", "commits", "logos", "tile", "timeline", "worklog", "stack", "portrait", "offclock"].includes(fill.kind)) {
+    if (["media", "quote", "kpi", "commits", "logos", "tile", "timeline", "worklog", "stack", "portrait", "offclock", "specimen"].includes(fill.kind)) {
       spec = fitFill(fill, rect.w, h, { ...ctx, expanded: exp.has(fill.id) }).spec;
     }
     h = Math.max(h, MIN_CELL.h);
@@ -293,7 +293,7 @@ function monotonicType(cells, weighted) {
         c.spec = { ...c.spec, step: i < 0 ? TILE.steps.length - 1 : i };
       } else if (c.kind === "prose" || c.kind === "quote") {
         const f = weighted.find((w) => w.fill.id === c.fillId)?.fill;
-        const steps = c.kind === "prose" ? stepsFor(f || { text: text.get(c.fillId) }) : QUOTE_STEPS;
+        const steps = c.kind === "prose" ? stepsFor(f || { text: text.get(c.fillId) }, true) : QUOTE_STEPS;
         let i = steps.findIndex((s) => s.size <= cap);
         if (i < 0) i = steps.length - 1;
         c.spec = { ...c.spec, size: steps[i].size, lineHeight: steps[i].lineHeight, step: i };
@@ -314,7 +314,7 @@ function restack(cells, strokes, weighted, measure, rect) {
       const innerW = c.w - 2 * PAD.phone;
       const paras = (f.text || "").split(/\n\s*\n/);
       const lines = paras.reduce((n, t) => n + measure.lines(t, { family: "Satoshi", weight: 400, size: c.spec.size }, innerW), 0) + (paras.length - 1) * 0.6;
-      const need = Math.ceil(lines * c.spec.lineHeight) + 2 * PAD.phone + kickerH(measure, f.kicker, kickerW(f, innerW)) + (f.status ? STATUS_H : 0) + ((f.receipts || []).length ? 30 : 0);
+      const need = Math.ceil(lines * c.spec.lineHeight) + 2 * PAD.phone + kickerH(measure, f.kicker, kickerW(f, innerW)) + (f.status ? STATUS_H : 0) + ctrlReserve(f, measure, c.w, PAD.phone);
       c.h = Math.max(need, MIN_CELL.h);
       c.spec = { ...c.spec, need: Math.ceil(lines * c.spec.lineHeight) };
     }

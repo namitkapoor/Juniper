@@ -374,6 +374,29 @@
           "evidence": "KYURI.OS's tailoring agents run on Claude; I built ChekOut's agent platform with Claude Code."
         },
         {
+          "name": "Gemini",
+          "icon": "simple-icons:googlegemini",
+          "jobs": [
+            "Christine Valmy"
+          ],
+          "evidence": "Answers Spanish speakers in the Christine Valmy enrollment agent."
+        },
+        {
+          "name": "MCP (Model Context Protocol)",
+          "icon": "simple-icons:modelcontextprotocol",
+          "jobs": [
+            "Christine Valmy"
+          ],
+          "evidence": "Routes the Christine Valmy agent: Claude for English, Gemini for Spanish."
+        },
+        {
+          "name": "Perspective API",
+          "jobs": [
+            "Christine Valmy"
+          ],
+          "evidence": "Scores empathy and toxicity in the Christine Valmy agent's evaluation plan."
+        },
+        {
           "name": "Agents and RAG",
           "evidence": "Christine Valmy's enrollment agent answers through RAG from the school's content."
         },
@@ -404,7 +427,7 @@
         },
         {
           "name": "BigQuery",
-          "evidence": "ChekOut's merchant analytics dashboard."
+          "evidence": "ChekOut's merchant analytics and conversation logs; Christine Valmy's conversation and lead data."
         },
         {
           "name": "Notion API",

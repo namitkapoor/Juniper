@@ -7,7 +7,7 @@ import { loadContent } from "./content.js";
 import { ask } from "./answer.js";
 import { focusAnswer, recedeAnswer, dedupeOpens } from "./focus.js";
 import { homeWithTiles, heroPreviews } from "./tiles.js";
-import { Stage } from "./stage/Stage.jsx";
+import { Stage, KEYS } from "./stage/Stage.jsx";
 import { Chat } from "./chat/Chat.jsx";
 import { Face } from "./chat/Face.jsx";
 import { Navbar } from "./nav/Navbar.jsx";
@@ -15,6 +15,8 @@ import { aboutAnswer, aboutFromJson } from "./about/aboutAnswer.js";
 import { caseName } from "./caseName.js";
 
 const FRAME = 20; // outer gutter around the hairline frame
+const RAIL = 24; // left gutter: the depth rail (24px targets)
+const FOOT = 28; // bottom gutter: tabs live here, fully on screen
 const NAV_H = 64; // the ported site nav sits on top of the frame, sharing its hairline
 
 function useViewport() {
@@ -90,7 +92,8 @@ export default function App() {
     loadFonts().then(() => setFontsReady(true));
     loadContent().then((c) => {
       setContent(c);
-      setAnswer(c.home);
+      // Seed only: a reload of this effect (Fast Refresh) never yanks the visitor home.
+      setAnswer((a) => a ?? c.home);
       answers.current.set(c.home.id, c.home);
       window.__content = c;
     });
@@ -100,8 +103,8 @@ export default function App() {
 
   // Desktop: the chat covers the right side; the stage is what's left.
   const chatW = phone ? 0 : chatOpen ? Math.round(Math.min(440, Math.max(340, vp.w * 0.3))) : 0;
-  const frameW = vp.w - 2 * FRAME;
-  const frameH = vp.h - 2 * FRAME - NAV_H + 1;
+  const frameW = vp.w - RAIL - FRAME;
+  const frameH = vp.h - FRAME - FOOT - NAV_H + 1;
   // The About stage is a long page: taller than the frame, scrolled inside it,
   // so the whole work history and stack fit without cutting anything.
   const isLongPage = answer?.page === "about" && !phone;
@@ -120,13 +123,18 @@ export default function App() {
     : { x: 0, y: 0, w: stageW, h: isLongPage ? longH : frameH };
 
   const onHomeStage = !!(content && answer && answer.id === content.home.id);
+  // Raw home.json never reaches the stage: home is ALWAYS the tile home, whatever
+  // focus/expanded state is left over; a focus the answer doesn't have is ignored (and cleared below).
+  const focusValid = !!(answer && focus && answer.fills.some((f) => f.id === focus && (f.kind === "media" || f.kind === "specimen")));
   const stageAnswer = useMemo(() => {
     if (!answer) return answer;
-    if (focus) return focusAnswer(dedupeOpens(answer), focus);
-    if (expanded.length && !onHomeStage) return recedeAnswer(dedupeOpens(answer), expanded[0]);
     if (onHomeStage) return homeWithTiles(answer, content.caseStudies, { chatOpen: chatOpen && !phone });
+    if (focusValid) return focusAnswer(dedupeOpens(answer), focus);
+    if (expanded.length && answer.fills.some((f) => f.id === expanded[0])) return recedeAnswer(dedupeOpens(answer), expanded[0]);
     return dedupeOpens(answer);
-  }, [answer, focus, onHomeStage, content, expanded, chatOpen, phone]);
+  }, [answer, focus, focusValid, onHomeStage, content, expanded, chatOpen, phone]);
+  useEffect(() => { if (focus && !focusValid) setFocus(null); }, [focus, focusValid]);
+  useEffect(() => { if (onHomeStage && expanded.length) setExpanded([]); }, [onHomeStage]); // eslint-disable-line react-hooks/exhaustive-deps
   const previews = useMemo(() => (content ? heroPreviews(content.home, content.caseStudies) : {}), [content]);
 
   // Layouts are cached by input, and the home tile variants are precomputed
@@ -342,16 +350,67 @@ export default function App() {
     if (child) openDeck(child);
   }, [deckById, openDeck]);
   const backTarget = answer?.parent ? rootOf(answer) : null;
+
+  /**
+   * Depth: Home · the case study's main deck · another top-level deck of the
+   * case · drill-downs (the parent chain) · an overlay (expanded media / Proof).
+   */
+  const depth = useMemo(() => {
+    if (!answer || !content) return [];
+    const L = [{ key: "home", label: "Home", go: goHome }];
+    if (isHome) return L;
+    if (answer.page === "about") return [...L, { key: "about", label: "About" }];
+    const chain = [];
+    for (let d = answer, i = 0; d && i < 8; d = d.parent ? deckById(d.parent) : null, i++) chain.unshift(d);
+    const top = chain[0];
+    const main = top?.caseStudy ? content.decks.find((d) => d.caseStudy === top.caseStudy && !d.parent) : null;
+    if (main && main.id !== top.id) L.push({ key: main.id, label: caseName(main.caseStudy), deck: main });
+    chain.forEach((d, i) => L.push({ key: d.id, label: i === 0 && d === main ? caseName(d.caseStudy) : d.question, deck: d }));
+    if (focus) L.push({ key: "overlay", label: "Expanded", overlay: true });
+    else if (expanded.length) L.push({ key: "overlay", label: "Proof", overlay: true });
+    return L;
+  }, [answer, content, isHome, focus, expanded, deckById, goHome]);
+  const jumpTo = useCallback((lvl) => {
+    if (lvl.overlay) return;
+    setFocus(null); setExpanded([]);
+    if (lvl.key === "home") goHome();
+    else if (lvl.deck) openDeck(lvl.deck, { silent: true });
+  }, [goHome, openDeck]);
   // Escape on the stage backs out one level: a drill-down -> its parent, a deck -> home.
   const escapeStage = useCallback(() => {
     if (answer?.parent) { const p = deckById(answer.parent); if (p) return openDeck(p, { silent: true }); }
     if (!isHome) goHome();
   }, [answer, deckById, openDeck, isHome, goHome]);
+  // "?" opens the shortcut sheet (not while typing).
+  const [shortcuts, setShortcuts] = useState(false);
+  // Theme: the OS preference by default; a choice made with the toggle is remembered.
+  const [theme, setTheme] = useState(() => {
+    try { const t = localStorage.getItem("stage-theme"); if (t === "light" || t === "dark") return t; } catch { /* private mode */ }
+    return window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+  });
+  useLayoutEffect(() => { document.documentElement.dataset.theme = theme; }, [theme]);
+  const toggleTheme = useCallback(() => setTheme((t) => {
+    const n = t === "light" ? "dark" : "light";
+    try { localStorage.setItem("stage-theme", n); } catch { /* private mode */ }
+    return n;
+  }), []);
+  const [focusChat, setFocusChat] = useState(0);
+  // S5: one h1 per page state + a document title per answer.
+  const pageH1 = !answer ? "" : isHome ? "namit, product engineer" : answer.page === "about" ? "About namit" : answer.question;
+  useEffect(() => { if (pageH1) document.title = isHome ? "namit · product engineer" : `${pageH1} · namit`; }, [pageH1, isHome]);
+  useEffect(() => {
+    const on = (e) => {
+      if (e.key !== "?" || e.target.closest?.("input, textarea")) return;
+      e.preventDefault(); setShortcuts((v) => !v);
+    };
+    window.addEventListener("keydown", on);
+    return () => window.removeEventListener("keydown", on);
+  }, []);
   // Layout changes are announced politely.
   const [announce, setAnnounce] = useState("");
   useEffect(() => {
     if (!stageAnswer) return;
-    if (focus) setAnnounce(`Expanded: ${stageAnswer.fills.find((f) => f.id === focus)?.alt || "media"}`);
+    if (focus) { const f = stageAnswer.fills.find((x) => x.id === focus); setAnnounce(`Expanded: ${f?.alt || (f?.kind === "specimen" ? "type specimen" : "media")}`); }
     else if (expanded.length) setAnnounce("Proof open. Escape to close.");
     else setAnnounce(isHome ? "Showing: home" : answer?.page === "about" ? "Showing: about" : `Showing: ${answer?.question || ""}`);
   }, [stageAnswer]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -360,13 +419,17 @@ export default function App() {
   const chips = useMemo(() => {
     if (!content || !answer) return [];
     if (!content.decks.length) return content.fixtures.filter((d) => !d.parent).slice(0, 6).map((d) => ({ label: d.question, q: d.question }));
-    const back = { label: "Back to all three", home: true };
+    // A D1 deck's parent is Home: the chip goes up ONE level, the rail does the rest.
+    const back = { label: "Home", aria: "Back to Home", home: true };
     // Inside a child deck: its sibling stages, then back to the case study's main deck.
     if (answer.parent) {
       const sibs = allDecks.filter((d) => d.parent === answer.parent && d.id !== answer.id);
       const root = rootOf(answer);
       const name = answer.caseStudy ? caseTitle(answer.caseStudy) : root?.question;
-      return [...sibs.map((d) => ({ label: d.question, deck: d, kicker: name })), ...(root ? [{ label: `back to ${name}`, deck: root, back: true }] : [])];
+      // Back goes up ONE level (the parent); the depth rail is the only multi-level jump.
+      const parent = deckById(answer.parent);
+      const pName = parent ? (parent === root ? name : parent.question) : null;
+      return [...sibs.map((d) => ({ label: d.question, deck: d, kicker: name })), ...(parent ? [{ label: `back to ${pName}`, deck: parent, back: true }] : [])];
     }
     const cs = answer.caseStudy;
     if (cs) {
@@ -381,7 +444,7 @@ export default function App() {
     if (isHome) return entries;
     const others = content.decks.filter((d) => !d.caseStudy && !d.parent && d.id !== answer.id).map((d) => ({ label: d.question, deck: d, kicker: "Other work" }));
     return [...entries, ...others, back];
-  }, [content, answer, isHome, caseTitle, allDecks, rootOf]);
+  }, [content, answer, isHome, caseTitle, allDecks, rootOf, deckById]);
 
   const crumbs = useMemo(() => {
     if (!answer || isHome) return null;
@@ -437,7 +500,10 @@ export default function App() {
   }, [answer, focus]);
   useEffect(() => {
     if (!focus) return;
-    const onKey = (e) => { if (e.key === "ArrowLeft") onStep(-1); if (e.key === "ArrowRight") onStep(1); };
+    const onKey = (e) => {
+      if (e.target.closest?.(".spec")) return; // the specimen steps itself
+      if (e.key === "ArrowLeft") onStep(-1); if (e.key === "ArrowRight") onStep(1);
+    };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [focus, onStep]);
@@ -515,6 +581,7 @@ export default function App() {
       openCase: onOpenCase,
       expand: onExpand,
       hover: (cs) => setHot(cs),
+      theme: (t) => setTheme(t),
       replayIntro: () => { try { sessionStorage.removeItem("stage-intro-seen"); } catch {} window.location.reload(); },
       collapse: onCollapse,
       openChat: setChatOpen,
@@ -525,13 +592,17 @@ export default function App() {
 
   if (!layout) return <div className="boot label">loading</div>;
 
-  const nav = <Navbar onHome={goHome} onAbout={goAbout} crumbs={crumbs} isHome={isHome} isAbout={isAbout} />;
+  const nav = <Navbar onHome={goHome} onAbout={goAbout} crumbs={crumbs} isHome={isHome} isAbout={isAbout} theme={theme} onToggleTheme={toggleTheme} />;
   return (
     <>
+    <a className="skip-link" href="#stage" onClick={(e) => { e.preventDefault(); const c = document.querySelector('.stage .cell[tabindex="0"]') || document.querySelector(".stage .cell"); c?.focus(); }}>Skip to work</a>
+    {shortcuts && <Shortcuts onClose={() => setShortcuts(false)} />}
     {!phone && <div className={`app-nav ${introPending && (isHome || isAbout) ? "intro" : ""}`}>{nav}</div>}
-    <div className={`app ${phone ? "phone" : "desk"} ${introPending && (isHome || isAbout) ? "intro" : ""}`} style={phone ? undefined : { left: FRAME, right: FRAME, bottom: FRAME, top: FRAME + NAV_H - 1 }}>
+    <div className={`app ${phone ? "phone" : "desk"} ${introPending && (isHome || isAbout) ? "intro" : ""}`} style={phone ? undefined : { left: RAIL, right: FRAME, bottom: FOOT, top: FRAME + NAV_H - 1 }}>
       {phone && <div className="app-nav">{nav}</div>}
+      <h1 className="sr-only">{pageH1}</h1>
       <div className="sr-only" role="status" aria-live="polite">{announce}</div>
+      {depth.length > 0 && <DepthRail levels={depth} onJump={jumpTo} phone={phone} reduced={reduced} />}
       <main className="stage-wrap" style={phone ? undefined : { width: rect.w }}>
         <div className={tall > 1 ? "stage-scroll" : "stage-plain"}>
         <Stage
@@ -542,7 +613,7 @@ export default function App() {
           onOpenCase={isHome ? (cs) => onTile(cs, "activate") : undefined}
           onTile={isHome ? onTile : undefined} hot={hot} quick={isHome && !focus}
           preview={isHome && hot ? previews[hot] : null} previewKey={hot}
-          onAskOpen={!chatOpen && !phone ? () => setChatOpen(true) : null} faceBusy={morphing}
+          onAskOpen={!chatOpen && !phone ? () => { setChatOpen(true); setFocusChat((n) => n + 1); } : null} faceBusy={morphing}
           intro={introPending && (isHome || isAbout)} onIntroDone={onIntroDone}
           onExpand={isHome ? undefined : onExpand} onCollapse={onCollapse} focusId={focus}
           openId={expanded[0] || focus || null} onCloseFocus={closeFocusMode} onStep={onStep} onCaseLink={onOpenCase} onDrill={onDrill}
@@ -550,9 +621,6 @@ export default function App() {
         />
         </div>
         <div className="gutter-left">
-          {backTarget && (
-            <button type="button" className="back-case" onClick={() => openDeck(backTarget, { silent: true })}>← {backLabel}</button>
-          )}
           {layout.dropped?.length > 0 && (
             <button type="button" className="more-tag" onClick={() => onMore(layout.dropped)}>
               +{layout.dropped.length} more, not shown
@@ -560,7 +628,7 @@ export default function App() {
           )}
         </div>
         {!chatOpen && !phone && !isHome && (
-          <button type="button" className="ask-btn gutter label" onClick={() => setChatOpen(true)}>
+          <button type="button" className="ask-btn gutter label" onClick={() => { setChatOpen(true); setFocusChat((n) => n + 1); }}>
             <Face size={36} busy={morphing} reduced={reduced} /> Ask Kip <span aria-hidden>→</span>
           </button>
         )}
@@ -568,7 +636,8 @@ export default function App() {
       <div className="chat-wrap" style={phone ? undefined : { width: chatW }}>
         <Chat
           open={phone || chatOpen} phone={phone} messages={messages} chips={chips} onAsk={onAsk} onChip={onChip} busy={busy}
-          onClose={() => setChatOpen(false)} busyFace={busy || morphing} reduced={reduced}
+          focusNonce={focusChat}
+          onClose={() => { setChatOpen(false); requestAnimationFrame(() => (document.querySelector('.cell .c-face.asks')?.closest(".cell") || document.querySelector(".ask-btn") || document.querySelector('.stage .cell[tabindex="0"]'))?.focus()); }} busyFace={busy || morphing} reduced={reduced}
           onReopen={(q) => { const a = [...answers.current.values()].find((x) => x.question === q); if (a) go(a); }}
         />
       </div>
@@ -576,3 +645,78 @@ export default function App() {
     </>
   );
 }
+
+function Shortcuts({ onClose }) {
+  const ref = useRef(null);
+  useEffect(() => {
+    const d = ref.current;
+    const back = document.activeElement;
+    d?.showModal?.();
+    return () => back?.focus?.();
+  }, []);
+  return (
+    <dialog ref={ref} className="shortcuts" aria-modal="true" aria-labelledby="sc-title" onCancel={(e) => { e.preventDefault(); onClose(); }} onClick={(e) => { if (e.target === ref.current) onClose(); }}>
+      <h2 id="sc-title" className="label">Keyboard</h2>
+      <dl>{KEYS.map(([k, v]) => <div key={k}><dt><kbd>{k}</kbd></dt><dd>{v}</dd></div>)}</dl>
+      <button type="button" className="close-btn" onClick={onClose}><span aria-hidden>×</span> Close</button>
+    </dialog>
+  );
+}
+
+/**
+ * The depth rail (Figma "tick rail", variant A): one hairline tick per level,
+ * Home at the top; passed levels mid-bright, the current one lit with its
+ * number, deeper slots dim. Hover / focus shows the level's question; a click
+ * jumps straight there. The only multi-level jump on the page.
+ */
+const RAIL_SLOTS = 6;
+// Rail geometry (desktop): level 0 sits beside the nav's glasses (nav row centre),
+// deeper levels run down the left gutter below the nav.
+const NAV_TOP = FRAME, NAV_ROW = 64, TICK = 26;
+const tickY = (i) => (i === 0 ? NAV_ROW / 2 : NAV_ROW + 10 + TICK / 2 + (i - 1) * TICK);
+function DepthRail({ levels, onJump, phone, reduced }) {
+  const cur = levels.length - 1;
+  const slots = Math.max(RAIL_SLOTS, levels.length);
+  // New ticks slide in 32px from above (going deeper) or below (coming back); no fade.
+  const prevLen = useRef(levels.length);
+  const dir = levels.length >= prevLen.current ? 1 : -1;
+  useEffect(() => { prevLen.current = levels.length; }, [levels.length]);
+  const label = (l, i) => `${i === 0 ? "Home" : `Level ${i}`}: ${l.label}${i === cur ? " (here)" : ""}`;
+  if (phone) {
+    return (
+      <nav className={`depth-rail h ${reduced ? "still" : ""}`} aria-label="Depth">
+        <ol>
+          {levels.map((l, i) => (
+            <li key={l.key} className={i === cur ? "cur" : "passed"}>
+              <button type="button" aria-current={i === cur ? "location" : undefined} aria-label={label(l, i)}
+                onClick={() => i !== cur && onJump(l)} aria-disabled={i === cur || undefined}>
+                <span className="tick" aria-hidden>{i === cur && i > 0 ? i : ""}</span>
+              </button>
+            </li>
+          ))}
+        </ol>
+      </nav>
+    );
+  }
+  return (
+    <nav className={`depth-rail v ${reduced ? "still" : ""}`} aria-label="Depth" style={{ top: NAV_TOP }}>
+      <ol>
+        {levels.map((l, i) => (
+          <li key={l.key} className={i === cur ? "cur" : "passed"} style={{ top: tickY(i) - 12, "--from": `${-32 * dir}px` }}>
+            <button type="button" aria-current={i === cur ? "location" : undefined} aria-label={label(l, i)}
+              onClick={() => i !== cur && onJump(l)} aria-disabled={i === cur || undefined}>
+              <span className="tick" aria-hidden />
+              <span className="tl" aria-hidden>{l.label}</span>
+            </button>
+          </li>
+        ))}
+        {Array.from({ length: slots - levels.length }, (_, k) => (
+          <li key={`slot${k}`} className="slot" aria-hidden style={{ top: tickY(levels.length + k) - 12 }}><span className="tick" /></li>
+        ))}
+      </ol>
+      {/* ONE puck that slides to the current tick (Jitter: Slide 32px, 0.64s, Elastic 50). */}
+      <span className="puck" aria-hidden style={{ transform: `translateY(${tickY(cur) - 9}px)` }}>{cur > 0 ? cur : ""}</span>
+    </nav>
+  );
+}
+const short = (t = "") => (t.length > 34 ? `${t.slice(0, 33)}…` : t);

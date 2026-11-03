@@ -8,7 +8,7 @@ const si = require("@iconify-json/simple-icons/icons.json");
 const lu = require("@iconify-json/lucide/icons.json");
 const WANT = {
   "simple-icons": ["typescript", "react", "nextdotjs", "nodedotjs", "python", "threedotjs", "claude", "langflow", "googlecloud", "postgresql", "googlebigquery", "notion", "n8n", "vercel", "playwright", "figma", "adobeaftereffects", "blender", "unity", "csharp"],
-  lucide: ["bot", "component", "layers", "book-open", "gamepad-2", "image", "file-text", "external-link", "moon"],
+  lucide: ["bot", "component", "layers", "book-open", "gamepad-2", "image", "file-text", "external-link", "moon", "sun"],
 };
 // Plus every Iconify id the content names directly (about.json stack icons).
 const about = JSON.parse(fs.readFileSync(new URL("../src/data/about.json", import.meta.url), "utf8"));

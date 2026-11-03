@@ -10,10 +10,11 @@
  * resolve to an Answer per src/data/schema.js. The stage does not care which.
  */
 import { cleanAnswer } from "./content.js";
+import { aboutFromJson, aboutAnswer } from "./about/aboutAnswer.js";
 
 const STOP = new Set(("a an and are as at be but by can did do does for from has have how i in is it its me "
   + "my of on or show so tell that the their there this to was what when where which who why with you your about "
-  + "work did made make any other some").split(" "));
+  + "work did made make any other some he him his she her they them even really namit").split(" "));
 
 export const tokens = (s) =>
   (s || "").toLowerCase().replace(/[^a-z0-9\s-]/g, " ").split(/\s+/).filter((t) => t.length > 1 && !STOP.has(t))
@@ -107,7 +108,24 @@ function fixtureFallback(q, fixtures) {
   return { answer: best, how: "fixture" };
 }
 
+/**
+ * Questions about the person, not a project ("who even is he", "tell me about
+ * Namit", "his background") open the About page. Pronouns and the name are
+ * stop words, so they can never match a project deck by accident.
+ */
+const ABOUT_Q = new RegExp([
+  String.raw`\bwho\s*(?:'s|\s+(?:even\s+)?(?:is|are))\s+(?:he|him|namit|you|this(?:\s+guy)?)\b`,
+  String.raw`\b(?:about|introduce)\s+(?:him|namit|yourself)\b`,
+  String.raw`\b(?:his|namit'?s|your)\s+(?:background|bio|story|experience|career|history|resume|cv)\b`,
+  String.raw`^\s*(?:about|bio|who)\s*\??\s*$`,
+].join("|"), "i");
+export const isAboutQuestion = (q) => ABOUT_Q.test(q || "");
+
 export async function localAnswer(q, content) {
+  if (isAboutQuestion(q)) {
+    const about = content.about ? aboutFromJson(content.about, content.caseStudies) : aboutAnswer();
+    return { answer: { ...about, thesis: "Here's who I am: the work history, the stack, and what each skill was used for." }, how: "about (intent)" };
+  }
   const d = content.decks.length ? matchDeck(q, content.decks) : null;
   if (d) return d;
   const r = content.corpus.length ? retrieve(q, content.corpus) : null;

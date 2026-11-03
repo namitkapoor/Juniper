@@ -146,6 +146,35 @@ function checkFill(f, where, ids) {
       }
       checkReceipts(f.receipts, where, false);
       break;
+    case "specimen": {
+      if (!isStr(f.sample)) err(where, "specimen.sample missing");
+      if (!isStr(f.font)) err(where, "specimen.font missing (\"display\", \"body\" or a CSS family)");
+      if (f.mode !== undefined && !["scale", "fit"].includes(f.mode)) err(where, `specimen.mode must be scale|fit, got ${f.mode}`);
+      if (f.direction !== undefined && !["up", "down"].includes(f.direction)) err(where, `specimen.direction must be up|down, got ${f.direction}`);
+      const fin = (v) => typeof v === "number" && Number.isFinite(v);
+      if (!Array.isArray(f.scale) || f.scale.length < 2) err(where, "specimen.scale needs at least two steps");
+      else f.scale.forEach((st, i) => {
+        const w = `${where}.scale[${i}]`;
+        if (!isStr(st.role)) err(w, "role missing");
+        if (!fin(st.size) || st.size <= 0) err(w, `size must be > 0, got ${st.size}`);
+        if (!fin(st.lineHeight) || st.lineHeight <= 0) err(w, `lineHeight must be px > 0, got ${st.lineHeight}`);
+        if (!fin(st.tracking) || Math.abs(st.tracking) > 1) err(w, `tracking must be em in -1..1, got ${st.tracking}`);
+        if (!Number.isInteger(st.weight) || st.weight < 100 || st.weight > 900) err(w, `weight must be 100..900, got ${st.weight}`);
+        if (st.font !== undefined && !isStr(st.font)) err(w, "font must be a non-empty string");
+        if (st.upper !== undefined && typeof st.upper !== "boolean") err(w, "upper must be a boolean");
+      });
+      if (f.spacing !== undefined) {
+        if (!Array.isArray(f.spacing)) err(where, "specimen.spacing must be an array");
+        else f.spacing.forEach((sp, i) => {
+          if (!isStr(sp.name)) err(`${where}.spacing[${i}]`, "name missing");
+          if (!fin(sp.value) || sp.value < 0) err(`${where}.spacing[${i}]`, `value must be px >= 0, got ${sp.value}`);
+        });
+      }
+      if (f.mode === "fit" && !(f.fit && fin(f.fit.pad) && f.fit.pad >= 0)) err(where, "fit mode needs fit.pad (px)");
+      if (f.fit?.floor !== undefined && !fin(f.fit.floor)) err(where, "fit.floor must be a number");
+      checkReceipts(f.receipts, where, false);
+      break;
+    }
     case "commits":
       if (!isStr(f.repo)) err(where, "commits.repo missing");
       if (!Array.isArray(f.items) || f.items.length === 0) err(where, "commits.items must be non-empty");
@@ -299,6 +328,7 @@ if (other < 2 || other > 4) err("decks", `${other} "any other work" decks, want 
       if (!c) err(`${w}.fills[${i}]`, `opens "${f.opens}" is not a deck`);
       else if (c.parent === d.id) { /* a drill-down of this deck */ }
       else if (!c.parent && c.caseStudy && c.caseStudy === d.caseStudy && c.id !== d.id) { /* a sibling top-level deck, e.g. ARCHITECTURE -> build */ }
+      else if (f.id.endsWith("-sys") && c.caseStudy && c.caseStudy === d.caseStudy && /-d-design$/.test(c.id)) { /* SYSTEM shortcut: the case's first deck links straight to its design deck */ }
       else err(`${w}.fills[${i}]`, `opens ${c.id}, whose parent is ${c.parent ?? "none"}, not ${d.id} (and it is not a top-level deck of the same case study)`);
       if (f.opensPrimary !== undefined && typeof f.opensPrimary !== "boolean") err(`${w}.fills[${i}]`, "opensPrimary must be a boolean");
     });

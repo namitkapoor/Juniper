@@ -1,0 +1,81 @@
+/* Specimen: a measured drawing of a type ladder. Monochrome hairlines on the
+   stage tokens (--ink / --ink-2 / --mute / --hair*), so both themes work. */
+
+.spec {
+  position: relative; width: 100%; height: 100%; min-height: 0;
+  display: flex; flex-direction: column;
+  padding: var(--spec-pad, 16px);
+  color: var(--ink); font-family: var(--body);
+}
+.spec:focus-visible { outline: 2px solid var(--ring); outline-offset: -2px; }
+
+.spec-head { flex: none; display: flex; align-items: center; gap: 12px; height: 28px; margin-bottom: 8px; }
+.spec-now {
+  margin: 0; min-width: 0; flex: 1; display: flex; gap: 10px; align-items: baseline; overflow: hidden; white-space: nowrap;
+  font-size: 12px; line-height: 16px; letter-spacing: .12em; text-transform: uppercase; color: var(--mute);
+}
+.spec-role { color: var(--ink); font-weight: 500; }
+.spec-val { font-variant-numeric: tabular-nums; letter-spacing: .04em; }
+.spec-floor { color: var(--ink-2); border-bottom: 1px dashed var(--hair-live); }
+
+.spec-ctl { flex: none; display: flex; border: 1px solid var(--hair-ctl); }
+.spec-ctl button {
+  width: 28px; height: 26px; display: flex; align-items: center; justify-content: center;
+  background: none; border: 0; border-left: 1px solid var(--hair); color: var(--ink); cursor: pointer; padding: 0;
+}
+.spec-ctl button:first-child { border-left: 0; }
+.spec-ctl button:hover:not(:disabled) { background: var(--hair-soft); }
+.spec-ctl button:disabled { color: var(--mute); cursor: default; }
+.spec-ctl button[aria-pressed="true"] { color: var(--ink); }
+
+.spec-draw { position: relative; flex: 1; min-height: 0; overflow: hidden; }
+.spec-draw svg { position: absolute; left: 0; top: 0; display: block; overflow: visible; }
+
+/* strokes */
+.spec-pencil { fill: none; stroke: var(--hair-live); stroke-width: 1; }
+.spec-ink { fill: none; stroke: var(--ink-2); stroke-width: 1; }
+.spec-soft { fill: none; stroke: var(--hair); stroke-width: 1; }
+.spec-soft.dashed { stroke-dasharray: 2 3; }
+.spec-block { fill: var(--hair-soft); stroke: var(--hair-live); stroke-width: 1; }
+.spec-cell { fill: none; stroke: var(--hair-live); stroke-width: 1; transition: stroke 160ms ease-in-out; }
+.spec-cell.tight { stroke: var(--ink); }
+.spec-content { fill: none; stroke: var(--hair); stroke-dasharray: 2 3; stroke-width: 1; }
+.spec-glyphs { fill: var(--ink); font-kerning: none; }
+
+.spec-lbl { fill: var(--mute); font-family: var(--body); font-size: 12px; font-variant-numeric: tabular-nums; }
+.spec-lbl.val { fill: var(--ink-2); }
+
+/* scrubber + step ticks */
+.spec-foot { flex: none; position: relative; padding-top: 6px; }
+.spec-scrub {
+  -webkit-appearance: none; appearance: none; display: block; width: 100%; height: 22px; margin: 0;
+  background: transparent; cursor: pointer;
+}
+.spec-scrub::-webkit-slider-runnable-track { height: 1px; background: var(--hair-ctl); }
+.spec-scrub::-moz-range-track { height: 1px; background: var(--hair-ctl); }
+.spec-scrub::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none; width: 11px; height: 11px; margin-top: -5px;
+  background: var(--bg); border: 1px solid var(--ink); border-radius: 0; transform: rotate(45deg);
+}
+.spec-scrub::-moz-range-thumb { width: 9px; height: 9px; background: var(--bg); border: 1px solid var(--ink); border-radius: 0; transform: rotate(45deg); }
+
+.spec-ticks { position: relative; height: 18px; margin: 0 5px; }
+.spec-tick {
+  position: absolute; top: 0; transform: translateX(-50%); padding: 4px 0 0; background: none; border: 0; cursor: pointer;
+  font-size: 12px; line-height: 14px; color: var(--mute); white-space: nowrap; font-variant-numeric: tabular-nums;
+}
+.spec-tick::before { content: ""; position: absolute; left: 50%; top: -9px; width: 1px; height: 5px; background: var(--hair-ctl); }
+.spec-tick.start { transform: none; }
+.spec-tick.start::before { left: 0; }
+.spec-tick.end { transform: translateX(-100%); }
+.spec-tick.end::before { left: auto; right: 0; }
+.spec-tick.on { color: var(--ink); }
+.spec-tick.on::before { background: var(--ink); }
+.spec-tick.below { text-decoration: line-through; text-decoration-color: var(--hair-live); }
+
+.spec.compact .spec-head { height: 26px; }
+.spec.compact .spec-ticks { height: 8px; }
+
+@media (prefers-reduced-motion: reduce) { .spec-cell { transition: none; } }
+
+.spec .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; margin: 0; padding: 0; }

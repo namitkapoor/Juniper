@@ -34,6 +34,7 @@ export function cellLabel(fill, { drillLabel } = {}) {
     case "stack": s = [fill.label || "Stack", fill.groups.map((g) => g.group).join(", ")]; break;
     case "offclock": s = [fill.label || "Off the clock"]; break;
     case "portrait": s = [fill.alt]; break;
+    case "specimen": s = [fill.title || "Type specimen", `${fill.scale.length} steps, ${fill.scale.map((x) => x.size).join(" / ")} px`]; break;
     default: s = [fill.text || fill.kind];
   }
   // Word joiners (glued hyphens) and trailing full stops don't belong in a spoken label.

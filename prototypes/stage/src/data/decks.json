@@ -55,84 +55,6 @@
         "opens": "ck-d-cart"
       },
       {
-        "kind": "logos",
-        "id": "ck-live-logos",
-        "weight": 0.55,
-        "label": "LIVE ON · 4 OF 8 SHOWN",
-        "items": [
-          {
-            "name": "KivaKube",
-            "src": "assets/chekout/logos/kivakube.webp",
-            "aspect": 7.3394,
-            "url": "https://www.kivakube.com/",
-            "invert": true
-          },
-          {
-            "name": "Rosendahl Design Group",
-            "src": "assets/chekout/logos/rosendahl.webp",
-            "aspect": 1.5474,
-            "url": "https://www.rosendahl.com/",
-            "invert": true
-          },
-          {
-            "name": "Pacific Soul Foods",
-            "src": "assets/chekout/logos/pacsoul.webp",
-            "aspect": 1.9704,
-            "url": "https://pacsoulfoods.com/"
-          },
-          {
-            "name": "Nuthatch Naturals",
-            "src": "assets/chekout/logos/nuthatch.webp",
-            "aspect": 1.0051,
-            "url": "https://nuthatchnaturals.com/"
-          }
-        ],
-        "receipts": [
-          {
-            "type": "asset",
-            "ref": "src/data/agentPlatformData.js",
-            "repo": "Juniper",
-            "date": "2026-10-26",
-            "label": "Agent platform case study · Client: ChekOut AI (8 merchants live)"
-          },
-          {
-            "type": "asset",
-            "ref": "storefront:kivakube.com",
-            "url": "https://www.kivakube.com/",
-            "date": "2026-11-02",
-            "label": "Homepage loads chekout.ai/chatbot.js with data-agent-id=\"kiva\", checked 2026-11-02"
-          },
-          {
-            "type": "asset",
-            "ref": "storefront:rosendahl.com",
-            "url": "https://www.rosendahl.com/",
-            "date": "2026-11-02",
-            "label": "Homepage loads chekout.ai/chatbot.js with data-agent-id=\"rosendahl-design-group\", checked 2026-11-02"
-          },
-          {
-            "type": "asset",
-            "ref": "storefront:pacsoulfoods.com",
-            "url": "https://pacsoulfoods.com/",
-            "date": "2026-11-02",
-            "label": "Homepage loads chekout.ai/chatbot.js with data-agent-id=\"pacsoulfoods\", checked 2026-11-02"
-          },
-          {
-            "type": "asset",
-            "ref": "storefront:nuthatchnaturals.com",
-            "url": "https://nuthatchnaturals.com/",
-            "date": "2026-11-02",
-            "label": "Homepage loads chekout.ai/chatbot.js with data-agent-id=\"nuthatch-naturals\", checked 2026-11-02"
-          },
-          {
-            "type": "asset",
-            "ref": "public/images/Case Studies/CK/clients/logos/",
-            "repo": "Juniper",
-            "label": "Merchant logo files (kivakube, rosendahl, pacsoul, nuthatch)"
-          }
-        ],
-        "opens": "ck-d-live-stores"
-      },
-      {
         "kind": "kpi",
         "id": "ck-sessions",
         "weight": 0.8,
@@ -162,7 +84,8 @@
             "share": 0.44,
             "logo": "assets/chekout/logos/kivakube.webp"
           }
-        ]
+        ],
+        "opens": "ck-d-live-stores"
       },
       {
         "kind": "media",
@@ -170,9 +93,9 @@
         "weight": 0.75,
         "media": "image",
         "src": "assets/chekout/top-metrics.webp",
-        "aspect": 4.1344,
-        "alt": "Dashboard top metrics: 126 total visitors, 86% engagement rate, 1 attributed order, $106.19 total revenue from Shopify",
-        "caption": "One live store's top line: visitors, engagement, and the order and revenue the agent drove.",
+        "aspect": 2.0103,
+        "alt": "Dashboard top metrics: 126 total visitors, 86% engagement rate",
+        "caption": "One live store's top line: visitors and engagement.",
         "receipts": [
           {
             "type": "asset",
@@ -181,7 +104,7 @@
             "label": "ChekOut AI case study · analytics"
           }
         ],
-        "explain": "This is the top of the merchant dashboard on a live store, pulling revenue from the store's own Shopify orders. Watch the attributed order and revenue tiles: they count only what shoppers bought after the agent helped. Merchants asked what the agent was worth, and this answers it in their own numbers.",
+        "explain": "This is the top of the merchant dashboard on a live store. Engagement counts only visitors who sent the agent a real message. Merchants asked what the agent was worth, and this answers it in their own numbers.",
         "kpi": {
           "value": "86%",
           "label": "engagement rate on one live store (conversations of 3+ turns)",
@@ -245,6 +168,13 @@
         ],
         "opens": "ck-platform-build",
         "opensPrimary": true
+      },
+      {
+        "kind": "prose",
+        "id": "ck-sys",
+        "weight": 0.5,
+        "text": "SYSTEM: The type scale and tokens behind the builder and the widget, drawn live.",
+        "opens": "ck-d-design"
       }
     ]
   },
@@ -868,9 +798,9 @@
         "media": "image",
         "src": "assets/christine-valmy/architecture.svg",
         "aspect": 1.7778,
-        "alt": "Christine Valmy agent architecture: students use the widget on the school's WordPress site; each message goes to an n8n chat webhook that reaches the agent's Cloud Function, finished chats go to an n8n transcript webhook that produces a lead for officers, and the inquiry form creates a lead in the school's Creatio CRM",
+        "alt": "Christine Valmy agent architecture: students use the widget on the school's WordPress site; each message goes to n8n on Google Cloud, which reaches the agent (RAG, routed through MCP: Claude for English, Gemini for Spanish); finished chats become leads for officers; conversation and lead data land in BigQuery; the inquiry form creates a lead in the school's Creatio CRM",
         "caption": "ARCHITECTURE: how the pieces connect.",
-        "explain": "A widget on the school's WordPress site, n8n webhooks between it and the agent, and finished chats turned into leads for the officers. Open it for how it is built.",
+        "explain": "A widget on the school's WordPress site, an n8n workflow on Google Cloud in front of the agent, BigQuery for the data, and finished chats turned into leads. Open it for how it is built.",
         "receipts": [
           {
             "type": "asset",
@@ -900,6 +830,19 @@
             "ref": "cv-chat-flat/claude.md",
             "repo": "chekout-ai (local)",
             "label": "Plugin notes: endpoint connectors (n8n chat, n8n transcript, Creatio CRM), WordPress settings"
+          },
+          {
+            "type": "asset",
+            "ref": "tools/content/sources/christine-valmy-requirements.md",
+            "repo": "Juniper (stage prototype)",
+            "date": "2026-11-02",
+            "label": "Christine Valmy requirements, provided by Namit (redacted)"
+          },
+          {
+            "type": "asset",
+            "ref": "namit-confirmation-2026-11-02",
+            "date": "2026-11-02",
+            "label": "Confirmed by Namit, Nov 2 2026"
           }
         ],
         "opens": "cv-build",
@@ -1133,7 +1076,7 @@
     "aliases": [
       "How is the Christine Valmy agent built?"
     ],
-    "thesis": "I built it as a React widget in a WordPress plugin that talks to the agent through n8n webhooks, and audited it to WCAG AA before launch.",
+    "thesis": "I built it as a React widget in a WordPress plugin, wired to an n8n workflow on Google Cloud with BigQuery for the data, and audited it to WCAG AA before launch.",
     "fills": [
       {
         "kind": "prose",
@@ -1160,9 +1103,9 @@
         "media": "image",
         "src": "assets/christine-valmy/architecture.svg",
         "aspect": 1.7778,
-        "alt": "Christine Valmy agent architecture: students use the widget on the school's WordPress site; each message goes to an n8n chat webhook that reaches the agent's Cloud Function, finished chats go to an n8n transcript webhook that produces a lead for officers, and the inquiry form creates a lead in the school's Creatio CRM",
+        "alt": "Christine Valmy agent architecture: students use the widget on the school's WordPress site; each message goes to n8n on Google Cloud, which reaches the agent (RAG, routed through MCP: Claude for English, Gemini for Spanish); finished chats become leads for officers; conversation and lead data land in BigQuery; the inquiry form creates a lead in the school's Creatio CRM",
         "caption": "From a student's question to a sorted lead.",
-        "explain": "Follow a student's message: the widget posts it to n8n, n8n reaches the agent (a teammate's Cloud Function; the persona and prompt are mine), and the reply comes back with the conversation stage. When the chat ends, the transcript goes to a second n8n webhook that turns it into a lead; the inquiry form goes straight to the school's Creatio CRM. Drawn from the plugin code and the ChekOut architecture board.",
+        "explain": "Follow a student's message: the widget sends it to n8n on Google Cloud, n8n reaches the agent, and the reply comes back with the conversation stage. The agent answers from the school's documents through RAG, Claude in English and Gemini in Spanish, routed through MCP. Finished chats become leads, the data lands in BigQuery, and the inquiry form goes to the school's CRM.",
         "receipts": [
           {
             "type": "asset",
@@ -1193,6 +1136,19 @@
             "ref": "cv-chat-flat/claude.md",
             "repo": "chekout-ai (local)",
             "label": "Plugin notes: endpoint connectors (n8n chat, n8n transcript, Creatio CRM), WordPress settings"
+          },
+          {
+            "type": "asset",
+            "ref": "tools/content/sources/christine-valmy-requirements.md",
+            "repo": "Juniper (stage prototype)",
+            "date": "2026-11-02",
+            "label": "Christine Valmy requirements, provided by Namit (redacted)"
+          },
+          {
+            "type": "asset",
+            "ref": "namit-confirmation-2026-11-02",
+            "date": "2026-11-02",
+            "label": "Confirmed by Namit, Nov 2 2026"
           }
         ]
       },
@@ -1200,7 +1156,7 @@
         "kind": "prose",
         "id": "cv-stack",
         "weight": 0.85,
-        "text": "HOW: The chat ships as a React widget in a WordPress plugin. Every message goes to an n8n webhook in front of the agent, finished chats go to a second webhook that makes the lead, and the inquiry form writes to the school's Creatio CRM. I tested the agent across the major models, launched it on Claude, and it now runs on Gemini.",
+        "text": "HOW: The chat ships as a React widget in a WordPress plugin. Every message goes to an n8n workflow on Google Cloud in front of the agent, finished chats become leads, conversation and lead data land in BigQuery, and the inquiry form writes to the school's Creatio CRM. Routing runs through MCP: Claude answers in English, Gemini in Spanish.",
         "receipts": [
           {
             "type": "asset",
@@ -1213,15 +1169,24 @@
             "type": "asset",
             "ref": "cv-chat-flat/christine-valmy-floating.js",
             "repo": "chekout-ai (local)",
-            "label": "N8nService: chat and transcript webhooks, payloads, completion stages"
+            "label": "Widget: chat and transcript calls, payloads, completion stages"
           },
           {
             "type": "asset",
-            "ref": "cv-chat-flat/claude.md",
-            "repo": "chekout-ai (local)",
-            "label": "Plugin notes: endpoint connectors (n8n chat, n8n transcript, Creatio CRM), WordPress settings"
+            "ref": "tools/content/sources/christine-valmy-requirements.md",
+            "repo": "Juniper (stage prototype)",
+            "date": "2026-11-02",
+            "label": "Christine Valmy requirements, provided by Namit (redacted)"
+          },
+          {
+            "type": "asset",
+            "ref": "namit-confirmation-2026-11-02",
+            "date": "2026-11-02",
+            "label": "Confirmed by Namit, Nov 2 2026"
           }
-        ]
+        ],
+        "opens": "cv-d-script",
+        "opensPrimary": true
       },
       {
         "kind": "media",
@@ -1392,7 +1357,7 @@
           }
         ],
         "explain": "The public Job Hunt page as any visitor sees it. The pipeline numbers come from the same system that runs my search, so they move as I apply. Company names and contacts are left out on purpose; the shape of the search is public, the people in it are not.",
-        "opens": "ky-d-live",
+        "opens": "ky-d-resumes",
         "opensPrimary": true
       },
       {
@@ -1450,31 +1415,6 @@
         "opens": "ky-d-funnel"
       },
       {
-        "kind": "kpi",
-        "id": "ky-resumes",
-        "weight": 0.6,
-        "value": "475",
-        "label": "tailored resumes, for me and other candidates",
-        "period": "as of Oct 15, 2026",
-        "receipts": [
-          {
-            "type": "asset",
-            "ref": "lib/proof.ts",
-            "repo": "kyuri-dashboard",
-            "date": "2026-10-15",
-            "label": "RESUMES_TOTAL snapshot, shown on the public Job Hunt page"
-          },
-          {
-            "type": "asset",
-            "ref": "assets/kyuri-os/job-hunt.webp",
-            "url": "https://kyuri.namit.me/?area=job-hunt",
-            "date": "2026-11-02",
-            "label": "kyuri.namit.me Job Hunt, visitor view, captured 2026-11-02"
-          }
-        ],
-        "opens": "ky-d-resumes"
-      },
-      {
         "kind": "media",
         "id": "ky-arch-main",
         "weight": 0.7,
@@ -1504,6 +1444,13 @@
         ],
         "opens": "ky-build",
         "opensPrimary": true
+      },
+      {
+        "kind": "prose",
+        "id": "ky-sys",
+        "weight": 0.5,
+        "text": "SYSTEM: The type scale and spacing behind KYURI.OS, drawn live.",
+        "opens": "ky-d-design"
       }
     ]
   },
@@ -2665,7 +2612,13 @@
             "ref": "5264ce8",
             "repo": "chekoutai-frontend",
             "date": "2026-07-21",
-            "label": "5264ce8 · Dashboard: wire engagement + Conversation Logs to BigQuery /analytics"
+            "label": "5264ce8 · Dashboard: wire engagement + Conversation Logs to BigQuery /analytics",
+            "preview": {
+              "src": "assets/chekout/demos/dashboard-desktop.gif",
+              "poster": "assets/chekout/demos/dashboard-desktop.webp",
+              "aspect": 1.7971,
+              "frame": "laptop"
+            }
           },
           {
             "type": "commit",
@@ -2927,6 +2880,19 @@
             "ref": "figma:juckmsHrlBUBKcMkoJCiep#3:112",
             "date": "2026-11-01",
             "label": "FigJam: 2 · Onboarding & agent builder"
+          },
+          {
+            "type": "commit",
+            "ref": "9596ff6",
+            "repo": "chekoutai-frontend",
+            "date": "2026-07-16",
+            "label": "9596ff6 · Shopline connection state, prompt-gen fixes, dashboard + pricing polish",
+            "preview": {
+              "src": "assets/chekout/demos/builder-desktop.gif",
+              "poster": "assets/chekout/demos/builder-desktop.webp",
+              "aspect": 1.7971,
+              "frame": "laptop"
+            }
           }
         ]
       },
@@ -3491,7 +3457,7 @@
     "aliases": [
       "How do leads reach the enrollment officers?"
     ],
-    "thesis": "Finished chats travel through an n8n webhook that turns them into leads, sorted into priority buckets with bad leads flagged; the inquiry form goes straight to the school's CRM.",
+    "thesis": "Finished chats travel through an n8n workflow on Google Cloud that turns them into leads, sorted into priority buckets with bad leads flagged, with conversation and lead data in BigQuery.",
     "fills": [
       {
         "kind": "prose",
@@ -3515,9 +3481,9 @@
         "media": "image",
         "src": "assets/christine-valmy/architecture.svg",
         "aspect": 1.7778,
-        "alt": "Christine Valmy agent architecture: students use the widget on the school's WordPress site; each message goes to an n8n chat webhook that reaches the agent's Cloud Function, finished chats go to an n8n transcript webhook that produces a lead for officers, and the inquiry form creates a lead in the school's Creatio CRM",
+        "alt": "Christine Valmy agent architecture: students use the widget on the school's WordPress site; each message goes to n8n on Google Cloud, which reaches the agent (RAG, routed through MCP: Claude for English, Gemini for Spanish); finished chats become leads for officers; conversation and lead data land in BigQuery; the inquiry form creates a lead in the school's Creatio CRM",
         "caption": "From a question to a sorted lead.",
-        "explain": "Follow a student's message: the widget posts it to n8n, n8n reaches the agent (a teammate's Cloud Function; the persona and prompt are mine), and the reply comes back with the conversation stage. When the chat ends, the transcript goes to a second n8n webhook that turns it into a lead; the inquiry form goes straight to the school's Creatio CRM. Drawn from the plugin code and the ChekOut architecture board.",
+        "explain": "Follow a student's message: the widget sends it to n8n on Google Cloud, n8n reaches the agent, and the reply comes back with the conversation stage. The agent answers from the school's documents through RAG, Claude in English and Gemini in Spanish, routed through MCP. Finished chats become leads, the data lands in BigQuery, and the inquiry form goes to the school's CRM.",
         "receipts": [
           {
             "type": "asset",
@@ -3547,6 +3513,19 @@
             "ref": "cv-chat-flat/claude.md",
             "repo": "chekout-ai (local)",
             "label": "Plugin notes: endpoint connectors (n8n chat, n8n transcript, Creatio CRM), WordPress settings"
+          },
+          {
+            "type": "asset",
+            "ref": "tools/content/sources/christine-valmy-requirements.md",
+            "repo": "Juniper (stage prototype)",
+            "date": "2026-11-02",
+            "label": "Christine Valmy requirements, provided by Namit (redacted)"
+          },
+          {
+            "type": "asset",
+            "ref": "namit-confirmation-2026-11-02",
+            "date": "2026-11-02",
+            "label": "Confirmed by Namit, Nov 2 2026"
           }
         ]
       },
@@ -3569,7 +3548,7 @@
         "kind": "prose",
         "id": "cvh-fresh",
         "weight": 0.55,
-        "text": "FRESH ANSWERS: The agent answers from the school's own content through RAG, and an automated pipeline keeps class schedules current in the chat.",
+        "text": "FRESH ANSWERS: The agent answers from the school's own documents through RAG, with the session's chat history, and an automated pipeline keeps class schedules current. Routing runs through MCP: Claude answers in English, Gemini in Spanish.",
         "receipts": [
           {
             "type": "asset",
@@ -3577,6 +3556,13 @@
             "repo": "Juniper",
             "date": "2026-10-26",
             "label": "Christine Valmy case study"
+          },
+          {
+            "type": "asset",
+            "ref": "tools/content/sources/christine-valmy-requirements.md",
+            "repo": "Juniper (stage prototype)",
+            "date": "2026-11-02",
+            "label": "Christine Valmy requirements, provided by Namit (redacted)"
           }
         ]
       },
@@ -3584,25 +3570,32 @@
         "kind": "prose",
         "id": "cvh-n8n",
         "weight": 0.5,
-        "text": "THE BRIDGE: The WordPress widget posts every message to an n8n webhook in front of the agent. When a chat ends, the full transcript goes to a second webhook that turns it into a lead, and the inquiry form writes to the school's Creatio CRM.",
+        "text": "THE BRIDGE: The widget sends every message to an n8n workflow on Google Cloud that reaches the agent. Finished chats become leads for the officers, conversation and lead data land in BigQuery, and the inquiry form writes to the school's Creatio CRM.",
         "receipts": [
           {
             "type": "asset",
             "ref": "cv-chat-flat/christine-valmy-floating.js",
             "repo": "chekout-ai (local)",
-            "label": "N8nService: chat and transcript webhooks, payloads, completion stages"
+            "label": "Widget: chat and transcript calls, payloads, completion stages"
           },
           {
             "type": "asset",
             "ref": "cv-chat-flat/claude.md",
             "repo": "chekout-ai (local)",
-            "label": "Plugin notes: endpoint connectors (n8n chat, n8n transcript, Creatio CRM), WordPress settings"
+            "label": "Plugin notes: endpoint connectors and WordPress settings"
           },
           {
             "type": "asset",
-            "ref": "cv-chat-flat/christine-valmy-step1.php",
-            "repo": "chekout-ai (local)",
-            "label": "WordPress plugin: settings page and config passed to the widget"
+            "ref": "tools/content/sources/christine-valmy-requirements.md",
+            "repo": "Juniper (stage prototype)",
+            "date": "2026-11-02",
+            "label": "Christine Valmy requirements, provided by Namit (redacted)"
+          },
+          {
+            "type": "asset",
+            "ref": "namit-confirmation-2026-11-02",
+            "date": "2026-11-02",
+            "label": "Confirmed by Namit, Nov 2 2026"
           }
         ],
         "opens": "cv-d-bridge",
@@ -4194,6 +4187,85 @@
     "thesis": "Figma is the source of truth for tokens and components, and a sync skill builds each design change in the file that renders it.",
     "fills": [
       {
+        "kind": "specimen",
+        "id": "spec-kyuri-scale",
+        "weight": 0.95,
+        "mode": "scale",
+        "direction": "up",
+        "title": "KYURI.OS type scale",
+        "sample": "Pipeline",
+        "font": "Jura",
+        "scale": [
+          {
+            "role": "meta",
+            "size": 11,
+            "lineHeight": 17.6,
+            "tracking": 0.1,
+            "weight": 400,
+            "upper": true
+          },
+          {
+            "role": "line",
+            "size": 14,
+            "lineHeight": 20.3,
+            "tracking": 0,
+            "weight": 400
+          },
+          {
+            "role": "H1",
+            "size": 26,
+            "lineHeight": 32.5,
+            "tracking": 0.01,
+            "weight": 700
+          },
+          {
+            "role": "display",
+            "size": 40,
+            "lineHeight": 40,
+            "tracking": -0.02,
+            "weight": 700,
+            "font": "Space Mono"
+          },
+          {
+            "role": "clock",
+            "size": 64,
+            "lineHeight": 64,
+            "tracking": -0.02,
+            "weight": 700,
+            "font": "Space Mono"
+          }
+        ],
+        "spacing": [
+          {
+            "name": "gap",
+            "value": 6
+          },
+          {
+            "name": "gap",
+            "value": 10
+          },
+          {
+            "name": "gap",
+            "value": 14
+          },
+          {
+            "name": "pad",
+            "value": 16
+          },
+          {
+            "name": "gap",
+            "value": 24
+          }
+        ],
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "kyuri-dashboard/app/globals.css",
+            "label": "app/globals.css"
+          }
+        ]
+      },
+      {
         "kind": "prose",
         "id": "kyd-problem",
         "weight": 1,
@@ -4397,6 +4469,18 @@
             "repo": "Juniper",
             "date": "2026-10-26",
             "label": "Live recordings on KivaKube and Rosendahl only, approved; never click add to cart"
+          },
+          {
+            "type": "asset",
+            "ref": "assets/chekout/demos/kivakube-mobile.gif",
+            "date": "2026-10-27",
+            "label": "KivaKube on a phone, recorded on the live store: the agent recommends the KivaStand with product cards",
+            "preview": {
+              "src": "assets/chekout/demos/kivakube-mobile.gif",
+              "poster": "assets/chekout/demos/kivakube-mobile.webp",
+              "aspect": 0.4747,
+              "frame": "phone"
+            }
           }
         ]
       },
@@ -4484,6 +4568,18 @@
             "url": "https://www.kivakube.com/",
             "date": "2026-11-02",
             "label": "Homepage loads chekout.ai/chatbot.js with data-agent-id=\"kiva\", checked 2026-11-02"
+          },
+          {
+            "type": "asset",
+            "ref": "assets/chekout/demos/kivakube-mobile.gif",
+            "date": "2026-10-27",
+            "label": "The agent answering on kivakube.com, recorded on a phone: best seller, then which one suits a small patio",
+            "preview": {
+              "src": "assets/chekout/demos/kivakube-mobile.gif",
+              "poster": "assets/chekout/demos/kivakube-mobile.webp",
+              "aspect": 0.4747,
+              "frame": "phone"
+            }
           }
         ]
       },
@@ -4558,6 +4654,89 @@
     ],
     "thesis": "I documented the shipped widget and builder in Figma from the code, so every token and component points at the file it ships from.",
     "fills": [
+      {
+        "kind": "specimen",
+        "id": "spec-chekout-scale",
+        "weight": 0.95,
+        "mode": "scale",
+        "direction": "up",
+        "title": "ChekOut type scale",
+        "sample": "Add to cart",
+        "font": "Sorts Mill Goudy",
+        "scale": [
+          {
+            "role": "body-3",
+            "size": 12,
+            "lineHeight": 18,
+            "tracking": 0,
+            "weight": 400
+          },
+          {
+            "role": "body-2",
+            "size": 14,
+            "lineHeight": 21,
+            "tracking": 0,
+            "weight": 400
+          },
+          {
+            "role": "body-1",
+            "size": 16,
+            "lineHeight": 24,
+            "tracking": 0,
+            "weight": 400
+          },
+          {
+            "role": "heading-5",
+            "size": 18,
+            "lineHeight": 25.2,
+            "tracking": 0,
+            "weight": 700
+          },
+          {
+            "role": "heading-4",
+            "size": 20,
+            "lineHeight": 26,
+            "tracking": 0,
+            "weight": 700
+          },
+          {
+            "role": "heading-3",
+            "size": 24,
+            "lineHeight": 31.2,
+            "tracking": 0,
+            "weight": 700
+          },
+          {
+            "role": "heading-2",
+            "size": 28,
+            "lineHeight": 33.6,
+            "tracking": 0,
+            "weight": 700
+          },
+          {
+            "role": "heading-1",
+            "size": 32,
+            "lineHeight": 38.4,
+            "tracking": 0,
+            "weight": 700
+          },
+          {
+            "role": "title-1",
+            "size": 48,
+            "lineHeight": 57.6,
+            "tracking": 0,
+            "weight": 700
+          }
+        ],
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "theme/typography.ts",
+            "repo": "chekoutai-frontend",
+            "label": "theme/typography.ts (MUI variants 48 to 12)"
+          }
+        ]
+      },
       {
         "kind": "prose",
         "id": "ckds-what",
@@ -5083,6 +5262,148 @@
     "thesis": "Content is built offline with receipts and validated against one schema; the stage only lays it out, cutting a 12 x 12 grid for each answer.",
     "fills": [
       {
+        "kind": "specimen",
+        "id": "spec-stage-fit",
+        "weight": 0.95,
+        "mode": "fit",
+        "title": "Prose steps down until it fits",
+        "sample": "Type is computed",
+        "font": "body",
+        "scale": [
+          {
+            "role": "prose",
+            "size": 22,
+            "lineHeight": 32,
+            "tracking": 0,
+            "weight": 400
+          },
+          {
+            "role": "prose",
+            "size": 19,
+            "lineHeight": 28,
+            "tracking": 0,
+            "weight": 400
+          },
+          {
+            "role": "prose",
+            "size": 17,
+            "lineHeight": 25,
+            "tracking": 0,
+            "weight": 400
+          },
+          {
+            "role": "prose",
+            "size": 15,
+            "lineHeight": 22,
+            "tracking": 0,
+            "weight": 400
+          },
+          {
+            "role": "prose",
+            "size": 14,
+            "lineHeight": 20,
+            "tracking": 0,
+            "weight": 400
+          }
+        ],
+        "fit": {
+          "pad": 24,
+          "floor": 16
+        },
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "src/engine/typo.js",
+            "label": "src/engine/typo.js"
+          }
+        ]
+      },
+      {
+        "kind": "specimen",
+        "id": "spec-stage-scale",
+        "weight": 0.5,
+        "mode": "scale",
+        "direction": "up",
+        "title": "The stage's type scale",
+        "sample": "Spacing",
+        "font": "body",
+        "scale": [
+          {
+            "role": "label",
+            "size": 12,
+            "lineHeight": 16,
+            "tracking": 0.12,
+            "weight": 500,
+            "upper": true
+          },
+          {
+            "role": "body",
+            "size": 17,
+            "lineHeight": 25,
+            "tracking": 0,
+            "weight": 400
+          },
+          {
+            "role": "heading",
+            "size": 22,
+            "lineHeight": 28,
+            "tracking": 0,
+            "weight": 300,
+            "font": "display"
+          },
+          {
+            "role": "hook",
+            "size": 30,
+            "lineHeight": 33,
+            "tracking": -0.01,
+            "weight": 300,
+            "font": "display"
+          },
+          {
+            "role": "title",
+            "size": 64,
+            "lineHeight": 59,
+            "tracking": -0.02,
+            "weight": 800,
+            "font": "display"
+          }
+        ],
+        "spacing": [
+          {
+            "name": "gap",
+            "value": 16
+          },
+          {
+            "name": "para",
+            "value": 15
+          },
+          {
+            "name": "gap",
+            "value": 14
+          },
+          {
+            "name": "gap",
+            "value": 14
+          },
+          {
+            "name": "pad",
+            "value": 24
+          }
+        ],
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "src/engine/typo.js",
+            "label": "src/engine/typo.js"
+          },
+          {
+            "type": "asset",
+            "ref": "src/styles.css",
+            "label": "src/styles.css"
+          }
+        ]
+      },
+      {
         "kind": "prose",
         "id": "site-problem",
         "weight": 1,
@@ -5594,7 +5915,7 @@
     "parent": "cv-d-handoff",
     "caseStudy": "christine-valmy",
     "question": "What exactly happens between the chat and the officers?",
-    "thesis": "Three calls leave the widget: one per message, one when the chat ends, one when the form is sent; the end-of-chat call is what becomes a lead.",
+    "thesis": "Three calls leave the widget: one per message, one when the chat ends, one when the form is sent; n8n runs on Google Cloud and the conversation and lead data land in BigQuery.",
     "fills": [
       {
         "kind": "prose",
@@ -5617,9 +5938,9 @@
         "media": "image",
         "src": "assets/christine-valmy/bridge.svg",
         "aspect": 2.1053,
-        "alt": "The three calls that leave the widget: each message to the n8n chat webhook, the transcript to the n8n transcript webhook when a chat ends, and the inquiry form to the Creatio CRM webhook",
+        "alt": "The three calls that leave the widget: each message to the n8n workflow on Google Cloud, which also writes conversation and lead data to BigQuery; the transcript when a chat ends, which becomes a lead; and the inquiry form to the Creatio CRM",
         "caption": "Three calls, in the order a student triggers them.",
-        "explain": "Read top to bottom. Every message carries the conversation so far; the reply carries the stage. Reaching enrollment collection, completion or post enrollment, or closing the widget or the tab, sends the transcript once. n8n answers whether a lead was made, and the widget stops sending after that. Drawn from the plugin code.",
+        "explain": "Read top to bottom. Every message carries the conversation so far; the reply carries the stage. Reaching enrollment collection, completion or post enrollment, or closing the widget or the tab, sends the transcript once. n8n answers whether a lead was made, and the widget stops sending after that. Drawn from the plugin code and Namit's confirmation.",
         "receipts": [
           {
             "type": "asset",
@@ -5636,6 +5957,12 @@
             "ref": "cv-chat-flat/claude.md",
             "repo": "chekout-ai (local)",
             "label": "Plugin notes: endpoint connectors (n8n chat, n8n transcript, Creatio CRM), WordPress settings"
+          },
+          {
+            "type": "asset",
+            "ref": "namit-confirmation-2026-11-02",
+            "date": "2026-11-02",
+            "label": "Confirmed by Namit, Nov 2 2026"
           }
         ]
       },
@@ -5643,7 +5970,7 @@
         "kind": "prose",
         "id": "cvbr-msg",
         "weight": 0.7,
-        "text": "1 · EACH MESSAGE: The widget posts the question, user and thread ids, the history and a reCAPTCHA v3 token to the n8n chat webhook. The reply carries the answer, the conversation stage, the enrollment state and whether the chat is complete.",
+        "text": "1 · EACH MESSAGE: The widget sends the question, user and thread ids, the history and a reCAPTCHA v3 token to the n8n workflow on Google Cloud. The reply carries the answer, the conversation stage, the enrollment state and whether the chat is complete.",
         "receipts": [
           {
             "type": "asset",
@@ -5656,6 +5983,19 @@
             "ref": "cv-chat-flat/claude.md",
             "repo": "chekout-ai (local)",
             "label": "Plugin notes: endpoint connectors (n8n chat, n8n transcript, Creatio CRM), WordPress settings"
+          },
+          {
+            "type": "asset",
+            "ref": "tools/content/sources/christine-valmy-requirements.md",
+            "repo": "Juniper (stage prototype)",
+            "date": "2026-11-02",
+            "label": "Christine Valmy requirements, provided by Namit (redacted)"
+          },
+          {
+            "type": "asset",
+            "ref": "namit-confirmation-2026-11-02",
+            "date": "2026-11-02",
+            "label": "Confirmed by Namit, Nov 2 2026"
           }
         ]
       },
@@ -5663,7 +6003,7 @@
         "kind": "prose",
         "id": "cvbr-end",
         "weight": 0.65,
-        "text": "2 · WHEN IT ENDS: A completing stage, closing the widget or hiding the tab sends the full transcript, the reason, the message count and the page to the transcript webhook, once per reason and by sendBeacon when the tab is closing. If n8n reports a lead was made, nothing more is sent.",
+        "text": "2 · WHEN IT ENDS: A completing stage, closing the widget or hiding the tab sends the full transcript, the reason, the message count and the page to the workflow, once per reason and by sendBeacon when the tab is closing. If n8n reports a lead was made, nothing more is sent.",
         "receipts": [
           {
             "type": "asset",
@@ -5697,7 +6037,7 @@
         "kind": "prose",
         "id": "cvbr-who",
         "weight": 0.45,
-        "text": "WHO BUILT WHAT: The widget, the plugin, the persona and the prompt are mine; the agent's Cloud Function is a teammate's. The priority buckets and bad-lead flags run inside the n8n workflow, which isn't exported in my sources, so its nodes aren't shown.",
+        "text": "WHO BUILT WHAT: The widget, the plugin, the persona and the prompt are mine; the agent's function is a teammate's. The priority buckets and bad-lead flags run inside the n8n workflow, which isn't exported in my sources, so its nodes aren't shown. Conversation and lead data land in BigQuery.",
         "receipts": [
           {
             "type": "asset",
@@ -5717,6 +6057,126 @@
             "ref": "cv-chat-flat/claude.md",
             "repo": "chekout-ai (local)",
             "label": "Plugin notes: endpoint connectors (n8n chat, n8n transcript, Creatio CRM), WordPress settings"
+          },
+          {
+            "type": "asset",
+            "ref": "namit-confirmation-2026-11-02",
+            "date": "2026-11-02",
+            "label": "Confirmed by Namit, Nov 2 2026"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "cv-d-script",
+    "parent": "cv-build",
+    "caseStudy": "christine-valmy",
+    "question": "How was the agent kept on script?",
+    "thesis": "Requirements set the order, the disqualifiers, the shape of every reply and the guardrails, and an evaluation plan checks each one; review sessions found where it drifted.",
+    "fills": [
+      {
+        "kind": "prose",
+        "id": "cvs-problem",
+        "weight": 1,
+        "text": "THE PROBLEM: In review sessions the agent gave too much at once, asked too many questions, and when a tester asked for a human it claimed to be a person on the team.",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "tools/content/sources/christine-valmy-requirements.md",
+            "repo": "Juniper (stage prototype)",
+            "date": "2026-11-02",
+            "label": "Christine Valmy requirements, provided by Namit (redacted)"
+          }
+        ]
+      },
+      {
+        "kind": "prose",
+        "id": "cvs-order",
+        "weight": 0.8,
+        "text": "THE ORDER (requirement): Course interest first, then pricing, then financial aid for esthetics. Pricing only after the student names a course, and the agent says plainly when someone doesn't meet the criteria.",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "tools/content/sources/christine-valmy-requirements.md",
+            "repo": "Juniper (stage prototype)",
+            "date": "2026-11-02",
+            "label": "Christine Valmy requirements, provided by Namit (redacted)"
+          }
+        ]
+      },
+      {
+        "kind": "prose",
+        "id": "cvs-disq",
+        "weight": 0.75,
+        "text": "DISQUALIFIED IF: not living in the United States · can't commit to the full 600-hour program · can't attend in person in New Jersey and New York · doesn't speak English or Spanish · no GED, U.S. high-school diploma or accepted equivalent · needs visa sponsorship.",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "tools/content/sources/christine-valmy-requirements.md",
+            "repo": "Juniper (stage prototype)",
+            "date": "2026-11-02",
+            "label": "Christine Valmy requirements, provided by Namit (redacted)"
+          }
+        ]
+      },
+      {
+        "kind": "prose",
+        "id": "cvs-reply",
+        "weight": 0.65,
+        "text": "EVERY REPLY (requirement): Four sentences or fewer, short and free of jargon, warm, grounded in the school's documents, and ending with a question. Routing runs through MCP: Claude answers in English, Gemini in Spanish.",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "tools/content/sources/christine-valmy-requirements.md",
+            "repo": "Juniper (stage prototype)",
+            "date": "2026-11-02",
+            "label": "Christine Valmy requirements, provided by Namit (redacted)"
+          }
+        ]
+      },
+      {
+        "kind": "prose",
+        "id": "cvs-guard",
+        "weight": 0.6,
+        "text": "GUARDRAILS (design): Student messages are capped at 300 characters with an inline error, a hand-off to an enrollment officer comes after a set number of messages, off-topic questions get a scripted redirect, SQL injection gets a refusal, and replies are meant to arrive within 30 seconds.",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "tools/content/sources/christine-valmy-requirements.md",
+            "repo": "Juniper (stage prototype)",
+            "date": "2026-11-02",
+            "label": "Christine Valmy requirements, provided by Namit (redacted)"
+          }
+        ]
+      },
+      {
+        "kind": "prose",
+        "id": "cvs-eval",
+        "weight": 0.55,
+        "text": "EVALUATION PLAN (not results): Automated checks on every reply for safety, accuracy, off-topic and SQL-injection detection, helpfulness, empathy and likeability through Perspective API, bias, persuasion and coherence in both languages; humans score six traits on a five-point scale; each session is checked for the course, pricing and aid order and for correct disqualification.",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "tools/content/sources/christine-valmy-requirements.md",
+            "repo": "Juniper (stage prototype)",
+            "date": "2026-11-02",
+            "label": "Christine Valmy requirements, provided by Namit (redacted)"
+          }
+        ]
+      },
+      {
+        "kind": "prose",
+        "id": "cvs-review",
+        "weight": 0.5,
+        "text": "FROM REVIEW SESSIONS: Slow down, one or two questions per reply, verify every program detail, give the phone number only when asked, and script the answer to identity questions. For the agent that claimed to be human, the fix direction is a hand-off to an enrollment advisor.",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "tools/content/sources/christine-valmy-requirements.md",
+            "repo": "Juniper (stage prototype)",
+            "date": "2026-11-02",
+            "label": "Christine Valmy requirements, provided by Namit (redacted)"
           }
         ]
       }

@@ -176,7 +176,7 @@ decks.push({
     kpi("ck-atc", 1, "20%", "of Kivakube's add-to-carts came through the agent", "chekoutData", { more: [cr("chekoutai-frontend", "d22f151", "d22f151 · Tag Shopify carts with ChekOut AI attribution attributes for order attribution")] }),
     kpi("ck-sessions", 0.8, "13,981", "shopper sessions", "chekoutData", { period: "Feb to Jul 2026" }),
     kpi("ck-brands", 0.6, "22", "brands the agent served", "chekoutData", { period: "Feb to Jul 2026" }),
-    media("ck-top-metrics", 0.75, "assets/chekout/top-metrics.webp", "Dashboard top metrics: 126 total visitors, 86% engagement rate, 1 attributed order, $106.19 total revenue from Shopify", { caption: "Top metrics from a live store, with revenue the agent drove.", from: "src/data/chekoutData.js ck-analytics" }),
+    media("ck-top-metrics", 0.75, "assets/chekout/top-metrics.webp", "Dashboard top metrics: 126 total visitors, 86% engagement rate", { caption: "Top metrics from a live store.", from: "src/data/chekoutData.js ck-analytics" }),
     kpi("ck-engagement", 0.5, "86%", "engagement rate on a live store", "chekoutData", { more: [cr("chekoutai-frontend", "c78b8c4")] }),
     prose("ck-cart-prose", 0.6, "The agent sells, and the store's own cart closes the sale. View cart opens the merchant's real cart with the discounts and checkout it already runs, so there is no second cart to reconcile.", [SRC.chekoutData.receipt]),
     media("ck-analytics", 0.55, "assets/chekout/analytics.mp4", "The analytics dashboard on Kivakube: visitors, an insight tooltip, and a keyword opening the conversations behind it", { caption: "Each keyword opens the threads that mention it.", from: "src/data/chekoutData.js ck-analytics", receipts: [cr("chekoutai-frontend", "ab03e36")] }),
@@ -393,8 +393,7 @@ unit("ck-cart", "ChekOut: the cart stays the store's", ["chekout", "ecommerce", 
    commitsFill("u-ck-cart-commits", 0.35, "chekoutai-frontend", ["d22f151", "62bde85", "2e113b9"])]);
 unit("ck-analytics", "ChekOut: merchants read the conversation", ["chekout", "dashboard", "analytics", "data-viz", "b2b", "bigquery"],
   "The merchant dashboard answers what shoppers are asking with the conversations themselves. Insights turn a number into a next step, and each keyword opens the threads behind it.",
-  [media("u-ck-metrics", 0.7, "assets/chekout/top-metrics.webp", "126 total visitors, 86% engagement rate, 1 attributed order, $106.19 revenue", { from: "src/data/chekoutData.js" }),
-   kpi("u-ck-rev", 0.5, "$106.19", "revenue from agent-attributed orders on a live store", "chekoutData"),
+  [media("u-ck-metrics", 0.7, "assets/chekout/top-metrics.webp", "126 total visitors, 86% engagement rate", { from: "src/data/chekoutData.js" }),
    media("u-ck-analytics", 0.6, "assets/chekout/analytics.mp4", "Dashboard: an insight tooltip and a keyword opening its threads", { from: "src/data/chekoutData.js" }),
    commitsFill("u-ck-dash-commits", 0.5, "chekoutai-frontend", ["5264ce8", "ab03e36", "c78b8c4", "99f80a8", "4c38f1f"])]);
 unit("ck-scale", "ChekOut: sessions and brands", ["chekout", "scale", "metrics", "ai-agent"],
