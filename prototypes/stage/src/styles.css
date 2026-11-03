@@ -1045,13 +1045,13 @@ kbd { font: 500 12px ui-monospace, Menlo, monospace; padding: 1px 5px; border: 1
 .gate-form input { flex: 1; min-width: 0; background: var(--bg); border: 0; color: var(--ink); font: 15px var(--body); padding: 11px 14px; outline: none; }
 .gate-form input::placeholder { color: var(--mute); }
 .gate-form:focus-within { border-color: var(--hair-live); box-shadow: 0 0 0 1px var(--hair-live); }
-.gate-form button { flex: none; background: var(--lift-bg); color: var(--ink); border: 0; border-left: 1px solid var(--hair-ctl); padding: 0 16px; font: 500 12px var(--body); letter-spacing: .12em; text-transform: uppercase; cursor: pointer; }
-.gate-form button:disabled { color: var(--mute); cursor: default; }
-.gate-form button:not(:disabled):hover { box-shadow: inset 0 0 0 1px var(--glow-line); }
+.gate-form > button { flex: none; background: var(--lift-bg); color: var(--ink); border: 0; border-left: 1px solid var(--hair-ctl); padding: 0 16px; font: 500 12px var(--body); letter-spacing: .12em; text-transform: uppercase; cursor: pointer; }
+.gate-form > button:disabled { color: var(--mute); cursor: default; }
+.gate-form > button:not(:disabled):hover { box-shadow: inset 0 0 0 1px var(--glow-line); }
 .gate-err { margin: 0; min-height: 16px; color: var(--ink-2); font-size: 12.5px; line-height: 16px; }
 @container gate (max-width: 300px) {
   .gate-form { flex-direction: column; }
-  .gate-form button { border-left: 0; border-top: 1px solid var(--hair-ctl); padding: 10px 16px; text-align: left; }
+  .gate-form > button { border-left: 0; border-top: 1px solid var(--hair-ctl); padding: 10px 16px; text-align: left; }
 }
 
 /* Kip beside the latest reply: large (56px) while he reacts to it, then he settles to a
@@ -1120,5 +1120,11 @@ kbd { font: 500 12px ui-monospace, Menlo, monospace; padding: 1px 5px; border: 1
 /* gate field: one focus ring (the box's), not the input's own outline on top of it */
 .gate-form input:focus-visible { outline: none; }
 .gate-form:focus-within { border-color: var(--hair-live); box-shadow: 0 0 0 1px var(--hair-live); }
-.gate-form button:focus-visible { outline: 1px solid var(--hair-live); outline-offset: -4px; }
-.gate-form button:not(:disabled):focus-visible { outline: none; background: var(--ink); color: var(--bg); }
+.gate-form > button:focus-visible { outline: 1px solid var(--hair-live); outline-offset: -4px; }
+.gate-form > button:not(:disabled):focus-visible { outline: none; background: var(--ink); color: var(--bg); }
+/* gate: show/hide password toggle inside the field */
+.gate-field { flex: 1; min-width: 0; display: flex; align-items: stretch; background: var(--bg); }
+.gate-field input { flex: 1; }
+.gate-eye { flex: none; display: flex; align-items: center; justify-content: center; width: 40px; background: none; border: 0; color: var(--mute); cursor: pointer; }
+.gate-eye:hover, .gate-eye[aria-pressed="true"] { color: var(--ink); }
+.gate-eye:focus-visible { outline: 1px solid var(--hair-live); outline-offset: -6px; color: var(--ink); }

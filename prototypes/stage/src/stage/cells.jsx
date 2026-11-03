@@ -1090,6 +1090,7 @@ export { PAD };
  */
 function GateCell({ fill, P }) {
   const [pw, setPw] = useState("");
+  const [show, setShow] = useState(false);
   const [state, setState] = useState({ busy: false, error: "" });
   const uid = `gate-${fill.id}`;
   const c = fill.count || {};
@@ -1109,8 +1110,16 @@ function GateCell({ fill, P }) {
       {parts.length > 0 && <p className="gate-count">{parts.join(" · ")}</p>}
       <form className="gate-form" onSubmit={submit}>
         <label htmlFor={uid} className="sr-only">Password</label>
-        <input id={uid} type="password" autoComplete="current-password" value={pw} onChange={(e) => setPw(e.target.value)}
-          placeholder="Password" aria-invalid={state.error ? "true" : undefined} aria-describedby={state.error ? `${uid}-err` : undefined} disabled={state.busy} />
+        <span className="gate-field">
+          <input id={uid} type={show ? "text" : "password"} autoComplete="current-password" autoCapitalize="none" spellCheck={false} value={pw} onChange={(e) => setPw(e.target.value)}
+            placeholder="Password" aria-invalid={state.error ? "true" : undefined} aria-describedby={state.error ? `${uid}-err` : undefined} disabled={state.busy} />
+          <button type="button" className="gate-eye" aria-pressed={show} aria-controls={uid} aria-label={show ? "Hide password" : "Show password"} onClick={() => setShow((v) => !v)}>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z" /><circle cx="12" cy="12" r="3" />
+              {show && <path d="M3 3l18 18" />}
+            </svg>
+          </button>
+        </span>
         <button type="submit" disabled={!pw || state.busy}>{state.busy ? "Checking" : "Unlock"} <span aria-hidden>→</span></button>
       </form>
       <p className="gate-err" id={`${uid}-err`} role="alert">{state.error}</p>
