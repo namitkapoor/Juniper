@@ -78,7 +78,7 @@ export const KPI_LABEL_FONT = font(BODY, 400, 14);
 export const COMMITS = { headerH: 32, rowH: 48, msgLH: 20, metaH: 16, rowPad: 12, more: 24 };
 export const COMMIT_MSG_FONT = font(BODY, 400, 14);
 
-export const RECEIPTS = { tagW: 96, tagH: 22, headerH: 30, rowH: 32, cardH: 78, maxRows: 6 };
+export const RECEIPTS = { tagW: 96, tagH: 24, headerH: 30, rowH: 32, cardH: 78, maxRows: 6 };
 
 /**
  * Words the stage shows instead of engineer-speak. Swap here.

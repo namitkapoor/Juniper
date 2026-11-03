@@ -10,6 +10,12 @@ export function Chat({ open, messages, chips, onAsk, onChip, busy, onClose, phon
   // Phone: the chat is a bottom sheet. Peek = face + latest reply + chips + input;
   // tap or drag the handle up to see the whole conversation, down to peek again.
   const [sheet, setSheet] = useState(false);
+  // A closed (hidden) panel takes no focus at all.
+  const aside = useRef(null);
+  useEffect(() => {
+    if (!aside.current) return;
+    if (!open && !phone) aside.current.setAttribute("inert", ""); else aside.current.removeAttribute("inert");
+  }, [open, phone]);
   const drag = useRef(null);
   const list = useRef(null);
   const input = useRef(null);
@@ -36,7 +42,7 @@ export function Chat({ open, messages, chips, onAsk, onChip, busy, onClose, phon
   };
 
   return (
-    <aside className={`chat ${open ? "open" : ""} ${messages.length === 0 ? "empty" : ""} ${reduced ? "instant" : ""} ${phone && sheet ? "sheet-open" : ""}`} aria-label="Ask Kip" aria-hidden={!open && !phone}>
+    <aside ref={aside} className={`chat ${open ? "open" : ""} ${messages.length === 0 ? "empty" : ""} ${reduced ? "instant" : ""} ${phone && sheet ? "sheet-open" : ""}`} aria-label="Ask Kip" aria-hidden={!open && !phone}>
       {phone && (
         <button
           type="button" className="sheet-handle" aria-expanded={sheet} aria-label={sheet ? "Ask Kip, collapse the conversation" : "Ask Kip, expand the conversation"}

@@ -140,6 +140,7 @@ export function Stage({ layout, fillMap, expanded, onToggleReceipts, reduced, me
 
   /* ---- keyboard: one tab stop for the stage, arrows move between tiles ---- */
   const [current, setCurrent] = useState(null); // fillId holding the roving tab stop
+  const [hoverCell, setHoverCell] = useState(null); // face tile hovered (lit by the 4-edge layer)
   const hadFocus = useRef(false);
   const liveIds = useMemo(() => new Set(layout?.cells.map((c) => c.fillId)), [layout]);
   const order = useMemo(() => (layout ? readingOrder(layout.cells) : []), [layout]);
@@ -246,9 +247,11 @@ export function Stage({ layout, fillMap, expanded, onToggleReceipts, reduced, me
               ref={(el) => { if (el) rt.cellEls.set(c.fillId, el); else rt.cellEls.delete(c.fillId); }}
               data-case={fill.caseStudy && onTile ? fill.caseStudy : undefined}
               onPointerEnter={(e) => {
+                if (fill.kind === "face" && onAskOpen) setHoverCell(fill.id);
                 if (isVideo(fill)) setHoverVideo(fill.id);
               }}
               onPointerLeave={(e) => {
+                if (fill.kind === "face") setHoverCell((h) => (h === fill.id ? null : h));
                 if (isVideo(fill)) setHoverVideo((h) => (h === fill.id ? null : h));
               }}
             >
@@ -273,7 +276,7 @@ export function Stage({ layout, fillMap, expanded, onToggleReceipts, reduced, me
           />
         ))}
       </div>
-      <Highlight layout={layout} fillMap={fillMap} hot={hot} openId={openId} />
+      <Highlight layout={layout} fillMap={fillMap} hot={hot} openId={openId} cellId={hoverCell && liveIds.has(hoverCell) ? hoverCell : null} />
     </RuntimeCtx.Provider>
   );
 }
@@ -283,12 +286,13 @@ export function Stage({ layout, fillMap, expanded, onToggleReceipts, reduced, me
  * its cell, whichever line owns them (a cut, or the frame / chat border just
  * outside the stage), clipped to the cell's extent and drawn above everything.
  */
-function Highlight({ layout, fillMap, hot, openId }) {
-  if ((!hot && !openId) || !layout) return null;
-  // The open (focused) cell, else the hovered home tile.
+function Highlight({ layout, fillMap, hot, openId, cellId }) {
+  if ((!hot && !openId && !cellId) || !layout) return null;
+  // The open (focused) cell, else the hovered home tile, else another hovered tile (Kip).
   const c = openId
     ? layout.cells.find((x) => x.fillId === openId)
-    : layout.cells.find((x) => fillMap.get(x.fillId)?.caseStudy === hot && x.kind === "tile");
+    : hot ? layout.cells.find((x) => fillMap.get(x.fillId)?.caseStudy === hot && x.kind === "tile")
+    : layout.cells.find((x) => x.fillId === cellId);
   if (!c) return null;
   const W = layout.rect.w, H = layout.rect.h;
   const left = c.x <= 0 ? -1 : c.x;

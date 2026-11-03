@@ -59,8 +59,9 @@ export function layoutStage({ rect, fills, measure, expanded = [], promote = [],
   });
   // Process steps keep reading order: the step media swap weights among
   // themselves so step 1 sorts first (same set of weights, same total room).
+  // (Not while one step is expanded: the expanded one must keep its weight.)
   const steps = weighted.filter((w) => w.fill.step).sort((a, b) => a.fill.step.n - b.fill.step.n);
-  if (steps.length > 1) {
+  if (steps.length > 1 && !weighted.some((w) => w.fill.focused)) {
     const ws = steps.map((w) => w.weight).sort((a, b) => b - a);
     steps.forEach((w, i) => { w.weight = ws[i] - i * 1e-4; });
   }
