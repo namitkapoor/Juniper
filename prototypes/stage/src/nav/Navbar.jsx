@@ -137,7 +137,7 @@ export function Navbar({ onHome, onAbout, crumbs, isHome, isAbout, theme, onTogg
             <Glyph name={theme === "light" ? "lucide:moon" : "lucide:sun"} size={18} />
           </button>
         </div>
-        <button ref={burger} className="hamburger-menu" type="button" onClick={() => setOpen(!open)} aria-label="Toggle navigation menu" aria-expanded={open}>
+        <button ref={burger} className="hamburger-menu" type="button" onClick={() => setOpen(!open)} aria-label={open ? "Close menu" : "Open menu"} aria-expanded={open}>
           <span className={`hamburger-line ${open ? "l1" : ""}`} />
           <span className={`hamburger-line ${open ? "l2" : ""}`} />
           <span className={`hamburger-line ${open ? "l3" : ""}`} />

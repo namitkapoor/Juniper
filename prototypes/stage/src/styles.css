@@ -808,3 +808,22 @@ kbd { font: 500 12px ui-monospace, Menlo, monospace; padding: 1px 5px; border: 1
 .thumb-big .thumb-bar .close-btn { position: static; }
 .thumb-big .zoom-slot { margin-left: auto; }
 .thumb-big .zoom-ctl { position: static; }
+
+/* Mobile menu button: three lines that morph into a centred X (same motion as
+   before), drawn from one centre point so the X can't drift off-centre at any
+   button size. Open, it reads as a proper close control: a 40px square with
+   the same hairline border as the stage's other buttons. 44px hit area. */
+.hamburger-menu { position: relative; width: 40px; height: 40px; margin: 2px; padding: 0; display: none;
+  border: 1px solid transparent; background: none; transition: border-color .3s; }
+@media (max-width: 760px) { .hamburger-menu { display: block; } }
+.hamburger-menu::after { content: ""; position: absolute; inset: -3px; }
+.hamburger-menu[aria-expanded="true"] { border-color: var(--hair-ctl); }
+.hamburger-line { position: absolute; left: 50%; top: 50%; width: 20px; height: 1.5px; margin: -0.75px 0 0 -10px;
+  background: var(--ink); transition: transform .3s cubic-bezier(.4,0,.2,1), opacity .2s; }
+.hamburger-line:nth-child(1) { transform: translateY(-6px); }
+.hamburger-line:nth-child(3) { transform: translateY(6px); }
+.hamburger-line.l1 { transform: rotate(45deg) scaleX(.8); }
+.hamburger-line.l2 { opacity: 0; }
+.hamburger-line.l3 { transform: rotate(-45deg) scaleX(.8); }
+.hamburger-menu:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { .hamburger-line, .hamburger-menu { transition: none; } }
