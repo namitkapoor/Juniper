@@ -833,3 +833,17 @@ kbd { font: 500 12px ui-monospace, Menlo, monospace; padding: 1px 5px; border: 1
 .hamburger-line.l3 { transform: rotate(-45deg) scaleX(.8); }
 .hamburger-menu:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
 @media (prefers-reduced-motion: reduce) { .hamburger-line, .hamburger-menu { transition: none; } }
+
+/* Kip empty state: the suggested questions scroll inside the panel (they used to
+   run under the input with no way to reach them). On short windows the big face
+   shrinks so more questions fit before scrolling is needed. */
+.chat.empty .chips { min-height: 0; overflow-y: auto; overscroll-behavior: contain; flex-wrap: nowrap; }
+.chat.empty .chips > .chip { flex: none; }
+@media (max-height: 860px) {
+  .chat.empty .chat-face { left: calc(50% - 64px); top: 84px; width: 128px; height: 128px; }
+  .chat.empty .hint { margin-top: 170px; }
+}
+@media (max-height: 680px) {
+  .chat.empty .chat-face { left: calc(50% - 44px); top: 72px; width: 88px; height: 88px; }
+  .chat.empty .hint { margin-top: 116px; }
+}
