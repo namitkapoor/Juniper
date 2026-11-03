@@ -2,6 +2,33 @@
   "framework": "vite",
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
+  "redirects": [
+    {
+      "source": "/about",
+      "destination": "/?page=about",
+      "permanent": false
+    },
+    {
+      "source": "/case-study/chekout",
+      "destination": "/?a=ck-merchant-outcomes",
+      "permanent": false
+    },
+    {
+      "source": "/case-study/christine-valmy",
+      "destination": "/?a=cv-results",
+      "permanent": false
+    },
+    {
+      "source": "/case-study/:slug*",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/explore",
+      "destination": "https://studio.namit.me",
+      "permanent": false
+    }
+  ],
   "rewrites": [
     {
       "source": "/gated/:path*",
