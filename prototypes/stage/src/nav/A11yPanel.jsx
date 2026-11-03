@@ -38,19 +38,22 @@ function A11yPanel({ onClose }) {
     const d = ref.current;
     const back = document.activeElement;
     d?.showModal?.();
+    if (d) d.scrollTop = 0; // open at the top, whatever got focus
     return () => back?.focus?.();
   }, []);
   return (
     <dialog ref={ref} className="a11y-panel" aria-modal="true" aria-labelledby="a11y-title"
       onCancel={(e) => { e.preventDefault(); onClose(); }} onClick={(e) => { if (e.target === ref.current) onClose(); }}>
-      <h2 id="a11y-title" className="label">Accessibility</h2>
+      <div className="a11y-head">
+        <h2 id="a11y-title" className="label">Accessibility</h2>
+        <button type="button" className="close-btn" onClick={onClose} autoFocus><span aria-hidden>×</span> Close</button>
+      </div>
       <p className="a11y-lede">Built in, not bolted on. Here is what works today.</p>
       <ul className="a11y-list">
         {FEATURES.map(([t, d]) => <li key={t}><h3>{t}</h3><p>{d}</p></li>)}
       </ul>
       <h3 className="label a11y-keys-h">Keyboard</h3>
       <dl className="a11y-keys">{KEYS.map(([k, v]) => <div key={k}><dt><kbd>{k}</kbd></dt><dd>{v}</dd></div>)}</dl>
-      <button type="button" className="close-btn" onClick={onClose} autoFocus><span aria-hidden>×</span> Close</button>
     </dialog>
   );
 }

@@ -1117,6 +1117,7 @@ kbd { font: 500 12px ui-monospace, Menlo, monospace; padding: 1px 5px; border: 1
 .a11y-keys div { display: grid; grid-template-columns: 84px 1fr; align-items: center; }
 .a11y-keys dd { margin: 0; color: var(--ink-2); font-size: 14px; }
 .a11y-panel .close-btn { position: static; }
+.a11y-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
 
 /* the arrow-key tip for pointer users (once per session) */
 .key-hint.tip { gap: 6px 12px; }
