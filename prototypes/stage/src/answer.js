@@ -132,10 +132,10 @@ export async function localAnswer(q, content) {
   if (r) return r;
   if (content.decks.length) {
     // Real content exists but nothing matched: say so instead of faking.
-    return {
-      answer: { ...content.home, id: `nomatch-${Date.now()}`, thesis: "I don't have receipts for that yet. Try one of the suggested questions." },
-      how: "no match",
-    };
+    // Real content exists but nothing matched: say so in the chat and leave the
+    // stage where it is. Never hand the stage a copy of home.json: only the
+    // home builder may render home.
+    return { answer: null, text: "I don't have receipts for that one yet. Try a suggested question, or ask me in an interview.", how: "no match" };
   }
   return fixtureFallback(q, content.fixtures);
 }
@@ -145,6 +145,7 @@ export function setAnswerer(fn) { answerer = fn || localAnswer; }
 
 export async function ask(q, content) {
   const r = await answerer(q, content);
+  if (r && r.answer === null) return { answer: null, text: r.text, how: r.how ?? "no match" };
   const answer = cleanAnswer(r.answer ?? r);
   return { answer, how: r.how ?? "custom" };
 }

@@ -464,7 +464,8 @@ export default function App() {
     setBusy(true);
     setMessages((m) => [...withoutTurn(m, q), { role: "user", text: q }]);
     try {
-      const { answer: a, how } = await ask(q, content);
+      const { answer: a, how, text } = await ask(q, content);
+      if (!a && text) setMessages((m) => [...m, { role: "bot", text, how: "kip", match: how }]);
       if (a) {
         turned.current.add(a.id);
         go(a);
