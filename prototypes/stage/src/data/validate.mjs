@@ -179,6 +179,38 @@ function checkFill(f, where, ids) {
       checkReceipts(f.receipts, where, false);
       break;
     }
+    case "rules": {
+      const icon = (v, w) => { if (!/^lucide:[a-z0-9-]+$/.test(v || "")) err(w, `icon must be a Lucide id (lucide:name), got ${v}`); };
+      if (!isStr(f.label)) err(where, "rules.label missing");
+      if (f.tag !== undefined && !isStr(f.tag)) err(where, "rules.tag must be a non-empty string");
+      if (f.mode !== undefined && !["list", "flow", "pairs"].includes(f.mode)) err(where, `rules.mode must be list|flow|pairs, got ${f.mode}`);
+      if (f.dense !== undefined && typeof f.dense !== "boolean") err(where, "rules.dense must be a boolean");
+      if (!Array.isArray(f.items) || f.items.length === 0) err(where, "rules.items must be non-empty");
+      else f.items.forEach((it, i) => {
+        const w = `${where}.items[${i}]`;
+        icon(it.icon, w);
+        if (!isStr(it.text)) err(w, "text missing");
+        else if (it.text.split(/\s+/).length > 6) err(w, `text is a label, keep it to 6 words or fewer: "${it.text}"`);
+        for (const k of ["note", "from", "group"]) if (it[k] !== undefined && !isStr(it[k])) err(w, `${k} must be a non-empty string`);
+        if (it.lock !== undefined && typeof it.lock !== "boolean") err(w, "lock must be a boolean");
+        if (it.lock && f.mode !== "flow") err(w, "lock only applies to a flow step");
+        if (it.from !== undefined && f.mode !== "pairs") err(w, "from only applies to pairs");
+      });
+      if (f.mode === "pairs" && !f.items?.some((it) => it.from)) err(where, "pairs needs at least one item with from");
+      if (f.mode === "flow" && (f.items?.length < 2 || f.items?.length > 5)) err(where, "a flow needs 2-5 steps");
+      if (f.exit !== undefined) {
+        if (f.mode !== "flow") err(where, "exit only applies to a flow");
+        icon(f.exit?.icon, `${where}.exit`);
+        if (!isStr(f.exit?.text)) err(`${where}.exit`, "text missing");
+      }
+      if (f.chips !== undefined) {
+        if (!Array.isArray(f.chips?.items) || !f.chips.items.length) err(`${where}.chips`, "items must be non-empty");
+        else f.chips.items.forEach((c, i) => { if (!isStr(c.text)) err(`${where}.chips.items[${i}]`, "text missing"); if (c.icon !== undefined) icon(c.icon, `${where}.chips.items[${i}]`); });
+      }
+      // Each item is a claim from a source.
+      checkReceipts(f.receipts, where, true);
+      break;
+    }
     case "commits":
       if (!isStr(f.repo)) err(where, "commits.repo missing");
       if (!Array.isArray(f.items) || f.items.length === 0) err(where, "commits.items must be non-empty");

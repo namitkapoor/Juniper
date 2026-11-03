@@ -429,3 +429,106 @@ describe("spatial keyboard navigation", async () => {
     });
   }
 });
+
+describe("case-study tiles: the metric always shows; the hook is cut first, never clipped", async () => {
+  const fs = await import("node:fs");
+  const path = await import("node:path");
+  const url = await import("node:url");
+  const { homeWithTiles } = await import("../tiles.js");
+  const { fitFill, tileNumH } = await import("./fit.js");
+  const { TILE, TILE_FONT, tileRoleH, PAD } = await import("./typo.js");
+  const DATA = path.resolve(path.dirname(url.fileURLToPath(import.meta.url)), "../data");
+  const load = (f) => JSON.parse(fs.readFileSync(path.join(DATA, f), "utf8"));
+  const home = load("home.json"), cases = load("case-studies.json");
+  const h = { ...home, fills: home.fills.map((f) => (f.kind === "media" ? { ...f, caseStudy: cases.find((c) => f.src.startsWith(`assets/${c.id}/`))?.id } : f)) };
+  const A = homeWithTiles(h, cases);
+  const tiles = A.fills.filter((f) => f.kind === "tile");
+  const ctx = { measure: fakeMeasure, pad: PAD.desktop, phone: false };
+
+  it("a short tile keeps its number (and drops the hook) rather than the reverse", () => {
+    // Whenever the kicker + the metric at its floor size fit, the metric shows;
+    // the hook is what gives way (shorter, smaller, or not set at all).
+    const { font } = { font: (family, weight, size) => ({ family, weight, size }) };
+    let sawNoTask = false;
+    for (const f of tiles.filter((t) => t.number)) {
+      for (const w of [236, 302, 394]) {
+        const labelLines = fakeMeasure.lines(f.number.label, font("Satoshi", 400, TILE.labelSize), w - 2 * PAD.desktop - TILE.openW - 16);
+        for (let hh = 120; hh <= 320; hh += 4) {
+          const r = fitFill(f, w, hh, ctx);
+          if (!r.spec) continue;
+          const roleH = tileRoleH(r.spec.roleLines);
+          if (hh - 2 * PAD.desktop - roleH < tileNumH(TILE.numFloor, labelLines)) continue;
+          expect(r.spec.num, `${f.id} @ ${w}x${hh}`).toBeGreaterThanOrEqual(TILE.numFloor);
+          if (r.spec.noTask) sawNoTask = true;
+        }
+      }
+    }
+    expect(sawNoTask).toBe(true); // the squeeze case is actually exercised
+  });
+
+  // Stage rects at short / small windows (the stage sits under the nav).
+  for (const rect of [{ x: 25, y: 84, w: 943, h: 352 }, { x: 25, y: 84, w: 974, h: 492 }, { x: 25, y: 84, w: 1230, h: 512 }, { x: 25, y: 84, w: 1390, h: 792 }]) {
+    it(`every shown tile sets its metric and a hook that fits whole @ ${rect.w}x${rect.h}`, () => {
+      const L = layoutStage({ rect, fills: A.fills, measure: fakeMeasure, viewportW: rect.w + 50, split: A.split });
+      const shown = L.cells.filter((c) => c.kind === "tile");
+      expect(shown.length).toBeGreaterThan(0);
+      for (const c of shown) {
+        const f = tiles.find((t) => t.id === c.fillId);
+        if (f.number) expect(c.spec.num, c.fillId).toBeGreaterThanOrEqual(TILE.numFloor);
+        if (c.spec.noTask) continue;
+        const P = PAD.desktop, innerW = c.w - 2 * P;
+        const s = TILE.steps[c.spec.step];
+        const text = c.spec.useShort && f.taskShort ? f.taskShort : f.task;
+        const lines = fakeMeasure.lines(text, TILE_FONT(s.size), innerW);
+        const avail = c.h - 2 * P - tileRoleH(c.spec.roleLines) - tileNumH(c.spec.num, c.spec.labelLines);
+        expect(lines * s.lineHeight, `${c.fillId} hook overflows`).toBeLessThanOrEqual(avail);
+      }
+    });
+  }
+});
+
+describe("commit rows: the measured height is the rendered height", async () => {
+  const fs = await import("node:fs");
+  const path = await import("node:path");
+  const url = await import("node:url");
+  const { commitRows } = await import("./fit.js");
+  const { COMMITS, COMMIT_MSG_FONT } = await import("./typo.js");
+  const here = path.dirname(url.fileURLToPath(import.meta.url));
+  const css = fs.readFileSync(path.resolve(here, "../styles.css"), "utf8");
+  const cells = fs.readFileSync(path.resolve(here, "../stage/cells.jsx"), "utf8");
+  // Every declaration for a selector, in source order (later wins, as in the cascade).
+  const decl = (sel, prop) => {
+    let v = null;
+    const re = new RegExp(`(^|[},\\s])${sel.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\s*[,{][^}]*?\\b${prop}\\s*:\\s*([^;}]+)`, "gm");
+    for (const m of css.matchAll(re)) v = m[2].trim();
+    return v;
+  };
+  const px = (v) => (v == null ? 0 : parseFloat(v));
+
+  it("the message's font, size, tracking and line height are the engine's", () => {
+    expect(px(decl(".commit-msg", "font-size"))).toBe(COMMIT_MSG_FONT.size);
+    expect(px(decl(".commit-msg", "line-height"))).toBe(COMMITS.msgLH);
+    expect(px(decl(".commit-meta", "line-height"))).toBe(COMMITS.metaH);
+    expect(decl(".commit-msg", "letter-spacing")).toBe(null);
+    expect(COMMIT_MSG_FONT.letterSpacingEm || 0).toBe(0);
+    expect(decl(".commit-msg", "white-space")).toBe("normal"); // it wraps, so its lines were counted
+  });
+
+  it("a row's padding + border fit inside the reserved row pad", () => {
+    const pad = px(decl(".c-commits li", "padding-top")) + px(decl(".c-commits li", "padding-bottom"));
+    const border = px((decl(".c-commits li", "border-top") || "").split(/\s+/)[0]);
+    expect(pad + border).toBeLessThanOrEqual(COMMITS.rowPad);
+  });
+
+  it("rows are a floor (min-height), so an extra line mid-morph pushes rows down instead of overlapping", () => {
+    expect(cells).toMatch(/minHeight:\s*cell\.spec\?\.rowHs\?\.\[i\]\s*\?\?\s*COMMITS\.rowH/);
+  });
+
+  it("the long Notion commit reserves one line per wrapped line, at any width", () => {
+    const msg = "status as history: Notion's multi-select Status is read as a stage list, the current status is derived, writers append; the funnel is counted";
+    for (let w = 180; w <= 600; w += 3) {
+      const [h] = commitRows(fakeMeasure, { items: [{ msg }] }, w);
+      expect(h).toBe(COMMITS.rowPad + fakeMeasure.lines(msg, COMMIT_MSG_FONT, w) * COMMITS.msgLH + COMMITS.metaH);
+    }
+  });
+});

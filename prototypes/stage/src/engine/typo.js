@@ -116,7 +116,8 @@ export const BREAKDOWN = { headH: 24, rowH: 24, barH: 38, maxRows: 8, nameFont: 
 export const TILE = {
   // Includes every prose size, so a hook can match the CURRENTLY text exactly.
   steps: [64, 56, 48, 42, 36, 32, 30, 28, 26, 25, 22, 19, 17].map((size) => ({ size, lineHeight: Math.round(size * 1.1) })),
-  numLabelH: 22, numGap: 14, numMax: 92, numMin: 48, // a metric shows only at a comfortable size
+  numLabelH: 22, numGap: 14, numMax: 92, numMin: 48, // the metric's comfortable size
+  numFloor: 32, // when room is short the metric steps down to this before the hook is ever cut; it never drops
   openW: 78, // the "Open →" box, bottom-right: the metric label wraps in the width left of it
   labelSize: 14, labelLH: 18,
   floor: 22, // no hook sets smaller than this
@@ -150,6 +151,32 @@ export const WORKLOG = {
   summary: font(BODY, 400, 13.5), summaryLH: 19,
 };
 export const STACK = { groupH: 24, chipH: 28, gap: 6, groupGap: 12, chip: font(BODY, 400, 13), iconW: 16, colGap: 28, leftShare: 0.46 };
+/**
+ * Rules: icon + short label items as a list / grid, a flow (steps, arrows, a
+ * lock, an exit branch) or before -> after pairs. Size steps, largest first;
+ * phones never set an item under 16px.
+ */
+export const RULES = {
+  headH: 26, tagH: 20, groupH: 22, gap: 10, colGap: 16, colMin: 104, iconGap: 10,
+  arrowW: 26, stepMin: 96, connH: 12, exitGap: 12, pairMin: 340,
+  chipH: 26, chipGap: 6, chipsGap: 14, denseGap: 6,
+  steps: [
+    { size: 22, lh: 28, icon: 40, note: 14, noteLH: 18, dense: 16 },
+    { size: 18, lh: 24, icon: 34, note: 13, noteLH: 17, dense: 15 },
+    { size: 16, lh: 21, icon: 30, note: 12.5, noteLH: 16, dense: 14 },
+    { size: 14.5, lh: 19, icon: 26, note: 12, noteLH: 16, dense: 13, gap: 8 },
+    { size: 13.5, lh: 18, icon: 22, note: 12, noteLH: 15, dense: 12.5, gap: 6 },
+  ],
+  phoneSteps: [
+    { size: 17, lh: 23, icon: 32, note: 13, noteLH: 17, dense: 16 },
+    { size: 16, lh: 22, icon: 28, note: 13, noteLH: 17, dense: 16 },
+  ],
+  /** A dense chip (icon + label [+ note]) at a step: its font and its height. */
+  denseFont: (s) => font(BODY, 400, s.dense),
+  denseH: (s) => Math.round(s.dense * 1.35) + 10,
+  item: (s) => font(BODY, 500, s.size),
+  noteFont: (s) => font(BODY, 400, s.note),
+};
 export const OFFCLOCK = { headH: 30, intro: font(BODY, 400, 15), introLH: 22, slotMinW: 150, slotH: 96, gap: 12 };
 
 /** "Go deeper →" on a tile that opens a child deck: its own row at the bottom. */

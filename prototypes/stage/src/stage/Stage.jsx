@@ -203,7 +203,8 @@ export function Stage({ layout, fillMap, expanded, onToggleReceipts, reduced, me
     }
     if (onSelf && (e.key === "Home" || e.key === "End")) { e.preventDefault(); focusCell(e.key === "Home" ? order[0] : order[order.length - 1]); return; }
     if (onSelf && (e.key === "Enter" || e.key === " ")) {
-      const target = el.querySelector(".c-tile, .c-face.asks, .drill, .c-media[data-act], .play-glyph, .wl-link, .status-link, .spec-expand");
+      // A tile's own action first; then Go deeper (the whole cell drills); then inner controls.
+      const target = el.querySelector(".c-tile, .c-face.asks, .c-media[data-act]") || el.querySelector(".drill") || el.querySelector(".play-glyph, .wl-link, .status-link, .spec-expand");
       if (target) { e.preventDefault(); target.click(); }
       return;
     }
@@ -221,6 +222,16 @@ export function Stage({ layout, fillMap, expanded, onToggleReceipts, reduced, me
       e.preventDefault(); f[next]?.focus();
     }
   }, [layout, liveIds, order, focusCell, openId, onEscapeStage, rt]);
+
+  // A click anywhere on a Go-deeper cell drills, except on its own controls
+  // (Proof, expand, links, play, media that act themselves) or after a text-selection drag.
+  const onCellDrill = useCallback((e, fill) => {
+    if (e.defaultPrevented || e.button !== 0) return;
+    const t = e.target;
+    if (t instanceof Element && t.closest("a, button, input, select, textarea, video[controls], label, [role=button], [data-act], .receipts, .spec")) return;
+    if (String(window.getSelection?.() || "").length) return;
+    onDrill(fill.opens);
+  }, [onDrill]);
 
   // The first keyboard focus on a tile shows the key hint once per session.
   const [hint, setHint] = useState(false);
@@ -252,6 +263,8 @@ export function Stage({ layout, fillMap, expanded, onToggleReceipts, reduced, me
         {scene.cells.map((c) => {
           const fill = fillMap.get(c.fillId);
           if (!fill) return null;
+          // Go deeper: the whole cell is the target (not while receded or open).
+          const drills = !!(fill.opens && onDrill && !fill.recede && openId !== c.fillId && focusId !== c.fillId);
           return (
             <section
               key={c.fillId}
@@ -261,8 +274,9 @@ export function Stage({ layout, fillMap, expanded, onToggleReceipts, reduced, me
               aria-hidden={!liveIds.has(c.fillId) || fill.recede ? true : undefined}
               onKeyDown={(e) => onCellKey(e, c)}
               onFocus={(e) => { hadFocus.current = true; if (e.target === e.currentTarget) { setCurrent(c.fillId); maybeHint(e); } }}
-              className={`cell k-${c.kind} ${fill.recede ? "recede" : ""} ${openId === c.fillId ? "open" : ""}`}
+              className={`cell k-${c.kind} ${fill.recede ? "recede" : ""} ${openId === c.fillId ? "open" : ""} ${focusId === c.fillId ? "is-focus" : ""} ${drills ? "drills" : ""}`}
               onClickCapture={fill.recede && onCloseFocus ? (e) => { e.preventDefault(); e.stopPropagation(); onCloseFocus(); } : undefined}
+              onClick={drills ? (e) => onCellDrill(e, fill) : undefined}
               {...(layout.mode === "stack" && openId === c.fillId ? swipe(onCloseFocus, onStep) : {})}
               data-fill={c.fillId}
               ref={(el) => { if (el) rt.cellEls.set(c.fillId, el); else rt.cellEls.delete(c.fillId); }}

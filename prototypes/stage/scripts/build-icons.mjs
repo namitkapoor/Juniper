@@ -16,6 +16,19 @@ for (const g of about.stack || []) for (const it of g.items) {
   const m = /^(simple-icons|lucide):([a-z0-9-]+)$/.exec(it.icon || "");
   if (m && !WANT[m[1]].includes(m[2])) WANT[m[1]].push(m[2]);
 }
+// And every Lucide id a rules fill names (decks + corpus: items, exit, chips).
+for (const f of ["decks.json", "corpus.json"]) {
+  const data = JSON.parse(fs.readFileSync(new URL(`../src/data/${f}`, import.meta.url), "utf8"));
+  const walk = (v) => {
+    if (Array.isArray(v)) return v.forEach(walk);
+    if (!v || typeof v !== "object") return;
+    const m = /^lucide:([a-z0-9-]+)$/.exec(typeof v.icon === "string" ? v.icon : "");
+    if (m && !WANT.lucide.includes(m[1])) WANT.lucide.push(m[1]);
+    Object.values(v).forEach(walk);
+  };
+  walk(data);
+}
+WANT.lucide.push("lock", "arrow-right", "arrow-down", "corner-down-right");
 WANT.lucide.push("database");
 const out = {};
 for (const [set, names] of Object.entries(WANT)) {

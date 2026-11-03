@@ -42,6 +42,10 @@ export function cleanFill(f) {
     case "media": return f.src && isNum(f.aspect) && f.aspect > 0 ? { ...f, weight } : null;
     case "commits": return Array.isArray(f.items) && f.items.length ? { ...f, weight } : null;
     case "specimen": return f.sample && Array.isArray(f.scale) && f.scale.length >= 2 ? { ...f, weight } : null;
+    case "rules": {
+      const items = (f.items || []).filter((it) => it && it.text && it.icon);
+      return f.label && items.length ? { ...f, items, weight, receipts: f.receipts || [] } : null;
+    }
     case "logos": {
       const items = (f.items || []).filter((it) => it && it.src && it.name && isNum(it.aspect) && it.aspect > 0);
       for (const it of items) if (it.invert) INVERT_LOGOS.add(it.src);

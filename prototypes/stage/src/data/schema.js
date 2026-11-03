@@ -51,6 +51,22 @@
  *                               status: "explored" | "tested" | "cut" | "shipped" },  // sequential process,
  *                                              // e.g. { n: 1, of: 4, stage: "First concept", status: "cut" }
  *                      receipts?: Receipt[] } |
+ *   { kind: "rules",   id: string, weight: number,          // icon + short-label items: rules, a flow,
+ *                      label: string,                         // before -> after pairs ("THE ORDER")
+ *                      tag?: string,                          // provenance, shown as a small chip:
+ *                                                             // "Requirement" | "Design" | "Plan, not results" ...
+ *                      mode?: "list" | "flow" | "pairs",      // list (default): a grid the engine sizes;
+ *                                                             // flow: steps joined by arrows; pairs: from -> text
+ *                      dense?: boolean,                       // list only: items as wrapped chips
+ *                      items: { icon: string,                 // Lucide id ("lucide:tag"), decorative
+ *                               text: string,                 // 2-5 words; carries the meaning
+ *                               note?: string,                // a short qualifier under the text
+ *                               lock?: boolean,               // flow: this step is gated (note says on what)
+ *                               from?: string,                // pairs: the "before" side
+ *                               group?: string }[],           // list: consecutive items under one heading
+ *                      exit?: { icon: string, text: string, note?: string },  // flow: a branch off the steps
+ *                      chips?: { label?: string, items: { icon?: string, text: string }[] },  // a footnote row
+ *                      receipts: Receipt[] } |
  *   { kind: "commits", id: string, weight: number, repo: string,
  *                      items: { sha: string, date: string, msg: string, url?: string }[] } |
  *   { kind: "specimen", id: string, weight: number,          // a design system drawn as a live,
@@ -127,4 +143,4 @@
  *                        portrait: { src: string, alt: string }           // the image the particle portrait samples
  *                      }
  */
-export const FILL_KINDS = ["title", "kpi", "prose", "quote", "media", "commits", "logos", "specimen"];
+export const FILL_KINDS = ["title", "kpi", "prose", "quote", "media", "commits", "logos", "specimen", "rules"];

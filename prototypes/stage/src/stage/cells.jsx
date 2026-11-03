@@ -10,13 +10,14 @@ import { Face } from "../chat/Face.jsx";
 import { StackIcon } from "../about/StackIcon.jsx";
 import { Glyph } from "../about/Glyph.jsx";
 import { ZoomImage } from "./ZoomImage.jsx";
+import { useHeroIntro } from "./HeroIntro.jsx";
 import Specimen from "./specimen/Specimen.jsx";
 import { shortName } from "../a11y.js";
 import { assetUrl, INVERT_LOGOS, themedSrc, useLightTheme } from "../content.js";
-import { ctrlItems, ctrlReserve, receiptsOf, sourcesOf, receiptImage, thumbBox, THUMB, SOURCE_MORE_H, sourceLineH, receiptsListH, kpiValueSize, tileNumLabelH, kickerH, kickerW, receiptRowH, previewBox, commitCardParts, commitTitle, commitMetaText, receiptText, breakdownRowHs, splitPeriod, BD_COLS, stepText, STEP_CHIP_W, worklogMeta, worklogLink, fmtDate, OFFCLOCK_GROUPS, STATUS_H } from "../engine/fit.js";
+import { ctrlItems, ctrlReserve, receiptsOf, sourcesOf, receiptImage, thumbBox, THUMB, SOURCE_MORE_H, sourceLineH, receiptsListH, kpiValueSize, tileNumLabelH, tileNumH, kickerH, kickerW, receiptRowH, previewBox, commitCardParts, commitTitle, commitMetaText, receiptText, breakdownRowHs, splitPeriod, BD_COLS, stepText, STEP_CHIP_W, worklogMeta, worklogLink, fmtDate, OFFCLOCK_GROUPS, STATUS_H, rulesGroups } from "../engine/fit.js";
 import {
   PAD, proseSteps, stepsFor, PROSE_FONT, QUOTE_STEPS, QUOTE_FONT, QUOTE_WHO_H, TITLE_FONT, titleLineHeight, titleFontFor, titleLHFor,
-  KICKER_H, RECEIPTS, COMMITS, MEDIA, DRILL_H, CTRL, WORDS, HEADING, headingH, LOGOS, BREAKDOWN, TILE, TILE_FONT, tileRoleH, TIMELINE, WORKLOG, STACK, OFFCLOCK,
+  KICKER_H, RECEIPTS, COMMITS, MEDIA, DRILL_H, CTRL, WORDS, HEADING, headingH, LOGOS, BREAKDOWN, TILE, TILE_FONT, tileRoleH, TIMELINE, WORKLOG, STACK, OFFCLOCK, RULES,
 } from "../engine/typo.js";
 
 // The Source rule lives in one place (engine/fit.js hasRealProof, sourcesOf).
@@ -39,6 +40,7 @@ export function CellContent({ drillLabel, onDrill, onCaseLink, onStep, cell, fil
       case "worklog": return <WorklogCell fill={fill} cell={cell} P={P} onCaseLink={onCaseLink} />;
       case "stack": return <StackCell fill={fill} cell={cell} P={P} />;
       case "offclock": return <OffClockCell fill={fill} cell={cell} P={P} />;
+      case "rules": return <RulesCell fill={fill} cell={cell} P={P} />;
       case "portrait": return <PortraitCell fill={fill} cell={cell} reduced={reduced} />;
       case "specimen": {
         // A 36px top strip holds the controls (Expand / Close, Proof), never the specimen itself.
@@ -93,10 +95,13 @@ function TitleCell({ fill, cell, P, listH, preview, reduced, measure }) {
   for (let s = base; s >= 14 && steps.length < 24; s = Math.floor(s * 0.94)) steps.push({ size: s, lineHeight: TLH(s) });
   const kick = kickerH(measure, fill.kicker, kickerW(fill, Math.round(cell.w) - 2 * P));
   const showing = preview?.current ? preview.key : null;
+  // First load: the original site's hero entrance plays on the wordmark (HeroIntro.jsx).
+  const rootRef = useRef(null);
+  const intro = useHeroIntro(fill, reduced, rootRef);
   return (
-    <div className={`c-title ${showing ? "previewing" : ""}`}>
+    <div ref={rootRef} className={`c-title ${showing ? "previewing" : ""} ${intro.play ? "hi-play" : ""}`}>
       <div className="wordmark">
-        {fill.kicker && <p className="label kicker" style={{ left: P, top: P, width: kickerW(fill, Math.round(cell.w) - 2 * P) }}>{fill.kicker}</p>}
+        {fill.kicker && <p className="label kicker" style={{ left: P, top: P, width: kickerW(fill, Math.round(cell.w) - 2 * P) }}>{intro.kicker(fill.kicker)}</p>}
         <h2 className="sr-only">{fill.text}</h2>
         <FlowText
           flowKey={`${fill.id}:t`} fillId={fill.id} text={fill.text} steps={steps} mkFont={titleFontFor(fill)}
@@ -427,6 +432,125 @@ function StackCell({ fill, cell, P }) {
   );
 }
 
+/* ---------------------------------------------------------------- rules */
+
+/** One icon + label (+ note) item. The icon is decoration; the text carries the meaning. */
+function RuleItem({ it, s, box = s.icon, lock = false, style, i = 0 }) {
+  return (
+    <li className="ru-item" style={{ ...style, "--i": i }}>
+      <span className={`ru-icon ${lock ? "locked" : ""}`} style={{ width: box, height: box }}>
+        <Glyph name={it.icon} size={Math.round(box * 0.5)} />
+        {lock && <span className="ru-lock"><Glyph name="lucide:lock" size={10} /></span>}
+      </span>
+      <span className="ru-text">
+        <span className="ru-label">{it.text}</span>
+        {it.note && <span className="ru-note">{lock && <Glyph name="lucide:lock" size={11} />}{lock && <span className="sr-only">Locked: </span>}{it.note}</span>}
+      </span>
+    </li>
+  );
+}
+
+const RuleChip = ({ it, i = 0 }) => (
+  <li className="ru-chip" style={{ "--i": i }}>
+    {it.icon && <Glyph name={it.icon} size={12} />}
+    <span>{it.text}</span>
+    {it.note && <span className="ru-note">{it.note}</span>}
+  </li>
+);
+
+/**
+ * Rules: a list / grid of icon rules, dense chip groups, a flow (steps, arrows,
+ * a lock, an exit branch) or before -> after pairs. Every size comes from the
+ * engine (spec), so the painted block is the block that was fitted.
+ */
+function RulesCell({ fill, cell, P }) {
+  const L = cell.spec;
+  const s = (L?.phone ? RULES.phoneSteps : RULES.steps)[L?.step ?? 0] || RULES.steps[RULES.steps.length - 1];
+  const vars = {
+    padding: P, "--r-size": `${s.size}px`, "--r-lh": `${s.lh}px`, "--r-note": `${s.note}px`, "--r-note-lh": `${s.noteLH}px`,
+    "--r-dense": `${s.dense}px`, "--r-dense-h": `${RULES.denseH(s)}px`, "--r-gap": `${RULES.iconGap}px`,
+  };
+  const mode = fill.mode || "list";
+  let body = null;
+  if (!L?.body) {
+    body = <ul className="ru-grid">{fill.items.map((it, i) => <RuleItem key={i} it={it} s={s} i={i} />)}</ul>;
+  } else if (mode === "flow") {
+    const B = L.body, box = s.icon + 6, row = B.dir === "row";
+    body = (<>
+      <ol className={`ru-flow ${B.dir}`} style={row
+        ? { gridTemplateColumns: `repeat(${fill.items.length}, ${B.stepW}px)`, columnGap: RULES.arrowW, height: B.h - B.exitH, "--r-box": `${box}px` }
+        : { rowGap: RULES.connH, "--r-box": `${box}px` }}>
+        {fill.items.map((it, i) => (
+          <RuleItem key={i} it={it} s={s} box={box} lock={!!it.lock} i={i}
+            style={row ? undefined : { height: B.stepHs[i] }} />
+        ))}
+      </ol>
+      {fill.exit && (
+        <div className="ru-exit" style={{ marginTop: RULES.exitGap, "--r-box": `${box}px`, "--r-arrow": `${RULES.arrowW}px` }}>
+          <span className="ru-branch" aria-hidden="true"><Glyph name="lucide:corner-down-right" size={16} /></span>
+          <ul className="ru-grid one"><RuleItem it={fill.exit} s={s} i={fill.items.length} /></ul>
+          <span className="sr-only">At any point, if the student doesn't meet the criteria.</span>
+        </div>
+      )}
+    </>);
+  } else if (mode === "pairs") {
+    const B = L.body;
+    const pairs = fill.items.filter((it) => it.from), rest = fill.items.filter((it) => !it.from);
+    body = (<>
+      <ul className={`ru-pairs ${B.wide ? "wide" : "narrow"}`} style={{ rowGap: (s.gap ?? RULES.gap) + 4 }}>
+        {pairs.map((it, i) => (
+          <li key={i} className="ru-pair" style={{ height: B.rowHs[i], "--i": i, ...(B.wide ? { gridTemplateColumns: `${B.fromW}px ${RULES.arrowW}px ${B.toW}px` } : {}) }}>
+            <span className="ru-from"><span className="sr-only">Found: </span>{it.from}</span>
+            <span className="ru-to-arrow" aria-hidden="true"><Glyph name="lucide:arrow-right" size={14} /></span>
+            <ul className="ru-grid one" style={B.wide ? undefined : { width: B.toW }}>
+              <RuleItem it={it} s={s} i={i} />
+            </ul>
+          </li>
+        ))}
+      </ul>
+      {rest.length > 0 && B.rest && (
+        <ul className="ru-grid ru-rest" style={{ marginTop: B.restGap ? (s.gap ?? RULES.gap) : 0, paddingTop: B.restGap ? (s.gap ?? RULES.gap) : 0, gridTemplateColumns: `repeat(${B.rest.cols}, minmax(0, 1fr))`, gridTemplateRows: B.rest.rowHs.map((h) => `${h}px`).join(" "), columnGap: RULES.colGap, rowGap: (s.gap ?? RULES.gap) }}>
+          {rest.map((it, i) => <RuleItem key={i} it={it} s={s} i={pairs.length + i} />)}
+        </ul>
+      )}
+    </>);
+  } else {
+    let n = 0;
+    body = rulesGroups(fill.items).map((g, gi) => {
+      const B = L.body.blocks[gi];
+      const items = g.items.map((it) => <RuleItem key={n} it={it} s={s} i={n++} />);
+      const list = fill.dense && B.rows !== "grid"
+        ? <ul className="ru-chips" aria-label={g.group || undefined} style={{ gap: RULES.denseGap }}>{g.items.map((it, k) => <RuleChip key={k} it={it} i={k} />)}</ul>
+        : <ul className="ru-grid" aria-label={g.group || undefined} style={{ gridTemplateColumns: `repeat(${B.cols}, minmax(0, 1fr))`, gridTemplateRows: B.rowHs.map((h) => `${h}px`).join(" "), columnGap: RULES.colGap, rowGap: (s.gap ?? RULES.gap) }}>{items}</ul>;
+      const side = L.body.side;
+      return (
+        <section key={gi} className={`ru-group ${side ? "side" : ""}`} style={{ marginTop: gi ? RULES.chipsGap : 0, ...(side ? { gridTemplateColumns: `${side}px minmax(0, 1fr)` } : {}) }}>
+          {g.group && <div className="label ru-group-head" aria-hidden="true" style={{ height: side ? RULES.denseH(s) : RULES.groupH }}>{g.group}</div>}
+          {list}
+        </section>
+      );
+    });
+  }
+  const C = L?.chips;
+  return (
+    <div className={`c-rules m-${mode}`} style={vars}>
+      <div className="ru-head" style={L ? { height: L.head } : undefined}>
+        <span className="label ru-title">{fill.label}</span>
+        {fill.tag && <span className="ru-tag">{fill.tag}</span>}
+      </div>
+      {body}
+      {fill.chips?.items?.length > 0 && (
+        <div className={`ru-foot ${C?.inline ? "inline" : ""}`} style={{ marginTop: RULES.chipsGap, ...(C?.inline ? { gridTemplateColumns: `${C.labelW}px 1fr` } : {}) }}>
+          {fill.chips.label && <span className="label ru-foot-label">{fill.chips.label}</span>}
+          <ul className="ru-chips" aria-label={fill.chips.label || undefined} style={{ gap: RULES.denseGap }}>
+            {fill.chips.items.map((it, k) => <RuleChip key={k} it={it} i={k} />)}
+          </ul>
+        </div>
+      )}
+    </div>
+  );
+}
+
 /* Off the clock: compact lists (READING, PLAYING; WATCHING once it has data). */
 function OffClockCell({ fill, cell, P }) {
   const L = cell.spec ?? {};
@@ -527,8 +651,10 @@ function FaceCell({ cell, P, onAskOpen, reduced, busy }) {
 function TileCell({ fill, cell, P, onTile, hot }) {
   const step = cell.spec?.step ?? 3;
   const num = cell.spec?.num ?? 0;
-  const numH = num ? num * 0.92 + tileNumLabelH(cell.spec?.labelLines ?? 1) + TILE.numGap : 0;
+  const numH = tileNumH(num, cell.spec?.labelLines ?? 1);
   const roleH = tileRoleH(cell.spec?.roleLines ?? 1);
+  // Short on room the engine drops the hook, never the metric (the sr-only line keeps it for AT).
+  const noTask = !!cell.spec?.noTask;
   const act = (e) => onTile?.(fill.caseStudy, "activate", e);
   return (
     <div
@@ -540,12 +666,12 @@ function TileCell({ fill, cell, P, onTile, hot }) {
     >
       <p className="sr-only">{cell.spec?.useShort && fill.taskShort ? fill.taskShort : fill.task}</p>
       <div className="label tile-role" style={{ left: P, top: P, right: P }}>{cell.spec?.roleShort && fill.roleShort ? fill.roleShort : fill.role}</div>
-      <FlowText
+      {!noTask && <FlowText
         flowKey={`${fill.id}:task`} fillId={fill.id} text={cell.spec?.useShort && fill.taskShort ? fill.taskShort : fill.task} steps={TILE.steps} mkFont={TILE_FONT}
         startStep={step} strictWords
         box={(w, h) => ({ x: P, y: P + roleH, w: w - 2 * P, h: h - 2 * P - roleH - numH })}
         className="t-tile"
-      />
+      />}
       {num > 0 && (
         <div className="tile-num" style={{ left: P, bottom: P, right: P }}>
           <div className="kpi-value" style={{ fontSize: num }}>{fill.number.value}{fill.number.unit && <span className="kpi-unit">{fill.number.unit}</span>}</div>
@@ -697,7 +823,9 @@ function CommitsCell({ fill, cell, P }) {
       </div>
       <ol>
         {shown.map((c, i) => (
-          <li key={c.sha} style={{ height: cell.spec?.rowHs?.[i] ?? COMMITS.rowH }}>
+          // A floor, not a fixed height: while the cell morphs from a narrower width the
+          // message can briefly take an extra line, and the row must grow, never overlap.
+          <li key={c.sha} style={{ minHeight: cell.spec?.rowHs?.[i] ?? COMMITS.rowH }}>
             <div className="commit-msg">{c.url ? <a href={c.url} target="_blank" rel="noreferrer">{c.msg}</a> : c.msg}</div>
             <div className="commit-meta"><code>{c.sha.slice(0, 7)}</code> · {c.date}</div>
           </li>

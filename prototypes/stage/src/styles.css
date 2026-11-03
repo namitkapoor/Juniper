@@ -25,10 +25,10 @@
   --scrim: rgba(10, 10, 10, 0.92);
   --panel-2: #191919;
   --media-bg: #0d0d0d;
-  --recede-ink: #9b9b96;
-  --recede-mute: #8f8f8a;
-  --recede-bg: #141414;
-  --recede-media: .45;
+  --recede-ink: #4e4e4b;
+  --recede-mute: #4e4e4b;
+  --recede-bg: #0e0e0e;            /* receded blocks go to solid black under a dense dark halftone */
+  --recede-media: .3;
   --chat-mute: #92928c;
   --logo-filter: none;            /* logos as delivered (dark marks are flipped by .inv) */
   --logo-inv-filter: brightness(0) invert(1);
@@ -59,9 +59,9 @@
   /* Receded cells step DOWN a surface, like KYURI.OS light (#c8c8c8 ground under #d8d8d8 panels):
      a clearly darker grey, with ink that still clears 4.5:1 on it (6.3:1 and 4.9:1). */
   --recede-bg: #bcbcba;
-  --recede-ink: #4a4a47;
-  --recede-mute: #4a4a47;
-  --recede-media: .45;
+  --recede-ink: #858582;
+  --recede-mute: #858582;
+  --recede-media: .3;
   --chat-mute: #50504c;
   --logo-filter: brightness(0);
   --logo-inv-filter: brightness(0);
@@ -244,9 +244,9 @@ body:has(.app.phone) { overflow: hidden; }
 .app.phone .stage-wrap { height: auto; }
 .app.phone .stage { position: relative; }
 .app.phone .stage-wrap { padding-bottom: 210px; }
-.app.phone .chat-wrap { position: fixed; left: 0; right: 0; bottom: 0; height: auto; z-index: 10; }
-.app.phone .chat { position: relative; border-left: 0; border-top: 1px solid var(--hair); min-width: 0; }
-.app.phone .chat-head, .app.phone .chat-list { display: none; }
+.app.phone .chat-wrap { position: fixed; left: 0; right: 0; bottom: 0; height: auto; z-index: 10; overflow: visible; pointer-events: none; }
+.app.phone .chat { position: relative; border-left: 0; min-width: 0; }
+.app.phone .chat-head { display: none; }
 .app.phone .chips { flex-wrap: nowrap; overflow-x: auto; padding: 12px 16px; }
 .app.phone .chip { flex: none; }
 .phone-reply { padding: 12px 16px 0; font-family: var(--display); font-weight: 500; font-size: 16px; line-height: 21px; color: var(--ink); max-height: 76px; overflow-y: auto; }
@@ -533,7 +533,40 @@ body:has(.app.phone) { overflow: hidden; }
 /* ---------------------------------------------------------------- phone pass */
 .sheet-handle { display: flex; align-items: center; gap: 10px; width: 100%; padding: 6px 16px 4px; background: var(--bg); border: 0; color: var(--ink-2); cursor: pointer; position: relative; }
 .sheet-handle .grip { position: absolute; left: 50%; top: 4px; width: 36px; height: 3px; margin-left: -18px; background: var(--hair-live); border-radius: 2px; }
-.app.phone .chat.sheet-open .chat-list { display: flex; max-height: 52vh; padding: 12px 16px; }
+/* The sheet: a drawer (handle + conversation) that slides up from behind a
+   fixed dock (chips + input). Peek translates the drawer down by --peek (the
+   conversation's height less the latest reply); open is translate 0. Dragging
+   sets the transform inline, 1:1 with the finger. */
+.app.phone .chat { background: transparent; box-shadow: none; pointer-events: none; }
+.app.phone .chat > * { pointer-events: auto; }
+.sheet-drawer { position: relative; z-index: 0; background: var(--panel-2); border-top: 1px solid var(--hair); transform: translate3d(0, var(--peek, 0px), 0); transition: transform 300ms cubic-bezier(.2,.7,.2,1); will-change: transform; }
+.sheet-drawer::after { content: ""; position: absolute; left: 0; right: 0; top: 100%; height: 96px; background: inherit; } /* fills the gap when rubber-banding up */
+.chat.sheet-open .sheet-drawer { transform: none; }
+.app.phone .chat > .chips, .app.phone .chat > .chat-input { position: relative; z-index: 1; }
+.sheet-handle { touch-action: none; user-select: none; -webkit-user-select: none; }
+.sheet-body { display: grid; }
+.sheet-body > * { grid-area: 1 / 1; min-width: 0; }
+.app.phone .chat-list { display: flex; max-height: 52vh; padding: 12px 16px; overscroll-behavior: contain; opacity: 0; visibility: hidden; transition: opacity 200ms, visibility 0s 200ms; }
+.app.phone .chat.sheet-open .chat-list { opacity: 1; visibility: visible; transition: opacity 200ms; }
+.app.phone .phone-reply { align-self: start; transition: opacity 200ms; }
+.app.phone .chat.sheet-open .phone-reply { opacity: 0; visibility: hidden; }
+.app.phone .chat.dragging .chat-list, .app.phone .chat.dragging .phone-reply { visibility: visible; transition: none; }
+.app.phone .chat.empty .hint { margin-top: 0; }
+.chat.instant .sheet-drawer, .chat.instant .chat-list, .chat.instant .phone-reply { transition: none !important; }
+@media (prefers-reduced-motion: reduce) { .sheet-drawer, .app.phone .chat-list, .app.phone .phone-reply { transition: none !important; } }
+/* Desktop: the edge tab and the panel header drag horizontally. Mid-drag the
+   wrap overlays the stage at full width; the stage resizes once, on release. */
+.app.desk .chat-head { touch-action: none; cursor: grab; }
+.app.desk .chat-head .link { cursor: pointer; }
+.app.desk .chat-wrap.dragging { position: absolute; top: 0; right: 0; bottom: 0; z-index: 6; transition: none; }
+.app.desk .chat-wrap.dragging .chat { box-shadow: inset 1px 0 0 var(--hair), -16px 0 32px rgba(0, 0, 0, .08); }
+.app.desk .chat-wrap.dragging .chat-head { cursor: grabbing; }
+.app.desk .chat-wrap.settled { transition: none; }
+.chat-tab { position: absolute; z-index: 7; top: 50%; left: calc(100% - 4px); width: 24px; height: 64px; margin-top: -32px; padding: 0; display: flex; align-items: center; justify-content: center;
+  background: var(--panel-2); border: 1px solid var(--hair-live); border-right: 0; color: var(--ink-2); font-size: 18px; line-height: 1; cursor: grab; touch-action: none; user-select: none; }
+.chat-tab:hover { color: var(--ink); }
+.chat-tab.is-hidden { visibility: hidden; }
+.chat [data-rove]:focus-visible { outline: 2px solid var(--ring); outline-offset: -2px; }
 .app.phone .chat .chat-face { display: none; }
 .app.phone .chat.empty .chips { flex-direction: row; padding: 12px 16px; }
 /* focus mode and expanded media become full-screen sheets on phones (swipe down to close) */
@@ -712,10 +745,67 @@ kbd { font: 500 12px ui-monospace, Menlo, monospace; padding: 1px 5px; border: 1
 .shortcuts dd { margin: 0; color: var(--ink-2); font-size: 14px; }
 .shortcuts .close-btn { position: static; }
 
-/* M1: receded cells recede by colour, not by fading text below contrast */
+/* M1: receded cells recede by colour. In focus mode they are inert + aria-hidden (Stage.jsx), i.e. an
+   inactive part of the page, so their text is exempt from 1.4.3 and is deliberately greyed out (~2:1). */
 .cell.recede > * { opacity: 1 !important; }
 .cell.recede { --ink: var(--recede-ink); --ink-2: var(--recede-ink); --mute: var(--recede-mute); --bg: var(--recede-bg); background: var(--recede-bg); }
 .cell.recede img, .cell.recede video, .cell.recede canvas, .cell.recede .logos img { opacity: var(--recede-media); }
+/* Hatched recede (focus mode): the other cells sit under 1px diagonal pixel lines ("///"),
+   the chart convention for a greyed-out / not-in-play area. Each line is a 45-degree stair of
+   1px squares on a 6px tile, drawn crisp (no antialiasing), so it reads as pixels at any DPR.
+   The hatch is the cell's own background, under the content: it never takes a click (a click on
+   a receded cell still closes focus mode) and never covers glyphs.
+   Worst-case ink on a line / the ground: dark 4.67:1 on #3d3d3a (8.28:1 on #0e0e0e);
+   light 7.25:1 on #e8e8e6 (4.67:1 on #bcbcba). The open cell stays clean. */
+:root { --recede-hatch: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='6' height='6' fill='%233d3d3a' shape-rendering='crispEdges'><rect x='0' y='5' width='1' height='1'/><rect x='1' y='4' width='1' height='1'/><rect x='2' y='3' width='1' height='1'/><rect x='3' y='2' width='1' height='1'/><rect x='4' y='1' width='1' height='1'/><rect x='5' y='0' width='1' height='1'/></svg>"); }
+:root[data-theme="light"] { --recede-hatch: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='6' height='6' fill='%23e8e8e6' shape-rendering='crispEdges'><rect x='0' y='5' width='1' height='1'/><rect x='1' y='4' width='1' height='1'/><rect x='2' y='3' width='1' height='1'/><rect x='3' y='2' width='1' height='1'/><rect x='4' y='1' width='1' height='1'/><rect x='5' y='0' width='1' height='1'/></svg>"); }
+.cell.recede {
+  background-color: var(--recede-bg);
+  background-image: var(--recede-hatch);
+  background-size: 6px 6px;
+  image-rendering: pixelated;
+  animation: hatch-in 180ms steps(3, end) both;
+}
+/* media show the hatch through their dimmed pixels */
+.cell.recede .media-box { background: transparent; }
+/* the lines march in one tile diagonally, in pixel steps */
+@keyframes hatch-in { from { background-position: -6px 6px; } to { background-position: 0 0; } }
+@media (prefers-reduced-motion: reduce) { .cell.recede { animation: none; } }
+/* The expanded cell: the same soft edge glow as hover, held while it is open, so it lifts off the hatch. */
+.cell.is-focus { box-shadow: inset 0 0 0 1px var(--glow-line), 0 0 18px 2px var(--glow-soft), inset 0 0 14px 2px var(--glow-soft); z-index: 2; }
+
+/* Hover / focus = a soft lift. An interactive cell (case-study tile, Go-deeper cell, media that
+   opens / drills / expands, and Kip's face tile when it opens the chat) steps its ground a few percent toward ink and gains a glow on its edge:
+   a crisp 1px line plus a 14px soft falloff, drawn on a top layer (::before) so media edges glow too.
+   Text tokens are untouched. Lifted grounds, worst text: dark #1c1c1c (mute #85857f 4.6:1),
+   light #d3d3d3 (mute #545450 5.1:1). Keyboard focus keeps the 2px ring (--ring, >= 10:1). */
+:root { --lift-bg: #1c1c1c; --glow-line: rgba(255, 255, 255, 0.30); --glow-soft: rgba(255, 255, 255, 0.09); }
+:root[data-theme="light"] { --lift-bg: #d3d3d3; --glow-line: rgba(0, 0, 0, 0.30); --glow-soft: rgba(0, 0, 0, 0.10); }
+.cell:is(.drills, :has(> .c-tile), :has(> .c-media[data-act]), :has(> .c-face.asks)):not(.recede, .open) {
+  transition: background-color 120ms steps(2, end);
+}
+.cell:is(.drills, :has(> .c-tile), :has(> .c-media[data-act]), :has(> .c-face.asks)):not(.recede, .open)::before {
+  content: ""; position: absolute; inset: 0; z-index: 8; pointer-events: none;
+  box-shadow: inset 0 0 0 1px var(--glow-line), inset 0 0 14px 2px var(--glow-soft);
+  opacity: 0; transition: opacity 160ms ease-out;
+}
+.cell.drills { cursor: pointer; }
+.cell:is(.drills, :has(> .c-tile), :has(> .c-media[data-act]), :has(> .c-face.asks)):not(.recede, .open):is(:focus-visible, :has(> .c-tile:focus-visible), :has(> .c-tile.hot)) { background-color: var(--lift-bg); }
+.cell:is(.drills, :has(> .c-tile), :has(> .c-media[data-act]), :has(> .c-face.asks)):not(.recede, .open):is(:focus-visible, :has(> .c-tile:focus-visible), :has(> .c-tile.hot))::before { opacity: 1; }
+/* a tile's own focus (Tab onto .c-tile) gets the same 2px ring the cell has */
+.cell:has(> .c-tile:focus-visible) { outline: 2px solid var(--ring); outline-offset: -5px; }
+@media (hover: hover) {
+  .cell:is(.drills, :has(> .c-tile), :has(> .c-media[data-act]), :has(> .c-face.asks)):not(.recede, .open):hover { background-color: var(--lift-bg); }
+  .cell:is(.drills, :has(> .c-tile), :has(> .c-media[data-act]), :has(> .c-face.asks)):not(.recede, .open):hover::before { opacity: 1; }
+  /* a Go-deeper cell lights its button too, the same as hovering the button */
+  .cell.drills:hover .drill { background: var(--ink); color: var(--bg); }
+}
+.cell.drills:focus-visible .drill { background: var(--ink); color: var(--bg); }
+.drill { transition: background-color 90ms steps(3, end), color 90ms steps(3, end); }
+@media (prefers-reduced-motion: reduce) {
+  .cell:is(.drills, :has(> .c-tile), :has(> .c-media[data-act]), :has(> .c-face.asks)):not(.recede, .open),
+  .cell:is(.drills, :has(> .c-tile), :has(> .c-media[data-act]), :has(> .c-face.asks)):not(.recede, .open)::before, .drill { transition: none; }
+}
 .stage.focus-mode .stroke:not(.live) { background: var(--hair); }
 /* S1: control borders >= 3:1 */
 :root { }
@@ -738,9 +828,9 @@ kbd { font: 500 12px ui-monospace, Menlo, monospace; padding: 1px 5px; border: 1
 .preview-big:not([open]) { display: none; }
 /* C2: on short phones / zoom, and while the stage has focus, the sheet collapses to its 48px bar */
 @media (max-height: 560px) {
-  .app.phone .chat:not(.sheet-open) > :not(.sheet-handle) { display: none !important; }
+  .app.phone .chat:not(.sheet-open) > :not(.sheet-drawer), .app.phone .chat:not(.sheet-open) .phone-reply { display: none !important; }
 }
-.app.phone:has(.stage :focus-visible) .chat:not(.sheet-open) > :not(.sheet-handle) { display: none !important; }
+.app.phone:has(.stage :focus-visible) .chat:not(.sheet-open) > :not(.sheet-drawer), .app.phone:has(.stage :focus-visible) .chat:not(.sheet-open) .phone-reply { display: none !important; }
 .app.phone .sheet-handle { min-height: 48px; }
 .app.phone { scroll-padding-top: 64px; scroll-padding-bottom: 200px; }
 .app.phone .gutter-left { position: static; margin: 0 16px 8px; }
@@ -847,3 +937,63 @@ kbd { font: 500 12px ui-monospace, Menlo, monospace; padding: 1px 5px; border: 1
   .chat.empty .chat-face { left: calc(50% - 44px); top: 72px; width: 88px; height: 88px; }
   .chat.empty .hint { margin-top: 116px; }
 }
+
+/* ------------------------------------------------------------- rules
+   Icon + short-label items (list / grid, dense chips, a flow, before -> after pairs).
+   Square icon boxes on 1px hairlines; items step in on pixel steps. Sizes come from the engine. */
+.c-rules { position: absolute; inset: 0; color: var(--ink); }
+.c-rules ul, .c-rules ol { list-style: none; margin: 0; padding: 0; }
+.ru-head { display: flex; flex-wrap: wrap; align-items: flex-start; column-gap: 12px; row-gap: 8px; }
+.ru-tag { display: inline-flex; align-items: center; height: 20px; padding: 0 7px; border: 1px dashed var(--hair-ctl); font-size: 11px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--mute); white-space: nowrap; }
+.ru-item { display: flex; gap: var(--r-gap); align-items: flex-start; min-width: 0; animation: ru-in 160ms steps(3, end) calc(var(--i, 0) * 40ms) both; }
+.ru-icon { position: relative; flex: none; display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--hair); color: var(--ink-2); }
+.ru-text { display: flex; flex-direction: column; min-width: 0; }
+.ru-label { font-size: var(--r-size); line-height: var(--r-lh); font-weight: 500; color: var(--ink); }
+.ru-note { display: inline-flex; align-items: center; gap: 4px; margin-top: 2px; font-size: var(--r-note); line-height: var(--r-note-lh); color: var(--mute); }
+.ru-group-head { display: flex; align-items: flex-start; }
+.ru-group.side { display: grid; align-items: start; }
+.ru-group.side .ru-group-head { align-items: center; }
+.ru-grid { display: grid; }
+.ru-grid.one { display: block; }
+/* flow: steps in a row joined by stepped arrows, or a column joined by a hairline */
+.ru-flow.row { display: grid; align-items: start; }
+.ru-flow.row .ru-item { position: relative; flex-direction: column; gap: 10px; }
+.ru-flow.row .ru-item:not(:last-child)::after {
+  content: ""; position: absolute; top: calc(var(--r-box) / 2 - 4px); left: 100%; width: 26px; height: 9px;
+  background:
+    linear-gradient(var(--hair-live), var(--hair-live)) left 6px top 4px / 12px 1px no-repeat,
+    linear-gradient(var(--hair-live), var(--hair-live)) left 17px top 2px / 1px 5px no-repeat,
+    linear-gradient(var(--hair-live), var(--hair-live)) left 18px top 3px / 1px 3px no-repeat,
+    linear-gradient(var(--hair-live), var(--hair-live)) left 19px top 4px / 1px 1px no-repeat;
+}
+.ru-flow.col { display: flex; flex-direction: column; }
+.ru-flow.col .ru-item { position: relative; }
+.ru-flow.col .ru-item:not(:last-child)::after { content: ""; position: absolute; left: calc(var(--r-box) / 2); top: 100%; width: 1px; height: 12px; background: var(--hair-live); }
+.ru-icon.locked { border-color: var(--hair-live); }
+.ru-lock { position: absolute; top: -6px; right: -6px; width: 16px; height: 16px; display: inline-flex; align-items: center; justify-content: center; background: var(--bg); border: 1px solid var(--hair-live); color: var(--ink); }
+.cell.recede .ru-lock { background: var(--recede-bg); }
+/* the exit: a dashed branch off the flow */
+.ru-exit { display: flex; align-items: flex-start; border-top: 1px dashed var(--hair-ctl); padding-top: 0; }
+.ru-exit .ru-branch { flex: none; width: var(--r-arrow); display: inline-flex; padding-top: 6px; color: var(--mute); }
+.ru-exit .ru-grid { flex: 1; min-width: 0; margin-top: -1px; }
+.ru-exit .ru-icon { border-style: dashed; border-color: var(--hair-ctl); }
+/* pairs: what review found -> the fix */
+.ru-pairs { display: flex; flex-direction: column; }
+.ru-pair { display: grid; align-items: start; animation: ru-in 160ms steps(3, end) calc(var(--i, 0) * 40ms) both; }
+.ru-pair .ru-item { animation: none; }
+.ru-pairs.narrow .ru-pair { grid-template-columns: 28px 1fr; row-gap: 6px; }
+.ru-pairs.narrow .ru-from { grid-column: 1 / -1; }
+.ru-from { font-size: var(--r-size); line-height: var(--r-lh); color: var(--mute); }
+.ru-to-arrow { display: inline-flex; align-items: center; height: var(--r-lh); color: var(--mute); }
+.ru-pairs.wide .ru-to-arrow { justify-content: center; }
+.ru-rest { border-top: 1px solid var(--hair-soft); }
+/* dense chips and the footnote row */
+.ru-chips { display: flex; flex-wrap: wrap; }
+.ru-chip { display: inline-flex; align-items: center; gap: 6px; height: var(--r-dense-h); padding: 0 11px 0 7px; border: 1px solid var(--hair); font-size: var(--r-dense); color: var(--ink); white-space: nowrap; animation: ru-in 160ms steps(3, end) calc(var(--i, 0) * 30ms) both; }
+.ru-chip .glyph { color: var(--ink-2); flex: none; }
+.ru-chip .ru-note { margin: 0; }
+.ru-foot.inline { display: grid; align-items: start; }
+.ru-foot-label { display: flex; align-items: center; height: 22px; }
+.ru-foot.inline .ru-foot-label { height: var(--r-dense-h); }
+@keyframes ru-in { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .ru-item, .ru-pair, .ru-chip { animation: none; } }

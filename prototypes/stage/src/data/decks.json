@@ -6062,25 +6062,34 @@
     "thesis": "Requirements set the order, the disqualifiers, the shape of every reply and the guardrails, and an evaluation plan checks each one; review sessions found where it drifted.",
     "fills": [
       {
-        "kind": "prose",
-        "id": "cvs-problem",
-        "weight": 1,
-        "text": "THE PROBLEM: In review sessions the agent gave too much at once, asked too many questions, and when a tester asked for a human it claimed to be a person on the team.",
-        "receipts": [
-          {
-            "type": "asset",
-            "ref": "tools/content/sources/christine-valmy-requirements.md",
-            "repo": "Juniper (stage prototype)",
-            "date": "2026-11-02",
-            "label": "Christine Valmy requirements, provided by Namit (redacted)"
-          }
-        ]
-      },
-      {
-        "kind": "prose",
+        "kind": "rules",
         "id": "cvs-order",
-        "weight": 0.8,
-        "text": "THE ORDER (requirement): Course interest first, then pricing, then financial aid for esthetics. Pricing only after the student names a course, and the agent says plainly when someone doesn't meet the criteria.",
+        "weight": 1,
+        "mode": "flow",
+        "label": "The order",
+        "tag": "Requirement",
+        "items": [
+          {
+            "icon": "lucide:graduation-cap",
+            "text": "Course interest"
+          },
+          {
+            "icon": "lucide:tag",
+            "text": "Pricing",
+            "lock": true,
+            "note": "Only after a course"
+          },
+          {
+            "icon": "lucide:piggy-bank",
+            "text": "Financial aid",
+            "note": "Esthetics only"
+          }
+        ],
+        "exit": {
+          "icon": "lucide:circle-x",
+          "text": "Doesn't qualify",
+          "note": "Says so plainly"
+        },
         "receipts": [
           {
             "type": "asset",
@@ -6092,10 +6101,86 @@
         ]
       },
       {
-        "kind": "prose",
+        "kind": "rules",
+        "id": "cvs-review",
+        "weight": 0.8,
+        "mode": "pairs",
+        "label": "Found → fix",
+        "tag": "Review sessions",
+        "items": [
+          {
+            "icon": "lucide:gauge",
+            "from": "Too much at once",
+            "text": "Slow down"
+          },
+          {
+            "icon": "lucide:message-circle-question-mark",
+            "from": "Too many questions",
+            "text": "1-2 questions per reply"
+          },
+          {
+            "icon": "lucide:user-round",
+            "from": "Claimed to be human",
+            "text": "Hand off to an advisor",
+            "note": "Fix direction"
+          },
+          {
+            "icon": "lucide:badge-check",
+            "text": "Verify every program detail"
+          },
+          {
+            "icon": "lucide:phone",
+            "text": "Phone number only when asked"
+          },
+          {
+            "icon": "lucide:id-card",
+            "text": "Scripted identity answers"
+          }
+        ],
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "tools/content/sources/christine-valmy-requirements.md",
+            "repo": "Juniper (stage prototype)",
+            "date": "2026-11-02",
+            "label": "Christine Valmy requirements, provided by Namit (redacted)"
+          }
+        ]
+      },
+      {
+        "kind": "rules",
         "id": "cvs-disq",
         "weight": 0.75,
-        "text": "DISQUALIFIED IF: not living in the United States · can't commit to the full 600-hour program · can't attend in person in New Jersey and New York · doesn't speak English or Spanish · no GED, U.S. high-school diploma or accepted equivalent · needs visa sponsorship.",
+        "label": "Disqualified if",
+        "tag": "Requirement",
+        "items": [
+          {
+            "icon": "lucide:globe",
+            "text": "Outside the US"
+          },
+          {
+            "icon": "lucide:hourglass",
+            "text": "Can't do 600 hrs"
+          },
+          {
+            "icon": "lucide:map-pin-off",
+            "text": "Can't attend NJ·NY",
+            "note": "In person"
+          },
+          {
+            "icon": "lucide:languages",
+            "text": "No English or Spanish"
+          },
+          {
+            "icon": "lucide:scroll-text",
+            "text": "No diploma or GED",
+            "note": "Or accepted equivalent"
+          },
+          {
+            "icon": "lucide:stamp",
+            "text": "Needs a visa"
+          }
+        ],
         "receipts": [
           {
             "type": "asset",
@@ -6107,10 +6192,42 @@
         ]
       },
       {
-        "kind": "prose",
+        "kind": "rules",
         "id": "cvs-reply",
         "weight": 0.65,
-        "text": "EVERY REPLY (requirement): Four sentences or fewer, short and free of jargon, warm, grounded in the school's documents, and ending with a question. Routing runs through MCP: Claude answers in English, Gemini in Spanish.",
+        "label": "Every reply",
+        "tag": "Requirement",
+        "items": [
+          {
+            "icon": "lucide:list-ordered",
+            "text": "≤4 sentences"
+          },
+          {
+            "icon": "lucide:message-square-text",
+            "text": "Plain, warm words"
+          },
+          {
+            "icon": "lucide:file-text",
+            "text": "From school docs"
+          },
+          {
+            "icon": "lucide:message-circle-question-mark",
+            "text": "Ends with a question"
+          }
+        ],
+        "chips": {
+          "label": "Routed via MCP",
+          "items": [
+            {
+              "icon": "lucide:bot",
+              "text": "EN → Claude"
+            },
+            {
+              "icon": "lucide:bot",
+              "text": "ES → Gemini"
+            }
+          ]
+        },
         "receipts": [
           {
             "type": "asset",
@@ -6122,10 +6239,36 @@
         ]
       },
       {
-        "kind": "prose",
+        "kind": "rules",
         "id": "cvs-guard",
         "weight": 0.6,
-        "text": "GUARDRAILS (design): Student messages are capped at 300 characters with an inline error, a hand-off to an enrollment officer comes after a set number of messages, off-topic questions get a scripted redirect, SQL injection gets a refusal, and replies are meant to arrive within 30 seconds.",
+        "label": "Guardrails",
+        "tag": "Design",
+        "items": [
+          {
+            "icon": "lucide:text-cursor-input",
+            "text": "300-char cap",
+            "note": "Inline error"
+          },
+          {
+            "icon": "lucide:user-round-check",
+            "text": "Officer hand-off",
+            "note": "After set messages"
+          },
+          {
+            "icon": "lucide:undo-2",
+            "text": "Off-topic redirect",
+            "note": "Scripted"
+          },
+          {
+            "icon": "lucide:shield-x",
+            "text": "SQL injection refused"
+          },
+          {
+            "icon": "lucide:timer",
+            "text": "30s reply target"
+          }
+        ],
         "receipts": [
           {
             "type": "asset",
@@ -6137,25 +6280,70 @@
         ]
       },
       {
-        "kind": "prose",
+        "kind": "rules",
         "id": "cvs-eval",
         "weight": 0.55,
-        "text": "EVALUATION PLAN (not results): Automated checks on every reply for safety, accuracy, off-topic and SQL-injection detection, helpfulness, empathy and likeability through Perspective API, bias, persuasion and coherence in both languages; humans score six traits on a five-point scale; each session is checked for the course, pricing and aid order and for correct disqualification.",
-        "receipts": [
+        "label": "Evaluation",
+        "tag": "Plan, not results",
+        "dense": true,
+        "items": [
           {
-            "type": "asset",
-            "ref": "tools/content/sources/christine-valmy-requirements.md",
-            "repo": "Juniper (stage prototype)",
-            "date": "2026-11-02",
-            "label": "Christine Valmy requirements, provided by Namit (redacted)"
+            "group": "Auto · per reply",
+            "icon": "lucide:shield-check",
+            "text": "Safety"
+          },
+          {
+            "group": "Auto · per reply",
+            "icon": "lucide:target",
+            "text": "Accuracy"
+          },
+          {
+            "group": "Auto · per reply",
+            "icon": "lucide:shield-ban",
+            "text": "Off-topic & SQL detection"
+          },
+          {
+            "group": "Auto · per reply",
+            "icon": "lucide:hand-helping",
+            "text": "Helpfulness"
+          },
+          {
+            "group": "Auto · per reply",
+            "icon": "lucide:heart",
+            "text": "Empathy & likeability",
+            "note": "Perspective API"
+          },
+          {
+            "group": "Auto · per reply",
+            "icon": "lucide:scale",
+            "text": "Bias"
+          },
+          {
+            "group": "Auto · per reply",
+            "icon": "lucide:megaphone",
+            "text": "Persuasion"
+          },
+          {
+            "group": "Auto · per reply",
+            "icon": "lucide:languages",
+            "text": "Coherence EN·ES"
+          },
+          {
+            "group": "Human",
+            "icon": "lucide:users",
+            "text": "6 traits × 5-point scale"
+          },
+          {
+            "group": "Per session",
+            "icon": "lucide:list-checks",
+            "text": "Order kept"
+          },
+          {
+            "group": "Per session",
+            "icon": "lucide:user-x",
+            "text": "Correct disqualification"
           }
-        ]
-      },
-      {
-        "kind": "prose",
-        "id": "cvs-review",
-        "weight": 0.5,
-        "text": "FROM REVIEW SESSIONS: Slow down, one or two questions per reply, verify every program detail, give the phone number only when asked, and script the answer to identity questions. For the agent that claimed to be human, the fix direction is a hand-off to an enrollment advisor.",
+        ],
         "receipts": [
           {
             "type": "asset",

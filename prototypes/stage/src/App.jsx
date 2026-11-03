@@ -102,7 +102,8 @@ export default function App() {
   const measure = fontsReady ? pretextMeasure : fakeMeasure;
 
   // Desktop: the chat covers the right side; the stage is what's left.
-  const chatW = phone ? 0 : chatOpen ? Math.round(Math.min(440, Math.max(340, vp.w * 0.3))) : 0;
+  const chatOpenW = Math.round(Math.min(440, Math.max(340, vp.w * 0.3)));
+  const chatW = phone ? 0 : chatOpen ? chatOpenW : 0;
   const frameW = vp.w - RAIL - FRAME;
   const frameH = vp.h - FRAME - FOOT - NAV_H + 1;
   // The About stage is a long page: taller than the frame, scrolled inside it,
@@ -652,20 +653,20 @@ export default function App() {
             </button>
           )}
         </div>
-        {!chatOpen && !phone && !isHome && (
+        {/* One way in: Kip's face tile when the stage shows it, else this gutter button. */}
+        {!chatOpen && !phone && !layout?.cells?.some((c) => c.kind === "face") && (
           <button type="button" className="ask-btn gutter label" onClick={() => { setChatOpen(true); setFocusChat((n) => n + 1); }}>
             <Face size={36} busy={morphing} reduced={reduced} /> Ask Kip <span aria-hidden>→</span>
           </button>
         )}
       </main>
-      <div className="chat-wrap" style={phone ? undefined : { width: chatW }}>
+      {/* Chat renders its own .chat-wrap (width chatW). */}
         <Chat
           open={phone || chatOpen} phone={phone} messages={messages} chips={chips} onAsk={onAsk} onChip={onChip} busy={busy}
-          focusNonce={focusChat}
+          focusNonce={focusChat} chatW={chatW} openW={chatOpenW} onOpen={() => { setChatOpen(true); setFocusChat((n) => n + 1); }}
           onClose={() => { setChatOpen(false); requestAnimationFrame(() => (document.querySelector('.cell .c-face.asks')?.closest(".cell") || document.querySelector(".ask-btn") || document.querySelector('.stage .cell[tabindex="0"]'))?.focus()); }} busyFace={busy || morphing} reduced={reduced}
           onReopen={(q) => { const a = [...answers.current.values()].find((x) => x.question === q); if (a) go(a); }}
         />
-      </div>
     </div>
     </>
   );

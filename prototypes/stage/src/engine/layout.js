@@ -154,7 +154,7 @@ function stackLayout({ rect, weighted, measure, exp, split }) {
     const nh = naturalHeight(fill, rect.w, { ...ctx, expanded: exp.has(fill.id) });
     let h = typeof nh === "number" ? nh : nh.h;
     let spec = typeof nh === "number" ? undefined : nh.spec;
-    if (["media", "quote", "kpi", "commits", "logos", "tile", "timeline", "worklog", "stack", "portrait", "offclock", "specimen"].includes(fill.kind)) {
+    if (["media", "quote", "kpi", "commits", "logos", "tile", "timeline", "worklog", "stack", "portrait", "offclock", "specimen", "rules"].includes(fill.kind)) {
       spec = fitFill(fill, rect.w, h, { ...ctx, expanded: exp.has(fill.id) }).spec;
     }
     h = Math.max(h, MIN_CELL.h);
@@ -342,14 +342,32 @@ function equalizeHomeType(cells, weighted, measure, phone) {
   const start = phone ? 0 : steps.findIndex((s) => s.size <= desc.spec.size);
   for (let i = start; i >= 0 && i < steps.length; i++) {
     const size = steps[i].size;
-    const res = tiles.map((c) => hookFits(fills.get(c.fillId), c, size, measure, phone, P));
+    // Check the hook at the size it will actually set (CURRENTLY can go below
+    // the smallest hook step; the hook then sets at that smallest step).
+    const ti0 = TILE.steps.findIndex((s) => s.size === size);
+    const ti = ti0 < 0 ? TILE.steps.length - 1 : ti0;
+    const res = tiles.map((c) => hookFits(fills.get(c.fillId), c, TILE.steps[ti].size, measure, phone, P));
     if (res.every((r) => r.fits) || i === steps.length - 1) {
       desc.spec = { ...desc.spec, size, lineHeight: steps[i].lineHeight, step: i };
-      const ti = TILE.steps.findIndex((s) => s.size === size);
-      tiles.forEach((c, k) => { c.spec = { ...c.spec, step: ti < 0 ? TILE.steps.length - 1 : ti, useShort: res[k].fits ? res[k].useShort : c.spec.useShort }; });
+      // A tile whose hook can't fit even here keeps its metric and drops the
+      // hook (a cut line is never an option).
+      tiles.forEach((c, k) => {
+        const r = res[k];
+        c.spec = r.fits
+          ? { ...c.spec, step: ti, useShort: r.useShort, num: r.num ?? c.spec.num }
+          : { ...c.spec, step: ti, useShort: false, noTask: true };
+      });
+      shareMetric(tiles);
       return;
     }
   }
+}
+
+/** One metric size across the case-study tiles: the smallest any of them sets. */
+function shareMetric(tiles) {
+  const nums = tiles.map((c) => c.spec.num).filter((n) => n > 0);
+  const num = nums.length ? Math.min(...nums) : 0;
+  for (const c of tiles) c.spec = { ...c.spec, num: c.spec.num > 0 ? num : 0 };
 }
 
 /**
@@ -361,10 +379,11 @@ function tileHierarchy(cells) {
   // smallest any tile needs (stepping down always still fits).
   const tiles = cells.filter((c) => c.kind === "tile" && c.spec);
   if (!tiles.length) return;
-  const step = Math.max(...tiles.map((c) => c.spec.step));
-  const nums = tiles.map((c) => c.spec.num).filter((n) => n > 0);
-  const num = nums.length ? Math.min(...nums) : 0;
-  for (const c of tiles) c.spec = { ...c.spec, step, num: c.spec.num > 0 ? num : 0 };
+  // (A tile set without its hook has no say in the hook size.)
+  const withHook = tiles.filter((c) => !c.spec.noTask);
+  const step = withHook.length ? Math.max(...withHook.map((c) => c.spec.step)) : TILE.steps.length - 1;
+  for (const c of tiles) c.spec = { ...c.spec, step };
+  shareMetric(tiles);
 }
 
 /** 13 grid lines (0..12) in px, rounded so strokes and cell edges coincide. */

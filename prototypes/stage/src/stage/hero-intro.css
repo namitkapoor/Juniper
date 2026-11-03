@@ -1,0 +1,6 @@
+/* Hero intro (HeroIntro.jsx): the original site's letter/word entrance on the home wordmark.
+   Hidden only until WAAPI takes over (same frame); the stepped clip reveal is replaced while it plays. */
+.stage.intro .k-title .c-title.hi-play .t-title { animation: none; }
+.c-title.hi-play .t-title .ln:not(.hi-split) { opacity: 0; }
+.c-title .hi-l { display: inline-block; white-space: pre; will-change: transform, opacity, filter; }
+.c-title.hi-play .hi-w { display: inline-block; will-change: transform, opacity, filter; }

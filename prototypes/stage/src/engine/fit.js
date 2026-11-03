@@ -10,7 +10,7 @@
 import {
   PROSE_STEPS, proseSteps, stepsFor, PROSE_FONT, paragraphs, PARA_GAP, QUOTE_STEPS, QUOTE_FONT, QUOTE_WHO_H,
   TITLE_FONT, titleLineHeight, titleFontFor, titleLHFor, isWordmark, KICKER_H, headingH, KPI_FONT, KPI_LABEL_H, KPI_META_H, KPI_LABEL_FONT, CAPS_FONT, capsH, quoteWhoH, COMMIT_MSG_FONT,
-  COMMITS, RECEIPTS, MEDIA, DRILL_H, CTRL, WORDS, CAPTION_FONT, CAPTION_FONT_PHONE, CAPTION_PHONE, LABEL, font, LOGOS, BREAKDOWN, TILE, TILE_FONT, TILE_ROLE_FONT, TIMELINE, WORKLOG, STACK, OFFCLOCK, tileRoleH, hookTarget, metricMax,
+  COMMITS, RECEIPTS, MEDIA, DRILL_H, CTRL, WORDS, CAPTION_FONT, CAPTION_FONT_PHONE, CAPTION_PHONE, LABEL, font, LOGOS, BREAKDOWN, TILE, TILE_FONT, TILE_ROLE_FONT, TIMELINE, WORKLOG, STACK, OFFCLOCK, RULES, tileRoleH, hookTarget, metricMax,
 } from "./typo.js";
 import MANIFEST from "../../tools/content/manifest.json";
 
@@ -418,20 +418,18 @@ function tileFit(fill, w, h, ctx) {
   const roleLines = ctx.measure.lines(roleText.toUpperCase(), TILE_ROLE_FONT, innerW);
   if (roleLines > (fill.roleShort ? 1 : 2)) return { cost: INFEASIBLE + 3 };
   const roleH = tileRoleH(roleLines);
-  let avail = innerH - roleH;
-  let num = 0;
   let labelLines = 1;
   let cost = 0;
+  // The metric is the tile's proof point: it always shows. Candidate sizes,
+  // largest first: the comfortable one, then smaller ones down to the floor.
+  let nums = [0];
   if (fill.number) {
-    // The metric shows only when it fits at a comfortable size; the top
-    // case study is the one that must show it.
-    num = tileNumberSize(ctx.measure, fill.number, innerW, innerH * 0.38, fill.priority);
     // The label sits beside the reserved "Open →" box, never under it.
     labelLines = ctx.measure.lines(fill.number.label, font(BODY_FAMILY, 400, TILE.labelSize), innerW - TILE.openW - 16);
-    if (labelLines > 2) num = 0;
-    if (num >= TILE.numMin) avail -= num * 0.92 + tileNumLabelH(labelLines) + TILE.numGap;
-    // Every tile keeps its metric unless it truly lacks room; the top one must.
-    else { num = 0; cost += fill.mustMetric ? INFEASIBLE : 1.5; }
+    const comfy = tileNumberSize(ctx.measure, fill.number, innerW, innerH * 0.38, fill.priority);
+    const widest = tileNumberSize(ctx.measure, fill.number, innerW, Infinity, fill.priority);
+    // A label of up to three lines still shows (its height is counted).
+    nums = labelLines > 3 ? [] : tileNumSizes(comfy, widest);
   }
   // On phones the spread is gentle (top 1.0, the rest ~0.9 of it): a step, not a jump.
   const target = hookTarget(ctx.phone ? 1 - (1 - (fill.priority ?? 0.5)) * 0.35 : fill.priority);
@@ -439,7 +437,7 @@ function tileFit(fill, w, h, ctx) {
   // on phones / 4 on desktop) is a candidate. The full hook first; the short
   // one when the full hook can't stay within that many lines.
   const maxLines = ctx.phone ? 3 : 4;
-  const pick = (text, extra) => {
+  const pick = (text, avail) => {
     const longest = longestWord(text);
     let b = null;
     TILE.steps.forEach((s, i) => {
@@ -449,23 +447,57 @@ function tileFit(fill, w, h, ctx) {
       if (lines > maxLines || lines * s.lineHeight > avail) return;
       // Size follows priority; a hook a step off its target costs, so the
       // layout itself makes room for the important one.
-      let c = 1.6 * Math.abs(Math.log(s.size / target)) + extra;
+      let c = 1.6 * Math.abs(Math.log(s.size / target));
       const cpl = innerW / (s.size * 0.5);
       if (cpl < 12) c += (12 - cpl) / 4;
       if (!b || c < b.c - 1e-9) b = { i, s, c, need: lines * s.lineHeight };
     });
     return b;
   };
-  const full = ctx.phone && fill.taskShort ? null : pick(fill.task, 0);
-  // The full hook only "fits comfortably" near its target size; otherwise the short one.
-  const short = fill.taskShort ? pick(fill.taskShort, 0) : null;
-  const useShort = !!short && (!full || full.s.size < target * 0.8);
-  let best = useShort ? short : full;
-  if (!best) return { cost: INFEASIBLE + 4 };
+  const hook = (avail) => {
+    const full = ctx.phone && fill.taskShort ? null : pick(fill.task, avail);
+    // The full hook only "fits comfortably" near its target size; otherwise the short one.
+    const short = fill.taskShort ? pick(fill.taskShort, avail) : null;
+    const useShort = !!short && (!full || full.s.size < target * 0.8);
+    const best = useShort ? short : full;
+    return best && { best, useShort };
+  };
+  const base = innerH - roleH;
+  // Space runs short -> cut from the hook first (short hook, smaller type),
+  // then step the metric down, then drop the hook entirely. Never the metric.
+  let num = 0, hk = null;
+  for (const n of nums) {
+    hk = hook(base - tileNumH(n, labelLines));
+    if (hk) { num = n; if (n < nums[0]) cost += 0.8 * Math.log(nums[0] / n); break; }
+  }
+  if (!hk && fill.number) {
+    const n = nums.find((x) => tileNumH(x, labelLines) <= base);
+    if (n) {
+      cost += 1.5 + (n < nums[0] ? 0.8 * Math.log(nums[0] / n) : 0); // as costly as a hidden metric used to be
+      return { cost, spec: { step: TILE.steps.length - 1, num: n, roleLines, labelLines, useShort: false, roleShort, noTask: true } };
+    }
+    // Truly no room for the metric: a last resort the layout steers away from.
+    cost += fill.mustMetric ? INFEASIBLE : 8;
+    hk = hook(base);
+  }
+  if (!hk) return { cost: INFEASIBLE + 4 };
+  const { best, useShort } = hk;
   cost += best.c;
-  const used = (best.need + (innerH - roleH - avail)) / (innerH - roleH);
+  const avail = base - tileNumH(num, labelLines);
+  const used = (best.need + (base - avail)) / base;
   if (used < 0.3) cost += (0.3 - used) * 1.0;
   return { cost, spec: { step: best.i, num, roleLines, labelLines, useShort, roleShort } };
+}
+
+/** The metric block's height (number, its label, the gap above it); 0 without one. */
+export const tileNumH = (num, labelLines = 1) => (num ? num * 0.92 + tileNumLabelH(labelLines) + TILE.numGap : 0);
+/** Metric sizes to try, largest first: the comfortable size, then 4px steps down to the floor. */
+export function tileNumSizes(comfy, widest) {
+  const out = comfy >= TILE.numMin ? [comfy] : [];
+  for (let s = Math.min(widest, TILE.numMin); s >= TILE.numFloor; s -= 4) {
+    if (!out.length || s < out[out.length - 1]) out.push(s);
+  }
+  return out;
 }
 
 /**
@@ -473,18 +505,24 @@ function tileFit(fill, w, h, ctx) {
  * its line cap, given the room its kicker and metric already take?
  */
 export function hookFits(fill, cell, size, measure, phone, P) {
+  // A tile already set without its hook (the metric took the room) stays so.
+  if (cell.spec?.noTask) return { fits: true, useShort: cell.spec.useShort, num: cell.spec.num, noTask: true };
   const innerW = cell.w - 2 * P;
   const roleText = cell.spec?.roleShort && fill.roleShort ? fill.roleShort : fill.role;
   const roleH = tileRoleH(measure.lines(roleText.toUpperCase(), TILE_ROLE_FONT, innerW));
-  const num = cell.spec?.num ?? 0;
-  const numH = num ? num * 0.92 + tileNumLabelH(cell.spec?.labelLines ?? 1) + TILE.numGap : 0;
-  const avail = cell.h - 2 * P - roleH - numH;
+  const num0 = cell.spec?.num ?? 0;
+  const labelLines = cell.spec?.labelLines ?? 1;
+  // The metric may step down (never away) so the hook keeps its line.
+  const nums = num0 ? [num0, ...tileNumSizes(0, num0).filter((n) => n < num0)] : [0];
   const lh = Math.round(size * 1.1), f = TILE_FONT(size), maxLines = phone ? 3 : 4;
-  for (const [text, short] of [[phone && fill.taskShort ? null : fill.task, false], [fill.taskShort, true]]) {
-    if (!text) continue;
-    if (measure.width(longestWord(text), f) > innerW) continue;
-    const lines = measure.lines(text, f, innerW);
-    if (lines <= maxLines && lines * lh <= avail) return { fits: true, useShort: short };
+  for (const num of nums) {
+    const avail = cell.h - 2 * P - roleH - tileNumH(num, labelLines);
+    for (const [text, short] of [[phone && fill.taskShort ? null : fill.task, false], [fill.taskShort, true]]) {
+      if (!text) continue;
+      if (measure.width(longestWord(text), f) > innerW) continue;
+      const lines = measure.lines(text, f, innerW);
+      if (lines <= maxLines && lines * lh <= avail) return { fits: true, useShort: short, num };
+    }
   }
   return { fits: false };
 }
@@ -614,6 +652,186 @@ function stackFit(fill, w, h, ctx) {
   if (need > innerH) return { cost: INFEASIBLE + 2 + (need - innerH) / 400 };
   const empty = (innerH - need) / innerH;
   return { cost: empty > 0.3 ? (empty - 0.3) * 1.2 : 0, spec: { cols: stackCols(innerW) } };
+}
+
+/* ---- Rules: icon + short-label items -------------------------------------
+ * One generic kind for "how it stays on script" style content: a list / grid
+ * (columns chosen to fit), dense chip groups, a flow (steps joined by arrows,
+ * an optional lock note, an exit branch), or before -> after pairs. Every
+ * block is measured at a size step; the fit takes the largest step that fits.
+ */
+const NOTE_LOCK = 16; // the lock glyph before a locked step's note
+const rulesTagW = (measure, tag) => (tag ? measure.width(tag.toUpperCase(), CAPS_FONT) + 16 : 0);
+export function rulesHeadH(measure, fill, innerW) {
+  const tw = rulesTagW(measure, fill.tag);
+  const lw = measure.width(String(fill.label || "").toUpperCase(), CAPS_FONT);
+  if (!fill.tag || lw + 12 + tw <= innerW) return Math.max(RULES.headH, capsH(measure, fill.label || "", innerW) + 10);
+  return capsH(measure, fill.label || "", innerW) + 6 + RULES.tagH + 10;
+}
+/** One icon + text (+ note) item in a column `colW` wide; null when a word can't fit. */
+export function rulesItemH(measure, it, colW, s, lock = false) {
+  const tw = colW - s.icon - RULES.iconGap;
+  if (tw < 48) return null;
+  const f = RULES.item(s);
+  if (measure.width(longestWord(it.text), f) > tw) return null;
+  const th = measure.lines(it.text, f, tw) * s.lh;
+  const nw = tw - (lock ? NOTE_LOCK : 0);
+  const nh = it.note ? 2 + measure.lines(it.note, RULES.noteFont(s), nw) * s.noteLH : 0;
+  return Math.max(s.icon, th + nh);
+}
+/** Items as a grid: the column count (<= what fits) that gives the shortest block. */
+export function rulesGrid(measure, items, innerW, s) {
+  let best = null;
+  const maxC = Math.min(items.length, Math.max(1, Math.floor((innerW + RULES.colGap) / (RULES.colMin + RULES.colGap))));
+  for (let c = 1; c <= maxC; c++) {
+    const colW = (innerW - (c - 1) * RULES.colGap) / c;
+    const hs = items.map((it) => rulesItemH(measure, it, colW, s));
+    if (hs.some((x) => x == null)) continue;
+    const rowHs = [];
+    for (let i = 0; i < hs.length; i += c) rowHs.push(Math.max(...hs.slice(i, i + c)));
+    const h = rowHs.reduce((a, b) => a + b, 0) + (rowHs.length - 1) * (s.gap ?? RULES.gap);
+    if (!best || h < best.h - 0.5) best = { cols: c, rowHs, h };
+  }
+  return best;
+}
+const denseChipW = (measure, it, s) => 8 + (it.icon ? 12 + 6 : 0) + measure.width(it.text, RULES.denseFont(s))
+  + (it.note ? 6 + measure.width(it.note, RULES.noteFont(s)) : 0) + 12;
+/** Chips wrapped greedily; null when one chip is wider than the block. */
+export function rulesChips(measure, items, innerW, s) {
+  let rows = 1, x = 0;
+  for (const it of items) {
+    const cw = denseChipW(measure, it, s);
+    if (cw > innerW) return null;
+    if (x > 0 && x + RULES.chipGap + cw > innerW) { rows++; x = cw; } else x += (x > 0 ? RULES.chipGap : 0) + cw;
+  }
+  return { rows, h: rows * RULES.denseH(s) + (rows - 1) * RULES.denseGap };
+}
+/** Consecutive items sharing `group` form one block under a small heading. */
+export function rulesGroups(items) {
+  const out = [];
+  for (const it of items) {
+    const g = it.group || "";
+    if (!out.length || out[out.length - 1].group !== g) out.push({ group: g, items: [] });
+    out[out.length - 1].items.push(it);
+  }
+  return out;
+}
+function rulesFlow(measure, fill, innerW, s) {
+  const n = fill.items.length;
+  const box = s.icon + 6;
+  const f = RULES.item(s);
+  let flow = null;
+  if (innerW >= n * RULES.stepMin + (n - 1) * RULES.arrowW) {
+    const stepW = (innerW - (n - 1) * RULES.arrowW) / n;
+    const hs = fill.items.map((it) => {
+      if (measure.width(longestWord(it.text), f) > stepW) return null;
+      const nh = it.note ? 4 + measure.lines(it.note, RULES.noteFont(s), stepW - (it.lock ? NOTE_LOCK : 0)) * s.noteLH : 0;
+      return box + 10 + measure.lines(it.text, f, stepW) * s.lh + nh;
+    });
+    if (!hs.some((x) => x == null)) flow = { dir: "row", stepW, stepHs: hs, h: Math.max(...hs) };
+  }
+  if (!flow) {
+    const hs = fill.items.map((it) => rulesItemH(measure, it, innerW, { ...s, icon: box }, it.lock));
+    if (hs.some((x) => x == null)) return null;
+    flow = { dir: "col", stepW: innerW, stepHs: hs, h: hs.reduce((a, b) => a + b, 0) + (n - 1) * RULES.connH };
+  }
+  let exitH = 0;
+  if (fill.exit) {
+    const eh = rulesItemH(measure, fill.exit, innerW - RULES.arrowW, s);
+    if (eh == null) return null;
+    exitH = RULES.exitGap + eh;
+  }
+  return { ...flow, exitH, h: flow.h + exitH };
+}
+function rulesPairs(measure, fill, innerW, s) {
+  const pairs = fill.items.filter((it) => it.from), rest = fill.items.filter((it) => !it.from);
+  const f = RULES.item(s);
+  const wide = innerW >= RULES.pairMin;
+  const fromW = wide ? Math.round((innerW - RULES.arrowW) * 0.4) : innerW;
+  const toW = wide ? innerW - RULES.arrowW - fromW : innerW - RULES.arrowW;
+  const rowHs = [];
+  for (const it of pairs) {
+    if (measure.width(longestWord(it.from), f) > fromW) return null;
+    const fh = measure.lines(it.from, f, fromW) * s.lh;
+    const th = rulesItemH(measure, it, toW, s);
+    if (th == null) return null;
+    rowHs.push(wide ? Math.max(fh, th) : fh + 6 + th);
+  }
+  const pairsH = rowHs.reduce((a, b) => a + b, 0) + Math.max(0, rowHs.length - 1) * ((s.gap ?? RULES.gap) + 4);
+  const grid = rest.length ? rulesGrid(measure, rest, innerW, s) : null;
+  if (rest.length && !grid) return null;
+  const restGap = pairs.length && rest.length ? 2 * (s.gap ?? RULES.gap) + 1 : 0;
+  return { wide, fromW, toW, rowHs, pairsH, rest: grid, restGap, h: pairsH + restGap + (grid ? grid.h : 0) };
+}
+/** The whole block at step `s`: { head, body..., chips, h } or null when it can't be set. */
+export function rulesLayout(measure, fill, innerW, s) {
+  const head = rulesHeadH(measure, fill, innerW);
+  let body;
+  if (fill.mode === "flow") body = rulesFlow(measure, fill, innerW, s);
+  else if (fill.mode === "pairs") body = rulesPairs(measure, fill, innerW, s);
+  else {
+    const groups = rulesGroups(fill.items);
+    // Dense groups put their heading in a left column (one width for all) when it takes <= 40%.
+    const lw = fill.dense ? Math.max(0, ...groups.map((g) => (g.group ? measure.width(g.group.toUpperCase(), CAPS_FONT) + 14 : 0))) : 0;
+    const set = (side) => {
+      const blocks = [];
+      let h = 0;
+      for (const g of groups) {
+        const gh = g.group && !side ? RULES.groupH : 0;
+        // A chip too wide for the block: the group falls back to rows (dense: "rows").
+        const chips = fill.dense ? rulesChips(measure, g.items, innerW - side, s) : null;
+        const b = chips || (side ? null : rulesGrid(measure, g.items, innerW, s));
+        if (!b) return null;
+        if (fill.dense && !chips) b.rows = "grid";
+        blocks.push({ ...b, gh });
+        h += (blocks.length > 1 ? RULES.chipsGap : 0) + gh + b.h;
+      }
+      return { blocks, side, h };
+    };
+    const a = lw > 0 && lw <= innerW * 0.4 ? set(lw) : null;
+    const b = set(0);
+    body = a && (!b || a.h <= b.h) ? a : b;
+  }
+  if (!body) return null;
+  let chips = null;
+  if (fill.chips?.items?.length) {
+    const lw = fill.chips.label ? measure.width(fill.chips.label.toUpperCase(), CAPS_FONT) + 10 : 0;
+    const c = rulesChips(measure, fill.chips.items, innerW, s);
+    if (!c) return null;
+    // The label is a column left of the chips when that costs no extra row, else a line above them.
+    const side = lw ? rulesChips(measure, fill.chips.items, innerW - lw, s) : null;
+    const inline = !!side && side.rows === c.rows;
+    chips = { ...(inline ? side : c), labelW: lw, inline, h: RULES.chipsGap + (inline || !lw ? 0 : 22) + c.h };
+  }
+  return { head, body, chips, h: head + body.h + (chips ? chips.h : 0) };
+}
+function rulesFit(fill, w, h, ctx) {
+  const P = ctx.pad;
+  const innerW = w - 2 * P;
+  if (innerW < 150) return { cost: INFEASIBLE + 10 };
+  const listH = ctx.expanded ? receiptsListH(fill, ctx.measure, innerW) : 0;
+  const availH = h - 2 * P - ctrlReserve(fill, ctx.measure, w, P) - listH;
+  const steps = ctx.phone ? RULES.phoneSteps : RULES.steps;
+  let last = null;
+  for (let i = 0; i < steps.length; i++) {
+    const L = rulesLayout(ctx.measure, fill, innerW, steps[i]);
+    if (L) last = L;
+    if (!L || L.h > availH) continue;
+    const empty = (availH - L.h) / Math.max(1, availH);
+    return { cost: 0.12 * i + (empty > 0.35 ? (empty - 0.35) * 1.5 : 0), spec: { ...L, step: i, phone: !!ctx.phone, listH } };
+  }
+  return { cost: INFEASIBLE + 2 + (last ? (last.h - availH) / 400 : 5) };
+}
+function rulesNaturalH(fill, w, ctx) {
+  const P = ctx.pad;
+  const innerW = w - 2 * P;
+  const steps = ctx.phone ? RULES.phoneSteps : RULES.steps;
+  const extra = ctx.expanded ? receiptsListH(fill, ctx.measure, innerW) : 0;
+  for (const s of steps) {
+    const L = rulesLayout(ctx.measure, fill, innerW, s);
+    if (L) return Math.ceil(L.h) + 2 * P + ctrlReserve(fill, ctx.measure, w, P) + extra + 4;
+  }
+  return 240 + extra;
 }
 
 /** Off the clock: an intro line, then compact lists (READING, PLAYING, WATCHING when it has data). */
@@ -833,6 +1051,7 @@ export function fitFill(fill, w, h, ctx) {
     case "portrait": r = portraitFit(fill, w, h); break;
     case "specimen": r = specimenFit(fill, w, h, ctx); break;
     case "offclock": r = offclockFit(fill, w, h, ctx); break;
+    case "rules": r = rulesFit(fill, w, h, ctx); break;
     default: r = { cost: INFEASIBLE + 20 };
   }
   // Generic shape sanity for text cells: no slivers.
@@ -884,6 +1103,7 @@ export function naturalHeight(fill, w, ctx) {
     case "portrait": return Math.round(Math.min(w / fill.aspect, 520));
     case "specimen": return Math.max(280, Math.round(w * 0.7)) + extra;
     case "offclock": return 2 * P + offclockLayout(ctx.measure, fill, innerW).h;
+    case "rules": return rulesNaturalH(fill, w, ctx);
     case "timeline": return 2 * P + TIMELINE.headH + TIMELINE.rowH * fill.items.length + 4;
     case "tile": {
       const role = ctx.phone && fill.roleShort ? fill.roleShort : fill.role;
