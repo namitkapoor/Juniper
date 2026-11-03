@@ -303,3 +303,20 @@ describe("type weights are locked per role (priority changes size only)", async 
     expect(TILE_ROLE_FONT.weight).toBeTypeOf("number");
   });
 });
+
+describe("Proof only where it's real", async () => {
+  const { hasRealProof } = await import("./fit.js");
+  const caseFile = { type: "asset", ref: "src/data/chekoutData.js", label: "ChekOut AI case study" };
+  it("hides a lone case-study data pointer", () => {
+    expect(hasRealProof({ kind: "prose", receipts: [caseFile] })).toBe(false);
+    expect(hasRealProof({ kind: "prose", receipts: [] })).toBe(false);
+  });
+  it("shows commits, urls, previews, records, or 2+ sources", () => {
+    expect(hasRealProof({ kind: "kpi", receipts: [caseFile, { type: "commit", ref: "abc1234", repo: "x" }] })).toBe(true);
+    expect(hasRealProof({ kind: "kpi", receipts: [{ type: "asset", ref: "a.webp", url: "https://x.y" }] })).toBe(true);
+    expect(hasRealProof({ kind: "kpi", receipts: [{ type: "asset", ref: "a.webp", preview: { src: "a.gif", aspect: 1 } }] })).toBe(true);
+    expect(hasRealProof({ kind: "kpi", receipts: [{ type: "record", ref: "rec-1" }] })).toBe(true);
+    expect(hasRealProof({ kind: "kpi", receipts: [{ type: "asset", ref: "a.webp" }, { type: "asset", ref: "b.webp" }] })).toBe(true);
+    expect(hasRealProof({ kind: "kpi", receipts: [{ type: "asset", ref: "a.webp" }] })).toBe(false);
+  });
+});

@@ -38,6 +38,20 @@ function checkReceipt(r, where) {
   if (r.url !== undefined && !/^https:\/\//.test(r.url)) err(where, `receipt.url not https: ${r.url}`);
   if (r.date !== undefined && r.date !== null && !isDate(r.date)) err(where, `receipt.date not ISO: ${r.date}`);
   if (r.type === "asset" && r.ref.startsWith("assets/")) checkAsset(r.ref, where);
+  if (r.preview !== undefined) checkPreview(r.preview, `${where}.preview`);
+}
+
+// Receipt.preview: a playable demo (device-framed GIF) shown in the Proof list.
+const PREVIEW_FRAMES = ["phone", "laptop", "none"];
+const PREVIEW_KEYS = new Set(["src", "poster", "aspect", "frame"]);
+function checkPreview(p, where) {
+  if (!p || typeof p !== "object" || Array.isArray(p)) return err(where, "preview is not an object");
+  checkAsset(p.src, `${where}.src`);
+  if (isStr(p.src) && !/\.(gif|webp|png|mp4|webm)$/i.test(p.src)) err(where, `preview.src not a gif/webp/png/mp4/webm: ${p.src}`);
+  if (p.poster !== undefined) checkAsset(p.poster, `${where}.poster`);
+  if (!(typeof p.aspect === "number" && Number.isFinite(p.aspect) && p.aspect > 0)) err(where, `preview.aspect must be a number > 0: ${p.aspect}`);
+  if (!PREVIEW_FRAMES.includes(p.frame)) err(where, `preview.frame must be one of ${PREVIEW_FRAMES.join("|")}: ${p.frame}`);
+  for (const k of Object.keys(p)) if (!PREVIEW_KEYS.has(k)) err(where, `preview has unknown key "${k}"`);
 }
 const checkReceipts = (rs, where, required) => {
   if (rs === undefined) { if (required) err(where, "receipts required"); return; }
@@ -94,6 +108,10 @@ function checkFill(f, where, ids) {
       if (!isStr(f.text)) err(where, "prose.text missing");
       // A problem statement is a claim: it needs a source (research, a client reference, data or code).
       checkReceipts(f.receipts, where, /^\s*(THE PROBLEM|THREE PROBLEMS)\b/.test(f.text || ""));
+      if (f.status !== undefined) {
+        if (!isStr(f.status?.text)) err(where, "prose.status.text missing");
+        if (f.status?.link && (!isStr(f.status.link.label) || !/^https:\/\//.test(f.status.link.url || ""))) err(where, "prose.status.link needs label + https url");
+      }
       if (f.evidence !== undefined && (!Array.isArray(f.evidence) || !f.evidence.every(isStr))) err(where, "prose.evidence must be an array of fill ids");
       break;
     case "quote":
@@ -231,7 +249,21 @@ decks.forEach((d, i) => {
   if (deckIds.has(d.id)) err(`decks[${i}]`, "duplicate deck id");
   deckIds.add(d.id);
   if (!isStr(d.question)) err(`decks[${i}]`, "question must be non-empty");
+  if (d.aliases !== undefined && (!Array.isArray(d.aliases) || !d.aliases.every(isStr)))
+    err(`decks[${i}]`, "aliases must be an array of non-empty strings");
 });
+// Questions and aliases together: each phrasing opens exactly one deck.
+{
+  const seenQ = new Map();
+  const key = (s) => s.trim().toLowerCase();
+  for (const d of decks) for (const q of [d.question, ...(Array.isArray(d.aliases) ? d.aliases : [])]) {
+    if (!isStr(q)) continue;
+    const k = key(q);
+    if (seenQ.has(k) && seenQ.get(k) !== d.id) err(`decks(${d.id})`, `question/alias "${q}" also belongs to ${seenQ.get(k)}`);
+    else if (seenQ.has(k)) err(`decks(${d.id})`, `alias "${q}" repeats this deck's own question or alias`);
+    seenQ.set(k, d.id);
+  }
+}
 for (const id of caseIds) {
   const n = decks.filter((d) => d.caseStudy === id && !d.parent).length;
   if (n < 2 || n > 3) err("decks", `case study ${id} has ${n} starter decks, want 2-3`);
@@ -308,6 +340,17 @@ if (!t || t.text !== "namit" || t.kicker !== "PRODUCT ENGINEER · NEW YORK") err
 
 // ---- about.json
 const about = load("about.json");
+if (about && about.offClock !== undefined) {
+  if (!Array.isArray(about.offClock)) err("about.offClock", "must be an array");
+  else about.offClock.forEach((it, i) => {
+    const w = `about.offClock[${i}]`;
+    if (!["book", "game", "watch"].includes(it.kind)) err(w, `kind must be book|game|watch, got ${it.kind}`);
+    if (!isStr(it.title)) err(w, "title missing");
+    if (!isStr(it.by)) err(w, "by missing");
+    if (it.note !== undefined && !isStr(it.note)) err(w, "note must be a non-empty string");
+    if (it.url !== undefined && !/^https:\/\//.test(it.url)) err(w, `url not https: ${it.url}`);
+  });
+}
 walkStrings(about, "about");
 {
   const w = "about";
@@ -352,9 +395,21 @@ walkStrings(about, "about");
       const iw = `${gw}.items[${j}]`;
       if (!isStr(it.name)) err(iw, "name missing");
       if (it.icon !== undefined) {
-        if (!String(it.icon).startsWith("assets/about/")) err(iw, `icon must be under assets/about/: ${it.icon}`);
-        checkAsset(it.icon, `${iw}.icon`);
+        const iconify = /^([a-z0-9-]+):([a-z0-9-]+)$/.exec(String(it.icon));
+        if (iconify) {
+          // An Iconify id: the set must be installed and carry the icon.
+          const set = path.resolve(DATA, `../../node_modules/@iconify-json/${iconify[1]}/icons.json`);
+          if (!fs.existsSync(set)) err(iw, `icon set ${iconify[1]} is not installed`);
+          else {
+            const j = JSON.parse(fs.readFileSync(set, "utf8"));
+            if (!j.icons?.[iconify[2]] && !j.aliases?.[iconify[2]]) err(iw, `icon ${it.icon} not found in @iconify-json/${iconify[1]}`);
+          }
+        } else {
+          if (!String(it.icon).startsWith("assets/about/")) err(iw, `icon must be under assets/about/ or an Iconify id: ${it.icon}`);
+          checkAsset(it.icon, `${iw}.icon`);
+        }
       }
+      if (it.jobs !== undefined && (!Array.isArray(it.jobs) || !it.jobs.every(isStr))) err(iw, "jobs must be an array of strings");
       if (it.evidence !== undefined && !isStr(it.evidence)) err(iw, "evidence must be a non-empty string");
     });
   });

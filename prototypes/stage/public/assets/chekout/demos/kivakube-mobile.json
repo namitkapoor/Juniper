@@ -1,0 +1,47 @@
+{
+  "name": "kivakube-mobile",
+  "device": "phone",
+  "frames": 8,
+  "holds": [
+    1.4,
+    1.4,
+    1.0,
+    2.0,
+    1.2,
+    1.0,
+    1.2,
+    2.6
+  ],
+  "fade": 0.25,
+  "mp4": {
+    "path": "assets/chekout/demos/kivakube-mobile.mp4",
+    "w": 724,
+    "h": 1530,
+    "fps": 30,
+    "duration": 11.8,
+    "bytes": 954197
+  },
+  "poster": {
+    "index": 7,
+    "files": {
+      "kivakube-mobile.png": 395523,
+      "kivakube-mobile.webp": 47950,
+      "kivakube-mobile.avif": 34622
+    }
+  },
+  "aspect": 0.4732,
+  "source_frame": [
+    300,
+    648
+  ],
+  "gif": {
+    "path": "assets/chekout/demos/kivakube-mobile.gif",
+    "w": 544,
+    "h": 1146,
+    "fps": 10,
+    "duration": 11.8,
+    "frames": 22,
+    "encoder": "ffmpeg",
+    "bytes": 3158289
+  }
+}

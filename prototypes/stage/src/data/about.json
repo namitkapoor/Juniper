@@ -345,6 +345,22 @@
           "evidence": "Resume build, lint and leak-guard scripts on the KYURI.OS box."
         },
         {
+          "name": "FastAPI",
+          "icon": "simple-icons:fastapi",
+          "jobs": [
+            "ChekOut AI"
+          ],
+          "evidence": "ChekOut's product sync services and analytics endpoints."
+        },
+        {
+          "name": "OAuth",
+          "icon": "lucide:key-round",
+          "jobs": [
+            "ChekOut AI"
+          ],
+          "evidence": "Shopify and Shopline app installs: signed state, scope checks per merchant."
+        },
+        {
           "name": "Three.js and React Three Fiber",
           "evidence": "The particle portrait on this page; 3D at Arlene and in ChekOut's Shopify quiz."
         }
@@ -362,6 +378,13 @@
           "evidence": "Christine Valmy's enrollment agent answers through RAG from the school's content."
         },
         {
+          "name": "Embeddings and pgvector",
+          "jobs": [
+            "ChekOut AI"
+          ],
+          "evidence": "Every product in a store's catalog embedded with Vertex AI and stored in Postgres for retrieval."
+        },
+        {
           "name": "Langflow",
           "evidence": "ChekOut's per-merchant agent flows."
         },
@@ -376,7 +399,8 @@
       "items": [
         {
           "name": "Postgres (Neon, pgvector)",
-          "evidence": "KYURI.OS accounts, quotas and evidence records in Neon; ChekOut on Postgres with pgvector."
+          "evidence": "KYURI.OS accounts, quotas and evidence records in Neon; ChekOut on Postgres with pgvector.",
+          "icon": "simple-icons:postgresql"
         },
         {
           "name": "BigQuery",
@@ -388,7 +412,7 @@
         },
         {
           "name": "n8n",
-          "evidence": "Bridges the Christine Valmy agent to the school's systems on GCP."
+          "evidence": "Webhooks between the Christine Valmy widget, its agent and the lead flow; a newsletter signup on ChekOut's site."
         }
       ]
     },
@@ -399,6 +423,14 @@
           "name": "Vercel",
           "icon": "assets/about/vercel.svg",
           "evidence": "KYURI.OS and this portfolio deploy there."
+        },
+        {
+          "name": "Firebase Hosting",
+          "icon": "simple-icons:firebase",
+          "jobs": [
+            "ChekOut AI"
+          ],
+          "evidence": "Serves ChekOut's builder, rewriting every request to its Cloud Run service."
         },
         {
           "name": "Google Cloud Run",
@@ -443,5 +475,54 @@
   "portrait": {
     "src": "assets/about/portrait.webp",
     "alt": "Namit Kapoor, professional portrait"
-  }
+  },
+  "offClock": [
+    {
+      "kind": "book",
+      "title": "The Trauma of Everyday Life",
+      "by": "Mark Epstein"
+    },
+    {
+      "kind": "book",
+      "title": "The Witcher saga, The Last Wish through The Lady of the Lake",
+      "by": "Andrzej Sapkowski",
+      "note": "seven books in"
+    },
+    {
+      "kind": "book",
+      "title": "The Idiot",
+      "by": "Fyodor Dostoevsky"
+    },
+    {
+      "kind": "book",
+      "title": "For Small Creatures Such as We",
+      "by": "Sasha Sagan"
+    },
+    {
+      "kind": "book",
+      "title": "One Piece",
+      "by": "Eiichiro Oda",
+      "note": "manga, caught up"
+    },
+    {
+      "kind": "game",
+      "title": "Marvel Rivals",
+      "by": "NetEase Games"
+    },
+    {
+      "kind": "game",
+      "title": "Baldur's Gate 3",
+      "by": "Larian Studios"
+    },
+    {
+      "kind": "game",
+      "title": "The Witcher 3: Wild Hunt",
+      "by": "CD PROJEKT RED"
+    },
+    {
+      "kind": "game",
+      "title": "Cyberpunk 2077",
+      "by": "CD PROJEKT RED"
+    }
+  ]
 }

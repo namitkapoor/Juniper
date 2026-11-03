@@ -20,8 +20,8 @@
  * lightest fills dropped (reported in `dropped`) when they do not fit.
  * Deterministic: no randomness, fixed iteration order, strict tie-breaks.
  */
-import { fitFill, naturalHeight, INFEASIBLE, kickerH, kickerW } from "./fit.js";
-import { MIN_CELL, PAD, TILE, KPI_LABEL_FONT, capsH, headingH, proseSteps, QUOTE_STEPS } from "./typo.js";
+import { fitFill, naturalHeight, INFEASIBLE, kickerH, kickerW, hookFits, STATUS_H } from "./fit.js";
+import { MIN_CELL, PAD, TILE, KPI_LABEL_FONT, capsH, headingH, proseSteps, stepsFor, QUOTE_STEPS } from "./typo.js";
 const TILE_STEPS = TILE.steps.length;
 
 export const GRID = 12;
@@ -110,6 +110,7 @@ function splitLayout({ rect, weighted, measure, exp, split }) {
   strokes.sort((a, b) => (a.depth - b.depth) || (a.path < b.path ? -1 : a.path > b.path ? 1 : 0) || (a.index - b.index));
   strokes.forEach((s, i) => { s.order = i; });
   tileHierarchy(cells, weighted);
+  equalizeHomeType(cells, weighted, measure, false);
   return { mode: "grid", rect, cells, strokes, dropped: [], tree: best.tree, score: best.cost };
 }
 
@@ -166,9 +167,13 @@ function stackLayout({ rect, weighted, measure, exp, split }) {
     y += h;
   });
   tileHierarchy(cells, weighted);
+  equalizeHomeType(cells, weighted, measure, true);
   monotonicType(cells, weighted);
+  // Text whose size changed above gets its height back (all lines, never cut),
+  // and everything below it moves down: the stack is re-laid top to bottom.
+  const stackH = restack(cells, strokes, weighted, measure, rect);
   return {
-    mode: "stack", rect: { ...rect, h: y - rect.y }, cells, strokes, dropped: [], tree: null, score: 0,
+    mode: "stack", rect: { ...rect, h: stackH }, cells, strokes, dropped: [], tree: null, score: 0,
   };
 }
 
@@ -286,7 +291,8 @@ function monotonicType(cells, weighted) {
         const i = TILE.steps.findIndex((s) => s.size <= cap);
         c.spec = { ...c.spec, step: i < 0 ? TILE.steps.length - 1 : i };
       } else if (c.kind === "prose" || c.kind === "quote") {
-        const steps = c.kind === "prose" ? proseSteps(text.get(c.fillId)) : QUOTE_STEPS;
+        const f = weighted.find((w) => w.fill.id === c.fillId)?.fill;
+        const steps = c.kind === "prose" ? stepsFor(f || { text: text.get(c.fillId) }) : QUOTE_STEPS;
         let i = steps.findIndex((s) => s.size <= cap);
         if (i < 0) i = steps.length - 1;
         c.spec = { ...c.spec, size: steps[i].size, lineHeight: steps[i].lineHeight, step: i };
@@ -298,18 +304,66 @@ function monotonicType(cells, weighted) {
   }
 }
 
+function restack(cells, strokes, weighted, measure, rect) {
+  const fills = new Map(weighted.map((w) => [w.fill.id, w.fill]));
+  let y = rect.y;
+  cells.forEach((c, i) => {
+    const f = fills.get(c.fillId);
+    if (c.kind === "prose" && c.spec?.size) {
+      const innerW = c.w - 2 * PAD.phone;
+      const paras = (f.text || "").split(/\n\s*\n/);
+      const lines = paras.reduce((n, t) => n + measure.lines(t, { family: "Satoshi", weight: 400, size: c.spec.size }, innerW), 0) + (paras.length - 1) * 0.6;
+      const need = Math.ceil(lines * c.spec.lineHeight) + 2 * PAD.phone + kickerH(measure, f.kicker, kickerW(f, innerW)) + (f.status ? STATUS_H : 0) + ((f.receipts || []).length ? 30 : 0);
+      c.h = Math.max(need, MIN_CELL.h);
+      c.spec = { ...c.spec, need: Math.ceil(lines * c.spec.lineHeight) };
+    }
+    if (i > 0) { const s = strokes[i - 1]; if (s) { s.y1 = s.y2 = s.pos = y; } }
+    c.y = y;
+    y += c.h;
+  });
+  return y - rect.y;
+}
+
 /**
- * Case-study tiles read in priority order at a glance: a lower-priority hook
- * is always at least one step smaller than the one above it (stepping down
- * always still fits), until the floor size.
+ * Home: the case-study hooks and the CURRENTLY description are ONE size. Start
+ * at CURRENTLY's own size; if any tile can't set its hook there (full or
+ * short), step both down together until every tile can.
  */
-function tileHierarchy(cells, weighted) {
-  const pr = new Map(weighted.map((w) => [w.fill.id, w.fill.priority ?? 0]));
-  const tiles = cells.filter((c) => c.kind === "tile" && c.spec).sort((a, b) => pr.get(b.fillId) - pr.get(a.fillId));
-  for (let i = 1; i < tiles.length; i++) {
-    const above = tiles[i - 1].spec.step;
-    if (tiles[i].spec.step <= above) tiles[i].spec = { ...tiles[i].spec, step: Math.min(TILE_STEPS - 1, above + 1) };
+function equalizeHomeType(cells, weighted, measure, phone) {
+  const fills = new Map(weighted.map((w) => [w.fill.id, w.fill]));
+  const tiles = cells.filter((c) => c.kind === "tile" && c.spec);
+  const desc = cells.find((c) => c.kind === "prose" && fills.get(c.fillId)?.id === "home-currently");
+  if (desc && !desc.spec) desc.spec = { size: 0, lineHeight: 0, step: 0 };
+  if (!tiles.length || !desc) return;
+  const P = phone ? PAD.phone : PAD.desktop;
+  const steps = proseSteps(fills.get(desc.fillId).text || "");
+  // Phones re-lay the stack afterwards, so CURRENTLY can start at its largest step there.
+  const start = phone ? 0 : steps.findIndex((s) => s.size <= desc.spec.size);
+  for (let i = start; i >= 0 && i < steps.length; i++) {
+    const size = steps[i].size;
+    const res = tiles.map((c) => hookFits(fills.get(c.fillId), c, size, measure, phone, P));
+    if (res.every((r) => r.fits) || i === steps.length - 1) {
+      desc.spec = { ...desc.spec, size, lineHeight: steps[i].lineHeight, step: i };
+      const ti = TILE.steps.findIndex((s) => s.size === size);
+      tiles.forEach((c, k) => { c.spec = { ...c.spec, step: ti < 0 ? TILE.steps.length - 1 : ti, useShort: res[k].fits ? res[k].useShort : c.spec.useShort }; });
+      return;
+    }
   }
+}
+
+/**
+ * Case-study tiles share one hook size and one metric size; priority shows in
+ * cell area and order only.
+ */
+function tileHierarchy(cells) {
+  // One hook size and one metric size across all case-study tiles: the
+  // smallest any tile needs (stepping down always still fits).
+  const tiles = cells.filter((c) => c.kind === "tile" && c.spec);
+  if (!tiles.length) return;
+  const step = Math.max(...tiles.map((c) => c.spec.step));
+  const nums = tiles.map((c) => c.spec.num).filter((n) => n > 0);
+  const num = nums.length ? Math.min(...nums) : 0;
+  for (const c of tiles) c.spec = { ...c.spec, step, num: c.spec.num > 0 ? num : 0 };
 }
 
 /** 13 grid lines (0..12) in px, rounded so strokes and cell edges coincide. */
@@ -330,7 +384,7 @@ function makeSolver({ rect, xs, ys, items, sumW, measure, exp, fitCache, bento =
     let r;
     if (w < MIN_CELL.w || h < MIN_CELL.h) r = { cost: Infinity };
     else {
-      const ctx = { pad: PAD.desktop, measure, expanded: exp.has(it.fill.id), inset: it.inset ? insetSize(it.inset, w, measure) : null, attach: it.attach || null };
+      const ctx = { pad: PAD.desktop, measure, expanded: exp.has(it.fill.id), inset: it.inset ? insetSize(it.inset, w, measure) : null, attach: it.attach || null, stage: rect };
       const fk = `${it.fill.id}|${it.inset?.id || ""}|${it.attach?.id || ""}|${w}x${h}`;
       let f = fitCache.get(fk);
       if (!f) { f = fitFill(it.fill, w, h, ctx); fitCache.set(fk, f); }

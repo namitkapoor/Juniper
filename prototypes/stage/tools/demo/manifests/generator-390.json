@@ -1,0 +1,13 @@
+{
+  "name": "generator-mobile",
+  "device": "phone",
+  "base": "/Users/namit/Documents/personal/code/Juniper/design-plans/hm-audit/rebuild/round4/generator",
+  "_note": "section screenshots, not viewports: every frame is cropped to the same 390x860 window, aligned on the store-address input (y=184 in 1-3, y=23 in the 352-wide suggestion shot)",
+  "frames": [
+    { "src": "390-light-1-default.png",    "crop": [0, 160, 390, 860], "hold": 1.6, "label": "default" },
+    { "src": "390-light-2-loading.png",    "crop": [0, 160, 390, 860], "hold": 1.4, "label": "building" },
+    { "src": "390-light-3-generated.png",  "crop": [0, 160, 390, 860], "hold": 2.6, "label": "generated" },
+    { "src": "390-light-6-suggestion.png", "crop": [-19, -1, 390, 860], "fill": [221, 221, 221], "hold": 2.0, "label": "try another store" }
+  ],
+  "poster": 2
+}

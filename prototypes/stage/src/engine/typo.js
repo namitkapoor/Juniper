@@ -35,6 +35,8 @@ export const glueHyphens = (t) => (t ? t.replace(/(\S)-(?=\S)/g, "$1-\u2060") : 
 /** Short prose may set larger, like a statement; long prose never does. */
 const PROSE_BIG = [{ size: 30, lineHeight: 38 }, { size: 26, lineHeight: 34 }];
 export const proseSteps = (text) => (text.length < 150 ? [...PROSE_BIG, ...PROSE_STEPS] : PROSE_STEPS);
+/** Steps for a prose fill: `small` (an expanded media's caption/explain) stays at body size. */
+export const stepsFor = (fill) => (fill.small ? PROSE_STEPS.slice(2) : proseSteps(fill.text || ""));
 
 export const QUOTE_STEPS = [
   { size: 34, lineHeight: 40 },
@@ -105,7 +107,8 @@ export const BREAKDOWN = { headH: 24, rowH: 24, barH: 38, maxRows: 8, nameFont: 
 
 /** A case-study tile at rest: role line, task line (display), headline number. */
 export const TILE = {
-  steps: [64, 56, 48, 42, 36, 32, 28, 25, 22].map((size) => ({ size, lineHeight: Math.round(size * 1.1) })),
+  // Includes every prose size, so a hook can match the CURRENTLY text exactly.
+  steps: [64, 56, 48, 42, 36, 32, 30, 28, 26, 25, 22, 19, 17].map((size) => ({ size, lineHeight: Math.round(size * 1.1) })),
   numLabelH: 22, numGap: 14, numMax: 92, numMin: 48, // a metric shows only at a comfortable size
   openW: 78, // the "Open →" box, bottom-right: the metric label wraps in the width left of it
   labelSize: 14, labelLH: 18,
@@ -116,7 +119,12 @@ export const TILE = {
  * so the dominant case study reads first at a glance: 1.0 -> 44px,
  * 0.75 -> 35px, 0.55 -> 29px.
  */
-export const hookTarget = (priority = 0.5) => Math.max(TILE.floor, Math.round(44 * Math.pow(1.25, (priority - 1) * 4)));
+// All case-study hooks share ONE size (the KYURI.OS hook's): priority changes
+// only cell area and order, never type.
+// The target is the CURRENTLY description's size (30px); the layout pass then
+// sets hooks and CURRENTLY to the same size at every width.
+export const HOOK_SIZE = 30;
+export const hookTarget = () => HOOK_SIZE;
 /** The metric scales with the tile too (same anatomy, smaller type for lower priority). */
 export const metricMax = (priority = 0.5) => Math.round(TILE.numMax * (0.6 + 0.4 * priority));
 // Descriptive text set large is LIGHT (Cabinet Grotesk 300), beside the 200 wordmark; numbers stay bold.

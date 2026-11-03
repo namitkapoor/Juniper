@@ -1,0 +1,13 @@
+{
+  "name": "generator-desktop",
+  "device": "laptop",
+  "base": "/Users/namit/Documents/personal/code/Juniper/design-plans/hm-audit/rebuild/round4/generator",
+  "_note": "1440-light-3-generated is a mid-transition capture (heading faded out, 'Setting up' overlay), so the generated state is 5 (Rosendahl live). Crops are 1440x900, aligned on the store-address input (y=367, x=549; in the 747-wide suggestion shot y=22, x=0)",
+  "frames": [
+    { "src": "1440-light-1-default.png", "crop": [0, 110, 1440, 900], "hold": 1.6, "label": "default" },
+    { "src": "1440-light-2-loading.png", "crop": [0, 110, 1440, 900], "hold": 1.4, "label": "building" },
+    { "src": "1440-light-5-reduced-motion-rosendahl-live.png", "crop": [0, 110, 1440, 900], "hold": 2.8, "label": "generated: Rosendahl agent" },
+    { "src": "1440-light-6-suggestion.png", "crop": [-549, -235, 1440, 900], "fill": [221, 221, 221], "hold": 2.0, "label": "try another store" }
+  ],
+  "poster": 2
+}

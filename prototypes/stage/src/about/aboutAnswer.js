@@ -99,11 +99,7 @@ export function aboutFromJson(about, caseStudies = []) {
  * two empty slots say so.
  */
 export function offClockFill(items, intro) {
-  const slots = items.length ? items : [
-    { kind: "book", title: "Reading list", by: "coming soon" },
-    { kind: "game", title: "Games", by: "coming soon" },
-  ];
-  return { kind: "offclock", id: "about-off-clock", weight: 0.45, label: "Off the clock", intro, items: slots };
+  return { kind: "offclock", id: "about-off-clock", weight: 0.45, label: "Off the clock", intro, items };
 }
 
 /** Jobs whose name appears in a skill's evidence line (an explicit `jobs` list wins). */

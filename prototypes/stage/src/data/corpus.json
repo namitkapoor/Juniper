@@ -4972,7 +4972,7 @@
       "wordpress",
       "bilingual"
     ],
-    "text": "A React widget in a WordPress plugin talks to an enrollment agent that answers through RAG from the school's content. A schedule pipeline keeps classes current, and n8n on GCP passes sorted leads to enrollment officers. The agent shipped with Claude and now runs on Gemini.",
+    "text": "A React widget in a WordPress plugin posts each message to an n8n webhook in front of the agent's Cloud Function, which answers through RAG from the school's content. Finished chats go to a second n8n webhook that turns them into leads in priority buckets, and the inquiry form writes to the school's Creatio CRM. The agent shipped with Claude and now runs on Gemini.",
     "fills": [
       {
         "kind": "media",
@@ -4981,9 +4981,9 @@
         "media": "image",
         "src": "assets/christine-valmy/architecture.svg",
         "aspect": 1.7778,
-        "alt": "Christine Valmy agent architecture: prospective students chat in English or Spanish on the school's site; the enrollment agent answers through RAG from the school's content, a schedule pipeline keeps classes current, and leads pass through n8n on GCP to enrollment officers in priority buckets",
+        "alt": "Christine Valmy agent architecture: students use the widget on the school's WordPress site; each message goes to an n8n chat webhook that reaches the agent's Cloud Function, finished chats go to an n8n transcript webhook that produces a lead for officers, and the inquiry form creates a lead in the school's Creatio CRM",
         "caption": "From a student's question to a sorted lead.",
-        "explain": "Follow one question: the student asks in the widget on the school's WordPress site, the agent answers from the school's own content, and the conversation becomes a lead that n8n hands to the officers already sorted. Solid boxes are mine; the agent function is a teammate's code. Drawn from the case study and the ChekOut architecture board.",
+        "explain": "Follow a student's message: the widget posts it to n8n, n8n reaches the agent (a teammate's Cloud Function; the persona and prompt are mine), and the reply comes back with the conversation stage. When the chat ends, the transcript goes to a second n8n webhook that turns it into a lead; the inquiry form goes straight to the school's Creatio CRM. Drawn from the plugin code and the ChekOut architecture board.",
         "receipts": [
           {
             "type": "asset",
@@ -5002,6 +5002,18 @@
             "ref": "figma:juckmsHrlBUBKcMkoJCiep#4:135",
             "date": "2026-11-01",
             "label": "FigJam: 4 · Sophia, enrollment agent"
+          },
+          {
+            "type": "asset",
+            "ref": "cv-chat-flat/christine-valmy-floating.js",
+            "repo": "chekout-ai (local)",
+            "label": "N8nService: chat and transcript webhooks, payloads, completion stages"
+          },
+          {
+            "type": "asset",
+            "ref": "cv-chat-flat/claude.md",
+            "repo": "chekout-ai (local)",
+            "label": "Plugin notes: endpoint connectors (n8n chat, n8n transcript, Creatio CRM), WordPress settings"
           }
         ]
       }
@@ -5024,6 +5036,18 @@
         "ref": "figma:juckmsHrlBUBKcMkoJCiep#4:135",
         "date": "2026-11-01",
         "label": "FigJam: 4 · Sophia, enrollment agent"
+      },
+      {
+        "type": "asset",
+        "ref": "cv-chat-flat/christine-valmy-floating.js",
+        "repo": "chekout-ai (local)",
+        "label": "N8nService: chat and transcript webhooks, payloads, completion stages"
+      },
+      {
+        "type": "asset",
+        "ref": "cv-chat-flat/claude.md",
+        "repo": "chekout-ai (local)",
+        "label": "Plugin notes: endpoint connectors (n8n chat, n8n transcript, Creatio CRM), WordPress settings"
       }
     ]
   },

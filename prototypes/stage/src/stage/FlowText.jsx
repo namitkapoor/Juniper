@@ -68,7 +68,7 @@ export function FlowText({ flowKey, fillId, text, steps, mkFont, startStep = 0, 
         const b = P.box(Math.round(geom.w), Math.round(geom.h));
         if (b.w < 20 || b.h < 10) { painter.paint([]); return; }
         const statics = P.statics ? P.statics(b) : [];
-        // Stage-level reserved areas (the "Ask the site" button) are obstacles too;
+        // Stage-level reserved areas (the "Ask Kip" button) are obstacles too;
         // bottom-anchored text simply sits above them.
         const R = ctx.reserve;
         if (R && !geom.moving) {

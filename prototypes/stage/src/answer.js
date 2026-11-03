@@ -31,12 +31,16 @@ function overlap(a, b) {
 
 function matchDeck(q, decks) {
   const nq = norm(q);
-  const exact = decks.find((d) => norm(d.question) === nq);
+  // A deck answers to its question and to its earlier phrasings (`aliases`).
+  const phrasings = (d) => [d.question, ...(Array.isArray(d.aliases) ? d.aliases : [])];
+  const exact = decks.find((d) => phrasings(d).some((p) => norm(p) === nq));
   if (exact) return { answer: exact, how: "deck (exact)" };
   let best = null, bestS = 0;
   for (const d of decks) {
-    const s = overlap(tokens(q), tokens(d.question));
-    if (s > bestS) { bestS = s; best = d; }
+    for (const p of phrasings(d)) {
+      const s = overlap(tokens(q), tokens(p));
+      if (s > bestS) { bestS = s; best = d; }
+    }
   }
   return bestS >= 0.5 ? { answer: best, how: `deck (near, ${bestS.toFixed(2)})` } : null;
 }

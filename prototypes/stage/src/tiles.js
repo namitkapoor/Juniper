@@ -50,13 +50,14 @@ export function tileText(cs, cover) {
  */
 export const ARRANGEMENT = { axis: "v", at: 0.36, bento: true, firstIds: (f) => f.kind === "title" || (f.kind === "prose" && f.id === "home-currently"), last: "home-face" };
 
-export function homeWithTiles(home, cases) {
+export function homeWithTiles(home, cases, { chatOpen = false } = {}) {
   if (!cases?.length) return home;
   const fills = [];
   const top = Math.max(...cases.map((c) => c.priority ?? 0.5));
   for (const f of home.fills) {
     // The "THREE CASE STUDIES" heading becomes the site's character: the face + Ask.
-    if (f.kind === "title" && /case stud/i.test(f.text)) { fills.push({ kind: "face", id: "home-face", weight: 0.42 }); continue; }
+    // While the chat is open Kip lives there; the tile (and its anchor) goes away.
+    if (f.kind === "title" && /case stud/i.test(f.text)) { if (!chatOpen) fills.push({ kind: "face", id: "home-face", weight: 0.42 }); continue; }
     const cs = f.kind === "media" && f.caseStudy ? cases.find((c) => c.id === f.caseStudy) : null;
     if (!cs) { fills.push(f); continue; }
     const t = tileText(cs, f);
@@ -72,7 +73,7 @@ export function homeWithTiles(home, cases) {
   const A = ARRANGEMENT;
   const first = fills.filter(A.firstIds).map((f) => f.id);
   const second = fills.filter((f) => !first.includes(f.id)).map((f) => f.id);
-  return { ...home, id: `${home.id}@home`, fills, split: { axis: A.axis, at: A.at, first, second, last: A.last, bento: A.bento } };
+  return { ...home, id: `${home.id}@home${chatOpen ? "+chat" : ""}`, fills, split: { axis: A.axis, at: A.at, first, second, last: chatOpen ? undefined : A.last, bento: A.bento } };
 }
 
 /** case id -> { cover media fill, title line } for the hero's preview. */

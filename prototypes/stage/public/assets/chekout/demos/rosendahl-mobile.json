@@ -1,0 +1,47 @@
+{
+  "name": "rosendahl-mobile",
+  "device": "phone",
+  "frames": 8,
+  "holds": [
+    1.4,
+    1.6,
+    1.2,
+    2.2,
+    1.2,
+    1.2,
+    1.0,
+    2.6
+  ],
+  "fade": 0.25,
+  "mp4": {
+    "path": "assets/chekout/demos/rosendahl-mobile.mp4",
+    "w": 724,
+    "h": 1532,
+    "fps": 30,
+    "duration": 12.4,
+    "bytes": 820149
+  },
+  "poster": {
+    "index": 7,
+    "files": {
+      "rosendahl-mobile.png": 350060,
+      "rosendahl-mobile.webp": 46864,
+      "rosendahl-mobile.avif": 34484
+    }
+  },
+  "aspect": 0.4726,
+  "source_frame": [
+    300,
+    649
+  ],
+  "gif": {
+    "path": "assets/chekout/demos/rosendahl-mobile.gif",
+    "w": 544,
+    "h": 1148,
+    "fps": 10,
+    "duration": 12.4,
+    "frames": 22,
+    "encoder": "ffmpeg",
+    "bytes": 3231792
+  }
+}

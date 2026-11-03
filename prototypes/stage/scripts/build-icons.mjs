@@ -10,6 +10,13 @@ const WANT = {
   "simple-icons": ["typescript", "react", "nextdotjs", "nodedotjs", "python", "threedotjs", "claude", "langflow", "googlecloud", "postgresql", "googlebigquery", "notion", "n8n", "vercel", "playwright", "figma", "adobeaftereffects", "blender", "unity", "csharp"],
   lucide: ["bot", "component", "layers", "book-open", "gamepad-2", "image", "file-text", "external-link", "moon"],
 };
+// Plus every Iconify id the content names directly (about.json stack icons).
+const about = JSON.parse(fs.readFileSync(new URL("../src/data/about.json", import.meta.url), "utf8"));
+for (const g of about.stack || []) for (const it of g.items) {
+  const m = /^(simple-icons|lucide):([a-z0-9-]+)$/.exec(it.icon || "");
+  if (m && !WANT[m[1]].includes(m[2])) WANT[m[1]].push(m[2]);
+}
+WANT.lucide.push("database");
 const out = {};
 for (const [set, names] of Object.entries(WANT)) {
   const data = set === "lucide" ? lu : si;

@@ -1,0 +1,17 @@
+{
+  "name": "rosendahl-desktop",
+  "device": "laptop",
+  "base": "/Users/namit/Documents/personal/code/Juniper/design-plans/hm-audit/rebuild/round4/recordings",
+  "sheet": "rosendahl-desktop-sheet.png",
+  "frames": [
+    { "index": 0, "hold": 1.4, "label": "store + launcher" },
+    { "index": 1, "hold": 1.2, "label": "agent opens" },
+    { "index": 2, "hold": 1.4, "label": "typing the ask" },
+    { "index": 3, "hold": 1.2, "label": "thinking" },
+    { "index": 4, "hold": 2.4, "label": "answer + product page" },
+    { "index": 5, "hold": 1.2, "label": "typing the follow-up" },
+    { "index": 6, "hold": 1.2, "label": "thinking" },
+    { "index": 7, "hold": 2.6, "label": "answer: Kahler Hammershoi" }
+  ],
+  "poster": 7
+}

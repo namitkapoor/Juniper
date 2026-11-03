@@ -130,23 +130,11 @@ export function Stage({ layout, fillMap, expanded, onToggleReceipts, reduced, me
     if (onTile && e.pointerType !== "touch") onTile(null, "move", e);
   }, [rt, onTile]);
 
-  // One video at a time: the hovered one, else the heaviest on stage.
+  // No autoplay anywhere: a video plays only while hovered (never under
+  // reduced motion); otherwise on an explicit click / Enter (see Video).
   const [hoverVideo, setHoverVideo] = useState(null);
   const isVideo = (f) => f?.kind === "media" && (f.media === "video" || (f.media === "animation" && /\.(mp4|webm|mov)$/i.test(f.src)));
-  const activeVideo = useMemo(() => {
-    if (reduced) return null;
-    const live = new Set(layout?.cells.map((c) => c.fillId));
-    // An expanded media owns playback: its video plays, nothing else does.
-    const focused = layout?.cells.map((c) => fillMap.get(c.fillId)).find((f) => f?.focused);
-    if (focused) return isVideo(focused) ? focused.id : null;
-    if (hoverVideo && live.has(hoverVideo)) return hoverVideo;
-    let best = null;
-    for (const c of layout?.cells ?? []) {
-      const f = fillMap.get(c.fillId);
-      if (isVideo(f) && (!best || f.weight > best.weight)) best = f;
-    }
-    return best?.id ?? null;
-  }, [reduced, hoverVideo, layout, fillMap]);
+  const activeVideo = reduced ? null : hoverVideo;
 
   const insetOwners = useMemo(() => {
     const m = new Map();
@@ -247,7 +235,11 @@ function Highlight({ layout, fillMap, hot, openId }) {
 function swipe(onClose, onStep) {
   let x0 = null, y0 = null, top0 = 0;
   return {
-    onTouchStart: (e) => { x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; top0 = e.currentTarget.scrollTop; },
+    onTouchStart: (e) => {
+      // A zoomed image owns its gestures: no swipe-to-close or step swipes while zoomed.
+      if (e.target.closest?.(".zoom-box.zoomed")) { x0 = null; return; }
+      x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; top0 = e.currentTarget.scrollTop;
+    },
     onTouchEnd: (e) => {
       if (x0 == null) return;
       const dx = e.changedTouches[0].clientX - x0, dy = e.changedTouches[0].clientY - y0;

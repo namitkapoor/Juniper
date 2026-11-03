@@ -1,0 +1,43 @@
+{
+  "name": "generator-desktop",
+  "device": "laptop",
+  "frames": 4,
+  "holds": [
+    1.6,
+    1.4,
+    2.8,
+    2.0
+  ],
+  "fade": 0.25,
+  "mp4": {
+    "path": "assets/chekout/demos/generator-desktop.mp4",
+    "w": 1470,
+    "h": 892,
+    "fps": 30,
+    "duration": 7.8,
+    "bytes": 316388
+  },
+  "poster": {
+    "index": 2,
+    "files": {
+      "generator-desktop.png": 356073,
+      "generator-desktop.webp": 61958,
+      "generator-desktop.avif": 51505
+    }
+  },
+  "aspect": 1.648,
+  "source_frame": [
+    1440,
+    900
+  ],
+  "gif": {
+    "path": "assets/chekout/demos/generator-desktop.gif",
+    "w": 918,
+    "h": 558,
+    "fps": 10,
+    "duration": 7.8,
+    "frames": 10,
+    "encoder": "ffmpeg",
+    "bytes": 537717
+  }
+}

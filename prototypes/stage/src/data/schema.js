@@ -18,7 +18,9 @@
  *   repo?: string,        // for commits: "kyuri-dashboard", "Juniper", ...
  *   url?: string,         // public link when one exists (GitHub commit, live page)
  *   date?: string,        // ISO date
- *   label?: string        // short human label ("a572b5e · Seat the train on the rails")
+ *   label?: string,       // short human label ("a572b5e · Seat the train on the rails")
+ *   preview?: { src: string, poster?: string, aspect: number,   // a playable demo shown IN the Proof list:
+ *               frame: "phone" | "laptop" | "none" }        // gif/mp4 under public/, already framed or framed at render
  * }} Receipt
  *
  * @typedef {(
@@ -69,6 +71,8 @@
  * @typedef {{
  *   id: string,
  *   question: string,
+ *   aliases?: string[],    // earlier phrasings of `question` (typed or bookmarked) that must still
+ *                          // open this deck; unique across all decks' questions and aliases
  *   thesis: string,        // one sentence, the argument this deck makes
  *   caseStudy?: string,    // id of the case study a starter deck belongs to
  *   parent?: string,       // id of the deck this one drills down from (a "stage of the build" deck);
@@ -95,8 +99,10 @@
  *                                    caseStudy?: string,  // id in case-studies.json when one exists
  *                                    receipts?: Receipt[] }[],   // newest first
  *                        stack: { group: string,          // e.g. "Build", "AI", "Design", "Data"
- *                                 items: { name: string, icon?: string,   // path under public/assets/about/
- *                                          evidence?: string }[] }[],     // where I used it (one line)
+ *                                 items: { name: string, icon?: string,   // path under public/assets/about/,
+ *                                                                         // or an Iconify id ("simple-icons:fastapi")
+ *                                          evidence?: string,             // where I used it (one line)
+ *                                          jobs?: string[] }[] }[],       // e.g. ["ChekOut AI"]
  *                        portrait: { src: string, alt: string }           // the image the particle portrait samples
  *                      }
  */

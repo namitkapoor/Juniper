@@ -14,12 +14,13 @@ export function focusAnswer(answer, mediaId) {
     kpi = { receipts: [], ...m.kpi, kind: "kpi", id: `${m.id}~kpi`, value: String(m.kpi.value) };
   }
   const fills = [{ ...m, caption: undefined, weight: 1, focused: true }];
-  if (m.explain) fills.push({ kind: "prose", id: `${m.id}~explain`, weight: 0.36, heading: m.caption, text: m.explain, receipts: [] });
-  else if (m.caption) fills.push({ kind: "prose", id: `${m.id}~explain`, weight: 0.3, text: m.caption, receipts: [] });
-  if (kpi) fills.push({ ...kpi, weight: 0.32 });
+  // Caption/explain and the KPI are a narrow strip at body size; the rest compress hard.
+  if (m.explain) fills.push({ kind: "prose", id: `${m.id}~explain`, weight: 0.14, heading: m.caption, text: m.explain, receipts: [], small: true });
+  else if (m.caption) fills.push({ kind: "prose", id: `${m.id}~explain`, weight: 0.12, text: m.caption, receipts: [], small: true });
+  if (kpi) fills.push({ ...kpi, weight: 0.12 });
   for (const f of answer.fills) {
     if (f.id === m.id || f.id === kpi?.id) continue;
-    fills.push({ ...f, weight: Math.max(0.02, f.weight * 0.15), recede: true });
+    fills.push({ ...f, weight: Math.max(0.02, f.weight * 0.04), recede: true });
   }
   return { ...answer, id: `${answer.id}~${m.id}`, fills, focus: m.id, base: answer.id };
 }

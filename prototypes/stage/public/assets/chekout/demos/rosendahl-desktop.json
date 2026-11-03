@@ -1,0 +1,47 @@
+{
+  "name": "rosendahl-desktop",
+  "device": "laptop",
+  "frames": 8,
+  "holds": [
+    1.4,
+    1.2,
+    1.4,
+    1.2,
+    2.4,
+    1.2,
+    1.2,
+    2.6
+  ],
+  "fade": 0.25,
+  "mp4": {
+    "path": "assets/chekout/demos/rosendahl-desktop.mp4",
+    "w": 1470,
+    "h": 892,
+    "fps": 30,
+    "duration": 12.6,
+    "bytes": 833557
+  },
+  "poster": {
+    "index": 7,
+    "files": {
+      "rosendahl-desktop.png": 527243,
+      "rosendahl-desktop.webp": 61790,
+      "rosendahl-desktop.avif": 43746
+    }
+  },
+  "aspect": 1.648,
+  "source_frame": [
+    720,
+    450
+  ],
+  "gif": {
+    "path": "assets/chekout/demos/rosendahl-desktop.gif",
+    "w": 918,
+    "h": 558,
+    "fps": 10,
+    "duration": 12.6,
+    "frames": 22,
+    "encoder": "ffmpeg",
+    "bytes": 2917200
+  }
+}

@@ -75,7 +75,8 @@ export const fixtureAnswers = [
     question: "What was the impact? (fixture: kpi-heavy)",
     thesis: "Fixture: four numbers and one sentence of context. None of these numbers are real.",
     fills: [
-      { kind: "kpi", id: "fx-k1", weight: 0.9, value: "38", unit: "%", label: "Fixture conversion lift", baseline: "vs. fixture baseline", period: "Q3 (fake)", receipts: rc(3) },
+      { kind: "kpi", id: "fx-k1", weight: 0.9, value: "38", unit: "%", label: "Fixture conversion lift", baseline: "vs. fixture baseline", period: "Q3 (fake)",
+        receipts: [{ type: "asset", ref: "fixture-preview", label: "Fixture phone demo", date: "2026-10-01", preview: { src: "fixtures/phone-9x19.svg", poster: "fixtures/phone-9x19.svg", aspect: 9 / 19, frame: "phone" } }, ...rc(2)] },
       { kind: "kpi", id: "fx-k2", weight: 0.7, value: "3.2", unit: "×", label: "Fixture speed-up", period: "per session", receipts: rc(2) },
       { kind: "kpi", id: "fx-k3", weight: 0.55, value: "1,204", label: "Fixture sessions observed", receipts: rc(1) },
       { kind: "kpi", id: "fx-k4", weight: 0.45, value: "12", unit: "d", label: "Fixture time to ship", receipts: rc(1) },

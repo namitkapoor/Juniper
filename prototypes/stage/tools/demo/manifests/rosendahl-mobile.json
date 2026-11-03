@@ -1,0 +1,17 @@
+{
+  "name": "rosendahl-mobile",
+  "device": "phone",
+  "base": "/Users/namit/Documents/personal/code/Juniper/design-plans/hm-audit/rebuild/round4/recordings",
+  "sheet": "rosendahl-mobile-sheet.png",
+  "frames": [
+    { "index": 0, "hold": 1.4, "label": "store" },
+    { "index": 1, "hold": 1.6, "label": "chat open, typing the ask" },
+    { "index": 2, "hold": 1.2, "label": "product page, agent replying" },
+    { "index": 3, "hold": 2.2, "label": "first answer + product cards" },
+    { "index": 4, "hold": 1.2, "label": "typing the follow-up" },
+    { "index": 5, "hold": 1.2, "label": "thinking" },
+    { "index": 6, "hold": 1.0, "label": "page follows the agent" },
+    { "index": 7, "hold": 2.6, "label": "answer: Kahler Hammershoi" }
+  ],
+  "poster": 7
+}

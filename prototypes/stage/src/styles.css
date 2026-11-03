@@ -567,3 +567,56 @@ body:has(.app.phone) { overflow: hidden; }
 .cc-foot { display: block; margin-top: 4px; line-height: 16px; padding-left: 22px; overflow: hidden; }
 .cc-foot a, .cc-private { margin-left: 10px; }
 .nav-crumbs { min-width: 0; flex: 1 1 auto; } .logo-container { margin-right: 24px; }
+/* hooks share the CURRENTLY description colour */
+.t-tile { color: var(--ink-2); }
+/* status under CURRENTLY */
+.status-line { position: absolute; }
+.status-text { display: flex; align-items: center; gap: 8px; color: var(--ink-2); }
+.status-dot { width: 7px; height: 7px; border-radius: 50%; background: #7bd88f; box-shadow: 0 0 0 3px rgba(123,216,143,.15); flex: none; }
+.status-link { display: inline-block; margin-top: 8px; font-size: 13px; color: var(--ink-2); text-decoration: none; border-bottom: 1px solid var(--hair); }
+.status-link:hover { color: var(--ink); border-color: var(--hair-live); }
+/* off the clock lists */
+.oc-list { margin-bottom: 16px; }
+.oc-head { display: flex; align-items: center; gap: 8px; height: 28px; border-bottom: 1px solid var(--hair); color: var(--ink-2); }
+.oc-list ul { list-style: none; margin: 0; padding: 0; }
+.oc-list li { padding-top: 8px; }
+.oc-title { font-size: 13.5px; line-height: 18px; color: var(--ink); }
+.oc-title a { text-decoration: none; }
+.oc-by { font-size: 12px; line-height: 16px; color: var(--mute); }
+/* Kip: the whole face tile asks */
+.c-face.asks { cursor: pointer; }
+.c-face.asks::after { content: ""; position: absolute; inset: 0; border: 1px solid transparent; pointer-events: none; transition: border-color 90ms steps(2, end); }
+.c-face.asks:hover::after, .c-face.asks:focus-visible::after { border-color: var(--hair-live); }
+.c-face.asks:hover .ask-btn { border-color: var(--hair-live); color: var(--ink); }
+.c-face:focus-visible { outline: none; }
+/* receipt previews */
+.r-row.has-preview { display: block; }
+.r-line { display: flex; gap: 10px; align-items: flex-start; }
+.r-preview { display: block; margin: 8px auto 0; padding: 0; border: 1px solid var(--hair); background: #0d0d0d; cursor: zoom-in; overflow: hidden; }
+.r-preview.f-laptop { margin-left: 24px; }
+.r-preview img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.preview-big { position: fixed; inset: 0; z-index: 50; background: rgba(10,10,10,.92); display: flex; align-items: center; justify-content: center; cursor: zoom-out; }
+.preview-big img { max-width: 80vw; max-height: 86vh; }
+/* expanded image: zoom + pan */
+.zoom-box { position: absolute; inset: 0; overflow: hidden; cursor: zoom-in; touch-action: none; }
+.zoom-box.zoomed { cursor: grab; }
+.zoom-box.zoomed:active { cursor: grabbing; }
+.zoom-box img { width: 100%; height: 100%; object-fit: contain; display: block; will-change: transform; user-select: none; }
+.zoom-ctl { position: absolute; right: 12px; bottom: 12px; display: flex; align-items: center; border: 1px solid var(--hair-live); background: rgba(20,20,20,.88); }
+.zoom-ctl button { height: 26px; min-width: 28px; padding: 0 8px; background: none; border: 0; border-left: 1px solid var(--hair); color: var(--ink); cursor: pointer; font-size: 12px; }
+.zoom-ctl button:first-child { border-left: 0; }
+.zoom-pct { min-width: 46px; text-align: center; font-size: 11px; color: var(--ink-2); font-variant-numeric: tabular-nums; border-left: 1px solid var(--hair); line-height: 26px; }
+/* expanded media: toolbar above the image */
+.media-toolbar { position: absolute; left: 0; right: 0; top: 0; display: flex; align-items: center; gap: 8px; padding: 0 10px; border-bottom: 1px solid var(--hair); z-index: 3; background: var(--bg); }
+.media-toolbar .close-btn, .media-toolbar .step-nav { position: static; }
+.media-toolbar .zoom-slot { margin-left: auto; }
+.media-toolbar .zoom-ctl { position: static; }
+.zoom-box { cursor: zoom-in; }
+.zoom-box.zoomed { cursor: zoom-out; }
+.zoom-box.zoomed:active { cursor: grabbing; }
+/* videos: never autoplay; a small play glyph (tap / click / Enter) */
+.play-glyph { position: absolute; left: 10px; bottom: 10px; z-index: 2; width: 28px; height: 28px; border: 1px solid var(--hair-live); background: rgba(20,20,20,.8); color: var(--ink); font-size: 10px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+.play-glyph.is-playing { opacity: 0; }
+.media-box:hover .play-glyph.is-playing, .play-glyph:focus-visible { opacity: 1; }
+.r-preview { position: relative; }
+.play-glyph.static { pointer-events: none; }

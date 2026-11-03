@@ -1,9 +1,12 @@
 [
   {
     "id": "ck-merchant-outcomes",
-    "question": "What did the ChekOut agent change for merchants?",
-    "thesis": "On Kivakube the agent sells inside the conversation, and the dashboard shows the merchant the questions behind each sale.",
+    "question": "How did chat win 20% of Kivakube's carts?",
     "caseStudy": "chekout",
+    "aliases": [
+      "What did the ChekOut agent change for merchants?"
+    ],
+    "thesis": "On Kivakube the agent sells inside the conversation, and the dashboard shows the merchant the questions behind each sale.",
     "fills": [
       {
         "kind": "prose",
@@ -247,9 +250,12 @@
   },
   {
     "id": "ck-conversation",
-    "question": "How does the shopper conversation work?",
-    "thesis": "The agent answers first, and what retrieval finds decides the layout: words when nothing fits, one card for one match, a bundle when products go together.",
+    "question": "Why doesn't every answer show products?",
     "caseStudy": "chekout",
+    "aliases": [
+      "How does the shopper conversation work?"
+    ],
+    "thesis": "The agent answers first, and what retrieval finds decides the layout: words when nothing fits, one card for one match, a bundle when products go together.",
     "fills": [
       {
         "kind": "prose",
@@ -429,9 +435,12 @@
   },
   {
     "id": "ck-platform-build",
-    "question": "How is ChekOut built, and how do merchants set it up?",
-    "thesis": "A merchant types one brand color, previews the real widget, pastes one snippet and is live; I built the builder and the widget mostly with Claude Code.",
+    "question": "How do stores go live in minutes?",
     "caseStudy": "chekout",
+    "aliases": [
+      "How is ChekOut built, and how do merchants set it up?"
+    ],
+    "thesis": "A merchant types one brand color, previews the real widget, pastes one snippet and is live; I built the builder and the widget mostly with Claude Code.",
     "fills": [
       {
         "kind": "prose",
@@ -459,6 +468,18 @@
             "repo": "chekoutai-frontend",
             "date": "2026-04-28",
             "label": "2127ede · Update to OAuth firebase domain and Agent position ui changes"
+          },
+          {
+            "type": "asset",
+            "ref": "assets/chekout/demos/generator-desktop.gif",
+            "date": "2026-10-26",
+            "label": "My rebuild of ChekOut's sales demo: the same widget set on KivaKube's lime, Rosendahl's black and a mockup store's red",
+            "preview": {
+              "src": "assets/chekout/demos/generator-desktop.gif",
+              "poster": "assets/chekout/demos/generator-desktop.webp",
+              "aspect": 1.6452,
+              "frame": "laptop"
+            }
           }
         ],
         "evidence": [
@@ -518,7 +539,7 @@
         "kind": "prose",
         "id": "ck-system",
         "weight": 0.7,
-        "text": "HOW IT FITS: Merchants build agents in the Next.js app; shoppers chat through a script and an iframe the same app serves onto their store. Messages go to a Langflow agent per merchant, and onboarding, store sync and billing go to backend services that connect to Shopify.",
+        "text": "HOW IT FITS: The builder is a Next.js app on Cloud Run behind Firebase Hosting, and shoppers chat through a script and an iframe the same app serves. Each merchant's agent is a Langflow flow retrieving from pgvector embeddings; FastAPI services handle OAuth, product sync and analytics; conversation logs land in BigQuery.",
         "receipts": [
           {
             "type": "asset",
@@ -527,18 +548,30 @@
             "label": "FigJam: 1 · System context"
           },
           {
-            "type": "commit",
-            "ref": "91ebf39",
+            "type": "asset",
+            "ref": "firebase.json",
             "repo": "chekoutai-frontend",
-            "date": "2026-07-01",
-            "label": "91ebf39 · Mount embed via authoritative allowed_domains list from backend"
+            "label": "Firebase Hosting rewrites every request to the Cloud Run service nextjs"
           },
           {
-            "type": "commit",
-            "ref": "e553f4b",
-            "repo": "chekoutai-frontend",
-            "date": "2026-03-26",
-            "label": "e553f4b · Shopify OAuth: fix merchant_id flow, lowercase normalization, disconnect on delete, platform auto-select"
+            "type": "asset",
+            "ref": "app/models.py",
+            "repo": "shopify-sync",
+            "label": "pgvector embeddings",
+            "url": "https://github.com/adk-sentryskin/shopify-sync/blob/main/app/models.py"
+          },
+          {
+            "type": "asset",
+            "ref": "requirements.txt",
+            "repo": "shopify-sync",
+            "label": "fastapi",
+            "url": "https://github.com/adk-sentryskin/shopify-sync/blob/main/requirements.txt"
+          },
+          {
+            "type": "asset",
+            "ref": "namit-confirmation-2026-11-02",
+            "date": "2026-11-02",
+            "label": "Confirmed by Namit, Nov 2 2026"
           }
         ],
         "opens": "ck-d-stack"
@@ -722,9 +755,12 @@
   },
   {
     "id": "cv-results",
-    "question": "What did the enrollment agent change for the school?",
-    "thesis": "The agent more than doubled visitor conversion, brought in enrolled revenue, and gave each officer hours back every day.",
+    "question": "How did conversion jump from 10% to 23%?",
     "caseStudy": "christine-valmy",
+    "aliases": [
+      "What did the enrollment agent change for the school?"
+    ],
+    "thesis": "The agent more than doubled visitor conversion, brought in enrolled revenue, and gave each officer hours back every day.",
     "fills": [
       {
         "kind": "prose",
@@ -832,9 +868,9 @@
         "media": "image",
         "src": "assets/christine-valmy/architecture.svg",
         "aspect": 1.7778,
-        "alt": "Christine Valmy agent architecture: students chat on the school's site, the agent answers through RAG, and n8n hands sorted leads to officers",
+        "alt": "Christine Valmy agent architecture: students use the widget on the school's WordPress site; each message goes to an n8n chat webhook that reaches the agent's Cloud Function, finished chats go to an n8n transcript webhook that produces a lead for officers, and the inquiry form creates a lead in the school's Creatio CRM",
         "caption": "ARCHITECTURE: how the pieces connect.",
-        "explain": "A widget on the school's WordPress site, an agent that answers from the school's own content, and n8n carrying sorted leads to the officers. Open it for how it is built.",
+        "explain": "A widget on the school's WordPress site, n8n webhooks between it and the agent, and finished chats turned into leads for the officers. Open it for how it is built.",
         "receipts": [
           {
             "type": "asset",
@@ -852,6 +888,18 @@
             "ref": "figma:juckmsHrlBUBKcMkoJCiep#4:135",
             "date": "2026-11-01",
             "label": "FigJam: 4 · Sophia, enrollment agent"
+          },
+          {
+            "type": "asset",
+            "ref": "cv-chat-flat/christine-valmy-floating.js",
+            "repo": "chekout-ai (local)",
+            "label": "N8nService: chat and transcript webhooks, payloads, completion stages"
+          },
+          {
+            "type": "asset",
+            "ref": "cv-chat-flat/claude.md",
+            "repo": "chekout-ai (local)",
+            "label": "Plugin notes: endpoint connectors (n8n chat, n8n transcript, Creatio CRM), WordPress settings"
           }
         ],
         "opens": "cv-build",
@@ -861,9 +909,12 @@
   },
   {
     "id": "cv-testing",
-    "question": "How did user testing change the design?",
-    "thesis": "Testing showed students skipped my tile grid and went looking for Instagram, so I cut it and fixed one problem per session until the bilingual version shipped.",
+    "question": "Why did testing kill his favorite design?",
     "caseStudy": "christine-valmy",
+    "aliases": [
+      "How did user testing change the design?"
+    ],
+    "thesis": "Testing showed students skipped my tile grid and went looking for Instagram, so I cut it and fixed one problem per session until the bilingual version shipped.",
     "fills": [
       {
         "kind": "prose",
@@ -1077,9 +1128,12 @@
   },
   {
     "id": "cv-build",
-    "question": "How is the Christine Valmy agent built?",
-    "thesis": "I built it as a React widget inside the school's WordPress site, connected it to their systems through n8n on GCP, and audited it to WCAG AA before launch.",
+    "question": "How did he build it into WordPress?",
     "caseStudy": "christine-valmy",
+    "aliases": [
+      "How is the Christine Valmy agent built?"
+    ],
+    "thesis": "I built it as a React widget in a WordPress plugin that talks to the agent through n8n webhooks, and audited it to WCAG AA before launch.",
     "fills": [
       {
         "kind": "prose",
@@ -1106,9 +1160,9 @@
         "media": "image",
         "src": "assets/christine-valmy/architecture.svg",
         "aspect": 1.7778,
-        "alt": "Christine Valmy agent architecture: prospective students chat in English or Spanish on the school's site; the enrollment agent answers through RAG from the school's content, a schedule pipeline keeps classes current, and leads pass through n8n on GCP to enrollment officers in priority buckets",
+        "alt": "Christine Valmy agent architecture: students use the widget on the school's WordPress site; each message goes to an n8n chat webhook that reaches the agent's Cloud Function, finished chats go to an n8n transcript webhook that produces a lead for officers, and the inquiry form creates a lead in the school's Creatio CRM",
         "caption": "From a student's question to a sorted lead.",
-        "explain": "Follow one question: the student asks in the widget on the school's WordPress site, the agent answers from the school's own content, and the conversation becomes a lead that n8n hands to the officers already sorted. Solid boxes are mine; the agent function is a teammate's code. Drawn from the case study and the ChekOut architecture board.",
+        "explain": "Follow a student's message: the widget posts it to n8n, n8n reaches the agent (a teammate's Cloud Function; the persona and prompt are mine), and the reply comes back with the conversation stage. When the chat ends, the transcript goes to a second n8n webhook that turns it into a lead; the inquiry form goes straight to the school's Creatio CRM. Drawn from the plugin code and the ChekOut architecture board.",
         "receipts": [
           {
             "type": "asset",
@@ -1127,6 +1181,18 @@
             "ref": "figma:juckmsHrlBUBKcMkoJCiep#4:135",
             "date": "2026-11-01",
             "label": "FigJam: 4 · Sophia, enrollment agent"
+          },
+          {
+            "type": "asset",
+            "ref": "cv-chat-flat/christine-valmy-floating.js",
+            "repo": "chekout-ai (local)",
+            "label": "N8nService: chat and transcript webhooks, payloads, completion stages"
+          },
+          {
+            "type": "asset",
+            "ref": "cv-chat-flat/claude.md",
+            "repo": "chekout-ai (local)",
+            "label": "Plugin notes: endpoint connectors (n8n chat, n8n transcript, Creatio CRM), WordPress settings"
           }
         ]
       },
@@ -1134,7 +1200,7 @@
         "kind": "prose",
         "id": "cv-stack",
         "weight": 0.85,
-        "text": "HOW: The chat ships as a React widget in a WordPress plugin, with n8n on GCP bridging it to the school's systems. I tested the agent across the major models, launched it on Claude, and it now runs on Gemini.",
+        "text": "HOW: The chat ships as a React widget in a WordPress plugin. Every message goes to an n8n webhook in front of the agent, finished chats go to a second webhook that makes the lead, and the inquiry form writes to the school's Creatio CRM. I tested the agent across the major models, launched it on Claude, and it now runs on Gemini.",
         "receipts": [
           {
             "type": "asset",
@@ -1142,6 +1208,18 @@
             "repo": "Juniper",
             "date": "2026-10-26",
             "label": "Christine Valmy case study"
+          },
+          {
+            "type": "asset",
+            "ref": "cv-chat-flat/christine-valmy-floating.js",
+            "repo": "chekout-ai (local)",
+            "label": "N8nService: chat and transcript webhooks, payloads, completion stages"
+          },
+          {
+            "type": "asset",
+            "ref": "cv-chat-flat/claude.md",
+            "repo": "chekout-ai (local)",
+            "label": "Plugin notes: endpoint connectors (n8n chat, n8n transcript, Creatio CRM), WordPress settings"
           }
         ]
       },
@@ -1260,9 +1338,12 @@
   },
   {
     "id": "ky-live",
-    "question": "Does KYURI.OS actually run his job search?",
-    "thesis": "Yes: it has run my search since April 2026, and the public Job Hunt page shows the live totals with companies and people left out.",
+    "question": "Does KYURI.OS really run his job hunt?",
     "caseStudy": "kyuri-os",
+    "aliases": [
+      "Does KYURI.OS actually run his job search?"
+    ],
+    "thesis": "Yes: it has run my search since April 2026, and the public Job Hunt page shows the live totals with companies and people left out.",
     "fills": [
       {
         "kind": "prose",
@@ -1428,9 +1509,12 @@
   },
   {
     "id": "ky-guards",
-    "question": "How does it keep AI-written resumes honest?",
-    "thesis": "Code, not the model, decides what a resume may say: a fit gate, fixed facts, a QA gate and a leak guard sit between the model and the PDF.",
+    "question": "What stops an AI resume from lying?",
     "caseStudy": "kyuri-os",
+    "aliases": [
+      "How does it keep AI-written resumes honest?"
+    ],
+    "thesis": "Code, not the model, decides what a resume may say: a fit gate, fixed facts, a QA gate and a leak guard sit between the model and the PDF.",
     "fills": [
       {
         "kind": "prose",
@@ -1567,9 +1651,12 @@
   },
   {
     "id": "ky-build",
-    "question": "How is KYURI.OS built?",
-    "thesis": "A Next.js site on Vercel that stays up on its own, a laptop box that does the AI work through a tunnel, three job boards searched without the box, and a Figma design system the code is synced from.",
+    "question": "Why run his AI on a laptop?",
     "caseStudy": "kyuri-os",
+    "aliases": [
+      "How is KYURI.OS built?"
+    ],
+    "thesis": "A Next.js site on Vercel that stays up on its own, a laptop box that does the AI work through a tunnel, three job boards searched without the box, and a Figma design system the code is synced from.",
     "fills": [
       {
         "kind": "prose",
@@ -1876,7 +1963,10 @@
   },
   {
     "id": "other-agents",
-    "question": "Has he shipped AI agents?",
+    "question": "Which AI agents has he actually shipped?",
+    "aliases": [
+      "Has he shipped AI agents?"
+    ],
     "thesis": "Yes, three that are live: a shopping agent on merchants' stores, a bilingual enrollment agent for a beauty school, and the multi-agent pipeline that runs my own job search.",
     "fills": [
       {
@@ -2031,7 +2121,10 @@
   },
   {
     "id": "other-qa",
-    "question": "What QA work has he done?",
+    "question": "How do his tests protect real users?",
+    "aliases": [
+      "What QA work has he done?"
+    ],
     "thesis": "I write tests that protect real users and real data: Vitest and Playwright on ChekOut since December 2025, and a Kyuri suite that can't spend credits or delete what it didn't create.",
     "fills": [
       {
@@ -2192,7 +2285,10 @@
   },
   {
     "id": "other-research",
-    "question": "Has he run user research?",
+    "question": "Has his research ever changed a design?",
+    "aliases": [
+      "Has he run user research?"
+    ],
     "thesis": "Yes, and it changed the designs: task analysis reshaped how My Influency tracks influencers, and usability testing lifted the Manage Small Farms redesign.",
     "fills": [
       {
@@ -2336,7 +2432,10 @@
     "id": "ck-d-cart",
     "parent": "ck-merchant-outcomes",
     "caseStudy": "chekout",
-    "question": "How does the cart work inside the conversation?",
+    "question": "Where does the cart actually live?",
+    "aliases": [
+      "How does the cart work inside the conversation?"
+    ],
     "thesis": "Shoppers add to cart without leaving the chat, the store's own cart closes the sale, and tagged carts let the merchant see what the agent sold.",
     "fills": [
       {
@@ -2470,7 +2569,10 @@
     "id": "ck-d-dashboard",
     "parent": "ck-merchant-outcomes",
     "caseStudy": "chekout",
-    "question": "What does the merchant dashboard show?",
+    "question": "What can merchants see that Shopify can't?",
+    "aliases": [
+      "What does the merchant dashboard show?"
+    ],
     "thesis": "The dashboard answers a merchant's first question, what are shoppers asking, with the conversations themselves.",
     "fills": [
       {
@@ -2618,7 +2720,10 @@
     "id": "ck-d-motion",
     "parent": "ck-conversation",
     "caseStudy": "chekout",
-    "question": "What does the motion in the widget do?",
+    "question": "What is each animation telling shoppers?",
+    "aliases": [
+      "What does the motion in the widget do?"
+    ],
     "thesis": "Each animation tells the shopper what the agent is doing, and each leaves a static cue behind when it ends.",
     "fills": [
       {
@@ -2764,7 +2869,10 @@
     "id": "ck-d-builder",
     "parent": "ck-platform-build",
     "caseStudy": "chekout",
-    "question": "How does a merchant set the agent up?",
+    "question": "How many steps to launch an agent?",
+    "aliases": [
+      "How does a merchant set the agent up?"
+    ],
     "thesis": "Three steps in the builder, one brand color, a preview that is the real widget, and an embed that only mounts on the merchant's own domains.",
     "fills": [
       {
@@ -2841,6 +2949,18 @@
             "repo": "chekoutai-frontend",
             "date": "2026-08-10",
             "label": "a57a3e3 · Chat widget: measure the footer ink instead of hardcoding grey"
+          },
+          {
+            "type": "asset",
+            "ref": "assets/chekout/demos/generator-mobile.gif",
+            "date": "2026-10-26",
+            "label": "My rebuild of ChekOut's sales demo: paste a store, the widget takes its one brand color and flips its text dark or light (stores other than KivaKube and Rosendahl are mockups)",
+            "preview": {
+              "src": "assets/chekout/demos/generator-mobile.gif",
+              "poster": "assets/chekout/demos/generator-mobile.webp",
+              "aspect": 0.4658,
+              "frame": "phone"
+            }
           }
         ]
       },
@@ -2944,7 +3064,10 @@
     "id": "ck-d-stack",
     "parent": "ck-platform-build",
     "caseStudy": "chekout",
-    "question": "What is the ChekOut stack?",
+    "question": "What runs the agent behind the scenes?",
+    "aliases": [
+      "What is the ChekOut stack?"
+    ],
     "thesis": "One Next.js app on Cloud Run serves the builder and the widget, chat runs through a Langflow agent per merchant, and analytics come from BigQuery.",
     "fills": [
       {
@@ -2985,19 +3108,56 @@
             "date": "2026-11-01",
             "label": "FigJam: 1 · System context"
           }
-        ]
+        ],
+        "opens": "ck-d-knowledge"
+      },
+      {
+        "kind": "prose",
+        "id": "cks-knowledge",
+        "weight": 0.7,
+        "text": "KNOWLEDGE: Each store's catalog is synced, embedded with Vertex AI and stored in Postgres with pgvector; the merchant's Langflow agent retrieves from it at answer time, and conversation logs land in BigQuery.",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "app/models.py",
+            "repo": "shopify-sync",
+            "label": "Product.embedding = Vector(768)",
+            "url": "https://github.com/adk-sentryskin/shopify-sync/blob/main/app/models.py"
+          },
+          {
+            "type": "asset",
+            "ref": "namit-confirmation-2026-11-02",
+            "date": "2026-11-02",
+            "label": "Confirmed by Namit, Nov 2 2026"
+          },
+          {
+            "type": "asset",
+            "ref": "figma:juckmsHrlBUBKcMkoJCiep#2:39",
+            "date": "2026-11-01",
+            "label": "FigJam: 5 · Data & observability"
+          }
+        ],
+        "opens": "ck-d-knowledge",
+        "opensPrimary": true
       },
       {
         "kind": "prose",
         "id": "cks-ship",
         "weight": 0.65,
-        "text": "SHIPPING: The frontend builds as a Docker image on Cloud Build and runs on Cloud Run, with a canary service beside production that takes no live traffic.",
+        "text": "SHIPPING: The builder runs on Cloud Run behind Firebase Hosting, which rewrites every request to the Next.js service, with a canary service beside production that takes no live traffic. The backend services are FastAPI.",
         "receipts": [
           {
-            "type": "record",
-            "ref": "df2abd95",
-            "url": "https://kyuri.namit.me/",
-            "label": "Cloud Build to Cloud Run deployment path"
+            "type": "asset",
+            "ref": "firebase.json",
+            "repo": "chekoutai-frontend",
+            "label": "Firebase Hosting rewrites every request to the Cloud Run service nextjs"
+          },
+          {
+            "type": "commit",
+            "ref": "64d2ed6",
+            "repo": "chekoutai-frontend",
+            "date": "2025-11-24",
+            "label": "64d2ed6 · cloud run + firebase deployment"
           },
           {
             "type": "commit",
@@ -3005,8 +3165,23 @@
             "repo": "chekoutai-frontend",
             "date": "2026-07-08",
             "label": "313d08d · Add canary deploy (production infra, 0% traffic)"
+          },
+          {
+            "type": "asset",
+            "ref": "requirements.txt",
+            "repo": "shopify-sync",
+            "label": "fastapi",
+            "url": "https://github.com/adk-sentryskin/shopify-sync/blob/main/requirements.txt"
+          },
+          {
+            "type": "asset",
+            "ref": "namit-confirmation-2026-11-02",
+            "date": "2026-11-02",
+            "label": "Confirmed by Namit, Nov 2 2026"
           }
-        ]
+        ],
+        "opens": "ck-d-backend",
+        "opensPrimary": true
       },
       {
         "kind": "prose",
@@ -3074,7 +3249,10 @@
     "id": "cv-d-concept",
     "parent": "cv-testing",
     "caseStudy": "christine-valmy",
-    "question": "What was the first concept?",
+    "question": "What was the design he loved?",
+    "aliases": [
+      "What was the first concept?"
+    ],
     "thesis": "I wanted enrollment to feel like an app, and every piece of it was a guess about what students wanted.",
     "fills": [
       {
@@ -3164,7 +3342,10 @@
     "id": "cv-d-bilingual",
     "parent": "cv-testing",
     "caseStudy": "christine-valmy",
-    "question": "How did the agent become bilingual?",
+    "question": "Why does the agent speak Spanish?",
+    "aliases": [
+      "How did the agent become bilingual?"
+    ],
     "thesis": "Many applicants spoke Spanish first, so the agent and every label work in both languages, not just the replies.",
     "fills": [
       {
@@ -3306,8 +3487,11 @@
     "id": "cv-d-handoff",
     "parent": "cv-results",
     "caseStudy": "christine-valmy",
-    "question": "How do leads reach the enrollment officers?",
-    "thesis": "The agent sorts every lead into a priority bucket and flags the bad ones, and n8n carries them to the school's systems.",
+    "question": "Which students do officers call first?",
+    "aliases": [
+      "How do leads reach the enrollment officers?"
+    ],
+    "thesis": "Finished chats travel through an n8n webhook that turns them into leads, sorted into priority buckets with bad leads flagged; the inquiry form goes straight to the school's CRM.",
     "fills": [
       {
         "kind": "prose",
@@ -3331,9 +3515,9 @@
         "media": "image",
         "src": "assets/christine-valmy/architecture.svg",
         "aspect": 1.7778,
-        "alt": "Christine Valmy agent architecture from student question to sorted lead",
+        "alt": "Christine Valmy agent architecture: students use the widget on the school's WordPress site; each message goes to an n8n chat webhook that reaches the agent's Cloud Function, finished chats go to an n8n transcript webhook that produces a lead for officers, and the inquiry form creates a lead in the school's Creatio CRM",
         "caption": "From a question to a sorted lead.",
-        "explain": "Follow the bottom of the diagram: the conversation becomes a lead with contact details, n8n on GCP hands it to the school's systems, and officers see it already sorted. Drawn from the case study and the ChekOut architecture board.",
+        "explain": "Follow a student's message: the widget posts it to n8n, n8n reaches the agent (a teammate's Cloud Function; the persona and prompt are mine), and the reply comes back with the conversation stage. When the chat ends, the transcript goes to a second n8n webhook that turns it into a lead; the inquiry form goes straight to the school's Creatio CRM. Drawn from the plugin code and the ChekOut architecture board.",
         "receipts": [
           {
             "type": "asset",
@@ -3351,6 +3535,18 @@
             "ref": "figma:juckmsHrlBUBKcMkoJCiep#4:135",
             "date": "2026-11-01",
             "label": "FigJam: 4 · Sophia, enrollment agent"
+          },
+          {
+            "type": "asset",
+            "ref": "cv-chat-flat/christine-valmy-floating.js",
+            "repo": "chekout-ai (local)",
+            "label": "N8nService: chat and transcript webhooks, payloads, completion stages"
+          },
+          {
+            "type": "asset",
+            "ref": "cv-chat-flat/claude.md",
+            "repo": "chekout-ai (local)",
+            "label": "Plugin notes: endpoint connectors (n8n chat, n8n transcript, Creatio CRM), WordPress settings"
           }
         ]
       },
@@ -3388,16 +3584,29 @@
         "kind": "prose",
         "id": "cvh-n8n",
         "weight": 0.5,
-        "text": "THE BRIDGE: n8n on GCP connects the chat to the school's systems, so a lead doesn't wait for someone to copy it over.",
+        "text": "THE BRIDGE: The WordPress widget posts every message to an n8n webhook in front of the agent. When a chat ends, the full transcript goes to a second webhook that turns it into a lead, and the inquiry form writes to the school's Creatio CRM.",
         "receipts": [
           {
             "type": "asset",
-            "ref": "src/data/christineValmyData.js",
-            "repo": "Juniper",
-            "date": "2026-10-26",
-            "label": "Christine Valmy case study"
+            "ref": "cv-chat-flat/christine-valmy-floating.js",
+            "repo": "chekout-ai (local)",
+            "label": "N8nService: chat and transcript webhooks, payloads, completion stages"
+          },
+          {
+            "type": "asset",
+            "ref": "cv-chat-flat/claude.md",
+            "repo": "chekout-ai (local)",
+            "label": "Plugin notes: endpoint connectors (n8n chat, n8n transcript, Creatio CRM), WordPress settings"
+          },
+          {
+            "type": "asset",
+            "ref": "cv-chat-flat/christine-valmy-step1.php",
+            "repo": "chekout-ai (local)",
+            "label": "WordPress plugin: settings page and config passed to the widget"
           }
-        ]
+        ],
+        "opens": "cv-d-bridge",
+        "opensPrimary": true
       }
     ]
   },
@@ -3405,7 +3614,10 @@
     "id": "cv-d-a11y",
     "parent": "cv-build",
     "caseStudy": "christine-valmy",
-    "question": "What did the accessibility audit change?",
+    "question": "What did the accessibility audit fix?",
+    "aliases": [
+      "What did the accessibility audit change?"
+    ],
     "thesis": "Before launch I audited the widget against WCAG AA and rebuilt the controls a screen reader couldn't use.",
     "fills": [
       {
@@ -3480,7 +3692,10 @@
     "id": "ky-d-pipeline",
     "parent": "ky-live",
     "caseStudy": "kyuri-os",
-    "question": "How does the job pipeline work?",
+    "question": "How does he track every application?",
+    "aliases": [
+      "How does the job pipeline work?"
+    ],
     "thesis": "Every role is a Notion row; its status is a history I append to, and the current stage is derived from it.",
     "fills": [
       {
@@ -3596,7 +3811,10 @@
     "id": "ky-d-tailoring",
     "parent": "ky-guards",
     "caseStudy": "kyuri-os",
-    "question": "What happens between adding a role and getting a resume?",
+    "question": "How does a posting become a resume?",
+    "aliases": [
+      "What happens between adding a role and getting a resume?"
+    ],
     "thesis": "Code routes the base resume, a tool-less agent tailors it, a lint checks facts against the base, QA gets two tries, and a leak guard scans the PDF.",
     "fills": [
       {
@@ -3732,7 +3950,10 @@
     "id": "ky-d-boards",
     "parent": "ky-build",
     "caseStudy": "kyuri-os",
-    "question": "Which job boards does it search?",
+    "question": "Why doesn't he search LinkedIn?",
+    "aliases": [
+      "Which job boards does it search?"
+    ],
     "thesis": "FIND ROLES searches speedrun startups, the a16z portfolio and Designer Fund straight from Vercel; LinkedIn is deliberately not a source.",
     "fills": [
       {
@@ -3825,7 +4046,10 @@
     "id": "ky-d-box",
     "parent": "ky-build",
     "caseStudy": "kyuri-os",
-    "question": "How does the laptop box fit in?",
+    "question": "What happens when his laptop sleeps?",
+    "aliases": [
+      "How does the laptop box fit in?"
+    ],
     "thesis": "The AI work runs on my laptop behind a tunnel, and the site degrades gracefully when the laptop sleeps.",
     "fills": [
       {
@@ -3963,7 +4187,10 @@
     "id": "ky-d-design",
     "parent": "ky-build",
     "caseStudy": "kyuri-os",
-    "question": "How does the KYURI.OS design system work?",
+    "question": "How does Figma stay synced with code?",
+    "aliases": [
+      "How does the KYURI.OS design system work?"
+    ],
     "thesis": "Figma is the source of truth for tokens and components, and a sync skill builds each design change in the file that renders it.",
     "fills": [
       {
@@ -4078,7 +4305,10 @@
     "id": "ck-d-live",
     "parent": "ck-conversation",
     "caseStudy": "chekout",
-    "question": "What does a real conversation look like on a live store?",
+    "question": "What does a live conversation look like?",
+    "aliases": [
+      "What does a real conversation look like on a live store?"
+    ],
     "thesis": "Recorded on a merchant's live store, the agent answers in words, shows the products that back the answer, and opens product detail beside the thread.",
     "fills": [
       {
@@ -4102,6 +4332,18 @@
             "repo": "Juniper",
             "date": "2026-10-26",
             "label": "ChekOut AI case study"
+          },
+          {
+            "type": "asset",
+            "ref": "assets/chekout/demos/rosendahl-desktop.gif",
+            "date": "2026-10-26",
+            "label": "Rosendahl on desktop, recorded on the live store: the agent opens product detail beside the thread",
+            "preview": {
+              "src": "assets/chekout/demos/rosendahl-desktop.gif",
+              "poster": "assets/chekout/demos/rosendahl-desktop.webp",
+              "aspect": 1.6452,
+              "frame": "laptop"
+            }
           }
         ],
         "poster": "assets/chekout/live-rosendahl.jpg"
@@ -4127,6 +4369,18 @@
             "repo": "Juniper",
             "date": "2026-10-26",
             "label": "Live recordings on KivaKube and Rosendahl only, approved; never click add to cart"
+          },
+          {
+            "type": "asset",
+            "ref": "assets/chekout/demos/rosendahl-mobile.gif",
+            "date": "2026-10-27",
+            "label": "Rosendahl on a phone, recorded on the live store: ask, product cards, follow-up, answer",
+            "preview": {
+              "src": "assets/chekout/demos/rosendahl-mobile.gif",
+              "poster": "assets/chekout/demos/rosendahl-mobile.webp",
+              "aspect": 0.4739,
+              "frame": "phone"
+            }
           }
         ],
         "poster": "assets/chekout/live-rosendahl-mobile.jpg"
@@ -4167,7 +4421,10 @@
     "id": "ck-d-live-stores",
     "parent": "ck-merchant-outcomes",
     "caseStudy": "chekout",
-    "question": "Which stores is the agent live on?",
+    "question": "Which stores is it live on?",
+    "aliases": [
+      "Which stores is the agent live on?"
+    ],
     "thesis": "Four of the live stores can be checked from the outside: each homepage loads the ChekOut embed with its own agent id.",
     "fills": [
       {
@@ -4251,6 +4508,18 @@
             "url": "https://www.rosendahl.com/",
             "date": "2026-11-02",
             "label": "Homepage loads chekout.ai/chatbot.js with data-agent-id=\"rosendahl-design-group\", checked 2026-11-02"
+          },
+          {
+            "type": "asset",
+            "ref": "assets/chekout/demos/rosendahl-mobile.gif",
+            "date": "2026-10-27",
+            "label": "The agent answering on rosendahl.com, recorded on a phone",
+            "preview": {
+              "src": "assets/chekout/demos/rosendahl-mobile.gif",
+              "poster": "assets/chekout/demos/rosendahl-mobile.webp",
+              "aspect": 0.4739,
+              "frame": "phone"
+            }
           }
         ]
       },
@@ -4283,7 +4552,10 @@
     "id": "ck-d-design",
     "parent": "ck-platform-build",
     "caseStudy": "chekout",
-    "question": "What is in the ChekOut design system?",
+    "question": "What's in his ChekOut design system?",
+    "aliases": [
+      "What is in the ChekOut design system?"
+    ],
     "thesis": "I documented the shipped widget and builder in Figma from the code, so every token and component points at the file it ships from.",
     "fills": [
       {
@@ -4367,7 +4639,10 @@
     "id": "ky-d-live",
     "parent": "ky-live",
     "caseStudy": "kyuri-os",
-    "question": "Where do the live totals come from?",
+    "question": "Where do the live numbers come from?",
+    "aliases": [
+      "Where do the live totals come from?"
+    ],
     "thesis": "The public Job Hunt page counts the same rows I work from, with companies, roles and people cleared before anything is counted.",
     "fills": [
       {
@@ -4455,7 +4730,10 @@
     "id": "ky-d-tokens",
     "parent": "ky-d-design",
     "caseStudy": "kyuri-os",
-    "question": "What do the KYURI.OS tokens look like in both modes?",
+    "question": "How do dark and light modes work?",
+    "aliases": [
+      "What do the KYURI.OS tokens look like in both modes?"
+    ],
     "thesis": "Dark and light are two modes of one Figma variable collection, read from the same CSS file the site ships.",
     "fills": [
       {
@@ -4547,7 +4825,10 @@
     "id": "ky-d-funnel",
     "parent": "ky-live",
     "caseStudy": "kyuri-os",
-    "question": "How do my applications actually move?",
+    "question": "How many applications reach an interview?",
+    "aliases": [
+      "How do my applications actually move?"
+    ],
     "thesis": "The behaviour panel reads every row for the habit and the funnel: how often I apply, my biggest day, and how many reached a phone screen.",
     "fills": [
       {
@@ -4673,7 +4954,10 @@
     "id": "ky-d-resumes",
     "parent": "ky-live",
     "caseStudy": "kyuri-os",
-    "question": "How are the resumes made and counted?",
+    "question": "How many resumes has it made?",
+    "aliases": [
+      "How are the resumes made and counted?"
+    ],
     "thesis": "Every resume comes out of the same guarded pipeline and lands in Drive; the count is taken by hand from Drive and dated.",
     "fills": [
       {
@@ -4792,7 +5076,10 @@
   },
   {
     "id": "other-site",
-    "question": "How was this site built?",
+    "question": "Why does this page rearrange itself?",
+    "aliases": [
+      "How was this site built?"
+    ],
     "thesis": "Content is built offline with receipts and validated against one schema; the stage only lays it out, cutting a 12 x 12 grid for each answer.",
     "fills": [
       {
@@ -4905,6 +5192,531 @@
             "ref": "figma:ihrhBKvJkXqj7emP5ht3cL#7:2",
             "date": "2026-11-01",
             "label": "Design system: foundations"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ck-d-knowledge",
+    "parent": "ck-d-stack",
+    "caseStudy": "chekout",
+    "question": "How does the agent learn each catalog?",
+    "aliases": [
+      "How does the agent learn a store's catalog?"
+    ],
+    "thesis": "Product sync turns each store's catalog into embeddings in Postgres with pgvector, and the merchant's agent retrieves from them when a shopper asks.",
+    "fills": [
+      {
+        "kind": "prose",
+        "id": "ckk-problem",
+        "weight": 1,
+        "text": "THE PROBLEM: The agent can only answer from what it knows about a store, and a product that loses its embedding becomes invisible to semantic search while the sync still reports clean.",
+        "receipts": [
+          {
+            "type": "commit",
+            "ref": "f62a338",
+            "repo": "shopline-sync",
+            "date": "2026-08-06",
+            "label": "f62a338 · Retry transient embedding failures; count the ones that still fail"
+          },
+          {
+            "type": "asset",
+            "ref": "namit-confirmation-2026-11-02",
+            "date": "2026-11-02",
+            "label": "Confirmed by Namit, Nov 2 2026"
+          }
+        ]
+      },
+      {
+        "kind": "media",
+        "id": "ckk-diagram",
+        "weight": 0.95,
+        "media": "image",
+        "src": "assets/chekout/knowledge.svg",
+        "aspect": 1.7778,
+        "alt": "How a catalog becomes the agent's knowledge: OAuth install, product sync in FastAPI, Vertex AI embeddings, Postgres with pgvector, a Langflow agent per merchant retrieving at answer time, and conversation logs into BigQuery for the analytics API",
+        "caption": "From a merchant's catalog to an answer.",
+        "explain": "Follow the top row: install, sync, embed. Product sync sends each product's text to Vertex AI and stores the vector beside the product in Postgres. The middle row is answer time: the merchant's agent retrieves products from those vectors. Solid boxes are mine. Drawn from the sync and backend repos and the ChekOut architecture board.",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "assets/chekout/knowledge.svg"
+          },
+          {
+            "type": "asset",
+            "ref": "app/services/embedding_service.py",
+            "repo": "shopify-sync",
+            "label": "Vertex AI embedding service",
+            "url": "https://github.com/adk-sentryskin/shopify-sync/blob/main/app/services/embedding_service.py"
+          },
+          {
+            "type": "asset",
+            "ref": "figma:juckmsHrlBUBKcMkoJCiep#3:39",
+            "date": "2026-11-01",
+            "label": "FigJam: 1 · System context"
+          },
+          {
+            "type": "asset",
+            "ref": "namit-confirmation-2026-11-02",
+            "date": "2026-11-02",
+            "label": "Confirmed by Namit, Nov 2 2026"
+          }
+        ]
+      },
+      {
+        "kind": "prose",
+        "id": "ckk-how",
+        "weight": 0.75,
+        "text": "HOW: Product sync builds one text per product, with its variant options and HTML entities cleaned, embeds it with Vertex AI's text-embedding-004, and stores the vector with the product in Postgres through pgvector. Each merchant's agent is a Langflow flow that retrieves from those vectors when a shopper asks.",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "app/models.py",
+            "repo": "shopify-sync",
+            "label": "Product.embedding = Vector(768)",
+            "url": "https://github.com/adk-sentryskin/shopify-sync/blob/main/app/models.py"
+          },
+          {
+            "type": "commit",
+            "ref": "859a164",
+            "repo": "shopify-sync",
+            "date": "2026-05-05",
+            "label": "859a164 · Normalize merchant IDs server-side, improve embedding quality",
+            "url": "https://github.com/adk-sentryskin/shopify-sync/commit/859a1648c658b253eab630ed725b72c473206069"
+          },
+          {
+            "type": "asset",
+            "ref": "namit-confirmation-2026-11-02",
+            "date": "2026-11-02",
+            "label": "Confirmed by Namit, Nov 2 2026"
+          },
+          {
+            "type": "asset",
+            "ref": "figma:juckmsHrlBUBKcMkoJCiep#3:39",
+            "date": "2026-11-01",
+            "label": "Langflow agents per merchant via /run"
+          }
+        ]
+      },
+      {
+        "kind": "kpi",
+        "id": "ckk-dims",
+        "weight": 0.6,
+        "value": "768",
+        "label": "dimensions in each product embedding, Vertex AI text-embedding-004",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "app/models.py",
+            "repo": "shopify-sync",
+            "label": "embedding = Column(Vector(768)) # 768-dim embedding from Vertex AI text-embedding-004",
+            "url": "https://github.com/adk-sentryskin/shopify-sync/blob/main/app/models.py"
+          }
+        ]
+      },
+      {
+        "kind": "prose",
+        "id": "ckk-safe",
+        "weight": 0.55,
+        "text": "NEVER SILENTLY BLIND: Transient Vertex failures are retried with backoff and products left without a vector are counted, and a batched write never overwrites a stored embedding with nothing.",
+        "receipts": [
+          {
+            "type": "commit",
+            "ref": "f62a338",
+            "repo": "shopline-sync",
+            "date": "2026-08-06",
+            "label": "f62a338 · Retry transient embedding failures; count the ones that still fail"
+          },
+          {
+            "type": "commit",
+            "ref": "2e7c541",
+            "repo": "shopify-sync",
+            "date": "2026-08-26",
+            "label": "2e7c541 · Page-batch product sync writes and guard against payload-driven data loss",
+            "url": "https://github.com/adk-sentryskin/shopify-sync/commit/2e7c541e5b243018001c4ba62735b59f0aa8921f"
+          }
+        ]
+      },
+      {
+        "kind": "media",
+        "id": "ckk-logs",
+        "weight": 0.5,
+        "media": "image",
+        "src": "assets/chekout/data-flow.webp",
+        "aspect": 2.7119,
+        "alt": "ChekOut data and observability: chat agent functions log to Cloud Logging and stream rows into BigQuery, which feeds merchant analytics and reporting",
+        "caption": "Conversations land in BigQuery.",
+        "explain": "Every agent turn is logged and streamed into BigQuery; merchant analytics query it on demand. I wrote the analytics endpoints on top; the logging functions are a teammate's.",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "assets/chekout/data-flow.webp"
+          },
+          {
+            "type": "asset",
+            "ref": "figma:juckmsHrlBUBKcMkoJCiep#2:39",
+            "date": "2026-11-01",
+            "label": "FigJam: 5 · Data & observability"
+          },
+          {
+            "type": "commit",
+            "ref": "14cc82b",
+            "repo": "chekout-backend",
+            "date": "2026-07-20",
+            "label": "14cc82b · Analytics: engaged_sessions, first_real_message, richer keywords/intent"
+          }
+        ]
+      },
+      {
+        "kind": "commits",
+        "id": "ckk-commits",
+        "weight": 0.45,
+        "repo": "shopify-sync",
+        "items": [
+          {
+            "sha": "859a164",
+            "date": "2026-05-05",
+            "msg": "Normalize merchant IDs server-side, improve embedding quality",
+            "url": "https://github.com/adk-sentryskin/shopify-sync/commit/859a1648c658b253eab630ed725b72c473206069"
+          },
+          {
+            "sha": "2e7c541",
+            "date": "2026-08-26",
+            "msg": "Page-batch product sync writes and guard against payload-driven data loss",
+            "url": "https://github.com/adk-sentryskin/shopify-sync/commit/2e7c541e5b243018001c4ba62735b59f0aa8921f"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ck-d-backend",
+    "parent": "ck-d-stack",
+    "caseStudy": "chekout",
+    "question": "How did 1,250 database trips become three?",
+    "aliases": [
+      "What did I build in the ChekOut backend?"
+    ],
+    "thesis": "The store connection end to end: OAuth installs for Shopify and Shopline, a product sync that writes a page at a time, resilient Admin API calls, and FastAPI endpoints behind a builder hosted on Firebase.",
+    "fills": [
+      {
+        "kind": "prose",
+        "id": "ckbe-problem",
+        "weight": 1,
+        "text": "THE PROBLEM: Product sync wrote one product at a time, several database round trips each, and a partial payload from Shopify could blank out the fields the agent reads.",
+        "receipts": [
+          {
+            "type": "commit",
+            "ref": "2e7c541",
+            "repo": "shopify-sync",
+            "date": "2026-08-26",
+            "label": "2e7c541 · Page-batch product sync writes and guard against payload-driven data loss",
+            "url": "https://github.com/adk-sentryskin/shopify-sync/commit/2e7c541e5b243018001c4ba62735b59f0aa8921f"
+          }
+        ]
+      },
+      {
+        "kind": "kpi",
+        "id": "ckbe-trips",
+        "weight": 0.85,
+        "value": "~1,250",
+        "label": "database round trips a full 250-product page used to take; now one batched upsert, committed once",
+        "receipts": [
+          {
+            "type": "commit",
+            "ref": "2e7c541",
+            "repo": "shopify-sync",
+            "date": "2026-08-26",
+            "label": "2e7c541 · Page-batch product sync writes and guard against payload-driven data loss",
+            "url": "https://github.com/adk-sentryskin/shopify-sync/commit/2e7c541e5b243018001c4ba62735b59f0aa8921f"
+          }
+        ]
+      },
+      {
+        "kind": "prose",
+        "id": "ckbe-oauth",
+        "weight": 0.75,
+        "text": "OAUTH: The Shopify install checks a signed state against CSRF, normalizes merchant IDs on the server, runs as an embedded app, and reads each merchant's real scope grant, so order reading stays off until a merchant grants it. On Shopline I built the callback back into the builder.",
+        "receipts": [
+          {
+            "type": "commit",
+            "ref": "f325a58",
+            "repo": "shopify-sync",
+            "date": "2026-03-26",
+            "label": "f325a58 · Shopify OAuth: signed state CSRF fix, lowercase merchant_id normalization, embedded=true, extension api_version",
+            "url": "https://github.com/adk-sentryskin/shopify-sync/commit/f325a580a6f53950b0347ebad6d6a13d5efed62e"
+          },
+          {
+            "type": "commit",
+            "ref": "8e718d9",
+            "repo": "shopify-sync",
+            "date": "2026-05-28",
+            "label": "8e718d9 · Add 6 benign Shopify read scopes; harden custom-app scope handling",
+            "url": "https://github.com/adk-sentryskin/shopify-sync/commit/8e718d97e4ac9f9d9b37ff736d1d2943119fe8c8"
+          },
+          {
+            "type": "commit",
+            "ref": "f62229c",
+            "repo": "shopline-sync",
+            "date": "2026-06-15",
+            "label": "f62229c · Redirect OAuth callback back to the chekoutai builder",
+            "url": "https://github.com/adk-sentryskin/shopline-sync/commit/f62229c1b80dac35837ddf5eebeac9a5b7da10e4"
+          },
+          {
+            "type": "asset",
+            "ref": "namit-confirmation-2026-11-02",
+            "date": "2026-11-02",
+            "label": "Confirmed by Namit, Nov 2 2026"
+          }
+        ]
+      },
+      {
+        "kind": "prose",
+        "id": "ckbe-retry",
+        "weight": 0.6,
+        "text": "RESILIENCE: Every Shopify Admin API call got an explicit timeout and a bounded backoff that only replays requests that can't be applied twice.",
+        "receipts": [
+          {
+            "type": "commit",
+            "ref": "9927b62",
+            "repo": "shopify-sync",
+            "date": "2026-08-06",
+            "label": "9927b62 · Add timeouts and bounded retry to Shopify Admin API calls",
+            "url": "https://github.com/adk-sentryskin/shopify-sync/commit/9927b6266f71f54d0c5259607bbc584baf7816aa"
+          }
+        ]
+      },
+      {
+        "kind": "prose",
+        "id": "ckbe-host",
+        "weight": 0.6,
+        "text": "SERVICES AND HOSTING: The sync services and the analytics endpoints are FastAPI. The builder is a Next.js app on Cloud Run behind Firebase Hosting, which rewrites every request to it.",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "requirements.txt",
+            "repo": "shopify-sync",
+            "label": "fastapi",
+            "url": "https://github.com/adk-sentryskin/shopify-sync/blob/main/requirements.txt"
+          },
+          {
+            "type": "asset",
+            "ref": "requirements.txt",
+            "repo": "chekout-backend",
+            "label": "fastapi, google-cloud-bigquery"
+          },
+          {
+            "type": "asset",
+            "ref": "firebase.json",
+            "repo": "chekoutai-frontend",
+            "label": "Firebase Hosting rewrites every request to the Cloud Run service nextjs"
+          },
+          {
+            "type": "commit",
+            "ref": "64d2ed6",
+            "repo": "chekoutai-frontend",
+            "date": "2025-11-24",
+            "label": "64d2ed6 · cloud run + firebase deployment"
+          },
+          {
+            "type": "asset",
+            "ref": "namit-confirmation-2026-11-02",
+            "date": "2026-11-02",
+            "label": "Confirmed by Namit, Nov 2 2026"
+          }
+        ]
+      },
+      {
+        "kind": "prose",
+        "id": "ckbe-orders",
+        "weight": 0.5,
+        "text": "ORDERS: Agent-attributed orders persist in Postgres with a PII-free field allowlist, kept on a rolling 60-day window and deleted when a merchant uninstalls.",
+        "receipts": [
+          {
+            "type": "commit",
+            "ref": "b3fccad",
+            "repo": "shopify-sync",
+            "date": "2026-05-28",
+            "label": "b3fccad · Add Postgres persistence for agent-attributed orders",
+            "url": "https://github.com/adk-sentryskin/shopify-sync/commit/b3fccad1d165142c50c39b2e66b68115155a7fd7"
+          }
+        ]
+      },
+      {
+        "kind": "commits",
+        "id": "ckbe-commits",
+        "weight": 0.5,
+        "repo": "shopify-sync",
+        "items": [
+          {
+            "sha": "f325a58",
+            "date": "2026-03-26",
+            "msg": "Shopify OAuth: signed state CSRF fix, lowercase merchant_id normalization, embedded=true, extension api_version",
+            "url": "https://github.com/adk-sentryskin/shopify-sync/commit/f325a580a6f53950b0347ebad6d6a13d5efed62e"
+          },
+          {
+            "sha": "8e718d9",
+            "date": "2026-05-28",
+            "msg": "Add 6 benign Shopify read scopes; harden custom-app scope handling",
+            "url": "https://github.com/adk-sentryskin/shopify-sync/commit/8e718d97e4ac9f9d9b37ff736d1d2943119fe8c8"
+          },
+          {
+            "sha": "b3fccad",
+            "date": "2026-05-28",
+            "msg": "Add Postgres persistence for agent-attributed orders",
+            "url": "https://github.com/adk-sentryskin/shopify-sync/commit/b3fccad1d165142c50c39b2e66b68115155a7fd7"
+          },
+          {
+            "sha": "7bd249c",
+            "date": "2026-06-10",
+            "msg": "Provision order access on read_orders grant",
+            "url": "https://github.com/adk-sentryskin/shopify-sync/commit/7bd249c7c4a591639872cbc00675fe1fc55c8fef"
+          },
+          {
+            "sha": "9927b62",
+            "date": "2026-08-06",
+            "msg": "Add timeouts and bounded retry to Shopify Admin API calls",
+            "url": "https://github.com/adk-sentryskin/shopify-sync/commit/9927b6266f71f54d0c5259607bbc584baf7816aa"
+          },
+          {
+            "sha": "2e7c541",
+            "date": "2026-08-26",
+            "msg": "Page-batch product sync writes and guard against payload-driven data loss",
+            "url": "https://github.com/adk-sentryskin/shopify-sync/commit/2e7c541e5b243018001c4ba62735b59f0aa8921f"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "cv-d-bridge",
+    "parent": "cv-d-handoff",
+    "caseStudy": "christine-valmy",
+    "question": "What exactly happens between the chat and the officers?",
+    "thesis": "Three calls leave the widget: one per message, one when the chat ends, one when the form is sent; the end-of-chat call is what becomes a lead.",
+    "fills": [
+      {
+        "kind": "prose",
+        "id": "cvbr-problem",
+        "weight": 1,
+        "text": "THE PROBLEM: Students close the tab mid-chat, especially on phones, and a conversation that ends that way still has to reach the officers once, not twice.",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "cv-chat-flat/christine-valmy-floating.js",
+            "repo": "chekout-ai (local)",
+            "label": "N8nService: chat and transcript webhooks, payloads, completion stages"
+          }
+        ]
+      },
+      {
+        "kind": "media",
+        "id": "cvbr-graph",
+        "weight": 0.9,
+        "media": "image",
+        "src": "assets/christine-valmy/bridge.svg",
+        "aspect": 2.1053,
+        "alt": "The three calls that leave the widget: each message to the n8n chat webhook, the transcript to the n8n transcript webhook when a chat ends, and the inquiry form to the Creatio CRM webhook",
+        "caption": "Three calls, in the order a student triggers them.",
+        "explain": "Read top to bottom. Every message carries the conversation so far; the reply carries the stage. Reaching enrollment collection, completion or post enrollment, or closing the widget or the tab, sends the transcript once. n8n answers whether a lead was made, and the widget stops sending after that. Drawn from the plugin code.",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "assets/christine-valmy/bridge.svg"
+          },
+          {
+            "type": "asset",
+            "ref": "cv-chat-flat/christine-valmy-floating.js",
+            "repo": "chekout-ai (local)",
+            "label": "N8nService: chat and transcript webhooks, payloads, completion stages"
+          },
+          {
+            "type": "asset",
+            "ref": "cv-chat-flat/claude.md",
+            "repo": "chekout-ai (local)",
+            "label": "Plugin notes: endpoint connectors (n8n chat, n8n transcript, Creatio CRM), WordPress settings"
+          }
+        ]
+      },
+      {
+        "kind": "prose",
+        "id": "cvbr-msg",
+        "weight": 0.7,
+        "text": "1 · EACH MESSAGE: The widget posts the question, user and thread ids, the history and a reCAPTCHA v3 token to the n8n chat webhook. The reply carries the answer, the conversation stage, the enrollment state and whether the chat is complete.",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "cv-chat-flat/christine-valmy-floating.js",
+            "repo": "chekout-ai (local)",
+            "label": "N8nService: chat and transcript webhooks, payloads, completion stages"
+          },
+          {
+            "type": "asset",
+            "ref": "cv-chat-flat/claude.md",
+            "repo": "chekout-ai (local)",
+            "label": "Plugin notes: endpoint connectors (n8n chat, n8n transcript, Creatio CRM), WordPress settings"
+          }
+        ]
+      },
+      {
+        "kind": "prose",
+        "id": "cvbr-end",
+        "weight": 0.65,
+        "text": "2 · WHEN IT ENDS: A completing stage, closing the widget or hiding the tab sends the full transcript, the reason, the message count and the page to the transcript webhook, once per reason and by sendBeacon when the tab is closing. If n8n reports a lead was made, nothing more is sent.",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "cv-chat-flat/christine-valmy-floating.js",
+            "repo": "chekout-ai (local)",
+            "label": "N8nService: chat and transcript webhooks, payloads, completion stages"
+          }
+        ]
+      },
+      {
+        "kind": "prose",
+        "id": "cvbr-form",
+        "weight": 0.55,
+        "text": "3 · THE FORM: The inquiry form creates the lead in the school's Creatio CRM through its webhook. The CRM and transcript webhook addresses are set in the plugin's WordPress settings.",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "cv-chat-flat/claude.md",
+            "repo": "chekout-ai (local)",
+            "label": "Plugin notes: endpoint connectors (n8n chat, n8n transcript, Creatio CRM), WordPress settings"
+          },
+          {
+            "type": "asset",
+            "ref": "cv-chat-flat/christine-valmy-step1.php",
+            "repo": "chekout-ai (local)",
+            "label": "WordPress plugin: settings page and config passed to the widget"
+          }
+        ]
+      },
+      {
+        "kind": "prose",
+        "id": "cvbr-who",
+        "weight": 0.45,
+        "text": "WHO BUILT WHAT: The widget, the plugin, the persona and the prompt are mine; the agent's Cloud Function is a teammate's. The priority buckets and bad-lead flags run inside the n8n workflow, which isn't exported in my sources, so its nodes aren't shown.",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "figma:juckmsHrlBUBKcMkoJCiep#4:135",
+            "date": "2026-11-01",
+            "label": "FigJam: 4 · Sophia, enrollment agent (agent function marked a teammate's)"
+          },
+          {
+            "type": "asset",
+            "ref": "src/data/christineValmyData.js",
+            "repo": "Juniper",
+            "date": "2026-10-26",
+            "label": "Christine Valmy case study"
+          },
+          {
+            "type": "asset",
+            "ref": "cv-chat-flat/claude.md",
+            "repo": "chekout-ai (local)",
+            "label": "Plugin notes: endpoint connectors (n8n chat, n8n transcript, Creatio CRM), WordPress settings"
           }
         ]
       }

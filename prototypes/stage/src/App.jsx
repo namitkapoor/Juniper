@@ -124,9 +124,9 @@ export default function App() {
     if (!answer) return answer;
     if (focus) return focusAnswer(dedupeOpens(answer), focus);
     if (expanded.length && !onHomeStage) return recedeAnswer(dedupeOpens(answer), expanded[0]);
-    if (onHomeStage) return homeWithTiles(answer, content.caseStudies);
+    if (onHomeStage) return homeWithTiles(answer, content.caseStudies, { chatOpen: chatOpen && !phone });
     return dedupeOpens(answer);
-  }, [answer, focus, onHomeStage, content, expanded]);
+  }, [answer, focus, onHomeStage, content, expanded, chatOpen, phone]);
   const previews = useMemo(() => (content ? heroPreviews(content.home, content.caseStudies) : {}), [content]);
 
   // Layouts are cached by input, and the home tile variants are precomputed
@@ -392,7 +392,8 @@ export default function App() {
       if (a) {
         turned.current.add(a.id);
         go(a);
-        setMessages((m) => [...m, { role: "bot", text: a.thesis, how }]);
+        // The tag is the case study; the match kind/score is debug-only (data-match).
+        setMessages((m) => [...m, { role: "bot", text: a.thesis, how: a.caseStudy ? caseName(a.caseStudy) : "other work", match: how }]);
       }
     } finally {
       setBusy(false);
@@ -545,7 +546,7 @@ export default function App() {
         </div>
         {!chatOpen && !phone && !isHome && (
           <button type="button" className="ask-btn gutter label" onClick={() => setChatOpen(true)}>
-            <Face size={36} busy={morphing} reduced={reduced} /> Ask the site <span aria-hidden>→</span>
+            <Face size={36} busy={morphing} reduced={reduced} /> Ask Kip <span aria-hidden>→</span>
           </button>
         )}
       </main>

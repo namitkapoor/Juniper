@@ -9,14 +9,15 @@ import { Icon } from "./icons.jsx";
 import { Face } from "../chat/Face.jsx";
 import { StackIcon } from "../about/StackIcon.jsx";
 import { Glyph } from "../about/Glyph.jsx";
+import { ZoomImage } from "./ZoomImage.jsx";
 import { assetUrl, INVERT_LOGOS } from "../content.js";
-import { receiptsListH, kpiValueSize, tileNumLabelH, kickerH, kickerW, receiptRowH, commitCardParts, commitTitle, commitMetaText, receiptText, breakdownRowHs, splitPeriod, BD_COLS, stepText, STEP_CHIP_W, worklogMeta, worklogLink, fmtDate } from "../engine/fit.js";
+import { receiptsOf, receiptsListH, kpiValueSize, tileNumLabelH, kickerH, kickerW, receiptRowH, previewBox, commitCardParts, commitTitle, commitMetaText, receiptText, breakdownRowHs, splitPeriod, BD_COLS, stepText, STEP_CHIP_W, worklogMeta, worklogLink, fmtDate, OFFCLOCK_GROUPS, STATUS_H } from "../engine/fit.js";
 import {
-  PAD, proseSteps, PROSE_FONT, QUOTE_STEPS, QUOTE_FONT, QUOTE_WHO_H, TITLE_FONT, titleLineHeight, titleFontFor, titleLHFor,
+  PAD, proseSteps, stepsFor, PROSE_FONT, QUOTE_STEPS, QUOTE_FONT, QUOTE_WHO_H, TITLE_FONT, titleLineHeight, titleFontFor, titleLHFor,
   KICKER_H, RECEIPTS, COMMITS, MEDIA, DRILL_H, WORDS, HEADING, headingH, LOGOS, BREAKDOWN, TILE, TILE_FONT, tileRoleH, TIMELINE, WORKLOG, STACK, OFFCLOCK,
 } from "../engine/typo.js";
 
-const receiptsOf = (fill) => (fill.kind === "commits" ? [] : fill.receipts || []);
+// The Proof rule lives in one place (engine/fit.js hasRealProof).
 
 export function CellContent({ onDrill, onCaseLink, onStep, cell, fill, insetFill, attachFill, onTile, hot, preview, reduced, onAskOpen, faceBusy, expanded, onToggle, pad, measure, activeVideo, onOpenCase, onExpand, onCollapse, focused }) {
   const P = pad;
@@ -122,7 +123,7 @@ function HeroPreview({ fillId, P, preview, reduced }) {
             />
             <div className="hp-media" style={{ left: P, top: P + 30, right: P, bottom: P }}>
               {isVideo
-                ? <Video src={assetUrl(f.src)} poster={assetUrl(f.poster)} alt={f.alt} active={on && !reduced} />
+                ? <Video src={assetUrl(f.src)} poster={assetUrl(f.poster)} alt={f.alt} active={false} />
                 : <img src={assetUrl(f.src)} alt={on ? f.alt : ""} draggable={false} />}
             </div>
           </div>
@@ -148,7 +149,7 @@ function ProseCell({ fill, cell, P, listH, tag, insetFill, measure }) {
       )}
       <p className="sr-only">{fill.kicker ? `${fill.kicker}: ` : ""}{fill.text}</p>
       <FlowText
-        flowKey={`${fill.id}:p`} fillId={fill.id} text={fill.text} steps={proseSteps(fill.text)} mkFont={PROSE_FONT}
+        flowKey={`${fill.id}:p`} fillId={fill.id} text={fill.text} steps={stepsFor(fill)} mkFont={PROSE_FONT}
         startStep={cell.spec?.step ?? 0}
         box={(w, h) => (cell.spec?.side && listH
           ? { x: P, y: P + kick, w: cell.spec.side.textW, h: h - 2 * P - kick - (fill.opens ? DRILL_H : 0) }
@@ -161,6 +162,12 @@ function ProseCell({ fill, cell, P, listH, tag, insetFill, measure }) {
         }}
         className="t-prose"
       />
+      {fill.status && (
+        <div className="status-line" style={{ left: P, right: P, top: P + kick + (cell.spec?.need ?? 0) + 16 }}>
+          <div className="label status-text"><i className="status-dot" aria-hidden /> {fill.status.text}</div>
+          {fill.status.link && <a className="status-link" href={fill.status.link.url} target="_blank" rel="noreferrer">{fill.status.link.label} →</a>}
+        </div>
+      )}
       {inset && insetFill && (
         <div className="inset" style={{ right: P, top: inset.y, width: inset.w, height: inset.h }}>
           <KpiBody fill={insetFill} w={inset.w} h={inset.h} P={14} measure={measure} />
@@ -287,7 +294,7 @@ function LogoRow({ items, logoH, label }) {
 function LogosCell({ fill, cell, P, listH }) {
   const label = fill.label || (fill.receipts?.length ? " " : "");
   return (
-    <div className="c-logos" style={{ padding: P, paddingBottom: P + listH }}>
+    <div className="c-logos" style={{ padding: P, paddingBottom: P + listH + (fill.opens ? DRILL_H : 0) }}>
       <LogoRow items={fill.items} logoH={cell.spec?.logoH ?? 28} label={label} />
     </div>
   );
@@ -383,7 +390,7 @@ function StackCell({ fill, cell, P }) {
             >
               <button type="button" className="st-skill" aria-pressed={sel?.skill === it.name}
                 onClick={() => setSel((s) => (s?.skill === it.name ? null : { skill: it.name }))}>
-                <StackIcon name={it.name} size={STACK.iconW} />
+                <StackIcon name={it.name} icon={it.icon} size={STACK.iconW} />
                 <span>{it.name}</span>
               </button>
               <div className="st-where">
@@ -405,33 +412,46 @@ function StackCell({ fill, cell, P }) {
   );
 }
 
-/* Off the clock: slots for line-art figures (made later by the Motion Designer). */
+/* Off the clock: compact lists (READING, PLAYING; WATCHING once it has data). */
 function OffClockCell({ fill, cell, P }) {
   const L = cell.spec ?? {};
+  const rowH = new Map(fill.items.map((it, i) => [it, L.rowHs?.[i]]));
   return (
     <div className="c-offclock" style={{ padding: P }}>
       <div className="label" style={{ height: OFFCLOCK.headH }}>{fill.label}</div>
       {fill.intro && <p className="oc-intro" style={{ minHeight: (L.introH ?? 0) - 14 }}>{fill.intro}</p>}
-      <ul className="oc-slots" style={{ gridTemplateColumns: `repeat(${L.cols ?? 2}, minmax(0, 1fr))`, gap: OFFCLOCK.gap }}>
-        {fill.items.map((it, i) => <li key={i} style={{ height: OFFCLOCK.slotH }}><OffClockSlot {...it} /></li>)}
-      </ul>
+      {OFFCLOCK_GROUPS.map(([kind, label, icon]) => {
+        const items = fill.items.filter((it) => it.kind === kind);
+        if (!items.length) return null;
+        return (
+          <section key={kind} className="oc-list">
+            <div className="label oc-head"><Glyph name={icon} size={14} /> {label}</div>
+            <ul>
+              {items.map((it, i) => (
+                <li key={i} style={{ minHeight: rowH.get(it) }}>
+                  <OffClockSlot {...it} />
+                </li>
+              ))}
+            </ul>
+          </section>
+        );
+      })}
     </div>
   );
 }
 
 /**
- * One off-the-clock slot: { kind: "book" | "game", title, by, figure? }.
- * `figure` is a self-contained animated SVG/HTML piece (Hairline style); until
- * it exists the slot shows a hairline placeholder of its kind.
+ * One off-the-clock entry: { kind, title, by, note?, url?, figure? }. A
+ * line-art figure (made later by the Motion Designer) can sit beside it.
  */
-export function OffClockSlot({ kind, title, by, figure }) {
+export function OffClockSlot({ title, by, note, url, figure }) {
+  const sub = [by, note].filter(Boolean).join(" · ");
   return (
-    <figure className={`oc-slot k-${kind}`}>
-      <div className="oc-figure">
-        {figure ? <object data={assetUrl(figure)} type={figure.endsWith(".svg") ? "image/svg+xml" : "text/html"} aria-label={title} /> : <HairlinePlaceholder kind={kind} />}
-      </div>
-      <figcaption><span className="oc-title">{title}</span>{by && <span className="oc-by">{by}</span>}</figcaption>
-    </figure>
+    <div className="oc-item">
+      {figure && <object className="oc-fig" data={assetUrl(figure)} type={figure.endsWith(".svg") ? "image/svg+xml" : "text/html"} aria-hidden />}
+      <div className="oc-title">{url ? <a href={url} target="_blank" rel="noreferrer">{title}</a> : title}</div>
+      {sub && <div className="oc-by">{sub}</div>}
+    </div>
   );
 }
 function HairlinePlaceholder({ kind }) {
@@ -460,18 +480,23 @@ function PortraitCell({ fill, cell, reduced }) {
 
 /* ----------------------------------------------------------------- face */
 
-/** The site's character, large, with Ask the site under it (while the chat is closed). */
+/** The site's character, large, with Ask Kip under it (while the chat is closed). */
 function FaceCell({ cell, P, onAskOpen, reduced, busy }) {
   const btnH = onAskOpen ? 52 : 0;
   const size = Math.max(80, Math.min(cell.w - 2 * P, cell.h - 2 * P - btnH));
+  // The whole tile opens the chat (keyboard too); the button is its label.
+  const act = onAskOpen ? {
+    role: "button", tabIndex: 0, "aria-label": "Ask Kip", onClick: onAskOpen,
+    onKeyDown: (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onAskOpen(); } },
+  } : {};
   return (
-    <div className="c-face">
+    <div className={`c-face ${onAskOpen ? "asks" : ""}`} {...act}>
       <div className="face-slot" style={{ left: P, right: P, top: P, bottom: P + btnH }}>
         <Face size={size} reduced={reduced} busy={busy} />
       </div>
       {onAskOpen && (
-        <button type="button" className="ask-btn in-cell label" onClick={onAskOpen} style={{ bottom: P - 4 }}>
-          Ask the site <span aria-hidden>→</span>
+        <button type="button" tabIndex={-1} className="ask-btn in-cell label" onClick={(e) => { e.stopPropagation(); onAskOpen(); }} style={{ bottom: P - 4 }}>
+          Ask Kip <span aria-hidden>→</span>
         </button>
       )}
     </div>
@@ -551,6 +576,7 @@ function MediaCell({ fill, cell, listH, active, onOpenCase, onExpand, onCollapse
   const pct = (v, of) => `${(100 * v) / of}%`;
   const W = cell.w, H = cell.h;
   const closeRef = useRef(null);
+  const [zoomSlot, setZoomSlot] = useState(null);
   // Focus moves into the expanded cell (its close button) and back on close (App).
   useEffect(() => { if (focused) closeRef.current?.focus({ preventScroll: true }); }, [focused]);
   const act = opens ? () => onOpenCase(fill.caseStudy) : drills ? () => onDrill(fill.opens) : expands ? () => onExpand(fill.id) : null;
@@ -569,7 +595,7 @@ function MediaCell({ fill, cell, listH, active, onOpenCase, onExpand, onCollapse
         {isVideo ? (
           <Video src={src} poster={assetUrl(fill.poster)} alt={fill.alt} active={active} controls={focused} />
         ) : (
-          <img src={src} alt={fill.alt} draggable={false} />
+          focused ? <ZoomImage src={src} alt={fill.alt} slot={zoomSlot} /> : <img src={src} alt={fill.alt} draggable={false} />
         )}
       </div>
       {(opens || expands) && <span className="open-tag" style={{ left: box.x + 12, top: box.y + 12 }} aria-hidden>{opens ? "Open →" : "Expand ↗"}</span>}
@@ -578,12 +604,19 @@ function MediaCell({ fill, cell, listH, active, onOpenCase, onExpand, onCollapse
           onClick={(e) => { e.stopPropagation(); onExpand(fill.id); }}>↗</button>
       )}
       {focused && (
-        <button
-          ref={closeRef} type="button" className="close-btn" style={{ left: box.x + 12, top: box.y + 12 }}
-          aria-label="Close the expanded view" onClick={(e) => { e.stopPropagation(); onCollapse(); }}
-        >
-          <span aria-hidden>×</span> Close
-        </button>
+        // The toolbar sits above the image, never on it: close, step nav, zoom.
+        <div className="media-toolbar" style={{ height: spec.toolbar?.h ?? 36 }} onClick={(e) => e.stopPropagation()}>
+          <button ref={closeRef} type="button" className="close-btn" aria-label="Close the expanded view" onClick={(e) => { e.stopPropagation(); onCollapse(); }}>
+            <span aria-hidden>×</span> Close
+          </button>
+          {fill.step && onStep && (
+            <div className="step-nav">
+              <button type="button" aria-label="Previous step" onClick={(e) => { e.stopPropagation(); onStep(-1); }} disabled={fill.step.n <= 1}>←</button>
+              <button type="button" aria-label="Next step" onClick={(e) => { e.stopPropagation(); onStep(1); }} disabled={fill.step.n >= fill.step.of}>→</button>
+            </div>
+          )}
+          <div className="zoom-slot" ref={setZoomSlot} />
+        </div>
       )}
       {fill.step && spec.step && (
         <div className="step-mark" style={{ left: pct(spec.step.x, W), top: pct(spec.step.y, H), width: pct(spec.step.w, W) }}>
@@ -596,12 +629,7 @@ function MediaCell({ fill, cell, listH, active, onOpenCase, onExpand, onCollapse
           )}
         </div>
       )}
-      {focused && fill.step && onStep && (
-        <div className="step-nav" style={{ left: box.x + 108, top: box.y + 12 }}>
-          <button type="button" aria-label="Previous step" onClick={(e) => { e.stopPropagation(); onStep(-1); }} disabled={fill.step.n <= 1}>←</button>
-          <button type="button" aria-label="Next step" onClick={(e) => { e.stopPropagation(); onStep(1); }} disabled={fill.step.n >= fill.step.of}>→</button>
-        </div>
-      )}
+
       {fill.caption && cap && (
         <figcaption className="caption" style={{ left: pct(cap.x, W), top: pct(cap.y, H), width: pct(cap.w, W) }}>
           <span className="cap-t" style={{ WebkitLineClamp: Math.max(1, cap.lines) }}>{fill.caption}</span>
@@ -618,14 +646,27 @@ function MediaCell({ fill, cell, listH, active, onOpenCase, onExpand, onCollapse
  */
 function Video({ src, poster, alt, active, controls }) {
   const v = useRef(null);
+  const [manual, setManual] = useState(false); // played by an explicit click / Enter / tap
+  const [playing, setPlaying] = useState(false);
   useEffect(() => {
     const el = v.current;
     if (!el) return;
-    if (active) el.play().catch(() => {});
-    else if (!el.paused || el.currentTime > 0) { el.pause(); el.currentTime = 0; el.load(); }
-  }, [active]);
-  // Muted by default; the expanded view shows controls, so sound is only ever an explicit click.
-  return <video ref={v} src={src} poster={poster} muted loop playsInline preload="metadata" controls={controls} aria-label={alt} />;
+    // Hover plays; leaving pauses and keeps the position. A manual play stays until toggled.
+    if (active || manual) el.play().catch(() => {}); else el.pause();
+  }, [active, manual]);
+  const toggle = (e) => { e?.stopPropagation(); setManual((m) => (m ? (v.current?.pause(), false) : true)); };
+  return (
+    <>
+      <video ref={v} src={src} poster={poster} muted loop playsInline preload="metadata" controls={controls} aria-label={alt}
+        onPlay={() => setPlaying(true)} onPause={() => setPlaying(false)} />
+      {!controls && (
+        <button type="button" className={`play-glyph ${playing ? "is-playing" : ""}`} aria-label={playing ? `Pause: ${alt}` : `Play: ${alt}`} onClick={toggle}
+          onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(e); } }}>
+          <span aria-hidden>{playing ? "❚❚" : "▶"}</span>
+        </button>
+      )}
+    </>
+  );
 }
 
 /* -------------------------------------------------------------- commits */
@@ -711,6 +752,32 @@ function CommitCard({ r, measure, innerW }) {
 /** Top of a text cell's flow box (kicker + heading), so the proof list can sit right under the text. */
 const textTop = (fill, cell, P, measure) => kickerH(measure, fill.kicker, kickerW(fill, Math.round(cell.w) - 2 * P)) + (fill.heading ? headingH(measure, fill.heading, Math.round(cell.w) - 2 * P) : 0);
 
+/** A playable preview on a receipt (device-framed GIF). Click opens it large. */
+function ReceiptPreview({ p, innerW, alt }) {
+  const box = previewBox(p, innerW);
+  const [hover, setHover] = useState(false);
+  const [big, setBig] = useState(false);
+  const reduced = typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  // Poster until hovered; the animated GIF only while the pointer is on it.
+  const src = assetUrl(hover && !reduced ? p.src : p.poster || p.src);
+  return (
+    <>
+      <button type="button" className={`r-preview f-${p.frame || "none"}`} style={{ width: box.w, height: box.h }}
+        onPointerEnter={(e) => e.pointerType !== "touch" && setHover(true)} onPointerLeave={() => setHover(false)}
+        onClick={() => setBig(true)} aria-label={`Play: ${alt}`}>
+        <img src={src} alt="" draggable={false} />
+        {!hover && <span className="play-glyph static" aria-hidden>▶</span>}
+      </button>
+      {big && (
+        <div className="preview-big" role="dialog" aria-label={alt} onClick={() => setBig(false)} onKeyDown={(e) => e.key === "Escape" && setBig(false)} tabIndex={-1}>
+          <img src={assetUrl(p.src)} alt={alt} style={{ aspectRatio: p.aspect }} />
+          <button type="button" className="close-btn" style={{ position: "fixed", top: 20, right: 20 }} onClick={() => setBig(false)}><span aria-hidden>×</span> Close</button>
+        </div>
+      )}
+    </>
+  );
+}
+
 function ReceiptsList({ fill, P, h, measure, innerW, highlight, place }) {
   const list = receiptsOf(fill);
   return (
@@ -722,10 +789,13 @@ function ReceiptsList({ fill, P, h, measure, innerW, highlight, place }) {
           if (r.type === "commit") return <CommitCard key={`${r.ref}-${i}`} r={r} measure={measure} innerW={innerW} />;
           const text = receiptText(r);
           return (
-            <li key={`${r.ref}-${i}`} className={`r-row ${highlight && (r.item || r.ref) === highlight ? "hi" : ""}`} style={{ height: receiptRowH(measure, r, innerW) }}>
-              <Icon type={r.type} size={14} />
-              <span className="r-what">{r.url ? <a href={r.url} target="_blank" rel="noreferrer">{text}</a> : text}</span>
-              {r.date && <span className="r-date">{r.date.slice(0, 10)}</span>}
+            <li key={`${r.ref}-${i}`} className={`r-row ${r.preview ? "has-preview" : ""} ${highlight && (r.item || r.ref) === highlight ? "hi" : ""}`} style={{ height: receiptRowH(measure, r, innerW) }}>
+              <div className="r-line">
+                <Icon type={r.type} size={14} />
+                <span className="r-what">{r.url ? <a href={r.url} target="_blank" rel="noreferrer">{text}</a> : text}</span>
+                {r.date && <span className="r-date">{r.date.slice(0, 10)}</span>}
+              </div>
+              {r.preview && <ReceiptPreview p={r.preview} innerW={innerW} alt={text} />}
             </li>
           );
         })}

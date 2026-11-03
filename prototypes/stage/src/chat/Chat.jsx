@@ -30,7 +30,7 @@ export function Chat({ open, messages, chips, onAsk, onChip, busy, onClose, phon
   };
 
   return (
-    <aside className={`chat ${open ? "open" : ""} ${messages.length === 0 ? "empty" : ""} ${reduced ? "instant" : ""} ${phone && sheet ? "sheet-open" : ""}`} aria-label="Ask the site" aria-hidden={!open && !phone}>
+    <aside className={`chat ${open ? "open" : ""} ${messages.length === 0 ? "empty" : ""} ${reduced ? "instant" : ""} ${phone && sheet ? "sheet-open" : ""}`} aria-label="Ask Kip" aria-hidden={!open && !phone}>
       {phone && (
         <button
           type="button" className="sheet-handle" aria-expanded={sheet} aria-label={sheet ? "Collapse the conversation" : "Expand the conversation"}
@@ -40,7 +40,7 @@ export function Chat({ open, messages, chips, onAsk, onChip, busy, onClose, phon
         >
           <span className="grip" aria-hidden />
           <Face size={30} busy={busyFace} reduced={reduced} />
-          <span className="label">Ask the site</span>
+          <span className="label">Ask Kip</span>
         </button>
       )}
       {/* One face: big and centered while the conversation is empty, then it
@@ -48,7 +48,7 @@ export function Chat({ open, messages, chips, onAsk, onChip, busy, onClose, phon
           not a swap). */}
       {!phone && <div className="chat-face"><Face size="100%" busy={busyFace} reduced={reduced} /></div>}
       <header className="chat-head">
-        <span className="chat-title"><span className="face-spot" aria-hidden /><span className="label">Ask the site</span></span>
+        <span className="chat-title"><span className="face-spot" aria-hidden /><span className="label">Ask Kip</span></span>
         {!phone && <button type="button" className="label link" onClick={onClose}>close</button>}
       </header>
       <ol className="chat-list" ref={list} aria-live="polite">
@@ -67,10 +67,10 @@ export function Chat({ open, messages, chips, onAsk, onChip, busy, onClose, phon
           <li key={i} className="turn-open">
             {ex.q && <div className="msg user"><div className="msg-text">{ex.q}</div></div>}
             {ex.a && (
-              <div className="msg bot">
+              <div className="msg bot" data-match={ex.a.match || undefined}>
                 <Face size={22} busy={busyFace} reduced={reduced} className="msg-face" />
                 <div className="msg-text">{ex.a.text}</div>
-                {ex.a.how && <div className="label msg-how">{ex.a.how}</div>}
+                <div className="label msg-how">Kip{ex.a.how ? ` · ${ex.a.how}` : ""}</div>
               </div>
             )}
           </li>

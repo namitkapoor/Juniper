@@ -1,0 +1,43 @@
+{
+  "name": "generator-mobile",
+  "device": "phone",
+  "frames": 4,
+  "holds": [
+    1.6,
+    1.4,
+    2.6,
+    2.0
+  ],
+  "fade": 0.25,
+  "mp4": {
+    "path": "assets/chekout/demos/generator-mobile.mp4",
+    "w": 724,
+    "h": 1558,
+    "fps": 30,
+    "duration": 7.6,
+    "bytes": 424327
+  },
+  "poster": {
+    "index": 2,
+    "files": {
+      "generator-mobile.png": 400356,
+      "generator-mobile.webp": 55712,
+      "generator-mobile.avif": 40996
+    }
+  },
+  "aspect": 0.4647,
+  "source_frame": [
+    390,
+    860
+  ],
+  "gif": {
+    "path": "assets/chekout/demos/generator-mobile.gif",
+    "w": 544,
+    "h": 1168,
+    "fps": 10,
+    "duration": 7.6,
+    "frames": 10,
+    "encoder": "ffmpeg",
+    "bytes": 852394
+  }
+}
