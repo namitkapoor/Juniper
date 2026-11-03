@@ -359,7 +359,7 @@
         "media": "image",
         "src": "assets/chekout/top-metrics.webp",
         "aspect": 2.0103,
-        "alt": "126 total visitors, 86% engagement rate",
+        "alt": "Rosendahl's dashboard on launch day: 126 total visitors, 86% engagement rate, 1 attributed order, $106.19 total revenue from Shopify",
         "receipts": [
           {
             "type": "asset",
@@ -368,8 +368,8 @@
             "label": "ChekOut AI case study"
           }
         ],
-        "caption": "One live store's top line: visitors and engagement.",
-        "explain": "The top of the merchant dashboard on a live store. Engagement counts only visitors who sent the agent a real message."
+        "caption": "Rosendahl on launch day: visitors, engagement, and the first order and revenue the agent drove.",
+        "explain": "This is the top of the merchant dashboard for Rosendahl on the day the agent launched, with revenue pulled from the store's own Shopify orders. The order and revenue tiles count only what shoppers bought after the agent helped, so a sale on day one is the agent paying for itself in the merchant's own numbers."
       },
       {
         "kind": "media",
