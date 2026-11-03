@@ -173,6 +173,10 @@ export default function App() {
 
   /** Show an answer; push a history entry unless we are replaying one. */
   const go = useCallback((a, { push = true } = {}) => {
+    // One home. Anything carrying home.json's own fills (a stale history entry,
+    // an old "no match" answer, a future answerer that copies home) IS home, so
+    // it always goes through the home builder instead of rendering raw.
+    if (content && a && a.id !== content.home.id && a.fills?.some((f) => f.id === "home-title" || f.id === "home-three")) a = content.home;
     answers.current.set(a.id, a);
     setFocus(null);
     setExpanded([]);
