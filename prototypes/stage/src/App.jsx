@@ -14,6 +14,7 @@ import { Navbar } from "./nav/Navbar.jsx";
 import { aboutAnswer, aboutFromJson } from "./about/aboutAnswer.js";
 import { caseName } from "./caseName.js";
 import { heroHome, caseKpis, aboutFacts } from "./prelude/heroState.js";
+import { initialTheme, saveTheme } from "./sharedTheme.js";
 
 const FRAME = 20; // outer gutter around the hairline frame
 const RAIL = 24; // left gutter: the depth rail (24px targets)
@@ -449,14 +450,12 @@ export default function App() {
   // "?" opens the shortcut sheet (not while typing).
   const [shortcuts, setShortcuts] = useState(false);
   // Theme: the OS preference by default; a choice made with the toggle is remembered.
-  const [theme, setTheme] = useState(() => {
-    try { const t = localStorage.getItem("stage-theme"); if (t === "light" || t === "dark") return t; } catch { /* private mode */ }
-    return window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
-  });
+  // Shared with studio.namit.me through a .namit.me cookie (src/sharedTheme.js).
+  const [theme, setTheme] = useState(() => initialTheme("stage-theme"));
   useLayoutEffect(() => { document.documentElement.dataset.theme = theme; }, [theme]);
   const toggleTheme = useCallback(() => setTheme((t) => {
     const n = t === "light" ? "dark" : "light";
-    try { localStorage.setItem("stage-theme", n); } catch { /* private mode */ }
+    saveTheme(n, "stage-theme");
     return n;
   }), []);
   const [focusChat, setFocusChat] = useState(0);

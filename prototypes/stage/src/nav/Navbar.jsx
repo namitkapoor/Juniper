@@ -15,7 +15,7 @@ import { Glyph } from "../about/Glyph.jsx";
 
 const SITE = "https://www.namit.me";
 const LINKS = [
-  { label: "studio", href: "https://studio.namit.me" },
+  { label: "studio", href: "https://studio.namit.me", sameTab: true }, // a sibling site: same tab, like a page of this one
   { label: "about", href: "?page=about", internal: true },
   { label: "resume", href: "/files/KapoorNamit_Resume.pdf" },
 ];
@@ -123,7 +123,7 @@ export function Navbar({ onHome, onAbout, crumbs, isHome, isAbout, theme, onTogg
           {LINKS.map((l) => (
             <a
               key={l.label} className={`nav-item-nk26 ${l.internal && isAbout ? "active" : ""}`} href={l.href}
-              {...(l.internal ? { onClick: (e) => { e.preventDefault(); onAbout(); }, "aria-current": isAbout ? "page" : undefined } : { target: "_blank", rel: "noopener noreferrer" })}
+              {...(l.internal ? { onClick: (e) => { e.preventDefault(); onAbout(); }, "aria-current": isAbout ? "page" : undefined } : l.sameTab ? {} : { target: "_blank", rel: "noopener noreferrer" })}
             >
               <span className="nav-arrow-nk26" aria-hidden="true">↘</span>
               <span className="nav-text-wrapper-nk26">
@@ -151,7 +151,7 @@ export function Navbar({ onHome, onAbout, crumbs, isHome, isAbout, theme, onTogg
           <div className="mobile-nav-links">
             {LINKS.map((l) => (
               <a key={l.label} className="mobile-nav-item" href={l.href}
-                {...(l.internal ? {} : { target: "_blank", rel: "noopener noreferrer" })}
+                {...(l.internal || l.sameTab ? {} : { target: "_blank", rel: "noopener noreferrer" })}
                 onClick={(e) => { setOpen(false); if (l.internal) { e.preventDefault(); onAbout(); } }}>{l.label}</a>
             ))}
           </div>
