@@ -8,6 +8,8 @@ import { FILL_KINDS } from "./data/schema.js";
 import { glueHyphens } from "./engine/typo.js";
 import { fixtureHome, fixtureAnswers } from "./fixtures/index.js";
 import { setCaseNames, caseName } from "./caseName.js";
+import { useEffect, useState } from "react";
+import MANIFEST from "../tools/content/manifest.json";
 
 const files = import.meta.glob("./data/*.json");
 
@@ -73,6 +75,27 @@ export function cleanAnswer(a) {
 }
 
 /** "assets/x.webp" -> "/assets/x.webp"; absolute URLs untouched. */
+/**
+ * Light theme: an asset with a NAME-light sibling swaps to it. Demos (assets/.../demos/)
+ * always have one; anything else must be listed in tools/content/manifest.json.
+ */
+const LIGHT = new Set(Object.keys(MANIFEST).filter((k) => /-light\.[a-z0-9]+$/i.test(k)).map((k) => `assets/${k}`));
+export const lightVariant = (src) => (src ? src.replace(/(\.[a-z0-9]+)$/i, "-light$1") : src);
+export const hasLight = (src) => !!src && (/\/demos\//.test(src) || LIGHT.has(lightVariant(src)));
+export const themedSrc = (src, light) => (light && hasLight(src) ? lightVariant(src) : src);
+const isLight = () => typeof document !== "undefined" && document.documentElement.dataset.theme === "light";
+/** Re-renders when <html data-theme> flips. */
+export function useLightTheme() {
+  const [light, setLight] = useState(isLight);
+  useEffect(() => {
+    const mo = new MutationObserver(() => setLight(isLight()));
+    mo.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+    setLight(isLight());
+    return () => mo.disconnect();
+  }, []);
+  return light;
+}
+
 export const assetUrl = (src) => (!src ? src : /^(https?:)?\/\//.test(src) || src.startsWith("/") ? src : `/${src}`);
 
 export async function loadContent() {

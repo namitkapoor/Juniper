@@ -251,7 +251,7 @@ decks.push({
   caseStudy: "christine-valmy",
   fills: [
     prose("cv-stack", 0.85, "The chat ships as a React widget in a WordPress plugin, with n8n on GCP bridging it to the school's systems. I tested the agent across the major models, shipped it with Claude, and it now runs on Gemini.", [SRC.cvData.receipt]),
-    media("cv-mobile", 0.7, "assets/christine-valmy/final-mobile.webp", "The agent on a phone: a bilingual greeting, a student's question about makeup classes, the inquiry form and social links below", { caption: "The same agent on a phone.", from: "public/images/Case Studies/CV/cv-final-mobile.png" }),
+    media("cv-mobile", 0.7, "assets/christine-valmy/final-mobile-framed.webp", "The agent on a phone: a bilingual greeting, a student's question about makeup classes, and the top of the inquiry form", { caption: "The same agent on a phone.", receipts: [{ type: "asset", ref: "assets/christine-valmy/final-mobile.webp", repo: "Juniper", label: "The unframed phone screenshot, public/images/Case Studies/CV/cv-final-mobile.png" }] }),
     commitsFill("cv-commits", 0.65, "sentry-skin-website", ["4a3eae5", "2aef9aa", "9045ebc", "56c6c5c", "c455e47"]),
     prose("cv-a11y", 0.55, "I audited the widget against WCAG AA before launch: the language toggle became a combobox with keyboard support and screen-reader announcements, and topic buttons got a labeled group.", [SRC.cvData.receipt, { type: "asset", ref: "cv-chat-flat/ACCESSIBILITY.md", repo: "chekout-ai (local)", label: "Accessibility notes for the Christine Valmy chat" }]),
     prose("cv-trade-school", 0.4, "The work became a vertical: I added a Trade School page, a site-wide product toggle and a separate trade-school chat route to the ChekOut company site.", [rr("bb9eabcf")]),

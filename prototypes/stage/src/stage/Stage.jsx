@@ -242,7 +242,7 @@ export function Stage({ layout, fillMap, expanded, onToggleReceipts, reduced, me
     <RuntimeCtx.Provider value={rt}>
       <div
         className={`stage ${introOn ? "intro" : ""} ${openId ? "focus-mode" : ""}`}
-        role="region" aria-label="Stage. Arrow keys move between tiles, Enter opens, P shows proof, Escape goes back."
+        role="region" aria-label="Stage. Arrow keys move between tiles, Enter opens, P shows the source, Escape goes back."
         onBlur={(e) => { if (e.relatedTarget && !stageEl.current?.contains(e.relatedTarget)) hadFocus.current = false; }}
         ref={stageEl} id="stage"
         style={height ? { height } : undefined}
@@ -358,7 +358,7 @@ function swipe(onClose, onStep) {
 
 export const KEYS = [
   ["← ↑ → ↓", "move between tiles"], ["Tab", "into a tile's links and buttons"], ["Enter", "open"],
-  ["P", "proof"], ["Esc", "back"], ["?", "all shortcuts"],
+  ["P", "source"], ["Esc", "back"], ["?", "all shortcuts"],
 ];
 function KeyHint({ onClose }) {
   return (

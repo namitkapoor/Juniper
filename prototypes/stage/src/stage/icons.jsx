@@ -10,6 +10,6 @@ export function Icon({ type, size = 14, className = "" }) {
   const common = { width: size, height: size, viewBox: "0 0 16 16", className: `icon ${className}`, "aria-hidden": true, focusable: "false" };
   if (type === "commit") return <svg {...common}><path d={GH} fill="currentColor" /></svg>;
   // Our own UI glyphs come from Lucide (bundled Iconify), not hand-drawn paths.
-  const name = type === "asset" ? "lucide:image" : type === "external" ? "lucide:external-link" : "lucide:file-text";
+  const name = type === "asset" || type === "image" ? "lucide:image" : type === "external" ? "lucide:external-link" : "lucide:file-text";
   return <Glyph name={name} size={size} className={`icon ${className}`} />;
 }

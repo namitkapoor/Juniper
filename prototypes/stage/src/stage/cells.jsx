@@ -12,14 +12,14 @@ import { Glyph } from "../about/Glyph.jsx";
 import { ZoomImage } from "./ZoomImage.jsx";
 import Specimen from "./specimen/Specimen.jsx";
 import { shortName } from "../a11y.js";
-import { assetUrl, INVERT_LOGOS } from "../content.js";
-import { ctrlItems, ctrlReserve, receiptsOf, receiptsListH, kpiValueSize, tileNumLabelH, kickerH, kickerW, receiptRowH, previewBox, commitCardParts, commitTitle, commitMetaText, receiptText, breakdownRowHs, splitPeriod, BD_COLS, stepText, STEP_CHIP_W, worklogMeta, worklogLink, fmtDate, OFFCLOCK_GROUPS, STATUS_H } from "../engine/fit.js";
+import { assetUrl, INVERT_LOGOS, themedSrc, useLightTheme } from "../content.js";
+import { ctrlItems, ctrlReserve, receiptsOf, sourcesOf, receiptImage, thumbBox, THUMB, SOURCE_MORE_H, sourceLineH, receiptsListH, kpiValueSize, tileNumLabelH, kickerH, kickerW, receiptRowH, previewBox, commitCardParts, commitTitle, commitMetaText, receiptText, breakdownRowHs, splitPeriod, BD_COLS, stepText, STEP_CHIP_W, worklogMeta, worklogLink, fmtDate, OFFCLOCK_GROUPS, STATUS_H } from "../engine/fit.js";
 import {
   PAD, proseSteps, stepsFor, PROSE_FONT, QUOTE_STEPS, QUOTE_FONT, QUOTE_WHO_H, TITLE_FONT, titleLineHeight, titleFontFor, titleLHFor,
   KICKER_H, RECEIPTS, COMMITS, MEDIA, DRILL_H, CTRL, WORDS, HEADING, headingH, LOGOS, BREAKDOWN, TILE, TILE_FONT, tileRoleH, TIMELINE, WORKLOG, STACK, OFFCLOCK,
 } from "../engine/typo.js";
 
-// The Proof rule lives in one place (engine/fit.js hasRealProof).
+// The Source rule lives in one place (engine/fit.js hasRealProof, sourcesOf).
 
 export function CellContent({ drillLabel, onDrill, onCaseLink, onStep, cell, fill, insetFill, attachFill, onTile, hot, preview, reduced, onAskOpen, faceBusy, expanded, onToggle, pad, measure, activeVideo, onOpenCase, onExpand, onCollapse, focused }) {
   const P = pad;
@@ -578,7 +578,9 @@ function KpiBody({ fill, size, w, h, P, measure }) {
 function MediaCell({ fill, cell, listH, active, onOpenCase, onExpand, onCollapse, focused, onStep, onDrill }) {
   const spec = cell.spec ?? {};
   const box = spec.box ?? { x: 0, y: 0, w: cell.w, h: cell.h - listH, fit: "contain" };
-  const src = assetUrl(fill.src);
+  const light = useLightTheme();
+  const src = assetUrl(themedSrc(fill.src, light));
+  const poster = assetUrl(themedSrc(fill.poster, light));
   const isVideo = fill.media === "video" || (fill.media === "animation" && /\.(mp4|webm|mov)$/i.test(fill.src));
   const opens = fill.caseStudy && onOpenCase;
   // A media tile with `opens` drills into its child deck on click; expanding in
@@ -609,7 +611,7 @@ function MediaCell({ fill, cell, listH, active, onOpenCase, onExpand, onCollapse
     >
       <div className={`media-box fit-${box.fit || "cover"}`} style={{ left: pct(box.x, W), top: pct(box.y, H), width: pct(box.w, W), height: pct(box.h, H) }}>
         {isVideo ? (
-          <Video src={src} poster={assetUrl(fill.poster)} alt={fill.alt} active={active} controls={focused} />
+          <Video src={src} poster={poster} alt={fill.alt} active={active} controls={focused} />
         ) : (
           focused ? <ZoomImage src={src} alt={fill.alt} slot={zoomSlot} /> : <img src={src} alt={fill.alt} draggable={false} />
         )}
@@ -709,7 +711,7 @@ function CommitsCell({ fill, cell, P }) {
 /* ------------------------------------------------------------- receipts */
 
 /**
- * The control group: [GO DEEPER →] [PROOF] [↗], one height, one type style, right-aligned
+ * The control group: [GO DEEPER →] [SRC] [↗], one height, one type style, right-aligned
  * at the cell's 16px inset. Media place it in their strip (spec.ctrl); a specimen in its
  * top strip; every other kind at the bottom, above an open Proof list. Widths come from
  * the engine (ctrlItems) so the DOM wraps exactly where the layout reserved room.
@@ -757,7 +759,7 @@ function ReceiptsTag({ fill, open, onToggle, width }) {
       className={`receipts-tag ${open ? "open" : ""}`}
       style={style}
       aria-expanded={open}
-      aria-label={open ? `Hide proof for ${shortName(fill)}` : `Show proof for ${shortName(fill)} (${list.length} source${list.length === 1 ? "" : "s"})`}
+      aria-label={open ? `Hide source for ${shortName(fill)}` : `Source for ${shortName(fill)}`}
       onClick={(e) => { e.stopPropagation(); onToggle(fill.id); }}
     >
       {!open && types.map((t) => <Icon key={t} type={t} size={11} />)}
@@ -819,8 +821,8 @@ function ReceiptPreview({ p, innerW, alt }) {
   const reduced = typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   // Poster until hovered; the animated GIF only while the pointer is on it.
   // Light theme: the demo's NAME-light variant (same file name + "-light").
-  const light = typeof document !== "undefined" && document.documentElement.dataset.theme === "light";
-  const themed = (u) => (u && light && /\/demos\//.test(u) ? u.replace(/(\.[a-z0-9]+)$/i, "-light$1") : u);
+  const light = useLightTheme();
+  const themed = (u) => themedSrc(u, light);
   const src = assetUrl(themed(hover && !reduced ? p.src : p.poster || p.src));
   return (
     <>
@@ -842,33 +844,91 @@ function ReceiptPreview({ p, innerW, alt }) {
   );
 }
 
+/** An image receipt as a framed thumbnail; click opens it large with the stage's ZoomImage. */
+function ReceiptThumb({ r, fill, innerW, alt }) {
+  const box = thumbBox(r.ref, innerW);
+  const [big, setBig] = useState(false);
+  const btn = useRef(null);
+  const dlg = useRef(null);
+  const [slot, setSlot] = useState(null);
+  useEffect(() => {
+    if (!big) return;
+    dlg.current?.showModal?.();
+    dlg.current?.querySelector(".close-btn")?.focus();
+  }, [big]);
+  const close = () => { setBig(false); requestAnimationFrame(() => btn.current?.focus()); };
+  const light = useLightTheme();
+  const src = assetUrl(themedSrc(r.ref, light));
+  return (
+    <>
+      <button ref={btn} type="button" className="r-thumb" style={{ width: box.w, height: box.h, marginTop: THUMB.gap }}
+        onClick={(e) => { e.stopPropagation(); setBig(true); }} aria-label={`Zoom: ${alt}`}>
+        <img src={src} alt="" loading="lazy" draggable={false} />
+      </button>
+      {big && (
+        <dialog ref={dlg} className="preview-big thumb-big" aria-modal="true" aria-label={alt}
+          onCancel={(e) => { e.preventDefault(); close(); }} onClick={(e) => { e.stopPropagation(); if (e.target === dlg.current) close(); }}
+          onKeyDown={(e) => { if (e.key === "Escape") { e.preventDefault(); e.stopPropagation(); close(); } }}>
+          <div className="thumb-zoom" style={{ aspectRatio: box.aspect }}><ZoomImage src={src} alt={alt} slot={slot} /></div>
+          <div className="thumb-bar">
+            <button type="button" className="close-btn" onClick={close}><span aria-hidden>×</span> Close</button>
+            <div className="zoom-slot" ref={setSlot} />
+          </div>
+        </dialog>
+      )}
+    </>
+  );
+}
+
+function ReceiptRow({ r, i, fill, measure, innerW, highlight }) {
+  if (r.type === "commit") return (
+    <li className="commit-wrap" style={{ height: receiptRowH(measure, r, innerW, fill) }}>
+      <ul className="cc-inner"><CommitCard r={r} measure={measure} innerW={innerW} /></ul>
+      {r.preview && <ReceiptPreview p={r.preview} innerW={innerW} alt={commitTitle(r)} />}
+    </li>
+  );
+  const text = receiptText(r);
+  const img = receiptImage(fill, r);
+  return (
+    <li className={`r-row ${r.preview || img ? "has-preview" : ""} ${highlight && (r.item || r.ref) === highlight ? "hi" : ""}`} style={{ height: receiptRowH(measure, r, innerW, fill) }}>
+      <div className="r-line">
+        <Icon type={img ? "image" : r.type} size={14} />
+        <span className="r-what">{r.url ? <a href={r.url} target="_blank" rel="noreferrer">{text}</a> : text}</span>
+        {r.date && <span className="r-date">{r.date.slice(0, 10)}</span>}
+      </div>
+      {r.preview && <ReceiptPreview p={r.preview} innerW={innerW} alt={text} />}
+      {img && <ReceiptThumb r={r} fill={fill} innerW={innerW} alt={text} />}
+    </li>
+  );
+}
+
+/**
+ * The Source list: at most two receipts (image, commit, link, rest), the others behind
+ * a quiet "+N more" (the list then scrolls in its own height); or, when nothing is
+ * public, one line in Namit's voice.
+ */
 function ReceiptsList({ fill, P, h, measure, innerW, highlight, place }) {
-  const list = receiptsOf(fill);
+  const { shown, rest, line } = sourcesOf(fill);
+  const [more, setMore] = useState(false);
+  const rows = more ? [...shown, ...rest] : shown;
   return (
     <div className={`receipts ${place ? (place.left != null ? "placed side" : "placed under") : ""}`} style={{ top: "auto", left: 0, right: 0, bottom: 0, height: h, padding: `0 ${P}px`, ...place }}>
       {fill.kind === "kpi" && fill.breakdown?.length > 0 && <BreakdownRows fill={fill} measure={measure} innerW={innerW} />}
-      <div className="label receipts-head" style={{ height: RECEIPTS.headerH }}>{WORDS.proof}</div>
-      <ul>
-        {list.map((r, i) => {
-          if (r.type === "commit") return (
-            <li key={`${r.ref}-${i}`} className="commit-wrap" style={{ height: receiptRowH(measure, r, innerW) }}>
-              <ul className="cc-inner"><CommitCard r={r} measure={measure} innerW={innerW} /></ul>
-              {r.preview && <ReceiptPreview p={r.preview} innerW={innerW} alt={commitTitle(r)} />}
+      <div className="label receipts-head" style={{ height: RECEIPTS.headerH }}>{WORDS.proofName}</div>
+      {line ? (
+        <p className="r-empty" style={{ height: sourceLineH(measure, line, innerW) }}>{line}</p>
+      ) : (
+        <ul>
+          {rows.map((r, i) => <ReceiptRow key={`${r.ref}-${i}`} r={r} i={i} fill={fill} measure={measure} innerW={innerW} highlight={highlight} />)}
+          {rest.length > 0 && (
+            <li className="r-more" style={{ height: SOURCE_MORE_H }}>
+              <button type="button" aria-expanded={more} onClick={(e) => { e.stopPropagation(); setMore((m) => !m); }}>
+                {more ? "Show fewer" : `+${rest.length} more`}
+              </button>
             </li>
-          );
-          const text = receiptText(r);
-          return (
-            <li key={`${r.ref}-${i}`} className={`r-row ${r.preview ? "has-preview" : ""} ${highlight && (r.item || r.ref) === highlight ? "hi" : ""}`} style={{ height: receiptRowH(measure, r, innerW) }}>
-              <div className="r-line">
-                <Icon type={r.type} size={14} />
-                <span className="r-what">{r.url ? <a href={r.url} target="_blank" rel="noreferrer">{text}</a> : text}</span>
-                {r.date && <span className="r-date">{r.date.slice(0, 10)}</span>}
-              </div>
-              {r.preview && <ReceiptPreview p={r.preview} innerW={innerW} alt={text} />}
-            </li>
-          );
-        })}
-      </ul>
+          )}
+        </ul>
+      )}
     </div>
   );
 }

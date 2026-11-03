@@ -41,5 +41,5 @@ export function cellLabel(fill, { drillLabel } = {}) {
   return [...s, ...act].filter(Boolean).map((x) => String(x).replace(/\u2060/g, "").replace(/[.]+$/, "")).join(", ");
 }
 
-/** Short name of a fill for button labels ("Show proof for …"). */
+/** Short name of a fill for button labels ("Source for …"). */
 export const shortName = (fill) => first(cellLabel(fill).split(", ").slice(0, 2).join(", "), 80);

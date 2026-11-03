@@ -86,10 +86,10 @@ export const RECEIPTS = { tagW: 96, tagH: 24, headerH: 30, rowH: 32, cardH: 78, 
 
 /**
  * Words the stage shows instead of engineer-speak. Swap here.
- * Proof tag alternatives: "Show me", "Sources", "See it".
+ * The source tag reads SRC on screen; its accessible name is "Source for …".
  * Commit-log label alternatives: "The work", "Built", "In the code".
  */
-export const WORDS = { proof: "Proof", proofClose: "Hide", shipped: "Shipped" };
+export const WORDS = { proof: "Src", proofName: "Source", proofClose: "Hide", shipped: "Shipped" };
 
 /**
  * Media: cover only when the crop is tiny, otherwise contain (letterboxed on
@@ -155,7 +155,7 @@ export const OFFCLOCK = { headH: 30, intro: font(BODY, 400, 15), introLH: 22, sl
 /** "Go deeper →" on a tile that opens a child deck: its own row at the bottom. */
 export const DRILL_H = 26;
 /**
- * A cell's controls are ONE group, always in this order: [GO DEEPER →] [PROOF] [↗].
+ * A cell's controls are ONE group, always in this order: [GO DEEPER →] [SRC] [↗].
  * One height, one type style, an 8px gap, right-aligned to the cell's 16px inset;
  * the whole group moves to its own row before it ever splits.
  */

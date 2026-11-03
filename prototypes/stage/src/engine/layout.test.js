@@ -321,6 +321,39 @@ describe("Proof only where it's real", async () => {
   });
 });
 
+describe("Source: two receipts, strongest first, or one polite line", async () => {
+  const { sourcesOf, emptyLine, EMPTY_LINES, SOURCE_CAP, receiptsListH } = await import("./fit.js");
+  const img = { type: "asset", ref: "assets/chekout/cover.webp", label: "cover" };
+  const commit = { type: "commit", ref: "abc1234", repo: "x" };
+  const link = { type: "asset", ref: "page", url: "https://example.com/" };
+  const figma = { type: "asset", ref: "figma:abc#1:2", label: "FigJam" };
+  const homeRecord = { type: "record", ref: "rec-1", url: "https://kyuri.namit.me/" };
+  it("caps at two, in order image, commit, link, rest", () => {
+    const s = sourcesOf({ id: "a", kind: "prose", receipts: [figma, link, commit, img] });
+    expect(s.shown).toEqual([img, commit]);
+    expect(s.rest).toEqual([link, figma]);
+    expect(s.shown.length).toBeLessThanOrEqual(SOURCE_CAP);
+    expect(s.line).toBe(null);
+  });
+  it("a tile's own media is not an image receipt, but keeps its link", () => {
+    const self = { type: "asset", ref: "assets/chekout/cover.webp", url: "https://example.com/" };
+    const s = sourcesOf({ id: "m", kind: "media", src: "assets/chekout/cover.webp", receipts: [self, commit] });
+    expect(s.shown).toEqual([commit, self]);
+  });
+  it("no image, commit or public link: one line, the same every time", () => {
+    const f = { id: "rec-x-p", kind: "prose", receipts: [homeRecord, figma] };
+    const s = sourcesOf(f);
+    expect(s.shown).toEqual([]);
+    expect(EMPTY_LINES).toContain(s.line);
+    expect(sourcesOf(f).line).toBe(emptyLine(f));
+    expect(receiptsListH(f, null, 320)).toBeGreaterThan(0);
+  });
+  it("a media tile never says it has no screengrab; lines carry no dashes", () => {
+    for (let i = 0; i < 40; i++) expect(emptyLine({ id: `m${i}`, kind: "media" })).not.toMatch(/screengrab/);
+    for (const l of EMPTY_LINES) expect(l).not.toMatch(/[—–]/);
+  });
+});
+
 describe("spatial keyboard navigation", async () => {
   const { neighbor, readingOrder } = await import("./nav.js");
   const fs = await import("node:fs");

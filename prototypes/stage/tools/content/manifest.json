@@ -281,5 +281,17 @@
   "h": 492,
   "bytes": 26264,
   "aspect": 1.0407
+ },
+ "christine-valmy/final-mobile-framed.webp": {
+  "w": 470,
+  "h": 996,
+  "bytes": 43384,
+  "aspect": 0.4719
+ },
+ "christine-valmy/final-mobile-framed-light.webp": {
+  "w": 470,
+  "h": 996,
+  "bytes": 43422,
+  "aspect": 0.4719
  }
 }

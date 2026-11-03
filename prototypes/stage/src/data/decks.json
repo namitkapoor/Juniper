@@ -1193,19 +1193,19 @@
         "id": "cv-mobile",
         "weight": 0.7,
         "media": "image",
-        "src": "assets/christine-valmy/final-mobile.webp",
-        "aspect": 0.3922,
-        "alt": "The agent on a phone: a bilingual greeting, a student's question about makeup classes, the inquiry form and social links below",
-        "caption": "On a phone: the bilingual greeting, a question about makeup classes, and the form and social links below.",
+        "src": "assets/christine-valmy/final-mobile-framed.webp",
+        "aspect": 0.4719,
+        "alt": "The agent on a phone: a bilingual greeting, a student's question about makeup classes, and the top of the inquiry form",
+        "caption": "On a phone: the bilingual greeting, a question about makeup classes, and the inquiry form below.",
         "receipts": [
           {
             "type": "asset",
             "ref": "assets/christine-valmy/final-mobile.webp",
             "repo": "Juniper",
-            "label": "public/images/Case Studies/CV/cv-final-mobile.png"
+            "label": "The unframed phone screenshot, public/images/Case Studies/CV/cv-final-mobile.png"
           }
         ],
-        "explain": "The same widget on a phone. Watch the order: the agent greets in both languages, answers a question about makeup classes, and the inquiry form and social links stack underneath, the same three pieces that survived testing on desktop.",
+        "explain": "The same widget on a phone. Watch the order: the agent greets in both languages, answers a question about makeup classes, and the inquiry form starts underneath: the same pieces that survived testing on desktop.",
         "opens": "cv-d-a11y"
       },
       {
@@ -3660,15 +3660,17 @@
         "id": "cva-mobile",
         "weight": 0.7,
         "media": "image",
-        "src": "assets/christine-valmy/final-mobile.webp",
-        "aspect": 0.3922,
-        "alt": "The agent on a phone: a bilingual greeting, a student's question, the inquiry form and social links below",
+        "src": "assets/christine-valmy/final-mobile-framed.webp",
+        "aspect": 0.4719,
+        "alt": "The agent on a phone: a bilingual greeting, a student's question about makeup classes, and the top of the inquiry form",
         "caption": "The audited widget on a phone.",
         "explain": "The shipped widget at phone width, after the audit: the same three pieces, with controls a keyboard and a screen reader can reach.",
         "receipts": [
           {
             "type": "asset",
-            "ref": "assets/christine-valmy/final-mobile.webp"
+            "ref": "assets/christine-valmy/final-mobile.webp",
+            "label": "The unframed phone screenshot, public/images/Case Studies/CV/cv-final-mobile.png",
+            "repo": "Juniper"
           },
           {
             "type": "asset",

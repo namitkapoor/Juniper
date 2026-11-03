@@ -12,6 +12,7 @@ import {
   TITLE_FONT, titleLineHeight, titleFontFor, titleLHFor, isWordmark, KICKER_H, headingH, KPI_FONT, KPI_LABEL_H, KPI_META_H, KPI_LABEL_FONT, CAPS_FONT, capsH, quoteWhoH, COMMIT_MSG_FONT,
   COMMITS, RECEIPTS, MEDIA, DRILL_H, CTRL, WORDS, CAPTION_FONT, CAPTION_FONT_PHONE, CAPTION_PHONE, LABEL, font, LOGOS, BREAKDOWN, TILE, TILE_FONT, TILE_ROLE_FONT, TIMELINE, WORKLOG, STACK, OFFCLOCK, tileRoleH, hookTarget, metricMax,
 } from "./typo.js";
+import MANIFEST from "../../tools/content/manifest.json";
 
 export const INFEASIBLE = 50;
 /** A status line under a prose block ("• OPEN TO … ROLES" + a quiet link). */
@@ -40,7 +41,50 @@ export function hasRealProof(fill) {
 }
 export const receiptsOf = (fill) => (hasRealProof(fill) ? fill.receipts : []);
 
-/* ---- the control group: [GO DEEPER →] [PROOF] [↗] -------------------------- */
+/* ---- Source: at most two receipts per tile, the strongest first -------------
+ * Order: an image or playable preview, then a commit, then a public link, then
+ * the rest (behind "+N more"). A receipt that IS the tile's own media is not an
+ * image here (it's already on screen); it stays only as a link, if it has one.
+ * A record whose url is just the kyuri.namit.me home page is not a public link.
+ * A tile with no image, no commit and no public link shows one line instead.
+ */
+export const SOURCE_CAP = 2;
+const IMG_EXT = /\.(webp|png|jpe?g|gif|svg|avif)$/i;
+const HOME_ONLY = /^https:\/\/kyuri\.namit\.me\/?$/;
+const isSelf = (fill, r) => !!r.ref && (r.ref === fill.src || r.ref === fill.poster);
+export const receiptImage = (fill, r) => !r.preview && r.type === "asset" && !isSelf(fill, r) && /^assets\//.test(r.ref || "") && IMG_EXT.test(r.ref);
+export const publicLink = (r) => !!r.url && !(r.type === "record" && HOME_ONLY.test(r.url));
+export const sourceRank = (fill, r) => (r.preview || receiptImage(fill, r) ? 0 : r.type === "commit" ? 1 : publicLink(r) ? 2 : 3);
+/** Lines in Namit's voice for a tile whose sources are all private. */
+export const EMPTY_LINES = [
+  "No screengrab for this one. Happy to walk through it in an interview.",
+  "Nothing public to link here yet. Ask me about it in an interview and I'll show my work.",
+  "The receipts for this one aren't public. Bring it up in an interview; I like talking about this one.",
+];
+const hash = (s) => { let h = 2166136261; for (const c of String(s)) h = Math.imul(h ^ c.charCodeAt(0), 16777619); return h >>> 0; };
+/** One line per tile, picked from the fill id (a media tile never says "no screengrab"). */
+export function emptyLine(fill) {
+  const pool = fill.kind === "media" ? EMPTY_LINES.slice(1) : EMPTY_LINES;
+  return pool[hash(fill.id) % pool.length];
+}
+/** { shown, rest, line }: the two receipts on show, the others, or the one line. */
+export function sourcesOf(fill) {
+  const all = receiptsOf(fill).filter((r) => !isSelf(fill, r) || r.url);
+  if (!all.length || all.every((r) => sourceRank(fill, r) === 3)) return { shown: [], rest: [], line: all.length || receiptsOf(fill).length ? emptyLine(fill) : null };
+  const sorted = all.map((r, i) => [r, i]).sort((a, b) => sourceRank(fill, a[0]) - sourceRank(fill, b[0]) || a[1] - b[1]).map(([r]) => r);
+  return { shown: sorted.slice(0, SOURCE_CAP), rest: sorted.slice(SOURCE_CAP), line: null };
+}
+/** A receipt image as a framed thumbnail: natural aspect from the asset manifest, capped box. */
+export const THUMB = { maxW: 220, maxH: 132, gap: 8 };
+export function thumbBox(ref, innerW) {
+  const m = MANIFEST[String(ref).replace(/^assets\//, "")];
+  const aspect = m?.aspect || (m?.w && m?.h ? m.w / m.h : 1.6);
+  let w = Math.min(THUMB.maxW, innerW - 24), h = w / aspect;
+  if (h > THUMB.maxH) { h = THUMB.maxH; w = h * aspect; }
+  return { w: Math.round(w), h: Math.round(h), aspect };
+}
+
+/* ---- the control group: [GO DEEPER →] [SRC] [↗] -------------------------- */
 const ctrlTextW = (measure, t) => Math.ceil(measure?.width ? measure.width(t.toUpperCase(), CAPS_FONT) : t.length * 9.5);
 /** The group's items with their widths, in order. `exp`: the media/specimen expand square. */
 export function ctrlItems(fill, measure, { drill = !!fill.opens, exp = false } = {}) {
@@ -115,9 +159,10 @@ export function previewBox(p, innerW) {
   const w = p.frame === "phone" ? Math.min(150, innerW) : Math.min(innerW - 24, 360);
   return { w: Math.round(w), h: Math.round(w / (p.aspect || 1)) };
 }
-export function receiptRowH(measure, r, innerW) {
+export function receiptRowH(measure, r, innerW, fill) {
   const pv = previewBox(r.preview, innerW);
-  const extra = pv ? pv.h + 10 : 0;
+  const th = !pv && fill && receiptImage(fill, r) ? thumbBox(r.ref, innerW) : null;
+  const extra = pv ? pv.h + 10 : th ? th.h + THUMB.gap + 10 : 0;
   if (!measure) return (r.type === "commit" ? RECEIPTS.cardH : RECEIPTS.rowH) + extra;
   // title lines, 6px, meta line(s), 4px, repo line; 10px above and below
   if (r.type === "commit") { const p = commitCardParts(measure, r, innerW); return 10 + p.title + 6 + p.meta + 4 + p.foot + 10 + extra; }
@@ -140,12 +185,17 @@ export function breakdownRowHs(measure, fill, innerW) {
 }
 
 /** Height the open Proof list takes at the bottom of a cell (all rows, measured). */
+export const SOURCE_MORE_H = 32;
+export const SOURCE_LINE = { font: font("Satoshi", 400, 14), lh: 20, pad: 12 };
+export const sourceLineH = (measure, line, innerW) => SOURCE_LINE.pad * 2 + (measure ? measure.lines(line, SOURCE_LINE.font, innerW) : 2) * SOURCE_LINE.lh;
 export function receiptsListH(fill, measure, innerW = 320) {
-  const list = receiptsOf(fill);
-  if (!list.length) return 0;
+  if (!receiptsOf(fill).length) return 0;
   // An open KPI also lists its breakdown rows above the sources.
   const bd = fill.kind === "kpi" && fill.breakdown?.length ? breakdownRowsH(fill, measure, innerW) : 0;
-  return bd + RECEIPTS.headerH + list.reduce((s, r) => s + receiptRowH(measure, r, innerW), 0) + 8;
+  const { shown, rest, line } = sourcesOf(fill);
+  const body = line ? sourceLineH(measure, line, innerW)
+    : shown.reduce((s, r) => s + receiptRowH(measure, r, innerW, fill), 0) + (rest.length ? SOURCE_MORE_H : 0);
+  return bd + RECEIPTS.headerH + body + 8;
 }
 
 /** Largest step whose wrapped text fits `availH` at `innerW`, or the smallest (overflowing). */

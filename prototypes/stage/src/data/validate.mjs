@@ -28,6 +28,10 @@ function checkAsset(p, where) {
   if (!p.startsWith("assets/")) return err(where, `asset path must start with assets/: ${p}`);
   if (!fs.existsSync(path.join(PUBLIC, p))) return err(where, `asset file not found: public/${p}`);
   assetsSeen.add(p);
+  // Light theme swaps to NAME-light (content.js themedSrc): demos must have one; any that exists is in use.
+  const light = p.replace(/(\.[a-z0-9]+)$/i, "-light$1");
+  if (fs.existsSync(path.join(PUBLIC, light))) assetsSeen.add(light);
+  else if (/\/demos\//.test(p)) err(where, `demo has no light variant: public/${light}`);
 }
 
 function checkReceipt(r, where) {

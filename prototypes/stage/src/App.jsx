@@ -367,7 +367,7 @@ export default function App() {
     if (main && main.id !== top.id) L.push({ key: main.id, label: caseName(main.caseStudy), deck: main });
     chain.forEach((d, i) => L.push({ key: d.id, label: i === 0 && d === main ? caseName(d.caseStudy) : d.question, deck: d }));
     if (focus) L.push({ key: "overlay", label: "Expanded", overlay: true });
-    else if (expanded.length) L.push({ key: "overlay", label: "Proof", overlay: true });
+    else if (expanded.length) L.push({ key: "overlay", label: "Source", overlay: true });
     return L;
   }, [answer, content, isHome, focus, expanded, deckById, goHome]);
   const jumpTo = useCallback((lvl) => {
@@ -411,7 +411,7 @@ export default function App() {
   useEffect(() => {
     if (!stageAnswer) return;
     if (focus) { const f = stageAnswer.fills.find((x) => x.id === focus); setAnnounce(`Expanded: ${f?.alt || (f?.kind === "specimen" ? "type specimen" : "media")}`); }
-    else if (expanded.length) setAnnounce("Proof open. Escape to close.");
+    else if (expanded.length) setAnnounce("Source open. Escape to close.");
     else setAnnounce(isHome ? "Showing: home" : answer?.page === "about" ? "Showing: about" : `Showing: ${answer?.question || ""}`);
   }, [stageAnswer]); // eslint-disable-line react-hooks/exhaustive-deps
   const backLabel = backTarget ? (answer.caseStudy ? caseTitle(answer.caseStudy) : backTarget.question) : null;

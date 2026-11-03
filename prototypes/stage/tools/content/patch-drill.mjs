@@ -163,8 +163,8 @@ children.push({
     prose("cva-problem", 1, "THE PROBLEM: The first widget's language toggle and topic buttons were plain buttons with no accessibility attributes, so a screen-reader user couldn't tell what they did.", [{ type: "asset", ref: "cv-chat-flat/ACCESSIBILITY.md", repo: "chekout-ai (local)", label: "Before and after notes per control" }]),
     prose("cva-toggle", 0.75, "LANGUAGE TOGGLE: Now a combobox with labels, arrow keys, Enter, Space and Escape, and an announcement when the language changes.", [{ type: "asset", ref: "cv-chat-flat/ACCESSIBILITY.md", repo: "chekout-ai (local)", label: "1. Language Toggle Button" }]),
     prose("cva-topics", 0.6, "TOPIC BUTTONS: Grouped under one label, each with its own description and hidden help text.", [{ type: "asset", ref: "cv-chat-flat/ACCESSIBILITY.md", repo: "chekout-ai (local)", label: "2. Topic Buttons" }]),
-    media("cva-mobile", 0.7, "assets/christine-valmy/final-mobile.webp", 0.3922, "The agent on a phone: a bilingual greeting, a student's question, the inquiry form and social links below",
-      "The audited widget on a phone.", "The shipped widget at phone width, after the audit: the same three pieces, with controls a keyboard and a screen reader can reach.", [CV]),
+    media("cva-mobile", 0.7, "assets/christine-valmy/final-mobile-framed.webp", 0.4719, "The agent on a phone: a bilingual greeting, a student's question about makeup classes, and the top of the inquiry form",
+      "The audited widget on a phone.", "The shipped widget at phone width, after the audit: the same three pieces, with controls a keyboard and a screen reader can reach.", [{ type: "asset", ref: "assets/christine-valmy/final-mobile.webp", repo: "Juniper", label: "The unframed phone screenshot" }, CV]),
   ],
 });
 
