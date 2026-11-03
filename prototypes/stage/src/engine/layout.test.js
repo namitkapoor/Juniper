@@ -354,6 +354,38 @@ describe("Source: two receipts, strongest first, or one polite line", async () =
   });
 });
 
+describe("controls never cover content (every deck, open and focused states)", async () => {
+  const { fitFill, INFEASIBLE } = await import("./fit.js");
+  const { PAD } = await import("./typo.js");
+  const { recedeAnswer, dedupeOpens, focusAnswer } = await import("../focus.js");
+  const fs = await import("node:fs");
+  const path = await import("node:path");
+  const url = await import("node:url");
+  const DATA = path.resolve(path.dirname(url.fileURLToPath(import.meta.url)), "../data");
+  const decks = fs.existsSync(path.join(DATA, "decks.json")) ? JSON.parse(fs.readFileSync(path.join(DATA, "decks.json"), "utf8")) : [];
+  const rects = [[1000, 820], [1400, 860], [820, 900], [390, 700]];
+  for (const d0 of decks) it(`${d0.id}: text cells fit above their control group; media controls sit under the media or beside it`, () => {
+    const d = dedupeOpens(d0);
+    const bad = [];
+    for (const [w, h] of rects) {
+      const states = [[d, []], ...d.fills.filter((f) => f.receipts?.length).map((f) => [recedeAnswer(d, f.id), [f.id]]), ...d.fills.filter((f) => f.kind === "media").map((f) => [focusAnswer(d, f.id), []])];
+      for (const [A, exp] of states) {
+        const L = layoutStage({ rect: { x: 0, y: 0, w, h }, fills: A.fills, measure: fakeMeasure, viewportW: w < 500 ? w : 1440, expanded: exp });
+        for (const c of L.cells) {
+          const f = A.fills.find((x) => x.id === c.fillId);
+          if (L.mode !== "stack" && (f.kind === "kpi" || f.kind === "prose") && !f.recede) {
+            const r = fitFill(f, c.w, c.h, { pad: PAD.desktop, measure: fakeMeasure, expanded: exp.includes(f.id) });
+            if (r.cost >= INFEASIBLE) bad.push(`${A.id} ${w}: ${f.id} does not fit above its controls`);
+          }
+          const sp = c.spec;
+          if (f.kind === "media" && sp?.ctrl && sp.box && sp.layout !== "beside" && sp.ctrl.y < sp.box.y + sp.box.h - 1) bad.push(`${A.id} ${w}: ${f.id} controls on the media`);
+        }
+      }
+    }
+    expect(bad).toEqual([]);
+  });
+});
+
 describe("spatial keyboard navigation", async () => {
   const { neighbor, readingOrder } = await import("./nav.js");
   const fs = await import("node:fs");

@@ -27,6 +27,8 @@
   --media-bg: #0d0d0d;
   --recede-ink: #9b9b96;
   --recede-mute: #8f8f8a;
+  --recede-bg: #141414;
+  --recede-media: .45;
   --chat-mute: #92928c;
   --logo-filter: none;            /* logos as delivered (dark marks are flipped by .inv) */
   --logo-inv-filter: brightness(0) invert(1);
@@ -54,8 +56,12 @@
   --scrim: rgba(221, 221, 221, 0.95);
   --panel-2: #e6e6e4;
   --media-bg: #d2d2d0;
-  --recede-ink: #4a4a47;
-  --recede-mute: #545450;
+  /* Receded cells step DOWN a surface, like KYURI.OS light (#c8c8c8 ground under #d8d8d8 panels):
+     a clearly darker grey, with ink that still clears 4.5:1 on it (6.3:1 and 4.9:1). */
+  --recede-bg: #c8c8c8;
+  --recede-ink: #3f3f3c;
+  --recede-mute: #4f4f4b;
+  --recede-media: .62;
   --chat-mute: #50504c;
   --logo-filter: brightness(0);
   --logo-inv-filter: brightness(0);
@@ -708,8 +714,8 @@ kbd { font: 500 12px ui-monospace, Menlo, monospace; padding: 1px 5px; border: 1
 
 /* M1: receded cells recede by colour, not by fading text below contrast */
 .cell.recede > * { opacity: 1 !important; }
-.cell.recede { --ink: var(--recede-ink); --ink-2: var(--recede-ink); --mute: var(--recede-mute); }
-.cell.recede img, .cell.recede video, .cell.recede canvas, .cell.recede .logos img { opacity: .45; }
+.cell.recede { --ink: var(--recede-ink); --ink-2: var(--recede-ink); --mute: var(--recede-mute); --bg: var(--recede-bg); background: var(--recede-bg); }
+.cell.recede img, .cell.recede video, .cell.recede canvas, .cell.recede .logos img { opacity: var(--recede-media); }
 .stage.focus-mode .stroke:not(.live) { background: var(--hair); }
 /* S1: control borders >= 3:1 */
 :root { }
