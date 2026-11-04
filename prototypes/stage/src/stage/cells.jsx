@@ -15,11 +15,12 @@ import Specimen from "./specimen/Specimen.jsx";
 import TokenSheet from "./TokenSheet.jsx";
 import { unlockGate } from "../gate.js";
 import { shortName } from "../a11y.js";
+import { pretextMeasure } from "../text/measure.js";
 import { assetUrl, INVERT_LOGOS, themedSrc, useLightTheme } from "../content.js";
 import { ctrlItems, ctrlReserve, receiptsOf, sourcesOf, receiptImage, thumbBox, THUMB, SOURCE_MORE_H, sourceLineH, receiptsListH, kpiValueSize, tileNumLabelH, tileNumH, kickerH, kickerW, receiptRowH, previewBox, commitCardParts, commitTitle, commitMetaText, receiptText, breakdownRowHs, splitPeriod, BD_COLS, stepText, STEP_CHIP_W, worklogMeta, worklogLink, fmtDate, OFFCLOCK_GROUPS, STATUS_H, rulesGroups } from "../engine/fit.js";
 import {
   PAD, proseSteps, stepsFor, PROSE_FONT, QUOTE_STEPS, QUOTE_FONT, QUOTE_WHO_H, TITLE_FONT, titleLineHeight, titleFontFor, titleLHFor,
-  KICKER_H, RECEIPTS, COMMITS, MEDIA, DRILL_H, CTRL, WORDS, HEADING, headingH, LOGOS, BREAKDOWN, TILE, TILE_FONT, tileRoleH, TIMELINE, WORKLOG, STACK, OFFCLOCK, RULES,
+  KICKER_H, RECEIPTS, COMMITS, MEDIA, DRILL_H, CTRL, WORDS, HEADING, headingH, LOGOS, BREAKDOWN, TILE, TILE_FONT, tileRoleH, TIMELINE, WORKLOG, STACK, OFFCLOCK, RULES, KPI_FONT,
 } from "../engine/typo.js";
 
 // The Source rule lives in one place (engine/fit.js hasRealProof, sourcesOf).
@@ -674,17 +675,26 @@ function FaceCell({ cell, P, onAskOpen, reduced, busy }) {
  * layout never changes. A covered tile keeps its own name as a small label, so you can
  * still tell what it opens.
  */
+const ovMeasure = (t) => { try { return pretextMeasure.width(t, KPI_FONT(100)); } catch { return 0; } };
 function TileOverlay({ o, fill, cell, P, out = false }) {
   const W = cell.w - 2 * P, H = cell.h - 2 * P;
   const v = `${o.value}${o.unit || ""}`;
-  const fs = Math.max(28, Math.min(H * 0.42, (W / Math.max(3, v.length)) * 1.55, 120));
+  // Measured, not guessed: "Design Engineer" at the old char-count estimate ran past
+  // the tile edge. Fit the whole value on one line, else wrap at spaces and fit the
+  // longest word, so a phrase never clips.
+  const w100 = (t) => ovMeasure(t) || t.length * 58;
+  const oneLine = (W / w100(v)) * 100;
+  const words = v.split(/\s+/);
+  const wrapped = words.length > 1 ? (W / Math.max(...words.map(w100))) * 100 : 0;
+  const wrap = oneLine < 40 && wrapped > oneLine;
+  const fs = Math.floor(Math.min(H * (wrap ? 0.21 : 0.42), wrap ? wrapped : oneLine, 120));
   return (
     <div className={`tile-overlay ${out ? "out" : ""} ${o.logo ? "has-logo" : ""}`} aria-hidden="true" style={{ padding: P }}>
       <div className="label tile-ov-k">{o.self ? o.kicker : o.about ? (o.kicker && o.kicker !== "namit" ? o.kicker : "namit · about") : o.kicker === "Open to" ? "namit · open to" : `${o.kicker} · impact`}</div>
       <div className="tile-ov-num">
         {o.logo
           ? <div className="tile-ov-logo" role="img" aria-label={o.value} style={{ WebkitMaskImage: `url(${o.logo})`, maskImage: `url(${o.logo})`, height: Math.round(Math.min(H * 0.5, 150)) }} />
-          : <div className="kpi-value" style={{ fontSize: Math.round(fs) }}>{o.value}{o.unit && <span className="kpi-unit">{o.unit}</span>}</div>}
+          : <div className="kpi-value" style={{ fontSize: fs, whiteSpace: wrap ? "normal" : undefined }}>{o.value}{o.unit && <span className="kpi-unit">{o.unit}</span>}</div>}
         <div className="kpi-label tile-ov-label">{o.label}</div>
       </div>
     </div>
