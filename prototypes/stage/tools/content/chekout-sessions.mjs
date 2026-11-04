@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 /**
  * Merchant-wide session distribution for the ChekOut case study, from the prod
- * BigQuery table the dashboard reads (shopify-473015.chatbot_logs.conversations,
- * same as chekout-backend/app/config.py).
+ * BigQuery table (production-aibuilder.chatbot_logs.conversations; shopify-473015
+ * is STAGING, despite being the default in chekout-backend/app/config.py).
  *
  * Prints AGGREGATES ONLY: counts per merchant, per month, per country, per OS.
  * No message text, no session ids, no shopper data. Runs through your own `bq`
@@ -16,7 +16,7 @@
  */
 import { execFileSync } from "node:child_process";
 
-const T = process.env.CK_TABLE || "shopify-473015.chatbot_logs.conversations";
+const T = process.env.CK_TABLE || "production-aibuilder.chatbot_logs.conversations";
 const project = T.split(".")[0];
 
 function sql(statement) {

@@ -17,7 +17,7 @@ import { unlockGate } from "../gate.js";
 import { shortName } from "../a11y.js";
 import { pretextMeasure } from "../text/measure.js";
 import { assetUrl, INVERT_LOGOS, themedSrc, useLightTheme } from "../content.js";
-import { ctrlItems, ctrlReserve, receiptsOf, sourcesOf, receiptImage, thumbBox, THUMB, SOURCE_MORE_H, sourceLineH, receiptsListH, kpiValueSize, tileNumLabelH, tileNumH, kickerH, kickerW, receiptRowH, previewBox, commitCardParts, commitTitle, commitMetaText, receiptText, breakdownRowHs, splitPeriod, BD_COLS, stepText, STEP_CHIP_W, worklogMeta, worklogLink, fmtDate, OFFCLOCK_GROUPS, STATUS_H, rulesGroups } from "../engine/fit.js";
+import { ctrlItems, ctrlReserve, receiptsOf, sourcesOf, receiptImage, thumbBox, THUMB, SOURCE_MORE_H, sourceLineH, receiptsListH, kpiValueSize, tileNumLabelH, tileNumH, kickerH, kickerW, receiptRowH, previewBox, commitCardParts, commitTitle, commitMetaText, receiptText, breakdownRowHs, splitPeriod, bdLegend, BD_COLS, stepText, STEP_CHIP_W, worklogMeta, worklogLink, fmtDate, OFFCLOCK_GROUPS, STATUS_H, rulesGroups } from "../engine/fit.js";
 import {
   PAD, proseSteps, stepsFor, PROSE_FONT, QUOTE_STEPS, QUOTE_FONT, QUOTE_WHO_H, TITLE_FONT, titleLineHeight, titleFontFor, titleLHFor,
   KICKER_H, RECEIPTS, COMMITS, MEDIA, DRILL_H, CTRL, WORDS, HEADING, headingH, LOGOS, BREAKDOWN, TILE, TILE_FONT, tileRoleH, TIMELINE, WORKLOG, STACK, OFFCLOCK, RULES, KPI_FONT,
@@ -270,9 +270,9 @@ export function BreakdownRows({ fill, measure, innerW }) {
   const cols = `${BD_COLS.logo}px minmax(0, 1fr) ${BD_COLS.value}px ${BD_COLS.bar}px ${BD_COLS.pct}px`;
   return (
     <div className="breakdown" style={{ marginTop: 6 }}>
-      <div className="label bd-head" style={{ height: BREAKDOWN.headH }}>Split</div>
+      <div className="label bd-head" style={{ height: BREAKDOWN.headH }}>{fill.breakdownHead || "Split"}</div>
       <ShareBar fill={fill} />
-      <ul aria-label={`${fill.label}, split`}>
+      <ul aria-label={`${fill.label}, ${fill.breakdownHead || "split"}`}>
         {rows.map((b, i) => {
           const { name, period } = splitPeriod(b.label);
           return (
@@ -295,6 +295,8 @@ export function BreakdownRows({ fill, measure, innerW }) {
  * is one dim, unlabeled "other" segment: shown honestly, never split up.
  */
 function ShareBar({ fill, h = 4 }) {
+  // Rates are not slices of one whole: stacking them would claim they add up.
+  if (fill.breakdownOf === "rate") return null;
   const parts = fill.breakdown.filter((b) => b.share != null);
   if (!parts.length) return null;
   const rest = Math.max(0, 1 - parts.reduce((s, b) => s + b.share, 0));
@@ -308,11 +310,10 @@ function ShareBar({ fill, h = 4 }) {
 }
 
 function BreakdownBar({ fill }) {
-  const known = fill.breakdown.filter((b) => b.share != null);
   return (
     <div className="bd-compact" style={{ height: BREAKDOWN.barH, marginTop: 10 }}>
       <ShareBar fill={fill} />
-      <div className="bd-legend">{known.slice(0, 2).map((b) => `${b.label} ${pctOf(b)}`).join(" · ")}</div>
+      <div className="bd-legend">{bdLegend(fill)}</div>
     </div>
   );
 }

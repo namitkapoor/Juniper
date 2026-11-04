@@ -174,6 +174,22 @@ export function splitPeriod(label) {
   const m = label.match(/^(.*?)\s*\(([^)]+)\)\s*$/);
   return m ? { name: m[1], period: m[2] } : { name: label, period: null };
 }
+/**
+ * One-line legend for a compact breakdown. A share split names its two biggest
+ * parts; a rate breakdown (each row its own rate, not a slice of one whole)
+ * names the lead row against the range of the rest.
+ */
+export function bdLegend(fill) {
+  const known = fill.breakdown.filter((b) => b.share != null);
+  const pct = (b) => `${Math.round(b.share * 100)}%`;
+  if (fill.breakdownNote) return fill.breakdownNote;
+  if (fill.breakdownOf === "rate" && known.length > 1) {
+    const rest = known.slice(1).map((b) => Math.round(b.share * 100));
+    const lo = Math.min(...rest), hi = Math.max(...rest);
+    return `${splitPeriod(known[0].label).name} ${pct(known[0])} · others ${lo === hi ? `${lo}%` : `${lo} to ${hi}%`}`;
+  }
+  return known.slice(0, 2).map((b) => `${b.label} ${pct(b)}`).join(" · ");
+}
 export const BD_COLS = { logo: 44, value: 64, bar: 56, pct: 38, gap: 10 };
 export const bdNameW = (innerW) => innerW - BD_COLS.logo - BD_COLS.value - BD_COLS.bar - BD_COLS.pct - 4 * BD_COLS.gap;
 export function breakdownRowHs(measure, fill, innerW) {
@@ -362,7 +378,7 @@ function kpiFit(fill, w, h, ctx) {
     // Rows only when every name fits its column whole; else the bar + legend.
     const nameW = innerW - 44 - 64 - 56 - 34 - 40;
     const namesFit = fill.breakdown.every((b) => ctx.measure.width(b.label, BREAKDOWN.nameFont) <= nameW);
-    const legend = fill.breakdown.filter((b) => b.share != null).slice(0, 2).map((b) => `${b.label} ${Math.round(b.share * 100)}%`).join(" · ");
+    const legend = bdLegend(fill);
     const legendOk = ctx.measure.lines(legend, BREAKDOWN.legendFont, innerW) <= 2;
     if (withRows.size >= 40 && bdNameW(innerW) >= 90) { spec.breakdown = "rows"; innerH -= rowsH; }
     else if (!legendOk) cost += 0.3;

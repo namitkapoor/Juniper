@@ -459,15 +459,15 @@
       "logos",
       "live"
     ],
-    "text": "From February to July 2026 the ChekOut agent ran 13,981 shopper sessions, 6,124 of them on KivaKube. It is live on 8 merchants' stores; KivaKube, Rosendahl Design Group, Pacific Soul Foods and Nuthatch Naturals are four of them.",
+    "text": "From February to October 2026 the ChekOut agent ran 16,841 shopper sessions across 8 merchants' stores. At Rosendahl Design Group, a furniture store, 77% of shoppers asked a follow-up question; at the other stores it was 2 to 8%.",
     "fills": [
       {
         "kind": "kpi",
         "id": "u-ck-sessions",
         "weight": 0.8,
-        "value": "13,981",
-        "label": "shopper sessions with the agent",
-        "period": "FEB 27 TO JUL 4, 2026",
+        "value": "77%",
+        "label": "of Rosendahl's shoppers asked a follow-up question. At the other stores it was 2 to 8%.",
+        "period": "JUL 29 TO OCT 31, 2026 · 102 OF 132 SESSIONS",
         "receipts": [
           {
             "type": "asset",
@@ -478,20 +478,62 @@
           },
           {
             "type": "asset",
-            "ref": "memory/project_chekout_metrics.md",
-            "repo": "Claude memory (Juniper project)",
-            "date": "2026-07-04",
-            "label": "ChekOut production analytics: 13,981 conversations, Feb 27 to Jul 4 2026; KivaKube 6,124, May 4 to Jul 4"
+            "ref": "tools/content/chekout-sessions.mjs",
+            "repo": "Juniper",
+            "date": "2026-11-03",
+            "label": "ChekOut production BigQuery: 16,841 sessions, Feb 27 to Oct 31 2026; Rosendahl 102 of 132 sessions had 2+ shopper messages"
+          },
+          {
+            "type": "asset",
+            "ref": "assets/chekout/top-metrics.webp",
+            "repo": "Juniper",
+            "label": "Rosendahl's ChekOut dashboard on launch day: 86% engagement"
           }
         ],
         "breakdown": [
           {
-            "label": "KivaKube (May 4 to Jul 4)",
-            "value": "6,124",
-            "share": 0.44,
+            "label": "Rosendahl (furniture)",
+            "value": "132",
+            "share": 0.7727,
+            "logo": "assets/chekout/logos/rosendahl.webp"
+          },
+          {
+            "label": "KivaKube",
+            "value": "6,756",
+            "share": 0.0176,
             "logo": "assets/chekout/logos/kivakube.webp"
+          },
+          {
+            "label": "Mae Bridal",
+            "value": "2,347",
+            "share": 0.0273
+          },
+          {
+            "label": "Blackcat MFG",
+            "value": "1,990",
+            "share": 0.0839
+          },
+          {
+            "label": "Nuthatch Naturals",
+            "value": "1,977",
+            "share": 0.0192,
+            "logo": "assets/chekout/logos/nuthatch.webp"
+          },
+          {
+            "label": "Billest",
+            "value": "1,466",
+            "share": 0.0164
+          },
+          {
+            "label": "Pacific Soul Foods",
+            "value": "1,093",
+            "share": 0.064,
+            "logo": "assets/chekout/logos/pacsoul.webp"
           }
-        ]
+        ],
+        "breakdownOf": "rate",
+        "breakdownHead": "Sessions · asked a follow-up",
+        "breakdownNote": "All 8 stores: 16,841 sessions since Feb 2026"
       },
       {
         "kind": "kpi",
@@ -595,10 +637,10 @@
       },
       {
         "type": "asset",
-        "ref": "memory/project_chekout_metrics.md",
-        "repo": "Claude memory (Juniper project)",
-        "date": "2026-07-04",
-        "label": "ChekOut production analytics: 13,981 conversations, Feb 27 to Jul 4 2026; KivaKube 6,124, May 4 to Jul 4"
+        "ref": "tools/content/chekout-sessions.mjs",
+        "repo": "Juniper",
+        "date": "2026-11-03",
+        "label": "ChekOut production BigQuery: 16,841 sessions, Feb 27 to Oct 31 2026; Rosendahl 102 of 132 sessions had 2+ shopper messages"
       },
       {
         "type": "asset",
