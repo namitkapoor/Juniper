@@ -4,14 +4,14 @@
     "title": "ChekOut AI",
     "kicker": "PRODUCTION AI · 8 MERCHANTS LIVE · AUG 2024 TO NOW",
     "summary": "Shoppers had questions a product grid can't answer. I designed and built the agent that answers from the store's own catalog, and 20% of Kivakube's add-to-carts came through it.",
-    "why": "This is Namit's strongest current work and the closest match to the roles he targets: as co-founder he designed and built a shopping agent that is live on 8 merchants' stores, with an outcome a merchant approved for publishing (20% of Kivakube's add-to-carts) and 16,841 shopper sessions from Feb to Oct 2026. It also has the richest media: recorded response shapes, motion clips, the analytics dashboard and the builder. The agent-platform work is folded in as the \"how merchants set it up\" deck, because on a three-slot stage two ChekOut studies would crowd out range.",
-    "hook": "An AI shopping agent I designed and built, live on 8 merchants' stores, that answers shoppers from each store's own catalog.",
+    "why": "This is Namit's strongest current work and the closest match to the roles he targets: as co-founder he designed and built a shopping agent that has run on 8 merchants' stores, with an outcome a merchant approved for publishing (20% of Kivakube's add-to-carts) and 16,841 shopper sessions from Feb to Oct 2026. It also has the richest media: recorded response shapes, motion clips, the analytics dashboard and the builder. The agent-platform work is folded in as the \"how merchants set it up\" deck, because on a three-slot stage two ChekOut studies would crowd out range.",
+    "hook": "An AI shopping agent I designed and built that has run on 8 merchants' stores, answering shoppers from each store's own catalog.",
     "metric": {
       "value": "20%",
       "label": "of KivaKube's add-to-carts, via the agent"
     },
     "priority": 1,
-    "hookShort": "An AI shopping agent, live on 8 stores, answering from each store's catalog.",
+    "hookShort": "An AI shopping agent that has run on 8 stores, answering from each store's catalog.",
     "kickerShort": "CHEKOUT AI · SUMMARY",
     "role": "CHEKOUT AI · SUMMARY"
   },

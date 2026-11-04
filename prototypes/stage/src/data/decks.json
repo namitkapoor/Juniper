@@ -3665,7 +3665,7 @@
     "aliases": [
       "What does a real conversation look like on a live store?"
     ],
-    "thesis": "Recorded on a merchant's live store, the agent answers in words, shows the products that back the answer, and opens product detail beside the thread.",
+    "thesis": "Recorded on a merchant's store, the agent answers in words, shows the products that back the answer, and opens product detail beside the thread.",
     "fills": [
       {
         "kind": "media",
@@ -3674,8 +3674,8 @@
         "media": "video",
         "src": "assets/chekout/live-rosendahl.mp4",
         "aspect": 1.8338,
-        "alt": "Rosendahl's live store: a shopper asks for a wedding gift on a budget, the agent answers with products, and a product detail opens beside the chat with Add to Cart",
-        "caption": "A full conversation on Rosendahl's live store.",
+        "alt": "Rosendahl's store: a shopper asks for a wedding gift on a budget, the agent answers with products, and a product detail opens beside the chat with Add to Cart",
+        "caption": "A full conversation on Rosendahl's store.",
         "explain": "The whole exchange in one take on Rosendahl Design Group's own site: the question, the answer with product names in the sentence, the cards that back it, and the detail panel opening beside the thread.",
         "receipts": [
           {
@@ -3693,7 +3693,7 @@
             "type": "asset",
             "ref": "assets/chekout/demos/rosendahl-desktop.gif",
             "date": "2026-10-26",
-            "label": "Rosendahl on desktop, recorded on the live store: the agent opens product detail beside the thread",
+            "label": "Rosendahl on desktop, recorded on the store: the agent opens product detail beside the thread",
             "preview": {
               "src": "assets/chekout/demos/rosendahl-desktop.gif",
               "poster": "assets/chekout/demos/rosendahl-desktop.webp",
@@ -3766,7 +3766,7 @@
             "type": "asset",
             "ref": "assets/chekout/demos/rosendahl-mobile.gif",
             "date": "2026-10-27",
-            "label": "Rosendahl on a phone, recorded on the live store: ask, product cards, follow-up, answer",
+            "label": "Rosendahl on a phone, recorded on the store: ask, product cards, follow-up, answer",
             "preview": {
               "src": "assets/chekout/demos/rosendahl-mobile.gif",
               "poster": "assets/chekout/demos/rosendahl-mobile.webp",
@@ -3829,7 +3829,7 @@
     "aliases": [
       "Which stores is the agent live on?"
     ],
-    "thesis": "Four of the live stores can be checked from the outside: each homepage loads the ChekOut embed with its own agent id.",
+    "thesis": "The agent is live on KivaKube, Pacific Soul Foods and Nuthatch Naturals, and has run on 8 merchants' stores since February 2026, Rosendahl Design Group among them.",
     "fills": [
       {
         "kind": "media",
@@ -3866,8 +3866,8 @@
         "poster": "assets/chekout/demos/rosendahl-mobile.webp",
         "aspect": 0.4726,
         "alt": "Søren, the ChekOut agent on Rosendahl Design Group, answering a shopper on a phone",
-        "caption": "Søren, the agent live on Rosendahl Design Group.",
-        "explain": "Recorded on rosendahl.com on a phone: Søren answers a shopper in the widget on the live store. The homepage loads the embed with the agent id rosendahl-design-group.",
+        "caption": "Søren, the agent on Rosendahl Design Group.",
+        "explain": "Recorded on rosendahl.com on a phone: Søren answers a shopper in the widget on the store. The homepage loaded the embed with the agent id rosendahl-design-group.",
         "receipts": [
           {
             "type": "asset",
