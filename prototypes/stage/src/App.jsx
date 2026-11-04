@@ -27,6 +27,8 @@ const FOOT = 28; // bottom gutter: tabs live here, fully on screen
  *          cover and headline number
  */
 const HOVER_MODE = (() => { try { const m = new URLSearchParams(window.location.search).get("hover"); return m === "local" || m === "hero" ? m : "all"; } catch { return "all"; } })();
+const REST_MS = 350; // pointer must rest this long on a case tile before the takeover
+const LEAVE_MS = 90; // grace before turning back, so crossing a hairline doesn't flap
 const NAV_H = 64; // the ported site nav sits on top of the frame, sharing its hairline
 
 function useViewport() {
@@ -189,7 +191,8 @@ export default function App() {
     const more = caseKpis(content.decks, hot, own.number?.value, tiles.length - 1);
     tiles.filter((f) => f.caseStudy !== hot).forEach((f, i) => {
       const k = more[i];
-      if (k) out[f.caseStudy] = { kicker, tag: k.tag, value: k.value, unit: k.unit, label: k.label };
+      // The hovered card turns first; the rest follow it, one beat apart.
+      if (k) out[f.caseStudy] = { kicker, tag: k.tag, value: k.value, unit: k.unit, label: k.label, delay: (i + 1) * 70 };
     });
     return out;
   }, [heroOn, hot, content, answer]);
@@ -316,23 +319,23 @@ export default function App() {
     if (cs === hotRef.current) return;
     setHot(cs);
   }, []);
-  const hoverLock = useRef(null);
   const lastMove = useRef(null);
   const onTile = useCallback((cs, kind, e) => {
     if (kind === "move") {
-      // The hero's hover view re-lays the stage, so another case's strip can slide under
-      // a still pointer. After a switch, a different case only takes over once the
-      // pointer has deliberately moved (>= 28px) from where the switch happened.
+      // Hard to trigger, easy to leave: a case takes the tiles over only once the
+      // pointer RESTS on its tile (the timer restarts on every move, so a passing
+      // mouse never fires it), and leaving the case tiles turns them back almost at
+      // once (a short grace covers the hairlines between tiles).
       if (e) lastMove.current = { x: e.clientX, y: e.clientY };
-      const at = hoverLock.current;
-      if (at && cs && cs !== hotRef.current && e && Math.hypot(e.clientX - at.x, e.clientY - at.y) < 28) return;
-      if (e && cs && cs === hotRef.current) hoverLock.current = { x: e.clientX, y: e.clientY };
-      if (cs === pending.current) return;
       clearTimeout(hoverT.current);
+      if (!cs) {
+        pending.current = undefined;
+        if (hotRef.current) hoverT.current = setTimeout(() => commitHot(null), LEAVE_MS);
+        return;
+      }
       pending.current = cs;
       if (cs === hotRef.current) return;
-      // Lock where the pointer IS when the switch lands (the morph starts there), not where it was.
-      hoverT.current = setTimeout(() => { if (cs && lastMove.current) hoverLock.current = { ...lastMove.current }; commitHot(cs); }, cs ? (HOVER_MODE === "all" ? 200 : 280) : 320);
+      hoverT.current = setTimeout(() => commitHot(cs), HOVER_MODE === "all" ? REST_MS : 280);
     } else if (kind === "focus") {
       // A tap focuses the tile too; let the tap itself decide (preview first, open second).
       if (lastPointer.current === "touch" && performance.now() - lastDownAt.current < 800) return;
