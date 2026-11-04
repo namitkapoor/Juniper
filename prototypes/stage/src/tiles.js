@@ -82,7 +82,7 @@ export function heroPreviews(home, cases) {
   for (const f of home?.fills || []) {
     if (f.kind !== "media" || !f.caseStudy) continue;
     const cs = cases?.find((c) => c.id === f.caseStudy);
-    if (cs) out[cs.id] = { cover: f, line: tileText(cs, f).role, title: cs.title };
+    if (cs) { const t = tileText(cs, f); out[cs.id] = { cover: f, line: t.role, title: cs.title, number: t.number }; }
   }
   return out;
 }

@@ -162,11 +162,17 @@ function HeroPreview({ fillId, P, preview, reduced }) {
               flowKey={`${fillId}:pv:${k}`} fillId={fillId} text={pv.line.toUpperCase()} steps={PREVIEW_LINE} mkFont={PREVIEW_FONT}
               box={(w) => ({ x: P, y: P, w: w - 2 * P, h: 18 })} className="t-preview"
             />
-            <div className="hp-media" style={{ left: P, top: P + 30, right: P, bottom: P }}>
+            <div className="hp-media" style={{ left: P, top: P + 30, right: P, bottom: pv.withNumber && pv.number?.value ? "42%" : P }}>
               {isVideo
                 ? <Video src={assetUrl(f.src)} poster={assetUrl(f.poster)} alt={f.alt} active={false} />
                 : <img src={assetUrl(f.src)} alt={on ? f.alt : ""} draggable={false} />}
             </div>
+            {pv.withNumber && pv.number?.value && (
+              <div className="hp-num" style={{ left: P, right: P, bottom: P }}>
+                <div className="kpi-value">{pv.number.value}{pv.number.unit && <span className="kpi-unit">{pv.number.unit}</span>}</div>
+                <div className="kpi-label">{pv.number.label}</div>
+              </div>
+            )}
           </div>
         );
       })}
@@ -691,7 +697,7 @@ function TileOverlay({ o, fill, cell, P, out = false }) {
   const fs = Math.floor(Math.min(H * (wrap ? 0.21 : 0.42), wrap ? wrapped : oneLine, 120));
   return (
     <div className={`tile-overlay ${out ? "out" : ""} ${o.logo ? "has-logo" : ""}`} aria-hidden="true" style={{ padding: P }}>
-      <div className="label tile-ov-k">{o.self ? o.kicker : o.about ? (o.kicker && o.kicker !== "namit" ? o.kicker : "namit · about") : o.kicker === "Open to" ? "namit · open to" : `${o.kicker} · impact`}</div>
+      <div className="label tile-ov-k">{o.self ? o.kicker : o.about ? (o.kicker && o.kicker !== "namit" ? o.kicker : "namit · about") : o.kicker === "Open to" ? "namit · open to" : o.tag ? `${o.kicker} · ${o.tag}` : o.kicker}</div>
       <div className="tile-ov-num">
         {o.logo
           ? <div className="tile-ov-logo" role="img" aria-label={o.value} style={{ WebkitMaskImage: `url(${o.logo})`, maskImage: `url(${o.logo})`, height: Math.round(Math.min(H * 0.5, 150)) }} />

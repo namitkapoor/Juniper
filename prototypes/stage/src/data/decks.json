@@ -53,14 +53,15 @@
           }
         ],
         "opens": "ck-d-cart",
-        "period": "OVER ONE MONTH"
+        "period": "OVER ONE MONTH",
+        "tag": "sales"
       },
       {
         "kind": "kpi",
         "id": "ck-sessions",
         "weight": 0.8,
         "value": "77%",
-        "label": "of Rosendahl's shoppers asked a follow-up question. At the other stores it was 2 to 8%.",
+        "label": "of Rosendahl's shoppers asked a follow-up question",
         "period": "JUL 29 TO OCT 31, 2026 · 102 OF 132 SESSIONS",
         "receipts": [
           {
@@ -86,49 +87,54 @@
         ],
         "breakdown": [
           {
-            "label": "Rosendahl (furniture)",
-            "value": "132",
-            "share": 0.7727,
-            "logo": "assets/chekout/logos/rosendahl.webp"
-          },
-          {
             "label": "KivaKube",
             "value": "6,756",
-            "share": 0.0176,
+            "share": 0.4012,
             "logo": "assets/chekout/logos/kivakube.webp"
           },
           {
             "label": "Mae Bridal",
             "value": "2,347",
-            "share": 0.0273
+            "share": 0.1394
           },
           {
             "label": "Blackcat MFG",
             "value": "1,990",
-            "share": 0.0839
+            "share": 0.1182
           },
           {
             "label": "Nuthatch Naturals",
             "value": "1,977",
-            "share": 0.0192,
+            "share": 0.1174,
             "logo": "assets/chekout/logos/nuthatch.webp"
           },
           {
             "label": "Billest",
             "value": "1,466",
-            "share": 0.0164
+            "share": 0.087
           },
           {
             "label": "Pacific Soul Foods",
             "value": "1,093",
-            "share": 0.064,
+            "share": 0.0649,
             "logo": "assets/chekout/logos/pacsoul.webp"
+          },
+          {
+            "label": "Rosendahl (furniture)",
+            "value": "132",
+            "share": 0.0078,
+            "logo": "assets/chekout/logos/rosendahl.webp"
+          },
+          {
+            "label": "Apparel Online",
+            "value": "11",
+            "share": 0.0007
           }
         ],
         "opens": "ck-d-live-stores",
-        "breakdownOf": "rate",
-        "breakdownHead": "Sessions · asked a follow-up",
-        "breakdownNote": "All 8 stores: 16,841 sessions since Feb 2026"
+        "breakdownHead": "Sessions by store",
+        "breakdownNote": "All 8 stores: 16,841 sessions since Feb 2026",
+        "tag": "engagement"
       },
       {
         "kind": "prose",
@@ -466,7 +472,8 @@
             "date": "2026-10-26",
             "label": "Agent platform case study"
           }
-        ]
+        ],
+        "tag": "accessibility"
       },
       {
         "kind": "gate",
@@ -495,7 +502,8 @@
             "date": "2026-10-26",
             "label": "Agent platform case study"
           }
-        ]
+        ],
+        "tag": "setup time"
       },
       {
         "kind": "media",
@@ -588,7 +596,8 @@
             "date": "2026-10-26",
             "label": "Agent platform case study"
           }
-        ]
+        ],
+        "tag": "build"
       },
       {
         "kind": "prose",
@@ -653,7 +662,8 @@
             "label": "Christine Valmy case study"
           }
         ],
-        "period": "OVER 3 MONTHS"
+        "period": "OVER 3 MONTHS",
+        "tag": "conversion"
       },
       {
         "kind": "kpi",
@@ -669,7 +679,8 @@
             "date": "2026-10-26",
             "label": "Christine Valmy case study"
           }
-        ]
+        ],
+        "tag": "revenue"
       },
       {
         "kind": "kpi",
@@ -685,7 +696,8 @@
             "date": "2026-10-26",
             "label": "Christine Valmy case study"
           }
-        ]
+        ],
+        "tag": "time saved"
       },
       {
         "kind": "media",
@@ -1122,46 +1134,52 @@
       },
       {
         "kind": "kpi",
-        "id": "ky-captured",
-        "weight": 0.8,
-        "value": "454",
-        "label": "roles captured into my pipeline",
-        "period": "as of Nov 2, 2026",
+        "id": "ky-made",
+        "weight": 0.85,
+        "value": "475",
+        "label": "tailored resumes, for 5 people",
+        "period": "MAY TO OCT 2026",
         "receipts": [
           {
             "type": "asset",
-            "ref": "assets/kyuri-os/job-hunt.webp",
-            "url": "https://kyuri.namit.me/?area=job-hunt",
-            "date": "2026-11-02",
-            "label": "kyuri.namit.me Job Hunt, visitor view, captured 2026-11-02"
+            "ref": "lib/proof.ts",
+            "repo": "kyuri-dashboard",
+            "date": "2026-10-15",
+            "label": "RESUMES_TOTAL 475 across 5 people"
           }
         ],
-        "opens": "ky-d-pipeline"
+        "opens": "ky-d-pipeline",
+        "tag": "output"
       },
       {
         "kind": "kpi",
-        "id": "ky-sent",
+        "id": "ky-evals",
         "weight": 0.8,
-        "value": "341",
-        "label": "of those marked applied",
-        "period": "as of Nov 2, 2026",
+        "value": "81",
+        "label": "eval cases on the resume agent: 17 real model runs (4 adversarial) and 64 leak-guard cases",
         "receipts": [
           {
             "type": "asset",
-            "ref": "assets/kyuri-os/job-hunt.webp",
-            "url": "https://kyuri.namit.me/?area=job-hunt",
-            "date": "2026-11-02",
-            "label": "kyuri.namit.me Job Hunt, visitor view, captured 2026-11-02"
+            "ref": "local-server/evals/cases/agent_cases.json",
+            "repo": "kyuri-dashboard",
+            "label": "17 agent eval cases that run the real model, 4 adversarial"
+          },
+          {
+            "type": "asset",
+            "ref": "local-server/evals/fixtures/guard_cases.json",
+            "repo": "kyuri-dashboard",
+            "label": "64 leak-guard cases"
           }
         ],
-        "opens": "ky-d-live"
+        "opens": "ky-d-live",
+        "tag": "evals"
       },
       {
         "kind": "kpi",
         "id": "ky-interviews",
         "weight": 0.6,
         "value": "9",
-        "label": "applications that reached an interview",
+        "label": "interview invites from 341 applications",
         "period": "as of Nov 2, 2026",
         "receipts": [
           {
@@ -1172,7 +1190,8 @@
             "label": "kyuri.namit.me Job Hunt, visitor view, captured 2026-11-02"
           }
         ],
-        "opens": "ky-d-funnel"
+        "opens": "ky-d-funnel",
+        "tag": "interviews"
       },
       {
         "kind": "media",
@@ -1307,22 +1326,42 @@
         "opens": "ky-d-tailoring"
       },
       {
-        "kind": "kpi",
-        "id": "ky-checks",
+        "kind": "prose",
+        "id": "ky-sweep",
         "weight": 0.6,
-        "value": "3",
-        "label": "agent checks every resume passes before it reaches Drive",
+        "text": "WHAT A SWEEP FOUND: Run over my past resumes, the new checks found 4 with the agent's notes printed, 5 with an empty summary, 6 with a changed job title and 4 with a number my base resume doesn't have. Each of those now stops a resume before it's sent.",
         "receipts": [
           {
             "type": "asset",
-            "ref": "assets/kyuri-os/job-hunt.webp",
-            "url": "https://kyuri.namit.me/?area=job-hunt",
-            "date": "2026-11-02",
-            "label": "kyuri.namit.me Job Hunt, visitor view, captured 2026-11-02"
+            "ref": "HANDOFF.md",
+            "repo": "kyuri-dashboard",
+            "label": "Sweep of past resumes: 4 notes printed, 5 empty summary, 6 changed titles, 4 invented numbers"
+          },
+          {
+            "type": "asset",
+            "ref": "local-server/evals/README.md",
+            "repo": "kyuri-dashboard",
+            "label": "What now guards a resume, in pipeline order"
+          }
+        ]
+      },
+      {
+        "kind": "kpi",
+        "id": "ky-checks",
+        "weight": 0.6,
+        "value": "5",
+        "label": "checks that can stop a resume before it's sent: lint, QA, leak guard, page gate and upload guard",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "local-server/evals/README.md",
+            "repo": "kyuri-dashboard",
+            "label": "What now guards a resume, in pipeline order"
           }
         ],
         "opens": "ky-d-tailoring",
-        "opensPrimary": true
+        "opensPrimary": true,
+        "tag": "guardrails"
       },
       {
         "kind": "prose",
@@ -1494,7 +1533,8 @@
             "label": "BOARDS: speedrun startups, a16z portfolio, Designer Fund"
           }
         ],
-        "opens": "ky-d-boards"
+        "opens": "ky-d-boards",
+        "tag": "job boards"
       },
       {
         "kind": "prose",

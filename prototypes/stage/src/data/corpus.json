@@ -460,14 +460,14 @@
       "logos",
       "live"
     ],
-    "text": "From February to October 2026 the ChekOut agent ran 16,841 shopper sessions across 8 merchants' stores. At Rosendahl Design Group, a furniture store, 77% of shoppers asked a follow-up question; at the other stores it was 2 to 8%. KivaKube's chat logs showed potential customers as far away as Australia.",
+    "text": "From February to October 2026 the ChekOut agent ran 16,841 shopper sessions across 8 merchants' stores. At Rosendahl Design Group, a furniture store, 77% of shoppers asked a follow-up question. KivaKube's chat logs showed potential customers as far away as Australia.",
     "fills": [
       {
         "kind": "kpi",
         "id": "u-ck-sessions",
         "weight": 0.8,
         "value": "77%",
-        "label": "of Rosendahl's shoppers asked a follow-up question. At the other stores it was 2 to 8%.",
+        "label": "of Rosendahl's shoppers asked a follow-up question",
         "period": "JUL 29 TO OCT 31, 2026 · 102 OF 132 SESSIONS",
         "receipts": [
           {
@@ -493,47 +493,51 @@
         ],
         "breakdown": [
           {
-            "label": "Rosendahl (furniture)",
-            "value": "132",
-            "share": 0.7727,
-            "logo": "assets/chekout/logos/rosendahl.webp"
-          },
-          {
             "label": "KivaKube",
             "value": "6,756",
-            "share": 0.0176,
+            "share": 0.4012,
             "logo": "assets/chekout/logos/kivakube.webp"
           },
           {
             "label": "Mae Bridal",
             "value": "2,347",
-            "share": 0.0273
+            "share": 0.1394
           },
           {
             "label": "Blackcat MFG",
             "value": "1,990",
-            "share": 0.0839
+            "share": 0.1182
           },
           {
             "label": "Nuthatch Naturals",
             "value": "1,977",
-            "share": 0.0192,
+            "share": 0.1174,
             "logo": "assets/chekout/logos/nuthatch.webp"
           },
           {
             "label": "Billest",
             "value": "1,466",
-            "share": 0.0164
+            "share": 0.087
           },
           {
             "label": "Pacific Soul Foods",
             "value": "1,093",
-            "share": 0.064,
+            "share": 0.0649,
             "logo": "assets/chekout/logos/pacsoul.webp"
+          },
+          {
+            "label": "Rosendahl (furniture)",
+            "value": "132",
+            "share": 0.0078,
+            "logo": "assets/chekout/logos/rosendahl.webp"
+          },
+          {
+            "label": "Apparel Online",
+            "value": "11",
+            "share": 0.0007
           }
         ],
-        "breakdownOf": "rate",
-        "breakdownHead": "Sessions · asked a follow-up",
+        "breakdownHead": "Sessions by store",
         "breakdownNote": "All 8 stores: 16,841 sessions since Feb 2026"
       },
       {
@@ -1470,39 +1474,43 @@
       "pipeline",
       "notion"
     ],
-    "text": "My job search runs on KYURI.OS: as of Nov 2, 2026 the public Job Hunt page shows 454 roles captured, 341 marked applied and 9 that reached interviews. Across all users it has tailored 475 resumes.",
+    "text": "My job search runs on KYURI.OS: it has tailored 475 resumes for 5 people, 81 eval cases test the resume agent, and as of Nov 2, 2026 the public Job Hunt page shows 9 interviews from 341 applications. Across all users it has tailored 475 resumes.",
     "fills": [
       {
         "kind": "kpi",
-        "id": "u-ky-cap",
-        "weight": 0.7,
-        "value": "454",
-        "label": "roles captured into my pipeline",
-        "period": "as of Nov 2, 2026",
+        "id": "u-ky-made",
+        "weight": 0.85,
+        "value": "475",
+        "label": "tailored resumes, for 5 people",
+        "period": "MAY TO OCT 2026",
         "receipts": [
           {
             "type": "asset",
-            "ref": "assets/kyuri-os/job-hunt.webp",
-            "url": "https://kyuri.namit.me/?area=job-hunt",
-            "date": "2026-11-02",
-            "label": "kyuri.namit.me Job Hunt, visitor view, captured 2026-11-02"
+            "ref": "lib/proof.ts",
+            "repo": "kyuri-dashboard",
+            "date": "2026-10-15",
+            "label": "RESUMES_TOTAL 475 across 5 people"
           }
         ]
       },
       {
         "kind": "kpi",
-        "id": "u-ky-sent",
+        "id": "u-ky-evals",
         "weight": 0.7,
-        "value": "341",
-        "label": "of those marked applied",
-        "period": "as of Nov 2, 2026",
+        "value": "81",
+        "label": "eval cases on the resume agent: 17 real model runs (4 adversarial) and 64 leak-guard cases",
         "receipts": [
           {
             "type": "asset",
-            "ref": "assets/kyuri-os/job-hunt.webp",
-            "url": "https://kyuri.namit.me/?area=job-hunt",
-            "date": "2026-11-02",
-            "label": "kyuri.namit.me Job Hunt, visitor view, captured 2026-11-02"
+            "ref": "local-server/evals/cases/agent_cases.json",
+            "repo": "kyuri-dashboard",
+            "label": "17 agent eval cases that run the real model, 4 adversarial"
+          },
+          {
+            "type": "asset",
+            "ref": "local-server/evals/fixtures/guard_cases.json",
+            "repo": "kyuri-dashboard",
+            "label": "64 leak-guard cases"
           }
         ]
       },
@@ -1511,7 +1519,7 @@
         "id": "u-ky-int",
         "weight": 0.5,
         "value": "9",
-        "label": "applications that reached an interview",
+        "label": "interview invites from 341 applications",
         "period": "as of Nov 2, 2026",
         "receipts": [
           {
@@ -1546,7 +1554,7 @@
         ],
         "caption": "The public Job Hunt page, signed out, Nov 2, 2026.",
         "explain": "The Job Hunt page as any visitor sees it. The totals come from the same pipeline that runs my search, so they move as I apply; companies and people are left out.",
-        "kpi": "u-ky-cap"
+        "kpi": "u-ky-made"
       }
     ],
     "receipts": [

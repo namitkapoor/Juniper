@@ -19,6 +19,14 @@ import { initialTheme, saveTheme } from "./sharedTheme.js";
 const FRAME = 20; // outer gutter around the hairline frame
 const RAIL = 24; // left gutter: the depth rail (24px targets)
 const FOOT = 28; // bottom gutter: tabs live here, fully on screen
+/**
+ * Home hover mode (preview switch while we choose; ?hover=local|hero):
+ *  all   - today: the hovered case takes over every case tile, cover on the hero
+ *  local - only the hovered tile shows its own headline; nothing else changes
+ *  hero  - case tiles never change; the big "namit" tile shows the hovered case's
+ *          cover and headline number
+ */
+const HOVER_MODE = (() => { try { const m = new URLSearchParams(window.location.search).get("hover"); return m === "local" || m === "hero" ? m : "all"; } catch { return "all"; } })();
 const NAV_H = 64; // the ported site nav sits on top of the frame, sharing its hairline
 
 function useViewport() {
@@ -162,6 +170,8 @@ export default function App() {
   // the other case tiles. Display only (never fed to the layout), so nothing reshuffles.
   const tileOverlay = useMemo(() => {
     if (!heroOn || !hot || !content) return null;
+    if (HOVER_MODE === "hero") return null;
+    if (HOVER_MODE === "local" && hot === "about") return null;
     const info = homeWithTiles(answer, content.caseStudies, { chatOpen: false });
     const tiles = info.fills.filter((f) => f.kind === "tile");
     // Hovering "namit": the About page's facts on the case tiles.
@@ -175,10 +185,11 @@ export default function App() {
     if (!own) return null;
     const kicker = own.caseTitle || own.role;
     const out = { [hot]: own.number?.value ? { self: true, kicker: `${kicker} · impact`, value: own.number.value, unit: own.number.unit, label: own.number.label } : null };
+    if (HOVER_MODE === "local") return out;
     const more = caseKpis(content.decks, hot, own.number?.value, tiles.length - 1);
     tiles.filter((f) => f.caseStudy !== hot).forEach((f, i) => {
       const k = more[i];
-      if (k) out[f.caseStudy] = { kicker, value: k.value, unit: k.unit, label: k.label };
+      if (k) out[f.caseStudy] = { kicker, tag: k.tag, value: k.value, unit: k.unit, label: k.label };
     });
     return out;
   }, [heroOn, hot, content, answer]);
@@ -321,7 +332,7 @@ export default function App() {
       pending.current = cs;
       if (cs === hotRef.current) return;
       // Lock where the pointer IS when the switch lands (the morph starts there), not where it was.
-      hoverT.current = setTimeout(() => { if (cs && lastMove.current) hoverLock.current = { ...lastMove.current }; commitHot(cs); }, cs ? 120 : 320);
+      hoverT.current = setTimeout(() => { if (cs && lastMove.current) hoverLock.current = { ...lastMove.current }; commitHot(cs); }, cs ? (HOVER_MODE === "all" ? 200 : 280) : 320);
     } else if (kind === "focus") {
       // A tap focuses the tile too; let the tap itself decide (preview first, open second).
       if (lastPointer.current === "touch" && performance.now() - lastDownAt.current < 800) return;
@@ -701,7 +712,7 @@ export default function App() {
           reserve={null}
           onOpenCase={isHome ? (cs) => onTile(cs, "activate") : undefined}
           onTile={isHome ? onTile : undefined} hot={hot} quick={isHome && !focus}
-          preview={isHome && hot ? previews[hot] : null} previewKey={hot}
+          preview={isHome && hot && HOVER_MODE !== "local" ? (HOVER_MODE === "hero" && previews[hot] ? { ...previews[hot], withNumber: true } : previews[hot]) : null} previewKey={hot}
           onAskOpen={!chatOpen && !phone ? () => { setChatOpen(true); setFocusChat((n) => n + 1); } : null} faceBusy={morphing}
           intro={introPending && (isHome || isAbout)} onIntroDone={onIntroDone}
           onExpand={isHome ? undefined : onExpand} onCollapse={onCollapse} focusId={focus}

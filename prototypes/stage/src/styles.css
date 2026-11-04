@@ -339,6 +339,9 @@ body:has(.app.phone) { overflow: hidden; }
 .hero-preview { position: absolute; inset: 0; pointer-events: none; }
 .hp-layer { position: absolute; inset: 0; opacity: 0; transition: opacity 140ms steps(3, end); }
 .hp-layer.on { opacity: 1; }
+.hp-num { position: absolute; display: flex; flex-direction: column; gap: 10px; }
+.hp-num .kpi-value { font-size: clamp(64px, 9vw, 150px); }
+.hp-num .kpi-label { font-size: 17px; line-height: 24px; color: var(--ink-2); max-width: 40ch; }
 .hero-preview.instant .hp-layer, .c-title:has(.instant) .wordmark { transition: none; }
 .hp-media { position: absolute; }
 .hp-media img, .hp-media video { width: 100%; height: 100%; object-fit: contain; object-position: center; display: block; }

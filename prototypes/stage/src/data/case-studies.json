@@ -35,13 +35,13 @@
     "id": "kyuri-os",
     "title": "KYURI.OS",
     "kicker": "PERSONAL PROJECT · LIVE SINCE APR 2026",
-    "summary": "My job search needed a tailored resume for every role. I built the system that writes them behind guards and tracks each application: 454 roles captured and 341 applied as of Nov 2026.",
-    "why": "It has the most checkable evidence of anything Namit has built: dated work from April 5, 2026 to today, 26 approved public records of that work, and live numbers anyone can check on kyuri.namit.me (454 roles captured, 341 marked applied, 9 interviewed, 475 resumes across all users). It shows product engineering end to end: multi-agent pipelines with guards and evals, access tiers, rate limits, an offline mode and a Playwright suite. Its weakness, fewer polished visuals, is offset by live screenshots of the public pages.",
+    "summary": "My job search needed a tailored resume for every role. I built the system that writes them behind guards and tracks each application: 475 tailored resumes for 5 people, and 81 eval cases on the agent.",
+    "why": "It has the most checkable evidence of anything Namit has built: dated work from April 5, 2026 to today, 26 approved public records of that work, and live numbers anyone can check on kyuri.namit.me (475 resumes for 5 people, 9 interviewed from 341 applications; 81 eval cases on the resume agent). It shows product engineering end to end: multi-agent pipelines with guards and evals, access tiers, rate limits, an offline mode and a Playwright suite. Its weakness, fewer polished visuals, is offset by live screenshots of the public pages.",
     "hook": "The system that runs my own job search: it tailors a resume for each role and tracks every application.",
     "metric": {
-      "value": "9",
-      "label": "interview invites from 341 applications since April",
-      "source": "kyuri.namit.me Job Hunt (public): INTERVIEWED 9, as of Nov 2, 2026; Gmail invite screenshots to follow"
+      "value": "475",
+      "label": "tailored resumes, for 5 people",
+      "source": "kyuri-dashboard lib/proof.ts RESUMES_TOTAL 475, PEOPLE 5 (2026-10-15)"
     },
     "priority": 0.55,
     "hookShort": "My job-search system: a tailored resume per role, every application tracked.",

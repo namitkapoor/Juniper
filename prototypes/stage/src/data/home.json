@@ -75,7 +75,7 @@
       "src": "assets/kyuri-os/cover-devices.webp",
       "aspect": 1.6211,
       "alt": "KYURI.OS Job Hunt page with live pipeline totals on a laptop, and its pipeline panel on a phone",
-      "caption": "KYURI.OS: My own job search, built as a system: 454 roles captured and 341 applications logged since April 2026, with guards on every AI-written resume.",
+      "caption": "KYURI.OS: My own job search, built as a system: 475 tailored resumes for 5 people since May 2026, with 5 checks that can stop any AI-written resume.",
       "receipts": [
         {
           "type": "asset",
@@ -94,8 +94,8 @@
       ],
       "explain": "The public Job Hunt page of KYURI.OS, the system I built to run my own search. The totals are live, from the same pipeline that tailors each resume behind a fit gate, a QA gate and a leak guard. Companies and people are left out of the public view.",
       "kpi": {
-        "value": "454",
-        "label": "roles captured",
+        "value": "475",
+        "label": "tailored resumes, for 5 people",
         "period": "as of Nov 2, 2026",
         "receipts": [
           {
