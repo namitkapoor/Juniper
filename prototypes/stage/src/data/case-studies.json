@@ -3,12 +3,12 @@
     "id": "chekout",
     "title": "ChekOut AI",
     "kicker": "PRODUCTION AI · 8 MERCHANTS LIVE · AUG 2024 TO NOW",
-    "summary": "Shoppers had questions a product grid can't answer. I designed and built the agent that answers from the store's own catalog, and 20% of Kivakube's add-to-carts came through it.",
-    "why": "This is Namit's strongest current work and the closest match to the roles he targets: as co-founder he designed and built a shopping agent that has run on 8 merchants' stores, with an outcome a merchant approved for publishing (20% of Kivakube's add-to-carts) and 16,841 shopper sessions from Feb to Oct 2026. It also has the richest media: recorded response shapes, motion clips, the analytics dashboard and the builder. The agent-platform work is folded in as the \"how merchants set it up\" deck, because on a three-slot stage two ChekOut studies would crowd out range.",
+    "summary": "Shoppers had questions a product grid can't answer. I designed and built the agent that answers from the store's own catalog, and 20% of Kivakube's add-to-carts in one month came through it.",
+    "why": "This is Namit's strongest current work and the closest match to the roles he targets: as co-founder he designed and built a shopping agent that has run on 8 merchants' stores, with an outcome a merchant approved for publishing (20% of Kivakube's add-to-carts in one month) and 16,841 shopper sessions from Feb to Oct 2026. It also has the richest media: recorded response shapes, motion clips, the analytics dashboard and the builder. The agent-platform work is folded in as the \"how merchants set it up\" deck, because on a three-slot stage two ChekOut studies would crowd out range.",
     "hook": "An AI shopping agent I designed and built that has run on 8 merchants' stores, answering shoppers from each store's own catalog.",
     "metric": {
       "value": "20%",
-      "label": "of KivaKube's add-to-carts, via the agent"
+      "label": "of KivaKube's add-to-carts in one month, via the agent"
     },
     "priority": 1,
     "hookShort": "An AI shopping agent that has run on 8 stores, answering from each store's catalog.",
@@ -19,12 +19,12 @@
     "id": "christine-valmy",
     "title": "Fewer tiles, more students",
     "kicker": "BILINGUAL AI ENROLLMENT AGENT · CONVERSION 10% → 23%",
-    "summary": "Prospective students waited on a form while officers answered the same questions on every call. Testing killed my first design, and the bilingual agent that shipped took conversion from 10% to 23%.",
-    "why": "It is the clearest design-process story here, and it ends in numbers: conversion 10% → 23%, $120K in enrolled revenue, about 2× the bad leads flagged and about 3 hours saved per officer per day. It has what the other two lack: real participant quotes, three before and after testing rounds with images, and a WCAG AA audit. It is also a second shipped AI agent, for different users (prospective students and enrollment officers) in a different domain, which keeps the three distinct.",
+    "summary": "Prospective students waited on a form while officers answered the same questions on every call. Testing killed my first design, and the bilingual agent that shipped took conversion from 10% to 23% over 3 months.",
+    "why": "It is the clearest design-process story here, and it ends in numbers: conversion 10% → 23% over 3 months, $120K in enrolled revenue, about 2× the bad leads flagged and about 3 hours saved per officer per day. It has what the other two lack: real participant quotes, three before and after testing rounds with images, and a WCAG AA audit. It is also a second shipped AI agent, for different users (prospective students and enrollment officers) in a different domain, which keeps the three distinct.",
     "hook": "A bilingual AI agent that answers prospective students in English or Spanish and passes the qualified ones to an enrollment officer.",
     "metric": {
       "value": "10% → 23%",
-      "label": "conversion"
+      "label": "conversion, 3 months"
     },
     "priority": 0.75,
     "hookShort": "A bilingual agent that answers students and passes qualified ones on.",

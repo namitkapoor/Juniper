@@ -52,7 +52,8 @@
             "label": "d22f151 · Tag Shopify carts with ChekOut AI attribution attributes for order attribution"
           }
         ],
-        "opens": "ck-d-cart"
+        "opens": "ck-d-cart",
+        "period": "OVER ONE MONTH"
       },
       {
         "kind": "kpi",
@@ -128,6 +129,21 @@
         "breakdownOf": "rate",
         "breakdownHead": "Sessions · asked a follow-up",
         "breakdownNote": "All 8 stores: 16,841 sessions since Feb 2026"
+      },
+      {
+        "kind": "prose",
+        "id": "ck-aus",
+        "weight": 0.55,
+        "text": "WHAT THE CHATS SHOWED: The agent logs where each chat comes from, and KivaKube's logs showed potential customers as far away as Australia.",
+        "receipts": [
+          {
+            "type": "asset",
+            "ref": "tools/content/chekout-sessions.mjs",
+            "repo": "Juniper",
+            "date": "2026-11-03",
+            "label": "ChekOut production BigQuery: KivaKube sessions by customer_country, Australia among them"
+          }
+        ]
       },
       {
         "kind": "media",
@@ -636,7 +652,8 @@
             "date": "2026-10-26",
             "label": "Christine Valmy case study"
           }
-        ]
+        ],
+        "period": "OVER 3 MONTHS"
       },
       {
         "kind": "kpi",

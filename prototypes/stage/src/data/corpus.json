@@ -228,7 +228,7 @@
       "shopify",
       "metrics"
     ],
-    "text": "20% of Kivakube's add-to-carts came through the ChekOut agent. Shoppers add to cart inside the conversation, View cart opens the store's own cart and checkout, and since May 2026 carts carry ChekOut attribution so the merchant's own orders show what the agent sold. It works with Shopify, Squarespace and Shopline carts.",
+    "text": "20% of Kivakube's add-to-carts in one month came through the ChekOut agent. Shoppers add to cart inside the conversation, View cart opens the store's own cart and checkout, and since May 2026 carts carry ChekOut attribution so the merchant's own orders show what the agent sold. It works with Shopify, Squarespace and Shopline carts.",
     "fills": [
       {
         "kind": "kpi",
@@ -244,7 +244,8 @@
             "date": "2026-10-26",
             "label": "ChekOut AI case study"
           }
-        ]
+        ],
+        "period": "OVER ONE MONTH"
       },
       {
         "kind": "media",
@@ -459,7 +460,7 @@
       "logos",
       "live"
     ],
-    "text": "From February to October 2026 the ChekOut agent ran 16,841 shopper sessions across 8 merchants' stores. At Rosendahl Design Group, a furniture store, 77% of shoppers asked a follow-up question; at the other stores it was 2 to 8%.",
+    "text": "From February to October 2026 the ChekOut agent ran 16,841 shopper sessions across 8 merchants' stores. At Rosendahl Design Group, a furniture store, 77% of shoppers asked a follow-up question; at the other stores it was 2 to 8%. KivaKube's chat logs showed potential customers as far away as Australia.",
     "fills": [
       {
         "kind": "kpi",
